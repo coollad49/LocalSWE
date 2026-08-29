@@ -182,12 +182,25 @@ export class BaselineRunner {
 
     const results: RepairRun[] = [];
 
+    // Live progress is off for run-baseline; provide simple case-level progress (quiet, not tool-level)
+    const quiet = process.env.BASELINE_LIVE_PROGRESS === "0";
+    let done = 0;
+    const total = caseIds.length * runsPerCase;
+    const logProgress = (caseId: string, status: string) => {
+      if (quiet) {
+        done++;
+        console.log(`[${done}/${total}] ${caseId} → ${status}`);
+      }
+    };
+
     // For baseline v0, prioritize correctness: run sequentially by default
     if (concurrency === 1) {
       for (const caseId of caseIds) {
         for (let i = 0; i < runsPerCase; i++) {
           const runId = `${caseId}-run-${String(i + 1).padStart(3, "0")}-${randomUUID().slice(0, 6)}`;
+          if (quiet) console.log(`[${done + 1}/${total}] ${caseId} (${runId}) started...`);
           const res = await this.runCase({ caseId, runId, config: this.config, runsRoot: options.runsRoot ?? this.runsRoot });
+          logProgress(caseId, res.status);
           results.push(res);
         }
       }
@@ -205,8 +218,10 @@ export class BaselineRunner {
         while (queue.length > 0) {
           const item = queue.shift();
           if (!item) break;
+          if (quiet) console.log(`[${done + 1}/${total}] ${item.caseId} started (concurrency ${concurrency})...`);
           const runId = `${item.caseId}-run-${String(item.runIndex + 1).padStart(3, "0")}-${randomUUID().slice(0, 6)}`;
           const res = await this.runCase({ caseId: item.caseId, runId, config: this.config, runsRoot: options.runsRoot ?? this.runsRoot });
+          logProgress(item.caseId, res.status);
           results.push(res);
         }
       });

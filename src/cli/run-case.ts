@@ -24,6 +24,8 @@ async function main(): Promise<void> {
   if (useMock) process.env.BASELINE_MOCK = "1";
 
   const keepWorkspace = args.includes("--keep-workspace");
+  // Enable live tool progress streaming (clean, informative: tool invocations only, no token deltas)
+  if (!args.includes("--quiet")) process.env.BASELINE_LIVE_PROGRESS = "1";
 
   const config = await loadBaselineConfig({
     overrides: useMock ? { model: "mock" } : undefined,

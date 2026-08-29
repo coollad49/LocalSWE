@@ -55,6 +55,53 @@ function isMockMode(config: BaselineConfig): boolean {
   return false;
 }
 
+const TEST_COMMAND_RE = /\b(vitest|bun test|npm test|yarn test|pnpm test|npx\s+vitest|bun run test)\b/;
+
+function extractTestRecords(events: Array<{ type: string; data: unknown; timestamp: string }>): TestRecord[] {
+  const starts = new Map<string, { command: string; timestamp: string }>();
+  const records: TestRecord[] = [];
+  for (const ev of events) {
+    const data = ev.data as Record<string, unknown>;
+    if (ev.type === "tool_execution_start" && data?.toolName === "bash") {
+      const args = data.args as Record<string, unknown> | undefined;
+      const command = (args?.command as string) ?? "";
+      const toolCallId = data.toolCallId as string | undefined;
+      if (toolCallId && command) starts.set(toolCallId, { command, timestamp: ev.timestamp });
+      // Also capture direct bash without toolCallId? Use command as key fallback
+      if (!toolCallId && TEST_COMMAND_RE.test(command)) {
+        // synthesize record without end yet
+        records.push({ command, exitCode: 0, durationMs: 0 });
+      }
+    } else if (ev.type === "tool_execution_end" && data?.toolName === "bash") {
+      const toolCallId = data.toolCallId as string | undefined;
+      const start = toolCallId ? starts.get(toolCallId) : undefined;
+      if (!start) continue;
+      const command = start.command;
+      if (!TEST_COMMAND_RE.test(command)) continue;
+      const result = data.result as Record<string, unknown> | undefined;
+      const isError = data.isError as boolean | undefined;
+      // Try to extract exitCode from result
+      let exitCode = isError ? 1 : 0;
+      if (result && typeof result.exitCode === "number") exitCode = result.exitCode as number;
+      else if (result && typeof (result as Record<string, unknown>).code === "number") exitCode = (result as Record<string, unknown>).code as number;
+      // Duration via timestamps
+      let durationMs = 0;
+      try {
+        const startMs = Date.parse(start.timestamp);
+        const endMs = Date.parse(ev.timestamp);
+        if (!Number.isNaN(startMs) && !Number.isNaN(endMs)) durationMs = Math.max(0, endMs - startMs);
+      } catch {}
+      // stdout preview
+      let stdout: string | undefined;
+      const content = (result?.content as Array<{ text?: string }> | undefined);
+      if (Array.isArray(content) && content[0]?.text) stdout = String(content[0].text).slice(0, 4000);
+      records.push({ command, exitCode, durationMs, stdout, stderr: undefined });
+      if (toolCallId) starts.delete(toolCallId);
+    }
+  }
+  return records;
+}
+
 export class PiCodingAgent implements CodingAgent {
   private config: BaselineConfig;
   private instructionsPromise: Promise<string>;
@@ -76,6 +123,44 @@ export class PiCodingAgent implements CodingAgent {
     const resultPath = join(this.runsRoot, runId, "result.json");
 
     const trajectory = new TrajectoryCapture(trajectoryPath);
+    // Live progress: stream high-level tool invocations to console for run-case.ts
+    // Enabled via BASELINE_LIVE_PROGRESS=1 (run-case sets it, run-baseline keeps quiet)
+    const liveProgress = process.env.BASELINE_LIVE_PROGRESS === "1" || process.env.BASELINE_VERBOSE === "1";
+    const origAppend = trajectory.append.bind(trajectory);
+    trajectory.append = (source: string, type: string, data: unknown) => {
+      origAppend(source as never, type as never, data);
+      if (!liveProgress) return;
+      try {
+        if (type === "tool_execution_start" && source === "agent") {
+          const d = data as Record<string, unknown>;
+          const toolName = (d.toolName as string) ?? "tool";
+          const args = d.args as Record<string, unknown> | undefined;
+          let detail = "";
+          if (toolName === "bash" && args?.command) detail = String(args.command).slice(0, 120);
+          else if ((toolName === "edit" || toolName === "write" || toolName === "read") && args?.path) detail = String(args.path);
+          else if (toolName === "grep" && (args?.pattern || args?.query)) detail = String(args.pattern ?? args.query).slice(0, 80);
+          else if (args) detail = JSON.stringify(args).slice(0, 80);
+          console.log(`[tool] ${toolName}: ${detail}`);
+        } else if (type === "tool_execution_end" && source === "agent") {
+          const d = data as Record<string, unknown>;
+          const toolName = (d.toolName as string) ?? "tool";
+          const isError = d.isError as boolean | undefined;
+          const result = d.result as Record<string, unknown> | undefined;
+          let exitInfo = "";
+          if (toolName === "bash") {
+            const code = (result as Record<string, unknown> | undefined)?.exitCode ?? (isError ? 1 : 0);
+            exitInfo = `exit ${code} ${code === 0 ? "(passed)" : "(failed)"}`;
+          } else {
+            exitInfo = isError ? "failed" : "ok";
+          }
+          console.log(`[tool] ${toolName}: ↳ ${exitInfo}`);
+        } else if (type === "agent_start") {
+          console.log(`[agent] started`);
+        } else if (type === "agent_end") {
+          console.log(`[agent] ended`);
+        }
+      } catch {}
+    };
     let status: RepairRun["status"] = "success";
     let error: string | undefined;
     let changedFiles: string[] = [];
@@ -164,9 +249,20 @@ export class PiCodingAgent implements CodingAgent {
           patchEmpty: patchResult.patch.trim().length === 0,
         });
 
-        // Tests: try to run vitest if requested? For baseline we just record that agent may have run tests
-        // No independent verification here; evaluator will do it. We just capture what we can.
-        // Optionally check if any test command was executed via trajectory - but for now leave empty.
+        // Populate testCommands from trajectory: extract agent-ran bash commands matching test runners
+        try {
+          const events = trajectory.getEvents();
+          const testRecords = extractTestRecords(events);
+          if (testRecords.length > 0) {
+            tests = testRecords;
+            trajectory.append("harness", "test_commands_extracted", {
+              count: testRecords.length,
+              commands: testRecords.map((t) => t.command),
+            });
+          }
+        } catch (e) {
+          trajectory.append("system", "test_extract_error", { error: (e as Error).message });
+        }
       } catch (e) {
         const msg = `Patch capture failed: ${(e as Error).message}`;
         trajectory.append("system", "patch_error", { error: msg });

@@ -21,6 +21,8 @@ async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const useMock = args.includes("--mock") || process.env.BASELINE_MOCK === "1";
   if (useMock) process.env.BASELINE_MOCK = "1";
+  // run-baseline stays quiet (tool-level streaming off); run-case enables it
+  if (!args.includes("--verbose")) process.env.BASELINE_LIVE_PROGRESS = "0";
 
   const runsArgIdx = args.indexOf("--runs");
   const runsPerCase = runsArgIdx >= 0 ? Number.parseInt(args[runsArgIdx + 1] ?? "1", 10) : undefined;

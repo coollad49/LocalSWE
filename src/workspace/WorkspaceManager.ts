@@ -111,7 +111,32 @@ async function rewriteReproduceImports(publicDir: string, _repository: string): 
   }
 }
 
+async function ensureGitIgnore(workspacePath: string): Promise<void> {
+  const gitIgnorePath = join(workspacePath, ".gitignore");
+  const required = ["node_modules/", ".vite/", "dist/", ".turbo/"];
+  let existing = "";
+  let hasFile = existsSync(gitIgnorePath);
+  if (hasFile) {
+    try { existing = await readFile(gitIgnorePath, "utf-8"); } catch { existing = ""; }
+  }
+  const lines = existing.split("\n").map((l) => l.trim());
+  let appended = false;
+  for (const entry of required) {
+    // Check exact match or normalized variant (node_modules vs node_modules/)
+    const found = lines.some((l) => l === entry || l === entry.replace(/\/$/, "") || l === `/${entry}` || l === `/${entry.replace(/\/$/, "")}`);
+    if (!found) {
+      existing += (existing.endsWith("\n") || existing === "" ? "" : "\n") + entry + "\n";
+      appended = true;
+    }
+  }
+  if (appended || !hasFile) {
+    try { await writeFile(gitIgnorePath, existing, "utf-8"); } catch {}
+  }
+}
+
 async function ensureGitRepo(workspacePath: string): Promise<void> {
+  // Ensure .gitignore appends node_modules/.vite/dist before first commit (preserve repo-specific rules)
+  await ensureGitIgnore(workspacePath);
   const gitDir = join(workspacePath, ".git");
   if (existsSync(gitDir)) return;
 
@@ -120,7 +145,6 @@ async function ensureGitRepo(workspacePath: string): Promise<void> {
   // Suppress git advice, set identity for commits
   await exec("git", ["config", "user.email", "baseline@frontier-verifier.local"], workspacePath);
   await exec("git", ["config", "user.name", "frontier-baseline"], workspacePath);
-  // Ensure .gitignore doesn't ignore needed files? No need.
   await exec("git", ["add", "."], workspacePath).catch(() => {});
   await exec("git", ["commit", "-m", "baseline: initial buggy state", "--allow-empty"], workspacePath).catch(() => {
     // If commit fails due to empty, allow -m with --allow-empty
@@ -252,42 +276,39 @@ export class WorkspaceManager {
         reproducePath,
         getChangedFiles: async () => {
           try {
-            const result = await exec("git", ["status", "--porcelain"], workspacePath);
+            const result = await exec("git", ["status", "--porcelain", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo"], workspacePath);
             if (result.code !== 0) return [];
             const files: string[] = [];
             for (const line of result.stdout.split("\n")) {
               const trimmed = line.trim();
               if (!trimmed) continue;
-              // porcelain format: XY <path> or XY "<path>"
               const match = trimmed.match(/^.. "?(.+?)"?$/);
               if (match && match[1]) {
-                files.push(match[1].replace(/^"|"$/g, ""));
+                const p = match[1].replace(/^"|"$/g, "");
+                if (p.startsWith("node_modules/") || p === "node_modules" || p.includes("/.vite/") || p.startsWith(".vite/") || p.startsWith("dist/") || p.startsWith(".turbo/")) continue;
+                files.push(p);
               }
             }
-            // Also include untracked? porcelain already covers.
-            // Diff --name-only for modified
-            const diffResult = await exec("git", ["diff", "--name-only", "HEAD"], workspacePath);
+            const diffResult = await exec("git", ["diff", "--name-only", "HEAD", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo"], workspacePath);
             if (diffResult.code === 0) {
               for (const f of diffResult.stdout.split("\n")) {
                 const t = f.trim();
-                if (t && !files.includes(t)) files.push(t);
+                if (!t) continue;
+                if (t.startsWith("node_modules/") || t === "node_modules" || t.includes("/.vite/") || t.startsWith(".vite/") || t.startsWith("dist/") || t.startsWith(".turbo/")) continue;
+                if (!files.includes(t)) files.push(t);
               }
             }
             return files;
           } catch {
-            // Fallback: list all files that differ from repo? Best effort return []
             return [];
           }
         },
         getPatch: async () => {
           try {
-            // Ensure all changes are visible
-            // Include untracked files via git add -N (intent to add) then diff
-            await exec("git", ["add", "-N", "."], workspacePath).catch(() => {});
-            const result = await exec("git", ["diff", "HEAD"], workspacePath);
+            await exec("git", ["add", "-N", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo"], workspacePath).catch(() => {});
+            const result = await exec("git", ["diff", "HEAD", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo"], workspacePath);
             if (result.code === 0) return result.stdout;
-            // Fallback to git diff without HEAD if no commit
-            const fallback = await exec("git", ["diff"], workspacePath);
+            const fallback = await exec("git", ["diff", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**"], workspacePath);
             return fallback.stdout;
           } catch {
             return "";
