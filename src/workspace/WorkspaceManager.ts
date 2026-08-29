@@ -32,8 +32,6 @@ export interface Workspace {
   manifestPath: string;
   /** Path to issue.md inside workspace (ISSUE.md) */
   issuePath: string;
-  /** Path to reproduce script inside workspace (if present) */
-  reproducePath: string | undefined;
 }
 
 function exec(cmd: string, args: string[], cwd: string, timeout = 15000): Promise<{ code: number; stdout: string; stderr: string }> {
@@ -63,52 +61,6 @@ function exec(cmd: string, args: string[], cwd: string, timeout = 15000): Promis
       reject(e);
     });
   });
-}
-
-/**
- * Rewrite public/reproduce.ts imports from canonical benchmark path
- * "../../../repositories/<repo>/..." to local workspace relative "../..."
- * Workspace root == repo root, so public/reproduce.ts at workspace/public/reproduce.ts
- * importing "../src/..." correctly resolves to workspace/src/...
- */
-async function rewriteReproduceImports(publicDir: string, _repository: string): Promise<void> {
-  try {
-    const entries = await readdir(publicDir, { withFileTypes: true });
-    for (const ent of entries) {
-      if (!ent.isFile()) continue;
-      if (!ent.name.endsWith(".ts") && !ent.name.endsWith(".js")) continue;
-      const full = join(publicDir, ent.name);
-      let content: string;
-      try {
-        content = await readFile(full, "utf-8");
-      } catch {
-        continue;
-      }
-      const original = content;
-      // Replace ../../../repositories/<repo>/ with ../  (public/ -> workspace root is one level up)
-      // Handles: "../../../repositories/task-manager/src/task-manager.ts" -> "../src/task-manager.ts"
-      // Also handles mixed quotes and double-quoted paths
-      let rewritten = content.replace(
-        /from\s+["']\.\.\/\.\.\/\.\.\/repositories\/[^"'\/]+\/([^"']+)["']/g,
-        'from "../$1"'
-      );
-      // Also handle import("../../../repositories/...") dynamic imports if any
-      rewritten = rewritten.replace(
-        /import\s*\(\s*["']\.\.\/\.\.\/\.\.\/repositories\/[^"'\/]+\/([^"']+)["']\s*\)/g,
-        'import("../$1")'
-      );
-      // Handle require calls
-      rewritten = rewritten.replace(
-        /require\s*\(\s*["']\.\.\/\.\.\/\.\.\/repositories\/[^"'\/]+\/([^"']+)["']\s*\)/g,
-        'require("../$1")'
-      );
-      if (rewritten !== original) {
-        await writeFile(full, rewritten, "utf-8");
-      }
-    }
-  } catch {
-    // best effort
-  }
 }
 
 async function ensureGitIgnore(workspacePath: string): Promise<void> {
@@ -206,23 +158,13 @@ export class WorkspaceManager {
         await copyFile(src, dest);
       }
 
-      // Copy public assets for agent visibility (issue.md + public/*)
+      // Copy ISSUE.md only (SWE-bench: agent gets issue + repo, no public/reproduce.ts)
       const issueSrc = join(CASES_DIR, caseId, "issue.md");
       const issueDest = join(workspacePath, "ISSUE.md");
       if (existsSync(issueSrc)) {
         await copyFile(issueSrc, issueDest);
       } else {
-        // Also try to copy as benchmark path for reference
         await writeFile(issueDest, `# Issue for ${caseId}\n\nSee benchmark/cases/${caseId}/issue.md\n`, "utf-8");
-      }
-
-      const publicDirSrc = join(CASES_DIR, caseId, "public");
-      const publicDirDest = join(workspacePath, "public");
-      if (existsSync(publicDirSrc)) {
-        cpSync(publicDirSrc, publicDirDest, { recursive: true });
-        // Rewrite reproduce.ts imports to resolve against local workspace, not canonical benchmark
-        // Original: from "../../../repositories/<repo>/src/..." -> local "from "../src/..."
-        await rewriteReproduceImports(publicDirDest, manifest.repository);
       }
 
       // Ensure no evaluator-only information leaked into workspace
@@ -252,19 +194,12 @@ export class WorkspaceManager {
         // Verify clean git state before agent execution (no diff vs initial commit)
         const statusCheck = await exec("git", ["status", "--porcelain"], workspacePath).catch(() => ({ stdout: "", code: 0 }));
         if (statusCheck.stdout.trim() !== "") {
-          // If dirty, try to clean: reset --hard and recommit? Log warning
-          // For now, ensure we at least have committed state: status should be empty
-          // If not empty, it means uncommitted changes leaked - treat as error
           const diffCheck = await exec("git", ["diff", "--name-only", "HEAD"], workspacePath).catch(() => ({ stdout: "" }));
           if (diffCheck.stdout.trim() !== "") {
             throw new Error(`Workspace not clean after init: ${statusCheck.stdout.slice(0, 500)}`);
           }
         }
       }
-
-      const reproducePath = existsSync(join(workspacePath, "public/reproduce.ts"))
-        ? join(workspacePath, "public/reproduce.ts")
-        : undefined;
 
       const workspace: Workspace = {
         path: workspacePath,
@@ -273,7 +208,6 @@ export class WorkspaceManager {
         cleanup,
         manifestPath,
         issuePath: issueDest,
-        reproducePath,
         getChangedFiles: async () => {
           try {
             const result = await exec("git", ["status", "--porcelain", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo"], workspacePath);

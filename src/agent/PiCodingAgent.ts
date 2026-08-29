@@ -29,8 +29,8 @@ function loadInstructionsSync(_config: BaselineConfig): string {
   } catch {
     // ignore
   }
-  // Fallback minimal
-  return `You are a competent software engineer. Fix the reported defect. Inspect repo, reproduce, diagnose, fix, test.`;
+  // Fallback minimal — SWE-bench alignment: bare-bones
+  return `You are an autonomous software engineer working in this repository.\nFix the issue described in ISSUE.md.`;
 }
 
 async function loadInstructions(config: BaselineConfig, override?: string): Promise<string> {
@@ -571,11 +571,8 @@ export class PiCodingAgent implements CodingAgent {
   }
 
   private buildPrompt(task: RepairTask, instructions: string): string {
-    // Baseline instruction already loaded via system prompt, but we also provide explicit task prompt
-    // Include ISSUE.md content and reproduction guidance
     let repoHint = "";
     try {
-      // Suggest relevant files via manifest? But we keep generic
       repoHint = `Workspace: ${task.workspacePath}\nRepository files at current working directory.\n`;
     } catch {
       // ignore
@@ -589,13 +586,6 @@ ${instructions.slice(0, 3000)}
 
 ## Issue
 ${task.issue}
-
-## Steps
-1. Read ISSUE.md and explore repo.
-2. Run public/reproduce.ts via \`npx tsx public/reproduce.ts\` (or bun) to confirm failure.
-3. Diagnose root cause, edit source files minimally.
-4. Rerun reproduce script and relevant tests (\`vitest run\`, \`npm test\`) until they pass.
-5. Summarize changes.
 
 Workspace is isolated at: ${task.workspacePath}
 Case ID: ${task.caseId}
@@ -669,23 +659,20 @@ Begin now.`;
       });
     }
 
-    // Simulate running reproduce script
+    // Simulate exploring repo (SWE-bench: no public/reproduce.ts provided)
     trajectory.append("agent", "tool_execution_start", {
       toolCallId: "mock-bash-2",
       toolName: "bash",
-      args: { command: "npx tsx public/reproduce.ts" },
+      args: { command: "grep -r TODO src --include=*.ts | head" },
     });
     try {
       const { execWithTimeout } = await import("../utils/git.ts");
-      const res = await execWithTimeout("npx", ["tsx", "public/reproduce.ts"], workspace, 10000).catch(async () => {
-        // fallback to bun
-        return execWithTimeout("bun", ["run", "public/reproduce.ts"], workspace, 10000).catch(() => ({ stdout: "mock reproduce no result", stderr: "", code: 1 }));
-      });
+      const res = await execWithTimeout("grep", ["-r", "TODO", "src", "--include=*.ts"], workspace, 5000).catch(() => ({ stdout: "no TODOs", stderr: "", code: 0 }));
       trajectory.append("agent", "tool_execution_end", {
         toolCallId: "mock-bash-2",
         toolName: "bash",
         result: { content: [{ type: "text", text: res.stdout.slice(0, 3000) }], exitCode: res.code },
-        isError: res.code !== 0,
+        isError: false,
       });
     } catch (e) {
       trajectory.append("agent", "tool_execution_end", {
@@ -717,15 +704,15 @@ Begin now.`;
         const walk = async (dir: string): Promise<string | undefined> => {
           const entries = await readdir(dir, { withFileTypes: true }).catch(() => []);
           for (const e of entries) {
-            if (e.name.startsWith(".") || e.name === "node_modules" || e.name === "public" || e.name === ".git") continue;
+            if (e.name.startsWith(".") || e.name === "node_modules" || e.name === ".git") continue;
             const full = join(dir, e.name);
             const rel = full.startsWith(workspace) ? full.slice(workspace.length + 1) : full;
             if (e.isDirectory()) {
               const found = await walk(full);
               if (found) return found;
             } else if (rel.endsWith(".ts") || rel.endsWith(".js")) {
-              // Skip reproduce.ts and ISSUE.md
-              if (rel.includes("reproduce")) continue;
+              // Skip ISSUE.md
+              if (rel.includes("ISSUE")) continue;
               return rel;
             }
           }

@@ -19,8 +19,6 @@ export interface RepairTask {
   workspacePath: string;
   /** Full issue text from benchmark/cases/<id>/issue.md */
   issue: string;
-  /** Path to public reproduce script inside workspace (if present) */
-  reproducePath?: string;
   agentVersion: string;
   benchmarkVersion: string;
 }

@@ -109,7 +109,6 @@ export class BaselineRunner {
         caseId,
         workspacePath: workspace.path,
         issue: loaded.issue,
-        reproducePath: workspace.reproducePath,
         agentVersion: effectiveConfig.agentVersion,
         benchmarkVersion: effectiveConfig.benchmarkVersion,
       };

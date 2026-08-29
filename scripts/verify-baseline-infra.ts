@@ -52,11 +52,11 @@ async function main() {
     return c.id === testCase && c.issue.length > 0 && c.manifest.repository === "task-manager";
   })();
 
-  // 2. Isolated workspace is created
+  // 2. Isolated workspace is created (SWE-bench: ISSUE.md only, no public/reproduce.ts)
   let ws: Awaited<ReturnType<typeof WorkspaceManager.createWorkspace>> | undefined;
   await check("2. Isolated workspace is created", async () => {
     ws = await WorkspaceManager.createWorkspace({ caseId: testCase, runId: "check-2" });
-    return existsSync(ws.path) && existsSync(join(ws.path, "src/task-manager.ts")) && existsSync(join(ws.path, "ISSUE.md")) && existsSync(join(ws.path, "public/reproduce.ts"));
+    return existsSync(ws.path) && existsSync(join(ws.path, "src/task-manager.ts")) && existsSync(join(ws.path, "ISSUE.md")) && !existsSync(join(ws.path, "public")) && !existsSync(join(ws.path, "public/reproduce.ts"));
   })();
 
   // 3. Canonical benchmark repository remains untouched
@@ -246,17 +246,17 @@ async function main() {
     return patches[0] !== patches[1] && results.every(r => r.status === "success");
   })();
 
-  // Extra: check workspace sanitation (no private/oracle leakage)
-  await check("Extra: Workspace sanitation (no private/oracle leakage)", async () => {
+  // Extra: check workspace sanitation (no private/oracle/public leakage — SWE-bench alignment)
+  await check("Extra: Workspace sanitation (no private/oracle/public leakage)", async () => {
     const tmpWs = await WorkspaceManager.createWorkspace({ caseId: histCase, runId: "check-extra" });
     const hasPrivate = existsSync(join(tmpWs.path, "private"));
     const hasOracle = existsSync(join(tmpWs.path, "private/oracle.test.ts"));
     const hasArtifacts = existsSync(join(tmpWs.path, "artifacts"));
     const hasProvenance = existsSync(join(tmpWs.path, "provenance.md"));
-    const reproContent = readFileSync(join(tmpWs.path, "public/reproduce.ts"), "utf-8");
-    const hasCanonicalImport = reproContent.includes("../../../repositories");
+    const hasPublic = existsSync(join(tmpWs.path, "public"));
+    const hasRepro = existsSync(join(tmpWs.path, "public/reproduce.ts"));
     await tmpWs.cleanup();
-    return !hasPrivate && !hasOracle && !hasArtifacts && !hasProvenance && !hasCanonicalImport;
+    return !hasPrivate && !hasOracle && !hasArtifacts && !hasProvenance && !hasPublic && !hasRepro;
   })();
 
   // Extra: check git clean state before agent
