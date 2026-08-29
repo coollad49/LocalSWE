@@ -1,10 +1,12 @@
 # Frontier Verifier Benchmark — Case Matrix
 
-**Version:** 0.1
-**Cases:** 12 (6 historical + 6 synthetic)
-**Repositories:** 3
+**Version:** 0.2 (integrity pass, fingerprint `sha256:42a6ef0ca73f3acb725fe316320715e5c7b2539b76dde855f6466adc19253ee7`)
+**Cases:** 12 (6 synthetic-pattern labeled historical pending real replacement + 6 synthetic) — see note below
+**Repositories:** 3 (task-manager, money-utils, async-queue benchmark-owned, MIT)
 **Date:** 2026-08-29
-**Validator:** `bun run benchmark:validate` — 12/12 ✓ VALID
+**Validator:** `bun run benchmark:validate` v0.2 isolated (temp workspace, path containment, exec guard, 3× oracle) — 12/12 ✓ VALID
+**Fingerprint:** `sha256:42a6ef0ca73f3acb725fe316320715e5c7b2539b76dde855f6466adc19253ee7` (sha256 over manifests + buggy snapshots + oracles + schema)
+**Stability:** reproduction 3×, oracle 3× per state, regression 1×
 
 ---
 
@@ -105,8 +107,14 @@ No duplicate bug pattern dominates; each category appears at least twice.
 
 ---
 
+## Note on Historical Cases (Integrity)
+
+Current `hist-001..006` are **synthetic-pattern cases** (reconstructed from common real-world patterns on benchmark-owned repos) — honest provenance notes `buggy-hist-*` synthetic with `synthetic-pattern` inspiration. They are labeled `historical` in `manifest.json:type` for v0.1 compatibility but should be read as `pattern-*` until replaced with genuine external historical commits.
+
+**Evaluation 2026-08-29:** 4 external candidates evaluated (`unjs/defu`, `cacjs/cac`, `sindresorhus/p-limit`, `lukeed/kleur`) — see `benchmark/HISTORICAL-CANDIDATES.md`. Only `cacjs/cac@ffaf796` (mixed option names default) and alternative `defu@3942bfb` (prototype pollution) are strong deterministic genuine historical candidates. Not enough to replace all 6 without further search. **Decision:** Freeze v0.2 with honest pattern labeling; incrementally replace one-by-one as each new real case passes strict `buggy→fail / fixed→pass / oracle 3×` acceptance. See `benchmark/HISTORICAL-CANDIDATES.md` for ranked evidence. Quality > count.
+
 ## Validation
 
-- Each case passes: buggy reproduces (3/3 fails), good passes (3/3), oracle passes on good, fails on buggy, regression tests pass.
-- Run: `bun run benchmark:validate`
-- Report: `benchmark/validation-report.json` (machine-readable)
+- Each case passes: buggy reproduces (3/3 fails), good passes (3/3), oracle passes 3× on good, fails 3× on buggy, regression passes, final stability 1× — all in isolated temp workspaces (no live repo mutation), path-contained, exec guarded.
+- Run: `bun run benchmark:validate` (reports fingerprint) or `bun run benchmark:check-types` + `bun run check-types`
+- Report: `benchmark/validation-report.json` (machine-readable `benchmarkVersion`, `fingerprint`, `stability`)

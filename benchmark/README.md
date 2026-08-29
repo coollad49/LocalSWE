@@ -1,9 +1,11 @@
-# Frontier Verifier Benchmark v0.1
+# Frontier Verifier Benchmark v0.2
 
-**Version:** 0.1
-**Cases:** 12 (6 historical, 6 synthetic)
-**Repositories:** 3 (task-manager, money-utils, async-queue)
-**Status:** Validated — 12/12 ✓ VALID
+**Version:** 0.2
+**Cases:** 12 (6 synthetic-pattern labeled historical pending real replacement + 6 synthetic)
+**Repositories:** 3 (task-manager, money-utils, async-queue benchmark-owned, MIT)
+**Status:** Validated — 12/12 ✓ VALID (isolated v0.2 validator)
+**Fingerprint:** `sha256:42a6ef0ca73f3acb725fe316320715e5c7b2539b76dde855f6466adc19253ee7`
+**Stability:** reproduction 3×, oracle 3× per state, regression 1×, isolated temp workspaces
 
 ---
 
@@ -56,20 +58,22 @@ Each case defines:
 ## Validation
 
 ```bash
-bun run benchmark:validate
+bun run benchmark:validate        # isolated temp workspaces, path containment, 3× oracle
+bun run benchmark:check-types     # benchmark harness types
+bun run check-types               # main project types
 ```
 
-Checks for every case:
+Checks for every case (v0.2):
 
-- manifest valid
+- manifest schema valid + path containment (absolute/traversal rejected)
 - repository available
 - dependencies install (pre-checked)
-- buggy reproduces (3/3 fails)
-- good passes (3/3)
-- oracle passes on good, fails on buggy
-- regression tests pass
-- stability (repeated runs consistent)
-- machine report at `benchmark/validation-report.json`
+- buggy reproduces 3/3 fails (isolated temp)
+- good passes 3/3 (isolated temp)
+- oracle passes 3× on good, fails 3× on buggy (isolated)
+- regression tests pass (isolated)
+- fingerprint `sha256` over manifests + buggy + oracles + schema included in report
+- machine report at `benchmark/validation-report.json` (`benchmarkVersion`, `fingerprint`, `stability`)
 
 Example output:
 
@@ -89,7 +93,7 @@ hist-001   ✓ VALID
 
 ## Provenance
 
-All repositories are synthetic benchmark-owned (MIT) with documented mutations. Historical cases are reconstructed from common real-world bug patterns; synthetic cases are deterministic mutations from known-good. See each `provenance.md` and `manifest.json` for license, source URL, commit, and mutation details.
+All repositories are synthetic benchmark-owned (MIT) with documented mutations. Current `hist-*` are **synthetic-pattern** (reconstructed from common real-world patterns) pending incremental replacement with genuine external historical commits — see `benchmark/HISTORICAL-CANDIDATES.md` (evaluated `unjs/defu`, `cacjs/cac`, `sindresorhus/p-limit`, `lukeed/kleur`; only `cac@ffaf796` and alternative `defu@3942bfb` are strong). Synthetic cases are deterministic mutations from known-good. See each `provenance.md` and `manifest.json` for license, source URL, commit, and mutation details. Honest labeling is required for competition integrity.
 
 ## Versioning
 
