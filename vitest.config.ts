@@ -6,6 +6,8 @@ export default defineConfig({
       "benchmark/repositories/*/tests/**/*.test.ts",
       "benchmark/cases/*/private/**/*.test.ts",
       "benchmark/cases/*/public/**/*.test.ts",
+      "src/evaluator/tests/**/*.test.ts",
+      "src/**/*.test.ts",
     ],
     // Use vmThreads for tinyspy happy-dom if needed, but default is fine
     // Isolate false for tinyspy original, but we use run

@@ -186,9 +186,44 @@ Implements the frozen control agent for the experiment (Pi remains constant acro
 
 * Pi is frozen as runtime; future improvements are evaluator-side. Baseline does not score patches.
 
+## [0.5.0] - 2026-08-29 — Evaluator v0 (Deterministic Verification)
+
+### Added — Evaluator v0 Deterministic Layer
+
+Implements the frozen evaluation layer that answers *did the agent actually fix the bug?* via executable evidence (no LLM judge):
+
+* **Core types:** `src/evaluator/types.ts` — `Verdict` (`verified|agent_failure|false_confidence|regression_failure`), `EvaluationStatus` (`completed|error|timeout`), `VerificationStageResult` (`passed|failed|error|timeout|skipped` + exitCode/duration/command/stdout/stderr/reason), `EvaluationResult` (evaluationId, runId, caseId, benchmarkVersion+fingerprint, agentVersion/model/piVersion, startedAt/completedAt/durationMs, patchPath, status/verdict, verification{patachApply,reproduction,oracle,regression}, workspace isolated, error), `EvaluateOptions`.
+* **Patch validation:** `src/evaluator/patchValidator.ts` — rejects `..`, absolute, null bytes in `diff --git`/`---`/`+++` headers via `resolve(base)` containment (reuses `benchmark/scripts/validate.ts` strategy); also validates patch file location vs `experiments/runs`.
+* **Deterministic exec:** `src/evaluator/exec.ts` — `spawn(cmd, args, {shell:false})` with explicit args, SIGTERM→SIGKILL escalation, settled guard, timeout, stdout/stderr capture (8000 char), duration, `toStageResult`; bun-first fallback (`bun run` → `node_modules/.bin/tsx`/`npx tsx`, `bun test` → `vitest`/`npx vitest`) for npm/pnpm/yarn compat.
+* **Isolation:** `src/evaluator/isolation.ts` — `mkdtemp(/tmp/frontier-eval-)` + `cpSync(benchmark/repositories/<repo>, benchmark/cases/<id>)` → `tmpRoot/benchmark/...` (validator pattern, no benchmark mutation, relative `../../../repositories` imports work), `git apply --check` → `git apply` with `PatchApplyResult`, `mkdtemp` cleanup best-effort.
+* **Verdict:** `src/evaluator/verdict.ts` — `computeVerdict` with documented precedence: `repro FAIL → agent_failure`, `repro PASS oracle FAIL → false_confidence`, `repro PASS oracle PASS regression FAIL → regression_failure`, `all PASS → verified`; timeout/error → no verdict, top status `timeout`/`error`.
+* **Benchmark identity:** `src/evaluator/benchmarkIdentity.ts` — loads `benchmark/validation-report.json` (v0.4 `cead5c6e...`), compares to run's `metadata.json` (`benchmarkVersion`/`benchmarkFingerprint`), refuses mismatch unless `allowBenchmarkMismatch`.
+* **Aggregation:** `src/evaluator/aggregation.ts` — `aggregateResults` → `AggregatedMetrics` (`total/completed/errors/timeouts`, `byVerdict`, `rates` VFR=`verified/completed×100`, repro/oracle/regression pass, failure rates) for future V1/V2; `evaluate --all` prints `VFR 75%` etc.
+* **Evaluator:** `src/evaluator/Evaluator.ts` — `evaluate(options: EvaluateOptions)` orchestrates `artifact resolve → identity check → patch load → repo manifest → isolated workspace → patch apply → reproduce → oracle (only if repro PASS) → regression (only if oracle PASS) → verdict → persist `experiments/runs/<runId>/evaluation/{result.json,reproduction.log,oracle.log,regression.log,patch-apply.log}` + cleanup.
+* **CLI:** `src/cli/evaluate.ts` — `bun run evaluate -- --run <runId>` / `--case <id> --patch <path>` / `--all` / `--allow-mismatch` / `--keep-workspace` / `--json`; human summary (`Patch: APPLIED, Reproduction: PASS, Oracle: PASS, Regression: PASS, VERDICT: VERIFIED`) + JSON; `npm run evaluate` also works.
+* **Config:** `package.json` scripts `evaluate: tsx src/cli/evaluate.ts`, `evaluator:test: vitest run src/evaluator/tests`; `vitest.config.ts` include updated to `src/evaluator/tests/**/*.test.ts`.
+* **Tests:** `src/evaluator/tests/` — 31 evaluator tests (patchValidator 5, verdict 9, exec 6, evaluator.integration 15 covering verified/agent_failure/false_confidence/regression_failure/isolation/repeatability/identity/runId/oracle secrecy/timeout, isolation 4, aggregation 2) — total `bun run test` 25 files 145 tests (19 benchmark/oracle + 6 evaluator).
+
+### Changed
+
+* `package.json` adds `evaluate`, `evaluator:test`; `vitest.config.ts` include expanded for evaluator tests; `src/evaluator/` new directory.
+
+### Evidence
+
+* `bun run check-types` → 0, `bun run benchmark:check-types` → 0
+* `bun run benchmark:validate` → 12/12 VALID `sha256:cead5c6e...` (unchanged)
+* `bun run test` → 25 files 145 tests (also `npm test`); `bun run benchmark:validate` still isolated
+* Manual smoke: `bun run evaluate -- --case synth-001 --patch empty` → `VERIFIED` (15ms repro, 17ms oracle, 16ms regression); `--patch buggy` → `AGENT_FAILURE`; `partial dueDate` → `FALSE_CONFIDENCE`; `regression break` → `REGRESSION_FAILURE`; `traversal` → `PATCH_TRAVERSAL` error (all 4 verdicts distinguishable)
+* Manual `BASELINE_MOCK=1 bun run baseline:run:case -- synth-001` → `patch.diff` (comment) → `bun run evaluate -- --run <runId>` → `VERIFIED` + `evaluation/result.json` persisted
+* `git status --short -- benchmark/repositories/ benchmark/cases/ benchmark/schema/` clean after evaluations; `experiments/runs` ignored
+
+### Decision
+
+* Evaluator is deterministic infrastructure, not an AI judge; benchmark remains immutable v0.4; evaluator is frozen `evaluator-v0` for baseline→v1→v2→final.
+
 ## Unreleased
 
-- Planned: evaluator (independent reproduction + oracle + VFR).
+- Next: agent-v1/v2 experiments using evaluator for VFR.
 
 
 ## [0.3.2] - 2026-08-29 — Historical Authenticity & TS Config Hygiene

@@ -1,4 +1,4 @@
-# Current State — 2026-08-29 v0.4 FROZEN + Baseline v0 (frozen)
+# Current State — 2026-08-29 v0.4 FROZEN + Baseline v0 + Evaluator v0 (frozen)
 
 **Benchmark version:** 0.4 — FROZEN for experiments (6 genuine historical + 6 synthetic)
 **Fingerprint:** `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` (sha256 over manifests + issue.md + provenance.md + buggy + oracles + schema + 7 repos)
@@ -7,6 +7,7 @@
 **Validator:** `bun run benchmark:validate` / `npm run benchmark:validate` v0.4 isolated (temp workspace, path containment, exec guard, oracle 3×, fingerprint includes provenance) passes
 **Type check:** `bun run check-types` + `bun run benchmark:check-types` passes (also `npm run`); `vitest` + `tsx` for harness
 **Repo tests:** all pass on known-good via `vitest run` (`bun run test` / `npm test` both → 19 files 103 tests)
+**Evaluator:** v0 deterministic (see docs/decisions/evaluator-v0.md) — `bun run evaluate` / `npm run evaluate` passes, 25 files 145 tests
 
 ## What exists — Benchmark (v0.4 FROZEN)
 
@@ -16,8 +17,9 @@
 - `benchmark/scripts/validate.ts` v0.4 — bun-first → vitest/tsx fallback, temp isolation, path containment, settle guard, 3× oracle, fingerprint (reports v0.4, now includes issue.md + provenance.md)
 - `benchmark/CASE-MATRIX.md`, `benchmark/README.md` v0.4 FROZEN, `benchmark/validation-report.json` (12/12 v0.4, cead5c...), `benchmark/HISTORICAL-CANDIDATES.md` (complete 6/6), `benchmark/repositories/README.md` (7 repos)
 - `vitest.config.ts` + `tsconfig.json` `types: [bun,node,vitest/globals]` + `package.json` `vitest`/`tsx`/`@types/node` (bun.lock kept, npm/pnpm/yarn compatible)
-- `CHANGELOG.md` 0.4.0 FROZEN
+- `CHANGELOG.md` 0.4.0 FROZEN + 0.5.0 evaluator
 - `docs/benchmark-spec.md` v0.4 FROZEN
+- `docs/decisions/evaluator-v0.md` — evaluator v0 (deterministic, 4 verdicts, isolated, benchmark integrity, VFR)
 
 ## What exists — Baseline v0 (new, frozen for experiments)
 
@@ -46,16 +48,29 @@ All 6 `hist-*` now genuine external bugs with pinned buggyCommit→fixedCommit, 
 - hist-006 tinyspy @ 0684083 (PR #50, inherited getter)
 Evaluated 4 provided + 4 additional (tinyspy, mri, yocto-queue) to reach 6; yocto-queue/p-limit/kleur rejected. Requirement 6 genuine non-negotiable now met.
 
+## What exists — Evaluator v0 (new, frozen for experiments)
+
+**Evaluator v0** implements deterministic verification (no LLM, no patch text comparison):
+
+* **Core:** `src/evaluator/Evaluator.ts` — accepts `patch.diff` artifact (via `--run` or `--case --patch`), checks benchmark identity (version+fingerprint, `--allow-mismatch` override), validates patch paths (traversal/absolute/null), creates isolated `mkdtemp` workspace (`benchmark/repositories/<repo>` + `benchmark/cases/<id>`), applies patch via `git apply --check` → `git apply`, runs ladder `reproduce → oracle → regression` with `spawn()` explicit args, timeouts (10s/15s/20s/30s), settled guard, bun-first → `vitest`/`tsx` fallback, computes verdict `verified|agent_failure|false_confidence|regression_failure` with `completed|error|timeout` status, persists `experiments/runs/<runId>/evaluation/{result.json,*.log}`.
+* **Types:** `src/evaluator/types.ts` (`Verdict`, `EvaluationStatus`, `VerificationStageResult`, `EvaluationResult` with fingerprint, runId, caseId, durations, stdout/stderr, workspace isolated flag), `aggregation.ts` (VFR = verified/completed×100 + rates).
+* **Security:** path containment (`resolve(base)`), no shell interpolation, SIGTERM→SIGKILL, `mkdtemp` cleanup, benchmark read-only (`benchmark/repositories`/`cases` never mutated, `git status` clean), oracle opaque (only exit code).
+* **CLI:** `src/cli/evaluate.ts` (`bun run evaluate -- --run <runId>` or `--case <id> --patch <path>`, `--all`, `--json`, `--keep-workspace`) → human summary + machine JSON, also `npm run evaluate`.
+* **Tests:** `src/evaluator/tests/` 31 tests covering patch validation, exec, verdict, isolation, repeatability, benchmark identity, false_confidence/regression_failure scenarios, timeout, etc. Total `bun run test` → 25 files 145 tests.
+* **Docs:** `docs/decisions/evaluator-v0.md` (responsibility, ladder, taxonomy, isolation, integrity, determinism, VFR), `package.json` scripts `evaluate`/`evaluator:test`.
+
 ## Next step
 
-FROZEN v0.4 (cead5c6...) + baseline-v0 for `evaluator` then `agent-v1/v2/final` experiments (no benchmark changes without v0.5). Previous v0.3 results discarded. Next: evaluator (independent reproduction + oracle + regression + VFR, 4-way verdict: verified / agent_failure / false_confidence / regression_failure, configurable runsPerCase).
+FROZEN v0.4 (cead5c6...) + baseline-v0 + evaluator-v0 for `agent-v1/v2/final` experiments (no benchmark changes without v0.5). Previous v0.3 results discarded. Next: `agent-v1/v2/final` rely on evaluator for VFR; do not rebuild evaluator.
 
 ## Known limitations
 
 - Baseline mock edits are trivial comments; real VFR requires valid `PROVIDER_API_KEY` and model.
-- Baseline does not score patches (evaluator will).
+- Evaluator mock smoke tests show `VERIFIED` for comment-only patches (since they preserve known-good behavior); real agent failures need genuine logic bugs.
 - Money/validators known-good not polished (intentionally left untouched).
 - Historical `cac`/`mri` excluded from `tsconfig` via `exclude` for verbatim compatibility.
+- Evaluator timeouts are heuristic (15s/20s/30s); very slow but correct patches could timeout — configurable via `EvaluateOptions.timeouts`.
+- Evaluator does not yet sandbox CPU/memory/network beyond temp workspace.
 
 ## Agent used
 
