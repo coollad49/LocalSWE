@@ -1,7 +1,5 @@
-// @ts-nocheck
 import CAC from './CAC'
-import Option from './Option'
-import type { OptionConfig } from './Option'
+import Option, { OptionConfig } from './Option'
 import {
   removeBrackets,
   findAllBrackets,

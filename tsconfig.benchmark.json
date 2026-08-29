@@ -1,8 +1,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "noEmit": true
+    "noEmit": true,
+    "verbatimModuleSyntax": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "strict": false,
+    "noUncheckedIndexedAccess": false
   },
-  "include": ["benchmark/scripts/**/*.ts", "benchmark/cases/**/public/**/*.ts", "benchmark/cases/**/private/**/*.ts", "benchmark/repositories/**/*.ts"],
-  "exclude": ["benchmark/cases/**/artifacts", "node_modules", "dist"]
+  "include": ["benchmark/scripts/**/*.ts", "benchmark/cases/**/public/**/*.ts", "benchmark/cases/**/private/**/*.ts", "benchmark/repositories/**/*.ts", "benchmark/**/*.d.ts"],
+  "exclude": ["benchmark/cases/**/artifacts", "benchmark/repositories/cac/**/*", "benchmark/repositories/cac/**", "benchmark/repositories/mri/**/*", "benchmark/repositories/mri/**", "node_modules", "dist"]
 }

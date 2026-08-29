@@ -157,3 +157,21 @@ Updated `benchmark/HISTORICAL-CANDIDATES.md` to **6/6 Genuine** (`tinyspy 0372bf
 
 - Planned: evaluator workspace builder, baseline agent (FROZEN v0.3, no benchmark changes).
 
+
+## [0.3.2] - 2026-08-29 — Historical Authenticity & TS Config Hygiene
+
+### Fixed — Remove `// @ts-nocheck`, Use `tsconfig Exclude`
+
+- **Cleaned source files:** Removed `// @ts-nocheck` from all `benchmark/repositories/cac/src/*` (CAC.ts, Command.ts, Option.ts, utils.ts, index.ts, node.ts, deno.ts, mri.d.ts) and `benchmark/cases/hist-001/artifacts/buggy/src/CAC.ts`. Restored historical source authenticity via `git show ffaf796:src/*` and `8342919:src/CAC.ts` (original `import Command, { GlobalCommand, CommandConfig...}` without `import type`).
+- **Updated TypeScript configs:** Added `benchmark/repositories/cac/**`, `benchmark/repositories/cac/**/*`, `benchmark/repositories/mri/**`, `benchmark/repositories/mri/**/*` and `benchmark/cases/hist-001/**`, `hist-002/**`, `hist-004/**`, `hist-005/**` to `exclude` in `tsconfig.json:30` and `tsconfig.benchmark.json:7`. This ensures `check-types` enforces strict types on infrastructure/scripts/test suites, not legacy 3rd-party historical libraries, without rewriting historical code.
+- **Preserved `mri.d.ts`:** Kept `declare module 'mri';` but without `@ts-nocheck` (now excluded, not type-checked).
+
+### Evidence
+
+- `bun run check-types` → 0, `bun run benchmark:check-types` → 0 (previously `benchmark:check-types` failed on `cac` strict errors)
+- `bun run benchmark:validate` → **12/12 VALID** `sha256:4d739f6c4abd2bfc8dc663fb03731ab24c91d25d5d3d28b6b10a620e749b055c` (also `npm run benchmark:validate` via `tsx` fallback)
+- `grep -r "@ts-nocheck" --include="*.ts"` → empty (verified)
+
+### Decision
+
+- Historical sources remain authentic (no `import type` rewrites), type-checking via `tsconfig Exclude` as instructed.

@@ -1,11 +1,11 @@
 # Frontier Verifier Benchmark — Case Matrix
 
-**Version:** 0.3 (6 genuine historical + 6 synthetic, fingerprint `sha256:ef363fc1663524bb075e83635861df370aa573392d7470918376c48d5195b0aa`)
+**Version:** 0.3 (6 genuine historical + 6 synthetic, fingerprint `sha256:4d739f6c4abd2bfc8dc663fb03731ab24c91d25d5d3d28b6b10a620e749b055c`)
 **Cases:** 12 (6 historical genuine + 6 synthetic)
 **Repositories:** 7 (3 benchmark-owned: task-manager, money-utils, async-queue + 4 external historical: cac, defu, tinyspy, mri)
 **Date:** 2026-08-29
 **Validator:** `bun run benchmark:validate` v0.3 isolated (bun-first → vitest/tsx fallback, temp workspace, path containment, exec guard, 3× oracle) — 12/12 ✓ VALID (also `npm run benchmark:validate` via tsx)
-**Fingerprint:** `sha256:ef363fc1663524bb075e83635861df370aa573392d7470918376c48d5195b0aa` (sha256 over manifests + buggy snapshots + oracles + schema + 7 repo hashes)
+**Fingerprint:** `sha256:4d739f6c4abd2bfc8dc663fb03731ab24c91d25d5d3d28b6b10a620e749b055c` (sha256 over manifests + buggy snapshots + oracles + schema + 7 repo hashes)
 **Stability:** reproduction 3×, oracle 3× per state, regression 1×
 
 ---

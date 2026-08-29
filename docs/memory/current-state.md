@@ -1,7 +1,7 @@
 # Current State — 2026-08-29 v0.3 (6 genuine historical — requirement met, vitest compatible)
 
 **Benchmark version:** 0.3 (6 genuine historical + 6 synthetic, FROZEN for experiments)
-**Fingerprint:** `sha256:ef363fc1663524bb075e83635861df370aa573392d7470918376c48d5195b0aa`
+**Fingerprint:** `sha256:4d739f6c4abd2bfc8dc663fb03731ab24c91d25d5d3d28b6b10a620e749b055c`
 **Cases:** 12 (6 genuine historical + 6 synthetic) — 12/12 VALID (isolated v0.3 validator, bun-first → vitest/tsx fallback)
 **Repositories:** 7 (3 synthetic: task-manager, money-utils, async-queue + 4 genuine: cac, defu, tinyspy, mri — all MIT)
 **Validator:** `bun run benchmark:validate` / `npm run benchmark:validate` v0.3 isolated (temp workspace, path containment, exec guard, oracle 3×) passes

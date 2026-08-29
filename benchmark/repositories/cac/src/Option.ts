@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { removeBrackets, camelcaseOptionName } from './utils'
 
 interface OptionConfig {

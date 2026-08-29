@@ -1,4 +1,3 @@
-// @ts-nocheck
 // Ignore the TypeScript errors
 // Since this file will only be used in Deno runtime
 

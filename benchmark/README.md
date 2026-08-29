@@ -4,7 +4,7 @@
 **Cases:** 12 (6 genuine historical + 6 synthetic)
 **Repositories:** 7 (3 benchmark-owned: task-manager, money-utils, async-queue + 4 external historical: cac, defu, tinyspy, mri — all MIT)
 **Status:** Validated — 12/12 ✓ VALID (isolated v0.3 validator, bun-first → vitest/tsx fallback)
-**Fingerprint:** `sha256:ef363fc1663524bb075e83635861df370aa573392d7470918376c48d5195b0aa`
+**Fingerprint:** `sha256:4d739f6c4abd2bfc8dc663fb03731ab24c91d25d5d3d28b6b10a620e749b055c`
 **Stability:** reproduction 3×, oracle 3× per state, regression 1×, isolated temp workspaces
 
 ---

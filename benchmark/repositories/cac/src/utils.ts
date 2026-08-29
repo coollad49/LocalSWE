@@ -1,4 +1,3 @@
-// @ts-nocheck
 import Option from './Option'
 
 export const removeBrackets = (v: string) => v.replace(/[<[].+/, '').trim()
