@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect } from "vitest";
 import { AsyncQueue } from "../../../repositories/async-queue/src/queue.ts";
 
 describe("synth-006 oracle: dequeue throws on empty", () => {

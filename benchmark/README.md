@@ -3,8 +3,8 @@
 **Version:** 0.3
 **Cases:** 12 (6 genuine historical + 6 synthetic)
 **Repositories:** 7 (3 benchmark-owned: task-manager, money-utils, async-queue + 4 external historical: cac, defu, tinyspy, mri — all MIT)
-**Status:** Validated — 12/12 ✓ VALID (isolated v0.2 validator)
-**Fingerprint:** `sha256:6938f031bedd5d120dbd7aacb8274717f1e3d00fa5928aa98216dc1c0e772b0c`
+**Status:** Validated — 12/12 ✓ VALID (isolated v0.3 validator, bun-first → vitest/tsx fallback)
+**Fingerprint:** `sha256:ef363fc1663524bb075e83635861df370aa573392d7470918376c48d5195b0aa`
 **Stability:** reproduction 3×, oracle 3× per state, regression 1×, isolated temp workspaces
 
 ---
@@ -48,22 +48,23 @@ Isolation is enforced by filesystem: evaluator creates per-case workspace copyin
 ## Reproducibility
 
 Each case defines:
-- runtime: Node 22, Bun 1.4.0, `bun install` + `bun test`
+- runtime: Node 22, Bun 1.4.0 (or Node 22 + npm/pnpm/yarn with `vitest`/`tsx`), `bun install` / `npm install` + `npm test` / `bun run test` (`vitest run`)
 - buggy state: apply `artifacts/buggy/src/...` over repository
 - known-good: restore repository
-- reproduction: `bun run benchmark/cases/<id>/public/reproduce.ts` (exit 0 = pass, 1 = fail)
-- oracle: `bun test benchmark/cases/<id>/private/oracle.test.ts`
-- regression: `bun test benchmark/repositories/<repo>/tests`
+- reproduction: `npx tsx benchmark/cases/<id>/public/reproduce.ts` or `bun run benchmark/cases/<id>/public/reproduce.ts` (exit 0 = pass, 1 = fail)
+- oracle: `npx vitest run benchmark/cases/<id>/private/oracle.test.ts` or `bun test` fallback
+- regression: `npx vitest run benchmark/repositories/<repo>/tests` or `bun test`
 
 ## Validation
 
 ```bash
-bun run benchmark:validate        # isolated temp workspaces, path containment, 3× oracle
-bun run benchmark:check-types     # benchmark harness types
+bun run benchmark:validate        # via tsx, isolated temp, bun-first → vitest fallback (also npm run benchmark:validate)
+npm run benchmark:validate        # same via tsx, works without bun (vitest fallback)
+bun run benchmark:check-types     # benchmark harness types (also npm)
 bun run check-types               # main project types
 ```
 
-Checks for every case (v0.2):
+Checks for every case (v0.3):
 
 - manifest schema valid + path containment (absolute/traversal rejected)
 - repository available

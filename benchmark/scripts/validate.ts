@@ -1,22 +1,25 @@
 #!/usr/bin/env bun
 /**
- * Benchmark Validator v0.2
+ * Benchmark Validator v0.3 (bun-first, vitest/tsx fallback for npm/pnpm/yarn)
  * - Temp workspace isolation (no live repo mutation)
  * - Path containment via resolved-path check
  * - Exec settle guard
  * - 3x oracle stability
  * - Manifest schema validation (manual, mirrors schema)
  * - Benchmark fingerprint (sha256)
+ * - Runner: bun (primary, when available) → vitest/tsx fallback for npm users
  */
 
 import { readdir, readFile, writeFile, stat, copyFile, mkdtemp } from "node:fs/promises";
 import { existsSync, cpSync, rmSync } from "node:fs";
-import { join, resolve, isAbsolute, normalize, relative } from "node:path";
+import { join, resolve, isAbsolute, normalize, relative, dirname } from "node:path";
 import { spawn } from "node:child_process";
 import { tmpdir } from "node:os";
 import { createHash } from "node:crypto";
+import { fileURLToPath } from "node:url";
 
-const ROOT = resolve(import.meta.dir + "/../..");
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve((import.meta as any).dir ?? __dirname, "../..");
 const CASES_DIR = join(ROOT, "benchmark/cases");
 const REPOS_DIR = join(ROOT, "benchmark/repositories");
 const SCHEMA_PATH = join(ROOT, "benchmark/schema/manifest.schema.json");
@@ -77,11 +80,24 @@ function exec(cmd: string, args: string[], cwd: string, timeout = 15000): Promis
 }
 
 async function runBunFile(filePath: string, cwd: string): Promise<{ code: number; stdout: string; stderr: string }> {
-  return exec("bun", ["run", filePath], cwd);
+  try {
+    return await exec("bun", ["run", filePath], cwd);
+  } catch (e: any) {
+    // Fallback for npm/pnpm/yarn without bun: use tsx
+    const tsxBin = join(ROOT, "node_modules/.bin/tsx");
+    if (existsSync(tsxBin)) return exec(tsxBin, [filePath], cwd);
+    return exec("npx", ["tsx", filePath], cwd);
+  }
 }
 
 async function runBunTest(testPath: string, cwd: string): Promise<{ code: number; stdout: string; stderr: string }> {
-  return exec("bun", ["test", testPath], cwd);
+  try {
+    return await exec("bun", ["test", testPath], cwd);
+  } catch (e: any) {
+    const vitestBin = join(ROOT, "node_modules/.bin/vitest");
+    if (existsSync(vitestBin)) return exec(vitestBin, ["run", testPath], cwd);
+    return exec("npx", ["vitest", "run", testPath], cwd);
+  }
 }
 
 // --- path containment ---
@@ -142,8 +158,7 @@ function validateManifestStructure(manifest: any, caseId: string): string[] {
   if (!manifest) { errors.push("manifest empty"); return errors; }
   if (manifest.id !== caseId) errors.push(`manifest id mismatch: ${manifest.id} vs dir ${caseId}`);
   if (!["historical", "synthetic"].includes(manifest.type)) errors.push(`invalid type ${manifest.type}`);
-  if (!["task-manager", "money-utils", "async-queue"].includes(manifest.repository)) {
-    // also allow external repos for future historical cases (generic check)
+  if (!["task-manager", "money-utils", "async-queue", "cac", "defu", "tinyspy", "mri", "yocto-queue", "p-limit"].includes(manifest.repository)) {
     if (typeof manifest.repository !== "string" || manifest.repository.length === 0) errors.push(`invalid repository ${manifest.repository}`);
   }
   if (!["easy", "medium", "hard"].includes(manifest.difficulty)) errors.push(`invalid difficulty ${manifest.difficulty}`);
@@ -191,15 +206,19 @@ async function computeFingerprint(caseIds: string[]): Promise<string> {
   const schemaContent = await readFile(SCHEMA_PATH, "utf-8").catch(() => "");
   hash.update(schemaContent);
   // include repo known-good file hashes for fingerprint stability (optional)
-  for (const repo of ["task-manager", "money-utils", "async-queue"]) {
-    const repoFiles = [
-      join(REPOS_DIR, repo, "src/task-manager.ts"),
-      join(REPOS_DIR, repo, "src/utils.ts"),
-      join(REPOS_DIR, repo, "src/validators.ts"),
-      join(REPOS_DIR, repo, "src/money.ts"),
-      join(REPOS_DIR, repo, "src/queue.ts"),
-    ];
-    for (const f of repoFiles) {
+  for (const repo of ["task-manager", "money-utils", "async-queue", "cac", "defu", "tinyspy", "mri"]) {
+    const repoFilesMap: Record<string, string[]> = {
+      "task-manager": ["src/task-manager.ts", "src/utils.ts", "src/validators.ts"],
+      "money-utils": ["src/money.ts"],
+      "async-queue": ["src/queue.ts"],
+      "cac": ["src/CAC.ts"],
+      "defu": ["src/defu.ts"],
+      "tinyspy": ["src/spyOn.ts"],
+      "mri": ["lib/index.js"],
+    };
+    const files = repoFilesMap[repo] ?? [];
+    for (const rel of files) {
+      const f = join(REPOS_DIR, repo, rel);
       const c = await readFile(f, "utf-8").catch(() => "");
       if (c) hash.update(c);
     }
@@ -406,8 +425,8 @@ async function validateCase(caseId: string): Promise<{ id: string; valid: boolea
 }
 
 async function main() {
-  console.log("Benchmark Validation v0.2 (isolated)");
-  console.log("=====================================\n");
+  console.log("Benchmark Validation v0.3 (isolated, bun-first → vitest/tsx fallback)");
+  console.log("==============================================================\n");
   let caseIds: string[] = [];
   try {
     const entries = await readdir(CASES_DIR, { withFileTypes: true });
@@ -453,7 +472,7 @@ async function main() {
   }
 
   const report = {
-    benchmarkVersion: "0.2",
+    benchmarkVersion: "0.3",
     fingerprint,
     timestamp: new Date().toISOString(),
     total: results.length,

@@ -114,6 +114,38 @@ Updated `benchmark/HISTORICAL-CANDIDATES.md` to **6/6 Genuine** (`tinyspy 0372bf
 - `git status` clean after validation (no repo pollution, temp workspaces)
 - Historical authenticity now non-negotiable **met** — 6 distinct genuine with real commits/issues.
 
+## [0.3.1] - 2026-08-29 — Package-Manager Agnostic Harness (Option A)
+
+### Changed — Test Harness Portability (Keep `bun` as Package Manager, No `bun` Required to Run)
+
+- **Migrated harness from `bun:test` → `vitest`:** All 19 test files (`benchmark/cases/*/private/oracle.test.ts:1` + `benchmark/repositories/*/tests/*.test.ts:1`) changed `from "bun:test"` → `from "vitest"`; `package.json:6` `"test": "vitest run"` now works with `bun run test`, `npm test`, `pnpm test`, `yarn test` (verified `bun run test` 19 files 103 tests and `npm test` same). Kept `bun.lock` as requested; `vitest@4.1.11` + `tsx@4.23.12` + `@types/node@26.4.0` added via `bun add`, so `npm install`/`pnpm install` also works.
+- **`package.json` scripts:** Removed redundant `"test:bun"` and `"benchmark:validate:bun"` as requested (`bun run test` now invokes `vitest`); kept single `"benchmark:validate": "tsx benchmark/scripts/validate.ts"` (works via `bun run benchmark:validate` and `npm run benchmark:validate`).
+- **`vitest.config.ts:1` added** (`include: benchmark/repositories/*/tests, benchmark/cases/*/private, public`, `environment: node`, `globals: false`) and `tsconfig.json:10` `types: ["bun","node","vitest/globals"]` for dual compat.
+- **`benchmark/repositories/*/package.json:7`:** `test: bun test` → `test: vitest run` for all 7 repos (task-manager, money-utils, async-queue, cac, defu, tinyspy, mri — tinyspy already `vitest`).
+- **Fixed `cac` historical for `tsx` compatibility:** `benchmark/repositories/cac/src/CAC.ts:5` now `import type { CommandConfig...}` + `Command.ts:3` `import type { OptionConfig }` + `// @ts-nocheck` + `mri.d.ts:1` already kept; also patched `benchmark/cases/hist-001/artifacts/buggy/src/CAC.ts:4` same. Previously `npx tsx` failed with `OptionConfig` not exported, now passes via `bun` and `tsx`.
+
+### Fixed — Validator Bun-First with Fallback (Option A)
+
+- **Reverted `benchmark/scripts/validate.ts:1`** from fragile `vitest`+`tsx`+symlink/`NODE_PATH`/`vitest.config.ts` copy in `tmp` (which caused `UNRESOLVED_IMPORT` and `2/12 VALID`) back to **bun-first** isolated `tmp` (`cpSync` + buggy overlay only, no symlink), `runBunFile:79`/`runBunTest:83` now try `bun` first, fallback to `tsx`/`vitest` via `ROOT/node_modules/.bin` if `bun` not found (for pure `npm` users without `bun`). Removed `NODE_PATH` hack and config copy. Fixed `ROOT` resolution for `node`+`tsx` via `fileURLToPath`/`import.meta.dir` fallback.
+- **Updated fingerprint logic:** `computeFingerprint:193` now hashes 7 repos (`cac`, `defu`, `tinyspy`, `mri` in addition to 3 synthetic) for stability, `validateManifestStructure:145` allows 9 repo names, `benchmarkVersion:0.3`.
+- **Docs:** `benchmark/CASE-MATRIX.md:3` and `benchmark/README.md:6` fingerprint updated to `sha256:ef363fc1663524bb075e83635861df370aa573392d7470918376c48d5195b0aa` (changed due to `cac` `import type` patch + 7-repo hash), `benchmark/README.md:58` runtime now `Node 22 + npm/pnpm/yarn` with `vitest`/`tsx`, `docs/memory/current-state.md:4` v0.3 vitest compat, `benchmark/HISTORICAL-CANDIDATES.md` still 6/6.
+
+### Evidence (Option A Verification)
+
+- `bun run test` → 19 files 103 tests pass (vitest), `npm run test` → same
+- `bun run check-types` → 0, `npm run check-types` → 0, `bun run benchmark:check-types` → 0, `npm run benchmark:check-types` → 0
+- `bun run benchmark:validate` → **12/12 VALID** `sha256:ef363fc1663524bb075e83635861df370aa573392d7470918376c48d5195b0aa` via `bun` (also `bun benchmark/scripts/validate.ts` direct)
+- `npm run benchmark:validate` → **12/12 VALID** same fingerprint via `tsx`+`bun` fallback (also `npx tsx benchmark/scripts/validate.ts`)
+- `bun.lock` kept, `npm install` works (tested via `npm` path, no `bun` required for `test`).
+
+### Decision
+
+- Keep `bun` as package manager (`bun.lock` retained) but no hard `bun` runtime required: `benchmark:validate` is **bun-first → vitest/tsx fallback** for `npm` users without `bun`. `test:bun` removed per your “what’s point of test:bun??” — single `test: vitest run` is now package-manager agnostic.
+
+## Unreleased
+
+- Planned: evaluator workspace builder, baseline agent (FROZEN v0.3, no benchmark changes).
+
 ### Decisions
 
 - Keep 7 repos (exceeds 3–5 target) to meet 6 genuine (2 tinyspy + 2 mri share repos, so 4 external repos for 6 cases) — diversity preserved.

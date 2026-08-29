@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect } from "vitest";
 import { TaskManager } from "../../../repositories/task-manager/src/task-manager.ts";
 
 describe("synth-004 oracle: filterByStatus cache invalidation", () => {

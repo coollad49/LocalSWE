@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect } from "vitest";
 import { defu, createDefu } from "../../../repositories/defu/src/defu.ts";
 
 describe("hist-002 oracle: prototype pollution via __proto__", () => {

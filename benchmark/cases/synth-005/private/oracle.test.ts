@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect } from "vitest";
 import { convertCurrency, createMoney } from "../../../repositories/money-utils/src/money.ts";
 
 describe("synth-005 oracle: convertCurrency rounding", () => {

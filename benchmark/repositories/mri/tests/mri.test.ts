@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect } from "vitest";
 import mri from "../lib/index.js";
 
 describe("mri regression", () => {

@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect } from "vitest";
 import { spyOn } from "../../../repositories/tinyspy/src/index.ts";
 
 describe("hist-003 oracle: prototype restore leak", () => {

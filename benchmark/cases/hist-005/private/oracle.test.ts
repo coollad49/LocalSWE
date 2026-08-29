@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect } from "vitest";
 import mri from "../../../repositories/mri/lib/index.js";
 
 describe("hist-005 oracle: alias defaults string cascade (5437ea5)", () => {

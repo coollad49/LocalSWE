@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect } from "vitest";
 import { defu, createDefu } from "../src/defu.ts";
 
 describe("defu regression", () => {

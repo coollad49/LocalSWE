@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect } from "vitest";
 import { createMoney, formatMoney, parseMoney, add, subtract, multiply, convertCurrency, roundToCents } from "../src/money.ts";
 
 describe("money-utils", () => {

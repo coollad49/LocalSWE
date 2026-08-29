@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect } from "vitest";
 import { cac } from "../../../repositories/cac/src/index.ts";
 
 describe("hist-001 oracle: option default alias leak", () => {

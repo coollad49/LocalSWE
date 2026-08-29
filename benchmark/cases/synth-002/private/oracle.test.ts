@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect } from "vitest";
 import { add, subtract, createMoney } from "../../../repositories/money-utils/src/money.ts";
 
 describe("synth-002 oracle: currency mismatch validation", () => {

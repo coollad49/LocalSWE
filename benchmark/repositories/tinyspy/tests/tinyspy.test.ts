@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, test, expect } from "vitest";
 import { spyOn, spy } from "../src/index.ts";
 
 describe("tinyspy regression", () => {

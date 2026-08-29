@@ -1,13 +1,9 @@
 // @ts-nocheck
 import { EventEmitter } from 'events'
 import mri from 'mri'
-import Command, {
-  GlobalCommand,
-  CommandConfig,
-  HelpCallback,
-  CommandExample,
-} from './Command'
-import { OptionConfig } from './Option'
+import Command, { GlobalCommand } from './Command'
+import type { CommandConfig, HelpCallback, CommandExample } from './Command'
+import type { OptionConfig } from './Option'
 import {
   getMriOptions,
   setDotProp,
