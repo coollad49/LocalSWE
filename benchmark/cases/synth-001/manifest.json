@@ -1,0 +1,32 @@
+{
+  "id": "synth-001",
+  "type": "synthetic",
+  "repository": "task-manager",
+  "baseVersion": "1.0.0",
+  "baseCommit": "v1.0.0-task-manager",
+  "difficulty": "medium",
+  "categories": ["state-management", "business-logic"],
+  "description": "updateTask overwrites fields with undefined when using spread",
+  "provenance": {
+    "sourceUrl": "https://github.com/frontier-verifier/task-manager",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "createdAt": "2026-08-29",
+    "issueUrl": null,
+    "buggyCommit": "generated-synth-001",
+    "fixedCommit": null,
+    "notes": "Synthetic mutation: updateTask spreads updates directly, so undefined overwrites existing values. Known-good checks !== undefined before assigning."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/task-manager.ts"],
+  "fixFiles": ["src/task-manager.ts"]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "synth-006",
+  "type": "synthetic",
+  "repository": "async-queue",
+  "baseVersion": "1.0.0",
+  "baseCommit": "v1.0.0-async-queue",
+  "difficulty": "easy",
+  "categories": ["api-behavior", "error-handling"],
+  "description": "dequeue returns undefined instead of throwing on empty queue",
+  "provenance": {
+    "sourceUrl": "https://github.com/frontier-verifier/async-queue",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "createdAt": "2026-08-29",
+    "issueUrl": null,
+    "buggyCommit": "generated-synth-006",
+    "fixedCommit": null,
+    "notes": "Synthetic: dequeue returns undefined when empty instead of throwing, violating API contract."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/queue.ts"],
+  "fixFiles": ["src/queue.ts"]
+}

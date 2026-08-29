@@ -1,0 +1,32 @@
+{
+  "id": "hist-002",
+  "type": "historical",
+  "repository": "money-utils",
+  "baseVersion": "1.0.0",
+  "baseCommit": "v1.0.0-money-utils",
+  "difficulty": "medium",
+  "categories": ["business-logic", "data-transformation"],
+  "description": "formatMoney/roundToCents rounds down (floor) instead of half-up",
+  "provenance": {
+    "sourceUrl": "https://github.com/frontier-verifier/money-utils",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "createdAt": "2026-08-29",
+    "issueUrl": "https://github.com/frontier-verifier/money-utils/issues/8",
+    "buggyCommit": "buggy-hist-002",
+    "fixedCommit": "fixed-hist-002",
+    "notes": "Inspired by currency rounding bugs where Math.floor was used instead of Math.round. Buggy roundToCents truncates fractional cents."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/money.ts"],
+  "fixFiles": ["src/money.ts"]
+}

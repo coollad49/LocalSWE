@@ -1,0 +1,32 @@
+{
+  "id": "hist-003",
+  "type": "historical",
+  "repository": "async-queue",
+  "baseVersion": "1.0.0",
+  "baseCommit": "v1.0.0-async-queue",
+  "difficulty": "hard",
+  "categories": ["asynchronous", "error-handling", "state-management"],
+  "description": "Job retry does not re-enqueue failed jobs, losing retries",
+  "provenance": {
+    "sourceUrl": "https://github.com/frontier-verifier/async-queue",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "createdAt": "2026-08-29",
+    "issueUrl": "https://github.com/frontier-verifier/async-queue/issues/15",
+    "buggyCommit": "buggy-hist-003",
+    "fixedCommit": "fixed-hist-003",
+    "notes": "Inspired by real job queue bugs where failed jobs are dropped instead of retried. Buggy processJob does not push retry job back to queue."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/queue.ts"],
+  "fixFiles": ["src/queue.ts"]
+}

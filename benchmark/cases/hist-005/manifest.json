@@ -1,0 +1,32 @@
+{
+  "id": "hist-005",
+  "type": "historical",
+  "repository": "money-utils",
+  "baseVersion": "1.0.0",
+  "baseCommit": "v1.0.0-money-utils",
+  "difficulty": "medium",
+  "categories": ["data-transformation", "validation"],
+  "description": "parseMoney fails on comma-separated thousands",
+  "provenance": {
+    "sourceUrl": "https://github.com/frontier-verifier/money-utils",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "createdAt": "2026-08-29",
+    "issueUrl": "https://github.com/frontier-verifier/money-utils/issues/11",
+    "buggyCommit": "buggy-hist-005",
+    "fixedCommit": "fixed-hist-005",
+    "notes": "Buggy parseMoney does not strip commas, so parseFloat fails on '1,000.00'."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/money.ts"],
+  "fixFiles": ["src/money.ts"]
+}

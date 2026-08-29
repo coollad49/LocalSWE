@@ -1,0 +1,32 @@
+{
+  "id": "synth-003",
+  "type": "synthetic",
+  "repository": "async-queue",
+  "baseVersion": "1.0.0",
+  "baseCommit": "v1.0.0-async-queue",
+  "difficulty": "medium",
+  "categories": ["error-handling", "asynchronous"],
+  "description": "Queue silently swallows job errors and reports success",
+  "provenance": {
+    "sourceUrl": "https://github.com/frontier-verifier/async-queue",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "createdAt": "2026-08-29",
+    "issueUrl": null,
+    "buggyCommit": "generated-synth-003",
+    "fixedCommit": null,
+    "notes": "Synthetic: processJob catch returns success:true even on error, hiding failures. Should return success:false and handle retry."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/queue.ts"],
+  "fixFiles": ["src/queue.ts"]
+}

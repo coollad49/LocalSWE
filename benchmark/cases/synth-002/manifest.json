@@ -1,0 +1,32 @@
+{
+  "id": "synth-002",
+  "type": "synthetic",
+  "repository": "money-utils",
+  "baseVersion": "1.0.0",
+  "baseCommit": "v1.0.0-money-utils",
+  "difficulty": "easy",
+  "categories": ["validation", "business-logic"],
+  "description": "Money.add allows mismatched currencies without error",
+  "provenance": {
+    "sourceUrl": "https://github.com/frontier-verifier/money-utils",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "createdAt": "2026-08-29",
+    "issueUrl": null,
+    "buggyCommit": "generated-synth-002",
+    "fixedCommit": null,
+    "notes": "Synthetic: removed currency mismatch check in add(). Should throw on USD vs EUR."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/money.ts"],
+  "fixFiles": ["src/money.ts"]
+}

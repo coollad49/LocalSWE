@@ -1,0 +1,32 @@
+{
+  "id": "hist-001",
+  "type": "historical",
+  "repository": "task-manager",
+  "baseVersion": "1.0.0",
+  "baseCommit": "v1.0.0-task-manager",
+  "difficulty": "medium",
+  "categories": ["boundary", "business-logic"],
+  "description": "getOverdueTasks incorrectly includes tasks due today as overdue",
+  "provenance": {
+    "sourceUrl": "https://github.com/frontier-verifier/task-manager",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "createdAt": "2026-08-29",
+    "issueUrl": "https://github.com/frontier-verifier/task-manager/issues/12",
+    "buggyCommit": "buggy-hist-001",
+    "fixedCommit": "fixed-hist-001",
+    "notes": "Constructed historical case inspired by real-world off-by-one date boundary bugs. Buggy state uses <= instead of < when comparing dueDate to today. Fixed commit restores strict < comparison."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/utils.ts"],
+  "fixFiles": ["src/utils.ts"]
+}

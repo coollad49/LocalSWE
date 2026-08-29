@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Frontier Verifier Case Manifest",
+  "type": "object",
+  "required": ["id", "type", "repository", "baseVersion", "difficulty", "categories", "description", "provenance", "runtime", "verification"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(hist|synth)-[0-9]{3}$" },
+    "type": { "type": "string", "enum": ["historical", "synthetic"] },
+    "repository": { "type": "string", "enum": ["task-manager", "money-utils", "async-queue"] },
+    "baseVersion": { "type": "string" },
+    "baseCommit": { "type": "string" },
+    "difficulty": { "type": "string", "enum": ["easy", "medium", "hard"] },
+    "categories": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "description": { "type": "string" },
+    "provenance": {
+      "type": "object",
+      "required": ["sourceUrl", "license", "licenseUrl", "createdAt"],
+      "properties": {
+        "sourceUrl": { "type": "string" },
+        "license": { "type": "string" },
+        "licenseUrl": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "issueUrl": { "type": ["string", "null"] },
+        "buggyCommit": { "type": ["string", "null"] },
+        "fixedCommit": { "type": ["string", "null"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "required": ["node", "bun", "packageManager"],
+      "properties": {
+        "node": { "type": "string" },
+        "bun": { "type": "string" },
+        "packageManager": { "type": "string" }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "required": ["reproduction", "oracle", "regression"],
+      "properties": {
+        "reproduction": { "type": "string" },
+        "oracle": { "type": "string" },
+        "regression": { "type": "string" }
+      }
+    },
+    "buggyFiles": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "fixFiles": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}

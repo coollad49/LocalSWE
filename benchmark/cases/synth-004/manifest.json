@@ -1,0 +1,32 @@
+{
+  "id": "synth-004",
+  "type": "synthetic",
+  "repository": "task-manager",
+  "baseVersion": "1.0.0",
+  "baseCommit": "v1.0.0-task-manager",
+  "difficulty": "hard",
+  "categories": ["state-management", "api-behavior"],
+  "description": "filterByStatus returns stale cached results after mutations",
+  "provenance": {
+    "sourceUrl": "https://github.com/frontier-verifier/task-manager",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "createdAt": "2026-08-29",
+    "issueUrl": null,
+    "buggyCommit": "generated-synth-004",
+    "fixedCommit": null,
+    "notes": "Synthetic: invalidateCache() is no-op, so filterByStatus cache never invalidates."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/task-manager.ts"],
+  "fixFiles": ["src/task-manager.ts"]
+}

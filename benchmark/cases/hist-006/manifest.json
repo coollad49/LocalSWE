@@ -1,0 +1,32 @@
+{
+  "id": "hist-006",
+  "type": "historical",
+  "repository": "async-queue",
+  "baseVersion": "1.0.0",
+  "baseCommit": "v1.0.0-async-queue",
+  "difficulty": "hard",
+  "categories": ["state-management", "api-behavior"],
+  "description": "pause() drops pending jobs: resume() does not restore them",
+  "provenance": {
+    "sourceUrl": "https://github.com/frontier-verifier/async-queue",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "createdAt": "2026-08-29",
+    "issueUrl": "https://github.com/frontier-verifier/async-queue/issues/22",
+    "buggyCommit": "buggy-hist-006",
+    "fixedCommit": "fixed-hist-006",
+    "notes": "Buggy resume() clears pendingJobs without moving them to main queue."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/queue.ts"],
+  "fixFiles": ["src/queue.ts"]
+}

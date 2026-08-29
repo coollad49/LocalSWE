@@ -1,0 +1,32 @@
+{
+  "id": "synth-005",
+  "type": "synthetic",
+  "repository": "money-utils",
+  "baseVersion": "1.0.0",
+  "baseCommit": "v1.0.0-money-utils",
+  "difficulty": "medium",
+  "categories": ["boundary", "data-transformation"],
+  "description": "convertCurrency loses precision by flooring instead of rounding",
+  "provenance": {
+    "sourceUrl": "https://github.com/frontier-verifier/money-utils",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "createdAt": "2026-08-29",
+    "issueUrl": null,
+    "buggyCommit": "generated-synth-005",
+    "fixedCommit": null,
+    "notes": "Synthetic: convertCurrency uses Math.floor after conversion, truncating cents."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/money.ts"],
+  "fixFiles": ["src/money.ts"]
+}
