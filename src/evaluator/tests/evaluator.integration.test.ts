@@ -256,7 +256,7 @@ describe("Evaluator integration", () => {
     expect(result.verification.reproduction.status).toBe("passed");
     expect(result.verification.oracle.status).toBe("passed");
     expect(result.verification.regression.status).toBe("passed");
-    expect(result.benchmarkVersion).toBe("0.4");
+    expect(result.benchmarkVersion).toBe("0.5");
     expect(result.benchmarkFingerprint).toMatch(/^sha256:/);
   }, 30000);
 
@@ -400,7 +400,7 @@ describe("Evaluator integration", () => {
     const metadata = {
       runId: fakeRunId,
       caseId: "synth-001",
-      benchmarkVersion: "0.4",
+      benchmarkVersion: "0.5",
       benchmarkFingerprint: report.fingerprint,
       agentVersion: "test-mock",
       model: "mock",
