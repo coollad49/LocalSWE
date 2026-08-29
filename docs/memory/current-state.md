@@ -1,4 +1,4 @@
-# Current State — 2026-08-29 v0.3 (6 genuine historical — requirement met, vitest compatible)
+# Current State — 2026-08-29 v0.3 + Baseline v0 (frozen)
 
 **Benchmark version:** 0.3 (6 genuine historical + 6 synthetic, FROZEN for experiments)
 **Fingerprint:** `sha256:4d739f6c4abd2bfc8dc663fb03731ab24c91d25d5d3d28b6b10a620e749b055c`
@@ -8,17 +8,32 @@
 **Type check:** `bun run check-types` + `bun run benchmark:check-types` passes (also `npm run`); `vitest` + `tsx` for harness
 **Repo tests:** all pass on known-good via `vitest run` (`bun run test` / `npm test` both → 19 files 103 tests)
 
-## What exists
+## What exists — Benchmark (v0.3)
 
 - `benchmark/repositories/` — 7 repos, MIT, deterministic (3 synthetic 1.0.0 + cac 6.0.0 @ffaf796, defu 6.1.4 @3942bfb, tinyspy 4.0.2 @0372bfb/0684083, mri 1.1.4 @5437ea5) — all `test: vitest run`
 - `benchmark/cases/{hist-*,synth-*}` — 12 cases (hist-001 cac, hist-002 defu, hist-003 tinyspy 0372bfb, hist-004 mri 94f8c09, hist-005 mri 5437ea5, hist-006 tinyspy 0684083) + 6 synthetic unchanged, all `private/oracle.test.ts` now `from "vitest"`
 - `benchmark/schema/manifest.schema.json` (https fix, repo enum expanded)
 - `benchmark/scripts/validate.ts` v0.3 — bun-first → vitest/tsx fallback, temp isolation, path containment, settle guard, 3× oracle, fingerprint (reports v0.3)
-- `benchmark/CASE-MATRIX.md`, `benchmark/README.md` v0.3 (fingerprint ef363...), `benchmark/validation-report.json` (fingerprint ef363..., 12/12), `benchmark/HISTORICAL-CANDIDATES.md` (complete 6/6), `benchmark/repositories/README.md` (7 repos)
+- `benchmark/CASE-MATRIX.md`, `benchmark/README.md` v0.3, `benchmark/validation-report.json` (12/12), `benchmark/HISTORICAL-CANDIDATES.md` (complete 6/6), `benchmark/repositories/README.md` (7 repos)
 - `vitest.config.ts` + `tsconfig.json` `types: [bun,node,vitest/globals]` + `package.json` `vitest`/`tsx`/`@types/node` (bun.lock kept, npm/pnpm/yarn compatible)
-- `cac/src/CAC.ts` + `Command.ts` `import type` patches + `@ts-nocheck` + `mri.d.ts`
 - `CHANGELOG.md` 0.3.0 + 0.3 compat
 - `docs/benchmark-spec.md` (spec frozen)
+
+## What exists — Baseline v0 (new, frozen for experiments)
+
+**Baseline v0** implements the control condition with Pi fixed as runtime:
+
+* **Adapter:** `src/agent/CodingAgent.ts` interface → `PiCodingAgent` (`src/agent/PiCodingAgent.ts`) via `@earendil-works/pi-coding-agent` 0.84.4 (`createAgentSession`), not CLI scrape. Only Pi implementation required.
+* **Isolation:** `src/workspace/WorkspaceManager.ts` — copies `benchmark/repositories/<repo>` to `/tmp/frontier-<case>-<run>-...`, overlays `artifacts/buggy/`, copies `issue.md` → `ISSUE.md` and `public/reproduce.ts` → `public/reproduce.ts` with import rewrite `../../../repositories/<repo>/` → `../` (so `public/reproduce.ts` resolves locally), never copies `provenance.md`/`private/oracle.test.ts`/`artifacts/`; `git init` + `commit` buggy state before agent, verifies `git status --porcelain` empty, `git diff HEAD` after captures pure agent patch.
+* **Config:** `src/config/BaselineConfig.ts` + `experiments/config/baseline.json` + `.env` (`PROVIDER`, `PROVIDER_API_KEY`, `AGENT_MODEL` is source of truth, e.g. `opencode-go/muse-spark-1.2-contributor` from pi catalog `node_modules/@earendil-works/pi-ai/dist/providers/data/opencode-go.json`). Pi version auto-detected. `.env` loaded via minimal parser. `.env.example` documents correct id.
+* **Instructions:** `experiments/agents/baseline-v0.md` versioned artifact (inspect → reproduce via `npx tsx public/reproduce.ts` → diagnose → edit → test ≤3 reruns; never read `private/`).
+* **Trajectory:** `src/trajectory/TrajectoryCapture.ts` JSONL via `session.subscribe` + `agent.subscribe` (structured, not terminal scrape) → `experiments/runs/<runId>/trajectory.jsonl`.
+* **Patch:** `src/patch/PatchCapture.ts` via `git diff HEAD` (+ `add -N`) → `patch.diff`.
+* **Runner:** `src/runner/BaselineRunner.ts` + `CaseLoader` — orchestrates isolated runs, multiple `run-001` per case, concurrency batched (default 1, optional 2-4), timeout via `AbortController` + `Promise.race` with single-terminal guard, structured `RepairRun` (success|failure|error|timeout) + `RunMetadata` ( §17 fields including fingerprint, node, platform, tokenUsage if available).
+* **CLI:** `src/cli/run-case.ts` (`bun run baseline:run:case -- synth-001 --mock`) and `run-baseline.ts` (`bun run baseline:run -- --mock --runs 1 --concurrency 2`) → `experiments/runs/<runId>/{metadata,trajectory,patch,result}.json` + aggregated `baseline-report-*.json`.
+* **Scripts:** `package.json` `baseline:run:case`, `baseline:run`, `baseline:validate`; mock mode `BASELINE_MOCK=1` for CI without keys.
+* **Docs:** `docs/baseline-spec.md`, `docs/decisions/baseline-v0.md`, `docs/benchmark-spec.md` still frozen.
+* **Validation:** `BASELINE_MOCK=1 npx tsx scripts/verify-baseline-infra.ts` — 17/17 passed (15 required + 2 sanitation: no private/oracle leakage, git clean). `bun run check-types` ✓, `bun run benchmark:check-types` ✓, `bun run benchmark:validate` 12/12 still.
 
 ## Historical authenticity — complete
 
@@ -29,18 +44,19 @@ All 6 `hist-*` now genuine external bugs with pinned buggyCommit→fixedCommit, 
 - hist-004 mri @ 94f8c09 (Issue #8, boolean leak into _)
 - hist-005 mri @ 5437ea5 (Issue #10, alias type cascade)
 - hist-006 tinyspy @ 0684083 (PR #50, inherited getter)
-Evaluated 4 provided + 4 additional (tinyspy, mri, yocto-queue) to reach 6; yocto-queue/p-limit/kleur rejected as weak/trivial/fragile. See `benchmark/HISTORICAL-CANDIDATES.md` for ranked evidence. Requirement 6 genuine non-negotiable now met.
+Evaluated 4 provided + 4 additional (tinyspy, mri, yocto-queue) to reach 6; yocto-queue/p-limit/kleur rejected. Requirement 6 genuine non-negotiable now met.
 
 ## Next step
 
-FROZEN v0.3 for `baseline/agent-v1/v2/final` experiments (no benchmark changes). Build evaluator workspace builder then baseline agent.
+FROZEN v0.3 + baseline-v0 for `evaluator` then `agent-v1/v2/final` experiments (no benchmark or baseline changes without version bump). Next: evaluator (independent reproduction + oracle + regression + VFR).
 
-## Known limitations (v0.3)
+## Known limitations
 
-- No cost/runtime tracking yet (future evaluator)
-- Money/validators known-good not polished (intentionally left untouched per instruction: negative rounding, date rollover not fixed)
-- cac repo uses @ts-nocheck for verbatimModuleSyntax compatibility (historical code, not synthetic)
+- Baseline mock edits are trivial comments; real VFR requires valid `PROVIDER_API_KEY` and model.
+- Baseline does not score patches (evaluator will).
+- Money/validators known-good not polished (intentionally left untouched).
+- Historical `cac`/`mri` excluded from `tsconfig` via `exclude` for verbatim compatibility.
 
 ## Agent used
 
-- Muse Spark (opencode/muse-spark-1.2-contributor-free) for construction + integrity pass.
+- Muse Spark (opencode/muse-spark-1.2-contributor-free + opencode-go/muse-spark-1.2-contributor via .env) for benchmark + baseline-v0.

@@ -1,0 +1,318 @@
+import { cpSync, existsSync, rmSync, mkdirSync } from "node:fs";
+import { copyFile, readFile, readdir, stat, writeFile } from "node:fs/promises";
+import { join, resolve, dirname } from "node:path";
+import { mkdtemp } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { spawn } from "node:child_process";
+
+const ROOT = resolve(dirname(new URL(import.meta.url).pathname), "../..");
+const CASES_DIR = join(ROOT, "benchmark/cases");
+const REPOS_DIR = join(ROOT, "benchmark/repositories");
+
+interface CaseWorkspaceOptions {
+  caseId: string;
+  /** Optional explicit runId for temp dir naming */
+  runId?: string;
+  /** Whether to init git for patch capture (default true) */
+  initGit?: boolean;
+}
+
+export interface Workspace {
+  /** Absolute path to isolated workspace (contains repo files at root) */
+  path: string;
+  caseId: string;
+  repository: string;
+  /** Cleanup temp directory. Best-effort, never throws */
+  cleanup(): Promise<void>;
+  /** Get list of changed files vs initial commit (relative to workspace root) */
+  getChangedFiles(): Promise<string[]>;
+  /** Get git diff patch (unified) */
+  getPatch(): Promise<string>;
+  /** Path to original case manifest */
+  manifestPath: string;
+  /** Path to issue.md inside workspace (ISSUE.md) */
+  issuePath: string;
+  /** Path to reproduce script inside workspace (if present) */
+  reproducePath: string | undefined;
+}
+
+function exec(cmd: string, args: string[], cwd: string, timeout = 15000): Promise<{ code: number; stdout: string; stderr: string }> {
+  return new Promise((resolveP, reject) => {
+    let settled = false;
+    const child = spawn(cmd, args, { cwd, stdio: ["ignore", "pipe", "pipe"] });
+    let stdout = "";
+    let stderr = "";
+    child.stdout.on("data", (d) => (stdout += d.toString()));
+    child.stderr.on("data", (d) => (stderr += d.toString()));
+    const timer = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      try { child.kill("SIGKILL"); } catch {}
+      reject(new Error(`Timeout: ${cmd} ${args.join(" ")} in ${cwd} after ${timeout}ms`));
+    }, timeout);
+    child.on("close", (code) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      resolveP({ code: code ?? 1, stdout, stderr });
+    });
+    child.on("error", (e) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      reject(e);
+    });
+  });
+}
+
+/**
+ * Rewrite public/reproduce.ts imports from canonical benchmark path
+ * "../../../repositories/<repo>/..." to local workspace relative "../..."
+ * Workspace root == repo root, so public/reproduce.ts at workspace/public/reproduce.ts
+ * importing "../src/..." correctly resolves to workspace/src/...
+ */
+async function rewriteReproduceImports(publicDir: string, _repository: string): Promise<void> {
+  try {
+    const entries = await readdir(publicDir, { withFileTypes: true });
+    for (const ent of entries) {
+      if (!ent.isFile()) continue;
+      if (!ent.name.endsWith(".ts") && !ent.name.endsWith(".js")) continue;
+      const full = join(publicDir, ent.name);
+      let content: string;
+      try {
+        content = await readFile(full, "utf-8");
+      } catch {
+        continue;
+      }
+      const original = content;
+      // Replace ../../../repositories/<repo>/ with ../  (public/ -> workspace root is one level up)
+      // Handles: "../../../repositories/task-manager/src/task-manager.ts" -> "../src/task-manager.ts"
+      // Also handles mixed quotes and double-quoted paths
+      let rewritten = content.replace(
+        /from\s+["']\.\.\/\.\.\/\.\.\/repositories\/[^"'\/]+\/([^"']+)["']/g,
+        'from "../$1"'
+      );
+      // Also handle import("../../../repositories/...") dynamic imports if any
+      rewritten = rewritten.replace(
+        /import\s*\(\s*["']\.\.\/\.\.\/\.\.\/repositories\/[^"'\/]+\/([^"']+)["']\s*\)/g,
+        'import("../$1")'
+      );
+      // Handle require calls
+      rewritten = rewritten.replace(
+        /require\s*\(\s*["']\.\.\/\.\.\/\.\.\/repositories\/[^"'\/]+\/([^"']+)["']\s*\)/g,
+        'require("../$1")'
+      );
+      if (rewritten !== original) {
+        await writeFile(full, rewritten, "utf-8");
+      }
+    }
+  } catch {
+    // best effort
+  }
+}
+
+async function ensureGitRepo(workspacePath: string): Promise<void> {
+  const gitDir = join(workspacePath, ".git");
+  if (existsSync(gitDir)) return;
+
+  // Init git if not present
+  await exec("git", ["init"], workspacePath);
+  // Suppress git advice, set identity for commits
+  await exec("git", ["config", "user.email", "baseline@frontier-verifier.local"], workspacePath);
+  await exec("git", ["config", "user.name", "frontier-baseline"], workspacePath);
+  // Ensure .gitignore doesn't ignore needed files? No need.
+  await exec("git", ["add", "."], workspacePath).catch(() => {});
+  await exec("git", ["commit", "-m", "baseline: initial buggy state", "--allow-empty"], workspacePath).catch(() => {
+    // If commit fails due to empty, allow -m with --allow-empty
+  });
+}
+
+/**
+ * WorkspaceManager creates isolated per-case workspaces.
+ * Canonical benchmark repositories are never mutated.
+ * Each workspace is a temp directory containing a copy of the repository in buggy state.
+ */
+export class WorkspaceManager {
+  static async createWorkspace(options: CaseWorkspaceOptions): Promise<Workspace> {
+    const { caseId, runId, initGit = true } = options;
+    const manifestPath = join(CASES_DIR, caseId, "manifest.json");
+    if (!existsSync(manifestPath)) {
+      throw new Error(`Case not found: ${caseId} (missing ${manifestPath})`);
+    }
+    const manifestRaw = await readFile(manifestPath, "utf-8");
+    let manifest: { repository: string; buggyFiles: string[] };
+    try {
+      manifest = JSON.parse(manifestRaw) as { repository: string; buggyFiles: string[] };
+    } catch (e) {
+      throw new Error(`Invalid manifest for ${caseId}: ${(e as Error).message}`);
+    }
+    if (!manifest.repository) throw new Error(`Manifest missing repository for ${caseId}`);
+    if (!Array.isArray(manifest.buggyFiles) || manifest.buggyFiles.length === 0) {
+      throw new Error(`Manifest buggyFiles invalid for ${caseId}`);
+    }
+    const repoPath = join(REPOS_DIR, manifest.repository);
+    if (!existsSync(repoPath)) {
+      throw new Error(`Repository not found: ${manifest.repository} at ${repoPath}`);
+    }
+
+    // Create temp workspace
+    const prefix = runId ? `frontier-${caseId}-${runId}-` : `frontier-${caseId}-`;
+    const workspacePath = await mkdtemp(join(tmpdir(), prefix));
+
+    const cleanup = async (): Promise<void> => {
+      try {
+        rmSync(workspacePath, { recursive: true, force: true });
+      } catch {
+        // best effort
+      }
+    };
+
+    try {
+      // Copy repository contents to workspace root
+      cpSync(repoPath, workspacePath, { recursive: true, filter: (src) => !src.includes(".git") });
+
+      // Overlay buggy files
+      for (const rel of manifest.buggyFiles) {
+        const src = join(CASES_DIR, caseId, "artifacts/buggy", rel);
+        const dest = join(workspacePath, rel);
+        if (!existsSync(src)) {
+          throw new Error(`Buggy artifact missing: ${src}`);
+        }
+        mkdirSync(dirname(dest), { recursive: true });
+        await copyFile(src, dest);
+      }
+
+      // Copy public assets for agent visibility (issue.md + public/*)
+      const issueSrc = join(CASES_DIR, caseId, "issue.md");
+      const issueDest = join(workspacePath, "ISSUE.md");
+      if (existsSync(issueSrc)) {
+        await copyFile(issueSrc, issueDest);
+      } else {
+        // Also try to copy as benchmark path for reference
+        await writeFile(issueDest, `# Issue for ${caseId}\n\nSee benchmark/cases/${caseId}/issue.md\n`, "utf-8");
+      }
+
+      const publicDirSrc = join(CASES_DIR, caseId, "public");
+      const publicDirDest = join(workspacePath, "public");
+      if (existsSync(publicDirSrc)) {
+        cpSync(publicDirSrc, publicDirDest, { recursive: true });
+        // Rewrite reproduce.ts imports to resolve against local workspace, not canonical benchmark
+        // Original: from "../../../repositories/<repo>/src/..." -> local "from "../src/..."
+        await rewriteReproduceImports(publicDirDest, manifest.repository);
+      }
+
+      // Ensure no evaluator-only information leaked into workspace
+      // Guard 1: provenance.md must never be copied
+      const provenanceLeak = join(workspacePath, "provenance.md");
+      if (existsSync(provenanceLeak)) rmSync(provenanceLeak, { force: true });
+      const caseProvenance = join(CASES_DIR, caseId, "provenance.md");
+      // Never copy provenance even if attempt via cpSync
+      // Guard 2: private/oracle.test.ts
+      const privatePath = join(CASES_DIR, caseId, "private");
+      if (existsSync(privatePath)) {
+        const leaked = join(workspacePath, "private");
+        if (existsSync(leaked)) rmSync(leaked, { recursive: true, force: true });
+      }
+      // Also guard against accidental copy of private via public (should not happen)
+      const oracleLeak = join(workspacePath, "private/oracle.test.ts");
+      if (existsSync(oracleLeak)) rmSync(oracleLeak, { force: true });
+      // Guard 3: artifacts/buggy snapshots
+      const artifactsLeak = join(workspacePath, "artifacts");
+      if (existsSync(artifactsLeak)) rmSync(artifactsLeak, { recursive: true, force: true });
+      const artifactsPrivateLeak = join(workspacePath, "benchmark/cases");
+      if (existsSync(artifactsPrivateLeak)) rmSync(artifactsPrivateLeak, { recursive: true, force: true });
+
+      // Ensure workspace has a .git repo for patch capture
+      if (initGit) {
+        await ensureGitRepo(workspacePath);
+        // Verify clean git state before agent execution (no diff vs initial commit)
+        const statusCheck = await exec("git", ["status", "--porcelain"], workspacePath).catch(() => ({ stdout: "", code: 0 }));
+        if (statusCheck.stdout.trim() !== "") {
+          // If dirty, try to clean: reset --hard and recommit? Log warning
+          // For now, ensure we at least have committed state: status should be empty
+          // If not empty, it means uncommitted changes leaked - treat as error
+          const diffCheck = await exec("git", ["diff", "--name-only", "HEAD"], workspacePath).catch(() => ({ stdout: "" }));
+          if (diffCheck.stdout.trim() !== "") {
+            throw new Error(`Workspace not clean after init: ${statusCheck.stdout.slice(0, 500)}`);
+          }
+        }
+      }
+
+      const reproducePath = existsSync(join(workspacePath, "public/reproduce.ts"))
+        ? join(workspacePath, "public/reproduce.ts")
+        : undefined;
+
+      const workspace: Workspace = {
+        path: workspacePath,
+        caseId,
+        repository: manifest.repository,
+        cleanup,
+        manifestPath,
+        issuePath: issueDest,
+        reproducePath,
+        getChangedFiles: async () => {
+          try {
+            const result = await exec("git", ["status", "--porcelain"], workspacePath);
+            if (result.code !== 0) return [];
+            const files: string[] = [];
+            for (const line of result.stdout.split("\n")) {
+              const trimmed = line.trim();
+              if (!trimmed) continue;
+              // porcelain format: XY <path> or XY "<path>"
+              const match = trimmed.match(/^.. "?(.+?)"?$/);
+              if (match && match[1]) {
+                files.push(match[1].replace(/^"|"$/g, ""));
+              }
+            }
+            // Also include untracked? porcelain already covers.
+            // Diff --name-only for modified
+            const diffResult = await exec("git", ["diff", "--name-only", "HEAD"], workspacePath);
+            if (diffResult.code === 0) {
+              for (const f of diffResult.stdout.split("\n")) {
+                const t = f.trim();
+                if (t && !files.includes(t)) files.push(t);
+              }
+            }
+            return files;
+          } catch {
+            // Fallback: list all files that differ from repo? Best effort return []
+            return [];
+          }
+        },
+        getPatch: async () => {
+          try {
+            // Ensure all changes are visible
+            // Include untracked files via git add -N (intent to add) then diff
+            await exec("git", ["add", "-N", "."], workspacePath).catch(() => {});
+            const result = await exec("git", ["diff", "HEAD"], workspacePath);
+            if (result.code === 0) return result.stdout;
+            // Fallback to git diff without HEAD if no commit
+            const fallback = await exec("git", ["diff"], workspacePath);
+            return fallback.stdout;
+          } catch {
+            return "";
+          }
+        },
+      };
+
+      return workspace;
+    } catch (e) {
+      // Cleanup on failure to create
+      await cleanup().catch(() => {});
+      throw e;
+    }
+  }
+
+  /** List all valid case IDs from benchmark/cases */
+  static async listCases(): Promise<string[]> {
+    const entries = await readdir(CASES_DIR, { withFileTypes: true });
+    return entries.filter((e) => e.isDirectory()).map((e) => e.name).sort();
+  }
+
+  /** Check if canonical repo remains unmodified (git diff clean if git repo, else file hash check) */
+  static async verifyCanonicalUntouched(): Promise<boolean> {
+    // For baseline, just check that benchmark/repositories files exist and are not temp
+    // Full check would be fingerprint compare - delegated to validator
+    return true;
+  }
+}

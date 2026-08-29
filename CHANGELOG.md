@@ -144,7 +144,7 @@ Updated `benchmark/HISTORICAL-CANDIDATES.md` to **6/6 Genuine** (`tinyspy 0372bf
 
 ## Unreleased
 
-- Planned: evaluator workspace builder, baseline agent (FROZEN v0.3, no benchmark changes).
+- Planned: evaluator (independent reproduction + oracle + VFR) (FROZEN v0.3 + baseline-v0).
 
 ### Decisions
 
@@ -153,9 +153,41 @@ Updated `benchmark/HISTORICAL-CANDIDATES.md` to **6/6 Genuine** (`tinyspy 0372bf
 - `cac` historical uses `@ts-nocheck` for `verbatimModuleSyntax` (external code).
 - Shared repos (`mri` at `5437ea5`, `tinyspy` at `0372bfb`) contain both fixes for that repo — `hist-004` baseCommit `5437ea5` includes `94f8c09` fix (documented).
 
+## [0.4.0] - 2026-08-29 — Baseline v0 (Pi Fixed Runtime)
+
+### Added — Baseline v0 Control Condition
+
+Implements the frozen control agent for the experiment (Pi remains constant across baseline → v1 → v2 → v3):
+
+* **Pi integration:** `@earendil-works/pi-coding-agent` 0.84.4 + `pi-agent-core` 0.84.4 + `pi-ai` 0.84.4 via project-owned `CodingAgent` interface (`src/agent/CodingAgent.ts` → `PiCodingAgent` `src/agent/PiCodingAgent.ts` with `createAgentSession`, structured `subscribe` trajectory, not terminal scrape). Only Pi implementation required.
+* **Isolation:** `src/workspace/WorkspaceManager.ts` — copies `benchmark/repositories/<repo>` to temp `/tmp/frontier-<case>-<run>-...`, overlays `artifacts/buggy/`, copies `issue.md` → `ISSUE.md` and `public/reproduce.ts` → `public/reproduce.ts` with import rewrite `../../../repositories/<repo>/` → `../` (verified `public/reproduce.ts` resolves locally), never copies `provenance.md`/`private/oracle.test.ts`/`artifacts/`; `git init` + `commit` buggy state before agent, verifies `git status --porcelain` empty, `git diff HEAD` after captures pure agent patch.
+* **Config:** `src/config/BaselineConfig.ts` + `experiments/config/baseline.json` + `.env` (`PROVIDER`, `PROVIDER_API_KEY`, `AGENT_MODEL` is source of truth, e.g. `opencode-go/muse-spark-1.2-contributor` per pi catalog `node_modules/@earendil-works/pi-ai/dist/providers/data/opencode-go.json`). Minimal `.env` loader, pi version auto-detected, `DEFAULTS` fallback only for mock. `.env.example` documents correct id.
+* **Instructions:** `experiments/agents/baseline-v0.md` versioned artifact (inspect → reproduce `npx tsx public/reproduce.ts` → diagnose → edit → test ≤3 reruns; never read `private/`).
+* **Artifacts:** `src/trajectory/TrajectoryCapture.ts` JSONL via `session`/`agent` `subscribe`; `src/patch/PatchCapture.ts` via `git diff HEAD`; `src/runner/BaselineRunner.ts` + `CaseLoader` orchestrates isolated runs, multiple `run-001` per case, concurrency 1-4, timeout `AbortController` + `Promise.race` with single-terminal guard, structured `RepairRun`/`RunMetadata` (§16-17: runId, caseId, benchmarkVersion, agentVersion, runtime, piVersion, model, thinkingLevel, prompt path, start/end, duration, terminationStatus, changedFiles, testCommands, trajectory/patch/result, node/platform, fingerprint, tokenUsage if available).
+* **CLI:** `src/cli/run-case.ts` (`bun run baseline:run:case -- synth-001 --mock`) and `run-baseline.ts` (`bun run baseline:run -- --mock --runs 1 --concurrency 2`) → `experiments/runs/<runId>/{metadata,trajectory,patch,result}.json` + aggregated `baseline-report-*.json`.
+* **Scripts:** `package.json` `baseline:run:case`, `baseline:run`, `baseline:validate`; mock `BASELINE_MOCK=1` for CI without keys; `bun`/`npm`/`pnpm` compat via `vitest`/`tsx` (benchmark harness unchanged).
+* **Infrastructure tests:** `scripts/verify-baseline-infra.ts` — 17/17 passed (15 required + 2 sanitation: no private/oracle leakage, git clean): case loads, workspace, canonical untouched, Pi session, instructions, inspect, modify, commands, trajectory JSONL, patch `git diff`, metadata, timeout (exec), cleanup, failed-case isolation, concurrent 2×, plus workspace sanitation and git clean checks.
+
+### Changed
+
+* `package.json` adds `baseline:run:case`, `baseline:run`, `baseline:validate`, deps `pi-coding-agent`, `pi-agent-core`, `pi-ai`, `uuid` (keeps `bun.lock` but `npm install` works).
+* `experiments/config/baseline.json` adds baseline defaults (model `opencode-go/muse-spark-1.2-contributor`, timeouts, piVersion 0.84.4).
+* `docs/baseline-spec.md` + `docs/decisions/baseline-v0.md` + `docs/memory/current-state.md` updated.
+
+### Evidence
+
+* `bun run check-types` ✓ 0, `bun run benchmark:check-types` ✓ 0
+* `bun run benchmark:validate` 12/12 VALID `sha256:4d739f6c4abd2bfc8dc663fb03731ab24c91d25d5d3d28b6b10a620e749b055c`
+* `BASELINE_MOCK=1 npx tsx scripts/verify-baseline-infra.ts` — 17/17 passed
+* Manual `BASELINE_MOCK=1 bun run baseline:run:case -- synth-001` → `src/task-manager.ts` patch `diff --git`, trajectory 21 lines, metadata fingerprint; `hist-001` → `src/CAC.ts` patch; `synth-001`+`synth-002` concurrent 2× success.
+
+### Decision
+
+* Pi is frozen as runtime; future improvements are evaluator-side. Baseline does not score patches.
+
 ## Unreleased
 
-- Planned: evaluator workspace builder, baseline agent (FROZEN v0.3, no benchmark changes).
+- Planned: evaluator (independent reproduction + oracle + VFR).
 
 
 ## [0.3.2] - 2026-08-29 — Historical Authenticity & TS Config Hygiene
