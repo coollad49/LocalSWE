@@ -1,13 +1,22 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "noEmit": true,
+    "target": "ESNext",
+    "module": "Preserve",
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "types": ["bun", "node", "vitest/globals"],
+    "lib": ["ES2020", "DOM"],
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": false,
-    "noImplicitAny": false,
+    "noEmit": true,
     "skipLibCheck": true,
     "strict": false,
-    "noUncheckedIndexedAccess": false
+    "noImplicitAny": false,
+    "noUncheckedIndexedAccess": false,
+    "noImplicitOverride": false
   },
-  "include": ["benchmark/scripts/**/*.ts", "benchmark/cases/**/public/**/*.ts", "benchmark/cases/**/private/**/*.ts", "benchmark/repositories/**/*.ts", "benchmark/**/*.d.ts"],
-  "exclude": ["benchmark/cases/**/artifacts", "benchmark/repositories/cac/**/*", "benchmark/repositories/cac/**", "benchmark/repositories/mri/**/*", "benchmark/repositories/mri/**", "node_modules", "dist"]
+  "include": ["benchmark/scripts/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

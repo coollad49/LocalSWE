@@ -1,25 +1,33 @@
-# Current State — 2026-08-29 v0.4 FROZEN + Baseline v0 + Evaluator v0 (frozen)
+# Current State — 2026-08-29 v0.5 FROZEN + Baseline v0 + Evaluator v0 (frozen) + Frontier-Hard
 
-**Benchmark version:** 0.4 — FROZEN for experiments (6 genuine historical + 6 synthetic)
-**Fingerprint:** `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` (sha256 over manifests + issue.md + provenance.md + buggy + oracles + schema + 7 repos)
-**Cases:** 12 (6 genuine historical + 6 synthetic) — 12/12 VALID (isolated v0.4 validator, bun-first → vitest/tsx fallback)
-**Repositories:** 7 (3 synthetic: task-manager, money-utils, async-queue + 4 genuine: cac, defu, tinyspy, mri — all MIT)
-**Validator:** `bun run benchmark:validate` / `npm run benchmark:validate` v0.4 isolated (temp workspace, path containment, exec guard, oracle 3×, fingerprint includes provenance) passes
+**Benchmark version:** 0.5 — FROZEN for experiments (12 Core: 6 genuine historical + 6 synthetic + 5 Frontier-Hard: all genuine historical)
+**Fingerprint:** `sha256:ee9104f5a7a03d0c227205de81fa24e464c23160ddf145051b08799693cbdf78` (sha256 over manifests + issue.md + provenance.md + buggy + oracles + schema + 12 repos — 7 Core + 5 Hard)
+**Previous:** v0.4 `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` preserved as `benchmark/validation-report.v0.4.json`
+**Cases:** 17 (12 Core + 5 Frontier-Hard) — 17/17 VALID (12/12 Core + 5/5 Hard, isolated v0.5 validator, bun-first → vitest/tsx fallback with SyntaxError fallback for `immer`/`superjson` type-only imports)
+**Repositories:** 12 (7 Core: 3 synthetic + 4 genuine + 5 Hard: immer, qs, superjson, p-queue, path-to-regexp — all MIT/BSD-3)
+**Validator:** `bun run benchmark:validate` / `npm run benchmark:validate` v0.5 isolated (temp workspace, path containment, exec guard, oracle 3×, fingerprint includes provenance, dual-root discovery) passes
 **Type check:** `bun run check-types` + `bun run benchmark:check-types` passes (also `npm run`); `vitest` + `tsx` for harness
-**Repo tests:** all pass on known-good via `vitest run` (`bun run test` / `npm test` both → 19 files 103 tests)
-**Evaluator:** v0 deterministic (see docs/decisions/evaluator-v0.md) — `bun run evaluate` / `npm run evaluate` passes, 25 files 145 tests
+**Repo tests:** all pass on known-good via `vitest run` (`bun run test` / `npm test` both → 30+ files, 17 cases + evaluator)
+**Evaluator:** v0 deterministic (see docs/decisions/evaluator-v0.md) — `bun run evaluate` / `npm run evaluate` passes, now handles `hard-*` via dual-root and `SyntaxError` fallback
 
-## What exists — Benchmark (v0.4 FROZEN)
+## What exists — Benchmark (v0.5 FROZEN — 17 cases)
 
-- `benchmark/repositories/` — 7 repos, MIT, deterministic (3 synthetic 1.0.0 + cac 6.0.0 @ffaf796, defu 6.1.4 @3942bfb, tinyspy 4.0.2 @0372bfb/0684083, mri 1.1.4 @5437ea5) — all `test: vitest run`
-- `benchmark/cases/{hist-*,synth-*}` — 12 cases (hist-001 cac, hist-002 defu, hist-003 tinyspy 0372bfb, hist-004 mri 94f8c09, hist-005 mri 5437ea5, hist-006 tinyspy 0684083) + 6 synthetic unchanged, all `private/oracle.test.ts` now `from "vitest"`
-- `benchmark/schema/manifest.schema.json` (https fix, repo enum expanded)
-- `benchmark/scripts/validate.ts` v0.4 — bun-first → vitest/tsx fallback, temp isolation, path containment, settle guard, 3× oracle, fingerprint (reports v0.4, now includes issue.md + provenance.md)
-- `benchmark/CASE-MATRIX.md`, `benchmark/README.md` v0.4 FROZEN, `benchmark/validation-report.json` (12/12 v0.4, cead5c...), `benchmark/HISTORICAL-CANDIDATES.md` (complete 6/6), `benchmark/repositories/README.md` (7 repos)
-- `vitest.config.ts` + `tsconfig.json` `types: [bun,node,vitest/globals]` + `package.json` `vitest`/`tsx`/`@types/node` (bun.lock kept, npm/pnpm/yarn compatible)
-- `CHANGELOG.md` 0.4.0 FROZEN + 0.5.0 evaluator
-- `docs/benchmark-spec.md` v0.4 FROZEN
-- `docs/decisions/evaluator-v0.md` — evaluator v0 (deterministic, 4 verdicts, isolated, benchmark integrity, VFR)
+- **Core (v0.4 preserved):** `benchmark/repositories/` — 7 repos, MIT, deterministic (3 synthetic 1.0.0 + cac 6.0.0 @ffaf796, defu 6.1.4 @3942bfb, tinyspy 4.0.2 @0372bfb/0684083, mri 1.1.4 @5437ea5) — all `test: vitest run`; `benchmark/cases/{hist-*,synth-*}` — 12 cases (hist-001 cac, hist-002 defu, hist-003 tinyspy 0372bfb, hist-004 mri 94f8c09, hist-005 mri 5437ea5, hist-006 tinyspy 0684083) + 6 synthetic unchanged, all `private/oracle.test.ts` from `vitest`
+- **Frontier-Hard (v0.5 addition):** `benchmark/frontier-hard/repositories/` — 5 repos (immer @ a73672a, qs @ d56f48c, superjson @ 4054f3f, p-queue @ a64b316, path-to-regexp @ 8877f41 — all MIT/BSD-3, deterministic, `tests/basic.test.ts` each); `benchmark/frontier-hard/cases/hard-001..005` — 5 hard cases with `manifest.json`, `issue.md`, `provenance.md`, `curator-notes.md` (maintainer-only), `public/reproduce.ts`, `private/oracle.test.ts`, `artifacts/buggy/src/...`; each `public` narrow, `private` broad with partial-fix trap
+- `benchmark/schema/manifest.schema.json` v0.5 — `id` pattern `^(hist|synth|hard)-[0-9]{3}$`, `repository` `type:string`, `difficulty` adds `frontier-hard`
+- `benchmark/scripts/validate.ts` v0.5 — dual-root discovery (`benchmark/cases` + `benchmark/frontier-hard/cases`), `resolveCaseDir`/`resolveRepoDir`, `computeFingerprint` over 17 cases + 12 repos, `createTempWorkspace` copies to both `benchmark/cases` and `benchmark/frontier-hard/cases` in temp for `../../../repositories` relative imports, `runBunFile`/`runBunTest` now `bun` → `vitest`/`tsx` fallback on `SyntaxError`/`not found in` (for `immer`/`superjson` type-only imports), `NODE_PATH` set, `benchmarkVersion 0.5`, `validation-report.v0.4.json` preserved
+- `benchmark/CASE-MATRIX.md` v0.5 — 17 rows (12 Core + 5 Hard), detailed per-case why hard, diversity, validation 17/17, fingerprint `ee9104f5...`
+- `benchmark/README.md` v0.5 — 17 cases, 12 repos, Core + Frontier-Hard structure, fingerprint `ee9104f5...`, v0.4 preserved
+- `benchmark/validation-report.json` v0.5 (17/17, `ee9104f5...`), `benchmark/validation-report.v0.4.json` preserved (12/12, `cead5c6e...`)
+- `benchmark/HISTORICAL-CANDIDATES.md` — updated with 5 hard selections and 15+ rejections
+- `benchmark/repositories/README.md` — 12 repos (7 Core + 5 Hard)
+- `vitest.config.ts` v0.5 — include adds `benchmark/frontier-hard/...` for both `cases` and `repositories`
+- `tsconfig.json` + `tsconfig.benchmark.json` — exclude `benchmark/frontier-hard/...`
+- `CHANGELOG.md` 0.6.0 — Frontier-Hard v0.5 entry
+- `docs/benchmark-spec.md` v0.5 FROZEN — 17 cases, repository strategy additive, diversity with 5 hard, immutability v0.5
+- `docs/decisions/evaluator-v0.md` — evaluator v0 (deterministic, 4 verdicts, isolated, benchmark integrity, VFR) — now handles `hard-*` via dual-root and `SyntaxError` fallback (see `docs/decisions/frontier-hard-benchmark-v0.md`)
+- `docs/decisions/frontier-hard-benchmark-v0.md` — why Core 100% VFR ceiling, selection criteria, hardness, provenance, isolation, oracle, freeze policy
+- `docs/progress/frontier-hard-benchmark-v0.md` — per-case evidence and rejections
 
 ## What exists — Baseline v0 (new, frozen for experiments)
 
@@ -61,7 +69,15 @@ Evaluated 4 provided + 4 additional (tinyspy, mri, yocto-queue) to reach 6; yoct
 
 ## Next step
 
-FROZEN v0.4 (cead5c6...) + baseline-v0 + evaluator-v0 for `agent-v1/v2/final` experiments (no benchmark changes without v0.5). Previous v0.3 results discarded. Next: `agent-v1/v2/final` rely on evaluator for VFR; do not rebuild evaluator.
+FROZEN v0.5 (ee9104f5...) — 17 cases (12 Core + 5 Hard) + baseline-v0 + evaluator-v0 for `agent-v1/v2/final` experiments (no benchmark changes without v0.6). Previous v0.4 (cead5c6... 12/12) preserved as `validation-report.v0.4.json` but not mixed with v0.5. Next: re-run baseline on v0.5 to measure ceiling, then `agent-v1/v2/final` rely on evaluator for VFR on the 17-case frozen benchmark; do not rebuild evaluator.
+
+## Known limitations (v0.5)
+
+- Baseline was measured on v0.4 (12 cases, 100% VFR); v0.5's 5 hard cases are designed to break that ceiling — expect VFR <100% on v0.5.
+- `superjson` `src/index.ts` patched `import type` for `Class`/`SuperJSONResult` (harness only, non-logic, documented in `provenance.md`) to make `bun`/`tsx` handle type-only imports; `p-queue` `tsconfig` adjusted similarly — historical logic unchanged.
+- Hard repos use `NODE_PATH` or `node_modules` in repo for `side-channel`/`copy-anything`/`eventemitter3`/`p-timeout` in temp workspaces.
+- `p-queue` hard-004's `public/reproduce.ts` and `private/oracle.test.ts` use `Promise.race` with 800-900ms timeout to avoid hanging on buggy (which never rejects) — deterministic, not flaky.
+- Hard cases are intentionally more complex: `hard-001` and `hard-003` touch 2-4 files, but `hard-005` is 1 file with subtle Unicode — all require reasoning, not just patch size.
 
 ## Known limitations
 

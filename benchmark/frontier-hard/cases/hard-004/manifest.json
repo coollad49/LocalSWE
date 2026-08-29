@@ -1,0 +1,32 @@
+{
+  "id": "hard-004",
+  "type": "historical",
+  "repository": "p-queue",
+  "baseVersion": "9.1.0",
+  "baseCommit": "a64b31663680f975571b6d7003b4dec86012c536",
+  "difficulty": "hard",
+  "categories": ["asynchronous", "state-management", "error-handling"],
+  "description": "p-queue signal abort while queued not rejected and not removed from queue",
+  "provenance": {
+    "sourceUrl": "https://github.com/sindresorhus/p-queue",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/sindresorhus/p-queue/blob/main/license",
+    "createdAt": "2026-08-29",
+    "issueUrl": "https://github.com/sindresorhus/p-queue/issues/241",
+    "buggyCommit": "3bd13ea130b105d8521e0ba4115a68671967200d",
+    "fixedCommit": "a64b31663680f975571b6d7003b4dec86012c536",
+    "notes": "Fix handles AbortSignal abort while task is queued: removes from priority queue, rejects with signal.reason, and cleans up event listeners."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["source/index.ts", "source/priority-queue.ts", "source/queue.ts"],
+  "fixFiles": ["source/index.ts", "source/priority-queue.ts", "source/queue.ts"]
+}

@@ -4,8 +4,11 @@ export default defineConfig({
   test: {
     include: [
       "benchmark/repositories/*/tests/**/*.test.ts",
+      "benchmark/frontier-hard/repositories/*/tests/**/*.test.ts",
       "benchmark/cases/*/private/**/*.test.ts",
       "benchmark/cases/*/public/**/*.test.ts",
+      "benchmark/frontier-hard/cases/*/private/**/*.test.ts",
+      "benchmark/frontier-hard/cases/*/public/**/*.test.ts",
       "src/evaluator/tests/**/*.test.ts",
       "src/**/*.test.ts",
     ],

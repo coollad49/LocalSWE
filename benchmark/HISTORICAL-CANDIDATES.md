@@ -73,6 +73,56 @@ See CASE-MATRIX.md for full details and provenance. Fingerprint `cead5c6e...` FR
 
 ---
 
+## Frontier-Hard Candidates — v0.5 (5 Genuine Hard, 15+ Rejected)
+
+**Date:** 2026-08-29 v0.5 FROZEN
+**Validator:** v0.5 isolated, fingerprint `sha256:ee9104f5a7a03d0c227205de81fa24e464c23160ddf145051b08799693cbdf78` (17/17 VALID)
+**Goal:** 5 deliberately difficult genuine historical bugs (high reasoning, not large repo) — **ACHIEVED 5/5**
+**Status:** 5 strong genuine hard cases constructed and validated (see CASE-MATRIX.md Frontier-Hard). 16 candidates evaluated, 11 rejected for hardness or infra reasons.
+
+---
+
+### Frontier-Hard Kept (5)
+
+| ID | Repo | Commit | Verdict | Why Hard | Category |
+|----|------|--------|---------|----------|----------|
+| hard-001 | immerjs/immer @ a73672a | a73672a (PR #1255) | **KEEP** | 2-file, 30+ lines, cross-file proxy + arrayMethods, hidden invariant base immutability, state/lifecycle, regression (patches, sharing), partial-fix trap (always-draft) | state-management, lifecycle, api-behavior |
+| hard-002 | ljharb/qs @ d56f48c | d56f48c (PR #558) | **KEEP** | 1-file but subtle one-level spread vs `[]=` single, hidden `arrayLimit` representation threshold, boundary, regression (plainObjects, throw) | parsing, boundary, state-management |
+| hard-003 | blitz-js/superjson @ 4054f3f | 4054f3f (PR #311) | **KEEP** | 4-file (pathstringifier, plainer, index, types), escaping order `\` then `.`, versioning `v:1`, walker numeric escaping, high cross-file | serialization, parsing, state-management |
+| hard-004 | sindresorhus/p-queue @ a64b316 | a64b316 (Issue #241) | **KEEP** | 3-file, async queued vs running, signal lifecycle, priority queue removal, listener cleanup, deterministic via `new Promise(()=>{})` | asynchronous, state-management, error-handling |
+| hard-005 | pillarjs/path-to-regexp @ 8877f41 | 8877f41 (PR #451) | **KEEP** | 1-file but Unicode code points vs code units, `u` flag, `ID_Continue`, requires matching `parse`'s `[...str]`, semantic | parsing, api-behavior, data-transformation |
+
+All 5: MIT/BSD-3, small/medium, no network, deterministic, 3× validated, hidden oracle broader than public.
+
+---
+
+### Frontier-Hard Rejected (15)
+
+| Repo | Commit | Verdict | Reason (per §6 and hardness Tests 1-5) |
+|------|--------|---------|----------------------------------------|
+| immer @ 16e225b | fix: undefined assigned to prototype-inherited key | **REJECT** | One-line `prop in` → `has()`, too obvious, fails Test 1 (agent solves from issue alone), §6.1 |
+| immer @ 90a7765 | fix: handle nested proxies after spreading | **REJECT (strong but overlap)** | Also hard (cross-file, `handleCrossReference`), but would share `immer` repo with hard-001 and overlap `arrayMethods.ts` — chose a73672a for higher cross-file reasoning; kept as backup |
+| immer @ 48fc378 | fix: prevent prototype pollution via constructor.prototype | **REJECT** | Similar to `defu` hist-002 (prototype pollution), not hard enough, one-line guard, §6.1 |
+| immer @ 0c3efdd | fix: preserve structural sharing for no-op array-methods | **REJECT** | Small, single-file, not enough hidden invariant, fails Test 2 |
+| qs @ b433a9b | fix: allowEmptyArrays skip cycle detection | **REJECT** | One-line `Object.keys(obj).length===0`, too obvious, §6.1 |
+| qs @ 8859c37 | fix: enforce arrayLimit on comma groups under `[]=` | **REJECT** | One-line gate `isFlatArrayValue` removal, easily discoverable via `throwOnLimitExceeded` search, §6.3 |
+| qs @ 74a0f6a | robustness: enforce arrayLimit consistently | **REJECT** | Similar to d56f48c but less distinct, not hard enough |
+| superjson @ faf164b | fix: don't synthesize cause on Errors | **REJECT (weak)** | 4-line `cause in v` check, small, would be medium-hard but less cross-file than 4054f3f |
+| superjson @ bccc082 | fix: preserve NaN/Infinity in typed arrays | **REJECT** | Small, 2-file, not enough reasoning |
+| p-queue @ 89a10bb | fix: rate limiter delaying tasks when intervalCap>1 | **REJECT** | 45-line rate limiter, but requires real timers (interval windows) — nondeterministic timing risk, violates §6.10/20 |
+| p-queue @ e9074f0 | fix: remove abort listener when operation completes | **REJECT** | Small, 1-file, not hard |
+| zustand @ 3febf8c | fix: clearStorage should invalidate async rehydration | **REJECT** | One-line `hydrationVersion++`, requires React/Testing Library + fake timers + DOM, heavy, fails §6.1 and DOM dep |
+| zod @ 84e416f | fix: stop cycle walk firing default factory | **REJECT** | Heavy monorepo (`pnpm` + `rollup`), requires `zod` 4.x build, violates heavy monorepo rejection (§2 instruction: reject heavy monorepo builds) |
+| zod @ b63db24 | fix: keep memoized node's cached issues private | **REJECT** | Same heavy monorepo |
+| path-to-regexp @ b42b3d0 | fix: reject wildcard array that compiles to empty path | **REJECT** | 4-line, single check, not hard |
+| path-to-regexp @ 22a9679 | fix: reject large optional route combinations | **REJECT** | Single counter `256`, not hard |
+
+**Provided list vs independent (for Frontier-Hard):** Task suggested potential repos (Vue, Svelte, MUI, Zod, Zustand, ts-node) as examples only — we did not select a repo merely because it is famous. We searched `Multi-SWE-bench` and GitHub issues/PRs across 7 repos (immer, qs, superjson, p-queue, path-to-regexp, zod, zustand) and selected the **bug** because it is difficult, per §4. Zod and Zustand were evaluated but rejected for heavy monorepo/DOM, despite being famous.
+
+**Recommendation:** 5 achieved, no further search needed. If expanding to 6th hard, `immer` `90a7765` could be added as strong backup with note about shared repo.
+
+---
+
 ## Reproducibility Note
 
 All checks run with `Bun 1.4.0`, `tmpdir` isolation, `git log` evidence. Candidate `cac` buggy state can be reproduced via:
@@ -82,4 +132,13 @@ cd /tmp/cac && git checkout ffaf796^
 # run repro: cac().option('-b, --base-url <url>', {default:'https://github.com'}).parse(['node','bin','--base-url','https://gitlab.com']) -> buggy gives {b: 'https://github.com', baseUrl: 'https://gitlab.com'}
 git checkout ffaf796
 # same repro -> fixed gives {baseUrl:'https://gitlab.com'} (and b mirrors if -b used)
+```
+
+Candidate `immer` a73672a buggy state can be reproduced via:
+```bash
+git clone https://github.com/immerjs/immer /tmp/immer
+cd /tmp/immer && git checkout cfec5e5
+# run repro: produce([{id:1},{id:2},{id:3}], s=>{ s.reverse(); s[0].id=99 }) -> buggy mutates baseState[2].id to 99
+git checkout a73672a
+# same -> baseState unchanged
 ```

@@ -14,7 +14,21 @@ import { computeVerdict } from "./verdict.ts";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../..");
 const CASES_DIR = join(ROOT, "benchmark/cases");
+const CASES_DIR_HARD = join(ROOT, "benchmark/frontier-hard/cases");
 const RUNS_DIR = join(ROOT, "experiments/runs");
+
+function resolveCaseDir(caseId: string): string {
+  if (caseId.startsWith("hard-")) {
+    const hard = join(CASES_DIR_HARD, caseId);
+    if (existsSync(hard)) return hard;
+    return hard;
+  }
+  const core = join(CASES_DIR, caseId);
+  if (existsSync(core)) return core;
+  const alt = join(CASES_DIR_HARD, caseId);
+  if (existsSync(alt)) return alt;
+  return core;
+}
 const DEFAULT_TIMEOUTS = {
   patchApplyMs: 10000,
   reproductionMs: 15000,
@@ -348,17 +362,18 @@ export class Evaluator {
       patchContent = content;
     }
 
-    // Load case manifest to get repository and enrich caseMeta
+    // Load case manifest to get repository and enrich caseMeta (supports core + frontier-hard)
     let repository: string;
     let caseMeta: CaseMeta = {};
     try {
-      const manifestRaw = await readFile(join(CASES_DIR, caseId, "manifest.json"), "utf-8");
+      const caseDir = resolveCaseDir(caseId);
+      const manifestRaw = await readFile(join(caseDir, "manifest.json"), "utf-8");
       const manifest = JSON.parse(manifestRaw) as { repository: string; type?: string; difficulty?: string; categories?: string[] };
       repository = manifest.repository;
       if (!repository) throw new Error("manifest missing repository");
       caseMeta = {
         repository: manifest.repository,
-        type: (manifest.type as CaseMeta["type"]) ?? (caseId.startsWith("hist-") ? "historical" : "synthetic"),
+        type: (manifest.type as CaseMeta["type"]) ?? (caseId.startsWith("hist-") || caseId.startsWith("hard-") ? "historical" : "synthetic"),
         difficulty: manifest.difficulty as CaseMeta["difficulty"],
         categories: manifest.categories,
       };

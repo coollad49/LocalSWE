@@ -1,0 +1,32 @@
+{
+  "id": "hard-005",
+  "type": "historical",
+  "repository": "path-to-regexp",
+  "baseVersion": "8.4.2",
+  "baseCommit": "8877f41873e37a30258d3935feaf1d2679321735",
+  "difficulty": "hard",
+  "categories": ["parsing", "api-behavior", "data-transformation"],
+  "description": "path-to-regexp stringify fails to quote param names followed by astral ID_Continue",
+  "provenance": {
+    "sourceUrl": "https://github.com/pillarjs/path-to-regexp",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/pillarjs/path-to-regexp/blob/master/LICENSE",
+    "createdAt": "2026-08-29",
+    "issueUrl": "https://github.com/pillarjs/path-to-regexp/issues/451",
+    "buggyCommit": "bd12a33e7e18c994e9cf0f7e6175fcd0ba41db22",
+    "fixedCommit": "8877f41873e37a30258d3935feaf1d2679321735",
+    "notes": "Fix changes next.value[0] to [first] = next.value destructuring to correctly handle astral code points when checking ID_Continue."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/index.ts"],
+  "fixFiles": ["src/index.ts"]
+}

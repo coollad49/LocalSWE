@@ -1,0 +1,32 @@
+{
+  "id": "hard-003",
+  "type": "historical",
+  "repository": "superjson",
+  "baseVersion": "2.2.5",
+  "baseCommit": "4054f3f5015522c582a2c09c2c9e2f25c301d570",
+  "difficulty": "hard",
+  "categories": ["serialization", "parsing", "state-management"],
+  "description": "SuperJSON path escape mapping mishandles backslashes and versioning",
+  "provenance": {
+    "sourceUrl": "https://github.com/blitz-js/superjson",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/blitz-js/superjson/blob/main/LICENSE",
+    "createdAt": "2026-08-29",
+    "issueUrl": "https://github.com/blitz-js/superjson/issues/310",
+    "buggyCommit": "6dc63da357383e200c91e0833e27ce288e5cd7a7",
+    "fixedCommit": "4054f3f5015522c582a2c09c2c9e2f25c301d570",
+    "notes": "Fix corrects escapeKey to handle backslashes, adds legacy versioning for parsePath, and rejects malformed paths."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/plainer.ts", "src/pathstringifier.ts", "src/index.ts", "src/types.ts"],
+  "fixFiles": ["src/plainer.ts", "src/pathstringifier.ts", "src/index.ts", "src/types.ts"]
+}

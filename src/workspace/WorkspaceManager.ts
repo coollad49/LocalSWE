@@ -8,6 +8,26 @@ import { spawn } from "node:child_process";
 const ROOT = resolve(dirname(new URL(import.meta.url).pathname), "../..");
 const CASES_DIR = join(ROOT, "benchmark/cases");
 const REPOS_DIR = join(ROOT, "benchmark/repositories");
+const CASES_DIR_HARD = join(ROOT, "benchmark/frontier-hard/cases");
+const REPOS_DIR_HARD = join(ROOT, "benchmark/frontier-hard/repositories");
+
+function resolveCaseDir(caseId: string): string {
+  if (caseId.startsWith("hard-")) {
+    const p = join(CASES_DIR_HARD, caseId);
+    if (existsSync(p)) return p;
+    return p;
+  }
+  const core = join(CASES_DIR, caseId);
+  if (existsSync(core)) return core;
+  const alt = join(CASES_DIR_HARD, caseId);
+  if (existsSync(alt)) return alt;
+  return core;
+}
+function resolveRepoDir(repo: string): string {
+  const hard = join(REPOS_DIR_HARD, repo);
+  if (existsSync(hard)) return hard;
+  return join(REPOS_DIR, repo);
+}
 
 interface CaseWorkspaceOptions {
   caseId: string;
@@ -111,7 +131,8 @@ async function ensureGitRepo(workspacePath: string): Promise<void> {
 export class WorkspaceManager {
   static async createWorkspace(options: CaseWorkspaceOptions): Promise<Workspace> {
     const { caseId, runId, initGit = true } = options;
-    const manifestPath = join(CASES_DIR, caseId, "manifest.json");
+    const caseDir = resolveCaseDir(caseId);
+    const manifestPath = join(caseDir, "manifest.json");
     if (!existsSync(manifestPath)) {
       throw new Error(`Case not found: ${caseId} (missing ${manifestPath})`);
     }
@@ -126,7 +147,7 @@ export class WorkspaceManager {
     if (!Array.isArray(manifest.buggyFiles) || manifest.buggyFiles.length === 0) {
       throw new Error(`Manifest buggyFiles invalid for ${caseId}`);
     }
-    const repoPath = join(REPOS_DIR, manifest.repository);
+    const repoPath = resolveRepoDir(manifest.repository);
     if (!existsSync(repoPath)) {
       throw new Error(`Repository not found: ${manifest.repository} at ${repoPath}`);
     }
@@ -149,7 +170,7 @@ export class WorkspaceManager {
 
       // Overlay buggy files
       for (const rel of manifest.buggyFiles) {
-        const src = join(CASES_DIR, caseId, "artifacts/buggy", rel);
+        const src = join(caseDir, "artifacts/buggy", rel);
         const dest = join(workspacePath, rel);
         if (!existsSync(src)) {
           throw new Error(`Buggy artifact missing: ${src}`);
@@ -159,7 +180,8 @@ export class WorkspaceManager {
       }
 
       // Copy ISSUE.md only (SWE-bench: agent gets issue + repo, no public/reproduce.ts)
-      const issueSrc = join(CASES_DIR, caseId, "issue.md");
+      // Strictly exclude curator-notes.md, provenance.md, private/oracle, artifacts
+      const issueSrc = join(caseDir, "issue.md");
       const issueDest = join(workspacePath, "ISSUE.md");
       if (existsSync(issueSrc)) {
         await copyFile(issueSrc, issueDest);
@@ -171,10 +193,13 @@ export class WorkspaceManager {
       // Guard 1: provenance.md must never be copied
       const provenanceLeak = join(workspacePath, "provenance.md");
       if (existsSync(provenanceLeak)) rmSync(provenanceLeak, { force: true });
-      const caseProvenance = join(CASES_DIR, caseId, "provenance.md");
-      // Never copy provenance even if attempt via cpSync
+      // Guard 1b: curator-notes.md (maintainer-only) must never be copied
+      const curatorLeak = join(workspacePath, "curator-notes.md");
+      if (existsSync(curatorLeak)) rmSync(curatorLeak, { force: true });
+      const curatorSrc = join(caseDir, "curator-notes.md");
+      // Never copy provenance/curator even if attempt via cpSync
       // Guard 2: private/oracle.test.ts
-      const privatePath = join(CASES_DIR, caseId, "private");
+      const privatePath = join(caseDir, "private");
       if (existsSync(privatePath)) {
         const leaked = join(workspacePath, "private");
         if (existsSync(leaked)) rmSync(leaked, { recursive: true, force: true });
@@ -187,6 +212,8 @@ export class WorkspaceManager {
       if (existsSync(artifactsLeak)) rmSync(artifactsLeak, { recursive: true, force: true });
       const artifactsPrivateLeak = join(workspacePath, "benchmark/cases");
       if (existsSync(artifactsPrivateLeak)) rmSync(artifactsPrivateLeak, { recursive: true, force: true });
+      const frontierArtifactsLeak = join(workspacePath, "benchmark/frontier-hard");
+      if (existsSync(frontierArtifactsLeak)) rmSync(frontierArtifactsLeak, { recursive: true, force: true });
 
       // Ensure workspace has a .git repo for patch capture
       if (initGit) {
@@ -258,10 +285,18 @@ export class WorkspaceManager {
     }
   }
 
-  /** List all valid case IDs from benchmark/cases */
+  /** List all valid case IDs from benchmark/cases + benchmark/frontier-hard/cases */
   static async listCases(): Promise<string[]> {
-    const entries = await readdir(CASES_DIR, { withFileTypes: true });
-    return entries.filter((e) => e.isDirectory()).map((e) => e.name).sort();
+    const all: string[] = [];
+    try {
+      const core = await readdir(CASES_DIR, { withFileTypes: true });
+      for (const e of core) if (e.isDirectory()) all.push(e.name);
+    } catch {}
+    try {
+      const hard = await readdir(CASES_DIR_HARD, { withFileTypes: true });
+      for (const e of hard) if (e.isDirectory()) all.push(e.name);
+    } catch {}
+    return all.sort();
   }
 
   /** Check if canonical repo remains unmodified (git diff clean if git repo, else file hash check) */

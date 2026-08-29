@@ -1,0 +1,32 @@
+{
+  "id": "hard-002",
+  "type": "historical",
+  "repository": "qs",
+  "baseVersion": "6.15.3",
+  "baseCommit": "d56f48ca137b1bf6385da749b1044246ae142f19",
+  "difficulty": "hard",
+  "categories": ["parsing", "boundary", "state-management"],
+  "description": "Combine overflow flatten: appended comma group nested instead of spread",
+  "provenance": {
+    "sourceUrl": "https://github.com/ljharb/qs",
+    "license": "BSD-3-Clause",
+    "licenseUrl": "https://github.com/ljharb/qs/blob/main/LICENSE.md",
+    "createdAt": "2026-08-29",
+    "issueUrl": "https://github.com/ljharb/qs/pull/558",
+    "buggyCommit": "e83d321ffafb38cf210683ac31714fce6ce1c6c6",
+    "fixedCommit": "d56f48ca137b1bf6385da749b1044246ae142f19",
+    "notes": "Fix spreads b one level in combine overflow branch to match [].concat(a,b) behavior, handling comma groups appended to overflowed arrays."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["lib/utils.js"],
+  "fixFiles": ["lib/utils.js"]
+}

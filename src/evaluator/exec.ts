@@ -1,4 +1,7 @@
 import { spawn } from "node:child_process";
+import { join, resolve as pathResolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { existsSync } from "node:fs";
 import type { VerificationStageResult } from "./types.ts";
 
 export interface ExecOptions {
@@ -48,6 +51,7 @@ export function execDeterministic(options: ExecOptions): Promise<ExecResult> {
       cwd,
       stdio: ["ignore", "pipe", "pipe"],
       shell: false,
+      env: { ...process.env, NODE_PATH: pathResolve(dirname(fileURLToPath(import.meta.url)), "../..", "node_modules") },
     });
 
     child.stdout.on("data", (d) => (stdout += d.toString()));
@@ -166,9 +170,6 @@ export function toStageResult(
   };
 }
 
-import { existsSync } from "node:fs";
-import { join } from "node:path";
-
 async function tryBunThenFallback(
   bunCommand: string,
   bunArgs: string[],
@@ -186,9 +187,15 @@ async function tryBunThenFallback(
     timeoutMs,
     commandString: bunCommandString,
   });
-  // If bun spawn failed with ENOENT, fallback
-  if (bunResult.error && bunResult.error.includes("ENOENT")) {
-    // fallback
+  const isBunMissing = bunResult.error && bunResult.error.includes("ENOENT");
+  const isBunCompileError =
+    bunResult.stderr?.includes("SyntaxError") ||
+    bunResult.stderr?.includes("not found in") ||
+    bunResult.stderr?.includes("Cannot find package") ||
+    bunResult.stdout?.includes("SyntaxError");
+  // If bun spawn failed with ENOENT or bun failed due to TS compilation incompatibility (e.g., immer's type-only imports), fallback to vitest/tsx
+  if (isBunMissing || isBunCompileError) {
+    // fallback to vitest/tsx which handles TypeScript via esbuild correctly
   } else {
     // Bun succeeded to spawn (even if test failed with exit 1, that's valid result)
     // Don't fallback; return bun result

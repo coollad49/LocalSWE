@@ -1,0 +1,32 @@
+{
+  "id": "hard-001",
+  "type": "historical",
+  "repository": "immer",
+  "baseVersion": "10.0.3-beta",
+  "baseCommit": "a73672ab76b5d9fd94f278a23c6c1931a03147e5",
+  "difficulty": "hard",
+  "categories": ["state-management", "lifecycle", "api-behavior"],
+  "description": "Draft relocated base refs after reverse/sort in array-methods plugin mutates base state",
+  "provenance": {
+    "sourceUrl": "https://github.com/immerjs/immer",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/immerjs/immer/blob/main/LICENSE",
+    "createdAt": "2026-08-29",
+    "issueUrl": "https://github.com/immerjs/immer/issues/1255",
+    "buggyCommit": "cfec5e51660aabd5f9026d3de1a0793630ef20c0",
+    "fixedCommit": "a73672ab76b5d9fd94f278a23c6c1931a03147e5",
+    "notes": "Fix adds baseRefs Set tracking and isRelocatedBaseRef check in proxy get trap to draft relocated base objects after array reorder."
+  },
+  "runtime": {
+    "node": "22",
+    "bun": "1.4.0",
+    "packageManager": "bun"
+  },
+  "verification": {
+    "reproduction": "public/reproduce.ts",
+    "oracle": "private/oracle.test.ts",
+    "regression": "bun test tests/"
+  },
+  "buggyFiles": ["src/core/proxy.ts", "src/plugins/arrayMethods.ts"],
+  "fixFiles": ["src/core/proxy.ts", "src/plugins/arrayMethods.ts"]
+}

@@ -1,8 +1,9 @@
 # Frontier Verifier Benchmark Specification
 
-**Version:** 0.4 — FROZEN for experiments
-**Status:** Frozen (benchmark v0.4, fingerprint `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e`)
+**Version:** 0.5 — FROZEN for experiments
+**Status:** Frozen (benchmark v0.5, fingerprint `sha256:ee9104f5a7a03d0c227205de81fa24e464c23160ddf145051b08799693cbdf78`)
 **Project:** micro1 Frontier Engineering Challenge 2026
+**Previous:** v0.4 `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` preserved as `benchmark/validation-report.v0.4.json`
 
 ---
 
@@ -48,22 +49,20 @@ If a benchmark case is invalid, unstable, incorrectly specified, or irreproducib
 
 ---
 
-# 3. Initial Benchmark Size
+# 3. Benchmark Size
 
-The initial benchmark target is:
-
-**12 cases**
+**Current benchmark:** v0.5 — **17 cases**
 
 Composition:
 
-* 6 historical cases;
-* 6 synthetic cases.
+* **Core Benchmark (v0.4 frozen):** 12 cases (6 genuine historical + 6 synthetic) — 7 repositories (3 benchmark-owned + 4 external)
+* **Frontier-Hard (v0.5 addition):** 5 cases (all genuine historical, deliberately difficult) — 5 repositories (immer, qs, superjson, p-queue, path-to-regexp)
 
-The benchmark may later be expanded to 16–20 cases if the infrastructure becomes stable early enough.
+Total: 12 Core + 5 Frontier-Hard = 17 cases, 12 repositories (7 Core + 5 Hard).
 
-Quality takes priority over quantity.
+Historical note: The Core Benchmark achieved 100% VFR with the baseline, indicating a ceiling effect. Frontier-Hard was introduced specifically to eliminate that ceiling with cases requiring high reasoning (cross-file, hidden invariant, lifecycle, async, partial-fix traps). Quality takes priority over quantity; a 300-line repo with a subtle invariant bug is preferred to a 20k-line repo with an obvious one-line fix.
 
-A smaller benchmark of highly reproducible cases is preferable to a larger benchmark containing unreliable cases.
+Previous: v0.4 was 12 cases (6+6) — preserved as `validation-report.v0.4.json`. Any further expansion creates v0.6.
 
 ---
 
@@ -75,34 +74,35 @@ Benchmark cases should reuse a small collection of suitable TypeScript repositor
 
 Target:
 
-* 3–5 repositories initially;
-* small or medium-sized;
-* TypeScript/Node.js;
-* locally reproducible;
-* preferably containing automated tests;
-* minimal or no external service dependencies;
-* reasonable installation/runtime requirements;
-* compatible with a reproducible clean environment;
-* permissive open-source license suitable for inclusion in the project.
+* Core: 7 repositories (3 benchmark-owned + 4 external) — v0.4
+* Frontier-Hard: +5 repositories (immer, qs, superjson, p-queue, path-to-regexp) — v0.5
+* Total: 12 repositories — small/medium, TypeScript/Node.js, locally reproducible, preferably with automated tests, minimal external deps, permissive MIT/BSD-3.
 
-A single repository may provide multiple benchmark cases.
+A single repository may provide multiple benchmark cases (but Frontier-Hard uses 5 distinct repos for diversity; sharing is allowed if isolated).
 
-Example:
+Example (v0.5 additive structure — Core preserved, Frontier-Hard added):
 
 ```text
-repositories/
-    repo-a/
-    repo-b/
-    repo-c/
-
-cases/
+benchmark/
+  repositories/         # 7 Core
+    task-manager/
+    ...
+  cases/                # 12 Core
     hist-001/
-    hist-002/
-    synth-001/
-    synth-002/
+    ...
+  frontier-hard/        # 5 Hard
+    repositories/
+      immer/
+      qs/
+      superjson/
+      p-queue/
+      path-to-regexp/
+    cases/
+      hard-001/
+      ...
 ```
 
-Cases refer to repository snapshots rather than duplicating the entire repository.
+Physical structure is additive to avoid risky moves of Core; validator discovers both `benchmark/cases` and `benchmark/frontier-hard/cases`. Cases refer to repository snapshots rather than duplicating the entire repository.
 
 ---
 
@@ -437,22 +437,18 @@ Difficulty must be assigned before final evaluation whenever possible.
 
 # 15. Benchmark Diversity
 
-The initial 12 cases should provide meaningful diversity.
+The 17 cases (12 Core + 5 Hard) provide meaningful diversity.
 
-Target categories include:
+**Core (12):** business logic, validation, boundary, API behavior, data transformation, asynchronous, state management, error handling, integration, regression-prone.
 
-* business logic;
-* validation;
-* boundary/edge cases;
-* API behavior;
-* data transformation;
-* asynchronous behavior;
-* state management;
-* error handling;
-* integration behavior;
-* regression-prone changes.
+**Frontier-Hard (5) adds distinct hard patterns:**
+- hard-001 immer: state-management, lifecycle, api-behavior (cross-file, hidden invariant base immutability)
+- hard-002 qs: parsing, boundary, state-management (arrayLimit overflow, one-level spread)
+- hard-003 superjson: serialization, parsing, state-management (path escaping, versioning)
+- hard-004 p-queue: asynchronous, state-management, error-handling (concurrency, signal lifecycle)
+- hard-005 path-to-regexp: parsing, api-behavior, data-transformation (unicode code points)
 
-The benchmark must avoid excessive duplication of the same bug pattern.
+No duplicate bug pattern dominates. Frontier-Hard was curated for **high reasoning, not large repo size** — e.g., path-to-regexp is ~500 LOC but requires Unicode code-point awareness.
 
 ---
 
@@ -599,17 +595,18 @@ The evaluator should create a fresh workspace for each case.
 After the benchmark is frozen:
 
 ```text
-Benchmark v0.4 — FROZEN
-fingerprint cead5c6e...
+Benchmark v0.5 — FROZEN
+fingerprint ee9104f5...
+Previous v0.4 cead5c6e... preserved as validation-report.v0.4.json
 ```
 
 must remain unchanged while comparing:
 
 ```text
-Baseline (v0.4)
-V1 (v0.4)
-V2 (v0.4)
-Final (v0.4)
+Baseline (v0.5 — 17 cases)
+V1 (v0.5)
+V2 (v0.5)
+Final (v0.5)
 ```
 
 If the benchmark is changed, it becomes a new benchmark version.
@@ -617,11 +614,12 @@ If the benchmark is changed, it becomes a new benchmark version.
 Example:
 
 ```text
-Benchmark v0.4
-Benchmark v0.5
+Benchmark v0.4 (12 cases, cead5c6e...) — preserved
+Benchmark v0.5 (17 cases, ee9104f5...) — FROZEN for all subsequent experiments
+Benchmark v0.6 (future) — if any case changes
 ```
 
-Results must never silently mix benchmark versions. Previous v0.3 results are discarded.
+Results must never silently mix benchmark versions. Previous v0.4 results are preserved but not mixed with v0.5; v0.3 discarded. Core's 12 cases remain behaviorally identical in v0.5; only the measuring instrument was expanded.
 
 ---
 

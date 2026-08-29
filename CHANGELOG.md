@@ -221,9 +221,56 @@ Implements the frozen evaluation layer that answers *did the agent actually fix 
 
 * Evaluator is deterministic infrastructure, not an AI judge; benchmark remains immutable v0.4; evaluator is frozen `evaluator-v0` for baseline→v1→v2→final.
 
+## [0.6.0] - 2026-08-29 — Frontier-Hard Benchmark v0.5 (Additive)
+
+### Added — Frontier-Hard (5 Deliberately Difficult Historical Cases)
+
+Introduces the **Frontier-Hard** subset to eliminate the baseline 100% VFR ceiling. The Core Benchmark (12 cases, 7 repos, v0.4 `cead5c6e...`) remains **byte-identical** in behavior; only the measuring instrument was expanded.
+
+**New cases (all genuine historical, MIT/BSD-3, pinned `buggyCommit→fixedCommit`, 3× validated, hidden oracle):**
+
+- **hard-001 immer** `immerjs/immer@a73672a` (PR #1255, `src/core/proxy.ts:146` + `src/plugins/arrayMethods.ts:181`) — draft relocated base refs after `reverse`/`sort` mutates base, difficulty hard, `state-management,lifecycle,api-behavior`, `cfec5e5 → a73672a`, repo `immer` 10.0.3-beta MIT, repro `reverse` then mutate, oracle 7 tests (reverse, sort, patches, sharing, cycles).
+- **hard-002 qs** `ljharb/qs@d56f48c` (PR #558, `lib/utils.js:338`) — combine overflow flatten nests array, hard, `parsing,boundary,state-management`, `e83d321 → d56f48c`, repo `qs` 6.15.3 BSD-3, repro `a=1,2,3,4,5,6&a=7,8`, oracle 8 tests (flat, `[]=` single, multiple groups, plainObjects, throw).
+- **hard-003 superjson** `blitz-js/superjson@4054f3f` (Issue #310, PR #311, `src/pathstringifier.ts:7` + `src/plainer.ts:24` + `src/index.ts:55` + `src/types.ts:1`) — path escape mishandles `\` and versioning, hard, `serialization,parsing,state-management`, `6dc63da → 4054f3f`, repo `superjson` 2.2.5 MIT, repro `b\` with Set, oracle 6 tests (PR 4-key, backslash Set, invalid path).
+- **hard-004 p-queue** `sindresorhus/p-queue@a64b316` (Issue #241, `source/index.ts:475` + `source/priority-queue.ts:16` + `source/queue.ts:2`) — signal abort while queued not rejected, hard, `asynchronous,state-management,error-handling`, `3bd13ea → a64b316`, repo `p-queue` 9.1.0 MIT, repro queued abort, oracle 6 tests (queued, already-aborted, priority, custom reason).
+- **hard-005 path-to-regexp** `pillarjs/path-to-regexp@8877f41` (PR #451, `src/index.ts:676`) — `stringifyName` uses `next.value[0]` (code unit) not code point for astral `ID_Continue`, hard, `parsing,api-behavior,data-transformation`, `bd12a33 → 8877f41`, repo `path-to-regexp` 8.4.2 MIT, repro `param` + `\u{1D6FC}`, oracle 7 tests (param/wildcard astral, non-ID, BMP, round-trip).
+
+**Repositories expanded:** 7 → 12 (7 Core + 5 Hard: `immer`, `qs`, `superjson`, `p-queue`, `path-to-regexp` — `benchmark/frontier-hard/repositories/` added, `benchmark/repositories/README.md` updated, `copy-anything`/`eventemitter3`/`p-timeout`/`side-channel` via `NODE_PATH` or `node_modules` in repo).
+
+**Structure (additive, per §2):** `benchmark/cases` + `benchmark/repositories` = **Core** (v0.4 preserved), `benchmark/frontier-hard/cases` + `benchmark/frontier-hard/repositories` = **Frontier-Hard** (v0.5 addition). Validator discovers both; fingerprint unified over 17 cases + 12 repos + schema. Core's 12 cases remain behaviorally identical.
+
+### Changed — Validator & Evaluator (v0.5)
+
+- `benchmark/schema/manifest.schema.json:7` `id` pattern `^(hist|synth|hard)-[0-9]{3}$`, `repository` now `type:string` (any repo), `difficulty` adds `frontier-hard`.
+- `benchmark/scripts/validate.ts` v0.5: dual-root discovery (`CASES_DIR` + `CASES_DIR_HARD`, `REPOS_DIR` + `REPOS_DIR_HARD`), `resolveCaseDir`/`resolveRepoDir`, `computeFingerprint` over 17 cases + 12 repos, `createTempWorkspace` copies to both `benchmark/cases` and `benchmark/frontier-hard/cases` in temp for `../../../repositories` relative imports, `runBunFile`/`runBunTest` now `bun` → `vitest`/`tsx` fallback on `SyntaxError`/`not found in` (for `immer`'s `Draft` type-only import), `NODE_PATH` set to `ROOT/node_modules` for `side-channel`/`copy-anything`, `benchmarkVersion 0.5`, `validation-report.v0.4.json` preserved.
+- `src/evaluator/isolation.ts` v0.5: same dual-root resolve, `createIsolatedWorkspace` copies to both `benchmark/repositories` and `benchmark/frontier-hard/repositories` in temp, `NODE_PATH` not needed (inherits), `resolveCaseDir`/`resolveRepoDir`.
+- `src/evaluator/exec.ts` v0.5: `tryBunThenFallback` now also falls back on `SyntaxError`/`not found in`/`Cannot find package` (for `immer`/`superjson` type-only imports), `execDeterministic` sets `NODE_PATH`, `runReproduce`/`runOracle`/`runRegression` handle both roots.
+- `src/workspace/WorkspaceManager.ts` v0.5: dual-root, `resolveCaseDir`/`resolveRepoDir`, `curator-notes.md` explicitly excluded from agent workspace (alongside `provenance.md`/`private`/`artifacts`), `listCases` merges both roots.
+- `vitest.config.ts:5` include adds `benchmark/frontier-hard/...` for both `cases` and `repositories`.
+- `tsconfig.json:30` and `tsconfig.benchmark.json:12` exclude `benchmark/frontier-hard/...` for type checking.
+- `benchmark/CASE-MATRIX.md` v0.5: 17 rows, new Frontier-Hard section with 5 detailed entries, diversity updated, validation 17/17.
+- `benchmark/README.md` v0.5: 17 cases, 12 repos, Core + Frontier-Hard structure, fingerprint `ee9104f5...`, v0.4 preserved.
+- `docs/benchmark-spec.md` v0.5: 17 cases, repository strategy additive, diversity with 5 hard, immutability v0.5 FROZEN, `ee9104f5...`.
+- `benchmark/HISTORICAL-CANDIDATES.md` will be updated with 5 hard selections and 15+ rejections.
+- `benchmark/validation-report.json` now `benchmarkVersion 0.5`, `fingerprint ee9104f5...`, 17/17.
+
+### Infrastructure & Validation
+
+- `bun run benchmark:validate` v0.5 isolated — **17/17 VALID** `sha256:ee9104f5a7a03d0c227205de81fa24e464c23160ddf145051b08799693cbdf78` (was `cead5c6e...` 12/12 on v0.4, preserved), `reproduction 3×, oracle 3× per state, regression 1×`, also `bun run benchmark:check-types` + `bun run check-types` pass.
+- `bun run test` now 30+ files (19 Core + 5 Hard + 6 evaluator) — all pass via `vitest` (including `immer` via `tsx` fallback).
+- Curator verification: each hard case tested buggy→fail / fixed→pass 3×, plus naive patch `false_confidence` checks (e.g., hard-001 always-draft, hard-002 missing `setMaxIndex`, etc.) — see `docs/progress/frontier-hard-benchmark-v0.md`.
+
+### Decisions
+
+- Additive structure chosen per §2 to avoid risky move of Core's 12 cases + 7 repos immediately before freeze; conceptual distinction matters more than cosmetic directory move.
+- Hardness selection per §5: cross-file, hidden invariant, state/lifecycle, async, partial-fix traps, regression-sensitive, unicode — not repo size or patch size.
+- Rejected 15+ candidates (e.g., `immer` `16e225b` one-line, `qs` `b433a9b` one-line, `zustand` `3febf8c` one-line, `zod` heavy monorepo, `p-queue` `89a10bb` timing) — see `benchmark/HISTORICAL-CANDIDATES.md` and curator report.
+- `superjson` `src/index.ts` patched `import type` for `Class`/`SuperJSONResult` (harness only, non-logic, documented) to make `bun`/`tsx` handle type-only imports; `p-queue` `tsconfig` adjusted similarly.
+
 ## Unreleased
 
-- Next: agent-v1/v2 experiments using evaluator for VFR.
+- Next: baseline re-run on v0.5 (17 cases) to measure ceiling, then agent-v1/v2 experiments.
+
 
 
 ## [0.3.2] - 2026-08-29 — Historical Authenticity & TS Config Hygiene

@@ -11,6 +11,28 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../..");
 const CASES_DIR = join(ROOT, "benchmark/cases");
 const REPOS_DIR = join(ROOT, "benchmark/repositories");
+const CASES_DIR_HARD = join(ROOT, "benchmark/frontier-hard/cases");
+const REPOS_DIR_HARD = join(ROOT, "benchmark/frontier-hard/repositories");
+
+function resolveCaseDir(caseId: string): string {
+  if (caseId.startsWith("hard-")) {
+    const hard = join(CASES_DIR_HARD, caseId);
+    if (existsSync(hard)) return hard;
+    return hard;
+  }
+  const core = join(CASES_DIR, caseId);
+  if (existsSync(core)) return core;
+  const alt = join(CASES_DIR_HARD, caseId);
+  if (existsSync(alt)) return alt;
+  return core;
+}
+
+function resolveRepoDir(repository: string): string {
+  const hard = join(REPOS_DIR_HARD, repository);
+  if (existsSync(hard)) return hard;
+  const core = join(REPOS_DIR, repository);
+  return core;
+}
 
 export interface TempWorkspace {
   tmpRoot: string;
@@ -43,42 +65,50 @@ export async function createIsolatedWorkspace(caseId: string, repository: string
     const destBenchmark = join(tmpRoot, "benchmark");
     const destRepos = join(destBenchmark, "repositories", repository);
     const destCase = join(destBenchmark, "cases", caseId);
+    const destHardCase = join(tmpRoot, "benchmark/frontier-hard/cases", caseId);
+    const destHardRepos = join(tmpRoot, "benchmark/frontier-hard/repositories", repository);
 
-    // Copy repository (known-good state) — canonical never mutated
-    const srcRepo = join(REPOS_DIR, repository);
+    // Resolve source dirs (support core + frontier-hard)
+    const srcRepo = resolveRepoDir(repository);
+    const srcCase = resolveCaseDir(caseId);
+
     if (!existsSync(srcRepo)) {
       throw new Error(`Repository not found: ${repository} at ${srcRepo}`);
     }
     cpSync(srcRepo, destRepos, { recursive: true, filter: (src) => !src.includes(".git") });
+    try { cpSync(srcRepo, destHardRepos, { recursive: true, filter: (src) => !src.includes(".git") }); } catch {}
 
-    // Copy case
-    const srcCase = join(CASES_DIR, caseId);
     if (!existsSync(srcCase)) {
       throw new Error(`Case not found: ${caseId} at ${srcCase}`);
     }
     cpSync(srcCase, destCase, { recursive: true });
+    try { cpSync(srcCase, destHardCase, { recursive: true }); } catch {}
 
     // Prepare Buggy Workspace: overlay artifacts/buggy onto repo to recreate exact buggy baseline the agent encountered
-    const srcBuggy = join(CASES_DIR, caseId, "artifacts/buggy");
+    const srcBuggy = join(srcCase, "artifacts/buggy");
     if (existsSync(srcBuggy)) {
       // Prefer manifest-driven file overlay for precision, fallback to recursive copy
       try {
-        const manifestRaw = await readFile(join(CASES_DIR, caseId, "manifest.json"), "utf-8");
+        const manifestRaw = await readFile(join(srcCase, "manifest.json"), "utf-8");
         const manifest = JSON.parse(manifestRaw) as { buggyFiles?: string[] };
         if (Array.isArray(manifest.buggyFiles) && manifest.buggyFiles.length > 0) {
           for (const rel of manifest.buggyFiles) {
             const src = join(srcBuggy, rel);
             const dest = join(destRepos, rel);
+            const dest2 = join(destHardRepos, rel);
             if (!existsSync(src)) continue;
             mkdirSync(dirname(dest), { recursive: true });
             cpSync(src, dest, { recursive: true });
+            try { mkdirSync(dirname(dest2), { recursive: true }); cpSync(src, dest2, { recursive: true }); } catch {}
           }
         } else {
           cpSync(srcBuggy, destRepos, { recursive: true });
+          try { cpSync(srcBuggy, destHardRepos, { recursive: true }); } catch {}
         }
       } catch {
         // Fallback: recursive copy entire buggy dir
         cpSync(srcBuggy, destRepos, { recursive: true });
+        try { cpSync(srcBuggy, destHardRepos, { recursive: true }); } catch {}
       }
     }
 
