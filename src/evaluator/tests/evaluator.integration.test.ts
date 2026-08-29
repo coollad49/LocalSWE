@@ -14,11 +14,58 @@ const CASES_DIR = join(ROOT, "benchmark/cases");
 const REPOS_DIR = join(ROOT, "benchmark/repositories");
 const RUNS_DIR = join(ROOT, "experiments/runs");
 
+// Correct fix patch: buggy (0fa3bc4) -> known-good (b65c9b4) — applied to buggy workspace yields verified
+const SYNTH_001_FIX_PATCH = `diff --git a/src/task-manager.ts b/src/task-manager.ts
+index 0fa3bc4..b65c9b4 100644
+--- a/src/task-manager.ts
++++ b/src/task-manager.ts
+@@ -38,21 +38,17 @@ export class TaskManager {
+     if (updates.status !== undefined) validateStatus(updates.status);
+     if (updates.dueDate !== undefined) validateDueDate(updates.dueDate);
+ 
+-    // BUG: spreads undefined values and overwrites existing fields
++    // Only update fields that are explicitly provided (not undefined)
+     const updated: Task = {
+       ...existing,
+-      title: updates.title as any,
+-      description: updates.description as any,
+-      priority: updates.priority as any,
+-      status: updates.status as any,
+-      dueDate: updates.dueDate as any,
++      ...(updates.title !== undefined ? { title: updates.title.trim() } : {}),
++      ...(updates.description !== undefined ? { description: updates.description } : {}),
++      ...(updates.priority !== undefined ? { priority: updates.priority } : {}),
++      ...(updates.status !== undefined ? { status: updates.status } : {}),
++      ...(updates.dueDate !== undefined ? { dueDate: updates.dueDate } : {}),
+       updatedAt: toISOTimestamp(new Date()),
+     };
+-    // Remove undefined check - this will set fields to undefined if not provided
+-    // Simulate buggy behavior: if update field is undefined, it still overwrites
+-    // The above already does it. Need to ensure we don't preserve old values.
+-    // In JS, spreading with undefined overwrites: { ...existing, title: undefined } => title undefined
+-    this.tasks.set(id, updated as Task);
++    this.tasks.set(id, updated);
+     this.invalidateCache();
+     return { ...updated };
+   }
+@@ -78,7 +74,9 @@ export class TaskManager {
+       return (this.statusCache.get(status) ?? []).map((t) => ({ ...t }));
+     }
+     const result = Array.from(this.tasks.values()).filter((t) => t.status === status);
++    // populate cache lazily
+     if (!this.statusCache) this.statusCache = new Map();
++    // Rebuild all statuses if cache invalid
+     if (!this.cacheValid) {
+       this.rebuildCache();
+     }
+`;
+
 function getKnownGoodPatch(caseId: string): string {
+  if (caseId === "synth-001") return SYNTH_001_FIX_PATCH;
   return "";
 }
 
-// Valid buggy patch generated via git diff from known-good to buggy artifact (synth-001)
+// Valid buggy patch generated via git diff from known-good to buggy artifact (synth-001) — kept for reference but NOT used for buggy-workspace agent_failure (empty patch is correct)
 const SYNTH_001_BUGGY_PATCH = `diff --git a/src/task-manager.ts b/src/task-manager.ts
 index b65c9b4..0fa3bc4 100644
 --- a/src/task-manager.ts
@@ -52,40 +99,80 @@ index b65c9b4..0fa3bc4 100644
      this.invalidateCache();
      return { ...updated };
    }
-@@ -74,9 +78,7 @@ export class TaskManager {
-       return (this.statusCache.get(status) ?? []).map((t) => ({ ...t }));
+@@ -105,21 +109,21 @@ index b65c9b4..0fa3bc4 100644
      }
-     const result = Array.from(this.tasks.values()).filter((t) => t.status === status);
--    // populate cache lazily
-     if (!this.statusCache) this.statusCache = new Map();
--    // Rebuild all statuses if cache invalid
-     if (!this.cacheValid) {
-       this.rebuildCache();
-     }
-`;
+ `;
 
-// Partial patch: only dueDate buggy, others correct — should pass reproduction (which doesn't check dueDate) but fail oracle (which does)
+// Partial patch: buggy -> partial fix (dueDate remains buggy) — repro PASS, oracle FAIL
 const SYNTH_001_PARTIAL_DUEDATE_PATCH = `diff --git a/src/task-manager.ts b/src/task-manager.ts
-index b65c9b4..94ed947 100644
+index 0fa3bc4..0be04ba 100644
 --- a/src/task-manager.ts
 +++ b/src/task-manager.ts
-@@ -45,7 +45,7 @@ export class TaskManager {
-       ...(updates.description !== undefined ? { description: updates.description } : {}),
-       ...(updates.priority !== undefined ? { priority: updates.priority } : {}),
-       ...(updates.status !== undefined ? { status: updates.status } : {}),
--      ...(updates.dueDate !== undefined ? { dueDate: updates.dueDate } : {}),
-+      dueDate: updates.dueDate as any,
+@@ -38,21 +38,17 @@ export class TaskManager {
+     if (updates.status !== undefined) validateStatus(updates.status);
+     if (updates.dueDate !== undefined) validateDueDate(updates.dueDate);
+ 
+-    // BUG: spreads undefined values and overwrites existing fields
++    // Only update fields that are explicitly provided (not undefined) - partial fix (dueDate still buggy)
+     const updated: Task = {
+       ...existing,
+-      title: updates.title as any,
+-      description: updates.description as any,
+-      priority: updates.priority as any,
+-      status: updates.status as any,
++      ...(updates.title !== undefined ? { title: updates.title.trim() } : {}),
++      ...(updates.description !== undefined ? { description: updates.description } : {}),
++      ...(updates.priority !== undefined ? { priority: updates.priority } : {}),
++      ...(updates.status !== undefined ? { status: updates.status } : {}),
+       dueDate: updates.dueDate as any,
        updatedAt: toISOTimestamp(new Date()),
      };
-     this.tasks.set(id, updated);
+-    // Remove undefined check - this will set fields to undefined if not provided
+-    // Simulate buggy behavior: if update field is undefined, it still overwrites
+-    // The above already does it. Need to ensure we don't preserve old values.
+-    // In JS, spreading with undefined overwrites: { ...existing, title: undefined } => title undefined
+-    this.tasks.set(id, updated as Task);
++    this.tasks.set(id, updated);
+     this.invalidateCache();
+     return { ...updated };
+   }
 `;
 
-// Regression break patch: keeps updateTask correct but breaks filterByStatus — should pass reproduce/oracle but fail regression
+// Regression break patch: buggy -> fixed but breaks filterByStatus — repro PASS, oracle PASS, regression FAIL
 const SYNTH_001_REGRESSION_BREAK_PATCH = `diff --git a/src/task-manager.ts b/src/task-manager.ts
-index b65c9b4..3bd20ac 100644
+index 0fa3bc4..3bd20ac 100644
 --- a/src/task-manager.ts
 +++ b/src/task-manager.ts
-@@ -70,17 +70,8 @@ export class TaskManager {
+@@ -38,21 +38,17 @@ export class TaskManager {
+     if (updates.status !== undefined) validateStatus(updates.status);
+     if (updates.dueDate !== undefined) validateDueDate(updates.dueDate);
+ 
+-    // BUG: spreads undefined values and overwrites existing fields
++    // Only update fields that are explicitly provided (not undefined)
+     const updated: Task = {
+       ...existing,
+-      title: updates.title as any,
+-      description: updates.description as any,
+-      priority: updates.priority as any,
+-      status: updates.status as any,
+-      dueDate: updates.dueDate as any,
++      ...(updates.title !== undefined ? { title: updates.title.trim() } : {}),
++      ...(updates.description !== undefined ? { description: updates.description } : {}),
++      ...(updates.priority !== undefined ? { priority: updates.priority } : {}),
++      ...(updates.status !== undefined ? { status: updates.status } : {}),
++      ...(updates.dueDate !== undefined ? { dueDate: updates.dueDate } : {}),
+       updatedAt: toISOTimestamp(new Date()),
+     };
+-    // Remove undefined check - this will set fields to undefined if not provided
+-    // Simulate buggy behavior: if update field is undefined, it still overwrites
+-    // The above already does it. Need to ensure we don't preserve old values.
+-    // In JS, spreading with undefined overwrites: { ...existing, title: undefined } => title undefined
+-    this.tasks.set(id, updated as Task);
++    this.tasks.set(id, updated);
+     this.invalidateCache();
+     return { ...updated };
+   }
+@@ -74,15 +70,8 @@ export class TaskManager {
  
    filterByStatus(status: Status): Task[] {
      validateStatus(status);
@@ -93,9 +180,7 @@ index b65c9b4..3bd20ac 100644
 -      return (this.statusCache.get(status) ?? []).map((t) => ({ ...t }));
 -    }
 -    const result = Array.from(this.tasks.values()).filter((t) => t.status === status);
--    // populate cache lazily
 -    if (!this.statusCache) this.statusCache = new Map();
--    // Rebuild all statuses if cache invalid
 -    if (!this.cacheValid) {
 -      this.rebuildCache();
 -    }
@@ -110,22 +195,7 @@ index b65c9b4..3bd20ac 100644
 function getBuggyPatch(caseId: string): string {
   if (caseId === "synth-001") return SYNTH_001_BUGGY_PATCH;
   if (caseId === "synth-002") {
-    return `diff --git a/src/money.ts b/src/money.ts
-index 111111..222222 100644
---- a/src/money.ts
-+++ b/src/money.ts
-@@ -39,7 +39,6 @@
- 
- export function add(a: Money, b: Money): Money {
--  if (a.currency !== b.currency) throw new Error(\`Currency mismatch: \${a.currency} vs \${b.currency}\`);
-   return { amount: roundToCents(a.amount + b.amount), currency: a.currency };
- }
- 
- export function subtract(a: Money, b: Money): Money {
--  if (a.currency !== b.currency) throw new Error(\`Currency mismatch: \${a.currency} vs \${b.currency}\`);
-   return { amount: roundToCents(a.amount - b.amount), currency: a.currency };
- }
-`;
+    return "diff --git a/src/money.ts b/src/money.ts\nindex 111111..222222 100644\n--- a/src/money.ts\n+++ b/src/money.ts\n@@ -39,7 +39,6 @@\n \n export function add(a: Money, b: Money): Money {\n-  if (a.currency !== b.currency) throw new Error('Currency mismatch');\n   return { amount: roundToCents(a.amount + b.amount), currency: a.currency };\n }\n \n export function subtract(a: Money, b: Money): Money {\n-  if (a.currency !== b.currency) throw new Error('Currency mismatch');\n   return { amount: roundToCents(a.amount - b.amount), currency: a.currency };\n }\n";
   }
   return "";
 }
@@ -175,7 +245,7 @@ diff --git a//etc/passwd b//etc/passwd
 describe("Evaluator integration", () => {
   const evaluator = new Evaluator();
 
-  test("valid empty patch on synth-001 -> verified", async () => {
+  test("valid fix patch on synth-001 -> verified (buggy -> fixed ladder)", async () => {
     const result = await evaluator.evaluate({
       caseId: "synth-001",
       patchContent: getKnownGoodPatch("synth-001"),
@@ -190,10 +260,10 @@ describe("Evaluator integration", () => {
     expect(result.benchmarkFingerprint).toMatch(/^sha256:/);
   }, 30000);
 
-  test("buggy patch on synth-001 -> agent_failure", async () => {
+  test("empty patch on synth-001 (leaves buggy) -> agent_failure", async () => {
     const result = await evaluator.evaluate({
       caseId: "synth-001",
-      patchContent: getBuggyPatch("synth-001"),
+      patchContent: "",
       agentVersion: "test",
     });
     expect(result.status).toBe("completed");
@@ -275,7 +345,7 @@ describe("Evaluator integration", () => {
     const before = await readFile(join(REPOS_DIR, "task-manager/src/task-manager.ts"), "utf-8");
     await evaluator.evaluate({
       caseId: "synth-001",
-      patchContent: getBuggyPatch("synth-001"),
+      patchContent: getKnownGoodPatch("synth-001"),
       agentVersion: "test",
     });
     const after = await readFile(join(REPOS_DIR, "task-manager/src/task-manager.ts"), "utf-8");
@@ -297,7 +367,7 @@ describe("Evaluator integration", () => {
   test("benchmark identity mismatch rejected unless allowed", async () => {
     const result = await evaluator.evaluate({
       caseId: "synth-001",
-      patchContent: "",
+      patchContent: getKnownGoodPatch("synth-001"),
       agentVersion: "test",
       benchmarkVersion: "0.999-mismatch",
       benchmarkFingerprint: "sha256:deadbeef",
@@ -309,7 +379,7 @@ describe("Evaluator integration", () => {
   test("benchmark identity mismatch allowed with flag", async () => {
     const result = await evaluator.evaluate({
       caseId: "synth-001",
-      patchContent: "",
+      patchContent: getKnownGoodPatch("synth-001"),
       agentVersion: "test",
       benchmarkVersion: "0.999-mismatch",
       benchmarkFingerprint: "sha256:deadbeef",
@@ -324,7 +394,7 @@ describe("Evaluator integration", () => {
     const runDir = join(RUNS_DIR, fakeRunId);
     mkdirSync(runDir, { recursive: true });
     const patchPath = join(runDir, "patch.diff");
-    writeFileSync(patchPath, "", "utf-8");
+    writeFileSync(patchPath, getKnownGoodPatch("synth-001"), "utf-8");
     const reportRaw = await readFile(join(ROOT, "benchmark/validation-report.json"), "utf-8");
     const report = JSON.parse(reportRaw) as { fingerprint: string };
     const metadata = {
@@ -353,7 +423,7 @@ describe("Evaluator integration", () => {
   test("hidden oracle not exposed to patch (evaluator opaque)", async () => {
     const result = await evaluator.evaluate({
       caseId: "synth-001",
-      patchContent: "",
+      patchContent: getKnownGoodPatch("synth-001"),
       agentVersion: "test",
     });
     const resultStr = JSON.stringify(result);
@@ -364,7 +434,7 @@ describe("Evaluator integration", () => {
   test("timeout handling: reproduction timeout", async () => {
     const result = await evaluator.evaluate({
       caseId: "synth-001",
-      patchContent: "",
+      patchContent: getKnownGoodPatch("synth-001"),
       agentVersion: "test",
       timeouts: { reproductionMs: 1 },
     });
