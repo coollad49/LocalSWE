@@ -142,18 +142,19 @@ Updated `benchmark/HISTORICAL-CANDIDATES.md` to **6/6 Genuine** (`tinyspy 0372bf
 
 - Keep `bun` as package manager (`bun.lock` retained) but no hard `bun` runtime required: `benchmark:validate` is **bun-first → vitest/tsx fallback** for `npm` users without `bun`. `test:bun` removed per your “what’s point of test:bun??” — single `test: vitest run` is now package-manager agnostic.
 
-## Unreleased
+## [0.4.0] - 2026-08-29 — Baseline v0 (Pi Fixed Runtime) + Benchmark FROZEN v0.4
 
-- Planned: evaluator (independent reproduction + oracle + VFR) (FROZEN v0.3 + baseline-v0).
+### Fixed — Benchmark FROZEN v0.4 (Fingerprint Completeness, Friend Review)
 
-### Decisions
+- **Provenance inclusion:** `benchmark/scripts/validate.ts:181-186` `computeFingerprint()` now hashes `issue.md` + `provenance.md` per case in addition to `manifest.json` + `buggyFiles` + `private/oracle.test.ts` + `public/reproduce.ts` + `schema` + 7 repo hashes. Previously `provenance.md` omitted — fingerprint did not fully represent benchmark identity (versioning flaw noted in review). Now `manifest + issue + provenance + reproduce + oracle + buggy + schema + repos`.
+- **Version bump:** `benchmark/scripts/validate.ts:2,428,475` `v0.3` → `v0.4`, report `benchmarkVersion 0.4`, `benchmark/CASE-MATRIX.md:3,8` `v0.4 FROZEN` `cead5c6e...`, `benchmark/README.md:1,7,100` `v0.4 FROZEN`, `docs/benchmark-spec.md:3,599` `0.1`/`V1` → `0.4 — FROZEN` `cead5c...`, `docs/memory/current-state.md:1,3,18` `0.3` → `0.4`, `src/config/BaselineConfig.ts:26` `0.3→0.4`, `experiments/config/baseline.json:4` `0.3→0.4`, `docs/baseline-spec.md:3,121` `0.3→0.4` + versioning note (runsPerCase configurable, v0.3 results discarded), `docs/decisions/baseline-v0.md:6,94` `v0.3→0.4`.
+- **Freeze:** Benchmark v0.4 `cead5c6e...` is FROZEN for all experiments (baseline, V1, V2, final). Any further case change → v0.5. Never mix v0.3 `4d739f...` and v0.4 results (v0.3 discarded per user). Evaluator will distinguish 4 verdicts (verified / agent_failure / false_confidence / regression_failure) with configurable `runsPerCase` — architecture keeps `CodingAgent` interface with only `PiCodingAgent`.
 
-- Keep 7 repos (exceeds 3–5 target) to meet 6 genuine (2 tinyspy + 2 mri share repos, so 4 external repos for 6 cases) — diversity preserved.
-- Leave `money.ts:13`/`validators.ts:38-41` untouched per instruction (predictable reference, not polish).
-- `cac` historical uses `@ts-nocheck` for `verbatimModuleSyntax` (external code).
-- Shared repos (`mri` at `5437ea5`, `tinyspy` at `0372bfb`) contain both fixes for that repo — `hist-004` baseCommit `5437ea5` includes `94f8c09` fix (documented).
+### Evidence
 
-## [0.4.0] - 2026-08-29 — Baseline v0 (Pi Fixed Runtime)
+- `npx tsx benchmark/scripts/validate.ts` v0.4 isolated — **12/12 VALID** `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` (was `4d739f6c...` on v0.3, discarded; no case content changed, only fingerprint input added)
+- `bun run check-types` → 0, `bun run benchmark:check-types` → 0
+- `BASELINE_MOCK=1 npx tsx scripts/verify-baseline-infra.ts` — 17/17 still (post-bump, pending re-run after freeze)
 
 ### Added — Baseline v0 Control Condition
 

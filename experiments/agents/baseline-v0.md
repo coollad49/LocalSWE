@@ -1,7 +1,8 @@
 # Baseline v0 — Agent Instructions
 
-**Version:** baseline-v0
+**Version:** baseline-v0 (runs against benchmark v0.4 FROZEN)
 **Date:** 2026-08-29
+**Benchmark:** v0.4 `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` — FROZEN
 **Runtime:** Pi coding-agent (@earendil-works/pi-coding-agent 0.84.4)
 **Purpose:** Establish control condition for repair/verification experiments
 

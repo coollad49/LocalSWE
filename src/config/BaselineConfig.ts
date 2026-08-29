@@ -23,7 +23,7 @@ export interface BaselineConfig {
 const DEFAULTS: BaselineConfig = {
   agentRuntime: "pi",
   agentVersion: "baseline-v0",
-  benchmarkVersion: "0.3",
+  benchmarkVersion: "0.4",
   // Model is sourced from environment (.env) via AGENT_MODEL; DEFAULTS is fallback for local mock/testing only.
   // Example .env: AGENT_MODEL=opencode-go/muse-spark-1.2-contributor (see pi catalog at node_modules/@earendil-works/pi-ai/dist/providers/data/opencode-go.json)
   model: "opencode-go/muse-spark-1.2-contributor",

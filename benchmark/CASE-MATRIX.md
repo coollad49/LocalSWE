@@ -1,11 +1,11 @@
 # Frontier Verifier Benchmark — Case Matrix
 
-**Version:** 0.3 (6 genuine historical + 6 synthetic, fingerprint `sha256:4d739f6c4abd2bfc8dc663fb03731ab24c91d25d5d3d28b6b10a620e749b055c`)
+**Version:** 0.4 — FROZEN for experiments (6 genuine historical + 6 synthetic, fingerprint `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e`)
 **Cases:** 12 (6 historical genuine + 6 synthetic)
 **Repositories:** 7 (3 benchmark-owned: task-manager, money-utils, async-queue + 4 external historical: cac, defu, tinyspy, mri)
 **Date:** 2026-08-29
-**Validator:** `bun run benchmark:validate` v0.3 isolated (bun-first → vitest/tsx fallback, temp workspace, path containment, exec guard, 3× oracle) — 12/12 ✓ VALID (also `npm run benchmark:validate` via tsx)
-**Fingerprint:** `sha256:4d739f6c4abd2bfc8dc663fb03731ab24c91d25d5d3d28b6b10a620e749b055c` (sha256 over manifests + buggy snapshots + oracles + schema + 7 repo hashes)
+**Validator:** `bun run benchmark:validate` v0.4 isolated (bun-first → vitest/tsx fallback, temp workspace, path containment, exec guard, 3× oracle) — 12/12 ✓ VALID (also `npm run benchmark:validate` via tsx)
+**Fingerprint:** `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` (sha256 over manifests + issue.md + provenance.md + buggy snapshots + oracles + schema + 7 repo hashes)
 **Stability:** reproduction 3×, oracle 3× per state, regression 1×
 
 ---
@@ -146,6 +146,6 @@ No duplicate bug pattern dominates.
 ## Validation
 
 - Each case passes: buggy reproduces (3/3 fails), good passes (3/3), oracle passes 3× on good, fails 3× on buggy, regression passes, final stability 1× — all in isolated temp workspaces (no live repo mutation), path-contained, exec guarded.
-- Run: `bun run benchmark:validate` (reports fingerprint) or `bun run benchmark:check-types` + `bun run check-types`
-- Report: `benchmark/validation-report.json` (machine-readable `benchmarkVersion`, `fingerprint`, `stability`)
+- Run: `bun run benchmark:validate` v0.4 (reports `cead5c6e...` FROZEN) or `bun run benchmark:check-types` + `bun run check-types`
+- Report: `benchmark/validation-report.json` (machine-readable `benchmarkVersion 0.4`, `fingerprint`, `stability`) — v0.4 FROZEN, v0.3 discarded
 - Full 6 genuine historical cases now satisfy non-negotiable requirement; 2 mri + 2 tinyspy + 1 cac + 1 defu = 6 distinct genuine.

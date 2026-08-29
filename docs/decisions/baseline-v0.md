@@ -2,8 +2,8 @@
 
 **Date:** 2026-08-29
 **Status:** Accepted
-**Version:** baseline-v0 (frozen for experiments)
-**Benchmark:** v0.3 (fingerprint `sha256:4d739f6c4abd2bfc8dc663fb03731ab24c91d25d5d3d28b6b10a620e749b055c`)
+**Version:** baseline-v0 (frozen for experiments, now runs against benchmark v0.4)
+**Benchmark:** v0.4 — FROZEN (fingerprint `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e`); previous v0.3 `4d739f...` discarded
 
 ## Context
 
@@ -91,7 +91,7 @@ Independent reproduction, hidden oracle execution, scoring, regression scoring, 
 ### Evidence
 
 * `bun run check-types` ✓ 0, `bun run benchmark:check-types` ✓ 0
-* `bun run benchmark:validate` 12/12 VALID fingerprint `sha256:4d739f6c...`
+* `bun run benchmark:validate` v0.4 12/12 VALID fingerprint `sha256:cead5c...` (was v0.3 `4d739f...` now discarded)
 * `BASELINE_MOCK=1 npx tsx scripts/verify-baseline-infra.ts` — 17/17 passed (15 required + 2 sanitation): loads case, workspace, canonical untouched, Pi session, instructions, inspect, modify, commands, trajectory JSONL, patch `git diff`, metadata, timeout (exec), cleanup, failed-case isolation, concurrent 2×, plus private/oracle leakage guard and git clean state.
 * Manual: `BASELINE_MOCK=1 bun run baseline:run:case -- synth-001` → `src/task-manager.ts` patch, `trajectory.jsonl` 21 lines, `metadata.json` with `benchmarkFingerprint`; `hist-001` similar `src/CAC.ts`.
 

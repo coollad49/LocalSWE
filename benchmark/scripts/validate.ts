@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * Benchmark Validator v0.3 (bun-first, vitest/tsx fallback for npm/pnpm/yarn)
+ * Benchmark Validator v0.4 (bun-first, vitest/tsx fallback for npm/pnpm/yarn)
  * - Temp workspace isolation (no live repo mutation)
  * - Path containment via resolved-path check
  * - Exec settle guard
@@ -182,6 +182,11 @@ async function computeFingerprint(caseIds: string[]): Promise<string> {
     const manifestPath = join(CASES_DIR, id, "manifest.json");
     const manifestContent = await readFile(manifestPath, "utf-8").catch(() => "");
     hash.update(manifestContent);
+    // issue.md (agent-visible) and provenance.md (evaluator provenance) — both affect benchmark identity
+    const issueContent = await readFile(join(CASES_DIR, id, "issue.md"), "utf-8").catch(() => "");
+    hash.update(issueContent);
+    const provenanceContent = await readFile(join(CASES_DIR, id, "provenance.md"), "utf-8").catch(() => "");
+    hash.update(provenanceContent);
     // buggy files
     let buggyFiles: string[] = [];
     try {
@@ -425,7 +430,7 @@ async function validateCase(caseId: string): Promise<{ id: string; valid: boolea
 }
 
 async function main() {
-  console.log("Benchmark Validation v0.3 (isolated, bun-first → vitest/tsx fallback)");
+  console.log("Benchmark Validation v0.4 (isolated, bun-first → vitest/tsx fallback)");
   console.log("==============================================================\n");
   let caseIds: string[] = [];
   try {
@@ -472,7 +477,7 @@ async function main() {
   }
 
   const report = {
-    benchmarkVersion: "0.3",
+    benchmarkVersion: "0.4",
     fingerprint,
     timestamp: new Date().toISOString(),
     total: results.length,

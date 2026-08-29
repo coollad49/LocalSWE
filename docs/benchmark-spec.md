@@ -1,7 +1,7 @@
 # Frontier Verifier Benchmark Specification
 
-**Version:** 0.1
-**Status:** Initial implementation specification
+**Version:** 0.4 — FROZEN for experiments
+**Status:** Frozen (benchmark v0.4, fingerprint `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e`)
 **Project:** micro1 Frontier Engineering Challenge 2026
 
 ---
@@ -599,17 +599,17 @@ The evaluator should create a fresh workspace for each case.
 After the benchmark is frozen:
 
 ```text
-Benchmark V1
+Benchmark v0.4 — FROZEN
+fingerprint cead5c6e...
 ```
 
 must remain unchanged while comparing:
 
 ```text
-Baseline
-V1
-V2
-V3
-Final
+Baseline (v0.4)
+V1 (v0.4)
+V2 (v0.4)
+Final (v0.4)
 ```
 
 If the benchmark is changed, it becomes a new benchmark version.
@@ -617,11 +617,11 @@ If the benchmark is changed, it becomes a new benchmark version.
 Example:
 
 ```text
-Benchmark v0.1
-Benchmark v0.2
+Benchmark v0.4
+Benchmark v0.5
 ```
 
-Results must never silently mix benchmark versions.
+Results must never silently mix benchmark versions. Previous v0.3 results are discarded.
 
 ---
 

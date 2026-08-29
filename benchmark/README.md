@@ -1,10 +1,10 @@
-# Frontier Verifier Benchmark v0.3
+# Frontier Verifier Benchmark v0.4 — FROZEN
 
-**Version:** 0.3
+**Version:** 0.4 — FROZEN for experiments
 **Cases:** 12 (6 genuine historical + 6 synthetic)
 **Repositories:** 7 (3 benchmark-owned: task-manager, money-utils, async-queue + 4 external historical: cac, defu, tinyspy, mri — all MIT)
-**Status:** Validated — 12/12 ✓ VALID (isolated v0.3 validator, bun-first → vitest/tsx fallback)
-**Fingerprint:** `sha256:4d739f6c4abd2bfc8dc663fb03731ab24c91d25d5d3d28b6b10a620e749b055c`
+**Status:** Validated — 12/12 ✓ VALID (isolated v0.4 validator, bun-first → vitest/tsx fallback)
+**Fingerprint:** `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e`
 **Stability:** reproduction 3×, oracle 3× per state, regression 1×, isolated temp workspaces
 
 ---
@@ -64,7 +64,7 @@ bun run benchmark:check-types     # benchmark harness types (also npm)
 bun run check-types               # main project types
 ```
 
-Checks for every case (v0.3):
+Checks for every case (v0.4 FROZEN):
 
 - manifest schema valid + path containment (absolute/traversal rejected)
 - repository available
@@ -73,8 +73,8 @@ Checks for every case (v0.3):
 - good passes 3/3 (isolated temp)
 - oracle passes 3× on good, fails 3× on buggy (isolated)
 - regression tests pass (isolated)
-- fingerprint `sha256` over manifests + buggy + oracles + schema included in report
-- machine report at `benchmark/validation-report.json` (`benchmarkVersion`, `fingerprint`, `stability`)
+- fingerprint `sha256` over manifests + issue.md + provenance.md + buggy + oracles + schema + 7 repos included in report
+- machine report at `benchmark/validation-report.json` (`benchmarkVersion 0.4`, `fingerprint`, `stability`)
 
 Example output:
 
@@ -98,7 +98,7 @@ All 6 historical cases are genuine external bugs with pinned buggyCommit → fix
 
 ## Versioning
 
-Benchmark is immutable during experiments. Changes create new version (e.g., v0.2). Never mix results across versions.
+Benchmark v0.4 is FROZEN for experiments (baseline, V1, V2, final). Any change creates Benchmark v0.5. Never mix results across versions.
 
 ## License
 

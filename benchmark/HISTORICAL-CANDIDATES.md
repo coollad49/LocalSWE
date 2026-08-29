@@ -1,7 +1,7 @@
 # Historical Candidate Evaluation — Complete (6/6 Genuine)
 
-**Date:** 2026-08-29 v0.3
-**Validator:** v0.2 isolated, fingerprint `sha256:6938f031bedd5d120dbd7aacb8274717f1e3d00fa5928aa98216dc1c0e772b0c` (after 6 genuine construction)
+**Date:** 2026-08-29 v0.4 FROZEN
+**Validator:** v0.4 isolated, fingerprint `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` (FROZEN; v0.3 `6938f031...` discarded)
 **Goal:** 6 genuine historical bugs (buggy commit → fail, fixed commit → pass, hidden oracle) — **ACHIEVED 6/6**
 **Status:** 6 strong genuine historical cases constructed and validated (see CASE-MATRIX.md). Additional tinyspy/mri/yocto-queue evaluations below document how 6 were selected.
 
@@ -41,14 +41,14 @@
 
 **Winner:** `cacjs/cac@ffaf796` (provided list #2) — only candidate that is simultaneously genuine historical, deterministic sync, no env mock, small, MIT, and has explicit buggy→fixed diff with 4 oracle tests. Independent alternative `defu@3942bfb` (prototype pollution) would be equal or better but was not in provided list as described.
 
-**Action (Completed v0.3):** Constructed 6 genuine historical cases via parallel subagents (all passed isolated v0.2 validator 3×):
+**Action (Completed v0.4 FROZEN):** Constructed 6 genuine historical cases via parallel subagents (all passed isolated v0.4 validator 3×, FROZEN):
 - `hist-001` cac @ ffaf796 (validation parsing, PL #153)
 - `hist-002` defu @ 3942bfb (security, PL #156)
 - `hist-003` tinyspy @ 0372bfb (state, commit 0372bfb)
 - `hist-004` mri @ 94f8c09 (parsing type-coercion, Issue #8)
 - `hist-005` mri @ 5437ea5 (parsing alias, Issue #10)
 - `hist-006` tinyspy @ 0684083 (state, PR #50)
-See CASE-MATRIX.md for full details and provenance. Fingerprint `6938f031...` after construction.
+See CASE-MATRIX.md for full details and provenance. Fingerprint `cead5c6e...` FROZEN after `issue.md+provenance.md` inclusion (v0.4).
 
 ---
 

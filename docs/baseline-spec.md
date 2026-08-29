@@ -1,8 +1,8 @@
 # Baseline v0 Specification
 
-**Version:** baseline-v0 (frozen)
+**Version:** baseline-v0 (frozen, runs against benchmark v0.4)
 **Date:** 2026-08-29
-**Benchmark:** v0.3 `sha256:4d739f6c4abd2bfc8dc663fb03731ab24c91d25d5d3d28b6b10a620e749b055c`
+**Benchmark:** v0.4 — FROZEN `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e`
 **Runtime:** Pi `@earendil-works/pi-coding-agent` 0.84.4
 
 ## Purpose
@@ -119,6 +119,10 @@ bun run benchmark:validate
 experiments/runs/synth-001-abc123-1717000000/
   trajectory.jsonl (21 lines, JSONL)
   patch.diff (diff --git a/src/task-manager.ts)
-  metadata.json (benchmarkVersion 0.3, piVersion 0.84.4, model opencode-go/muse-spark-1.2-contributor)
+  metadata.json (benchmarkVersion 0.4, fingerprint cead5c..., piVersion 0.84.4, model opencode-go/muse-spark-1.2-contributor)
   result.json (status success, durationMs 18000, changedFiles ["src/task-manager.ts"])
 ```
+
+## Versioning Note
+
+Benchmark v0.4 is FROZEN. Previous v0.3 runs discarded. `runsPerCase` is configurable via `experiments/config/baseline.json` or `--runs` CLI flag (default 1 for infra, 3 for evaluation). Any benchmark change → v0.5.
