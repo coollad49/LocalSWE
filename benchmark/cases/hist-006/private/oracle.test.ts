@@ -1,40 +1,54 @@
 import { describe, test, expect } from "bun:test";
-import { AsyncQueue } from "../../../repositories/async-queue/src/queue.ts";
+import { spyOn } from "../../../repositories/tinyspy/src/index.ts";
 
-describe("hist-006 oracle: pause/resume preserves jobs", () => {
-  test("resume restores pending jobs", () => {
-    const q = new AsyncQueue<string>();
-    q.enqueue("a");
-    q.enqueue("b");
-    q.pause();
-    q.enqueue("c");
-    q.enqueue("d");
-    expect(q.size()).toBe(4);
-    q.resume();
-    expect(q.size()).toBe(4);
-    expect(q.dequeue().payload).toBe("a");
-    expect(q.dequeue().payload).toBe("b");
-    expect(q.dequeue().payload).toBe("c");
-    expect(q.dequeue().payload).toBe("d");
+describe("hist-006 oracle: inherited methods", () => {
+  test("mocks inherited getter preserves setter", () => {
+    class Bar {
+      _bar = 'bar';
+      get bar(): string { return this._bar; }
+      set bar(v: string) { this._bar = v; }
+    }
+    class Foo extends Bar {}
+    const foo = new Foo();
+    expect(foo.bar).toBe('bar');
+    spyOn(foo, { getter: 'bar' }, () => 'foo');
+    expect(foo.bar).toBe('foo');
+    expect(() => { foo.bar = 'baz'; }).not.toThrow();
+    expect(foo.bar).toBe('foo');
+    expect((foo as any)._bar).toBe('baz');
   });
-  test("multiple pause/resume cycles", () => {
-    const q = new AsyncQueue<number>();
-    q.pause();
-    q.enqueue(1);
-    q.resume();
-    expect(q.size()).toBe(1);
-    q.pause();
-    q.enqueue(2);
-    q.enqueue(3);
-    expect(q.size()).toBe(3);
-    q.resume();
-    expect(q.size()).toBe(3);
-    expect(q.getJobs().map(j=>j.payload)).toEqual([1,2,3]);
+
+  test("mocks deeply inherited getter preserves setter", () => {
+    class GrandBar {
+      _x = 'grand';
+      get x(): string { return this._x; }
+      set x(v: string) { this._x = v; }
+    }
+    class Bar extends GrandBar {}
+    class Foo extends Bar {}
+    const foo = new Foo();
+    expect(foo.x).toBe('grand');
+    spyOn(foo, { getter: 'x' }, () => 'mocked');
+    expect(foo.x).toBe('mocked');
+    expect(() => { foo.x = 'new'; }).not.toThrow();
+    expect(foo.x).toBe('mocked');
+    expect((foo as any)._x).toBe('new');
   });
-  test("resume when not paused does nothing", () => {
-    const q = new AsyncQueue<string>();
-    q.enqueue("a");
-    q.resume();
-    expect(q.size()).toBe(1);
+
+  test("mocks inherited overridden getter - setter throws", () => {
+    class Bar {
+      _bar = 'bar';
+      get bar(): string { return this._bar; }
+      set bar(v: string) { this._bar = v; }
+    }
+    class Foo extends Bar {
+      override get bar(): string { return `${super.bar}-foo`; }
+    }
+    const foo = new Foo();
+    expect(foo.bar).toBe('bar-foo');
+    spyOn(foo, { getter: 'bar' }, () => 'foo');
+    expect(foo.bar).toBe('foo');
+    expect(() => { (foo as any).bar = 'baz'; }).toThrow();
+    expect(foo.bar).toBe('foo');
   });
 });

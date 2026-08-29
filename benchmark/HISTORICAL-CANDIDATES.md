@@ -1,9 +1,9 @@
-# Historical Candidate Evaluation — Phase 2
+# Historical Candidate Evaluation — Complete (6/6 Genuine)
 
-**Date:** 2026-08-29
-**Validator:** v0.2 isolated, fingerprint `sha256:42a6ef0ca...`
-**Goal:** 6 genuine historical bugs (buggy commit → fail, fixed commit → pass, hidden oracle)
-**Status:** 1 strong candidate validated, 1 strong alternative within same repo, 2 weak/rejected. Not enough to replace all 6 `hist-*` without further search. Current `hist-*` remain as synthetic-pattern pending incremental replacement.
+**Date:** 2026-08-29 v0.3
+**Validator:** v0.2 isolated, fingerprint `sha256:6938f031bedd5d120dbd7aacb8274717f1e3d00fa5928aa98216dc1c0e772b0c` (after 6 genuine construction)
+**Goal:** 6 genuine historical bugs (buggy commit → fail, fixed commit → pass, hidden oracle) — **ACHIEVED 6/6**
+**Status:** 6 strong genuine historical cases constructed and validated (see CASE-MATRIX.md). Additional tinyspy/mri/yocto-queue evaluations below document how 6 were selected.
 
 ---
 
@@ -41,19 +41,35 @@
 
 **Winner:** `cacjs/cac@ffaf796` (provided list #2) — only candidate that is simultaneously genuine historical, deterministic sync, no env mock, small, MIT, and has explicit buggy→fixed diff with 4 oracle tests. Independent alternative `defu@3942bfb` (prototype pollution) would be equal or better but was not in provided list as described.
 
-**Action:** Keep current `hist-001..006` as **synthetic-pattern** (honest provenance) for `v0.2` freeze; add `cac` as first incremental real historical candidate under `benchmark/candidates/` or `hist-007` only after full case construction passes `v0.2` validator (temp isolated, path contained, 3× oracle). Do not replace all 6 until each passes strict acceptance (`buggy→fail / fixed→pass / oracle 3×`).
+**Action (Completed v0.3):** Constructed 6 genuine historical cases via parallel subagents (all passed isolated v0.2 validator 3×):
+- `hist-001` cac @ ffaf796 (validation parsing, PL #153)
+- `hist-002` defu @ 3942bfb (security, PL #156)
+- `hist-003` tinyspy @ 0372bfb (state, commit 0372bfb)
+- `hist-004` mri @ 94f8c09 (parsing type-coercion, Issue #8)
+- `hist-005` mri @ 5437ea5 (parsing alias, Issue #10)
+- `hist-006` tinyspy @ 0684083 (state, PR #50)
+See CASE-MATRIX.md for full details and provenance. Fingerprint `6938f031...` after construction.
 
 ---
 
-## What Would Be Needed for 6 Real Historical
+## Additional Candidates Evaluated to Reach 6
 
-To reach 6, need 5 more distinct repos/PRs beyond `cac` + `defu` alternative. Options not in provided list that were briefly considered (not deeply evaluated due to time):
-- `tinyspy` / `vitest` mock bugs (small, sync)
-- `mri` (cac dependency) flag parsing
-- `yocto-queue` (p-limit dep) micro-queue
-- Further `defu` bugs (`11ba022`, `1b9fcab`) could provide 2 more distinct cases within same repo but would reduce repo diversity (violates 3–5 repo target).
+**Phase 2b — tinyspy / mri / yocto-queue (requested by user to reach 6 non-negotiable):**
 
-**Recommendation:** Time-box further search; if 6 not found quickly, freeze `v0.2` with honest `pattern-*` labeling and report shortfall (quality > count per `docs/benchmark-spec.md:16`).
+| Repo | Commit | Verdict | Reason |
+|------|--------|---------|--------|
+| tinyspy @ 0372bfb | 0372bfb | **KEEP strong** — prototype restore leak, sync deterministic, 3× validated via subagent, chosen as hist-003 |
+| tinyspy @ 0684083 | 0684083 | **KEEP strong** — inherited methods, sync, chosen as hist-006 |
+| mri @ 94f8c09 | 94f8c09 | **KEEP strong** — boolean defaults leak, sync, chosen as hist-004 |
+| mri @ 5437ea5 | 5437ea5 | **KEEP strong** — alias cascade, sync, chosen as hist-005 |
+| yocto-queue @ ee91589 | ee91589 | **WEAK** — drain ignores undefined (1 strong case, but second fix #14 is GC leak not observable, 90 LOC too small, family overlap with p-limit) — not chosen, would be filler if needed |
+| yocto-queue @ 8aead27 | 8aead27 | **REJECT** — stale tail GC leak not observable via public API |
+
+**Provided list vs independent:** Provided 1/4 solid (cac), 1/4 wrong PR but repo excellent (defu alternative 3942bfb chosen), 1/4 fragile (kleur rejected), 1/4 trivial (p-limit not needed after 6 found). Independent tinyspy/mri provided the remaining 4 to reach 6.
+
+**What was not chosen:** `sindresorhus/p-limit` detached map (trivial 1-line, async timing), `lukeed/kleur` process.env (fragile global mock) — both evaluated but not needed after achieving 6 strong.
+
+**Recommendation (now obsolete):** 6 achieved, no further search needed. If expanding to 7th, yocto-queue ee91589 could be added as weak filler with note.
 
 ---
 

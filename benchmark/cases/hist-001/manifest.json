@@ -1,21 +1,21 @@
 {
   "id": "hist-001",
   "type": "historical",
-  "repository": "task-manager",
-  "baseVersion": "1.0.0",
-  "baseCommit": "v1.0.0-task-manager",
+  "repository": "cac",
+  "baseVersion": "6.0.0",
+  "baseCommit": "ffaf796fc5a0d776147178055b91677346c0e69a",
   "difficulty": "medium",
-  "categories": ["boundary", "business-logic"],
-  "description": "getOverdueTasks incorrectly includes tasks due today as overdue",
+  "categories": ["validation", "parsing"],
+  "description": "Option default leaks to alias names when one alias parsed",
   "provenance": {
-    "sourceUrl": "https://github.com/frontier-verifier/task-manager",
+    "sourceUrl": "https://github.com/cacjs/cac",
     "license": "MIT",
     "licenseUrl": "https://opensource.org/licenses/MIT",
     "createdAt": "2026-08-29",
-    "issueUrl": "https://github.com/frontier-verifier/task-manager/issues/12",
-    "buggyCommit": "buggy-hist-001",
-    "fixedCommit": "fixed-hist-001",
-    "notes": "Constructed historical case inspired by real-world off-by-one date boundary bugs. Buggy state uses <= instead of < when comparing dueDate to today. Fixed commit restores strict < comparison."
+    "issueUrl": "https://github.com/cacjs/cac/pull/153",
+    "buggyCommit": "8342919821fbffa733c6ab9558f4d60fc43f9ff0",
+    "fixedCommit": "ffaf796fc5a0d776147178055b91677346c0e69a",
+    "notes": "Bug in src/CAC.ts mri default handling: buggy sets default for all names unconditionally; fixed checks parsedOptionNames = cliOption.names.filter(n=>parsed[n]!==undefined) and only sets defaults if none parsed. Repro: --base-url leaks default to short alias."
   },
   "runtime": {
     "node": "22",
@@ -27,6 +27,6 @@
     "oracle": "private/oracle.test.ts",
     "regression": "bun test tests/"
   },
-  "buggyFiles": ["src/utils.ts"],
-  "fixFiles": ["src/utils.ts"]
+  "buggyFiles": ["src/CAC.ts"],
+  "fixFiles": ["src/CAC.ts"]
 }

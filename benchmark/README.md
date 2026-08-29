@@ -1,10 +1,10 @@
-# Frontier Verifier Benchmark v0.2
+# Frontier Verifier Benchmark v0.3
 
-**Version:** 0.2
-**Cases:** 12 (6 synthetic-pattern labeled historical pending real replacement + 6 synthetic)
-**Repositories:** 3 (task-manager, money-utils, async-queue benchmark-owned, MIT)
+**Version:** 0.3
+**Cases:** 12 (6 genuine historical + 6 synthetic)
+**Repositories:** 7 (3 benchmark-owned: task-manager, money-utils, async-queue + 4 external historical: cac, defu, tinyspy, mri — all MIT)
 **Status:** Validated — 12/12 ✓ VALID (isolated v0.2 validator)
-**Fingerprint:** `sha256:42a6ef0ca73f3acb725fe316320715e5c7b2539b76dde855f6466adc19253ee7`
+**Fingerprint:** `sha256:6938f031bedd5d120dbd7aacb8274717f1e3d00fa5928aa98216dc1c0e772b0c`
 **Stability:** reproduction 3×, oracle 3× per state, regression 1×, isolated temp workspaces
 
 ---
@@ -93,7 +93,7 @@ hist-001   ✓ VALID
 
 ## Provenance
 
-All repositories are synthetic benchmark-owned (MIT) with documented mutations. Current `hist-*` are **synthetic-pattern** (reconstructed from common real-world patterns) pending incremental replacement with genuine external historical commits — see `benchmark/HISTORICAL-CANDIDATES.md` (evaluated `unjs/defu`, `cacjs/cac`, `sindresorhus/p-limit`, `lukeed/kleur`; only `cac@ffaf796` and alternative `defu@3942bfb` are strong). Synthetic cases are deterministic mutations from known-good. See each `provenance.md` and `manifest.json` for license, source URL, commit, and mutation details. Honest labeling is required for competition integrity.
+All 6 historical cases are genuine external bugs with pinned buggyCommit → fixedCommit (cac @ ffaf796, defu @ 3942bfb, tinyspy @ 0372bfb & 0684083, mri @ 94f8c09 & 5437ea5 — all MIT, see each `provenance.md` and `manifest.json` + `benchmark/HISTORICAL-CANDIDATES.md` for evaluation). Synthetic cases are deterministic mutations from known-good on 3 benchmark-owned repos. See each `provenance.md` and `manifest.json` for license, source URL, commit, and mutation details. Benchmark satisfies 6 genuine historical non-negotiable requirement.
 
 ## Versioning
 

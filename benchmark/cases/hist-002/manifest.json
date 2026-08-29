@@ -1,21 +1,21 @@
 {
   "id": "hist-002",
   "type": "historical",
-  "repository": "money-utils",
-  "baseVersion": "1.0.0",
-  "baseCommit": "v1.0.0-money-utils",
-  "difficulty": "medium",
-  "categories": ["business-logic", "data-transformation"],
-  "description": "formatMoney/roundToCents rounds down (floor) instead of half-up",
+  "repository": "defu",
+  "baseVersion": "6.1.4",
+  "baseCommit": "3942bfbbcaa72084bd4284846c83bd61ed7c8b29",
+  "difficulty": "hard",
+  "categories": ["security", "validation"],
+  "description": "Prototype pollution via __proto__ in defaults",
   "provenance": {
-    "sourceUrl": "https://github.com/frontier-verifier/money-utils",
+    "sourceUrl": "https://github.com/unjs/defu",
     "license": "MIT",
     "licenseUrl": "https://opensource.org/licenses/MIT",
     "createdAt": "2026-08-29",
-    "issueUrl": "https://github.com/frontier-verifier/money-utils/issues/8",
-    "buggyCommit": "buggy-hist-002",
-    "fixedCommit": "fixed-hist-002",
-    "notes": "Inspired by currency rounding bugs where Math.floor was used instead of Math.round. Buggy roundToCents truncates fractional cents."
+    "issueUrl": "https://github.com/unjs/defu/pull/156",
+    "buggyCommit": "d3ef16dabe861713192ba8679c5db8e0ac143f9b",
+    "fixedCommit": "3942bfbbcaa72084bd4284846c83bd61ed7c8b29",
+    "notes": "Genuine historical bug: Object.assign({}, defaults) pollutes result prototype when defaults contains __proto__. Fixed via spread { ...defaults } which preserves __proto__ as own property. See PR #156."
   },
   "runtime": {
     "node": "22",
@@ -27,6 +27,6 @@
     "oracle": "private/oracle.test.ts",
     "regression": "bun test tests/"
   },
-  "buggyFiles": ["src/money.ts"],
-  "fixFiles": ["src/money.ts"]
+  "buggyFiles": ["src/defu.ts"],
+  "fixFiles": ["src/defu.ts"]
 }

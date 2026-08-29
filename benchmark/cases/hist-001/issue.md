@@ -1,41 +1,103 @@
-# Issue: Tasks due today incorrectly shown as overdue
+# Issue: Option default leaks to alias names when one alias parsed
 
-**Repository:** `task-manager`
-**Component:** `TaskManager.getOverdueTasks()`
+**Repository:** `cac` (`cacjs/cac`)
+**Component:** `src/CAC.ts` — default value handling in `mri()` parser
+**PR:** https://github.com/cacjs/cac/pull/153
+**Commit:** fixed `ffaf796`, buggy parent `8342919`
 
 ## Description
 
-Users report that tasks with a due date of **today** are being flagged as overdue, even though they should not be considered overdue until the next day. Only tasks whose due date is strictly before today should be returned by `getOverdueTasks()`.
+When an option has multiple names/aliases (e.g., `-b, --base-url`) and a default value, the default was incorrectly applied to **all** alias names even when one alias was already parsed from the command line.
+
+For example:
+
+```ts
+import { cac } from "./src/index.ts";
+
+const cli = cac();
+cli.option("-b, --base-url <baseUrl>", "Set the instance URL", {
+  default: "https://github.com",
+});
+
+// Using long name only
+const { options } = cli.parse(
+  ["node", "bin", "--base-url", "https://gitlab.com"],
+  { run: false }
+);
+console.log(options);
+// Expected (fixed): { baseUrl: "https://gitlab.com", "--": [] }
+// Actual (buggy):   { b: "https://github.com", baseUrl: "https://gitlab.com", "--": [] }
+//                    ^ leaked default for short alias
+```
+
+The same option with the short flag works only by accident (mri mirrors both names for `-b`):
+
+```ts
+cli.parse(["node", "bin", "-b", "https://gitlab.com"], { run: false })
+// Both buggy and fixed give { b: "https://gitlab.com", baseUrl: "https://gitlab.com" }
+```
 
 ## Steps to Reproduce
 
 ```ts
-import { TaskManager } from "./src/task-manager.ts";
+import { cac } from "../../../repositories/cac/src/index.ts";
 
-const tm = new TaskManager();
-tm.createTask({ title: "overdue", priority: 1, dueDate: "2024-01-01" });
-tm.createTask({ title: "today", priority: 1, dueDate: "2024-06-15" });
-tm.createTask({ title: "future", priority: 1, dueDate: "2024-12-31" });
+const cli = cac();
+cli.option("-b, --base-url <baseUrl>", "Set the instance URL", {
+  default: "https://github.com",
+});
 
-const now = new Date("2024-06-15T12:00:00Z");
-console.log(tm.getOverdueTasks(now).map(t => t.title));
-// Expected: ["overdue"]
-// Actual: ["overdue", "today"]  <- bug
+// 1) Long form — should NOT leak `b`
+let { options } = cli.parse(
+  ["node", "bin", "--base-url", "https://gitlab.com"],
+  { run: false }
+);
+console.log(options);
+// Buggy: { b: "https://github.com", baseUrl: "https://gitlab.com" }
+// Fixed: { baseUrl: "https://gitlab.com" }
+
+// 2) Short form — should have both
+({ options } = cli.parse(
+  ["node", "bin", "-b", "https://gitlab.com"],
+  { run: false }
+));
+console.log(options);
+// Both: { b: "https://gitlab.com", baseUrl: "https://gitlab.com" }
+
+// 3) No args — should have both defaults
+({ options } = cli.parse(["node", "bin"], { run: false }));
+console.log(options);
+// Both: { b: "https://github.com", baseUrl: "https://github.com" }
 ```
 
 ## Expected Behavior
 
-- `getOverdueTasks(now)` should return only tasks where `dueDate < today` and status is not `completed`/`archived`.
-- Tasks due today should **not** be included.
-- Tasks with `dueDate: null` should never be overdue.
-- Completed/archived tasks should never be overdue even if due date is in the past.
+- If **none** of the alias names were parsed, the default should be set for **all** names.
+- If **any** alias name was parsed, the default must **not** be applied to any of them; the parsed value(s) should be used as provided by `mri` (which handles alias mirroring for the supplied flag).
+
+Formally, the fixed code does:
+
+```ts
+const parsedOptionNames = cliOption.names.filter(
+  (name) => parsed[name] !== undefined
+);
+if (parsedOptionNames.length === 0) {
+  for (const name of cliOption.names) {
+    options[name] = cliOption.config.default;
+  }
+}
+```
 
 ## Environment
 
 - Node 22 / Bun 1.4.0
-- `bun test` should pass after fix
+- `mri ^1.1.6`
+- `bun run` with ESM TS imports
 
 ## Notes
 
-- Check `src/utils.ts` helper `isOverdue` and how date comparison is performed.
-- The fix should not break existing tests in `tests/task-manager.test.ts`.
+- Fix is in `src/CAC.ts` lines 289–299.
+- Check `src/Command.ts`, `src/Option.ts`, `src/utils.ts` for option alias handling, but do not modify them unless necessary.
+- Regression suite is `bun test tests/` (see `tests/cac.test.ts`).
+- The bug also affects boolean defaults (e.g., `-s, --skip` default `false` should set both `s` and `skip` only when not parsed).
+

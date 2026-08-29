@@ -1,21 +1,21 @@
 {
   "id": "hist-004",
   "type": "historical",
-  "repository": "task-manager",
-  "baseVersion": "1.0.0",
-  "baseCommit": "v1.0.0-task-manager",
+  "repository": "mri",
+  "baseVersion": "1.1.4",
+  "baseCommit": "5437ea5cd9afcfcfe50c1c316aff990cac21231b",
   "difficulty": "easy",
-  "categories": ["validation"],
-  "description": "createTask accepts invalid priority values 0 and 6",
+  "categories": ["parsing", "type-coercion"],
+  "description": "Boolean defaults leak numeric values into _ due to toVal boolean check order",
   "provenance": {
-    "sourceUrl": "https://github.com/frontier-verifier/task-manager",
+    "sourceUrl": "https://github.com/lukeed/mri",
     "license": "MIT",
     "licenseUrl": "https://opensource.org/licenses/MIT",
     "createdAt": "2026-08-29",
-    "issueUrl": "https://github.com/frontier-verifier/task-manager/issues/7",
-    "buggyCommit": "buggy-hist-004",
-    "fixedCommit": "fixed-hist-004",
-    "notes": "Validation bug: isValidPriority incorrectly allows 0-6 range."
+    "issueUrl": "https://github.com/lukeed/mri/issues/8",
+    "buggyCommit": "a4759d51a5a5c86b902cf9d5484654fdfb1e2750",
+    "fixedCommit": "94f8c0941088716be3c86b850a40dedbe0a2e520",
+    "notes": "Historical bug: toVal checked opts.boolean before typeof val === 'boolean'. Fixed by swapping order so boolean-typed defaults (true/false) are preserved and not coerced via boolean branch that pushes numeric fallback into _. Buggy blob b4d8a0a -> fixed blob 3a9e1c6."
   },
   "runtime": {
     "node": "22",
@@ -27,6 +27,6 @@
     "oracle": "private/oracle.test.ts",
     "regression": "bun test tests/"
   },
-  "buggyFiles": ["src/validators.ts"],
-  "fixFiles": ["src/validators.ts"]
+  "buggyFiles": ["lib/index.js"],
+  "fixFiles": ["lib/index.js"]
 }

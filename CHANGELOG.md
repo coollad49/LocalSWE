@@ -77,6 +77,51 @@ All notable changes to the Frontier Verifier project.
 - `benchmark/validation-report.json` now includes `benchmarkVersion`, `fingerprint`, `stability`
 - All 12 cases still VALID under v0.2 isolated validator.
 
+## [0.3.0] - 2026-08-29 — 6 Genuine Historical (Non-Negotiable Met)
+
+### Added — 6 Genuine Historical Cases
+
+Replaced all 6 synthetic-pattern `hist-*` with genuine external bugs (all MIT, pinned `buggyCommit → fixedCommit`, verified `buggy→fail / fixed→pass` 3×, hidden oracle 3×, isolated temp):
+
+- **hist-001 cac** `cacjs/cac@ffaf796` (PR #153, `src/CAC.ts:286`) — alias default leak, difficulty medium, `validation,parsing`, `8342919 → ffaf796`, repo `cac` 6.0.0 MIT, repro `--base-url` leaks `b`, oracle 4 tests.
+- **hist-002 defu** `unjs/defu@3942bfb` (PR #156, `src/defu.ts:10`) — `__proto__` pollution `Object.assign` → `{...defaults}`, difficulty hard, `security,validation`, `d3ef16d → 3942bfb`, repo `defu` 6.1.4 MIT, oracle 8 tests.
+- **hist-003 tinyspy** `tinylibs/tinyspy@0372bfb` (`src/spyOn.ts` + `utils.ts`) — prototype restore leak, medium, `state-management,api-behavior`, `0684083 → 0372bfb`, repo `tinyspy` 4.0.2 MIT, oracle 3 tests.
+- **hist-004 mri** `lukeed/mri@94f8c09` (Issue #8, `lib/index.js:5`) — boolean `toVal` order `typeof boolean` before `opts.boolean`, easy, `parsing,type-coercion`, `a4759d5 → 94f8c09` (repo at `5437ea5` 1.1.4 includes fix), oracle 6 tests, `['-t']` leaks `[1]`.
+- **hist-005 mri** `lukeed/mri@5437ea5` (Issue #10, `lib/index.js:46`) — alias default type cascade, medium, `parsing,alias-handling`, `40051e6 → 5437ea5`, repo `mri` 1.1.4 MIT, oracle 6 tests, `"-a 01"` `"01"` vs `1`.
+- **hist-006 tinyspy** `tinylibs/tinyspy@0684083` (PR #50, `src/spyOn.ts:22`) — inherited getter prototype walk `while`, medium, `state-management`, `f42d545 → 0684083`, repo `tinyspy` 4.0.2, oracle 3 tests.
+
+**Repositories expanded:** 3 → 7 (3 synthetic + 4 genuine historical: `cac`, `defu`, `tinyspy`, `mri` — `benchmark/repositories/README.md` updated). `benchmark/schema/manifest.schema.json` repo enum expanded, `benchmark/repositories/cac/src/*` `@ts-nocheck` + `mri.d.ts` for verbatim compatibility, `tinyspy` fixed verbatim `import type`.
+
+### Parallel Construction
+
+Spun 3 subagents simultaneously (cac, defu, tinyspy×2 + mri via earlier) — each via `bash` `git archive`/`git show` from `/tmp/fv-eval/{cac,defu,tinyspy,mri}` clones, copied to `benchmark/repositories/<repo>` + `benchmark/cases/hist-*/artifacts/buggy/...`, created `tests/*.test.ts` regression, validated via temp workspace `mkdtemp+cpSync` `bun run`/`bun test` 3× before reporting. `tinyspy/mri/yocto-queue` evaluated to reach 6 (yocto-queue `ee91589` weak, `8aead27` rejected GC leak, `p-limit`/`kleur` not needed).
+
+### Candidate Evaluation Complete
+
+Updated `benchmark/HISTORICAL-CANDIDATES.md` to **6/6 Genuine** (`tinyspy 0372bfb` KEEP, `tinyspy 0684083` KEEP, `mri 94f8c09` KEEP, `mri 5437ea5` KEEP vs provided `cac` KEEP, `defu` alternative KEEP, `kleur` fragile rejected, `p-limit` trivial rejected, `yocto-queue` weak). See `benchmark/CASE-MATRIX.md` v0.3 for full details.
+
+### Changed
+
+- `benchmark/CASE-MATRIX.md` v0.3 fingerprint `sha256:6938f031bedd5d120dbd7aacb8274717f1e3d00fa5928aa98216dc1c0e772b0c`, 6 genuine table + details, diversity updated.
+- `benchmark/README.md` v0.3 (7 repos, 6 genuine provenance, fingerprint).
+- `docs/memory/current-state.md` v0.3 FROZEN for experiments (6 genuine, no further benchmark changes).
+- `benchmark/validation-report.json` fingerprint `6938f031...`, `benchmarkVersion 0.2` (validator) — benchmark v0.3 content.
+
+### Evidence
+
+- `bun run benchmark:validate` v0.2 isolated — **12/12 VALID** `hist-001..006` genuine + `synth-001..006`, fingerprint `sha256:6938f031bedd5d120dbd7aacb8274717f1e3d00fa5928aa98216dc1c0e772b0c`, `reproduction 3×, oracle 3× per state, regression 1×`
+- `bun run check-types` — 0, `bun run benchmark:check-types` — 0
+- `git status` clean after validation (no repo pollution, temp workspaces)
+- Historical authenticity now non-negotiable **met** — 6 distinct genuine with real commits/issues.
+
+### Decisions
+
+- Keep 7 repos (exceeds 3–5 target) to meet 6 genuine (2 tinyspy + 2 mri share repos, so 4 external repos for 6 cases) — diversity preserved.
+- Leave `money.ts:13`/`validators.ts:38-41` untouched per instruction (predictable reference, not polish).
+- `cac` historical uses `@ts-nocheck` for `verbatimModuleSyntax` (external code).
+- Shared repos (`mri` at `5437ea5`, `tinyspy` at `0372bfb`) contain both fixes for that repo — `hist-004` baseCommit `5437ea5` includes `94f8c09` fix (documented).
+
 ## Unreleased
 
-- Planned: incremental real historical cases (starting `cac@ffaf796`), evaluator workspace builder, baseline agent.
+- Planned: evaluator workspace builder, baseline agent (FROZEN v0.3, no benchmark changes).
+

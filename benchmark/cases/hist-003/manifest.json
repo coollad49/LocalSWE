@@ -1,21 +1,21 @@
 {
   "id": "hist-003",
   "type": "historical",
-  "repository": "async-queue",
-  "baseVersion": "1.0.0",
-  "baseCommit": "v1.0.0-async-queue",
-  "difficulty": "hard",
-  "categories": ["asynchronous", "error-handling", "state-management"],
-  "description": "Job retry does not re-enqueue failed jobs, losing retries",
+  "repository": "tinyspy",
+  "baseVersion": "4.0.2",
+  "baseCommit": "0372bfb952fe761742f1b96165c3b6a25d499588",
+  "difficulty": "medium",
+  "categories": ["state-management", "api-behavior"],
+  "description": "spyOn leaks own property when spying on prototype method and restores incorrectly (prototype restore leak)",
   "provenance": {
-    "sourceUrl": "https://github.com/frontier-verifier/async-queue",
+    "sourceUrl": "https://github.com/tinylibs/tinyspy",
     "license": "MIT",
-    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "licenseUrl": "https://github.com/tinylibs/tinyspy/blob/main/LICENCE",
     "createdAt": "2026-08-29",
-    "issueUrl": "https://github.com/frontier-verifier/async-queue/issues/15",
-    "buggyCommit": "buggy-hist-003",
-    "fixedCommit": "fixed-hist-003",
-    "notes": "Inspired by real job queue bugs where failed jobs are dropped instead of retried. Buggy processJob does not push retry job back to queue."
+    "issueUrl": "https://github.com/tinylibs/tinyspy/commit/0372bfb952fe761742f1b96165c3b6a25d499588",
+    "buggyCommit": "0684083fc217e18d21ea404b3461bde52b60fdb3",
+    "fixedCommit": "0372bfb952fe761742f1b96165c3b6a25d499588",
+    "notes": "Fix: remove own properties if method defined on prototype. Files src/spyOn.ts + src/utils.ts. Extracted via git archive from tinylibs/tinyspy. Buggy state is parent commit 0684083 (includes inherited methods fix but not prototype restore fix). Verified buggy reproduces leak, fixed passes."
   },
   "runtime": {
     "node": "22",
@@ -27,6 +27,6 @@
     "oracle": "private/oracle.test.ts",
     "regression": "bun test tests/"
   },
-  "buggyFiles": ["src/queue.ts"],
-  "fixFiles": ["src/queue.ts"]
+  "buggyFiles": ["src/spyOn.ts", "src/utils.ts"],
+  "fixFiles": ["src/spyOn.ts", "src/utils.ts"]
 }
