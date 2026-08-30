@@ -233,12 +233,22 @@ async function evaluateExperimentRuns(params: {
   }
 
   console.log(`Evaluating ${runIds.length} runs from ${resolvedRunsDir} for experiment ${experimentId}... (force=${force})`);
+  console.log(`[progress] 0/${runIds.length} evaluated — starting...`);
   const evaluator = new Evaluator();
   const results: EvaluationResult[] = [];
   const startAll = Date.now();
   const identity = await loadBenchmarkIdentity();
+  let evaluated = 0;
+  const sortedRunIds = runIds.sort();
+  const progInterval = setInterval(() => {
+    if (jsonOnly) return;
+    const elapsed = ((Date.now() - startAll) / 1000).toFixed(0);
+    console.log(`[heartbeat] ${evaluated}/${sortedRunIds.length} evaluated, elapsed ${elapsed}s — still verifying...`);
+  }, 30000);
 
-  for (const runId of runIds.sort()) {
+  for (const runId of sortedRunIds) {
+    const idx = evaluated + 1;
+    if (!jsonOnly) console.log(`[progress] [${idx}/${sortedRunIds.length}] ${runId} — starting...`);
     // Caching: preserve already evaluated runs where identity matches, unless --force
     const cachedPath = join(resolvedRunsDir, runId, "evaluation", "result.json");
     if (!force && existsSync(cachedPath)) {
@@ -289,8 +299,9 @@ async function evaluateExperimentRuns(params: {
             }
           }
           results.push(cached);
+          evaluated++;
           if (!jsonOnly) {
-            console.log(`[cached] ${runId} → ${cached.verdict?.toUpperCase() ?? cached.status.toUpperCase()}`);
+            console.log(`[cached] [${idx}/${sortedRunIds.length}] ${runId} → ${cached.verdict?.toUpperCase() ?? cached.status.toUpperCase()} (${cached.durationMs}ms)`);
             printEvaluationSummary(cached, identity);
           }
           continue;
@@ -314,13 +325,18 @@ async function evaluateExperimentRuns(params: {
         keepWorkspace,
       });
       results.push(result);
+      evaluated++;
       if (!jsonOnly) {
+        console.log(`[done] [${idx}/${sortedRunIds.length}] ${runId} → ${result.verdict?.toUpperCase() ?? result.status.toUpperCase()} (${result.durationMs}ms)`);
         printEvaluationSummary(result, identity);
       }
     } catch (e) {
-      console.error(`Failed to evaluate ${runId}: ${(e as Error).message}`);
+      evaluated++;
+      console.error(`[error] [${idx}/${sortedRunIds.length}] Failed to evaluate ${runId}: ${(e as Error).message}`);
     }
   }
+  clearInterval(progInterval);
+  if (!jsonOnly) console.log(`[progress] ${evaluated}/${sortedRunIds.length} evaluated in ${((Date.now() - startAll) / 1000).toFixed(1)}s`);
 
    // Data integrity: reject mixed benchmark fingerprints within one experiment
   const fingerprints = new Set(results.map((r) => r.benchmarkFingerprint));

@@ -26,8 +26,10 @@ async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const useMock = args.includes("--mock") || process.env.BASELINE_MOCK === "1";
   if (useMock) process.env.BASELINE_MOCK = "1";
-  // run-baseline stays quiet (tool-level streaming off); run-case enables it
-  if (!args.includes("--verbose")) process.env.BASELINE_LIVE_PROGRESS = "0";
+  const verbose = args.includes("--verbose") || args.includes("-v");
+  // run-baseline: quiet by default, but show case-level progress; --verbose streams tool-level
+  if (!verbose) process.env.BASELINE_LIVE_PROGRESS = "0";
+  else process.env.BASELINE_LIVE_PROGRESS = "1";
 
   const runsArgIdx = args.indexOf("--runs");
   const runsPerCase = runsArgIdx >= 0 ? Number.parseInt(args[runsArgIdx + 1] ?? "1", 10) : undefined;
@@ -69,11 +71,21 @@ async function main(): Promise<void> {
   console.log(`  timeout: ${config.agentTimeoutMs}ms`);
   console.log(`  concurrency: ${concurrency}`);
   console.log(`  mock: ${useMock ? "yes" : "no"}`);
+  console.log(`  verbose: ${verbose ? "yes (tool streaming)" : "no (use --verbose for tool logs)"}`);
+  console.log(`  Tip: --verbose shows live tool calls (read/bash/edit) per case`);
   console.log("");
 
   const runsRoot = useMock ? join(ROOT, "experiments/runs/mock") : undefined;
   const runner = new BaselineRunner(config, runsRoot);
   const start = Date.now();
+  let completed = 0;
+  const totalRuns = caseIds.length * config.runsPerCase;
+  console.log(`[progress] 0/${totalRuns} runs completed — starting...`);
+  // heartbeat every 30s so you know it's alive
+  const progInterval = setInterval(() => {
+    const elapsed = ((Date.now() - start) / 1000).toFixed(0);
+    console.log(`[heartbeat] ${completed}/${totalRuns} done, elapsed ${elapsed}s — still running...`);
+  }, 30000);
   const results = await runner.runBaseline({
     caseIds,
     config,
@@ -81,7 +93,9 @@ async function main(): Promise<void> {
     runsPerCase: config.runsPerCase,
     runsRoot,
   });
+  clearInterval(progInterval);
   const elapsed = ((Date.now() - start) / 1000).toFixed(1);
+  console.log(`[progress] ${totalRuns}/${totalRuns} runs completed in ${elapsed}s`);
 
   // Summary
   const byStatus: Record<string, number> = {};

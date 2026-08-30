@@ -19,6 +19,14 @@ async function main(): Promise<void> {
     process.env.V1_MOCK = "1";
     process.env.BASELINE_MOCK = "1";
   }
+  const verbose = args.includes("--verbose") || args.includes("-v");
+  if (verbose) {
+    process.env.V1_LIVE_PROGRESS = "1";
+    process.env.BASELINE_LIVE_PROGRESS = "1";
+  } else if (!args.includes("--quiet")) {
+    // V1 batch: show case-level, not tool-level by default
+    process.env.V1_LIVE_PROGRESS = "0";
+  }
 
   const runsPerCaseIdx = args.indexOf("--runs");
   const runsPerCase = runsPerCaseIdx !== -1 && args[runsPerCaseIdx + 1] ? Number.parseInt(args[runsPerCaseIdx + 1]!, 10) : 1;
@@ -62,6 +70,7 @@ async function main(): Promise<void> {
   console.log(`  benchmark: ${config.benchmarkVersion} ${fingerprint ?? ""}`);
   console.log(`  maxIterations: ${config.maxIterations}`);
   console.log(`  runsPerCase: ${runsPerCase}, concurrency: ${concurrency}, mock: ${useMock ? "yes" : "no"}`);
+  console.log(`  verbose: ${verbose ? "yes (tool + phase streaming)" : "no (use --verbose for tool logs)"}`);
   if (caseIds) console.log(`  cases: ${caseIds.join(", ")}`);
 
   const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -70,7 +79,17 @@ async function main(): Promise<void> {
   const runner = new V1Runner(config, runsRoot);
 
   const allCases = caseIds ?? (await CaseLoader.listCases());
+  const totalRuns = allCases.length * runsPerCase;
+  const start = Date.now();
+  console.log(`[progress] 0/${totalRuns} runs completed — starting...`);
+  const progInterval = setInterval(() => {
+    const elapsed = ((Date.now() - start) / 1000).toFixed(0);
+    console.log(`[heartbeat] elapsed ${elapsed}s — still running (${totalRuns} total)...`);
+  }, 30000);
   const results = await runner.runV1({ caseIds: allCases, config, concurrency, runsPerCase, runsRoot });
+  clearInterval(progInterval);
+  const elapsed = ((Date.now() - start) / 1000).toFixed(1);
+  console.log(`[progress] ${results.length}/${totalRuns} runs completed in ${elapsed}s`);
 
   const byStatus: Record<string, number> = {};
   for (const r of results) byStatus[r.status] = (byStatus[r.status] ?? 0) + 1;
