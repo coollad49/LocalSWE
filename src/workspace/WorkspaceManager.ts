@@ -1,11 +1,12 @@
 import { cpSync, existsSync, rmSync, mkdirSync } from "node:fs";
 import { copyFile, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import { join, resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import { mkdtemp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { spawn } from "node:child_process";
 
-const ROOT = resolve(dirname(new URL(import.meta.url).pathname), "../..");
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const CASES_DIR = join(ROOT, "benchmark/cases");
 const REPOS_DIR = join(ROOT, "benchmark/repositories");
 const CASES_DIR_HARD = join(ROOT, "benchmark/frontier-hard/cases");

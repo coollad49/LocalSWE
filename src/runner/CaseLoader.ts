@@ -1,8 +1,9 @@
 import { readFile, readdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = resolve(dirname(new URL(import.meta.url).pathname), "../..");
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const CASES_DIR = join(ROOT, "benchmark/cases");
 const REPOS_DIR = join(ROOT, "benchmark/repositories");
 const CASES_DIR_HARD = join(ROOT, "benchmark/frontier-hard/cases");
