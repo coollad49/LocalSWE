@@ -10,6 +10,7 @@ import { loadAndValidatePatch, isPatchPathSafe } from "./patchValidator.ts";
 import { createIsolatedWorkspace, applyPatchIsolated } from "./isolation.ts";
 import { runReproduce, runOracle, runRegression } from "./exec.ts";
 import { computeVerdict } from "./verdict.ts";
+import { extractRunMetrics } from "./metrics.ts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../..");
@@ -442,6 +443,28 @@ export class Evaluator {
     // Isolated verification with finally cleanup per spec §4 step 9
     let result: EvaluationResult | undefined;
     let cleanupError: string | undefined;
+
+    // Helper to enrich with per-run metrics/cost (never invents, guardrail enforced)
+    const enrichMetrics = async (r: EvaluationResult): Promise<void> => {
+      if (!options.runId) return;
+      try {
+        const effectiveRunsDir = options.runsDir ?? RUNS_DIR;
+        const { metrics, cost } = await extractRunMetrics({
+          runId: r.runId,
+          runsDir: effectiveRunsDir,
+          agentVersion: r.agentVersion,
+          durationMsFallback: r.durationMs,
+          pricingConfigPath: options.pricingConfigPath,
+        });
+        r.metrics = metrics;
+        r.cost = cost;
+        // Also ensure durationMs reflects runMetadata if we have it and result durationMs is 0
+        if (metrics.durationMs != null && r.durationMs === 0) r.durationMs = metrics.durationMs;
+      } catch {
+        // best effort: leave metrics undefined
+      }
+    };
+
     try {
       // Patch apply with --whitespace=nowarn
       let patchApplyStage: VerificationStageResult;
@@ -494,6 +517,7 @@ export class Evaluator {
           },
           caseMeta,
         };
+        await enrichMetrics(result);
         // Do not run further stages; proceed to finally for cleanup
         return result;
       }
@@ -587,6 +611,7 @@ export class Evaluator {
         }
       }
 
+      await enrichMetrics(result);
       return result;
     } finally {
       // Cleanup in finally per spec §4 step 9

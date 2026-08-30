@@ -40,6 +40,33 @@ export interface CaseMeta {
   repository?: string;
 }
 
+export interface RunMetrics {
+  durationMs: number | null;
+  totalTurns: number | null;
+  toolCalls: number | null;
+  commandsExecuted: number | null;
+  filesInspected: number | null;
+  filesChanged: number | null;
+  iterations: number | null;
+  iterationsSource: "v1-state" | "metadata" | "trajectory" | "fallback" | "unavailable";
+  inputTokens: number | null;
+  outputTokens: number | null;
+  totalTokens: number | null;
+}
+
+export interface RunCost {
+  inputTokens: number | null;
+  outputTokens: number | null;
+  totalTokens: number | null;
+  inputCostUsd: number | null;
+  outputCostUsd: number | null;
+  totalCostUsd: number | null;
+  costUsd: number | null;
+  costStatus: "computed" | "provider" | "unavailable";
+  costSource: "computed" | "provider" | "none";
+  pricingModel?: string;
+}
+
 export interface EvaluationResult {
   evaluationId: string;
   runId: string;
@@ -81,6 +108,12 @@ export interface EvaluationResult {
 
   /** Enriched from manifest.json for breakdowns */
   caseMeta?: CaseMeta;
+
+  /** Per-run performance metrics (added v1 metrics upgrade) */
+  metrics?: RunMetrics;
+
+  /** Per-run cost (null if unavailable, never $0 invent) */
+  cost?: RunCost;
 }
 
 export interface EvaluateOptions {
@@ -94,6 +127,9 @@ export interface EvaluateOptions {
   benchmarkVersion?: string;
   benchmarkFingerprint?: string;
   allowBenchmarkMismatch?: boolean;
+  allowCrossBenchmark?: boolean;
+  force?: boolean;
+  pricingConfigPath?: string;
   runsDir?: string;
   timeouts?: {
     patchApplyMs?: number;
@@ -189,6 +225,154 @@ export interface ExperimentEvaluation {
   };
   stability: CaseStability[];
   results: EvaluationResult[];
+}
+
+export interface AgentMetrics {
+  agentVersion: string;
+  runs: number;
+  outcomes: {
+    verified: number;
+    agentFailure: number;
+    falseConfidence: number;
+    regressionFailure: number;
+    timeout: number;
+    error: number;
+    patchFailed: number;
+  };
+  rates: {
+    vfr: number | null;
+    vfrValid: number | null;
+    reproductionRate: number | null;
+    oraclePassRate: number | null;
+    regressionFreeRate: number | null;
+    patchApplySuccessRate: number | null;
+    falseConfidenceRate: number | null;
+    agentFailureRate: number | null;
+    regressionFailureRate: number | null;
+    timeoutRate: number | null;
+  };
+  efficiency: {
+    totalCostUsd: number | null;
+    averageCostUsd: number | null;
+    medianCostUsd: number | null;
+    averageDurationMs: number | null;
+    medianDurationMs: number | null;
+    averageTurns: number | null;
+    medianTurns: number | null;
+    averageToolCalls: number | null;
+    medianToolCalls: number | null;
+    averageTokens: number | null;
+    medianTokens: number | null;
+    averageIterations: number | null;
+    medianIterations: number | null;
+    timeoutRate: number;
+  };
+}
+
+export interface CaseReportRow {
+  caseId: string;
+  difficulty?: string;
+  category?: string;
+  categories?: string[];
+  agentVersion: string;
+  runs: number;
+  verified: number;
+  agentFailures: number;
+  falseConfidence: number;
+  regressionFailures: number;
+  timeouts: number;
+  errors: number;
+  patchFailed: number;
+  vfr: number | null;
+  vfrValid: number | null;
+  avgCost: number | null;
+  medianCost: number | null;
+  avgDuration: number | null;
+  medianDuration: number | null;
+  avgTurns: number | null;
+  avgToolCalls: number | null;
+  avgTokens: number | null;
+  consistency: number | null;
+}
+
+export interface ComparisonRow {
+  metric: string;
+  v0: number | null;
+  v1: number | null;
+  delta: number | null;
+  deltaUnit: "pp" | "absolute" | "percent";
+  v0Label?: string;
+  v1Label?: string;
+}
+
+export interface FailureAnalysis {
+  agentFailures: { runId: string; caseId: string; agentVersion: string }[];
+  falseConfidences: { runId: string; caseId: string; agentVersion: string }[];
+  regressionFailures: { runId: string; caseId: string; agentVersion: string }[];
+  timeouts: { runId: string; caseId: string; agentVersion: string }[];
+  infrastructureErrors: { runId: string; caseId: string; agentVersion: string; code?: string }[];
+}
+
+export interface CostMethodology {
+  pricingSnapshot: import("./pricing.ts").PricingConfig | null;
+  costCalculation: string;
+  note: string;
+}
+
+export interface ExperimentReport {
+  experiment: {
+    id: string;
+    runsDir: string;
+    timestamp: string;
+    totalRuns: number;
+    elapsedMs?: number;
+  };
+  benchmark: {
+    version: string;
+    fingerprint: string;
+  };
+  evaluatorVersion: string;
+  agents: AgentMetrics[];
+  summary: AggregatedMetrics;
+  breakdowns: {
+    historicalVsSynthetic: HistoricalVsSyntheticBreakdown;
+    byDifficulty: DifficultyBreakdown;
+    byCategory: CategoryBreakdown;
+  };
+  stability: CaseStability[];
+  caseBreakdown: CaseReportRow[];
+  comparison: ComparisonRow[] | null;
+  failures: FailureAnalysis;
+  costMethodology: CostMethodology;
+  limitations: string[];
+  results: EvaluationResult[];
+  validRunRate?: {
+    vfrOverall: number | null;
+    vfrValid: number | null;
+    total: number;
+    valid: number;
+    infraErrors: number;
+  };
+}
+
+export interface SummaryJson {
+  experimentId: string;
+  benchmark: { version: string; fingerprint: string };
+  evaluatorVersion: string;
+  timestamp: string;
+  totalRuns: number;
+  agents: Array<{
+    agentVersion: string;
+    runs: number;
+    vfr: number | null;
+    vfrValid: number | null;
+    avgCost: number | null;
+    medianCost: number | null;
+    avgDuration: number | null;
+    medianDuration: number | null;
+  }>;
+  comparison: ComparisonRow[] | null;
+  limitations: string[];
 }
 
 /**

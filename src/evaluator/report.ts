@@ -1,11 +1,48 @@
-import type { ExperimentEvaluation, EvaluationResult, AggregatedMetrics } from "./types.ts";
+import type {
+  ExperimentEvaluation,
+  ExperimentReport,
+  EvaluationResult,
+  AggregatedMetrics,
+  AgentMetrics,
+  CaseReportRow,
+  ComparisonRow,
+  SummaryJson,
+} from "./types.ts";
+import { loadPricingConfig } from "./pricing.ts";
+import { readFileSync } from "node:fs";
+import { join, resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-function fmtPct(n: number): string {
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, "../..");
+
+function fmtPct(n: number | null): string {
+  if (n == null) return "`null`";
   return `${n.toFixed(2)}%`;
+}
+
+function fmtNum(n: number | null, digits = 2): string {
+  if (n == null) return "`null`";
+  return n.toFixed(digits);
+}
+
+function fmtCost(n: number | null): string {
+  if (n == null) return "`null`";
+  return `$${n.toFixed(4)}`;
 }
 
 function fmtCountPct(count: number, total: number, pct: number): string {
   return `${count}/${total} (${pct.toFixed(2)}%)`;
+}
+
+function getEvaluatorVersion(): string {
+  try {
+    const raw = readFileSync(join(ROOT, "package.json"), "utf-8");
+    const j = JSON.parse(raw) as { version?: string };
+    return j.version ?? "0.0.0";
+  } catch {
+    return "unknown";
+  }
 }
 
 export function buildExperimentEvaluation(params: {
@@ -39,11 +76,124 @@ export function buildExperimentEvaluation(params: {
       byCategory: params.byCategory,
     },
     stability: params.stability,
-    results: params.results,
+    results: [...params.results].sort((a, b) => a.caseId.localeCompare(b.caseId) || a.runId.localeCompare(b.runId)),
   };
 }
 
-export function generateReportMarkdown(evalData: ExperimentEvaluation): string {
+export function buildExperimentReport(params: {
+  benchmarkVersion: string;
+  benchmarkFingerprint: string;
+  experimentId: string;
+  runsDir: string;
+  totalRuns: number;
+  elapsedMs?: number;
+  results: EvaluationResult[];
+  summary: AggregatedMetrics;
+  historicalVsSynthetic: ExperimentEvaluation["breakdowns"]["historicalVsSynthetic"];
+  byDifficulty: ExperimentEvaluation["breakdowns"]["byDifficulty"];
+  byCategory: ExperimentEvaluation["breakdowns"]["byCategory"];
+  stability: ExperimentEvaluation["stability"];
+  agents: AgentMetrics[];
+  caseBreakdown: CaseReportRow[];
+  comparison: ComparisonRow[] | null;
+  failures: ExperimentReport["failures"];
+  pricingSnapshot: ExperimentReport["costMethodology"]["pricingSnapshot"];
+  timestamp?: string;
+}): ExperimentReport {
+  const evaluatorVersion = getEvaluatorVersion();
+  const validRun = computeValidMetrics(params.results);
+  // Sort results deterministically
+  const sortedResults = [...params.results].sort((a, b) => a.caseId.localeCompare(b.caseId) || a.runId.localeCompare(b.runId));
+  const sortedAgents = [...params.agents].sort((a, b) => a.agentVersion.localeCompare(b.agentVersion));
+  const sortedCaseBreakdown = [...params.caseBreakdown].sort((a, b) => a.caseId.localeCompare(b.caseId) || a.agentVersion.localeCompare(b.agentVersion));
+  const costMethodology = {
+    pricingSnapshot: params.pricingSnapshot,
+    costCalculation: "inputCost = inputTokens/1M * inputUsdPerMillion; outputCost = outputTokens/1M * outputUsdPerMillion; totalCost = inputCost+outputCost. If provider returns trustworthy cost, prefer provider cost and record source. If tokens unavailable, costUsd=null costStatus=unavailable, never $0.",
+    note: params.pricingSnapshot ? `Pricing snapshot version ${params.pricingSnapshot.version}: ${params.pricingSnapshot.description ?? ""}` : "No pricing config found — all costs unavailable.",
+  };
+  const limitations = [
+    "Results are descriptive measurements from repeated runs, not statistically powered estimates.",
+    "With only 3 runs per case, small percentage differences are not statistically conclusive.",
+    "Cost is null/unavailable when token usage not exposed by Pi 0.84.4; never assumed.",
+    "VFR reported both overall (verified/total) and valid-agent-run (verified/valid) — see validRunRate.",
+  ];
+  return {
+    experiment: {
+      id: params.experimentId,
+      runsDir: params.runsDir,
+      timestamp: params.timestamp ?? new Date().toISOString(),
+      totalRuns: params.totalRuns,
+      elapsedMs: params.elapsedMs,
+    },
+    benchmark: {
+      version: params.benchmarkVersion,
+      fingerprint: params.benchmarkFingerprint,
+    },
+    evaluatorVersion,
+    agents: sortedAgents,
+    summary: params.summary,
+    breakdowns: {
+      historicalVsSynthetic: params.historicalVsSynthetic,
+      byDifficulty: params.byDifficulty,
+      byCategory: params.byCategory,
+    },
+    stability: [...params.stability].sort((a, b) => a.caseId.localeCompare(b.caseId)),
+    caseBreakdown: sortedCaseBreakdown,
+    comparison: params.comparison,
+    failures: params.failures,
+    costMethodology,
+    limitations,
+    results: sortedResults,
+    validRunRate: validRun,
+  };
+}
+
+function computeValidMetrics(results: EvaluationResult[]): ExperimentReport["validRunRate"] {
+  const total = results.length;
+  const verified = results.filter((r) => r.verdict === "verified").length;
+  const infra = results.filter((r) => (r.status === "error" || r.status === "timeout") && !r.verdict).length;
+  const valid = total - infra;
+  return {
+    vfrOverall: total === 0 ? null : (verified / total) * 100,
+    vfrValid: valid === 0 ? null : (verified / valid) * 100,
+    total,
+    valid,
+    infraErrors: infra,
+  };
+}
+
+export function generateSummaryJson(report: ExperimentReport): SummaryJson {
+  return {
+    experimentId: report.experiment.id,
+    benchmark: report.benchmark,
+    evaluatorVersion: report.evaluatorVersion,
+    timestamp: report.experiment.timestamp,
+    totalRuns: report.experiment.totalRuns,
+    agents: report.agents.map((a) => ({
+      agentVersion: a.agentVersion,
+      runs: a.runs,
+      vfr: a.rates.vfr,
+      vfrValid: a.rates.vfrValid,
+      avgCost: a.efficiency.averageCostUsd,
+      medianCost: a.efficiency.medianCostUsd,
+      avgDuration: a.efficiency.averageDurationMs,
+      medianDuration: a.efficiency.medianDurationMs,
+    })),
+    comparison: report.comparison,
+    limitations: report.limitations,
+  };
+}
+
+// Legacy markdown for ExperimentEvaluation (keep backwards compatibility)
+export function generateReportMarkdown(evalData: ExperimentEvaluation | ExperimentReport): string {
+  // Dispatch based on shape
+  if ("agents" in evalData && "caseBreakdown" in evalData) {
+    return generateExperimentReportMarkdown(evalData as ExperimentReport);
+  }
+  return generateLegacyReportMarkdown(evalData as ExperimentEvaluation);
+}
+
+function generateLegacyReportMarkdown(evalData: ExperimentEvaluation): string {
   const { benchmark, experiment, summary, breakdowns, stability, results } = evalData;
   const total = summary.total;
   const verified = summary.byVerdict.verified;
@@ -53,7 +203,6 @@ export function generateReportMarkdown(evalData: ExperimentEvaluation): string {
   const regressionTested = results.filter((r) => r.verification.regression.status !== "skipped").length;
   const falseConf = summary.byVerdict.false_confidence;
 
-  // Primary comparison table values
   const vfrStr = `**${summary.rates.vfr.toFixed(2)}%** (${verified}/${total})`;
   const reproStr = `**${summary.rates.reproductionRate.toFixed(2)}%** (${reproPassed}/${total})`;
   const oracleStr = `**${summary.rates.oracleRate.toFixed(2)}%** (${oraclePassed}/${total})`;
@@ -179,7 +328,6 @@ export function generateReportMarkdown(evalData: ExperimentEvaluation): string {
 
   lines.push(`## What The Baseline Struggled With`);
   lines.push(``);
-  // Observed vs Hypothesis separated
   lines.push(`### Observed`);
   lines.push(``);
   lines.push(`- False confidence occurred in ${falseConf}/${total} runs (${summary.rates.falseConfidenceRate.toFixed(2)}%).`);
@@ -198,7 +346,6 @@ export function generateReportMarkdown(evalData: ExperimentEvaluation): string {
   } else if (stability.some((c) => c.totalRuns > 1)) {
     lines.push(`- No variance observed across repeated runs (all repeated cases deterministic).`);
   }
-  // Category observation: find worst category
   const catEntries = Object.entries(breakdowns.byCategory);
   if (catEntries.length > 0) {
     const sortedByVfr = [...catEntries].sort((a, b) => a[1].vfr - b[1].vfr);
@@ -248,6 +395,260 @@ export function generateReportMarkdown(evalData: ExperimentEvaluation): string {
 
   lines.push(`---`);
   lines.push(`*Generated from executable evidence. Benchmark ${benchmark.version} ${benchmark.fingerprint}.*`);
+  lines.push(``);
+
+  return lines.join("\n");
+}
+
+function generateExperimentReportMarkdown(report: ExperimentReport): string {
+  const { benchmark, experiment, summary, breakdowns, stability, results, agents, caseBreakdown, comparison, failures, costMethodology, limitations } = report;
+  const total = summary.total;
+  const verified = summary.byVerdict.verified;
+  const reproPassed = results.filter((r) => r.verification.reproduction.status === "passed").length;
+  const oraclePassed = results.filter((r) => r.verification.oracle.status === "passed").length;
+  const regressionPassed = results.filter((r) => r.verification.regression.status === "passed").length;
+  const regressionTested = results.filter((r) => r.verification.regression.status !== "skipped").length;
+  const falseConf = summary.byVerdict.false_confidence;
+  const valid = report.validRunRate;
+
+  const lines: string[] = [];
+  lines.push(`# Experiment Report — ${experiment.id}`);
+  lines.push(``);
+  lines.push(`> **Results are descriptive measurements from repeated runs, not statistically powered estimates.**`);
+  lines.push(`> With only 3 runs per case, small percentage differences are not statistically conclusive.`);
+  lines.push(``);
+  lines.push(`**Benchmark:** ${benchmark.version} \`${benchmark.fingerprint}\``);
+  lines.push(`**Evaluator:** \`${report.evaluatorVersion}\``);
+  lines.push(`**Experiment:** ${experiment.id}`);
+  lines.push(`**Runs Dir:** \`${experiment.runsDir}\``);
+  lines.push(`**Timestamp:** ${experiment.timestamp}`);
+  lines.push(`**Total Runs:** ${total} (valid ${valid?.valid ?? total}, infra errors ${valid?.infraErrors ?? 0})`);
+  if (experiment.elapsedMs != null) lines.push(`**Elapsed:** ${experiment.elapsedMs}ms`);
+  lines.push(``);
+
+  // Agents overview
+  lines.push(`## Agent Versions`);
+  lines.push(``);
+  if (agents.length === 0) {
+    lines.push(`_No agent data (zero runs)_`);
+    lines.push(``);
+  } else {
+    lines.push(`| Agent | Runs | VFR (overall) | VFR (valid) | Repro | Oracle | Regression-Free | FalseConf |`);
+    lines.push(`| --- | --- | --- | --- | --- | --- | --- | --- |`);
+    for (const a of agents) {
+      lines.push(
+        `| ${a.agentVersion} | ${a.runs} | ${fmtPct(a.rates.vfr)} | ${fmtPct(a.rates.vfrValid)} | ${fmtPct(a.rates.reproductionRate)} | ${fmtPct(a.rates.oraclePassRate)} | ${fmtPct(a.rates.regressionFreeRate)} | ${fmtPct(a.rates.falseConfidenceRate)} |`,
+      );
+    }
+    lines.push(``);
+  }
+
+  // Primary metrics (overall)
+  const vfrOverall = valid ? fmtPct(valid.vfrOverall) : fmtPct(summary.rates.vfr);
+  const vfrValidStr = valid ? fmtPct(valid.vfrValid) : "`null`";
+  lines.push(`## Primary Outcome`);
+  lines.push(``);
+  lines.push(`- **VFR (overall):** ${vfrOverall} (${verified}/${total}) — verified / total`);
+  lines.push(`- **VFR (valid):** ${vfrValidStr} (${verified}/${valid?.valid ?? total}) — verified / valid (excludes infra errors)`);
+  lines.push(`- **Reproduction Rate:** ${fmtPct(summary.rates.reproductionRate)} (${reproPassed}/${total})`);
+  lines.push(`- **Oracle Pass Rate:** ${fmtPct(summary.rates.oracleRate)} (${oraclePassed}/${total})`);
+  lines.push(`- **Regression-Free Rate:** ${fmtPct(summary.rates.regressionFreeRate)} (${regressionPassed}/${regressionTested || total}) — regression passed / tested`);
+  lines.push(`- **Patch-Apply Success:** ${fmtPct(agents[0]?.rates.patchApplySuccessRate ?? null)}`);
+  lines.push(`- **False Confidence Rate:** ${fmtPct(summary.rates.falseConfidenceRate)} (${falseConf}/${total})`);
+  lines.push(``);
+
+  // Outcome breakdown
+  lines.push(`## Outcome Breakdown`);
+  lines.push(``);
+  lines.push(`| Outcome | Count | % (overall) |`);
+  lines.push(`| --- | --- | --- |`);
+  const fb = summary.failureBreakdown;
+  const pct = (c: number) => (total === 0 ? 0 : (c / total) * 100);
+  lines.push(`| verified | ${fb.verified} | ${pct(fb.verified).toFixed(2)}% |`);
+  lines.push(`| agent_failure | ${fb.agent_failure} | ${pct(fb.agent_failure).toFixed(2)}% |`);
+  lines.push(`| false_confidence | ${fb.false_confidence} | ${pct(fb.false_confidence).toFixed(2)}% |`);
+  lines.push(`| regression_failure | ${fb.regression_failure} | ${pct(fb.regression_failure).toFixed(2)}% |`);
+  lines.push(`| patch_failed | ${fb.patch_failed} | ${pct(fb.patch_failed).toFixed(2)}% |`);
+  lines.push(`| timeout (non-patch) | ${fb.timeout} | ${pct(fb.timeout).toFixed(2)}% |`);
+  lines.push(`| error (infra) | ${fb.error} | ${pct(fb.error).toFixed(2)}% |`);
+  lines.push(``);
+
+  // Failure analysis
+  lines.push(`## Failure Analysis`);
+  lines.push(``);
+  lines.push(`### Where improvement is needed — by category (never merged)`);
+  lines.push(``);
+  lines.push(`- **Agent failures** (repro still failing): ${failures.agentFailures.length} — ${failures.agentFailures.map((f) => `${f.caseId} (${f.runId})`).join(", ") || "_none_"}`);
+  lines.push(`- **False confidence** (repro pass / oracle fail): ${failures.falseConfidences.length} — ${failures.falseConfidences.map((f) => `${f.caseId} (${f.runId})`).join(", ") || "_none_"}`);
+  lines.push(`  → Demonstrates visible reproduction success ≠ correctness.`);
+  lines.push(`- **Regression failures** (oracle pass / regression fail): ${failures.regressionFailures.length} — ${failures.regressionFailures.map((f) => `${f.caseId} (${f.runId})`).join(", ") || "_none_"}`);
+  lines.push(`- **Timeouts**: ${failures.timeouts.length} — ${failures.timeouts.map((f) => `${f.caseId} (${f.runId})`).join(", ") || "_none_"}`);
+  lines.push(`- **Infrastructure errors**: ${failures.infrastructureErrors.length} — ${failures.infrastructureErrors.map((f) => `${f.caseId} (${f.runId})${f.code ? ` ${f.code}` : ""}`).join(", ") || "_none_"}`);
+  lines.push(``);
+
+  // Efficiency metrics per agent
+  lines.push(`## Efficiency Metrics (per agent)`);
+  lines.push(``);
+  if (agents.length === 0) {
+    lines.push(`_No efficiency data_`);
+    lines.push(``);
+  } else {
+    lines.push(`| Agent | Avg Cost | Median Cost | Total Cost | Avg Duration | Median Duration | Avg Turns | Median Turns | Avg ToolCalls | Median ToolCalls | Avg Tokens | Median Tokens | Avg Iter | TimeoutRate |`);
+    lines.push(`| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |`);
+    for (const a of agents) {
+      const e = a.efficiency;
+      lines.push(
+        `| ${a.agentVersion} | ${fmtCost(e.averageCostUsd)} | ${fmtCost(e.medianCostUsd)} | ${fmtCost(e.totalCostUsd)} | ${e.averageDurationMs != null ? `${e.averageDurationMs.toFixed(0)}ms` : "`null`"} | ${e.medianDurationMs != null ? `${e.medianDurationMs.toFixed(0)}ms` : "`null`"} | ${fmtNum(e.averageTurns)} | ${fmtNum(e.medianTurns)} | ${fmtNum(e.averageToolCalls)} | ${fmtNum(e.medianToolCalls)} | ${fmtNum(e.averageTokens)} | ${fmtNum(e.medianTokens)} | ${fmtNum(e.averageIterations)} | ${fmtPct(e.timeoutRate)} |`,
+      );
+    }
+    lines.push(``);
+    const anyNull = agents.some((a) => a.efficiency.averageCostUsd == null);
+    if (anyNull) lines.push(`> Cost is \`null\`/\`unavailable\` when token usage not exposed by Pi 0.84.4. Pricing snapshot exists but never used to invent costs.`);
+    lines.push(``);
+  }
+
+  // Case-level breakdown
+  lines.push(`## Case-Level Breakdown`);
+  lines.push(``);
+  if (caseBreakdown.length === 0) {
+    lines.push(`_No case data_`);
+    lines.push(``);
+  } else {
+    lines.push(`| Case | Difficulty | Category | Agent | Runs | Verified | AgentFail | FalseConf | RegFail | Timeouts | Errors | VFR | VFR(valid) | AvgCost | AvgDur | AvgTurns | AvgToolCalls | Consistency |`);
+    lines.push(`| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |`);
+    for (const r of caseBreakdown) {
+      lines.push(
+        `| ${r.caseId} | ${r.difficulty ?? ""} | ${r.category ?? ""} | ${r.agentVersion} | ${r.runs} | ${r.verified} | ${r.agentFailures} | ${r.falseConfidence} | ${r.regressionFailures} | ${r.timeouts} | ${r.errors} | ${fmtPct(r.vfr)} | ${fmtPct(r.vfrValid)} | ${fmtCost(r.avgCost)} | ${r.avgDuration != null ? `${r.avgDuration.toFixed(0)}ms` : "`null`"} | ${fmtNum(r.avgTurns)} | ${fmtNum(r.avgToolCalls)} | ${fmtPct(r.consistency)} |`,
+      );
+    }
+    lines.push(``);
+  }
+
+  // Comparison V0 vs V1
+  if (comparison) {
+    lines.push(`## Comparative V0 vs V1`);
+    lines.push(``);
+    lines.push(`| Metric | V0 | V1 | Delta |`);
+    lines.push(`| --- | --- | --- | --- |`);
+    for (const c of comparison) {
+      const unit = c.deltaUnit === "pp" ? "pp" : "";
+      const v0s = c.v0 == null ? "`null`" : c.metric.toLowerCase().includes("cost") ? fmtCost(c.v0) : c.metric.toLowerCase().includes("rate") || c.metric.includes("VFR") ? fmtPct(c.v0) : fmtNum(c.v0);
+      const v1s = c.v1 == null ? "`null`" : c.metric.toLowerCase().includes("cost") ? fmtCost(c.v1) : c.metric.toLowerCase().includes("rate") || c.metric.includes("VFR") ? fmtPct(c.v1) : fmtNum(c.v1);
+      const ds = c.delta == null ? "`null`" : c.deltaUnit === "pp" ? `${c.delta >= 0 ? "+" : ""}${c.delta.toFixed(2)} pp` : `${c.delta >= 0 ? "+" : ""}${c.delta.toFixed(2)}`;
+      lines.push(`| ${c.metric} | ${v0s} | ${v1s} | ${ds} |`);
+    }
+    lines.push(``);
+    lines.push(`> Deltas for percentages are percentage-point changes (e.g., V0 50% → V1 66.7% = +16.7 pp), not relative % improvement.`);
+    lines.push(``);
+  } else if (agents.length === 1) {
+    lines.push(`## Comparative V0 vs V1`);
+    lines.push(``);
+    lines.push(`_Single agent version present — comparison requires ≥2 versions (e.g., baseline-v0 and agent-v1). Run both and re-evaluate to populate this table._`);
+    lines.push(``);
+  }
+
+  // Reliability across repeated runs (stability already)
+  lines.push(`## Reliability Across Repeated Runs`);
+  lines.push(``);
+  if (stability.length === 0) {
+    lines.push(`_No stability data_`);
+    lines.push(``);
+  } else {
+    lines.push(`| Case | Runs | Verified | Consistency | Has Variance |`);
+    lines.push(`| --- | --- | --- | --- | --- |`);
+    for (const cs of stability) {
+      lines.push(`| ${cs.caseId} | ${cs.totalRuns} | ${cs.verifiedCount} | ${cs.stabilityRate.toFixed(2)}% | ${cs.hasVariance ? "YES" : "no"} |`);
+    }
+    lines.push(``);
+    const varianceCases = stability.filter((c) => c.hasVariance);
+    if (varianceCases.length > 0) {
+      lines.push(`**Unreliable cases (variance):** ${varianceCases.map((c) => `${c.caseId} (${c.verifiedCount}/${c.totalRuns} ${c.stabilityRate.toFixed(1)}%)`).join(", ")}`);
+      lines.push(``);
+    } else if (stability.some((c) => c.totalRuns > 1)) {
+      lines.push(`All repeated cases deterministic (no variance).`);
+      lines.push(``);
+    } else {
+      lines.push(`Single run per case — run 3 trials per case to assess reliability.`);
+      lines.push(``);
+    }
+  }
+
+  // Historical vs synthetic etc (keep for compatibility)
+  lines.push(`## Historical vs Synthetic`);
+  lines.push(``);
+  lines.push(`| Type | Total | Verified | VFR | Oracle Rate | False Confidence |`);
+  lines.push(`| --- | --- | --- | --- | --- | --- |`);
+  const h = breakdowns.historicalVsSynthetic.historical;
+  const s = breakdowns.historicalVsSynthetic.synthetic;
+  lines.push(`| historical | ${h.total} | ${h.verified} | ${h.vfr.toFixed(2)}% | ${h.oracleRate.toFixed(2)}% | ${h.falseConfidenceRate.toFixed(2)}% |`);
+  lines.push(`| synthetic | ${s.total} | ${s.verified} | ${s.vfr.toFixed(2)}% | ${s.oracleRate.toFixed(2)}% | ${s.falseConfidenceRate.toFixed(2)}% |`);
+  lines.push(``);
+
+  lines.push(`## Difficulty Breakdown`);
+  lines.push(``);
+  lines.push(`| Difficulty | Total | Verified | VFR | Repro Rate | Oracle Rate |`);
+  lines.push(`| --- | --- | --- | --- | --- | --- |`);
+  for (const diff of ["easy", "medium", "hard"] as const) {
+    const d = breakdowns.byDifficulty[diff];
+    lines.push(`| ${diff} | ${d.total} | ${d.verified} | ${d.vfr.toFixed(2)}% | ${d.reproductionRate.toFixed(2)}% | ${d.oracleRate.toFixed(2)}% |`);
+  }
+  lines.push(``);
+
+  lines.push(`## Category Breakdown`);
+  lines.push(``);
+  if (Object.keys(breakdowns.byCategory).length === 0) {
+    lines.push(`_No category data_`);
+    lines.push(``);
+  } else {
+    lines.push(`| Category | Total | Verified | VFR | False Confidence |`);
+    lines.push(`| --- | --- | --- | --- | --- |`);
+    for (const [cat, m] of Object.entries(breakdowns.byCategory)) {
+      lines.push(`| ${cat} | ${m.total} | ${m.verified} | ${m.vfr.toFixed(2)}% | ${m.falseConfidenceRate.toFixed(2)}% |`);
+    }
+    lines.push(``);
+  }
+
+  // Cost methodology
+  lines.push(`## Cost Methodology`);
+  lines.push(``);
+  lines.push(`- **Formula:** ${costMethodology.costCalculation}`);
+  lines.push(`- **Snapshot:** ${costMethodology.pricingSnapshot ? `\`v${costMethodology.pricingSnapshot.version}\` ${costMethodology.pricingSnapshot.description ?? ""}` : costMethodology.note}`);
+  if (costMethodology.pricingSnapshot) {
+    for (const m of costMethodology.pricingSnapshot.models) {
+      lines.push(`  - \`${m.model}\`: input \${m.inputUsdPerMillionTokens}/M, output \${m.outputUsdPerMillionTokens}/M`);
+    }
+  }
+  lines.push(`- **Guardrail:** If \`inputTokens\` is null, evaluator outputs \`costUsd: null\`, \`costStatus: "unavailable"\` even if pricing exists. Never \$0.00.`);
+  lines.push(`- **Source:** Prefer provider-returned trustworthy cost (\`costSource: provider\`) else computed (\`costSource: computed\`). Recorded per-run.`);
+  lines.push(``);
+
+  // Limitations
+  lines.push(`## Limitations & Confidence`);
+  lines.push(``);
+  for (const l of limitations) lines.push(`- ${l}`);
+  lines.push(``);
+
+  // Per-case results
+  lines.push(`## Per-Run Results`);
+  lines.push(``);
+  lines.push(`| Run | Case | Agent | Verdict | Patch | Repro | Oracle | Regression | Duration | Cost | Turns | Tokens | Iter |`);
+  lines.push(`| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |`);
+  for (const r of [...results].sort((a, b) => a.caseId.localeCompare(b.caseId) || a.runId.localeCompare(b.runId))) {
+    const verdict = r.verdict ? r.verdict.toUpperCase() : r.status.toUpperCase();
+    const patch = r.verification.patchApply.status.toUpperCase();
+    const repro = r.verification.reproduction.status.toUpperCase();
+    const oracle = r.verification.oracle.status.toUpperCase();
+    const regression = r.verification.regression.status.toUpperCase();
+    const cost = r.cost?.totalCostUsd != null ? fmtCost(r.cost.totalCostUsd) : r.cost?.costStatus === "unavailable" ? "`unav`" : "`null`";
+    const turns = r.metrics?.totalTurns != null ? String(r.metrics.totalTurns) : "";
+    const tokens = r.metrics?.totalTokens != null ? String(r.metrics.totalTokens) : "";
+    const iter = r.metrics?.iterations != null ? String(r.metrics.iterations) : "";
+    lines.push(`| ${r.runId} | ${r.caseId} | ${r.agentVersion} | ${verdict} | ${patch} | ${repro} | ${oracle} | ${regression} | ${r.durationMs}ms | ${cost} | ${turns} | ${tokens} | ${iter} |`);
+  }
+  lines.push(``);
+
+  lines.push(`---`);
+  lines.push(`*Generated from executable evidence. Benchmark ${benchmark.version} ${benchmark.fingerprint} — Evaluator ${report.evaluatorVersion}.*`);
   lines.push(``);
 
   return lines.join("\n");

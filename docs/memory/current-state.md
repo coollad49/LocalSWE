@@ -57,9 +57,19 @@ All 6 `hist-*` now genuine external bugs with pinned buggyCommit→fixedCommit, 
 - hist-006 tinyspy @ 0684083 (PR #50, inherited getter)
 Evaluated 4 provided + 4 additional (tinyspy, mri, yocto-queue) to reach 6; yocto-queue/p-limit/kleur rejected. Requirement 6 genuine non-negotiable now met.
 
-## What exists — Evaluator v0 (new, frozen for experiments)
+## What exists — Evaluator v1 Reporting & Metrics Upgrade (extends v0, frozen)
 
-**Evaluator v0** implements deterministic verification (no LLM, no patch text comparison):
+**Evaluator v1** extends v0 without changing the verification ladder or verdict taxonomy — adds pricing, per-run metrics, aggregation, case breakdown, comparison, and machine-readable reporting:
+
+* **Pricing:** `experiments/config/pricing.json` `2026-08-30-snapshot` (opencode-go/muse-spark-1.2-contributor `$0.15`/M in, `$0.60`/M out), `src/evaluator/pricing.ts` (`ModelPricing`, `loadPricingConfig`, `computeCost` guardrail `inputTokens==null → unavailable`, `resolveCostWithProviderPreference`).
+* **Metrics:** `src/evaluator/metrics.ts` (`median`/`average`, `extractRunMetrics` with V1 precedence `v1-state.json` → `metadata.v1.iterationCount` → trajectory → `1`, token extraction from `metadata.tokenUsage`/trajectory, `RunMetrics`/`RunCost` on `EvaluationResult`).
+* **Aggregation:** `src/evaluator/aggregation.ts` now `computeAgentMetrics`/`computeAllAgentMetrics`/`computeCaseBreakdown`/`computeComparison`/`computeFailureAnalysis`/`computeValidRunMetrics` (VFR overall + `vfrValid`, repair rates, efficiency medians/averages, timeout rate, case-level VFR valid, delta in `pp`).
+* **Report:** `src/evaluator/report.ts` `buildExperimentReport` → `experiments/reports/<id>/report.json|report.md|summary.json` (primary source of truth) + compat `evaluations/<id>/`, `generateReportMarkdown`/`generateSummaryJson` (small-sample disclaimer, both denominators, failure categories never merged, cost methodology, limitations).
+* **CLI:** `src/cli/evaluate.ts` supports `--force/--no-cache` (re-evaluate even if cached), `--pricing <path>`, `--allow-cross-benchmark`, preserves cached runs where fingerprint matches, rejects mixed fingerprints unless `allowCrossBenchmark`/`allowMismatch` via `process.exitCode=2; throw` (Bun async exit documented in `docs/experiments/README.md`), writes dual dirs + `cases/<runId>.json`.
+* **Tests:** `pricing.test.ts` (guardrail), `metrics.test.ts` (V1 precedence, fallback `1`), `aggregation.v1.test.ts` (VFR, rates, medians, null cost, case breakdown, V0 vs V1 delta, zero/all-fail/infra/mixed/3-run variance, determinism, summary) — total `bun test` 43 files 274 tests. `package.json` adds `evaluate:experiment`.
+* **Docs:** `docs/decisions/evaluator-v0.md` addendum, `docs/experiments/README.md`, `CHANGELOG.md` 0.7.1.
+
+## What exists — Evaluator v0 (frozen, superseded by v1 upgrade above)
 
 * **Core:** `src/evaluator/Evaluator.ts` — accepts `patch.diff` artifact (via `--run` or `--case --patch`), checks benchmark identity (version+fingerprint, `--allow-mismatch` override), validates patch paths (traversal/absolute/null), creates isolated `mkdtemp` workspace (`benchmark/repositories/<repo>` + `benchmark/cases/<id>`), applies patch via `git apply --check` → `git apply`, runs ladder `reproduce → oracle → regression` with `spawn()` explicit args, timeouts (10s/15s/20s/30s), settled guard, bun-first → `vitest`/`tsx` fallback, computes verdict `verified|agent_failure|false_confidence|regression_failure` with `completed|error|timeout` status, persists `experiments/runs/<runId>/evaluation/{result.json,*.log}`.
 * **Types:** `src/evaluator/types.ts` (`Verdict`, `EvaluationStatus`, `VerificationStageResult`, `EvaluationResult` with fingerprint, runId, caseId, durations, stdout/stderr, workspace isolated flag), `aggregation.ts` (VFR = verified/completed×100 + rates).

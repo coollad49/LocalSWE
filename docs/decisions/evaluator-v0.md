@@ -247,10 +247,31 @@ Evaluator tests cover (§20):
 - Timeout values are heuristic (15s repro, 20s oracle, 30s regression); very slow but correct patches could be misclassified as timeout — configurable via `EvaluateOptions.timeouts`.
 - Evaluator does not yet sandbox CPU/memory or network; trusts `vitest`/`tsx` to not exfiltrate, but runs isolated via temp workspace.
 
+## Addendum — Evaluator v1 Reporting & Metrics Upgrade (2026-08-30)
+
+Extends v0 without changing the verification ladder or verdict taxonomy.
+
+**Pricing snapshot:** `experiments/config/pricing.json` v`2026-08-30-snapshot` — `opencode-go/muse-spark-1.2-contributor` input `$0.15`/M output `$0.60`/M (experiment baseline). Snapshot is copied into every `report.json: costMethodology.pricingSnapshot` for reproducibility. Cost formula `input/1M*in + output/1M*out`. If `Pi 0.84.4` does not expose `tokenUsage`, evaluator outputs `costUsd: null, costStatus: "unavailable"` (never `$0.00`), even though pricing exists.
+
+**Per-run metrics:** `src/evaluator/types.ts: RunMetrics/RunCost` added to `EvaluationResult` (optional, backward compatible). `src/evaluator/metrics.ts` extracts `durationMs, totalTurns, toolCalls, commandsExecuted, filesInspected, filesChanged, iterations, inputTokens/outputTokens` from `metadata.json` + `trajectory.jsonl`. V1 precedence: `v1-state.json` (`iterationCount`) → `metadata.v1.iterationCount` → trajectory `v1_iteration` events → `1` (V0 fallback). `PiCodingAgent` no longer needs to invent usage; missing stays `null`.
+
+**Aggregation:** `src/evaluator/aggregation.ts` now computes `AgentMetrics` (outcomes + `rates` with `vfr` + `vfrValid` valid-agent-run rate, reproduction/oracle/regression/patchApply rates, false-confidence/agent-failure/regression/timeout rates) and `efficiency` (total/avg/median cost/duration/turns/toolCalls/tokens/iterations). `CaseReportRow` breaks down each `caseId × agentVersion` with VFR valid, avgCost/duration/turns/toolCalls. `ComparisonRow` delta is percentage-point change for rates. `FailureAnalysis` keeps 5 categories separate (never merged).
+
+**Report:** `src/evaluator/report.ts: buildExperimentReport` is new source of truth `experiments/reports/<id>/report.json|report.md|summary.json` (primary) + compat `evaluations/<id>/`. Markdown includes small-sample disclaimer, both VFR denominators, outcome breakdown, repair metrics, efficiency avg+median, case-level table, failure analysis, comparison table, cost methodology, limitations, per-run table.
+
+**CLI:** `src/cli/evaluate.ts` now supports `--force/--no-cache` (re-evaluate even if cached fingerprint matches), `--pricing <path>`, `--allow-cross-benchmark`, and preserves cached runs where fingerprint matches. Data integrity: rejects mixed fingerprints/versions unless `allowCrossBenchmark`/`allowMismatch` (throws `BENCHMARK_*_MISMATCH`). Added `package.json: evaluate:experiment`.
+
+**Bun note:** Bun’s CLI may not propagate `process.exit(2)` from async `await` chains; evaluator uses `process.exitCode = 2; throw` and documents the discrepancy.
+
+**Tests:** `pricing.test.ts` (guardrail), `metrics.test.ts` (V1 precedence), `aggregation.v1.test.ts` (VFR, rates, medians, case breakdown, delta, null cost, valid VFR, 3-run variance, determinism, summary).
+
+**Docs:** This addendum + `docs/experiments/README.md` + `CHANGELOG.md` 0.7.1.
+
 ## References
 
-- `benchmark/validation-report.json` v0.4 `cead5c6e...`
+- `benchmark/validation-report.json` v0.4 `cead5c6e...` (v0.5 `20f1003c...` current)
 - `src/evaluator/Evaluator.ts` (orchestrator)
 - `src/cli/evaluate.ts` (CLI)
-- `src/evaluator/tests/` (31 evaluator tests)
-- `package.json` scripts `evaluate`, `evaluator:test`
+- `src/evaluator/tests/` (now 43 files, 274 tests with pricing/metrics/aggregation.v1)
+- `src/evaluator/pricing.ts`, `metrics.ts`, `aggregation.ts`, `report.ts`
+- `package.json` scripts `evaluate`, `evaluate:experiment`, `evaluator:test`

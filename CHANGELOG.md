@@ -322,6 +322,35 @@ New `src/v1/tests/` (5 files, 36 tests):
 
 - V1 changes workflow, not information: benchmark v0.5 `20f1003c...`, issue, repository, Pi 0.84.4, `opencode-go/muse-spark-1.2-contributor`, tools, workspace, timeout all constant with V0 per experiment integrity §15.
 
+## [0.7.1] - 2026-08-30 — Evaluator Reporting & Metrics Upgrade
+
+### Added — Evaluator v1 (extends v0, deterministic, no LLM)
+
+* **Pricing:** `experiments/config/pricing.json` `2026-08-30-snapshot` (opencode-go/muse-spark-1.2-contributor `$0.15`/M in, `$0.60`/M out), `src/evaluator/pricing.ts` (`ModelPricing`, `PricingConfig`, `loadPricingConfig`, `computeCost` with guardrail `inputTokens==null → costUsd:null costStatus:unavailable` even though pricing exists, `resolveCostWithProviderPreference` preferring provider).
+* **Metrics:** `src/evaluator/types.ts` `RunMetrics`/`RunCost`/`AgentMetrics`/`CaseReportRow`/`ExperimentReport` (optional, backward compatible) + `src/evaluator/metrics.ts` (`median`/`average`, `extractRunMetrics` reading `metadata.json`/`trajectory.jsonl` with V1 precedence `v1-state.json` → `metadata.v1.iterationCount` → trajectory → `1` fallback).
+* **Aggregation:** `src/evaluator/aggregation.ts` now `computeAgentMetrics`/`computeAllAgentMetrics`/`computeCaseBreakdown`/`computeComparison`/`computeFailureAnalysis`/`computeValidRunMetrics` (primary VFR overall + `vfrValid` valid-agent-run, reproduction/oracle/regression/patchApply rates, efficiency total/avg/median cost/duration/turns/toolCalls/tokens/iterations, timeout rate, case-level VFR valid/avgCost/avgDuration/avgTurns/avgToolCalls/consistency, comparison delta in `pp`).
+* **Report:** `src/evaluator/report.ts` `buildExperimentReport` → `experiments/reports/<id>/report.json|report.md|summary.json` (source of truth, deterministic sorted) + compat `evaluations/<id>/`, `generateReportMarkdown`/`generateSummaryJson` (small-sample disclaimer, both VFR denominators, outcome breakdown, repair metrics, efficiency avg+median, case-level table, failure analysis 5 categories never merged, comparative V0 vs V1, cost methodology, limitations, per-run table).
+* **CLI:** `src/cli/evaluate.ts` supports `--force/--no-cache`, `--pricing <path>`, `--allow-cross-benchmark`, preserves cached runs where `benchmarkFingerprint` matches, rejects mixed fingerprints/versions unless `allowCrossBenchmark`/`allowMismatch` (now `process.exitCode=2; throw` for Bun async compatibility, documented in `docs/experiments/README.md`), writes dual `reports`+`evaluations` + `cases/`; `package.json` adds `evaluate:experiment`.
+* **Evaluator enrichment:** `src/evaluator/Evaluator.ts` now enriches each `EvaluationResult` with `metrics`/`cost` via `extractRunMetrics` (patch-apply-fail and verified paths).
+
+### Tests
+
+* `src/evaluator/tests/pricing.test.ts` (8), `metrics.test.ts` (6), `aggregation.v1.test.ts` (15) covering VFR, reproduction/oracle/regression rates, avg/median cost/duration/turns/toolCalls/tokens, timeout/failure rates, case breakdown, V0 vs V1 delta pp, null cost, valid VFR, edge cases (zero/all-fail/infra/mixed/3-run variance), failure-analysis non-merge, determinism, summary. Total `bun test` 43 files 274 tests. `src/agent/PiCodingAgent` token guardrail noted as unavailable via Pi 0.84.4 (leave `costStatus: unavailable`).
+
+### Evidence
+
+* `bun run check-types` 0, `bun run benchmark:check-types` 0, `bun run test` 43 files 274 tests & `npm test` same.
+* `bun run evaluate -- --run synth-001-run-001-c6531d --json` → `metrics`/`cost` present (`costStatus: unavailable` correctly, never `$0`).
+* `bun run evaluate -- --experiment baseline-v0 --force` → 17 runs VFR 76.47% report at `experiments/reports/baseline-v0/report.json|report.md|summary.json` + compat `evaluations/` with `validRunRate`, `costMethodology` snapshot, `limitations` disclaimer, case-level breakdown, efficiency medians.
+
+### Docs
+
+* `docs/decisions/evaluator-v0.md` addendum, `docs/experiments/README.md` (layout, schema, cost methodology, limitations, Bun note), `docs/memory/current-state.md` evaluator v1 section, `CHANGELOG.md` 0.7.1.
+
+### Decision
+
+* Evaluator remains measurement infra (never scores patch text, never parses oracle); cost is never invented; V1 metrics upgrade is additive and frozen for V1/V2 experiments.
+
 ## Unreleased
 
 
