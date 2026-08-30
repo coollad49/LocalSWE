@@ -10,6 +10,8 @@
 import { loadBaselineConfig } from "../config/BaselineConfig.ts";
 import { BaselineRunner } from "../runner/BaselineRunner.ts";
 import { CaseLoader } from "../runner/CaseLoader.ts";
+import { join, resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
@@ -41,11 +43,15 @@ async function main(): Promise<void> {
   console.log(`  benchmark: ${config.benchmarkVersion} ${fingerprint ?? ""}`);
   console.log(`  timeout: ${config.agentTimeoutMs}ms`);
   console.log(`  mock: ${useMock ? "yes" : "no"}`);
+  if (useMock) console.log(`  runsRoot: experiments/runs/mock (mock)`);
   console.log("");
 
-  const runner = new BaselineRunner(config);
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const ROOT = resolve(__dirname, "../..");
+  const runsRoot = useMock ? join(ROOT, "experiments/runs/mock") : undefined;
+  const runner = new BaselineRunner(config, runsRoot);
   const start = Date.now();
-  const result = await runner.runCase({ caseId, config, keepWorkspace: keepWorkspace ? true : undefined });
+  const result = await runner.runCase({ caseId, config, keepWorkspace: keepWorkspace ? true : undefined, runsRoot });
   const elapsed = ((Date.now() - start) / 1000).toFixed(1);
 
   console.log("\n=== Result ===");

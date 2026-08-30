@@ -18,6 +18,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../..");
 
 async function main(): Promise<void> {
+  // Node version warning (benchmark validated on Node 22 / Bun 1.4.0)
+  const major = Number.parseInt(process.version.slice(1).split(".")[0] ?? "0", 10);
+  if (major !== 22) {
+    console.warn(`[warn] Node ${process.version} detected — benchmark requires Node 22 (validated on Node 22 / Bun 1.4.0, fingerprint 20f1003c...). Node 24 may crash. Use 'nvm use 22'.`);
+  }
   const args = process.argv.slice(2);
   const useMock = args.includes("--mock") || process.env.BASELINE_MOCK === "1";
   if (useMock) process.env.BASELINE_MOCK = "1";
@@ -66,13 +71,15 @@ async function main(): Promise<void> {
   console.log(`  mock: ${useMock ? "yes" : "no"}`);
   console.log("");
 
-  const runner = new BaselineRunner(config);
+  const runsRoot = useMock ? join(ROOT, "experiments/runs/mock") : undefined;
+  const runner = new BaselineRunner(config, runsRoot);
   const start = Date.now();
   const results = await runner.runBaseline({
     caseIds,
     config,
     concurrency,
     runsPerCase: config.runsPerCase,
+    runsRoot,
   });
   const elapsed = ((Date.now() - start) / 1000).toFixed(1);
 
@@ -90,8 +97,9 @@ async function main(): Promise<void> {
     console.log(`  ${r.caseId} ${r.runId} ${r.status} ${r.durationMs}ms files=${r.changedFiles.length} patch=${r.patchPath ? "yes" : "no"}`);
   }
 
-  // Write aggregated report
-  const reportPath = join(ROOT, "experiments/runs", `baseline-report-${Date.now()}.json`);
+  // Write aggregated report (mock runs go to mock/ subfolder)
+  const reportDir = useMock ? join(ROOT, "experiments/runs/mock") : join(ROOT, "experiments/runs");
+  const reportPath = join(reportDir, `baseline-report-${Date.now()}.json`);
   const report = {
     benchmarkVersion: config.benchmarkVersion,
     agentVersion: config.agentVersion,
@@ -118,7 +126,7 @@ async function main(): Promise<void> {
   };
   try {
     const { mkdirSync } = await import("node:fs");
-    mkdirSync(join(ROOT, "experiments/runs"), { recursive: true });
+    mkdirSync(reportDir, { recursive: true });
     await writeFile(reportPath, JSON.stringify(report, null, 2), "utf-8");
     console.log(`\nReport written to ${reportPath}`);
   } catch (e) {

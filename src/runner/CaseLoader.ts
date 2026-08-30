@@ -5,6 +5,27 @@ import { join, resolve, dirname } from "node:path";
 const ROOT = resolve(dirname(new URL(import.meta.url).pathname), "../..");
 const CASES_DIR = join(ROOT, "benchmark/cases");
 const REPOS_DIR = join(ROOT, "benchmark/repositories");
+const CASES_DIR_HARD = join(ROOT, "benchmark/frontier-hard/cases");
+const REPOS_DIR_HARD = join(ROOT, "benchmark/frontier-hard/repositories");
+
+function resolveCaseDir(caseId: string): string {
+  if (caseId.startsWith("hard-")) {
+    const hard = join(CASES_DIR_HARD, caseId);
+    if (existsSync(hard)) return hard;
+    return hard;
+  }
+  const core = join(CASES_DIR, caseId);
+  if (existsSync(core)) return core;
+  const alt = join(CASES_DIR_HARD, caseId);
+  if (existsSync(alt)) return alt;
+  return core;
+}
+
+function resolveRepoDir(repo: string): string {
+  const hard = join(REPOS_DIR_HARD, repo);
+  if (existsSync(hard)) return hard;
+  return join(REPOS_DIR, repo);
+}
 
 export interface LoadedCase {
   id: string;
@@ -30,7 +51,7 @@ export interface LoadedCase {
 
 export class CaseLoader {
   static async loadCase(caseId: string): Promise<LoadedCase> {
-    const caseDir = join(CASES_DIR, caseId);
+    const caseDir = resolveCaseDir(caseId);
     if (!existsSync(caseDir)) {
       throw new Error(`Case not found: ${caseId}`);
     }
@@ -61,8 +82,8 @@ export class CaseLoader {
       if (!existsSync(p)) throw new Error(`Buggy artifact missing for ${caseId}: ${f}`);
     }
 
-    // Verify repo exists
-    const repoPath = join(REPOS_DIR, manifest.repository);
+    // Verify repo exists (supports Core + Frontier-Hard)
+    const repoPath = resolveRepoDir(manifest.repository);
     if (!existsSync(repoPath)) throw new Error(`Repository not found for ${caseId}: ${manifest.repository}`);
 
     return {
@@ -77,8 +98,16 @@ export class CaseLoader {
   }
 
   static async listCases(): Promise<string[]> {
-    const entries = await readdir(CASES_DIR, { withFileTypes: true });
-    return entries.filter((e) => e.isDirectory()).map((e) => e.name).sort();
+    const all: string[] = [];
+    try {
+      const core = await readdir(CASES_DIR, { withFileTypes: true });
+      for (const e of core) if (e.isDirectory()) all.push(e.name);
+    } catch {}
+    try {
+      const hard = await readdir(CASES_DIR_HARD, { withFileTypes: true });
+      for (const e of hard) if (e.isDirectory()) all.push(e.name);
+    } catch {}
+    return all.sort();
   }
 
   /** Ensure case is valid before running (mirrors validator checks: manifest, paths) */
