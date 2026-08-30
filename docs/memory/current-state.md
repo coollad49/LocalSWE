@@ -1,4 +1,4 @@
-# Current State — 2026-08-29 v0.5 FROZEN + Baseline v0 + Evaluator v0 (frozen) + Frontier-Hard
+# Current State — 2026-08-30 v0.5 FROZEN + Baseline v0 + Evaluator v0 (frozen) + Frontier-Hard + Agent V1 (frozen)
 
 **Benchmark version:** 0.5 — FROZEN for experiments (12 Core: 6 genuine historical + 6 synthetic + 5 Frontier-Hard: all genuine historical)
 **Fingerprint:** `sha256:20f1003c3f0e10bcd6293f49ca2a2167011941f5b0677076c93103b10f411dde` (sha256 over manifests + issue.md + provenance.md + buggy + oracles + schema + 12 repos — 7 Core + 5 Hard)
@@ -7,8 +7,9 @@
 **Repositories:** 12 (7 Core: 3 synthetic + 4 genuine + 5 Hard: immer, qs, superjson, p-queue, path-to-regexp — all MIT/BSD-3)
 **Validator:** `bun run benchmark:validate` / `npm run benchmark:validate` v0.5 isolated (temp workspace, path containment, exec guard, oracle 3×, fingerprint includes provenance, dual-root discovery) passes
 **Type check:** `bun run check-types` + `bun run benchmark:check-types` passes (also `npm run`); `vitest` + `tsx` for harness
-**Repo tests:** all pass on known-good via `vitest run` (`bun run test` / `npm test` both → 30+ files, 17 cases + evaluator)
+**Repo tests:** all pass on known-good via `vitest run` (`bun run test` / `npm test` both → 40 files, 233 tests — 30+ benchmark + evaluator + 5 V1 workflow)
 **Evaluator:** v0 deterministic (see docs/decisions/evaluator-v0.md) — `bun run evaluate` / `npm run evaluate` passes, now handles `hard-*` via dual-root and `SyntaxError` fallback
+**Agent V1:** structured workflow (see `docs/decisions/agent-v1.md`) — `bun run v1:run:case -- synth-001 --mock` / `V1_MOCK=1 bun run v1:run` passes, same Pi/model/workspace, single session, file-based hypotheses via `.v1/state.json`, evidence gates, bounded 5 iterations, patch hygiene via pathspec, telemetry `v1:{phases,evidence,hypotheses}`
 
 ## What exists — Benchmark (v0.5 FROZEN — 17 cases)
 
@@ -67,9 +68,23 @@ Evaluated 4 provided + 4 additional (tinyspy, mri, yocto-queue) to reach 6; yoct
 * **Tests:** `src/evaluator/tests/` 31 tests covering patch validation, exec, verdict, isolation, repeatability, benchmark identity, false_confidence/regression_failure scenarios, timeout, etc. Total `bun run test` → 25 files 145 tests.
 * **Docs:** `docs/decisions/evaluator-v0.md` (responsibility, ladder, taxonomy, isolation, integrity, determinism, VFR), `package.json` scripts `evaluate`/`evaluator:test`.
 
+## Agent V1 (new, frozen for experiments)
+
+**Agent V1** implements the structured variable against baseline’s unstructured workflow, holding model/tools/workspace constant:
+
+* **Workflow:** `src/v1/workflow/WorkflowEngine.ts` — state machine `reconnaissance→diagnosis→investigation→implementation→verification→finalization`, `ALLOWED_TRANSITIONS`, `phaseHistory/phaseDurations`, `TaskState` persisted to `.v1/state.json` (file-based, not regex, helper `src/v1/workflow/helpersTemplate.js` → `.v1/helpers.js`), gates per phase, bounded `maxIterations=5` observable in metadata.
+* **Evidence:** `src/v1/workflow/EvidenceStore.ts` (`file_inspection|command_result|test_result|reproduction|diff_inspection|other`, `result: supports|contradicts|neutral`), `src/v1/workflow/gates.ts` (repo-agnostic, no prescribed `npm test`), internal telemetry only.
+* **Hypothesis:** file-based via `.v1/state.json` (`Hypothesis {id, description, evidence[], confidence, status}`), helper `add-hypothesis`/`select-hypothesis`, engine merges by id, no regex.
+* **Session:** `src/v1/agent/V1CodingAgent.ts` — **single persistent Pi session** per case, phases via prompt turns (`getPhasePrompt`), same Pi 0.84.4 / `opencode-go/muse-spark-1.2-contributor` / tools, `syncStateFromWorkspaceFile` each turn, gate nudge + loopback prompts, `WorkflowEngine`+`EvidenceStore` tracking, `isMock` mock mirrors all phases + `cleanupScratchFiles`.
+* **Hygiene:** `src/patch/PatchCapture.ts` now excludes `:!.v1`, `:!repro.js`, etc.; `V1CodingAgent` `cleanupScratchFiles` removes `repro.js` before `capturePatch`, `sanitizePatchForScratchFiles`, no `.gitignore` pollution.
+* **Telemetry:** `metadata.json:v1` with `phaseTransitions/durations`, `iterationCount/maxIterations`, `commandsExecuted/fileCount`, `toolCallCount`, `tokenUsage:null`/`cost:null` when unavailable, `hypotheses/evidenceCount/verificationAttempts`, `evidence.jsonl`, `v1-state.json`.
+* **Config/CLI:** `src/v1/config/V1Config.ts` (`maxIterations` via `agent-v1.json` + `V1_MAX_ITERATIONS`), `src/v1/runner/V1Runner.ts`, `src/cli/run-v1-case.ts` (`bun run v1:run:case -- hist-001 --mock`), `run-v1.ts` (`bun run v1:run -- --mock --runs 1 --concurrency 1`), `experiments/agents/agent-v1.md`, `experiments/config/agent-v1.json`, `package.json` scripts `v1:run:case`, `v1:run`, `v1:validate`.
+* **Tests:** `src/v1/tests/` 5 files (workflow, gates, evidenceStore, hypothesis, v1RunnerIntegration mock) — total `bun run test` 40 files 233 tests, `bun run benchmark:validate` still 17/17 `20f1003c...`, `V1_MOCK=1` produces clean patch (`repro.js` removed, `.v1` excluded, `v1-state` has hypotheses).
+* **Docs:** `docs/decisions/agent-v1.md`, `docs/progress/agent-v1.md`.
+
 ## Next step
 
-FROZEN v0.5 (ee9104f5...) — 17 cases (12 Core + 5 Hard) + baseline-v0 + evaluator-v0 for `agent-v1/v2/final` experiments (no benchmark changes without v0.6). Previous v0.4 (cead5c6... 12/12) preserved as `validation-report.v0.4.json` but not mixed with v0.5. Next: re-run baseline on v0.5 to measure ceiling, then `agent-v1/v2/final` rely on evaluator for VFR on the 17-case frozen benchmark; do not rebuild evaluator.
+FROZEN v0.5 (`20f1003c...` — 17 cases 12 repos) + baseline-v0 + evaluator-v0 + **agent-v1** for `v2/final` experiments (no benchmark changes without v0.6). Previous v0.4 preserved but not mixed. Next: run real V1 (non-mock) on v0.5 17 cases and evaluate VFR via `bun run evaluate` per experiment protocol in `docs/decisions/agent-v1.md`.
 
 ## Known limitations (v0.5)
 

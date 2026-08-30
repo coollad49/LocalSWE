@@ -267,9 +267,62 @@ Introduces the **Frontier-Hard** subset to eliminate the baseline 100% VFR ceili
 - Rejected 15+ candidates (e.g., `immer` `16e225b` one-line, `qs` `b433a9b` one-line, `zustand` `3febf8c` one-line, `zod` heavy monorepo, `p-queue` `89a10bb` timing) — see `benchmark/HISTORICAL-CANDIDATES.md` and curator report.
 - `superjson` `src/index.ts` patched `import type` for `Class`/`SuperJSONResult` (harness only, non-logic, documented) to make `bun`/`tsx` handle type-only imports; `p-queue` `tsconfig` adjusted similarly.
 
-## Unreleased
+## [0.7.0] - 2026-08-30 — Agent V1 Structured Workflow (Single Session, File-Based)
 
-- Next: baseline re-run on v0.5 (17 cases) to measure ceiling, then agent-v1/v2 experiments.
+### Added — Agent V1 (Structured Variable Against Baseline)
+
+Builds V1 as a structured evidence-aware workflow around the **same Pi model and task info as V0**, isolating one variable (workflow) per experiment protocol:
+
+* **Types:** `src/v1/types.ts` — `AgentPhase` (`reconnaissance|diagnosis|investigation|implementation|verification|finalization`), `Hypothesis`, `Evidence` (`file_inspection|command_result|test_result|reproduction|diff_inspection|other`, `supports|contradicts|neutral`), `CommandExecution`, `FileChange`, `VerificationAttempt`, `TaskState` (`phaseHistory`, `phaseDurations`, `iteration`, `maxIterations`, `terminationReason`), `V1Telemetry`, `ALLOWED_TRANSITIONS` / `PHASE_ORDER` (normal flow + investigation loopback + verification failure loops, no arbitrary transitions).
+
+* **Config:** `src/v1/config/V1Config.ts` extends `BaselineConfig` with `maxIterations` default 5 (env `V1_MAX_ITERATIONS`/`AGENT_MAX_ITERATIONS`, file `experiments/config/agent-v1.json` → `baseline.json` → env, bounds 1–20, observable in `metadata.json: {modelConfiguration.maxIterations, v1.maxIterations}`); `getDefaultV1Config()`.
+
+* **Evidence Store:** `src/v1/workflow/EvidenceStore.ts` — in-memory + JSONL (`evidence.jsonl`), typed helpers, `addFileInspection/CommandResult/TestResult/Reproduction/DiffInspection`, `getByPhase/getByType/hasTypeInPhase`, error-suppressed `createWriteStream` (fixes Vitest ENOENT after `mkdtemp` delete), `loadFromFile`.
+
+* **Gates:** `src/v1/workflow/gates.ts` — repo-agnostic evidence gates (not prescribed `npm test`): recon needs `filesInspected≥1`+evidence, diagnosis needs hypothesis with evidence, investigation needs command/test evidence, implementation needs selected hypothesis+changes, verification needs attempts+evidence, finalization needs `diff_inspection`. `checkGateForPhase`, `allGatesForCompletedRun`.
+
+* **Workflow Engine:** `src/v1/workflow/WorkflowEngine.ts` — state machine with `transitionTo` (gate-checked, throws `InvalidTransitionError`/`GateFailedError`), `forceTransitionTo`/`skipGate`, `canTransitionTo`, iteration increment on `verification→investigation/implementation`, budget check `isBudgetExhausted`/`canLoopBack`, `recordFileInspected/CommandExecution`, `addHypothesis/updateHypothesis/selectHypothesis`, `recordEvidence/FileChange/VerificationAttempt`, `phaseHistory/phaseDurations` timestamps, `.v1/state.json` file-based persistence via queued `writeStateFile` (`persistChain` + `flushPersist`, skips initial overwrite if file exists to fix reload race). Single persistent state, not regex.
+
+* **Helpers:** `src/v1/workflow/helpersTemplate.js` copied to workspace `.v1/helpers.js` for `add-hypothesis`/`select-hypothesis`/`add-evidence`/`add-file-inspected`/`add-command`/`add-verification`/`status` (file-based, per instruction #3 preference).
+
+* **Phase Prompts:** `src/v1/agent/phasePrompts.ts` — `PHASE_INSTRUCTIONS` per phase + `getWorkflowOverview` (generic constraints, no `private/`/`provenance.md` leak).
+
+* **V1CodingAgent:** `src/v1/agent/V1CodingAgent.ts` implements `CodingAgent`, **single persistent Pi session** per case (per #1, `createAgentSession` once, phases via `session.prompt` turns, not re-instantiation), same `ModelRuntime`/`DefaultResourceLoader`/`getModel` as V0 (`PROVIDER`/`PROVIDER_API_KEY`, `AGENT_MODEL` exact id, `thinkingLevel`, `tool` list `read,bash,edit,write,grep,find,ls`), subscriptions tag `_v1Phase/_v1Iteration` and auto-record `filesInspected/commands/verificationAttempts/evidence`, `writeWorkspaceHelpers` + `syncStateFromWorkspaceFile` (merge by id, file-authoritative), gate nudge + loopback prompts (`buildGateNudgePrompt`, `buildLoopbackPrompt`), `setTerminationReason`, `cleanupScratchFiles` (removes `repro.js`/`tmp` before capture, keeps `.v1`), patch hygiene via `sanitizePatchForScratchFiles` + `PatchCapture` pathspec (per #2, **no `.gitignore` modification** to avoid `+.v1/` pollution), `capturePatch` filtered to exclude `.v1`, `isScratchFile`, telemetry (`toolCallCount`, `tokenUsage:null`/`cost:null` when unavailable, `phaseTransitions/durations`, `iterationCount`, `hypotheses/evidenceCount`), mock `runMock` mirrors all 6 phases (recon `read ISSUE.md`+`ls`, diagnosis `addHypothesis→selected`, investigation `grep`, implementation `edit` trivial comment, verification `vitest run`, finalization `git diff --stat`, plus `repro.js` scratch creation to test hygiene, phase transitions via `transitionTo`/`forceTransitionTo`).
+
+* **V1Runner:** `src/v1/runner/V1Runner.ts` mirrors `BaselineRunner` (case validation, `WorkspaceManager.createWorkspace` same isolation, `V1CodingAgent`, `runCase`/`runV1` with concurrency 1–4, `keepWorkspace`, cleanup, `getFingerprint` corrected to `../../..`).
+
+* **Patch Hygiene Fix:** `src/patch/PatchCapture.ts` now excludes `.v1`, `repro.js`, `scratch.*`, `tmp` in all `git add -N`/`diff`/`status`/`diff --name-only` and `isIgnoredPath`; defensive stripping extended. Previously `capturePatch` only excluded `node_modules/.vite/dist/.turbo`.
+
+* **Prompt/Config:** `experiments/agents/agent-v1.md` (structured workflow, phase responsibilities, generic hidden-file constraint, no `private/` leak) + `experiments/config/agent-v1.json` (`maxIterations:5`) + corrected `ROOT` (`../../..` for `src/v1/*`).
+
+* **CLI:** `src/cli/run-v1-case.ts` (`bun run v1:run:case -- hist-001 --mock --keep-workspace --max-iterations 5`) + `run-v1.ts` (`bun run v1:run -- --mock --runs 1 --concurrency 1 --cases hist-001,synth-001`), `package.json` scripts `v1:run:case`, `v1:run`, `v1:validate`.
+
+### Changed
+
+* `package.json` adds `v1:*` scripts.
+
+### Tests — 40 files 233 tests
+
+New `src/v1/tests/` (5 files, 36 tests):
+
+- `workflow.test.ts` — phase transitions (valid after gate, invalid `recon→implementation`, gate rejects, `diagnosis→investigation`, `investigation→diagnosis` loopback, `verification→investigation` increments iteration, budget exhaustion `max 1`, arbitrary transitions blocked, `phaseHistory/phaseDurations`, `forceTransitionTo`).
+- `evidenceGates.test.ts` — gates pure, repo-agnostic (`node .v1/repro.js` passes verification without `npm test`).
+- `evidenceStore.test.ts` — record/persist JSONL, count/filter, helpers, `loadFromFile`, no `private/provenance` leak.
+- `hypothesis.test.ts` — file-based `add/select/reject`, persistence to `.v1/state.json` (JSON not regex), `loadState` (queued writes), `flushPersist`.
+- `v1RunnerIntegration.test.ts` — mock end-to-end (patch excludes `.v1`/`repro.js`, `changedFiles` clean, telemetry `v1:{phases,evidence,hypotheses,maxIterations}`, hypothesis tracked, isolation no `private/oracle` in trajectory/evidence, finalization `diff_inspection`).
+
+### Evidence
+
+- `bun run check-types` 0, `bun run benchmark:check-types` 0, `bun run benchmark:validate` 17/17 `20f1003c...` (also `npm`), `bun run test` 40 files 233 tests & `npm test` same (was 25/145 before V1).
+- `V1_MOCK=1 bun run v1:run:case -- synth-001 --mock` → `src/task-manager.ts` comment patch, `trajectory` 41 lines, `evidence 9`, `phases 6`, `v1-state` hypotheses 1 selected, patch no `.v1`/`repro.js`, `metadata.v1.maxIterations 5`.
+- `V1_MOCK=1 bun run v1:run:case -- hist-001 --mock` → `src/CAC.ts` patch, `trajectory` no `private/oracle`/`provenance` leak, evidence JSONL persisted.
+- Fixes during build: `status === "timeout"` narrowing (cast), `WorkflowEngine.addHypothesis` status optional, `VerificationAttempt` iteration optional, `contradricts` typo `contradricts→contradicts`, `ROOT` `../..→../../..` for v1, `EvidenceStore` ENOENT after `rmSync` (error listener + in-memory unit tests), `WorkflowEngine` constructor race (queued writes + skip if exists), patch `.gitignore` pollution (removed, rely on pathspec), prompt leakage `provenance.md` (generic).
+
+### Decision
+
+- V1 changes workflow, not information: benchmark v0.5 `20f1003c...`, issue, repository, Pi 0.84.4, `opencode-go/muse-spark-1.2-contributor`, tools, workspace, timeout all constant with V0 per experiment integrity §15.
+
+## Unreleased
 
 
 

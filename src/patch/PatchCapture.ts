@@ -21,7 +21,15 @@ function isIgnoredPath(p: string): boolean {
     p === "dist" ||
     p.startsWith("dist/") ||
     p === ".turbo" ||
-    p.startsWith(".turbo/")
+    p.startsWith(".turbo/") ||
+    p === ".v1" ||
+    p.startsWith(".v1/") ||
+    p === "repro.js" ||
+    p === "repro.ts" ||
+    p === "scratch.js" ||
+    p === "scratch.ts" ||
+    p === "debug.js" ||
+    p === "debug.ts"
   );
 }
 
@@ -30,15 +38,15 @@ export async function capturePatch(workspacePath: string): Promise<PatchResult> 
   let changedFiles: string[] = [];
 
   try {
-    await execWithTimeout("git", ["add", "-N", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo"], workspacePath, 5000).catch(() => {});
-    const diff = await execWithTimeout("git", ["diff", "HEAD", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo"], workspacePath, 10000);
+    await execWithTimeout("git", ["add", "-N", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo", ":!.v1", ":!.v1/**", ":!repro.js", ":!repro.ts", ":!scratch.js", ":!scratch.ts", ":!debug.js", ":!debug.ts", ":!tmp", ":!tmp/**", ":!.tmp", ":!.tmp/**"], workspacePath, 5000).catch(() => {});
+    const diff = await execWithTimeout("git", ["diff", "HEAD", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo", ":!.v1", ":!.v1/**", ":!repro.js", ":!repro.ts", ":!scratch.js", ":!scratch.ts", ":!debug.js", ":!debug.ts", ":!tmp", ":!tmp/**", ":!.tmp", ":!.tmp/**"], workspacePath, 10000);
     if (diff.code === 0) patch = diff.stdout;
     else {
       const fallback = await execWithTimeout("git", ["diff", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**"], workspacePath, 10000).catch(() => ({ stdout: "" } as any));
       patch = fallback.stdout ?? "";
     }
 
-    const status = await execWithTimeout("git", ["status", "--porcelain", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo"], workspacePath, 5000);
+    const status = await execWithTimeout("git", ["status", "--porcelain", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo", ":!.v1", ":!.v1/**", ":!repro.js", ":!repro.ts", ":!scratch.js", ":!scratch.ts"], workspacePath, 5000);
     if (status.code === 0) {
       for (const line of status.stdout.split("\n")) {
         const t = line.trim();
@@ -51,7 +59,7 @@ export async function capturePatch(workspacePath: string): Promise<PatchResult> 
         }
       }
     }
-    const diffNames = await execWithTimeout("git", ["diff", "--name-only", "HEAD", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo"], workspacePath, 5000).catch(() => ({ stdout: "" } as any));
+    const diffNames = await execWithTimeout("git", ["diff", "--name-only", "HEAD", "--", ".", ":!node_modules", ":!node_modules/**", ":!.vite", ":!.vite/**", ":!dist", ":!.turbo", ":!.v1", ":!.v1/**", ":!repro.js", ":!repro.ts"], workspacePath, 5000).catch(() => ({ stdout: "" } as any));
     if (diffNames.stdout) {
       for (const f of diffNames.stdout.split("\n")) {
         const t = f.trim();
