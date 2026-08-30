@@ -4,7 +4,7 @@
 **Cases:** 17 (12 Core: 6 genuine historical + 6 synthetic + 5 Frontier-Hard: all genuine historical)
 **Repositories:** 12 (7 Core: 3 benchmark-owned + 4 external historical + 5 Frontier-Hard: immer, qs, superjson, p-queue, path-to-regexp — all MIT/BSD-3)
 **Status:** Validated — 17/17 ✓ VALID (12/12 Core + 5/5 Frontier-Hard, isolated v0.5 validator, bun-first → vitest/tsx fallback)
-**Fingerprint:** `sha256:ee9104f5a7a03d0c227205de81fa24e464c23160ddf145051b08799693cbdf78`
+**Fingerprint:** `sha256:20f1003c3f0e10bcd6293f49ca2a2167011941f5b0677076c93103b10f411dde`
 **Stability:** reproduction 3×, oracle 3× per state, regression 1×, isolated temp workspaces
 **Previous:** v0.4 `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` preserved as `benchmark/validation-report.v0.4.json`
 

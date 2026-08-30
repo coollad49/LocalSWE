@@ -571,27 +571,7 @@ export class PiCodingAgent implements CodingAgent {
   }
 
   private buildPrompt(task: RepairTask, instructions: string): string {
-    let repoHint = "";
-    try {
-      repoHint = `Workspace: ${task.workspacePath}\nRepository files at current working directory.\n`;
-    } catch {
-      // ignore
-    }
-
-    return `# Repair Task — ${task.caseId}
-
-${repoHint}
-## Instructions
-${instructions.slice(0, 3000)}
-
-## Issue
-${task.issue}
-
-Workspace is isolated at: ${task.workspacePath}
-Case ID: ${task.caseId}
-Benchmark version: ${task.benchmarkVersion}
-
-Begin now.`;
+    return `${instructions}\n\n${task.issue}`;
   }
 
   /**

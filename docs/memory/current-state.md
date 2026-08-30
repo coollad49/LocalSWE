@@ -1,7 +1,7 @@
 # Current State — 2026-08-29 v0.5 FROZEN + Baseline v0 + Evaluator v0 (frozen) + Frontier-Hard
 
 **Benchmark version:** 0.5 — FROZEN for experiments (12 Core: 6 genuine historical + 6 synthetic + 5 Frontier-Hard: all genuine historical)
-**Fingerprint:** `sha256:ee9104f5a7a03d0c227205de81fa24e464c23160ddf145051b08799693cbdf78` (sha256 over manifests + issue.md + provenance.md + buggy + oracles + schema + 12 repos — 7 Core + 5 Hard)
+**Fingerprint:** `sha256:20f1003c3f0e10bcd6293f49ca2a2167011941f5b0677076c93103b10f411dde` (sha256 over manifests + issue.md + provenance.md + buggy + oracles + schema + 12 repos — 7 Core + 5 Hard)
 **Previous:** v0.4 `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` preserved as `benchmark/validation-report.v0.4.json`
 **Cases:** 17 (12 Core + 5 Frontier-Hard) — 17/17 VALID (12/12 Core + 5/5 Hard, isolated v0.5 validator, bun-first → vitest/tsx fallback with SyntaxError fallback for `immer`/`superjson` type-only imports)
 **Repositories:** 12 (7 Core: 3 synthetic + 4 genuine + 5 Hard: immer, qs, superjson, p-queue, path-to-regexp — all MIT/BSD-3)

@@ -1,11 +1,11 @@
 # Frontier Verifier Benchmark — Case Matrix
 
-**Version:** 0.5 — FROZEN for experiments (12 Core: 6 genuine historical + 6 synthetic + 5 Frontier-Hard genuine historical, fingerprint `sha256:ee9104f5a7a03d0c227205de81fa24e464c23160ddf145051b08799693cbdf78`)
+**Version:** 0.5 — FROZEN for experiments (12 Core: 6 genuine historical + 6 synthetic + 5 Frontier-Hard genuine historical, fingerprint `sha256:20f1003c3f0e10bcd6293f49ca2a2167011941f5b0677076c93103b10f411dde`)
 **Cases:** 17 (12 Core + 5 Frontier-Hard)
 **Repositories:** 12 (7 Core: 3 benchmark-owned: task-manager, money-utils, async-queue + 4 external historical: cac, defu, tinyspy, mri + 5 Frontier-Hard: immer, qs, superjson, p-queue, path-to-regexp)
 **Date:** 2026-08-29
 **Validator:** `bun run benchmark:validate` v0.5 isolated (bun-first → vitest/tsx fallback, temp workspace, path containment, exec guard, 3× oracle) — 17/17 ✓ VALID (12/12 Core + 5/5 Frontier-Hard, also `npm run benchmark:validate` via tsx)
-**Fingerprint:** `sha256:ee9104f5a7a03d0c227205de81fa24e464c23160ddf145051b08799693cbdf78` (sha256 over manifests + issue.md + provenance.md + buggy snapshots + oracles + schema + 12 repo hashes)
+**Fingerprint:** `sha256:20f1003c3f0e10bcd6293f49ca2a2167011941f5b0677076c93103b10f411dde` (sha256 over manifests + issue.md + provenance.md + buggy snapshots + oracles + schema + 12 repo hashes)
 **Stability:** reproduction 3×, oracle 3× per state, regression 1×
 **Previous:** v0.4 `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` preserved as `benchmark/validation-report.v0.4.json`
 

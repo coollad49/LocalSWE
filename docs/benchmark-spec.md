@@ -1,7 +1,7 @@
 # Frontier Verifier Benchmark Specification
 
 **Version:** 0.5 — FROZEN for experiments
-**Status:** Frozen (benchmark v0.5, fingerprint `sha256:ee9104f5a7a03d0c227205de81fa24e464c23160ddf145051b08799693cbdf78`)
+**Status:** Frozen (benchmark v0.5, fingerprint `sha256:20f1003c3f0e10bcd6293f49ca2a2167011941f5b0677076c93103b10f411dde`)
 **Project:** micro1 Frontier Engineering Challenge 2026
 **Previous:** v0.4 `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` preserved as `benchmark/validation-report.v0.4.json`
 
