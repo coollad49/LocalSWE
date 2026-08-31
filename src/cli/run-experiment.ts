@@ -1,12 +1,11 @@
 #!/usr/bin/env tsx
 /**
  * Master Experiment Runner CLI — Frontier Engineering Challenge
- * Executes Baseline v0 vs Agent V1 across benchmark cases,
+ * Executes Baseline v0, Agent V1, and Agent V2 across benchmark cases,
  * evaluates all patches deterministically, and prints a comparative delta report.
  *
  * Usage:
- *   bun run experiment
- *   bun run experiment --concurrency 4 --runs 1
+ *   bun run experiment --v2 --reuse-baseline --reuse-v1 --concurrency 4
  *   bun run experiment --reuse-baseline
  *   bun run experiment --cases hist-001,synth-001
  *   bun run experiment --mock
@@ -16,6 +15,8 @@ import { loadBaselineConfig } from "../config/BaselineConfig.ts";
 import { BaselineRunner } from "../runner/BaselineRunner.ts";
 import { loadV1Config } from "../v1/config/V1Config.ts";
 import { V1Runner } from "../v1/runner/V1Runner.ts";
+import { loadV2Config } from "../v2/config/V2Config.ts";
+import { V2Runner } from "../v2/runner/V2Runner.ts";
 import { CaseLoader } from "../runner/CaseLoader.ts";
 import { Evaluator } from "../evaluator/Evaluator.ts";
 import { loadBenchmarkIdentity } from "../evaluator/benchmarkIdentity.ts";
@@ -60,17 +61,23 @@ interface ExperimentCliOptions {
   skipBaseline: boolean;
   reuseBaseline: boolean;
   skipV1: boolean;
+  reuseV1: boolean;
+  runV2: boolean;
+  skipV2: boolean;
   experimentName: string;
 }
 
 function parseCliArgs(): ExperimentCliOptions {
   const args = process.argv.slice(2);
-  const useMock = args.includes("--mock") || process.env.BASELINE_MOCK === "1" || process.env.V1_MOCK === "1";
+  const useMock = args.includes("--mock") || process.env.BASELINE_MOCK === "1" || process.env.V1_MOCK === "1" || process.env.V2_MOCK === "1";
   const verbose = args.includes("--verbose") || args.includes("-v");
   const quiet = args.includes("--quiet") || args.includes("-q");
   const skipBaseline = args.includes("--skip-baseline");
   const reuseBaseline = args.includes("--reuse-baseline");
   const skipV1 = args.includes("--skip-v1");
+  const reuseV1 = args.includes("--reuse-v1");
+  const runV2 = args.includes("--v2") || args.includes("--agent-v2");
+  const skipV2 = args.includes("--skip-v2");
 
   const runsIdx = args.indexOf("--runs");
   const runsPerCase = runsIdx !== -1 && args[runsIdx + 1] ? Math.max(1, Number.parseInt(args[runsIdx + 1]!, 10)) : 1;
@@ -102,11 +109,14 @@ function parseCliArgs(): ExperimentCliOptions {
     skipBaseline,
     reuseBaseline,
     skipV1,
+    reuseV1,
+    runV2,
+    skipV2,
     experimentName,
   };
 }
 
-async function findExistingBaselineRuns(runsRoot: string, caseIds: string[]): Promise<Map<string, string[]>> {
+async function findExistingRuns(runsRoot: string, caseIds: string[], versionPrefix: string): Promise<Map<string, string[]>> {
   const map = new Map<string, string[]>();
   try {
     const entries = await readdir(runsRoot, { withFileTypes: true });
@@ -118,7 +128,7 @@ async function findExistingBaselineRuns(runsRoot: string, caseIds: string[]): Pr
         try {
           const raw = await readFile(metaPath, "utf-8");
           const meta = JSON.parse(raw);
-          if (meta.agentVersion?.startsWith("baseline") && caseIds.includes(meta.caseId)) {
+          if (meta.agentVersion?.startsWith(versionPrefix) && caseIds.includes(meta.caseId)) {
             const list = map.get(meta.caseId) ?? [];
             list.push(e.name);
             map.set(meta.caseId, list);
@@ -135,11 +145,13 @@ async function main(): Promise<void> {
   if (opts.useMock) {
     process.env.BASELINE_MOCK = "1";
     process.env.V1_MOCK = "1";
+    process.env.V2_MOCK = "1";
   }
-  // Enable clean live tool progress by default unless explicitly silenced via --quiet
+
   const live = !opts.quiet;
   process.env.BASELINE_LIVE_PROGRESS = live ? "1" : "0";
   process.env.V1_LIVE_PROGRESS = live ? "1" : "0";
+  process.env.V2_LIVE_PROGRESS = live ? "1" : "0";
 
   const allAvailableCases = await CaseLoader.listCases();
   const targetCases = opts.caseIds && opts.caseIds.length > 0 ? opts.caseIds : allAvailableCases;
@@ -178,6 +190,8 @@ async function main(): Promise<void> {
   console.log(`  Runs / Case:  ${opts.runsPerCase} run(s) per case`);
   console.log(`  Execution:    ${opts.useMock ? "Mock Agent" : "Live Cloud API"}`);
   if (opts.reuseBaseline) console.log(`  Baseline:     Reusing completed baseline runs (--reuse-baseline)`);
+  if (opts.reuseV1) console.log(`  Agent V1:     Reusing completed V1 runs (--reuse-v1)`);
+  if (opts.runV2) console.log(`  Agent V2:     Active execution (--v2)`);
   console.log("=".repeat(78) + "\n");
 
   const runIdsToEvaluate: string[] = [];
@@ -186,7 +200,7 @@ async function main(): Promise<void> {
   if (!opts.skipBaseline) {
     let casesToRun = targetCases;
     if (opts.reuseBaseline) {
-      const existing = await findExistingBaselineRuns(runsRoot, targetCases);
+      const existing = await findExistingRuns(runsRoot, targetCases, "baseline");
       const reusedRuns: string[] = [];
       const missingCases: string[] = [];
       for (const c of targetCases) {
@@ -206,12 +220,6 @@ async function main(): Promise<void> {
 
     if (casesToRun.length > 0) {
       console.log(`[1/3] Running Baseline v0 for ${casesToRun.length} case(s) × ${opts.runsPerCase} runs...`);
-      const baselineConfig = await loadBaselineConfig({
-        overrides: {
-          ...(opts.useMock ? { model: "mock" } : {}),
-          runsPerCase: opts.runsPerCase,
-        },
-      });
       const baselineRunner = new BaselineRunner(baselineConfig, runsRoot);
       const startBaseline = Date.now();
       const baselineResults = await baselineRunner.runBaseline({
@@ -231,33 +239,80 @@ async function main(): Promise<void> {
     console.log("[1/3] Skipping Baseline v0 (--skip-baseline)\n");
   }
 
-  // --- Step 2: Run Agent V1 ---
+  // --- Step 2: Agent V1 (fresh or reused) ---
   if (!opts.skipV1) {
-    console.log(`[2/3] Running Agent V1 (${targetCases.length} cases × ${opts.runsPerCase} runs)...`);
-    const v1Config = await loadV1Config({
+    let casesToRun = targetCases;
+    if (opts.reuseV1) {
+      const existing = await findExistingRuns(runsRoot, targetCases, "agent-v1");
+      const reusedRuns: string[] = [];
+      const missingCases: string[] = [];
+      for (const c of targetCases) {
+        const found = existing.get(c);
+        if (found && found.length >= opts.runsPerCase) {
+          reusedRuns.push(...found.slice(0, opts.runsPerCase));
+        } else {
+          missingCases.push(c);
+        }
+      }
+      if (reusedRuns.length > 0) {
+        console.log(`[2/3] Reusing ${reusedRuns.length} existing Agent V1 run(s) from disk...`);
+        for (const id of reusedRuns) runIdsToEvaluate.push(id);
+      }
+      casesToRun = missingCases;
+    }
+
+    if (casesToRun.length > 0) {
+      console.log(`[2/3] Running Agent V1 (${casesToRun.length} cases × ${opts.runsPerCase} runs)...`);
+      const v1Config = await loadV1Config({
+        overrides: {
+          ...(opts.useMock ? { model: "mock" } : {}),
+          runsPerCase: opts.runsPerCase,
+        },
+      });
+      const v1Runner = new V1Runner(v1Config, runsRoot);
+      const startV1 = Date.now();
+      const v1Results = await v1Runner.runV1({
+        caseIds: casesToRun,
+        config: v1Config,
+        concurrency: opts.concurrency,
+        runsPerCase: opts.runsPerCase,
+        runsRoot,
+      });
+      const v1Elapsed = ((Date.now() - startV1) / 1000).toFixed(1);
+      console.log(`  ✓ Agent V1 completed: ${v1Results.length} runs in ${v1Elapsed}s\n`);
+      for (const r of v1Results) runIdsToEvaluate.push(r.runId);
+    } else if (opts.reuseV1) {
+      console.log(`  ✓ All ${targetCases.length} Agent V1 runs successfully loaded from disk.\n`);
+    }
+  } else {
+    console.log("[2/3] Skipping Agent V1 (--skip-v1)\n");
+  }
+
+  // --- Step 3: Agent V2 ---
+  if (opts.runV2 && !opts.skipV2) {
+    console.log(`[3/3] Running Agent V2 (${targetCases.length} cases × ${opts.runsPerCase} runs)...`);
+    const v2Config = await loadV2Config({
       overrides: {
         ...(opts.useMock ? { model: "mock" } : {}),
         runsPerCase: opts.runsPerCase,
       },
     });
-    const v1Runner = new V1Runner(v1Config, runsRoot);
-    const startV1 = Date.now();
-    const v1Results = await v1Runner.runV1({
+    const v2Runner = new V2Runner(v2Config, runsRoot);
+    const startV2 = Date.now();
+    const v2Results = await v2Runner.runV2({
       caseIds: targetCases,
-      config: v1Config,
+      config: v2Config,
       concurrency: opts.concurrency,
       runsPerCase: opts.runsPerCase,
       runsRoot,
     });
-    const v1Elapsed = ((Date.now() - startV1) / 1000).toFixed(1);
-    console.log(`  ✓ Agent V1 completed: ${v1Results.length} runs in ${v1Elapsed}s\n`);
-    for (const r of v1Results) runIdsToEvaluate.push(r.runId);
-  } else {
-    console.log("[2/3] Skipping Agent V1 (--skip-v1)\n");
+    const v2Elapsed = ((Date.now() - startV2) / 1000).toFixed(1);
+    console.log(`  ✓ Agent V2 completed: ${v2Results.length} runs in ${v2Elapsed}s\n`);
+    for (const r of v2Results) runIdsToEvaluate.push(r.runId);
   }
 
-  // --- Step 3: Evaluate All Runs ---
-  console.log(`[3/3] Evaluating ${runIdsToEvaluate.length} run(s) against benchmark ground truth...`);
+  // --- Step 4: Deterministic Evaluation Across All Collected Runs ---
+  console.log(`\nEvaluating ${runIdsToEvaluate.length} run(s) against benchmark ground truth...`);
   const evaluator = new Evaluator();
 
   const evaluationResults: EvaluationResult[] = [];
@@ -294,10 +349,13 @@ async function main(): Promise<void> {
   const pricingSnapshot = loadPricingConfig() ?? null;
 
   const baselineVersion = evaluationResults.find((r) => r.agentVersion.includes("baseline"))?.agentVersion ?? "baseline-v0";
-  const v1Version = evaluationResults.find((r) => r.agentVersion.includes("v1") || r.agentVersion.includes("agent-v1"))?.agentVersion ?? "agent-v1";
+  const comparisonAgentVersion = evaluationResults.find((r) => r.agentVersion.includes("v2"))?.agentVersion
+    ?? evaluationResults.find((r) => r.agentVersion.includes("v1"))?.agentVersion
+    ?? "agent-v1";
+
   const baselineMetrics = computeAgentMetrics(evaluationResults, baselineVersion);
-  const v1Metrics = computeAgentMetrics(evaluationResults, v1Version);
-  const comparison = computeComparison(baselineMetrics, v1Metrics);
+  const compMetrics = computeAgentMetrics(evaluationResults, comparisonAgentVersion);
+  const comparison = computeComparison(baselineMetrics, compMetrics);
 
   const report = buildExperimentReport({
     benchmarkVersion: identity.version,
@@ -345,7 +403,7 @@ async function main(): Promise<void> {
     } catch {}
   }
 
-  // --- Step 4: Auto-Vacuum Trajectory Logs to Reclaim Disk Space ---
+  // --- Step 5: Auto-Vacuum Trajectory Logs to Reclaim Disk Space ---
   try {
     const vacuumRes = await vacuumTrajectories(runsRoot, true);
     if (vacuumRes.savedMb > 0) {
@@ -358,26 +416,14 @@ async function main(): Promise<void> {
   console.log("  EXPERIMENT RESULTS — COMPARATIVE PERFORMANCE");
   console.log("=".repeat(78));
 
-  console.log("\n--- AGENT COMPARISON ---");
   const formatRate = (rate: number | null | undefined) => (rate != null ? `${rate.toFixed(1)}%` : "N/A");
-  const formatDelta = (row?: { delta: number | null; deltaUnit: string }) => {
-    if (!row || row.delta == null) return "";
-    const sign = row.delta >= 0 ? "+" : "";
-    return ` (${sign}${row.delta.toFixed(1)} ${row.deltaUnit})`;
-  };
 
-  const vfrRow = comparison?.find((r) => r.metric === "VFR");
-  const reproRow = comparison?.find((r) => r.metric === "Reproduction Rate");
-  const oracleRow = comparison?.find((r) => r.metric === "Oracle Pass Rate");
-  const regrRow = comparison?.find((r) => r.metric === "Regression-Free Rate");
-
-  console.log(`  Metric                 | Baseline v0      | Agent V1         | Delta`);
-  console.log(`  -----------------------+------------------+------------------+-----------------`);
-  console.log(`  Verified Fix Rate (VFR)| ${formatRate(baselineMetrics.rates.vfr).padEnd(16)} | ${formatRate(v1Metrics.rates.vfr).padEnd(16)} | ${vfrRow?.delta != null ? (vfrRow.delta >= 0 ? `+${vfrRow.delta.toFixed(1)} pp` : `${vfrRow.delta.toFixed(1)} pp`) : "N/A"}`);
-  console.log(`  Reproduction Pass Rate | ${formatRate(baselineMetrics.rates.reproductionRate).padEnd(16)} | ${formatRate(v1Metrics.rates.reproductionRate).padEnd(16)} | ${formatDelta(reproRow)}`);
-  console.log(`  Oracle Pass Rate       | ${formatRate(baselineMetrics.rates.oraclePassRate).padEnd(16)} | ${formatRate(v1Metrics.rates.oraclePassRate).padEnd(16)} | ${formatDelta(oracleRow)}`);
-  console.log(`  Regression-Free Rate   | ${formatRate(baselineMetrics.rates.regressionFreeRate).padEnd(16)} | ${formatRate(v1Metrics.rates.regressionFreeRate).padEnd(16)} | ${formatDelta(regrRow)}`);
-  console.log(`  Mean Duration (ms)     | ${(baselineMetrics.efficiency.averageDurationMs?.toFixed(0) ?? "N/A").padEnd(16)} | ${(v1Metrics.efficiency.averageDurationMs?.toFixed(0) ?? "N/A").padEnd(16)} |`);
+  console.log("\n--- AGENTS OVERVIEW ---");
+  for (const a of agents) {
+    const costStr = a.efficiency.averageCostUsd != null ? `$${a.efficiency.averageCostUsd.toFixed(4)}` : "N/A";
+    const durStr = a.efficiency.averageDurationMs != null ? `${(a.efficiency.averageDurationMs / 1000).toFixed(1)}s` : "N/A";
+    console.log(`  ${a.agentVersion.padEnd(16)} | Runs: ${String(a.runs).padEnd(4)} | VFR: ${formatRate(a.rates.vfr).padEnd(8)} | AvgCost: ${costStr.padEnd(10)} | AvgDur: ${durStr}`);
+  }
 
   console.log("\n--- CASE-BY-CASE BREAKDOWN ---");
   console.log(`  Case ID      | Agent Version    | Runs | Verified | VFR    | Avg Duration`);
