@@ -848,8 +848,11 @@ export class V1CodingAgent implements CodingAgent {
 
     const unsubAgent = session.agent.subscribe((event: unknown, _signal: AbortSignal) => {
       const ev = event as { type: string; data?: unknown };
-      const enriched = { ...(event as Record<string, unknown>), _v1Phase: engine.getPhase(), _v1Iteration: engine.getIteration() };
-      trajectory.append("agent", ev.type ?? "unknown", enriched);
+      // Ignore token-by-token streaming deltas to prevent gigabyte-scale quadratic trajectory bloat
+      if (ev.type !== "message_update") {
+        const enriched = { ...(event as Record<string, unknown>), _v1Phase: engine.getPhase(), _v1Iteration: engine.getIteration() };
+        trajectory.append("agent", ev.type ?? "unknown", enriched);
+      }
 
       // Track tool calls for evidence/filesInspected in real time (best-effort)
       try {

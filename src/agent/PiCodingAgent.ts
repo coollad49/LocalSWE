@@ -520,7 +520,10 @@ export class PiCodingAgent implements CodingAgent {
 
     const unsubAgent = session.agent.subscribe((event: unknown, _signal: AbortSignal) => {
       const ev = event as { type: string };
-      trajectory.append("agent", ev.type ?? "unknown", event);
+      // Ignore token-by-token streaming deltas to prevent gigabyte-scale quadratic trajectory bloat
+      if (ev.type !== "message_update") {
+        trajectory.append("agent", ev.type ?? "unknown", event);
+      }
 
       if (process.env.BASELINE_LIVE_PROGRESS === "1") {
         const type = ev.type ?? "";
