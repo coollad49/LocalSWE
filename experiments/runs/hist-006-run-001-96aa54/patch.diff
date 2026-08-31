@@ -1,0 +1,62 @@
+diff --git a/src/spyOn.ts b/src/spyOn.ts
+index cf0f3f8..65cd219 100644
+--- a/src/spyOn.ts
++++ b/src/spyOn.ts
+@@ -65,9 +65,25 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     }
+     throw new Error('specify getter or setter to spy on')
+   })()
++  // Walk up the prototype chain to find the descriptor and the object
++  // that owns it. This allows spying on methods/getters inherited from
++  // any ancestor (not just the immediate prototype), and lets us
++  // restore the property on the same object where it was originally
++  // defined so that no own property is leaked onto `obj` after restore.
++  let descriptorOwner: any = obj
+   let objDescriptor = getDescriptor(obj, accessName)
+-  let proto = Object.getPrototypeOf(obj)
+-  let protoDescriptor = proto && getDescriptor(proto, accessName)
++  let protoDescriptor: PropertyDescriptor | undefined
++  if (!objDescriptor) {
++    let proto: any = Object.getPrototypeOf(obj)
++    while (proto && !protoDescriptor) {
++      protoDescriptor = getDescriptor(proto, accessName)
++      if (protoDescriptor) {
++        descriptorOwner = proto
++        break
++      }
++      proto = Object.getPrototypeOf(proto)
++    }
++  }
+   let originalDescriptor = objDescriptor || protoDescriptor
+ 
+   assert(
+@@ -104,19 +120,22 @@ export function internalSpyOn<T, K extends string & keyof T>(
+   }
+ 
+   let reassign = (cb: any) => {
+-    let { value, ...desc } = originalDescriptor || {
+-      configurable: true,
+-      writable: true,
+-    }
++    // Build the new descriptor based on the original one (if found) so
++    // that sibling accessors such as the setter are preserved when we
++    // spy on a getter (and vice versa).
++    let desc: any = originalDescriptor
++      ? { ...originalDescriptor }
++      : { configurable: true, writable: true }
++    delete desc.value
+     if (accessType !== 'value') {
+       delete desc.writable // getter/setter can't have writable attribute at all
+     }
+-    ;(desc as PropertyDescriptor)[accessType] = cb
+-    define(obj, accessName, desc)
++    desc[accessType] = cb
++    define(descriptorOwner, accessName, desc)
+   }
+   let restore = () =>
+     originalDescriptor && !original
+-      ? define(obj, accessName, originalDescriptor)
++      ? define(descriptorOwner, accessName, originalDescriptor)
+       : reassign(original)
+ 
+   if (!mock) mock = original

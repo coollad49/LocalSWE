@@ -1,0 +1,441 @@
+{
+  "runId": "hist-004-run-001-e166c8",
+  "caseId": "hist-004",
+  "benchmarkVersion": "0.5",
+  "agentVersion": "agent-v1",
+  "agentRuntime": "pi",
+  "piVersion": "0.84.4",
+  "model": "mimo-v2.5",
+  "modelConfiguration": {
+    "thinkingLevel": "medium",
+    "maxTurns": 25,
+    "agentTimeoutMs": 600000,
+    "commandTimeoutSec": 30,
+    "maxIterations": 5
+  },
+  "agentPromptVersion": "agent-v1",
+  "agentPromptPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\agents\\agent-v1.md",
+  "startTime": "2026-08-30T15:14:32.177Z",
+  "endTime": "2026-08-30T15:24:33.074Z",
+  "durationMs": 600897,
+  "terminationStatus": "timeout",
+  "terminationReason": "timeout",
+  "changedFiles": [
+    "lib/index.js",
+    "tests/mri.test.ts"
+  ],
+  "testCommands": [
+    "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\" && npm test 2>&1",
+    "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\" && npm test 2>&1",
+    "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\" && npm test 2>&1",
+    "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\" && node -e \"\nconst fs = require('fs');\nconst s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\ns.phase = 'finalization';\ns.changesMade = s.changesMade || [];\ns.changesMade.push({\n  file: 'lib/index.js',\n  description: 'Added typeof val === \\\\'boolean\\\\' short-circuit in toVal boolean branch to prevent numeric coercion of boolean values into out._.'\n});\ns.changesMade.push({\n  file: 'tests/mri.test.ts',\n  description: 'Added two regression tests for boolean default leak scenario.'\n});\ns.verificationAttempts = s.verificationAttempts || [];\ns.verificationAttempts.push({\n  method: 'vitest',\n  command: 'npm test',\n  passed: true,\n  output: '11 passed (11)'\n});\ns.verificationAttempts.push({\n  method: 'reproducer',\n  command: 'node repro showing before vs after',\n  passed: true,\n  output: 'Before: {foo:true, _:[1]}; After: {foo:true, _:[]}'\n});\nfs.writeFileSync('.v1/state.json', JSON.stringify(s, null, 2));\nconsole.log('state updated');\n\""
+  ],
+  "testResults": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\" && npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 4522,
+      "stdout": "\n> mri@1.1.4 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  16:17:14\n   Duration  901ms (transform 94ms, setup 0ms, import 147ms, tests 18ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\" && npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 5514,
+      "stdout": "\n> mri@1.1.4 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  16:17:35\n   Duration  1.34s (transform 129ms, setup 0ms, import 188ms, tests 27ms, environment 2ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\" && npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 6369,
+      "stdout": "\n> mri@1.1.4 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  16:17:52\n   Duration  1.03s (transform 124ms, setup 0ms, import 186ms, tests 30ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\" && node -e \"\nconst fs = require('fs');\nconst s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\ns.phase = 'finalization';\ns.changesMade = s.changesMade || [];\ns.changesMade.push({\n  file: 'lib/index.js',\n  description: 'Added typeof val === \\\\'boolean\\\\' short-circuit in toVal boolean branch to prevent numeric coercion of boolean values into out._.'\n});\ns.changesMade.push({\n  file: 'tests/mri.test.ts',\n  description: 'Added two regression tests for boolean default leak scenario.'\n});\ns.verificationAttempts = s.verificationAttempts || [];\ns.verificationAttempts.push({\n  method: 'vitest',\n  command: 'npm test',\n  passed: true,\n  output: '11 passed (11)'\n});\ns.verificationAttempts.push({\n  method: 'reproducer',\n  command: 'node repro showing before vs after',\n  passed: true,\n  output: 'Before: {foo:true, _:[1]}; After: {foo:true, _:[]}'\n});\nfs.writeFileSync('.v1/state.json', JSON.stringify(s, null, 2));\nconsole.log('state updated');\n\"",
+      "exitCode": 0,
+      "durationMs": 1237,
+      "stdout": "state updated\n"
+    }
+  ],
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-004-run-001-e166c8\\trajectory.jsonl",
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-004-run-001-e166c8\\patch.diff",
+  "resultPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-004-run-001-e166c8\\result.json",
+  "workspacePath": "C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-004-hist-004-run-001-e166c8-xWFbUc",
+  "error": "Agent timeout after 600000ms",
+  "nodeVersion": "v22.23.2",
+  "platform": "win32",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "v1": {
+    "phaseTransitions": [
+      {
+        "from": "init",
+        "to": "reconnaissance",
+        "timestamp": "2026-08-30T15:14:32.184Z",
+        "iteration": 0
+      },
+      {
+        "from": "reconnaissance",
+        "to": "diagnosis",
+        "timestamp": "2026-08-30T15:18:16.104Z",
+        "iteration": 0
+      }
+    ],
+    "phaseDurations": [
+      {
+        "phase": "reconnaissance",
+        "enteredAt": "2026-08-30T15:14:32.184Z",
+        "exitedAt": "2026-08-30T15:18:16.104Z",
+        "durationMs": 223920
+      },
+      {
+        "phase": "diagnosis",
+        "enteredAt": "2026-08-30T15:18:16.104Z",
+        "exitedAt": "2026-08-30T15:24:32.201Z",
+        "durationMs": 376097
+      }
+    ],
+    "iterationCount": 0,
+    "maxIterations": 5,
+    "commandsExecuted": [
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "total 115\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 .\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 ..\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 .git\n-rw-r--r-- 1 cooll 197609   35 Aug 30 16:14 .gitignore\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 .v1\n-rw-r--r-- 1 cooll 197609  244 Aug 30 15:13 ISSUE.md\n-rw-r--r-- 1 cooll 197609  477 Aug 30 15:13 index.d.ts\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 lib\n-rw-r--r-- 1 cooll 197609 1135 Aug 30 15:13 license.md\n-rw-r--r-- 1 cooll 197609  698 Aug 30 15:13 package.json\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 tests\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:14:43.921Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "{\n  \"phase\": \"reconnaissance\",\n  \"issue\": \"# Issue: Boolean defaults leak into _ (mri)\\r\\n\\r\\n## Problem\\r\\n\\r\\nWhen a boolean default is provided and a boolean flag is supplied, the parser incorrectly coerces the boolean default and pushes a numeric value into the positional arguments array.\\r\\n\",\n  \"filesInspected\": [\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/ISSUE.md\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/package.json\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/index.d.ts\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/lib\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/lib/index.js\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/tests\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/tests/mri.test.ts\"\n  ],\n  \"commandsExecuted\": [\n    {\n      \"command\": \"\",\n      \"exitCode\": 0,\n      \"stdout\": \"total 115\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 .\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 ..\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 .git\\n-rw-r--r-- 1 cooll 197609   35 Aug 30 16:14 .gitignore\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 .v1\\n-rw-r--r-- 1 cooll 197609  244 Aug 30 15:13 ISSUE.md\\n-rw-r--r-- 1 cooll 197609  477 Aug 30 15:13 index.d.ts\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 lib\\n-rw-r--r-- 1 cooll 197609 1135 Aug 30 15:13 license.md\\n-rw-r--r-- 1 cooll 197609  698 Aug 30 15:13 package.json\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 tests\\n\",\n      \"stderr\": \"\",\n      \"durationMs\": 0,\n      \"phase\": \"reconnaissance\",\n      \"timestamp\": \"2026-08-30T15:14:43.921Z\"\n    }\n  ],\n  \"hypotheses\": [],\n  \"changesMade\": [],\n  \"verificationAttempts\": [],\n  \"evidence\": [\n    {\n      \"id\": \"ev-bbf7e0dd\",\n      \"type\": \"command_result\",\n      \"d",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:14:54.466Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "Result: {\"_\":[1],\"foo\":true}\nExpected: { foo: true, _: [] }\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:15:41.432Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hyp-7ce0d55a\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:15:44.671Z"
+      },
+      {
+        "command": "",
+        "exitCode": 1,
+        "stdout": "hypothesis not found hyp-7ce0d55a\n\n\nCommand exited with code 1",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:15:52.168Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "#!/usr/bin/env node\r\n// V1 helper for file-based hypothesis/evidence tracking inside workspace.\r\n// Usage:\r\n//   node .v1/helpers.js add-hypothesis '{\"description\":\"...\",\"evidence\":[\"file:line\"],\"confidence\":0.8,\"files\":[\"src/foo.ts\"]}'\r\n//   node .v1/helpers.js select-hypothesis <id>\r\n//   node .v1/helpers.js add-evidence '{\"type\":\"file_inspection\",\"description\":\"...\",\"source\":\"src/foo.ts\",\"result\":\"supports\"}'\r\n//   node .v1/helpers.js add-file-inspected src/foo.ts\r\n//   node .v1/helpers.js add-command '{\"command\":\"npm test\",\"exitCode\":0,\"stdout\":\"...\"}'\r\n//   node .v1/helpers.js add-verification '{\"method\":\"vitest\",\"command\":\"vitest run\",\"passed\":true,\"output\":\"...\"}'\r\n//   node .v1/helpers.js status\r\nimport { readFileSync, writeFileSync, existsSync, mkdirSync } from \"node:fs\";\r\nimport { join, dirname } from \"node:path\";\r\nimport { randomUUID } from \"node:crypto\";\r\n\r\nconst STATE_PATH = join(process.cwd(), \".v1/state.json\");\r\n\r\nfunction load() {\r\n  if (!existsSync(STATE_PATH)) {\r\n    console.error(\"No .v1/state.json found at\", STATE_PATH);\r\n    process.exit(1);\r\n  }\r\n  const raw = readFileSync(STATE_PATH, \"utf-8\");\r\n  return JSON.parse(raw);\r\n}\r\nfunction save(s) {\r\n  mkdirSync(dirname(STATE_PATH), { recursive: true });\r\n  writeFileSync(STATE_PATH, JSON.stringify(s, null, 2), \"utf-8\");\r\n}\r\n\r\nconst cmd = process.argv[2];\r\nif (!cmd || cmd === \"help\" || cmd === \"--help\") {\r\n  console.log(\"Usage: node .v1/helpers.js <add-hypothesis|select-hypothesis|add-evidence|add-file-inspected|add-command|add-verification|status>\");\r\n  process.exit(0);\r\n}\r\nif (cmd === \"status\") {\r\n  const s = load();\r\n  console.log(JSON.stringify(s, null, 2));\r\n  process.exit(0);\r\n}\r\nif (cmd === \"add-hypothesis\") {\r\n  const arg = process.argv[3];\r\n  if (!arg) { console.error(\"need JSON arg\"); process.exit(1); }\r\n  let payload;\r\n  try { payload = JSON.parse(arg); } catch { payload = { description: arg, evidence: [] }; }\r\n  const s = load();\r\n  const h = {\r\n    id: payload.id ?? `hyp-${randomUUID().sl",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:15:54.432Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "{\n  \"phase\": \"reconnaissance\",\n  \"issue\": \"# Issue: Boolean defaults leak into _ (mri)\\r\\n\\r\\n## Problem\\r\\n\\r\\nWhen a boolean default is provided and a boolean flag is supplied, the parser incorrectly coerces the boolean default and pushes a numeric value into the positional arguments array.\\r\\n\",\n  \"filesInspected\": [\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/ISSUE.md\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/package.json\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/index.d.ts\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/lib\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/lib/index.js\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/tests\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/tests/mri.test.ts\"\n  ],\n  \"commandsExecuted\": [\n    {\n      \"command\": \"\",\n      \"exitCode\": 0,\n      \"stdout\": \"total 115\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 .\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 ..\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 .git\\n-rw-r--r-- 1 cooll 197609   35 Aug 30 16:14 .gitignore\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 .v1\\n-rw-r--r-- 1 cooll 197609  244 Aug 30 15:13 ISSUE.md\\n-rw-r--r-- 1 cooll 197609  477 Aug 30 15:13 index.d.ts\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 lib\\n-rw-r--r-- 1 cooll 197609 1135 Aug 30 15:13 license.md\\n-rw-r--r-- 1 cooll 197609  698 Aug 30 15:13 package.json\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 tests\\n\",\n      \"stderr\": \"\",\n      \"durationMs\": 0,\n      \"phase\": \"reconnaissance\",\n      \"timestamp\": \"2026-08-30T15:14:43.921Z\"\n    },\n    {\n      \"command\": \"\",\n      \"exitCode\": 0,\n      \"stdout\": \"{\\n  \\\"phase\\\": \\\"reconnaissance\\\",\\n  \\\"issue\\\": \\\"# Issue: Boolean defaults leak into _ (mri)\\\\r\\",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:15:56.975Z"
+      },
+      {
+        "command": "",
+        "exitCode": 1,
+        "stdout": "Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Manage App Execution Aliases.\r\n\n\nCommand exited with code 49",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:01.576Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hypotheses: []\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:06.068Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hyp-bb7a8377\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:08.751Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hypotheses count: 0\nhypotheses: []\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:11.056Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "  File: .v1/state.json\n  Size: 23431     \tBlocks: 24         IO Block: 65536  regular file\nDevice: 26a3f660h/648279648d\tInode: 1407374884036674  Links: 1\nAccess: (0644/-rw-r--r--)  Uid: (197609/   cooll)   Gid: (197609/ UNKNOWN)\nAccess: 2026-08-30 16:16:13.076698600 +0100\nModify: 2026-08-30 16:16:13.076698600 +0100\nChange: 2026-08-30 16:16:13.076698600 +0100\n Birth: 2026-08-30 16:14:32.186407200 +0100\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:13.369Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hyp-27abec60\nhypotheses: 1\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:19.146Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "total 40\ndrwxr-xr-x 1 cooll 197609     0 Aug 30 16:14 .\ndrwxr-xr-x 1 cooll 197609     0 Aug 30 16:14 ..\n-rwxr-xr-x 1 cooll 197609  5743 Aug 30 16:14 helpers.js\n-rw-r--r-- 1 cooll 197609 25447 Aug 30 16:16 state.json\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:21.776Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hypotheses: []\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:23.821Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "On branch main\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t.v1/\n\nnothing added to commit but untracked files present (use \"git add\" to track)\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:26.226Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hyp-00c68718\ncount: 1 [\"Test H\"]\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:31.200Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hyp-df6fac7f\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:36.288Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hypotheses count: 0\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:39.598Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "added\ncount: 1\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:44.798Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "count: 0 []\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:47.104Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "written, count: 1 phase: investigation selected: hyp-df6fac7f\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:50.852Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "Test 1: --foo with boolean default\n  Result: {\"_\":[1],\"foo\":true}\nTest 2: -t with boolean default (no value provided)\n  Result: {\"_\":[1],\"t\":true}\nTest 3: --foo=bar (boolean key with =value)\n  Result: {\"_\":[\"bar\"],\"foo\":true}\nTest 4: --foo=42 (numeric value, should push to _)\n  Result: {\"_\":[42],\"foo\":true}\nTest 5: -t moo (boolean key with separate value)\n  Result: {\"_\":[\"moo\"],\"t\":true}\nTest 6: --foo --bar (no value, default boolean)\n  Result: {\"_\":[1,1],\"foo\":true,\"bar\":true}\nTest 7: --foo false (boolean string)\n  Result: {\"_\":[],\"foo\":false}\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:16:54.766Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "Test 1: --foo with boolean default\n  Result: {\"_\":[],\"foo\":true}\n  Expected: {\"foo\":true,\"_\":[]}\nTest 2: -t with boolean default (no value provided)\n  Result: {\"_\":[],\"t\":true}\nTest 3: --foo=bar (boolean key with =value)\n  Result: {\"_\":[\"bar\"],\"foo\":true}\nTest 4: --foo=42 (numeric value, should push to _)\n  Result: {\"_\":[42],\"foo\":true}\nTest 5: -t moo (boolean key with separate value)\n  Result: {\"_\":[\"moo\"],\"t\":true}\nTest 6: --foo --bar (no value, default boolean)\n  Result: {\"_\":[],\"foo\":true,\"bar\":true}\nTest 7: --foo false (boolean string)\n  Result: {\"_\":[],\"foo\":false}\nTest 8: --foo true (boolean string)\n  Result: {\"_\":[],\"foo\":true}\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:17:08.138Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "\n> mri@1.1.4 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  16:17:14\n   Duration  901ms (transform 94ms, setup 0ms, import 147ms, tests 18ms, environment 0ms)\n\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:17:15.488Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "Test cluster -abc with a and b as boolean:\n  Result: {\"_\":[],\"a\":true,\"b\":true,\"c\":true}\n  Expected: { a: true, b: true, c: true }\nTest cluster -ab (no value) with a,b as boolean:\n  Result: {\"_\":[],\"a\":true,\"b\":true}\n  Expected: { a: true, b: true, _: [] }\nTest -ab c (c as positional) with a,b as boolean:\n  Result: {\"_\":[\"c\"],\"a\":true,\"b\":true}\n  Expected: { a: true, b: true, _: [\"c\"] }\nTest -aBc with a and b boolean, c=positional:\n  Result: {\"_\":[],\"a\":true,\"B\":true,\"c\":true}\n  Expected: { a: true, b: true, c: true }\nTest default boolean false:\n  Result: {\"_\":[],\"foo\":true}\n  Expected: { foo: false, _: [] }\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:17:27.987Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "\n> mri@1.1.4 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  16:17:35\n   Duration  1.34s (transform 129ms, setup 0ms, import 188ms, tests 27ms, environment 2ms)\n\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:17:37.582Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "\n> mri@1.1.4 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  16:17:52\n   Duration  1.03s (transform 124ms, setup 0ms, import 186ms, tests 30ms, environment 0ms)\n\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:17:53.621Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": " lib/index.js      |  2 +-\n tests/mri.test.ts | 11 +++++++++++\n 2 files changed, 12 insertions(+), 1 deletion(-)\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:17:56.385Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "diff --git a/lib/index.js b/lib/index.js\nindex b4d8a0a..05f190c 100644\n--- a/lib/index.js\n+++ b/lib/index.js\n@@ -5,7 +5,7 @@ function toArr(any) {\n function toVal(out, key, val, opts) {\n \tvar x, old=out[key], nxt=(\n \t\t!!~opts.string.indexOf(key) ? (val == null || val === true ? '' : String(val))\n-\t\t: !!~opts.boolean.indexOf(key) ? (val === 'false' ? false : val === 'true' || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))\n+\t\t: !!~opts.boolean.indexOf(key) ? (val === 'false' ? false : val === 'true' || typeof val === 'boolean' || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))\n \t\t: typeof val === 'boolean' ? val\n \t\t: (x = +val,x * 0 === 0) ? x : val\n \t);\ndiff --git a/tests/mri.test.ts b/tests/mri.test.ts\nindex d0b1825..1d46cc9 100644\n--- a/tests/mri.test.ts\n+++ b/tests/mri.test.ts\n@@ -43,6 +43,17 @@ describe(\"mri regression\", () => {\n     expect(res).toEqual({ _: [], foo: \"bar\" });\n   });\n \n+  test(\"boolean default does not leak into _ when flag is supplied\", () => {\n+    const res = mri([\"--foo\"], { boolean: \"foo\", default: { foo: true } });\n+    expect(res).toEqual({ _: [], foo: true });\n+    expect(typeof res.foo).toBe(\"boolean\");\n+  });\n+\n+  test(\"boolean default with short flag does not leak into _\", () => {\n+    const res = mri([\"-t\"], { boolean: \"t\", default: { t: true } });\n+    expect(res).toEqual({ _: [], t: true });\n+  });\n+\n   test(\"unknown handler strict\", () => {\n     const unknown = (flag: string) => {\n       throw new Error(`unknown ${flag}`);\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:18:03.816Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "state updated\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-30T15:18:09.053Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "phase: diagnosis\nhypotheses count: 0\nselectedHypothesis: undefined\nhypotheses: []\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "diagnosis",
+        "timestamp": "2026-08-30T15:18:19.142Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hypotheses count: 1\nselected: hyp-df6fac7f\nphase: diagnosis\ndesc: In lib/index.js, the toVal function mishandles a boolean val for boolean-typed keys. The boolean branch expression out._...\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "diagnosis",
+        "timestamp": "2026-08-30T15:18:29.465Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "{\n  \"phase\": \"diagnosis\",\n  \"issue\": \"# Issue: Boolean defaults leak into _ (mri)\\r\\n\\r\\n## Problem\\r\\n\\r\\nWhen a boolean default is provided and a boolean flag is supplied, the parser incorrectly coerces the boolean default and pushes a numeric value into the positional arguments array.\\r\\n\",\n  \"filesInspected\": [\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/ISSUE.md\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/package.json\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/index.d.ts\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/lib\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/lib/index.js\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/tests\",\n    \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/tests/mri.test.ts\"\n  ],\n  \"commandsExecuted\": [\n    {\n      \"command\": \"\",\n      \"exitCode\": 0,\n      \"stdout\": \"total 115\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 .\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 ..\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 .git\\n-rw-r--r-- 1 cooll 197609   35 Aug 30 16:14 .gitignore\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 .v1\\n-rw-r--r-- 1 cooll 197609  244 Aug 30 15:13 ISSUE.md\\n-rw-r--r-- 1 cooll 197609  477 Aug 30 15:13 index.d.ts\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 lib\\n-rw-r--r-- 1 cooll 197609 1135 Aug 30 15:13 license.md\\n-rw-r--r-- 1 cooll 197609  698 Aug 30 15:13 package.json\\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:14 tests\\n\",\n      \"stderr\": \"\",\n      \"durationMs\": 0,\n      \"phase\": \"reconnaissance\",\n      \"timestamp\": \"2026-08-30T15:14:43.921Z\"\n    },\n    {\n      \"command\": \"\",\n      \"exitCode\": 0,\n      \"stdout\": \"{\\n  \\\"phase\\\": \\\"reconnaissance\\\",\\n  \\\"issue\\\": \\\"# Issue: Boolean defaults leak into _ (mri)\\\\r\\\\n\\\\r",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "diagnosis",
+        "timestamp": "2026-08-30T15:21:42.406Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "/tmp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc\nhelpers.js\nstate.json\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "diagnosis",
+        "timestamp": "2026-08-30T15:24:29.444Z"
+      }
+    ],
+    "commandCount": 35,
+    "filesInspected": [
+      "C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/ISSUE.md",
+      "C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/package.json",
+      "C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/index.d.ts",
+      "C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/lib",
+      "C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/lib/index.js",
+      "C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/tests",
+      "C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-e166c8-xWFbUc/tests/mri.test.ts"
+    ],
+    "fileCount": 7,
+    "filesChanged": [
+      "lib/index.js",
+      "tests/mri.test.ts"
+    ],
+    "toolCallCount": 188,
+    "tokenUsage": null,
+    "cost": null,
+    "hypotheses": [],
+    "evidenceCount": 56,
+    "verificationAttempts": [],
+    "finalPatchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-004-run-001-e166c8\\patch.diff",
+    "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-004-run-001-e166c8\\trajectory.jsonl",
+    "evidencePath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-004-run-001-e166c8\\evidence.jsonl",
+    "v1StatePath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-004-run-001-e166c8\\v1-state.json"
+  }
+}

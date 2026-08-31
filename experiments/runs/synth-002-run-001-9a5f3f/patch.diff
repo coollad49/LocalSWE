@@ -1,0 +1,19 @@
+diff --git a/src/money.ts b/src/money.ts
+index c7ec6f8..a67c7bd 100644
+--- a/src/money.ts
++++ b/src/money.ts
+@@ -35,12 +35,12 @@ export function parseMoney(input: string): Money {
+ }
+ 
+ export function add(a: Money, b: Money): Money {
+-  // BUG: missing currency check
++  if (a.currency !== b.currency) throw new Error(`Currency mismatch: ${a.currency} vs ${b.currency}`);
+   return { amount: roundToCents(a.amount + b.amount), currency: a.currency };
+ }
+ 
+ export function subtract(a: Money, b: Money): Money {
+-  // BUG: also missing check for symmetry
++  if (a.currency !== b.currency) throw new Error(`Currency mismatch: ${a.currency} vs ${b.currency}`);
+   return { amount: roundToCents(a.amount - b.amount), currency: a.currency };
+ }
+ 

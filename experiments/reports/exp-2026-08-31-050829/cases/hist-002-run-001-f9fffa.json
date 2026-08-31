@@ -1,0 +1,85 @@
+{
+  "runId": "hist-002-run-001-f9fffa",
+  "caseId": "hist-002",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 2367,
+  "startedAt": "2026-08-31T08:42:16.568Z",
+  "completedAt": "2026-08-31T08:42:18.935Z",
+  "caseMeta": {
+    "repository": "defu",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "security",
+      "validation"
+    ]
+  },
+  "metrics": {
+    "durationMs": 438595,
+    "totalTurns": 164,
+    "toolCalls": 70,
+    "commandsExecuted": 46,
+    "filesInspected": 5,
+    "filesChanged": 1,
+    "iterations": 3,
+    "iterationsSource": "v1-state",
+    "inputTokens": 142576,
+    "outputTokens": 63464,
+    "totalTokens": 2442712
+  },
+  "cost": {
+    "inputTokens": 142576,
+    "outputTokens": 63464,
+    "totalTokens": 206040,
+    "inputCostUsd": 0.019961,
+    "outputCostUsd": 0.01777,
+    "totalCostUsd": 0.043993,
+    "costUsd": 0.043993,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 319,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-002-YpiaZv\\patch-1788165737728.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 334,
+      "command": "bun run benchmark\\cases\\hist-002\\public\\reproduce.ts",
+      "stdout": "result: {} polluted=undefined hasPollution=false hasOwnProto=false proto={}\nObject.prototype.polluted=undefined ({}).polluted=undefined\nnormal merge 1: {\"a\":\"c\",\"d\":\"c\"} pass=true\nnormal merge 2 (nested): {\"a\":{\"d\":\"e\",\"b\":\"c\"}} pass=true\nnormal merge 3 (arrays): {\"array\":[\"a\",\"b\",\"c\",\"d\"]} pass=true\nPR case defu(malicious, {isAdmin:false}) => {\"isAdmin\":false} isAdmin=false globalIsAdmin=undefined pass=true\npollutionBlocked=true (expect true on fixed, false on buggy)\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 274,
+      "command": "bun test benchmark\\cases\\hist-002\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-002\\private\\oracle.test.ts:\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks __proto__ pollution via defaults (Object.assign vs spread) [2.48ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks __proto__ pollution with isAdmin payload (PR #156 case) [0.44ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks pollution when defaults is first pollution vector via JSON [0.19ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks constructor.prototype pollution [0.19ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > normal merging still works (regression) [0.42ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > handles non-object defaults [6.50ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > merge with merger still works [0.35ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > defu does not pollute global after multiple calls [0.74ms]\n\n 8 pass\n 0 fail\n 22 expect() calls\nRan 8 tests across 1 file. [213.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 275,
+      "command": "bun test benchmark\\repositories\\defu\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\defu\\tests\\defu.test.ts:\n(pass) defu regression > copies missing defaults [4.39ms]\n(pass) defu regression > fills null values from defaults [0.20ms]\n(pass) defu regression > merges nested objects [0.17ms]\n(pass) defu regression > concats arrays by default [0.17ms]\n(pass) defu regression > multi defaults [0.14ms]\n(pass) defu regression > handles non-object defaults [0.12ms]\n(pass) defu regression > does not override Object prototype via constructor [0.23ms]\n\n 7 pass\n 0 fail\n 8 expect() calls\nRan 7 tests across 1 file. [211.00ms]\n",
+      "timedOut": false
+    }
+  }
+}

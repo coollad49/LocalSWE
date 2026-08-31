@@ -1,0 +1,73 @@
+diff --git a/src/core/proxy.ts b/src/core/proxy.ts
+index bd98e27..43dc5a1 100644
+--- a/src/core/proxy.ts
++++ b/src/core/proxy.ts
+@@ -146,7 +146,11 @@ export const objectTraps: ProxyHandler<ProxyState> = {
+ 		}
+ 		// Check for existing draft in modified state.
+ 		// Assigned values are never drafted. This catches any drafts we created, too.
+-		if (value === peek(state.base_, prop)) {
++		if (
++			value === peek(state.base_, prop) ||
++			(state.type_ === ArchType.Array &&
++				(state as ProxyArrayState).allIndicesReassigned_)
++		) {
+ 			prepareCopy(state)
+ 			// Ensure array keys are always numbers
+ 			const childKey = state.type_ === ArchType.Array ? +(prop as string) : prop
+diff --git a/tests/repro-reverse-sort.test.ts b/tests/repro-reverse-sort.test.ts
+new file mode 100644
+index 0000000..7c7935d
+--- /dev/null
++++ b/tests/repro-reverse-sort.test.ts
+@@ -0,0 +1,49 @@
++import { describe, test, expect } from "vitest";
++import { produce, enableArrayMethods } from "../src/immer";
++
++enableArrayMethods();
++
++describe("reverse/sort base mutation regression", () => {
++  test("reverse then mutate element should not mutate base", () => {
++    const base = [{ value: 1 }, { value: 2 }, { value: 3 }];
++    const next = produce(base, (draft) => {
++      draft.reverse();
++      draft[0].value = 99;
++    });
++    expect(base[0].value).toBe(1);
++    expect(base[1].value).toBe(2);
++    expect(base[2].value).toBe(3);
++    expect(next[0].value).toBe(99);
++    expect(next[1].value).toBe(2);
++    expect(next[2].value).toBe(1);
++  });
++
++  test("sort then mutate element should not mutate base", () => {
++    const base = [{ value: 3 }, { value: 1 }, { value: 2 }];
++    const next = produce(base, (draft) => {
++      draft.sort((a, b) => a.value - b.value);
++      draft[0].value = 99;
++    });
++    expect(base[0].value).toBe(3);
++    expect(base[1].value).toBe(1);
++    expect(base[2].value).toBe(2);
++    expect(next[0].value).toBe(99);
++    expect(next[1].value).toBe(2);
++    expect(next[2].value).toBe(3);
++  });
++
++  test("reverse then mutate multiple elements should not mutate base", () => {
++    const base = [{ value: 1 }, { value: 2 }, { value: 3 }];
++    const next = produce(base, (draft) => {
++      draft.reverse();
++      draft[0].value = 10;
++      draft[2].value = 30;
++    });
++    expect(base[0].value).toBe(1);
++    expect(base[1].value).toBe(2);
++    expect(base[2].value).toBe(3);
++    expect(next[0].value).toBe(10);
++    expect(next[1].value).toBe(2);
++    expect(next[2].value).toBe(30);
++  });
++});
+

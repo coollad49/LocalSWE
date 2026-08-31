@@ -1,0 +1,911 @@
+{
+  "evaluationId": "eval-c56f2725-1788165751848",
+  "runId": "hist-003-run-001-8f9ea0",
+  "caseId": "hist-003",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:42:31.848Z",
+  "completedAt": "2026-08-31T08:42:33.901Z",
+  "durationMs": 2053,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-003-run-001-8f9ea0\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 293,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-003-PUdcZ5\\patch-1788165752915.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 274,
+      "command": "bun run benchmark\\cases\\hist-003\\public\\reproduce.ts",
+      "stdout": "before: foo.f()=original own=undefined\nbefore descriptors: {}\nafter spy: foo.f()=mocked ownDesc={\"writable\":true,\"enumerable\":false,\"configurable\":true}\nafter restore: foo.f()=original ownDesc=undefined\nall own descriptors after restore: {}\nPASS: prototype restore is clean, no leak\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 195,
+      "command": "bun test benchmark\\cases\\hist-003\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-003\\private\\oracle.test.ts:\n(pass) hist-003 oracle: prototype restore leak > restore deletes own property for prototype method [4.72ms]\n(pass) hist-003 oracle: prototype restore leak > multiple spy/restore cycles remain clean [2.24ms]\n(pass) hist-003 oracle: prototype restore leak > prototype still owns method after restore [0.50ms]\n\n 3 pass\n 0 fail\n 27 expect() calls\nRan 3 tests across 1 file. [142.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 216,
+      "command": "bun test benchmark\\repositories\\tinyspy\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\tinyspy\\tests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [4.93ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [3.44ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [0.94ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [147.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "tinyspy",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "state-management",
+      "api-behavior"
+    ]
+  },
+  "metrics": {
+    "durationMs": 93423,
+    "totalTurns": 62,
+    "toolCalls": 34,
+    "commandsExecuted": 6,
+    "filesInspected": 7,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 54168,
+    "outputTokens": 14528,
+    "totalTokens": 413528
+  },
+  "cost": {
+    "inputTokens": 54168,
+    "outputTokens": 14528,
+    "totalTokens": 68696,
+    "inputCostUsd": 0.007584,
+    "outputCostUsd": 0.004068,
+    "totalCostUsd": 0.012617,
+    "costUsd": 0.012617,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-003-run-001-8f9ea0",
+    "caseId": "hist-003",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:90826391d0810487c70606582ef4ab5e5892df0bbca07650a9d6c647a1633e51",
+    "trajectory": {
+      "eventCount": 283,
+      "durationMs": 93419,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 2,
+        "turn_start": 24,
+        "message_start": 60,
+        "message_end": 60,
+        "tool_execution_start": 34,
+        "tool_execution_end": 34,
+        "turn_end": 24,
+        "tool_execution_update": 28,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "prompt_completed": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 72,
+      "userMessages": 4,
+      "toolCalls": 34,
+      "toolResults": 136,
+      "thinkingEvents": 48,
+      "unknownEvents": 57,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 34,
+      "uniqueTools": 4,
+      "byTool": {
+        "read": {
+          "calls": 18,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 6,
+          "failures": 12
+        },
+        "edit": {
+          "calls": 4,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 54168,
+      "output": 14528,
+      "cacheRead": 344832,
+      "cacheWrite": 0,
+      "total": 413528,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.012617,
+      "inputCostUsd": 0.007584,
+      "outputCostUsd": 0.004068,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 48,
+      "characterCount": 38316,
+      "averageCharacters": 798,
+      "maxCharacters": 3473,
+      "firstThinkingAt": "2026-08-31T04:10:14.843Z",
+      "lastThinkingAt": "2026-08-31T04:11:44.901Z",
+      "thinkingDurationMs": 90058
+    },
+    "editing": {
+      "editCalls": 4,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/spyOn.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 18,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 6,
+      "explorationToEditingRatio": 7.5
+    },
+    "verification": {
+      "commandsDetected": 24,
+      "testsRun": true,
+      "testCommandCount": 6,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 22,
+      "duplicateReadTargets": 11,
+      "duplicateEditTargets": 3,
+      "toolFailureCount": 12,
+      "topRepetitions": [
+        {
+          "signature": "6a8a37655088",
+          "tool": "read",
+          "target": "src/spyOn.ts",
+          "count": 6
+        },
+        {
+          "signature": "b7aa88d62481",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+          "count": 6
+        },
+        {
+          "signature": "3066c8f047e4",
+          "tool": "edit",
+          "target": "src/spyOn.ts",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "111f7c140d64",
+          "tool": "read",
+          "target": "src/spy.ts",
+          "count": 2
+        },
+        {
+          "signature": "d177a2010f69",
+          "tool": "read",
+          "target": "src/internal.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-003-run-001-8f9ea0",
+    "caseId": "hist-003",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-31T04:10:14.844Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-31T04:10:14.844Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 24,
+        "timestamp": "2026-08-31T04:10:14.879Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 25,
+        "timestamp": "2026-08-31T04:10:14.879Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 46,
+        "timestamp": "2026-08-31T04:10:16.272Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 47,
+        "timestamp": "2026-08-31T04:10:16.272Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 48,
+        "timestamp": "2026-08-31T04:10:16.278Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 49,
+        "timestamp": "2026-08-31T04:10:16.278Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 50,
+        "timestamp": "2026-08-31T04:10:16.286Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 51,
+        "timestamp": "2026-08-31T04:10:16.286Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 78,
+        "timestamp": "2026-08-31T04:10:19.754Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 79,
+        "timestamp": "2026-08-31T04:10:19.754Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 80,
+        "timestamp": "2026-08-31T04:10:19.760Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spy.ts"
+      },
+      {
+        "index": 81,
+        "timestamp": "2026-08-31T04:10:19.760Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spy.ts"
+      },
+      {
+        "index": 82,
+        "timestamp": "2026-08-31T04:10:19.768Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/internal.ts"
+      },
+      {
+        "index": 83,
+        "timestamp": "2026-08-31T04:10:19.768Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/internal.ts"
+      },
+      {
+        "index": 110,
+        "timestamp": "2026-08-31T04:10:21.283Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 111,
+        "timestamp": "2026-08-31T04:10:21.283Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 112,
+        "timestamp": "2026-08-31T04:10:21.289Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/tinyspy.test.ts"
+      },
+      {
+        "index": 113,
+        "timestamp": "2026-08-31T04:10:21.289Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/tinyspy.test.ts"
+      },
+      {
+        "index": 134,
+        "timestamp": "2026-08-31T04:10:34.185Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 135,
+        "timestamp": "2026-08-31T04:10:34.185Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 158,
+        "timestamp": "2026-08-31T04:10:52.479Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 159,
+        "timestamp": "2026-08-31T04:10:52.479Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 174,
+        "timestamp": "2026-08-31T04:10:54.623Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 175,
+        "timestamp": "2026-08-31T04:10:54.623Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 200,
+        "timestamp": "2026-08-31T04:11:18.109Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 201,
+        "timestamp": "2026-08-31T04:11:18.109Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 216,
+        "timestamp": "2026-08-31T04:11:24.110Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 217,
+        "timestamp": "2026-08-31T04:11:24.110Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 232,
+        "timestamp": "2026-08-31T04:11:26.596Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 233,
+        "timestamp": "2026-08-31T04:11:26.596Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 258,
+        "timestamp": "2026-08-31T04:11:38.733Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 259,
+        "timestamp": "2026-08-31T04:11:38.733Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 22,
+        "timestamp": "2026-08-31T04:10:14.844Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 134,
+        "timestamp": "2026-08-31T04:10:34.185Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 144,
+        "timestamp": "2026-08-31T04:10:45.171Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 145,
+        "timestamp": "2026-08-31T04:10:45.172Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 146,
+        "timestamp": "2026-08-31T04:10:45.188Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 147,
+        "timestamp": "2026-08-31T04:10:45.188Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 148,
+        "timestamp": "2026-08-31T04:10:45.188Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 149,
+        "timestamp": "2026-08-31T04:10:45.188Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 158,
+        "timestamp": "2026-08-31T04:10:52.479Z",
+        "detail": "src/spyOn.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 186,
+        "timestamp": "2026-08-31T04:11:04.905Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 187,
+        "timestamp": "2026-08-31T04:11:04.905Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 188,
+        "timestamp": "2026-08-31T04:11:04.911Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 189,
+        "timestamp": "2026-08-31T04:11:04.912Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 190,
+        "timestamp": "2026-08-31T04:11:04.912Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 191,
+        "timestamp": "2026-08-31T04:11:04.912Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vites"
+      }
+    ],
+    "errors": [
+      {
+        "index": 144,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\n\n ❯ tests/tinyspy.test.ts (3 tests | 1 failed) 43ms\n     × spyOn mocks prototype method and restores cleanly 29ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn mocks prototype method and restores cleanly\nAssertionError: expected { value: [Function f], …(3) } to be undefined\n\n- Expected:\nundefined\n\n+ Received:\n{\n  \"configurable\": true,\n  \"enumerable\": fals"
+      },
+      {
+        "index": 145,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\n\n ❯ tests/tinyspy.test.ts (3 tests | 1 failed) 43ms\n     × spyOn mocks prototype method and restores cleanly 29ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn mocks prototype method and restores cleanly\nAssertionError: expected { value: [Function f], …(3) } to be undefined\n\n- Expected:\nundefined\n\n+ Received:\n{\n  \"configurable\": true,\n  \"enumerable\": fals"
+      },
+      {
+        "index": 146,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 147,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 148,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 149,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 186,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\n\n ❯ tests/tinyspy.test.ts (3 tests | 1 failed) 43ms\n     × spyOn mocks prototype method and restores cleanly 29ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn mocks prototype method and restores cleanly\nAssertionError: expected { value: [Function f], …(3) } to be undefined\n\n- Expected:\nundefined\n\n+ Received:\n{\n  \"configurable\": true,\n  \"enumerable\": fals"
+      },
+      {
+        "index": 187,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\n\n ❯ tests/tinyspy.test.ts (3 tests | 1 failed) 43ms\n     × spyOn mocks prototype method and restores cleanly 29ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn mocks prototype method and restores cleanly\nAssertionError: expected { value: [Function f], …(3) } to be undefined\n\n- Expected:\nundefined\n\n+ Received:\n{\n  \"configurable\": true,\n  \"enumerable\": fals"
+      },
+      {
+        "index": 188,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 189,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 190,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 191,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 134,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 135,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 144,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\n\n ❯ tests/tinyspy.test.ts (3 tests | 1 failed) 43ms\n     × spyOn mocks prototype method and restores c"
+      },
+      {
+        "index": 145,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\n\n ❯ tests/tinyspy.test.ts (3 tests | 1 failed) 43ms\n     × spyOn mocks prototype method and restores c"
+      },
+      {
+        "index": 146,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 147,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 148,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 149,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 174,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 175,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 186,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\n\n ❯ tests/tinyspy.test.ts (3 tests | 1 failed) 43ms\n     × spyOn mocks prototype method and restores c"
+      },
+      {
+        "index": 187,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\n\n ❯ tests/tinyspy.test.ts (3 tests | 1 failed) 43ms\n     × spyOn mocks prototype method and restores c"
+      },
+      {
+        "index": 188,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 189,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 190,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 191,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 232,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 233,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 244,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  05:11:32\n   Duration  1.00s (transf"
+      },
+      {
+        "index": 245,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  05:11:32\n   Duration  1.00s (transf"
+      },
+      {
+        "index": 246,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 247,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 248,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 249,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-8f9ea0-GKBCep\" && npx vitest run 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

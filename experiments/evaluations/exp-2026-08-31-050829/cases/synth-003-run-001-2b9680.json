@@ -1,0 +1,83 @@
+{
+  "runId": "synth-003-run-001-2b9680",
+  "caseId": "synth-003",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 2113,
+  "startedAt": "2026-08-31T08:43:52.388Z",
+  "completedAt": "2026-08-31T08:43:54.501Z",
+  "caseMeta": {
+    "repository": "async-queue",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "error-handling",
+      "asynchronous"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 440,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-003-KUcVAJ\\patch-1788165833386.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 245,
+      "command": "bun run benchmark\\cases\\synth-003\\public\\reproduce.ts",
+      "stdout": "success=false expected false\nattempts=1 expected 1\nsize=1 expected 1 (retry)\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 206,
+      "command": "bun test benchmark\\cases\\synth-003\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-003\\private\\oracle.test.ts:\n(pass) synth-003 oracle: error handling > reports failure and retries [2.69ms]\n(pass) synth-003 oracle: error handling > success true only on no throw [0.51ms]\n(pass) synth-003 oracle: error handling > processNext retries [0.86ms]\n\n 3 pass\n 0 fail\n 8 expect() calls\nRan 3 tests across 1 file. [146.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 219,
+      "command": "bun test benchmark\\repositories\\async-queue\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\async-queue\\tests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [1.44ms]\n(pass) AsyncQueue > dequeue throws on empty [0.58ms]\n(pass) AsyncQueue > pause and resume preserves jobs [0.60ms]\n(pass) AsyncQueue > pause resume multiple cycles [0.81ms]\n(pass) AsyncQueue > processJob retry re-enqueues [1.27ms]\n(pass) AsyncQueue > processJob succeeds [0.38ms]\n(pass) AsyncQueue > processNext handles empty [0.45ms]\n(pass) AsyncQueue > processNext surfaces errors via retry [0.60ms]\n(pass) AsyncQueue > clear empties queue [0.23ms]\n\n 9 pass\n 0 fail\n 35 expect() calls\nRan 9 tests across 1 file. [157.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "metrics": {
+    "durationMs": 419208,
+    "totalTurns": 170,
+    "toolCalls": 82,
+    "commandsExecuted": 62,
+    "filesInspected": 6,
+    "filesChanged": 3,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 94436,
+    "outputTokens": 25872,
+    "totalTokens": 1663988
+  },
+  "cost": {
+    "inputTokens": 94436,
+    "outputTokens": 25872,
+    "totalTokens": 120308,
+    "inputCostUsd": 0.028331,
+    "outputCostUsd": 0.031046,
+    "totalCostUsd": 0.151998,
+    "costUsd": 0.151998,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  }
+}

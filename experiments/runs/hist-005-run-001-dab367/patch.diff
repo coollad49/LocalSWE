@@ -1,0 +1,34 @@
+diff --git a/lib/index.js b/lib/index.js
+index 3a9e1c6..9007810 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -48,6 +48,10 @@ module.exports = function (args, opts) {
+ 		for (k in opts.default) {
+ 			opts.alias[k] = opts.alias[k] || [];
+ 			(opts[typeof opts.default[k]] || []).push(k);
++			// Add aliases to the type array so string/boolean types propagate
++			if (opts[typeof opts.default[k]]) {
++				opts[typeof opts.default[k]] = opts[typeof opts.default[k]].concat(opts.alias[k]);
++			}
+ 		}
+ 	}
+ 
+diff --git a/tests/mri.test.ts b/tests/mri.test.ts
+index d0b1825..d70d415 100644
+--- a/tests/mri.test.ts
++++ b/tests/mri.test.ts
+@@ -49,4 +49,14 @@ describe("mri regression", () => {
+     };
+     expect(() => mri(["--unknown", "val"], { unknown })).toThrow();
+   });
++
++  test("alias defaults preserve string type", () => {
++    // Issue: When an option has a string default and an alias,
++    // the string type should be propagated to the alias
++    const res = mri(["-a", "01"], { alias: { arg: "a" }, default: { arg: "01" } });
++    expect(res.a).toBe("01");
++    expect(res.arg).toBe("01");
++    expect(typeof res.a).toBe("string");
++    expect(typeof res.arg).toBe("string");
++  });
+ });

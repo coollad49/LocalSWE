@@ -1,0 +1,356 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# Issue: Updating a task erases fields not included in update\r\n\r\n## Problem\r\n\r\nUpdating a task with only some fields should leave the other fields unchanged. Currently, fields not included in the update are erased or set to undefined.\r\n",
+  "filesInspected": [
+    "ISSUE.md",
+    ".",
+    "package.json",
+    "src",
+    "tests",
+    "src/types.ts",
+    "src/task-manager.ts",
+    "src/index.ts",
+    "src/validators.ts",
+    "src/utils.ts",
+    "tests/task-manager.test.ts"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi\n\n ❯ tests/task-manager.test.ts (11 tests | 2 failed) 51ms\n     × updateTask merges correctly without losing fields 19ms\n     × updateTask only updates provided fields 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/task-manager.test.ts > TaskManager > updateTask merges correctly without losing fields\nAssertionError: expected undefined to be 'desc' // Object.is equality\n\n- Expected:\n\"desc\"\n\n+ Received:\nundefined\n\n ❯ tests/task-manager.test.ts:32:33\n     30|     const updated = tm.updateTask(t.id, { title: \"Updated\" });\n     31|     expect(updated.title).toBe(\"Updated\");\n     32|     expect(updated.description).toBe(\"desc\");\n       |                                 ^\n     33|     expect(updated.priority).toBe(2);\n     34|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/task-manager.test.ts > TaskManager > updateTask only updates provided fields\nAssertionError: expected undefined to be 't' // Object.is equality\n\n- Expected:\n\"t\"\n\n+ Received:\nundefined\n\n ❯ tests/task-manager.test.ts:41:21\n     39|     const u = tm.updateTask(t.id, { status: \"completed\" });\n     40|     expect(u.status).toBe(\"completed\");\n     41|     expect(u.title).toBe(\"t\");\n       |                     ^\n     42|     expect(u.priority).toBe(1);\n     43|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 9 passed (11)\n   Start at  05:27:29\n   Duration  1.71s (transform 335ms, setup 0ms, import 416ms, tests 51ms, environment 0ms)\n\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:27:31.988Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:27:51\n   Duration  1.48s (transform 181ms, setup 0ms, import 254ms, tests 30ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:27:53.425Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "diff --git a/src/task-manager.ts b/src/task-manager.ts\nindex 0fa3bc4..ee524a8 100644\n--- a/src/task-manager.ts\n+++ b/src/task-manager.ts\n@@ -38,20 +38,15 @@ export class TaskManager {\n     if (updates.status !== undefined) validateStatus(updates.status);\n     if (updates.dueDate !== undefined) validateDueDate(updates.dueDate);\n \n-    // BUG: spreads undefined values and overwrites existing fields\n     const updated: Task = {\n       ...existing,\n-      title: updates.title as any,\n-      description: updates.description as any,\n-      priority: updates.priority as any,\n-      status: updates.status as any,\n-      dueDate: updates.dueDate as any,\n+      title: updates.title !== undefined ? updates.title : existing.title,\n+      description: updates.description !== undefined ? updates.description : existing.description,\n+      priority: updates.priority !== undefined ? updates.priority : existing.priority,\n+      status: updates.status !== undefined ? updates.status : existing.status,\n+      dueDate: updates.dueDate !== undefined ? updates.dueDate : existing.dueDate,\n       updatedAt: toISOTimestamp(new Date()),\n     };\n-    // Remove undefined check - this will set fields to undefined if not provided\n-    // Simulate buggy behavior: if update field is undefined, it still overwrites\n-    // The above already does it. Need to ensure we don't preserve old values.\n-    // In JS, spreading with undefined overwrites: { ...existing, title: undefined } => title undefined\n     this.tasks.set(id, updated as Task);\n     this.invalidateCache();\n     return { ...updated };\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:27:56.071Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:28:16\n   Duration  1.33s (transform 203ms, setup 0ms, import 275ms, tests 33ms, environment 1ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:28:17.867Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:28:32\n   Duration  1.35s (transform 219ms, setup 0ms, import 291ms, tests 31ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:28:34.118Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:28:52\n   Duration  1.43s (transform 215ms, setup 0ms, import 286ms, tests 33ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:28:54.864Z"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "hyp-b4543f3c",
+      "description": "Root cause identified and repaired in src/task-manager.ts",
+      "evidence": [
+        "Code inspection and passing verification"
+      ],
+      "confidence": 0.9,
+      "status": "selected",
+      "files": [
+        "src/task-manager.ts"
+      ]
+    }
+  ],
+  "changesMade": [
+    {
+      "path": "src/task-manager.ts",
+      "summary": "edit src/task-manager.ts",
+      "iteration": 0,
+      "timestamp": "2026-08-31T04:27:37.864Z"
+    },
+    {
+      "path": "src/task-manager.ts",
+      "summary": "modified src/task-manager.ts",
+      "iteration": 3,
+      "timestamp": "2026-08-31T04:28:58.591Z"
+    }
+  ],
+  "verificationAttempts": [],
+  "evidence": [
+    {
+      "id": "ev-386e5843",
+      "type": "file_inspection",
+      "description": "Inspected ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T04:27:09.185Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-49735873",
+      "type": "file_inspection",
+      "description": "read ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T04:27:09.186Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ed593f2e",
+      "type": "file_inspection",
+      "description": "Inspected .",
+      "source": ".",
+      "timestamp": "2026-08-31T04:27:10.835Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7a4c4476",
+      "type": "file_inspection",
+      "description": "read .",
+      "source": ".",
+      "timestamp": "2026-08-31T04:27:10.836Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-697a5bd3",
+      "type": "file_inspection",
+      "description": "Inspected package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-31T04:27:12.536Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6e307005",
+      "type": "file_inspection",
+      "description": "read package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-31T04:27:12.537Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-162b4c5f",
+      "type": "file_inspection",
+      "description": "Inspected src",
+      "source": "src",
+      "timestamp": "2026-08-31T04:27:14.467Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c468d55a",
+      "type": "file_inspection",
+      "description": "read src",
+      "source": "src",
+      "timestamp": "2026-08-31T04:27:14.468Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-fe844df0",
+      "type": "file_inspection",
+      "description": "Inspected tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T04:27:14.481Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a004bff5",
+      "type": "file_inspection",
+      "description": "read tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T04:27:14.482Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7d7ba579",
+      "type": "file_inspection",
+      "description": "Inspected src/types.ts",
+      "source": "src/types.ts",
+      "timestamp": "2026-08-31T04:27:16.355Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-db4ba08e",
+      "type": "file_inspection",
+      "description": "read src/types.ts",
+      "source": "src/types.ts",
+      "timestamp": "2026-08-31T04:27:16.356Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b4589b39",
+      "type": "file_inspection",
+      "description": "Inspected src/task-manager.ts",
+      "source": "src/task-manager.ts",
+      "timestamp": "2026-08-31T04:27:16.358Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a094dbca",
+      "type": "file_inspection",
+      "description": "read src/task-manager.ts",
+      "source": "src/task-manager.ts",
+      "timestamp": "2026-08-31T04:27:16.359Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-35cf87c4",
+      "type": "file_inspection",
+      "description": "Inspected src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-31T04:27:16.361Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e59bb038",
+      "type": "file_inspection",
+      "description": "read src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-31T04:27:16.361Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7b8f8e7e",
+      "type": "file_inspection",
+      "description": "Inspected src/validators.ts",
+      "source": "src/validators.ts",
+      "timestamp": "2026-08-31T04:27:16.363Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-dcdf8b34",
+      "type": "file_inspection",
+      "description": "read src/validators.ts",
+      "source": "src/validators.ts",
+      "timestamp": "2026-08-31T04:27:16.363Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-de842624",
+      "type": "file_inspection",
+      "description": "Inspected src/utils.ts",
+      "source": "src/utils.ts",
+      "timestamp": "2026-08-31T04:27:16.364Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c2382f28",
+      "type": "file_inspection",
+      "description": "read src/utils.ts",
+      "source": "src/utils.ts",
+      "timestamp": "2026-08-31T04:27:16.365Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e89f144f",
+      "type": "file_inspection",
+      "description": "Inspected tests/task-manager.test.ts",
+      "source": "tests/task-manager.test.ts",
+      "timestamp": "2026-08-31T04:27:16.367Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-45f72494",
+      "type": "file_inspection",
+      "description": "read tests/task-manager.test.ts",
+      "source": "tests/task-manager.test.ts",
+      "timestamp": "2026-08-31T04:27:16.368Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1d154340",
+      "type": "command_result",
+      "description": "bash: cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi && npx vitest run 2>&1",
+      "source": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:27:20.273Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e71b27aa",
+      "type": "command_result",
+      "description": "bash: cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi && npx vitest run 2>&1",
+      "source": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:27:39.903Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4f592db3",
+      "type": "command_result",
+      "description": "bash: cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi && git diff HEAD",
+      "source": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi && git diff HEAD",
+      "timestamp": "2026-08-31T04:27:55.688Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b8bec3fb",
+      "type": "command_result",
+      "description": "bash: cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi && npx vitest run 2>&1",
+      "source": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:28:03.436Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-049ecef2",
+      "type": "command_result",
+      "description": "bash: cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi && npx vitest run 2>&1",
+      "source": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:28:22.701Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-06d022e9",
+      "type": "command_result",
+      "description": "bash: cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi && npx vitest run 2>&1",
+      "source": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-9e3426-mhUWYi && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:28:40.052Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-16aebc76",
+      "type": "diff_inspection",
+      "description": "Final diff stat:  src/task-manager.ts | 15 +++++----------\n 1 file changed, 5 insertions(+), 10 deletions(-)\n",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-31T04:28:57.368Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 3,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-31T04:27:07.645Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-31T04:27:07.645Z",
+      "exitedAt": "2026-08-31T04:28:57.045Z",
+      "durationMs": 109400
+    }
+  ],
+  "selectedHypothesis": "hyp-b4543f3c",
+  "terminationReason": "completed"
+}

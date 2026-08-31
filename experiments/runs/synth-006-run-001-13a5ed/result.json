@@ -1,0 +1,64 @@
+{
+  "runId": "synth-006-run-001-13a5ed",
+  "caseId": "synth-006",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "status": "timeout",
+  "durationMs": 600869,
+  "changedFiles": [
+    "src/queue.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-006-run-001-13a5ed\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-006-run-001-13a5ed\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-006-run-001-13a5ed\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-13a5ed-jFkbLh\" && npm test 2>&1 | head -100",
+      "exitCode": 0,
+      "durationMs": 5942,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-13a5ed-jFkbLh\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  16:39:00\n   Duration  1.08s (transform 141ms, setup 0ms, import 210ms, tests 30ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-13a5ed-jFkbLh\" && npx vitest run --reporter=verbose 2>&1 | head -50",
+      "exitCode": 0,
+      "durationMs": 10676,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-13a5ed-jFkbLh\n\n ✓ tests/queue.test.ts > AsyncQueue > enqueue and dequeue 7ms\n ✓ tests/queue.test.ts > AsyncQueue > dequeue throws on empty 3ms\n ✓ tests/queue.test.ts > AsyncQueue > pause and resume preserves jobs 2ms\n ✓ tests/queue.test.ts > AsyncQueue > pause resume multiple cycles 3ms\n ✓ tests/queue.test.ts > AsyncQueue > processJob retry re-enqueues 2ms\n ✓ tests/queue.test.ts > AsyncQueue > processJob succeeds 1ms\n ✓ tests/queue.test.ts > AsyncQueue > processNext handles empty 1ms\n ✓ tests/queue.test.ts > AsyncQueue > processNext surfaces errors via retry 1ms\n ✓ tests/queue.test.ts > AsyncQueue > clear empties queue 2ms\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  16:39:18\n   Duration  1.43s (transform 253ms, setup 0ms, import 336ms, tests 31ms, environment 1ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-13a5ed-jFkbLh\" && npx vitest run --reporter=verbose 2>&1 | tail -20",
+      "exitCode": 0,
+      "durationMs": 7005,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-13a5ed-jFkbLh\n\n ✓ tests/queue.test.ts > AsyncQueue > enqueue and dequeue 5ms\n ✓ tests/queue.test.ts > AsyncQueue > dequeue throws on empty 2ms\n ✓ tests/queue.test.ts > AsyncQueue > pause and resume preserves jobs 2ms\n ✓ tests/queue.test.ts > AsyncQueue > pause resume multiple cycles 3ms\n ✓ tests/queue.test.ts > AsyncQueue > processJob retry re-enqueues 2ms\n ✓ tests/queue.test.ts > AsyncQueue > processJob succeeds 1ms\n ✓ tests/queue.test.ts > AsyncQueue > processNext handles empty 1ms\n ✓ tests/queue.test.ts > AsyncQueue > processNext surfaces errors via retry 1ms\n ✓ tests/queue.test.ts > AsyncQueue > clear empties queue 2ms\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  16:43:36\n   Duration  763ms (transform 104ms, setup 0ms, import 158ms, tests 25ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-13a5ed-jFkbLh\" && node .v1/helpers.js add-evidence '{\"type\":\"file_inspection\",\"description\":\"src/queue.ts original dequeue body uses Array.shift() then casts to Job<T> returning undefined on empty (BUG)\",\"source\":\"src/queue.ts:36-39\",\"result\":\"supports\",\"phase\":\"diagnosis\"}'\nnode .v1/helpers.js add-evidence '{\"type\":\"test_inspection\",\"description\":\"tests/queue.test.ts expects `expect(() => q.dequeue()).toThrow(/empty/i)` — codifies the fix contract\",\"source\":\"tests/queue.test.ts:14-18\",\"result\":\"supports\",\"phase\":\"diagnosis\"}'\nnode .v1/helpers.js add-evidence '{\"type\":\"file_inspection\",\"description\":\"src/queue.ts processNext() guards with empty-check before calling dequeue() — confirms empty-dequeue is exceptional in the codebase\",\"source\":\"src/queue.ts:104-110\",\"result\":\"supports\",\"phase\":\"diagnosis\"}'\nnode .v1/helpers.js add-evidence '{\"type\":\"file_inspection\",\"description\":\"src/queue.ts peek() correctly returns Job<T> | undefined, demonstrating author distinguished peek (may be empty) from dequeue (must not be empty)\",\"source\":\"src/queue.ts:71-74\",\"result\":\"supports\",\"phase\":\"diagnosis\"}'\nnode .v1/helpers.js add-evidence '{\"type\":\"test_result\",\"description\":\"After fix: vitest reports 9/9 tests pass including `dequeue throws on empty`\",\"source\":\"vitest run --reporter=verbose\",\"result\":\"supports\",\"phase\":\"verification\"}'\necho \"--- state snapshot ---\"\nnode -e \"const s=JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8'));console.log('phase:',s.phase);console.log('hypotheses:',s.hypotheses.length,'selected:',s.selectedHypothesis);console.log('evidence count:',s.evidence.length);\"",
+      "exitCode": 0,
+      "durationMs": 1402,
+      "stdout": "evidence added\nevidence added\nevidence added\nevidence added\nevidence added\n--- state snapshot ---\nphase: diagnosis\nhypotheses: 0 selected: undefined\nevidence count: 73\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-13a5ed-jFkbLh\" && HYP_JSON=$(cat <<'EOF'\n{\"id\":\"hyp-12d74b0b\",\"description\":\"Root cause: dequeue() in src/queue.ts uses Array.shift() which returns undefined for an empty queue, then casts the result to Job<T> via `as Job<T>` and returns that undefined value instead of throwing. Fix: detect falsy shift result and throw an Error whose message matches /empty/i per tests/queue.test.ts.\",\"evidence\":[\"src/queue.ts:36-39: original buggy dequeue body shifts and returns via `as Job<T>` cast (BUG comment present)\",\"tests/queue.test.ts:14-18: `expect(() => q.dequeue()).toThrow(/empty/i)` documents the required behavior\",\"src/queue.ts:104-110: processNext guards with empty-check before dequeue, confirming empty-dequeue is exceptional\",\"src/queue.ts:71-74: peek correctly returns `Job<T> | undefined`, showing author distinguished peek vs dequeue\"],\"confidence\":0.97,\"files\":[\"src/queue.ts\",\"tests/queue.test.ts\"]}\nEOF\n)\nID=$(node .v1/helpers.js add-hypothesis \"$HYP_JSON\")\necho \"Added: $ID\"\nnode .v1/helpers.js select-hypothesis \"$ID\"\nnode .v1/helpers.js add-evidence '{\"type\":\"file_inspection\",\"description\":\"src/queue.ts original dequeue body uses Array.shift() then casts to Job<T> returning undefined on empty\",\"source\":\"src/queue.ts:36-39\",\"result\":\"supports\",\"phase\":\"diagnosis\"}'\nnode .v1/helpers.js add-evidence '{\"type\":\"test_inspection\",\"description\":\"tests/queue.test.ts expects dequeue to throw matching /empty/i\",\"source\":\"tests/queue.test.ts:14-18\",\"result\":\"supports\",\"phase\":\"diagnosis\"}'\nnode .v1/helpers.js add-evidence '{\"type\":\"test_result\",\"description\":\"After fix: vitest 9/9 tests pass including `dequeue throws on empty`\",\"source\":\"vitest run\",\"result\":\"supports\",\"phase\":\"verification\"}'\necho \"--- state ---\"\nnode -e \"const s=JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8'));console.log('phase:',s.phase,'hypotheses:',s.hypotheses.length,'selected:',s.selectedHypothesis);console.log('first hyp:',JSON.stringify(s.hypotheses[0],null,2));\"",
+      "exitCode": 0,
+      "durationMs": 1472,
+      "stdout": "Added: hyp-12d74b0b\nselected hyp-12d74b0b\nevidence added\nevidence added\nevidence added\n--- state ---\nphase: diagnosis hypotheses: 1 selected: hyp-12d74b0b\nfirst hyp: {\n  \"id\": \"hyp-12d74b0b\",\n  \"description\": \"Root cause: dequeue() in src/queue.ts uses Array.shift() which returns undefined for an empty queue, then casts the result to Job<T> via `as Job<T>` and returns that undefined value instead of throwing. Fix: detect falsy shift result and throw an Error whose message matches /empty/i per tests/queue.test.ts.\",\n  \"evidence\": [\n    \"src/queue.ts:36-39: original buggy dequeue body shifts and returns via `as Job<T>` cast (BUG comment present)\",\n    \"tests/queue.test.ts:14-18: `expect(() => q.dequeue()).toThrow(/empty/i)` documents the required behavior\",\n    \"src/queue.ts:104-110: processNext guards with empty-check before dequeue, confirming empty-dequeue is exceptional\",\n    \"src/queue.ts:71-74: peek correctly returns `Job<T> | undefined`, showing author distinguished peek vs dequeue\"\n  ],\n  \"confidence\": 0.97,\n  \"status\": \"selected\",\n  \"files\": [\n    \"src/queue.ts\",\n    \"tests/queue.test.ts\"\n  ]\n}\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-13a5ed-jFkbLh\" && npx vitest run --reporter=verbose 2>&1 | tail -20",
+      "exitCode": 0,
+      "durationMs": 7594,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-13a5ed-jFkbLh\n\n ✓ tests/queue.test.ts > AsyncQueue > enqueue and dequeue 7ms\n ✓ tests/queue.test.ts > AsyncQueue > dequeue throws on empty 3ms\n ✓ tests/queue.test.ts > AsyncQueue > pause and resume preserves jobs 2ms\n ✓ tests/queue.test.ts > AsyncQueue > pause resume multiple cycles 3ms\n ✓ tests/queue.test.ts > AsyncQueue > processJob retry re-enqueues 2ms\n ✓ tests/queue.test.ts > AsyncQueue > processJob succeeds 1ms\n ✓ tests/queue.test.ts > AsyncQueue > processNext handles empty 1ms\n ✓ tests/queue.test.ts > AsyncQueue > processNext surfaces errors via retry 1ms\n ✓ tests/queue.test.ts > AsyncQueue > clear empties queue 2ms\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  16:44:16\n   Duration  858ms (transform 114ms, setup 0ms, import 173ms, tests 27ms, environment 1ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-13a5ed-jFkbLh\" && node .v1/helpers.js add-evidence '{\"type\":\"test_result\",\"description\":\"vitest run --reporter=verbose: 9/9 tests pass including `dequeue throws on empty`\",\"source\":\"vitest run\",\"result\":\"supports\",\"phase\":\"investigation\"}' && node .v1/helpers.js add-evidence '{\"type\":\"reproduction\",\"description\":\"Custom repro under .v1/repro_edge_cases.mjs: 12/12 edge-case checks pass (throws on empty, message matches /empty/i, FIFO preserved, processNext still returns null, peek still undefined, pause/resume does not bypass throw, thrown value is Error instance with stack)\",\"source\":\".v1/repro_edge_cases.mjs\",\"result\":\"supports\",\"phase\":\"investigation\"}'\necho \"--- state ---\"\nnode -e \"const s=JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8'));console.log('phase:',s.phase,'hypotheses:',s.hypotheses.length,'evidence:',s.evidence.length,'selected:',s.selectedHypothesis);\"",
+      "exitCode": 0,
+      "durationMs": 759,
+      "stdout": "evidence added\nevidence added\n--- state ---\nphase: investigation hypotheses: 0 evidence: 77 selected: undefined\n"
+    }
+  ],
+  "error": "Agent timeout after 600000ms",
+  "model": "mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-30T15:34:38.493Z",
+  "endedAt": "2026-08-30T15:44:39.362Z"
+}

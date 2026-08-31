@@ -1,0 +1,50 @@
+{
+  "runId": "hard-003-run-001-a317f1",
+  "caseId": "hard-003",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "status": "timeout",
+  "durationMs": 610704,
+  "changedFiles": [],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-003-run-001-a317f1\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-003-run-001-a317f1\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-003-run-001-a317f1\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-a317f1-TDzA0W\" && npx vitest run 2>&1",
+      "exitCode": 1,
+      "durationMs": 9851,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-a317f1-TDzA0W\n\n ❯ src/pathstringifier.test.ts (13 tests | 4 failed) 59ms\n     × parsePath(%p) === %p 25ms\n     × parsePath(%p) === %p 5ms\n     × parsePath(%p) is rejected 5ms\n     × parsePath(%p) is rejected 2ms\n ❯ src/index.test.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/index.test.ts [ src/index.test.ts ]\nError: Cannot find package 'mongodb' imported from C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-a317f1-TDzA0W/src/index.test.ts\n ❯ src/index.test.ts:17:1\n     15| } from './is.js';\n     16|\n     17| import { ObjectID } from 'mongodb';\n       | ^\n     18| import { Decimal } from 'decimal.js';\n     19|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯\n\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/pathstringifier.test.ts > parsePath > parsePath(%p) === %p\nAssertionError: expected [ 'test\\.a', 'b' ] to deeply equal [ 'test\\', 'a', 'b' ]\n\n- Expected\n+ Received\n\n  [\n-   \"test\\\\\",\n-   \"a\",\n+   \"test\\\\.a\",\n    \"b\",\n  ]\n\n ❯ src/pathstringifier.test.ts:22:37\n     20|     ['test\\\\\\\\a.b', ['test\\\\a', 'b']],\n     21|   ])('parsePath(%p) === %p', (input, expectedOutput) => {\n     22|     expect(parsePath(input, false)).toEqual(expectedOutput);\n       |                                     ^\n     23|   });\n     24|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯\n\n FAIL  src/pathstringifier.test.ts > parsePath > parsePath(%p) === %p\nAssertionError: expected [ 'test\\\\a', 'b' ] to deeply equal [ 'test\\a', 'b' ]\n\n- Expected\n+ Received\n\n  [\n-   \"test\\\\a\",\n+   \"test\\\\\\\\a\",\n    \"b\",\n  ]\n\n ❯ src/pathstringifier.test.ts:22:37\n     20|     ['test\\\\\\\\a.b', ['test\\\\a', 'b']],\n     21|   ])('parsePath(%p) === %p', (input, expectedOutput) => {\n     22|     expect(parsePath(input, false)).toEqual(expectedOutput);\n       |                                     ^\n     23|   });\n     24|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯\n\n FAIL  src/pathstringifier.test.ts > parsePath > parsePath(%p) is rejected\n FAIL  src/pathstringifier.test.ts > parsePath > parsePath(%p) is rejected\nAssertionError: expected [Function] to throw an error\n ❯ src/pathstringifier.test.ts:29:43\n     27|     'foo.bar.baz\\\\',\n     28|   ])('parsePath(%p) is rejected', (input) => {\n     29|     expect(() => parsePath(input, false)).toThrowError();\n       |                                           ^\n     30|   });\n     31| });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯\n\n\n Test Files  2 failed | 6 passed (8)\n      Tests  4 failed | 21 passed (25)\n   Start at  05:09:04\n   Duration  3.74s (transform 1.09s, setup 0ms, import 1.14s, tests 179ms, environment 3ms)\n\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-a317f1-TDzA0W\" && npx vitest run src/pathstringifier.test.ts 2>&1",
+      "exitCode": 1,
+      "durationMs": 8308,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-a317f1-TDzA0W\n\n ❯ src/pathstringifier.test.ts (13 tests | 2 failed) 44ms\n     × legacy parsePath(%p) === %p 17ms\n     × legacy parsePath(%p) === %p 4ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/pathstringifier.test.ts > parsePath > legacy parsePath(%p) === %p\nAssertionError: expected [ 'test\\', 'a', 'b' ] to deeply equal [ 'test\\.a', 'b' ]\n\n- Expected\n+ Received\n\n  [\n-   \"test\\\\.a\",\n+   \"test\\\\\",\n+   \"a\",\n    \"b\",\n  ]\n\n ❯ src/pathstringifier.test.ts:13:36\n     11|     ['test\\\\\\\\a.b', ['test\\\\\\\\a', 'b']],\n     12|   ])('legacy parsePath(%p) === %p', (input, expectedOutput) => {\n     13|     expect(parsePath(input, true)).toEqual(expectedOutput);\n       |                                    ^\n     14|   });\n     15|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  src/pathstringifier.test.ts > parsePath > legacy parsePath(%p) === %p\nAssertionError: expected [ 'test\\a', 'b' ] to deeply equal [ 'test\\\\a', 'b' ]\n\n- Expected\n+ Received\n\n  [\n-   \"test\\\\\\\\a\",\n+   \"test\\\\a\",\n    \"b\",\n  ]\n\n ❯ src/pathstringifier.test.ts:13:36\n     11|     ['test\\\\\\\\a.b', ['test\\\\\\\\a', 'b']],\n     12|   ])('legacy parsePath(%p) === %p', (input, expectedOutput) => {\n     13|     expect(parsePath(input, true)).toEqual(expectedOutput);\n       |                                    ^\n     14|   });\n     15|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 11 passed (13)\n   Start at  05:11:15\n   Duration  899ms (transform 94ms, setup 0ms, import 148ms, tests 44ms, environment 0ms)\n\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-a317f1-TDzA0W\" && npx vitest run src/pathstringifier.test.ts 2>&1",
+      "exitCode": 0,
+      "durationMs": 8165,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-a317f1-TDzA0W\n\n\n Test Files  1 passed (1)\n      Tests  13 passed (13)\n   Start at  05:11:55\n   Duration  869ms (transform 105ms, setup 0ms, import 159ms, tests 26ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-a317f1-TDzA0W\" && npx vitest run tests/basic.test.ts 2>&1",
+      "exitCode": 0,
+      "durationMs": 8525,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-a317f1-TDzA0W\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:12:07\n   Duration  1.44s (transform 367ms, setup 0ms, import 479ms, tests 21ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-a317f1-TDzA0W\" && npx vitest run --reporter=verbose 2>&1 | head -100",
+      "exitCode": 0,
+      "durationMs": 14795,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-a317f1-TDzA0W\n\n ✓ src/registry.test.ts > class registry 9ms\n ✓ tests/basic.test.ts > superjson regression > basic stringify/parse 19ms\n ✓ tests/basic.test.ts > superjson regression > regexp 2ms\n ✓ src/pathstringifier.test.ts > parsePath > legacy parsePath(%p) === %p 7ms\n ✓ src/pathstringifier.test.ts > parsePath > legacy parsePath(%p) === %p 1ms\n ✓ src/pathstringifier.test.ts > parsePath > legacy parsePath(%p) === %p 1ms\n ✓ src/pathstringifier.test.ts > parsePath > legacy parsePath(%p) === %p 1ms\n ✓ src/pathstringifier.test.ts > parsePath > legacy parsePath(%p) === %p 1ms\n ✓ src/pathstringifier.test.ts > parsePath > parsePath(%p) === %p 1ms\n ✓ src/pathstringifier.test.ts > parsePath > parsePath(%p) === %p 1ms\n ✓ src/pathstringifier.test.ts > parsePath > parsePath(%p) === %p 0ms\n ✓ src/pathstringifier.test.ts > parsePath > parsePath(%p) === %p 2ms\n ✓ src/pathstringifier.test.ts > parsePath > parsePath(%p) is rejected 3ms\n ✓ src/pathstringifier.test.ts > parsePath > parsePath(%p) is rejected 1ms\n ✓ src/pathstringifier.test.ts > escapeKey > escapeKey(dontescape) === dontescape 1ms\n ✓ src/pathstringifier.test.ts > escapeKey > escapeKey(escape.me) === escape\\.me 0ms\n ✓ src/is.test.ts > Basic true tests 9ms\n ✓ src/is.test.ts > Basic false tests 2ms\n ✓ src/is.test.ts > Primitive tests 2ms\n ✓ src/is.test.ts > Date exception 1ms\n ✓ src/is.test.ts > Regression: null-prototype object 1ms\n ✓ src/transformer.test.ts > throws an descriptive error when transforming 14ms\n ✓ src/accessDeep.test.ts > setDeep > correctly sets values in maps 10ms\n ✓ src/accessDeep.test.ts > setDeep > correctly sets values in sets 1ms\n ✓ src/plainer.spec.ts > walker 12ms\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/index.test.ts [ src/index.test.ts ]\nError: Cannot find package 'mongodb' imported from C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-a317f1-TDzA0W/src/index.test.ts\n ❯ src/index.test.ts:17:1\n     15| } from './is.js';\n     16|\n     17| import { ObjectID } from 'mongodb';\n       | ^\n     18| import { Decimal } from 'decimal.js';\n     19|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\nSerialized Error: { code: 'ERR_MODULE_NOT_FOUND' }\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed | 7 passed (8)\n      Tests  25 passed (25)\n   Start at  05:12:23\n   Duration  4.13s (transform 1.56s, setup 0ms, import 1.57s, tests 139ms, environment 31ms)\n\n"
+    }
+  ],
+  "error": "Agent timeout after 600000ms",
+  "model": "opencode-go/mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T04:08:40.390Z",
+  "endedAt": "2026-08-31T04:18:51.094Z"
+}

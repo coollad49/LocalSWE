@@ -1,0 +1,30 @@
+diff --git a/src/defu.ts b/src/defu.ts
+index 168ddff..34b2f19 100644
+--- a/src/defu.ts
++++ b/src/defu.ts
+@@ -7,7 +7,7 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
+     return _defu(baseObject, {}, namespace, merger);
+   }
+ 
+-  const object = Object.assign({}, defaults);
++  const object = Object.assign(Object.create(null) as any, defaults);
+ 
+   for (const key in baseObject) {
+     if (key === "__proto__" || key === "constructor") {
+diff --git a/tests/defu.test.ts b/tests/defu.test.ts
+index d414087..97fadc7 100644
+--- a/tests/defu.test.ts
++++ b/tests/defu.test.ts
+@@ -40,4 +40,12 @@ describe("defu regression", () => {
+     // @ts-ignore
+     expect(({} as any).isAdmin).toBe(undefined);
+   });
++
++  test("does not pollute Object.prototype via __proto__", () => {
++    const payload = JSON.parse('{"__proto__":{"polluted":true}}');
++    const result = defu({}, payload);
++    // @ts-ignore
++    expect(({} as any).polluted).toBe(undefined);
++    expect(result).toHaveProperty("__proto__");
++  });
+ });

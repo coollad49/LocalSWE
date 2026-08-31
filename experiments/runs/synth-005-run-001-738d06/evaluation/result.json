@@ -1,0 +1,508 @@
+{
+  "evaluationId": "eval-00d82037-1788165859081",
+  "runId": "synth-005-run-001-738d06",
+  "caseId": "synth-005",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:44:19.081Z",
+  "completedAt": "2026-08-31T08:44:20.946Z",
+  "durationMs": 1865,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-005-run-001-738d06\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 209,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-005-LGzyqD\\patch-1788165860100.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 184,
+      "command": "bun run benchmark\\cases\\synth-005\\public\\reproduce.ts",
+      "stdout": "100 USD -> EUR {\"amount\":92.35,\"currency\":\"EUR\"} expected 92.35 (100*0.92345=92.345)\n10 USD -> EUR @0.10055 {\"amount\":1.01,\"currency\":\"EUR\"} expected 1.01\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 260,
+      "command": "bun test benchmark\\cases\\synth-005\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-005\\private\\oracle.test.ts:\n(pass) synth-005 oracle: convertCurrency rounding > rounds correctly with half-cent edge [1.27ms]\n(pass) synth-005 oracle: convertCurrency rounding > rounds standard cases [0.16ms]\n(pass) synth-005 oracle: convertCurrency rounding > same currency no conversion [0.11ms]\n\n 3 pass\n 0 fail\n 6 expect() calls\nRan 3 tests across 1 file. [201.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 187,
+      "command": "bun test benchmark\\repositories\\money-utils\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\money-utils\\tests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.43ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.34ms]\n(pass) money-utils > parseMoney handles comma-separated [1.27ms]\n(pass) money-utils > parseMoney handles simple amounts [0.16ms]\n(pass) money-utils > add validates currency mismatch [0.53ms]\n(pass) money-utils > subtract validates currency [0.21ms]\n(pass) money-utils > multiply [0.19ms]\n(pass) money-utils > convertCurrency precision [3.19ms]\n(pass) money-utils > convertCurrency throws missing rate [0.32ms]\n(pass) money-utils > createMoney validates [0.18ms]\n\n 10 pass\n 0 fail\n 22 expect() calls\nRan 10 tests across 1 file. [129.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "money-utils",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "boundary",
+      "data-transformation"
+    ]
+  },
+  "metrics": {
+    "durationMs": 28749,
+    "totalTurns": 34,
+    "toolCalls": 18,
+    "commandsExecuted": 2,
+    "filesInspected": 4,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 21048,
+    "outputTokens": 3060,
+    "totalTokens": 90156
+  },
+  "cost": {
+    "inputTokens": 21048,
+    "outputTokens": 3060,
+    "totalTokens": 24108,
+    "inputCostUsd": 0.002947,
+    "outputCostUsd": 0.000857,
+    "totalCostUsd": 0.003988,
+    "costUsd": 0.003988,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-005-run-001-738d06",
+    "caseId": "synth-005",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:34b27ab694bc6c5ac7da1069ca792b09b531be81ce2b24f2cb07e5984684215a",
+    "trajectory": {
+      "eventCount": 153,
+      "durationMs": 28746,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 2,
+        "turn_start": 12,
+        "message_start": 32,
+        "message_end": 32,
+        "tool_execution_start": 18,
+        "tool_execution_end": 18,
+        "turn_end": 12,
+        "tool_execution_update": 10,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "prompt_completed": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 36,
+      "userMessages": 4,
+      "toolCalls": 18,
+      "toolResults": 72,
+      "thinkingEvents": 24,
+      "unknownEvents": 27,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 18,
+      "uniqueTools": 4,
+      "byTool": {
+        "read": {
+          "calls": 8,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 21048,
+      "output": 3060,
+      "cacheRead": 66048,
+      "cacheWrite": 0,
+      "total": 90156,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.003988,
+      "inputCostUsd": 0.002947,
+      "outputCostUsd": 0.000857,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 24,
+      "characterCount": 4244,
+      "averageCharacters": 177,
+      "maxCharacters": 644,
+      "firstThinkingAt": "2026-08-31T02:55:35.207Z",
+      "lastThinkingAt": "2026-08-31T02:56:01.467Z",
+      "thinkingDurationMs": 26260
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/money.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 8,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 2,
+      "explorationToEditingRatio": 8
+    },
+    "verification": {
+      "commandsDetected": 8,
+      "testsRun": true,
+      "testCommandCount": 2,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 9,
+      "duplicateReadTargets": 4,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 0,
+      "topRepetitions": [
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "cec7100b2e9d",
+          "tool": "read",
+          "target": "src/money.ts",
+          "count": 2
+        },
+        {
+          "signature": "58cc7666d7a3",
+          "tool": "read",
+          "target": "tests/money.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "fee3c4976bbc",
+          "tool": "edit",
+          "target": "src/money.ts",
+          "count": 2
+        },
+        {
+          "signature": "3b86ea7cce44",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-005-run-001-738d06",
+    "caseId": "synth-005",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-31T02:55:35.207Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-31T02:55:35.207Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 24,
+        "timestamp": "2026-08-31T02:55:35.214Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 25,
+        "timestamp": "2026-08-31T02:55:35.214Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 46,
+        "timestamp": "2026-08-31T02:55:37.090Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 47,
+        "timestamp": "2026-08-31T02:55:37.090Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 48,
+        "timestamp": "2026-08-31T02:55:37.091Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 49,
+        "timestamp": "2026-08-31T02:55:37.091Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 70,
+        "timestamp": "2026-08-31T02:55:38.885Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 71,
+        "timestamp": "2026-08-31T02:55:38.885Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 72,
+        "timestamp": "2026-08-31T02:55:38.886Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 73,
+        "timestamp": "2026-08-31T02:55:38.886Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 74,
+        "timestamp": "2026-08-31T02:55:38.886Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/money.test.ts"
+      },
+      {
+        "index": 75,
+        "timestamp": "2026-08-31T02:55:38.886Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/money.test.ts"
+      },
+      {
+        "index": 102,
+        "timestamp": "2026-08-31T02:55:45.019Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 103,
+        "timestamp": "2026-08-31T02:55:45.019Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 118,
+        "timestamp": "2026-08-31T02:55:47.029Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 119,
+        "timestamp": "2026-08-31T02:55:47.029Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 22,
+        "timestamp": "2026-08-31T02:55:35.207Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 102,
+        "timestamp": "2026-08-31T02:55:45.019Z",
+        "detail": "src/money.ts"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 118,
+        "timestamp": "2026-08-31T02:55:47.029Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vit"
+      }
+    ],
+    "errors": [],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 118,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 119,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 130,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  03:55:58\n   Duration  949ms (tr"
+      },
+      {
+        "index": 131,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  03:55:58\n   Duration  949ms (tr"
+      },
+      {
+        "index": 132,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 133,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 134,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 135,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-738d06-VJGKzY\" && npx vitest run 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

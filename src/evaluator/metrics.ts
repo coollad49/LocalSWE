@@ -59,10 +59,8 @@ async function extractTokens(params: {
     const tu = meta.tokenUsage as unknown;
     if (tu && typeof tu === "object") {
       const obj = tu as Record<string, unknown>;
-      // Common shapes: { inputTokens, outputTokens, totalTokens } or { promptTokens, completionTokens } or { input, output }
       let input = parseTokens(obj.inputTokens ?? obj.promptTokens ?? obj.input ?? obj.input_tokens);
       let output = parseTokens(obj.outputTokens ?? obj.completionTokens ?? obj.output ?? obj.output_tokens);
-      // Alternative nested usage
       if (input == null && output == null && (obj.usage as Record<string, unknown>)?.inputTokens != null) {
         const u = obj.usage as Record<string, unknown>;
         input = parseTokens(u.inputTokens ?? u.promptTokens);
@@ -72,46 +70,54 @@ async function extractTokens(params: {
         return { inputTokens: input, outputTokens: output, providerCost: parseTokens((meta as { cost?: unknown }).cost) };
       }
     }
-    // Alternative: metadata contains tokenUsage directly flattened
     const directInput = parseTokens((meta as Record<string, unknown>).inputTokens ?? (meta as Record<string, unknown>).promptTokens);
     const directOutput = parseTokens((meta as Record<string, unknown>).outputTokens ?? (meta as Record<string, unknown>).completionTokens);
     if (directInput != null || directOutput != null) {
       return { inputTokens: directInput, outputTokens: directOutput, providerCost: parseTokens((meta as { cost?: unknown }).cost) };
     }
-    // Provider cost may be stored separately
-    const pc = parseTokens((meta as { cost?: unknown }).cost);
-    if (pc != null && (directInput != null || directOutput != null)) {
-      return { inputTokens: directInput, outputTokens: directOutput, providerCost: pc };
-    }
   }
 
-  // 2. Trajectory scan for usage events (if Pi SDK ever emits)
+  // 2. Trajectory scan: sum usage across all assistant message_end events
   if (existsSync(params.trajectoryPath)) {
     try {
       const raw = await readFile(params.trajectoryPath, "utf-8");
       const lines = raw.split("\n").filter(Boolean);
-      for (let i = lines.length - 1; i >= 0; i--) {
-        const line = lines[i]!;
+      let totalInput = 0;
+      let totalOutput = 0;
+      let totalProviderCost = 0;
+      let observed = false;
+
+      for (const line of lines) {
         const ev = tryParseJson(line) as Record<string, unknown> | null;
         if (!ev) continue;
         const data = ev.data as Record<string, unknown> | undefined;
         if (!data) continue;
-        // Various possible keys
-        const usage = (data.usage ?? data.tokenUsage ?? data.tokens) as Record<string, unknown> | undefined;
+
+        // Check data.message.usage (Pi 0.84.4 standard event)
+        const msg = data.message as Record<string, unknown> | undefined;
+        const usage = (msg?.usage ?? data.usage ?? data.tokenUsage ?? data.tokens) as Record<string, unknown> | undefined;
         if (usage && typeof usage === "object") {
-          const inp = parseTokens(usage.inputTokens ?? usage.promptTokens ?? usage.input_tokens ?? usage.input);
-          const out = parseTokens(usage.outputTokens ?? usage.completionTokens ?? usage.output_tokens ?? usage.output);
+          const inp = parseTokens(usage.input ?? usage.inputTokens ?? usage.promptTokens ?? usage.input_tokens);
+          const out = parseTokens(usage.output ?? usage.outputTokens ?? usage.completionTokens ?? usage.output_tokens);
           if (inp != null || out != null) {
-            const pc = parseTokens(data.cost ?? usage.cost);
-            return { inputTokens: inp, outputTokens: out, providerCost: pc };
+            observed = true;
+            if (inp != null) totalInput += inp;
+            if (out != null) totalOutput += out;
+          }
+          const costObj = usage.cost as Record<string, unknown> | undefined;
+          const costVal = parseTokens(costObj?.total ?? costObj?.totalCost ?? data.cost ?? usage.cost);
+          if (costVal != null) {
+            totalProviderCost += costVal;
           }
         }
-        // Sometimes usage is top-level in data
-        const inp2 = parseTokens(data.inputTokens ?? data.promptTokens);
-        const out2 = parseTokens(data.outputTokens ?? data.completionTokens);
-        if (inp2 != null || out2 != null) {
-          return { inputTokens: inp2, outputTokens: out2, providerCost: parseTokens(data.cost) };
-        }
+      }
+
+      if (observed) {
+        return {
+          inputTokens: totalInput,
+          outputTokens: totalOutput,
+          providerCost: totalProviderCost > 0 ? Number(totalProviderCost.toFixed(6)) : null,
+        };
       }
     } catch {
       // ignore
@@ -119,8 +125,6 @@ async function extractTokens(params: {
   }
 
   const providerCost = meta ? parseTokens((meta as { cost?: unknown }).cost) : null;
-  // Only treat providerCost as trustworthy if tokens also present? For now guardrail says prefer provider only if cost numeric AND tokens? But spec says prefer provider if returns trustworthy cost. We'll allow providerCost alone -> cost computed via provider path with tokens null will still be unavailable, so we keep providerCost for resolveCost step
-  // However to avoid reporting cost without tokens, we only return providerCost if numeric; compute will handle
   return { inputTokens: null, outputTokens: null, providerCost };
 }
 

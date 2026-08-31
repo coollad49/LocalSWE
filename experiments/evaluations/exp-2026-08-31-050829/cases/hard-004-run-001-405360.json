@@ -1,0 +1,87 @@
+{
+  "runId": "hard-004-run-001-405360",
+  "caseId": "hard-004",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "timeout",
+  "durationMs": 32584,
+  "startedAt": "2026-08-31T08:40:52.045Z",
+  "completedAt": "2026-08-31T08:41:24.629Z",
+  "caseMeta": {
+    "repository": "p-queue",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "asynchronous",
+      "state-management",
+      "error-handling"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 271,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-hJqpS0\\patch-1788165653491.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 430,
+      "command": "bun run benchmark\\cases\\hard-004\\public\\reproduce.ts",
+      "stdout": "Test queued abort: outcome=rejected notRan=true sizeOk=true => PASS\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 347,
+      "command": "bun test benchmark\\cases\\hard-004\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hard-004\\private\\oracle.test.ts:\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject when signal is aborted while task is waiting in queue [6.90ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject immediately when signal is already aborted and task is queued [0.63ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should not affect running task when queued task is aborted [31.91ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > abort with custom reason forwards the reason [4.31ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should remove aborted task from priority queue [5.26ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > signal abort not called when task already started should not affect queue size [17.84ms]\n\n 6 pass\n 0 fail\n 15 expect() calls\nRan 6 tests across 1 file. [292.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "timeout",
+      "durationMs": 30048,
+      "command": "bun test benchmark\\repositories\\p-queue\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\p-queue\\tests\\basic.test.ts:\n(pass) p-queue regression > basic queue [4.91ms]\n(pass) p-queue regression > concurrency [52.38ms]\n",
+      "reason": "Timeout after 30000ms: bun test benchmark\\repositories\\p-queue\\tests",
+      "timedOut": true
+    }
+  },
+  "error": {
+    "code": "STAGE_TIMEOUT",
+    "message": "Timeout after 30000ms: bun test benchmark\\repositories\\p-queue\\tests"
+  },
+  "metrics": {
+    "durationMs": 600574,
+    "totalTurns": 202,
+    "toolCalls": 98,
+    "commandsExecuted": 60,
+    "filesInspected": 7,
+    "filesChanged": 6,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 120572,
+    "outputTokens": 46012,
+    "totalTokens": 3659480
+  },
+  "cost": {
+    "inputTokens": 120572,
+    "outputTokens": 46012,
+    "totalTokens": 166584,
+    "inputCostUsd": 0.036172,
+    "outputCostUsd": 0.055214,
+    "totalCostUsd": 0.30096,
+    "costUsd": 0.30096,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  }
+}

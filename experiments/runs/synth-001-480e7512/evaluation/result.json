@@ -1,0 +1,61 @@
+{
+  "evaluationId": "eval-3ea05bb3-1788101153836",
+  "runId": "synth-001-480e7512",
+  "caseId": "synth-001",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:20f1003c3f0e10bcd6293f49ca2a2167011941f5b0677076c93103b10f411dde",
+  "agentVersion": "test",
+  "startedAt": "2026-08-30T14:45:53.836Z",
+  "completedAt": "2026-08-30T14:45:55.776Z",
+  "durationMs": 1940,
+  "patchPath": "inline-synth-001.diff",
+  "status": "completed",
+  "verdict": "false_confidence",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 460,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-001-D2lIAH\\patch-1788101154830.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 212,
+      "command": "bun run benchmark\\cases\\synth-001\\public\\reproduce.ts",
+      "stdout": "description=\"keep me\" expected \"keep me\"\npriority=2 expected 2\nstatus=pending expected pending\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 271,
+      "command": "bun test benchmark\\cases\\synth-001\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-001\\private\\oracle.test.ts:\n 8 |     const u = tm.updateTask(t.id, { title: \"Updated\" });\n 9 |     expect(u.title).toBe(\"Updated\");\n10 |     expect(u.description).toBe(\"desc\");\n11 |     expect(u.priority).toBe(2);\n12 |     expect(u.status).toBe(\"pending\");\n13 |     expect(u.dueDate).toBe(\"2024-12-31\");\n                           ^\nerror: expect(received).toBe(expected)\n\nExpected: \"2024-12-31\"\nReceived: undefined\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-001-D2lIAH\\benchmark\\cases\\synth-001\\private\\oracle.test.ts:13:23)\n(fail) synth-001 oracle: updateTask preserves fields > update only provided field [2.62ms]\n(pass) synth-001 oracle: updateTask preserves fields > update multiple fields preserves others [0.58ms]\n(pass) synth-001 oracle: updateTask preserves fields > update with empty object changes nothing except updatedAt [0.14ms]\n\n 2 pass\n 1 fail\n 10 expect() calls\nRan 3 tests across 1 file. [133.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "task-manager",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "state-management",
+      "business-logic"
+    ]
+  }
+}

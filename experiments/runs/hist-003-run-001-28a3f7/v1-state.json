@@ -1,0 +1,278 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# Issue: spyOn leaks own property when spying on prototype method\r\n\r\n## Problem\r\n\r\nWhen spying on a method defined on an object's prototype and then restoring, the spy incorrectly leaves an own property on the instance instead of removing it, so the prototype method is not correctly restored.\r\n",
+  "filesInspected": [
+    "ISSUE.md",
+    "src/spyOn.ts",
+    "tests/tinyspy.test.ts",
+    "src/utils.ts"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "ISSUE.md\nLICENSE\nnode_modules\npackage.json\nsrc\ntests\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:22:30.856Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\n\n ❯ tests/tinyspy.test.ts (3 tests | 1 failed) 43ms\n     × spyOn mocks prototype method and restores cleanly 29ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn mocks prototype method and restores cleanly\nAssertionError: expected { value: [Function f], …(3) } to be undefined\n\n- Expected:\nundefined\n\n+ Received:\n{\n  \"configurable\": true,\n  \"enumerable\": false,\n  \"value\": [Function f],\n  \"writable\": true,\n}\n\n ❯ tests/tinyspy.test.ts:14:55\n     12|     s.restore();\n     13|     expect(foo.f()).toBe('original');\n     14|     expect(Object.getOwnPropertyDescriptor(foo, 'f')).toBeUndefined();\n       |                                                       ^\n     15|   });\n     16|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  1 failed | 2 passed (3)\n   Start at  05:22:53\n   Duration  1.28s (transform 256ms, setup 0ms, import 365ms, tests 43ms, environment 0ms)\n\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:22:55.124Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  05:23:33\n   Duration  1.72s (transform 381ms, setup 0ms, import 469ms, tests 23ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:23:35.191Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "diff --git a/src/spyOn.ts b/src/spyOn.ts\nindex 4889eaf..3471fd9 100644\n--- a/src/spyOn.ts\n+++ b/src/spyOn.ts\n@@ -78,6 +78,7 @@ export function internalSpyOn<T, K extends string & keyof T>(\n     throw new Error('specify getter or setter to spy on')\n   })()\n   let originalDescriptor = getDescriptor(obj, accessName)\n+  let isOwnProperty = Object.getOwnPropertyDescriptor(obj, accessName) !== undefined\n \n   assert(\n     originalDescriptor || accessName in obj,\n@@ -123,10 +124,18 @@ export function internalSpyOn<T, K extends string & keyof T>(\n     ;(desc as PropertyDescriptor)[accessType] = cb\n     define(obj, accessName, desc)\n   }\n-  let restore = () =>\n-    originalDescriptor && !original\n-      ? define(obj, accessName, originalDescriptor)\n-      : reassign(original)\n+  let restore = () => {\n+    if (isOwnProperty) {\n+      if (originalDescriptor && !original) {\n+        define(obj, accessName, originalDescriptor)\n+      } else {\n+        reassign(original)\n+      }\n+    } else {\n+      // Method was on prototype: remove own property to restore prototype lookup\n+      delete obj[accessName as keyof T]\n+    }\n+  }\n \n   if (!mock) mock = original\n \n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:23:38.276Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  05:23:59\n   Duration  1.35s (transform 250ms, setup 0ms, import 333ms, tests 23ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:24:01.102Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  05:24:21\n   Duration  1.44s (transform 262ms, setup 0ms, import 353ms, tests 23ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:24:23.610Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  05:24:40\n   Duration  1.58s (transform 372ms, setup 0ms, import 463ms, tests 25ms, environment 1ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:24:42.574Z"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "hyp-eb781edf",
+      "description": "Root cause identified and repaired in src/spyOn.ts",
+      "evidence": [
+        "Code inspection and passing verification"
+      ],
+      "confidence": 0.9,
+      "status": "selected",
+      "files": [
+        "src/spyOn.ts"
+      ]
+    }
+  ],
+  "changesMade": [
+    {
+      "path": "src/spyOn.ts",
+      "summary": "edit src/spyOn.ts",
+      "iteration": 0,
+      "timestamp": "2026-08-31T04:23:19.062Z"
+    },
+    {
+      "path": "src/spyOn.ts",
+      "summary": "modified src/spyOn.ts",
+      "iteration": 3,
+      "timestamp": "2026-08-31T04:24:47.427Z"
+    }
+  ],
+  "verificationAttempts": [],
+  "evidence": [
+    {
+      "id": "ev-c42fac4c",
+      "type": "file_inspection",
+      "description": "Inspected ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T04:22:27.419Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-96b10865",
+      "type": "file_inspection",
+      "description": "read ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T04:22:27.420Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8134363c",
+      "type": "command_result",
+      "description": "bash: ls",
+      "source": "ls",
+      "timestamp": "2026-08-31T04:22:29.941Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4aa11db0",
+      "type": "file_inspection",
+      "description": "grep spyOn",
+      "source": "spyOn",
+      "timestamp": "2026-08-31T04:22:29.943Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7c1e1560",
+      "type": "file_inspection",
+      "description": "Inspected src/spyOn.ts",
+      "source": "src/spyOn.ts",
+      "timestamp": "2026-08-31T04:22:34.122Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f9d2fa56",
+      "type": "file_inspection",
+      "description": "read src/spyOn.ts",
+      "source": "src/spyOn.ts",
+      "timestamp": "2026-08-31T04:22:34.123Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-07c65ae3",
+      "type": "file_inspection",
+      "description": "Inspected tests/tinyspy.test.ts",
+      "source": "tests/tinyspy.test.ts",
+      "timestamp": "2026-08-31T04:22:39.863Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-265384fa",
+      "type": "file_inspection",
+      "description": "read tests/tinyspy.test.ts",
+      "source": "tests/tinyspy.test.ts",
+      "timestamp": "2026-08-31T04:22:39.864Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f2da6216",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:22:42.477Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-32d27628",
+      "type": "file_inspection",
+      "description": "Inspected src/utils.ts",
+      "source": "src/utils.ts",
+      "timestamp": "2026-08-31T04:22:59.641Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-84c45be5",
+      "type": "file_inspection",
+      "description": "read src/utils.ts",
+      "source": "src/utils.ts",
+      "timestamp": "2026-08-31T04:22:59.643Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-d81eb847",
+      "type": "file_inspection",
+      "description": "Inspected src/spyOn.ts",
+      "source": "src/spyOn.ts",
+      "timestamp": "2026-08-31T04:23:07.857Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-9746c5ff",
+      "type": "file_inspection",
+      "description": "read src/spyOn.ts",
+      "source": "src/spyOn.ts",
+      "timestamp": "2026-08-31T04:23:07.858Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4fb39614",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:23:20.933Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-814f39ad",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\" && git diff HEAD",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\" && git diff HEAD",
+      "timestamp": "2026-08-31T04:23:37.574Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-cc98f0bf",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:23:45.034Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0048ba5d",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:24:06.819Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f393f3a3",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-28a3f7-BVBpJ4\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:24:28.161Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0b0b2904",
+      "type": "diff_inspection",
+      "description": "Final diff stat:  src/spyOn.ts | 17 +++++++++++++----\n 1 file changed, 13 insertions(+), 4 deletions(-)\n",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-31T04:24:45.895Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 3,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-31T04:22:26.063Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-31T04:22:26.063Z",
+      "exitedAt": "2026-08-31T04:24:45.386Z",
+      "durationMs": 139323
+    }
+  ],
+  "selectedHypothesis": "hyp-eb781edf",
+  "terminationReason": "completed"
+}

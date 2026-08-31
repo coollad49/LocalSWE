@@ -1,0 +1,271 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# Issue: Adding money with different currencies should fail but does not\r\n\r\n## Problem\r\n\r\nAdding or subtracting money with different currencies should throw a currency mismatch error, but it currently succeeds and mixes currencies.\r\n",
+  "filesInspected": [
+    "ISSUE.md",
+    "src",
+    "tests",
+    "src/money.ts",
+    "src/index.ts",
+    "tests/money.test.ts"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n ❯ tests/money.test.ts (10 tests | 2 failed) 50ms\n     × add validates currency mismatch 19ms\n     × subtract validates currency 2ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/money.test.ts > money-utils > add validates currency mismatch\nAssertionError: expected [Function] to throw an error\n\n- Expected:\nnull\n\n+ Received:\nundefined\n\n ❯ tests/money.test.ts:31:29\n     29|     const a = createMoney(10, \"USD\");\n     30|     const b = createMoney(5, \"EUR\");\n     31|     expect(() => add(a, b)).toThrow(/Currency mismatch/);\n       |                             ^\n     32|     expect(add(a, createMoney(5, \"USD\"))).toEqual({ amount: 15, curren…\n     33|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/money.test.ts > money-utils > subtract validates currency\nAssertionError: expected [Function] to throw an error\n ❯ tests/money.test.ts:36:75\n     34|\n     35|   test(\"subtract validates currency\", () => {\n     36|     expect(() => subtract(createMoney(10, \"USD\"), createMoney(5, \"EUR\"…\n       |                                                                           ^\n     37|   });\n     38|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 8 passed (10)\n   Start at  05:28:39\n   Duration  1.62s (transform 184ms, setup 0ms, import 255ms, tests 50ms, environment 0ms)\n\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:28:41.595Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:29:01\n   Duration  1.37s (transform 153ms, setup 0ms, import 216ms, tests 33ms, environment 1ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:03.486Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "diff --git a/src/money.ts b/src/money.ts\nindex c7ec6f8..a67c7bd 100644\n--- a/src/money.ts\n+++ b/src/money.ts\n@@ -35,12 +35,12 @@ export function parseMoney(input: string): Money {\n }\n \n export function add(a: Money, b: Money): Money {\n-  // BUG: missing currency check\n+  if (a.currency !== b.currency) throw new Error(`Currency mismatch: ${a.currency} vs ${b.currency}`);\n   return { amount: roundToCents(a.amount + b.amount), currency: a.currency };\n }\n \n export function subtract(a: Money, b: Money): Money {\n-  // BUG: also missing check for symmetry\n+  if (a.currency !== b.currency) throw new Error(`Currency mismatch: ${a.currency} vs ${b.currency}`);\n   return { amount: roundToCents(a.amount - b.amount), currency: a.currency };\n }\n \n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:06.390Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:29:26\n   Duration  1.19s (transform 169ms, setup 0ms, import 293ms, tests 32ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:28.009Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:29:45\n   Duration  1.63s (transform 213ms, setup 0ms, import 284ms, tests 30ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:47.557Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:30:08\n   Duration  922ms (transform 114ms, setup 0ms, import 171ms, tests 26ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:30:09.215Z"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "hyp-7beba913",
+      "description": "Root cause identified and repaired in src/money.ts",
+      "evidence": [
+        "Code inspection and passing verification"
+      ],
+      "confidence": 0.9,
+      "status": "selected",
+      "files": [
+        "src/money.ts"
+      ]
+    }
+  ],
+  "changesMade": [
+    {
+      "path": "src/money.ts",
+      "summary": "edit src/money.ts",
+      "iteration": 0,
+      "timestamp": "2026-08-31T04:28:45.598Z"
+    },
+    {
+      "path": "src/money.ts",
+      "summary": "modified src/money.ts",
+      "iteration": 3,
+      "timestamp": "2026-08-31T04:30:14.900Z"
+    }
+  ],
+  "verificationAttempts": [],
+  "evidence": [
+    {
+      "id": "ev-424394c8",
+      "type": "file_inspection",
+      "description": "Inspected ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T04:28:17.593Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3509cfa7",
+      "type": "file_inspection",
+      "description": "read ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T04:28:17.594Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-49f6086f",
+      "type": "file_inspection",
+      "description": "Inspected src",
+      "source": "src",
+      "timestamp": "2026-08-31T04:28:21.031Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e0341184",
+      "type": "file_inspection",
+      "description": "read src",
+      "source": "src",
+      "timestamp": "2026-08-31T04:28:21.032Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-00d667eb",
+      "type": "file_inspection",
+      "description": "Inspected tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T04:28:21.034Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-2363c640",
+      "type": "file_inspection",
+      "description": "read tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T04:28:21.034Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ffdd0c41",
+      "type": "file_inspection",
+      "description": "Inspected src/money.ts",
+      "source": "src/money.ts",
+      "timestamp": "2026-08-31T04:28:22.873Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3acdea12",
+      "type": "file_inspection",
+      "description": "read src/money.ts",
+      "source": "src/money.ts",
+      "timestamp": "2026-08-31T04:28:22.874Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8492e324",
+      "type": "file_inspection",
+      "description": "Inspected src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-31T04:28:22.876Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e9f0ebbd",
+      "type": "file_inspection",
+      "description": "read src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-31T04:28:22.877Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3259d513",
+      "type": "file_inspection",
+      "description": "Inspected tests/money.test.ts",
+      "source": "tests/money.test.ts",
+      "timestamp": "2026-08-31T04:28:22.882Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-12712b12",
+      "type": "file_inspection",
+      "description": "read tests/money.test.ts",
+      "source": "tests/money.test.ts",
+      "timestamp": "2026-08-31T04:28:22.883Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c35f8468",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:28:25.759Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-03fbe751",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:28:47.721Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f9247f00",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && git diff HEAD",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && git diff HEAD",
+      "timestamp": "2026-08-31T04:29:05.821Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-d47c7471",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:29:11.525Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ff7ff826",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:29:31.867Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6b2dbf99",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:29:53.459Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4274c62e",
+      "type": "diff_inspection",
+      "description": "Final diff stat:  src/money.ts | 4 ++--\n 1 file changed, 2 insertions(+), 2 deletions(-)\n",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-31T04:30:14.039Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 3,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-31T04:28:15.080Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-31T04:28:15.080Z",
+      "exitedAt": "2026-08-31T04:30:13.718Z",
+      "durationMs": 118638
+    }
+  ],
+  "selectedHypothesis": "hyp-7beba913",
+  "terminationReason": "completed"
+}

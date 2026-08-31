@@ -1,0 +1,19 @@
+diff --git a/lib/index.js b/lib/index.js
+index 3a9e1c6..6c6d281 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -49,6 +49,14 @@ module.exports = function (args, opts) {
+ 			opts.alias[k] = opts.alias[k] || [];
+ 			(opts[typeof opts.default[k]] || []).push(k);
+ 		}
++
++		opts.boolean.forEach(key => {
++			opts.boolean = opts.boolean.concat(opts.alias[key] = opts.alias[key] || []);
++		});
++
++		opts.string.forEach(key => {
++			opts.string = opts.string.concat(opts.alias[key] = opts.alias[key] || []);
++		});
+ 	}
+ 
+ 	const keys = strict ? Object.keys(opts.alias) : [];

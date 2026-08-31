@@ -1,0 +1,86 @@
+{
+  "runId": "hard-004-run-001-36f07b",
+  "caseId": "hard-004",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 2414,
+  "startedAt": "2026-08-31T08:40:49.393Z",
+  "completedAt": "2026-08-31T08:40:51.807Z",
+  "caseMeta": {
+    "repository": "p-queue",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "asynchronous",
+      "state-management",
+      "error-handling"
+    ]
+  },
+  "metrics": {
+    "durationMs": 611530,
+    "totalTurns": 168,
+    "toolCalls": 84,
+    "commandsExecuted": 54,
+    "filesInspected": 7,
+    "filesChanged": 5,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 67562,
+    "outputTokens": 59964,
+    "totalTokens": 4037088
+  },
+  "cost": {
+    "inputTokens": 67562,
+    "outputTokens": 59964,
+    "totalTokens": 127526,
+    "inputCostUsd": 0.020269,
+    "outputCostUsd": 0.071957,
+    "totalCostUsd": 0.326799,
+    "costUsd": 0.326799,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 296,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-N5CPa0\\patch-1788165650435.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 260,
+      "command": "bun run benchmark\\cases\\hard-004\\public\\reproduce.ts",
+      "stdout": "Test queued abort: outcome=rejected notRan=true sizeOk=true => PASS\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 313,
+      "command": "bun test benchmark\\cases\\hard-004\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hard-004\\private\\oracle.test.ts:\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject when signal is aborted while task is waiting in queue [9.40ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject immediately when signal is already aborted and task is queued [0.58ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should not affect running task when queued task is aborted [29.08ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > abort with custom reason forwards the reason [3.47ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should remove aborted task from priority queue [2.03ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > signal abort not called when task already started should not affect queue size [21.02ms]\n\n 6 pass\n 0 fail\n 15 expect() calls\nRan 6 tests across 1 file. [248.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 498,
+      "command": "bun test benchmark\\repositories\\p-queue\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\nBefore abort: queue.size = 1 firstTaskStarted = true\nImmediately after abort: queue.size = 0\n",
+      "stderr": "\nbenchmark\\repositories\\p-queue\\tests\\basic.test.ts:\n(pass) p-queue regression > basic queue [5.55ms]\n(pass) p-queue regression > concurrency [44.88ms]\n\nbenchmark\\repositories\\p-queue\\tests\\repro.test.ts:\n(pass) p-queue signal abort while queued > aborting signal while task is queued should reject the task and remove it from the queue [215.27ms]\n\n 3 pass\n 0 fail\n 7 expect() calls\nRan 3 tests across 2 files. [438.00ms]\n",
+      "timedOut": false
+    }
+  }
+}

@@ -1,0 +1,126 @@
+diff --git a/package-lock.json b/package-lock.json
+new file mode 100644
+index 0000000..c1d42ba
+--- /dev/null
++++ b/package-lock.json
+@@ -0,0 +1,53 @@
++{
++  "name": "defu",
++  "version": "6.1.4",
++  "lockfileVersion": 3,
++  "requires": true,
++  "packages": {
++    "": {
++      "name": "defu",
++      "version": "6.1.4",
++      "license": "MIT",
++      "devDependencies": {
++        "@types/bun": "latest"
++      }
++    },
++    "node_modules/@types/bun": {
++      "version": "1.4.0",
++      "resolved": "https://registry.npmjs.org/@types/bun/-/bun-1.4.0.tgz",
++      "integrity": "sha512-K+lZULY23vRgK/CfTjFIV+tyifaNdSMlPh9j+6mQ/cLfpOznLyAuzgV/JQysyECpkBQLVMSyvjlr2fBUSA9wFQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "bun-types": "1.4.0"
++      }
++    },
++    "node_modules/@types/node": {
++      "version": "26.4.0",
++      "resolved": "https://registry.npmjs.org/@types/node/-/node-26.4.0.tgz",
++      "integrity": "sha512-faiGnoIrLH/V8cibOMEAZ8pMw6oXqSukl29ra4mN8GdaB2ZewzeaLj+INpV5N+Z1eKWzY+IzaIZH2EIR6YZRNQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "undici-types": "~8.3.0"
++      }
++    },
++    "node_modules/bun-types": {
++      "version": "1.4.0",
++      "resolved": "https://registry.npmjs.org/bun-types/-/bun-types-1.4.0.tgz",
++      "integrity": "sha512-iIKw23BspnQQYd3prITOBxeUsxBHnwzX6YJfGMuNOZzeNcMmVqzIIVGRm1l69ogaPQmb4wB6BN8mA5bE9YuC5Q==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@types/node": "*"
++      }
++    },
++    "node_modules/undici-types": {
++      "version": "8.3.0",
++      "resolved": "https://registry.npmjs.org/undici-types/-/undici-types-8.3.0.tgz",
++      "integrity": "sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==",
++      "dev": true,
++      "license": "MIT"
++    }
++  }
++}
+diff --git a/src/defu.ts b/src/defu.ts
+index 168ddff..8b80e87 100644
+--- a/src/defu.ts
++++ b/src/defu.ts
+@@ -7,7 +7,18 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
+     return _defu(baseObject, {}, namespace, merger);
+   }
+ 
+-  const object = Object.assign({}, defaults);
++  // Use Object.defineProperty instead of Object.assign to avoid triggering
++  // the __proto__ setter, which would set the prototype instead of creating
++  // an own property (prototype pollution fix).
++  const object: Record<string, any> = {};
++  for (const key of Object.keys(defaults)) {
++    Object.defineProperty(object, key, {
++      value: defaults[key],
++      writable: true,
++      enumerable: true,
++      configurable: true,
++    });
++  }
+ 
+   for (const key in baseObject) {
+     if (key === "__proto__" || key === "constructor") {
+@@ -34,7 +45,13 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
+         merger,
+       );
+     } else {
+-      object[key] = value;
++      // Use Object.defineProperty to avoid triggering __proto__ setter
++      Object.defineProperty(object, key, {
++        value,
++        writable: true,
++        enumerable: true,
++        configurable: true,
++      });
+     }
+   }
+ 
+diff --git a/tests/defu.test.ts b/tests/defu.test.ts
+index d414087..564ad3c 100644
+--- a/tests/defu.test.ts
++++ b/tests/defu.test.ts
+@@ -40,4 +40,23 @@ describe("defu regression", () => {
+     // @ts-ignore
+     expect(({} as any).isAdmin).toBe(undefined);
+   });
++
++  test("does not pollute Object prototype via __proto__ in defaults", () => {
++    const payload = JSON.parse('{"__proto__":{"polluted":true}}');
++    const result = defu({}, payload);
++    // Should NOT pollute Object.prototype
++    expect(({} as any).polluted).toBe(undefined);
++    expect(Object.prototype).not.toHaveProperty("polluted");
++    // The result should have __proto__ as a regular own property
++    expect(Object.prototype.hasOwnProperty.call(result, "__proto__")).toBe(true);
++    expect((result as any).__proto__).toEqual({ polluted: true });
++  });
++
++  test("does not pollute when __proto__ is in baseObject", () => {
++    const payload = JSON.parse('{"__proto__":{"polluted":true}}');
++    const result = defu(payload, {});
++    // Should NOT pollute Object.prototype
++    expect(({} as any).polluted).toBe(undefined);
++    expect(Object.prototype).not.toHaveProperty("polluted");
++  });
+ });

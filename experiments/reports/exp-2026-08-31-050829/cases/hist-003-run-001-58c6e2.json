@@ -1,0 +1,79 @@
+{
+  "runId": "hist-003-run-001-58c6e2",
+  "caseId": "hist-003",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 1785,
+  "startedAt": "2026-08-31T08:42:27.761Z",
+  "completedAt": "2026-08-31T08:42:29.546Z",
+  "caseMeta": {
+    "repository": "tinyspy",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "state-management",
+      "api-behavior"
+    ]
+  },
+  "metrics": {
+    "durationMs": 603706,
+    "totalTurns": 100,
+    "toolCalls": 46,
+    "commandsExecuted": 18,
+    "filesInspected": 12,
+    "filesChanged": 1,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 84272,
+    "outputTokens": 17316,
+    "totalTokens": 1103620
+  },
+  "cost": {
+    "inputTokens": 84272,
+    "outputTokens": 17316,
+    "totalTokens": 101588,
+    "inputCostUsd": 0.025282,
+    "outputCostUsd": 0.020779,
+    "totalCostUsd": 0.106183,
+    "costUsd": 0.106183,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 229,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-003-QLFiD1\\patch-1788165749116.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 195,
+      "command": "bun run benchmark\\cases\\hist-003\\public\\reproduce.ts",
+      "stdout": "before: foo.f()=original own=undefined\nbefore descriptors: {}\nafter spy: foo.f()=mocked ownDesc={\"writable\":true,\"enumerable\":false,\"configurable\":true}\nafter restore: foo.f()=original ownDesc=[object Object]\nall own descriptors after restore: {\"f\":{\"writable\":true,\"enumerable\":false,\"configurable\":true}}\nFAIL: leak detected - own property still exists after restore (buggy)\n{\n  \"writable\": true,\n  \"enumerable\": false,\n  \"configurable\": true\n}\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  }
+}

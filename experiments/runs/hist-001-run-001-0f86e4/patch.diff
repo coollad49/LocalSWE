@@ -1,0 +1,65 @@
+diff --git a/src/CAC.ts b/src/CAC.ts
+index 7a3df11..4311029 100644
+--- a/src/CAC.ts
++++ b/src/CAC.ts
+@@ -307,6 +307,14 @@ class CAC extends EventEmitter {
+       if (key !== '_') {
+         const keys = key.split('.')
+         setDotProp(options, keys, parsed[key])
++        // Propagate the parsed value to all alias names of the same option
++        for (const cliOption of cliOptions) {
++          if (cliOption.names.includes(key)) {
++            for (const name of cliOption.names) {
++              options[name] = parsed[key]
++            }
++          }
++        }
+         setByType(options, transforms)
+       }
+     }
+diff --git a/tests/cac.test.ts b/tests/cac.test.ts
+index 5ae436f..bb309a4 100644
+--- a/tests/cac.test.ts
++++ b/tests/cac.test.ts
+@@ -34,4 +34,41 @@ describe("cac regression", () => {
+     expect(options.baseUrl).toBe("https://github.com");
+     expect(options.b).toBe("https://github.com");
+   });
++
++  test("default value does not leak when one alias is parsed (long flag)", () => {
++    const cli = cac();
++    cli.option("-b, --base-url <baseUrl>", "Set the instance URL", {
++      default: "https://github.com",
++    });
++    const { options } = cli.parse(["node", "bin", "--base-url", "https://gitlab.com"]);
++    expect(options.baseUrl).toBe("https://gitlab.com");
++    expect(options.b).toBe("https://gitlab.com");
++  });
++
++  test("default value does not leak when one alias is parsed (short flag)", () => {
++    const cli = cac();
++    cli.option("-b, --base-url <baseUrl>", "Set the instance URL", {
++      default: "https://github.com",
++    });
++    const { options } = cli.parse(["node", "bin", "-b", "https://gitlab.com"]);
++    expect(options.baseUrl).toBe("https://gitlab.com");
++    expect(options.b).toBe("https://gitlab.com");
++  });
++
++  test("multiple options with aliases - defaults and parsed values", () => {
++    const cli = cac();
++    cli.option("-b, --base-url <url>", "Base URL", {
++      default: "https://github.com",
++    });
++    cli.option("-t, --token <token>", "Auth token", {
++      default: "default-token",
++    });
++    // Parse with one option specified
++    const { options } = cli.parse(["node", "bin", "--base-url", "https://gitlab.com"]);
++    expect(options.baseUrl).toBe("https://gitlab.com");
++    expect(options.b).toBe("https://gitlab.com");
++    // Token should still be default
++    expect(options.token).toBe("default-token");
++    expect(options.t).toBe("default-token");
++  });
+ });

@@ -1,0 +1,39 @@
+diff --git a/tests/cac.test.ts b/tests/cac.test.ts
+index 5ae436f..ea1159b 100644
+--- a/tests/cac.test.ts
++++ b/tests/cac.test.ts
+@@ -34,4 +34,34 @@ describe("cac regression", () => {
+     expect(options.baseUrl).toBe("https://github.com");
+     expect(options.b).toBe("https://github.com");
+   });
++
++  test("default value not leaking to alias when one alias parsed", () => {
++    const cli = cac();
++    cli.option("-b, --base-url <baseUrl>", "Set the instance URL", {
++      default: "https://github.com",
++    });
++    const { options } = cli.parse([
++      "node",
++      "bin",
++      "--base-url",
++      "https://gitlab.com",
++    ]);
++    expect(options.baseUrl).toBe("https://gitlab.com");
++    expect(options.b).toBe("https://gitlab.com");
++  });
++
++  test("default value applied to both aliases when short alias parsed", () => {
++    const cli = cac();
++    cli.option("-b, --base-url <baseUrl>", "Set the instance URL", {
++      default: "https://github.com",
++    });
++    const { options } = cli.parse([
++      "node",
++      "bin",
++      "-b",
++      "https://gitlab.com",
++    ]);
++    expect(options.baseUrl).toBe("https://gitlab.com");
++    expect(options.b).toBe("https://gitlab.com");
++  });
+ });

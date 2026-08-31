@@ -1,0 +1,1789 @@
+{
+  "evaluationId": "eval-9ad0a977-1788165695562",
+  "runId": "hard-005-run-001-017ebf",
+  "caseId": "hard-005",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:41:35.562Z",
+  "completedAt": "2026-08-31T08:41:37.389Z",
+  "durationMs": 1827,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-005-run-001-017ebf\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 204,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-005-qEP9B7\\patch-1788165696432.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 283,
+      "command": "bun run benchmark\\cases\\hard-005\\public\\reproduce.ts",
+      "stdout": "Test astral ID_Continue: result=\"/:\\\"test\\\"𝛼\" expected=\"/:\\\"test\\\"𝛼\" => PASS\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 193,
+      "command": "bun test benchmark\\cases\\hard-005\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hard-005\\private\\oracle.test.ts:\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > quotes param name when followed by astral ID_Continue [2.48ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > quotes wildcard name when followed by astral ID_Continue [0.16ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > does not quote when followed by non-ID_Continue astral [0.11ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > quotes when next text starts with BMP ID_Continue [1.96ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > does not quote when next is not text or is empty [0.37ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > round-trip parse -> stringify -> parse for astral [1.98ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > parse correctly handles astral ID_Continue in param name [0.18ms]\n\n 7 pass\n 0 fail\n 9 expect() calls\nRan 7 tests across 1 file. [132.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 268,
+      "command": "bun test benchmark\\repositories\\path-to-regexp\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\path-to-regexp\\tests\\basic.test.ts:\n(pass) path-to-regexp regression > basic parse/stringify [7.41ms]\n(pass) path-to-regexp regression > wildcard [0.24ms]\n(pass) path-to-regexp regression > stringify quotes param names followed by astral ID_Continue [1.45ms]\n\n 3 pass\n 0 fail\n 5 expect() calls\nRan 3 tests across 1 file. [216.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "path-to-regexp",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "parsing",
+      "api-behavior",
+      "data-transformation"
+    ]
+  },
+  "metrics": {
+    "durationMs": 557241,
+    "totalTurns": 114,
+    "toolCalls": 56,
+    "commandsExecuted": 24,
+    "filesInspected": 5,
+    "filesChanged": 2,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 84852,
+    "outputTokens": 37440,
+    "totalTokens": 1288116
+  },
+  "cost": {
+    "inputTokens": 84852,
+    "outputTokens": 37440,
+    "totalTokens": 122292,
+    "inputCostUsd": 0.011879,
+    "outputCostUsd": 0.010483,
+    "totalCostUsd": 0.025627,
+    "costUsd": 0.025627,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-005-run-001-017ebf",
+    "caseId": "hard-005",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:0e38e7c8dc9066483cb350ab9020c63cd7c57fab22b2a3c906e6302aa352a13e",
+    "trajectory": {
+      "eventCount": 541,
+      "durationMs": 557237,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 2,
+        "turn_start": 54,
+        "message_start": 112,
+        "message_end": 112,
+        "tool_execution_start": 56,
+        "tool_execution_end": 56,
+        "turn_end": 54,
+        "tool_execution_update": 78,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "prompt_completed": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 162,
+      "userMessages": 4,
+      "toolCalls": 56,
+      "toolResults": 224,
+      "thinkingEvents": 108,
+      "unknownEvents": 137,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 56,
+      "uniqueTools": 4,
+      "byTool": {
+        "read": {
+          "calls": 14,
+          "failures": 6
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 12,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 24,
+          "failures": 48
+        }
+      }
+    },
+    "tokens": {
+      "input": 84852,
+      "output": 37440,
+      "cacheRead": 1165824,
+      "cacheWrite": 0,
+      "total": 1288116,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.025627,
+      "inputCostUsd": 0.011879,
+      "outputCostUsd": 0.010483,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 108,
+      "characterCount": 79800,
+      "averageCharacters": 739,
+      "maxCharacters": 5236,
+      "firstThinkingAt": "2026-08-31T02:44:48.486Z",
+      "lastThinkingAt": "2026-08-31T02:53:49.081Z",
+      "thinkingDurationMs": 540595
+    },
+    "editing": {
+      "editCalls": 12,
+      "writeCalls": 0,
+      "filesTouched": [
+        "tests/basic.test.ts",
+        "src/index.ts"
+      ],
+      "uniqueFilesTouched": 2
+    },
+    "exploration": {
+      "readCalls": 14,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 24,
+      "explorationToEditingRatio": 3.67
+    },
+    "verification": {
+      "commandsDetected": 64,
+      "testsRun": true,
+      "testCommandCount": 16,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "exitCode": 1
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 38,
+      "duplicateReadTargets": 9,
+      "duplicateEditTargets": 10,
+      "toolFailureCount": 54,
+      "topRepetitions": [
+        {
+          "signature": "9cc144416462",
+          "tool": "edit",
+          "target": "tests/basic.test.ts",
+          "count": 10
+        },
+        {
+          "signature": "f78ea73d31f3",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+          "count": 8
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 6
+        },
+        {
+          "signature": "08919bf25172",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "5eaa0363d758",
+          "tool": "read",
+          "target": "tests/cases.spec.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-005-run-001-017ebf",
+    "caseId": "hard-005",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-31T02:44:48.486Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-31T02:44:48.486Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 38,
+        "timestamp": "2026-08-31T02:44:51.935Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 39,
+        "timestamp": "2026-08-31T02:44:51.935Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 54,
+        "timestamp": "2026-08-31T02:44:54.691Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 55,
+        "timestamp": "2026-08-31T02:44:54.691Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 56,
+        "timestamp": "2026-08-31T02:44:54.692Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 57,
+        "timestamp": "2026-08-31T02:44:54.692Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-31T02:44:54.693Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-31T02:44:54.693Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 86,
+        "timestamp": "2026-08-31T02:44:57.442Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 87,
+        "timestamp": "2026-08-31T02:44:57.442Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 102,
+        "timestamp": "2026-08-31T02:45:00.821Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/cases.spec.ts"
+      },
+      {
+        "index": 103,
+        "timestamp": "2026-08-31T02:45:00.821Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/cases.spec.ts"
+      },
+      {
+        "index": 118,
+        "timestamp": "2026-08-31T02:45:03.233Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 119,
+        "timestamp": "2026-08-31T02:45:03.233Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 134,
+        "timestamp": "2026-08-31T02:45:19.349Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 135,
+        "timestamp": "2026-08-31T02:45:19.350Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 150,
+        "timestamp": "2026-08-31T02:45:23.046Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 151,
+        "timestamp": "2026-08-31T02:45:23.046Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 172,
+        "timestamp": "2026-08-31T02:45:37.684Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm install 2>&1",
+        "commandClass": "general"
+      },
+      {
+        "index": 173,
+        "timestamp": "2026-08-31T02:45:37.684Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm install 2>&1",
+        "commandClass": "general"
+      },
+      {
+        "index": 192,
+        "timestamp": "2026-08-31T02:47:42.893Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 193,
+        "timestamp": "2026-08-31T02:47:42.893Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 218,
+        "timestamp": "2026-08-31T02:48:04.353Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 219,
+        "timestamp": "2026-08-31T02:48:04.353Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 244,
+        "timestamp": "2026-08-31T02:48:45.327Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && node -e \"\nconst { parse, stringify } = require('./src/index",
+        "commandClass": "general"
+      },
+      {
+        "index": 245,
+        "timestamp": "2026-08-31T02:48:45.327Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && node -e \"\nconst { parse, stringify } = require('./src/index",
+        "commandClass": "general"
+      },
+      {
+        "index": 264,
+        "timestamp": "2026-08-31T02:48:51.223Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx tsx -e \"\nimport { parse, stringify } from './src/index.",
+        "commandClass": "general"
+      },
+      {
+        "index": 265,
+        "timestamp": "2026-08-31T02:48:51.223Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx tsx -e \"\nimport { parse, stringify } from './src/index.",
+        "commandClass": "general"
+      },
+      {
+        "index": 282,
+        "timestamp": "2026-08-31T02:49:13.118Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 283,
+        "timestamp": "2026-08-31T02:49:13.118Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 308,
+        "timestamp": "2026-08-31T02:49:48.073Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 309,
+        "timestamp": "2026-08-31T02:49:48.073Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 324,
+        "timestamp": "2026-08-31T02:50:07.040Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 325,
+        "timestamp": "2026-08-31T02:50:07.040Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 340,
+        "timestamp": "2026-08-31T02:50:33.260Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && cat > /tmp/test_debug.mjs << 'EOF'\n// Simulate parsing /:a{",
+        "commandClass": "general"
+      },
+      {
+        "index": 341,
+        "timestamp": "2026-08-31T02:50:33.260Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && cat > /tmp/test_debug.mjs << 'EOF'\n// Simulate parsing /:a{",
+        "commandClass": "general"
+      },
+      {
+        "index": 362,
+        "timestamp": "2026-08-31T02:50:51.927Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 363,
+        "timestamp": "2026-08-31T02:50:51.927Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 378,
+        "timestamp": "2026-08-31T02:50:55.039Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 379,
+        "timestamp": "2026-08-31T02:50:55.039Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 394,
+        "timestamp": "2026-08-31T02:51:05.122Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 395,
+        "timestamp": "2026-08-31T02:51:05.122Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 412,
+        "timestamp": "2026-08-31T02:51:39.931Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 413,
+        "timestamp": "2026-08-31T02:51:39.931Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 438,
+        "timestamp": "2026-08-31T02:52:26.456Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 439,
+        "timestamp": "2026-08-31T02:52:26.456Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 454,
+        "timestamp": "2026-08-31T02:52:30.555Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 455,
+        "timestamp": "2026-08-31T02:52:30.555Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 474,
+        "timestamp": "2026-08-31T02:53:21.560Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 475,
+        "timestamp": "2026-08-31T02:53:21.560Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 500,
+        "timestamp": "2026-08-31T02:53:37.158Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 501,
+        "timestamp": "2026-08-31T02:53:37.158Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 516,
+        "timestamp": "2026-08-31T02:53:39.909Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 517,
+        "timestamp": "2026-08-31T02:53:39.909Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 22,
+        "timestamp": "2026-08-31T02:44:48.486Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 134,
+        "timestamp": "2026-08-31T02:45:19.349Z",
+        "detail": "tests/basic.test.ts"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 150,
+        "timestamp": "2026-08-31T02:45:23.046Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 158,
+        "timestamp": "2026-08-31T02:45:34.990Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 159,
+        "timestamp": "2026-08-31T02:45:34.990Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 160,
+        "timestamp": "2026-08-31T02:45:35.201Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 161,
+        "timestamp": "2026-08-31T02:45:35.201Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 162,
+        "timestamp": "2026-08-31T02:45:35.202Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 163,
+        "timestamp": "2026-08-31T02:45:35.202Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 204,
+        "timestamp": "2026-08-31T02:47:59.141Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 205,
+        "timestamp": "2026-08-31T02:47:59.141Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 206,
+        "timestamp": "2026-08-31T02:47:59.169Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 207,
+        "timestamp": "2026-08-31T02:47:59.169Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 208,
+        "timestamp": "2026-08-31T02:47:59.169Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 209,
+        "timestamp": "2026-08-31T02:47:59.169Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 294,
+        "timestamp": "2026-08-31T02:49:33.192Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 295,
+        "timestamp": "2026-08-31T02:49:33.192Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 296,
+        "timestamp": "2026-08-31T02:49:33.201Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 297,
+        "timestamp": "2026-08-31T02:49:33.201Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 298,
+        "timestamp": "2026-08-31T02:49:33.201Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 299,
+        "timestamp": "2026-08-31T02:49:33.202Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 398,
+        "timestamp": "2026-08-31T02:51:36.478Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 399,
+        "timestamp": "2026-08-31T02:51:36.478Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 400,
+        "timestamp": "2026-08-31T02:51:36.533Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 401,
+        "timestamp": "2026-08-31T02:51:36.533Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 402,
+        "timestamp": "2026-08-31T02:51:36.533Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 403,
+        "timestamp": "2026-08-31T02:51:36.533Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 424,
+        "timestamp": "2026-08-31T02:52:21.537Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 425,
+        "timestamp": "2026-08-31T02:52:21.537Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 426,
+        "timestamp": "2026-08-31T02:52:21.768Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 427,
+        "timestamp": "2026-08-31T02:52:21.768Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 428,
+        "timestamp": "2026-08-31T02:52:21.769Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 429,
+        "timestamp": "2026-08-31T02:52:21.769Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 486,
+        "timestamp": "2026-08-31T02:53:33.385Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 487,
+        "timestamp": "2026-08-31T02:53:33.386Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 488,
+        "timestamp": "2026-08-31T02:53:33.390Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 489,
+        "timestamp": "2026-08-31T02:53:33.390Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 490,
+        "timestamp": "2026-08-31T02:53:33.390Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 491,
+        "timestamp": "2026-08-31T02:53:33.391Z",
+        "detail": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vites"
+      }
+    ],
+    "errors": [
+      {
+        "index": 104,
+        "tool": "read",
+        "error": "ENOENT: no such file or directory, access 'C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\\tests\\cases.spec.ts'"
+      },
+      {
+        "index": 105,
+        "tool": "read",
+        "error": "ENOENT: no such file or directory, access 'C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\\tests\\cases.spec.ts'"
+      },
+      {
+        "index": 106,
+        "tool": "read",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 107,
+        "tool": "read",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 108,
+        "tool": "read",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 109,
+        "tool": "read",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 158,
+        "tool": "bash",
+        "error": "\n> path-to-regexp@8.4.2 test\n> ts-scripts test && npm run size\n\n'ts-scripts' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 159,
+        "tool": "bash",
+        "error": "\n> path-to-regexp@8.4.2 test\n> ts-scripts test && npm run size\n\n'ts-scripts' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 160,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 161,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 162,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 163,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 178,
+        "tool": "bash",
+        "error": "npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me\n\n\nCommand timed out after 120 seconds"
+      },
+      {
+        "index": 179,
+        "tool": "bash",
+        "error": "npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me\n\n\nCommand timed out after 120 seconds"
+      },
+      {
+        "index": 180,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 181,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 182,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 183,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 204,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.spec.ts ]\nError: No test suite found in file C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR/src/cases.spec.ts\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed | 1 passed (2)\n      Tests  3 passed (3)\n   Start at  03:47:56\n   Duration  2.43s (transform 853ms, "
+      },
+      {
+        "index": 205,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.spec.ts ]\nError: No test suite found in file C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR/src/cases.spec.ts\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed | 1 passed (2)\n      Tests  3 passed (3)\n   Start at  03:47:56\n   Duration  2.43s (transform 853ms, "
+      },
+      {
+        "index": 206,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 207,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 208,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 209,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 250,
+        "tool": "bash",
+        "error": "C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\\src\\index.ts:127\r\n  constructor(\r\n    public readonly tokens: Token[],\r\n                    ^^^^^^^^^^^^^^^\r\n    public readonly originalPath?: string,\r\r\n\r\nSyntaxError [ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX]: TypeScript parameter property is not supported in strip-only mode\r\n    at parseTypeScript (node:internal/modules/typescript:63:40)\r\n    at processTypeScriptCode (node:internal/modules/typescript:133:42)\r\n    at s"
+      },
+      {
+        "index": 251,
+        "tool": "bash",
+        "error": "C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\\src\\index.ts:127\r\n  constructor(\r\n    public readonly tokens: Token[],\r\n                    ^^^^^^^^^^^^^^^\r\n    public readonly originalPath?: string,\r\r\n\r\nSyntaxError [ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX]: TypeScript parameter property is not supported in strip-only mode\r\n    at parseTypeScript (node:internal/modules/typescript:63:40)\r\n    at processTypeScriptCode (node:internal/modules/typescript:133:42)\r\n    at s"
+      },
+      {
+        "index": 252,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 253,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 254,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 255,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 294,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 8ms\n ✓ tests/basic.test.ts > path-to-regexp regression > wildcard 1ms\n ✓ tests/basic.test.ts > path-to-regexp regression > stringify quotes param names followed by astral ID_Continue 2ms\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.spec.ts ]\nError: No test suite found in file C:/Users/cooll/AppData/L"
+      },
+      {
+        "index": 295,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 8ms\n ✓ tests/basic.test.ts > path-to-regexp regression > wildcard 1ms\n ✓ tests/basic.test.ts > path-to-regexp regression > stringify quotes param names followed by astral ID_Continue 2ms\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.spec.ts ]\nError: No test suite found in file C:/Users/cooll/AppData/L"
+      },
+      {
+        "index": 296,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 297,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 298,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 299,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 398,
+        "tool": "bash",
+        "error": "Command timed out after 30 seconds"
+      },
+      {
+        "index": 399,
+        "tool": "bash",
+        "error": "Command timed out after 30 seconds"
+      },
+      {
+        "index": 400,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 401,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 402,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 403,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 424,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 8ms\n ✓ tests/basic.test.ts > path-to-regexp regression > wildcard 1ms\n × tests/basic.test.ts > path-to-regexp regression > stringify quotes param names followed by astral ID_Continue 24ms\n   → expected ':a𐐀' to be ':\"a\"𐐀' // Object.is equality\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/basic.test.ts > path-to-regexp reg"
+      },
+      {
+        "index": 425,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 8ms\n ✓ tests/basic.test.ts > path-to-regexp regression > wildcard 1ms\n × tests/basic.test.ts > path-to-regexp regression > stringify quotes param names followed by astral ID_Continue 24ms\n   → expected ':a𐐀' to be ':\"a\"𐐀' // Object.is equality\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/basic.test.ts > path-to-regexp reg"
+      },
+      {
+        "index": 426,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 427,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 428,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 429,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 486,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 7ms\n ✓ tests/basic.test.ts > path-to-regexp regression > wildcard 1ms\n ✓ tests/basic.test.ts > path-to-regexp regression > stringify quotes param names followed by astral ID_Continue 2ms\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.spec.ts ]\nError: No test suite found in file C:/Users/cooll/AppData/L"
+      },
+      {
+        "index": 487,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 7ms\n ✓ tests/basic.test.ts > path-to-regexp regression > wildcard 1ms\n ✓ tests/basic.test.ts > path-to-regexp regression > stringify quotes param names followed by astral ID_Continue 2ms\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.spec.ts ]\nError: No test suite found in file C:/Users/cooll/AppData/L"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 150,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 151,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 158,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n> path-to-regexp@8.4.2 test\n> ts-scripts test && npm run size\n\n'ts-scripts' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 159,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n> path-to-regexp@8.4.2 test\n> ts-scripts test && npm run size\n\n'ts-scripts' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 160,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 161,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 162,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 163,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 192,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 193,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 204,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.s"
+      },
+      {
+        "index": 205,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.s"
+      },
+      {
+        "index": 206,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 207,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 208,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 209,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 218,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 219,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 230,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 8ms\n ✓ tests/basic.test.ts"
+      },
+      {
+        "index": 231,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 8ms\n ✓ tests/basic.test.ts"
+      },
+      {
+        "index": 232,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 233,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 234,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 235,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 282,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 283,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 294,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 8ms\n ✓ tests/basic.test.ts"
+      },
+      {
+        "index": 295,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 8ms\n ✓ tests/basic.test.ts"
+      },
+      {
+        "index": 296,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 297,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 298,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 299,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 394,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 395,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 398,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "Command timed out after 30 seconds"
+      },
+      {
+        "index": 399,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "Command timed out after 30 seconds"
+      },
+      {
+        "index": 400,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 401,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 402,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 403,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 412,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 413,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 424,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 8ms\n ✓ tests/basic.test.ts"
+      },
+      {
+        "index": 425,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 8ms\n ✓ tests/basic.test.ts"
+      },
+      {
+        "index": 426,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 427,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 428,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 429,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 454,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 455,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 460,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 7ms\n ✓ tests/basic.test.ts"
+      },
+      {
+        "index": 461,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 7ms\n ✓ tests/basic.test.ts"
+      },
+      {
+        "index": 462,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 463,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 464,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 465,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run tests/basic.test.ts --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 474,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 475,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 486,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 7ms\n ✓ tests/basic.test.ts"
+      },
+      {
+        "index": 487,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\n\n ✓ tests/basic.test.ts > path-to-regexp regression > basic parse/stringify 7ms\n ✓ tests/basic.test.ts"
+      },
+      {
+        "index": 488,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 489,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 490,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 491,
+        "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-017ebf-fLYvWR\" && npx vitest run --reporter=verbose 2>&1",
+        "exitCode": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "runId": "synth-002-run-001-dced56",
+  "caseId": "synth-002",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "status": "timeout",
+  "durationMs": 602791,
+  "changedFiles": [],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-002-run-001-dced56\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-002-run-001-dced56\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-002-run-001-dced56\\metadata.json",
+  "tests": [
+    {
+      "command": "which vitest tsc node; node --version; ls node_modules 2>/dev/null | head -20",
+      "exitCode": 0,
+      "durationMs": 514,
+      "stdout": "/c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest\n/c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/tsc\n/c/Program Files/nodejs/node\nv22.23.2\r\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-002-synth-002-run-001-dced56-LhOcRa && vitest --version 2>&1 | head -5",
+      "exitCode": 0,
+      "durationMs": 820,
+      "stdout": "vitest/4.1.11 win32-x64 node-v22.23.2\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-002-synth-002-run-001-dced56-LhOcRa && vitest run 2>&1 | tail -60",
+      "exitCode": 0,
+      "durationMs": 3943,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-dced56-LhOcRa\n\n ❯ tests/money.test.ts (10 tests | 2 failed) 49ms\n     × add validates currency mismatch 20ms\n     × subtract validates currency 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/money.test.ts > money-utils > add validates currency mismatch\nAssertionError: expected [Function] to throw an error\n\n- Expected:\nnull\n\n+ Received:\nundefined\n\n ❯ tests/money.test.ts:31:29\n     29|     const a = createMoney(10, \"USD\");\n     30|     const b = createMoney(5, \"EUR\");\n     31|     expect(() => add(a, b)).toThrow(/Currency mismatch/);\n       |                             ^\n     32|     expect(add(a, createMoney(5, \"USD\"))).toEqual({ amount: 15, curren…\n     33|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/money.test.ts > money-utils > subtract validates currency\nAssertionError: expected [Function] to throw an error\n ❯ tests/money.test.ts:36:75\n     34|\n     35|   test(\"subtract validates currency\", () => {\n     36|     expect(() => subtract(createMoney(10, \"USD\"), createMoney(5, \"EUR\"…\n       |                                                                           ^\n     37|   });\n     38|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 8 passed (10)\n   Start at  16:28:26\n   Duration  1.21s (transform 111ms, setup 0ms, import 175ms, tests 49ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-002-synth-002-run-001-dced56-LhOcRa && node .v1/helpers.js add-hypothesis '{\"description\":\"add() and subtract() in src/money.ts do not validate that both Money operands share the same currency before combining them. They ignore b.currency and only use a.currency, so USD + EUR silently returns USD with summed amounts.\",\"evidence\":[\"src/money.ts:41 // BUG: missing currency check\",\"src/money.ts:45 // BUG: also missing check for symmetry\",\"tests/money.test.ts:31 expect(() => add(a, b)).toThrow(/Currency mismatch/)\",\"tests/money.test.ts:36 expect(() => subtract(createMoney(10, \\\"USD\\\"), createMoney(5, \\\"EUR\\\"))).toThrow()\",\"vitest run output: 2 failed tests (add validates currency mismatch, subtract validates currency)\"],\"confidence\":0.99,\"files\":[\"src/money.ts\"]}'",
+      "exitCode": 0,
+      "durationMs": 399,
+      "stdout": "hyp-93a1c7e4\n"
+    }
+  ],
+  "error": "Agent timeout after 600000ms",
+  "model": "mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-30T15:24:34.350Z",
+  "endedAt": "2026-08-30T15:34:37.141Z"
+}

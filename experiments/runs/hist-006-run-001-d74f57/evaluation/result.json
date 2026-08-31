@@ -1,0 +1,544 @@
+{
+  "evaluationId": "eval-ee02cf58-1788165788503",
+  "runId": "hist-006-run-001-d74f57",
+  "caseId": "hist-006",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:43:08.503Z",
+  "completedAt": "2026-08-31T08:43:10.512Z",
+  "durationMs": 2009,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-d74f57\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 211,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-006-pbiXqD\\patch-1788165789510.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 391,
+      "command": "bun run benchmark\\cases\\hist-006\\public\\reproduce.ts",
+      "stdout": "before: foo.bar=bar (expected 'bar')\nafter spy: foo.bar=foo (expected 'foo')\nsetter succeeded: foo.bar=foo _bar=baz (expected 'foo' / 'baz')\nPASS: inherited getter correctly mocked with setter preserved\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 199,
+      "command": "bun test benchmark\\cases\\hist-006\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-006\\private\\oracle.test.ts:\n(pass) hist-006 oracle: inherited methods > mocks inherited getter preserves setter [5.25ms]\n(pass) hist-006 oracle: inherited methods > mocks deeply inherited getter preserves setter [1.35ms]\n(pass) hist-006 oracle: inherited methods > mocks inherited overridden getter - setter throws [0.94ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [141.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 196,
+      "command": "bun test benchmark\\repositories\\tinyspy\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\tinyspy\\tests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [4.80ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [1.27ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [0.94ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [146.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "tinyspy",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "state-management"
+    ]
+  },
+  "metrics": {
+    "durationMs": 44762,
+    "totalTurns": 44,
+    "toolCalls": 22,
+    "commandsExecuted": 2,
+    "filesInspected": 5,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 41044,
+    "outputTokens": 8704,
+    "totalTokens": 204628
+  },
+  "cost": {
+    "inputTokens": 41044,
+    "outputTokens": 8704,
+    "totalTokens": 49748,
+    "inputCostUsd": 0.005746,
+    "outputCostUsd": 0.002437,
+    "totalCostUsd": 0.008617,
+    "costUsd": 0.008617,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-006-run-001-d74f57",
+    "caseId": "hist-006",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:a1d21d4d1aea6f511dcfd558539ede74b04a4c13adff1d0aed922b21cfe98573",
+    "trajectory": {
+      "eventCount": 195,
+      "durationMs": 44758,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 2,
+        "turn_start": 18,
+        "message_start": 42,
+        "message_end": 42,
+        "tool_execution_start": 22,
+        "tool_execution_end": 22,
+        "turn_end": 18,
+        "tool_execution_update": 12,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "prompt_completed": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 54,
+      "userMessages": 4,
+      "toolCalls": 22,
+      "toolResults": 88,
+      "thinkingEvents": 36,
+      "unknownEvents": 35,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 22,
+      "uniqueTools": 4,
+      "byTool": {
+        "read": {
+          "calls": 12,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 41044,
+      "output": 8704,
+      "cacheRead": 154880,
+      "cacheWrite": 0,
+      "total": 204628,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.008617,
+      "inputCostUsd": 0.005746,
+      "outputCostUsd": 0.002437,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 36,
+      "characterCount": 20128,
+      "averageCharacters": 559,
+      "maxCharacters": 2110,
+      "firstThinkingAt": "2026-08-31T02:55:05.862Z",
+      "lastThinkingAt": "2026-08-31T02:55:46.952Z",
+      "thinkingDurationMs": 41090
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/spyOn.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 12,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 2,
+      "explorationToEditingRatio": 10
+    },
+    "verification": {
+      "commandsDetected": 8,
+      "testsRun": true,
+      "testCommandCount": 2,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 12,
+      "duplicateReadTargets": 7,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 0,
+      "topRepetitions": [
+        {
+          "signature": "6a8a37655088",
+          "tool": "read",
+          "target": "src/spyOn.ts",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "ec8ec0fa57e2",
+          "tool": "ls",
+          "target": ".",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "16c17a125655",
+          "tool": "read",
+          "target": "src/utils.ts",
+          "count": 2
+        },
+        {
+          "signature": "d177a2010f69",
+          "tool": "read",
+          "target": "src/internal.ts",
+          "count": 2
+        },
+        {
+          "signature": "85dd01f8d924",
+          "tool": "read",
+          "target": "tests/tinyspy.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "3066c8f047e4",
+          "tool": "edit",
+          "target": "src/spyOn.ts",
+          "count": 2
+        },
+        {
+          "signature": "f1cdcbc16e54",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-006-run-001-d74f57",
+    "caseId": "hist-006",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-31T02:55:05.862Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-31T02:55:05.862Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 38,
+        "timestamp": "2026-08-31T02:55:07.517Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 39,
+        "timestamp": "2026-08-31T02:55:07.517Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 54,
+        "timestamp": "2026-08-31T02:55:09.156Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 55,
+        "timestamp": "2026-08-31T02:55:09.156Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 56,
+        "timestamp": "2026-08-31T02:55:09.159Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 57,
+        "timestamp": "2026-08-31T02:55:09.159Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 78,
+        "timestamp": "2026-08-31T02:55:11.552Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 79,
+        "timestamp": "2026-08-31T02:55:11.552Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 80,
+        "timestamp": "2026-08-31T02:55:11.556Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 81,
+        "timestamp": "2026-08-31T02:55:11.556Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 82,
+        "timestamp": "2026-08-31T02:55:11.556Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/internal.ts"
+      },
+      {
+        "index": 83,
+        "timestamp": "2026-08-31T02:55:11.556Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/internal.ts"
+      },
+      {
+        "index": 110,
+        "timestamp": "2026-08-31T02:55:15.823Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/tinyspy.test.ts"
+      },
+      {
+        "index": 111,
+        "timestamp": "2026-08-31T02:55:15.823Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/tinyspy.test.ts"
+      },
+      {
+        "index": 126,
+        "timestamp": "2026-08-31T02:55:27.687Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 127,
+        "timestamp": "2026-08-31T02:55:27.687Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 142,
+        "timestamp": "2026-08-31T02:55:30.072Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 143,
+        "timestamp": "2026-08-31T02:55:30.072Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 170,
+        "timestamp": "2026-08-31T02:55:39.236Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 171,
+        "timestamp": "2026-08-31T02:55:39.236Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 22,
+        "timestamp": "2026-08-31T02:55:05.862Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 126,
+        "timestamp": "2026-08-31T02:55:27.687Z",
+        "detail": "src/spyOn.ts"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 142,
+        "timestamp": "2026-08-31T02:55:30.072Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test "
+      }
+    ],
+    "errors": [],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 142,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 143,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 156,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> tinyspy@4.0.2 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at "
+      },
+      {
+        "index": 157,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> tinyspy@4.0.2 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at "
+      },
+      {
+        "index": 158,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 159,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 160,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 161,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-d74f57-dglNdQ\" && npm test 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

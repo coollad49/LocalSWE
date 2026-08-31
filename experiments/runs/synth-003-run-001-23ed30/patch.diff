@@ -1,0 +1,17 @@
+diff --git a/src/queue.ts b/src/queue.ts
+index 104f669..9955340 100644
+--- a/src/queue.ts
++++ b/src/queue.ts
+@@ -84,8 +84,10 @@ export class AsyncQueue<T = unknown> {
+       await handler(current.payload);
+       return { success: true, job: current };
+     } catch (err) {
+-      // BUG: swallows error and reports success
+-      return { success: true, job: current };
++      if (current.attempts < current.maxAttempts) {
++        this.queue.push(current);
++      }
++      return { success: false, job: current };
+     }
+   }
+ 

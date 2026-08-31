@@ -1,0 +1,36 @@
+diff --git a/src/spyOn.ts b/src/spyOn.ts
+index 4889eaf..3471fd9 100644
+--- a/src/spyOn.ts
++++ b/src/spyOn.ts
+@@ -78,6 +78,7 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     throw new Error('specify getter or setter to spy on')
+   })()
+   let originalDescriptor = getDescriptor(obj, accessName)
++  let isOwnProperty = Object.getOwnPropertyDescriptor(obj, accessName) !== undefined
+ 
+   assert(
+     originalDescriptor || accessName in obj,
+@@ -123,10 +124,18 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     ;(desc as PropertyDescriptor)[accessType] = cb
+     define(obj, accessName, desc)
+   }
+-  let restore = () =>
+-    originalDescriptor && !original
+-      ? define(obj, accessName, originalDescriptor)
+-      : reassign(original)
++  let restore = () => {
++    if (isOwnProperty) {
++      if (originalDescriptor && !original) {
++        define(obj, accessName, originalDescriptor)
++      } else {
++        reassign(original)
++      }
++    } else {
++      // Method was on prototype: remove own property to restore prototype lookup
++      delete obj[accessName as keyof T]
++    }
++  }
+ 
+   if (!mock) mock = original
+ 
+

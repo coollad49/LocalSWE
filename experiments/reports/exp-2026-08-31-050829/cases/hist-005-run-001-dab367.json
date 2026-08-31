@@ -1,0 +1,85 @@
+{
+  "runId": "hist-005-run-001-dab367",
+  "caseId": "hist-005",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 1765,
+  "startedAt": "2026-08-31T08:42:58.109Z",
+  "completedAt": "2026-08-31T08:42:59.874Z",
+  "caseMeta": {
+    "repository": "mri",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "parsing",
+      "alias-handling"
+    ]
+  },
+  "metrics": {
+    "durationMs": 123036,
+    "totalTurns": 54,
+    "toolCalls": 28,
+    "commandsExecuted": 6,
+    "filesInspected": 4,
+    "filesChanged": 2,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 55352,
+    "outputTokens": 23136,
+    "totalTokens": 357784
+  },
+  "cost": {
+    "inputTokens": 55352,
+    "outputTokens": 23136,
+    "totalTokens": 78488,
+    "inputCostUsd": 0.007749,
+    "outputCostUsd": 0.006478,
+    "totalCostUsd": 0.015009,
+    "costUsd": 0.015009,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 212,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-005-vFjCyi\\patch-1788165779063.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 194,
+      "command": "bun run benchmark\\cases\\hist-005\\public\\reproduce.ts",
+      "stdout": "mri(['-a','01'], {alias:{a:['arg']}, default:{arg:''}}) => {\"_\":[],\"a\":\"01\",\"arg\":\"01\"}\na type string value 01 expected string \"01\"\narg type string value 01 expected string \"01\"\n_ empty true expected true\nsecondary mri(['-a','01'], {alias:{arg:['a']}, default:{arg:''}}) => {\"_\":[],\"a\":\"01\",\"arg\":\"01\"}\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 188,
+      "command": "bun test benchmark\\cases\\hist-005\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-005\\private\\oracle.test.ts:\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > core bug: -a 01 with alias a->arg preserves string [2.45ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > all 5 variants from 5437ea5 fix [0.61ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > string types for each alias variant [0.53ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > numeric strings with leading zeros remain strings, numbers still coerce when not string-typed [0.27ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > boolean defaults still cascade to alias (regression from hist-004) [0.66ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > regression: basic parsing unchanged [0.24ms]\n\n 6 pass\n 0 fail\n 29 expect() calls\nRan 6 tests across 1 file. [134.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 211,
+      "command": "bun test benchmark\\repositories\\mri\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\mri\\tests\\mri.test.ts:\n(pass) mri regression > parses basic flags [4.41ms]\n(pass) mri regression > handles short flags [0.27ms]\n(pass) mri regression > handles -- separator [0.14ms]\n(pass) mri regression > coerces numbers by default [0.16ms]\n(pass) mri regression > string opts preserve string values [0.26ms]\n(pass) mri regression > boolean flag with no value [0.24ms]\n(pass) mri regression > alias mirrors values [0.20ms]\n(pass) mri regression > default values [0.11ms]\n(pass) mri regression > unknown handler strict [0.43ms]\n(pass) mri regression > alias defaults preserve string type [0.23ms]\n\n 10 pass\n 0 fail\n 19 expect() calls\nRan 10 tests across 1 file. [161.00ms]\n",
+      "timedOut": false
+    }
+  }
+}

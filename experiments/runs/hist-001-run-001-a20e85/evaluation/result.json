@@ -1,0 +1,1897 @@
+{
+  "evaluationId": "eval-09fd5ac0-1788165720595",
+  "runId": "hist-001-run-001-a20e85",
+  "caseId": "hist-001",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v1",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:42:00.595Z",
+  "completedAt": "2026-08-31T08:42:03.822Z",
+  "durationMs": 3227,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-001-run-001-a20e85\\patch.diff",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 825,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-001-UCd4hW\\patch-1788165722547.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 445,
+      "command": "bun run benchmark\\cases\\hist-001\\public\\reproduce.ts",
+      "stdout": "Test --base-url: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://gitlab.com\"} => FAIL (hasB=true b=https://github.com baseUrl=https://gitlab.com)\nTest -b: options={\"--\":[],\"b\":\"https://gitlab.com\",\"baseUrl\":\"https://gitlab.com\"} => PASS\nTest no args: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://github.com\"} => PASS\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "cac",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "validation",
+      "parsing"
+    ]
+  },
+  "metrics": {
+    "durationMs": 604021,
+    "totalTurns": 204,
+    "toolCalls": 98,
+    "commandsExecuted": 70,
+    "filesInspected": 10,
+    "filesChanged": 1,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 112724,
+    "outputTokens": 32456,
+    "totalTokens": 3636960
+  },
+  "cost": {
+    "inputTokens": 112724,
+    "outputTokens": 32456,
+    "totalTokens": 145180,
+    "inputCostUsd": 0.033817,
+    "outputCostUsd": 0.038947,
+    "totalCostUsd": 0.282271,
+    "costUsd": 0.282271,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-001-run-001-a20e85",
+    "caseId": "hist-001",
+    "agentVersion": "agent-v1",
+    "benchmarkVersion": "0.5",
+    "model": "mimo-v2.5",
+    "trajectoryHash": "sha256:45bf2d96ff6cd59d19e03af4798a6fbc181f2f8f2186341fd52aa9f350b71666",
+    "trajectory": {
+      "eventCount": 980,
+      "durationMs": 604008,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "workflow_init": 1,
+        "helpers_ready": 1,
+        "runtime_key_set": 1,
+        "available_models": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "phase_start": 1,
+        "agent_start": 4,
+        "turn_start": 102,
+        "message_start": 202,
+        "message_end": 200,
+        "tool_execution_start": 98,
+        "tool_execution_update": 156,
+        "tool_execution_end": 98,
+        "turn_end": 100,
+        "agent_end": 2,
+        "auto_retry_start": 1,
+        "auto_retry_end": 1,
+        "timeout": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 302,
+      "userMessages": 4,
+      "toolCalls": 98,
+      "toolResults": 392,
+      "thinkingEvents": 76,
+      "unknownEvents": 266,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 98,
+      "uniqueTools": 3,
+      "byTool": {
+        "bash": {
+          "calls": 70,
+          "failures": 30
+        },
+        "read": {
+          "calls": 24,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 4,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 112724,
+      "output": 32456,
+      "cacheRead": 3491780,
+      "cacheWrite": 0,
+      "total": 3636960,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.282271,
+      "inputCostUsd": 0.033817,
+      "outputCostUsd": 0.038947,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 76,
+      "characterCount": 72580,
+      "averageCharacters": 955,
+      "maxCharacters": 6240,
+      "firstThinkingAt": "2026-08-30T15:04:34.944Z",
+      "lastThinkingAt": "2026-08-30T15:12:24.033Z",
+      "thinkingDurationMs": 469089
+    },
+    "editing": {
+      "editCalls": 0,
+      "writeCalls": 0,
+      "filesTouched": [],
+      "uniqueFilesTouched": 0
+    },
+    "exploration": {
+      "readCalls": 24,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 4,
+      "bashCalls": 70,
+      "explorationToEditingRatio": null
+    },
+    "verification": {
+      "commandsDetected": 64,
+      "testsRun": true,
+      "testCommandCount": 16,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+          "exitCode": 0
+        },
+        {
+          "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 51,
+      "duplicateReadTargets": 14,
+      "duplicateEditTargets": 0,
+      "toolFailureCount": 30,
+      "topRepetitions": [
+        {
+          "signature": "7f6e1bef26e9",
+          "tool": "read",
+          "target": ".v1/state.json",
+          "count": 6
+        },
+        {
+          "signature": "8436f3211aa1",
+          "tool": "bash",
+          "target": "ls -la",
+          "count": 2
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "d58e763780fa",
+          "tool": "read",
+          "target": "src/Option.ts",
+          "count": 2
+        },
+        {
+          "signature": "4ab58faacb8f",
+          "tool": "read",
+          "target": "src/CAC.ts",
+          "count": 2
+        },
+        {
+          "signature": "c94e8782b700",
+          "tool": "read",
+          "target": "tests/cac.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "73d3e0dc87c9",
+          "tool": "read",
+          "target": "src/Command.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-001-run-001-a20e85",
+    "caseId": "hist-001",
+    "agentVersion": "agent-v1",
+    "timeline": [
+      {
+        "index": 25,
+        "timestamp": "2026-08-30T15:04:34.944Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 26,
+        "timestamp": "2026-08-30T15:04:34.944Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 45,
+        "timestamp": "2026-08-30T15:04:37.765Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 46,
+        "timestamp": "2026-08-30T15:04:37.765Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 61,
+        "timestamp": "2026-08-30T15:04:38.984Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 62,
+        "timestamp": "2026-08-30T15:04:38.984Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 77,
+        "timestamp": "2026-08-30T15:04:40.295Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 78,
+        "timestamp": "2026-08-30T15:04:40.295Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 93,
+        "timestamp": "2026-08-30T15:04:41.224Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-30T15:04:41.224Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 109,
+        "timestamp": "2026-08-30T15:04:44.336Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/Option.ts"
+      },
+      {
+        "index": 110,
+        "timestamp": "2026-08-30T15:04:44.336Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/Option.ts"
+      },
+      {
+        "index": 125,
+        "timestamp": "2026-08-30T15:04:45.300Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 126,
+        "timestamp": "2026-08-30T15:04:45.300Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 141,
+        "timestamp": "2026-08-30T15:04:47.757Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/cac.test.ts"
+      },
+      {
+        "index": 142,
+        "timestamp": "2026-08-30T15:04:47.757Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tests/cac.test.ts"
+      },
+      {
+        "index": 157,
+        "timestamp": "2026-08-30T15:04:50.031Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/Command.ts"
+      },
+      {
+        "index": 158,
+        "timestamp": "2026-08-30T15:04:50.031Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/Command.ts"
+      },
+      {
+        "index": 173,
+        "timestamp": "2026-08-30T15:04:51.439Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 174,
+        "timestamp": "2026-08-30T15:04:51.439Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 189,
+        "timestamp": "2026-08-30T15:04:52.597Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 190,
+        "timestamp": "2026-08-30T15:04:52.597Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 205,
+        "timestamp": "2026-08-30T15:04:54.398Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 206,
+        "timestamp": "2026-08-30T15:04:54.398Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 221,
+        "timestamp": "2026-08-30T15:04:56.625Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la .v1/",
+        "commandClass": "general"
+      },
+      {
+        "index": 222,
+        "timestamp": "2026-08-30T15:04:56.625Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la .v1/",
+        "commandClass": "general"
+      },
+      {
+        "index": 241,
+        "timestamp": "2026-08-30T15:04:59.284Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/helpers.js"
+      },
+      {
+        "index": 242,
+        "timestamp": "2026-08-30T15:04:59.284Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/helpers.js"
+      },
+      {
+        "index": 257,
+        "timestamp": "2026-08-30T15:05:08.891Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking d",
+        "commandClass": "test"
+      },
+      {
+        "index": 258,
+        "timestamp": "2026-08-30T15:05:08.891Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking d",
+        "commandClass": "test"
+      },
+      {
+        "index": 277,
+        "timestamp": "2026-08-30T15:05:15.983Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-2c6fb2e7",
+        "commandClass": "general"
+      },
+      {
+        "index": 278,
+        "timestamp": "2026-08-30T15:05:15.983Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-2c6fb2e7",
+        "commandClass": "general"
+      },
+      {
+        "index": 297,
+        "timestamp": "2026-08-30T15:05:20.800Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js status 2>&1 | tail -50",
+        "commandClass": "general"
+      },
+      {
+        "index": 298,
+        "timestamp": "2026-08-30T15:05:20.800Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js status 2>&1 | tail -50",
+        "commandClass": "general"
+      },
+      {
+        "index": 317,
+        "timestamp": "2026-08-30T15:05:27.442Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js status 2>&1 | grep -A2 '\"hypotheses\"' | head -30",
+        "commandClass": "general"
+      },
+      {
+        "index": 318,
+        "timestamp": "2026-08-30T15:05:27.442Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js status 2>&1 | grep -A2 '\"hypotheses\"' | head -30",
+        "commandClass": "general"
+      },
+      {
+        "index": 337,
+        "timestamp": "2026-08-30T15:05:34.972Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking d",
+        "commandClass": "general"
+      },
+      {
+        "index": 338,
+        "timestamp": "2026-08-30T15:05:34.972Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking d",
+        "commandClass": "general"
+      },
+      {
+        "index": 357,
+        "timestamp": "2026-08-30T15:05:40.090Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-d00b9baa",
+        "commandClass": "general"
+      },
+      {
+        "index": 358,
+        "timestamp": "2026-08-30T15:05:40.090Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-d00b9baa",
+        "commandClass": "general"
+      },
+      {
+        "index": 377,
+        "timestamp": "2026-08-30T15:05:45.977Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 378,
+        "timestamp": "2026-08-30T15:05:45.977Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 393,
+        "timestamp": "2026-08-30T15:05:58.857Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat .v1/state.json | python -c \"import json,sys; d=json.load(sys.stdin); print('hypotheses:', d.get('hypotheses', 'MISSING'))\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 394,
+        "timestamp": "2026-08-30T15:05:58.857Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat .v1/state.json | python -c \"import json,sys; d=json.load(sys.stdin); print('hypotheses:', d.get('hypotheses', 'MISSING'))\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 415,
+        "timestamp": "2026-08-30T15:06:12.999Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses)\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 416,
+        "timestamp": "2026-08-30T15:06:12.999Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses)\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 435,
+        "timestamp": "2026-08-30T15:06:19.546Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hyp",
+        "commandClass": "test"
+      },
+      {
+        "index": 436,
+        "timestamp": "2026-08-30T15:06:19.546Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hyp",
+        "commandClass": "test"
+      },
+      {
+        "index": 471,
+        "timestamp": "2026-08-30T15:08:42.233Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaul",
+        "commandClass": "test"
+      },
+      {
+        "index": 472,
+        "timestamp": "2026-08-30T15:08:42.233Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaul",
+        "commandClass": "test"
+      },
+      {
+        "index": 491,
+        "timestamp": "2026-08-30T15:08:44.143Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-c15dec26",
+        "commandClass": "general"
+      },
+      {
+        "index": 492,
+        "timestamp": "2026-08-30T15:08:44.143Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-c15dec26",
+        "commandClass": "general"
+      },
+      {
+        "index": 511,
+        "timestamp": "2026-08-30T15:08:46.180Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 512,
+        "timestamp": "2026-08-30T15:08:46.180Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 531,
+        "timestamp": "2026-08-30T15:09:05.292Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "pwd && ls -la .v1/state.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 532,
+        "timestamp": "2026-08-30T15:09:05.292Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "pwd && ls -la .v1/state.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 553,
+        "timestamp": "2026-08-30T15:09:07.272Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"console.log(require('fs').readFileSync('.v1/state.json', 'utf-8').indexOf('hyp-c15dec26'))\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 554,
+        "timestamp": "2026-08-30T15:09:07.272Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"console.log(require('fs').readFileSync('.v1/state.json', 'utf-8').indexOf('hyp-c15dec26'))\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 573,
+        "timestamp": "2026-08-30T15:09:09.413Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"const s = require('./.v1/state.json'); console.log('keys:', Object.keys(s)); console.log('hypotheses:', JSON.stringify(s.hypotheses));\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 574,
+        "timestamp": "2026-08-30T15:09:09.413Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"const s = require('./.v1/state.json'); console.log('keys:', Object.keys(s)); console.log('hypotheses:', JSON.stringify(s.hypotheses));\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 595,
+        "timestamp": "2026-08-30T15:09:12.321Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"\nconst fs = require('fs');\nconst data = fs.readFileSync('.v1/state.json', 'utf-8');\nconsole.log('Length:', data.length);\nconsole.log('Around ",
+        "commandClass": "general"
+      },
+      {
+        "index": 596,
+        "timestamp": "2026-08-30T15:09:12.321Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"\nconst fs = require('fs');\nconst data = fs.readFileSync('.v1/state.json', 'utf-8');\nconsole.log('Length:', data.length);\nconsole.log('Around ",
+        "commandClass": "general"
+      },
+      {
+        "index": 617,
+        "timestamp": "2026-08-30T15:09:14.534Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -n \"hypotheses\" .v1/state.json | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 618,
+        "timestamp": "2026-08-30T15:09:14.534Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -n \"hypotheses\" .v1/state.json | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 637,
+        "timestamp": "2026-08-30T15:09:16.360Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -n '\"hypotheses\"' .v1/state.json | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 638,
+        "timestamp": "2026-08-30T15:09:16.360Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -n '\"hypotheses\"' .v1/state.json | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 657,
+        "timestamp": "2026-08-30T15:09:19.115Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 658,
+        "timestamp": "2026-08-30T15:09:19.115Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 673,
+        "timestamp": "2026-08-30T15:09:22.769Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -c \"add-hypothesis\" .v1/state.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 674,
+        "timestamp": "2026-08-30T15:09:22.769Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -c \"add-hypothesis\" .v1/state.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 693,
+        "timestamp": "2026-08-30T15:09:24.747Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -n \"hypothesis not found\" .v1/state.json | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 694,
+        "timestamp": "2026-08-30T15:09:24.747Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -n \"hypothesis not found\" .v1/state.json | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 713,
+        "timestamp": "2026-08-30T15:09:37.089Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"\nconst fs = require('fs');\nconst s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('hypotheses array:', s.hypotheses);\n",
+        "commandClass": "general"
+      },
+      {
+        "index": 714,
+        "timestamp": "2026-08-30T15:09:37.089Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"\nconst fs = require('fs');\nconst s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('hypotheses array:', s.hypotheses);\n",
+        "commandClass": "general"
+      },
+      {
+        "index": 735,
+        "timestamp": "2026-08-30T15:09:39.977Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"\nconst fs = require('fs');\nconst s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('hypotheses:', s.hypotheses);\nconsol",
+        "commandClass": "general"
+      },
+      {
+        "index": 736,
+        "timestamp": "2026-08-30T15:09:39.977Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"\nconst fs = require('fs');\nconst s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('hypotheses:', s.hypotheses);\nconsol",
+        "commandClass": "general"
+      },
+      {
+        "index": 757,
+        "timestamp": "2026-08-30T15:09:42.822Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"\nconst fs = require('fs');\nlet s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\ns.hypotheses.push({\n  id: 'hyp-c15dec26',\n  descri",
+        "commandClass": "general"
+      },
+      {
+        "index": 758,
+        "timestamp": "2026-08-30T15:09:42.822Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"\nconst fs = require('fs');\nlet s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\ns.hypotheses.push({\n  id: 'hyp-c15dec26',\n  descri",
+        "commandClass": "general"
+      },
+      {
+        "index": 777,
+        "timestamp": "2026-08-30T15:09:45.091Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"\nconst fs = require('fs');\nlet s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('After delay:', s.hypotheses.length, s",
+        "commandClass": "general"
+      },
+      {
+        "index": 778,
+        "timestamp": "2026-08-30T15:09:45.091Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"\nconst fs = require('fs');\nlet s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('After delay:', s.hypotheses.length, s",
+        "commandClass": "general"
+      },
+      {
+        "index": 799,
+        "timestamp": "2026-08-30T15:09:49.273Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la .git/hooks/ 2>&1 | head -20",
+        "commandClass": "git"
+      },
+      {
+        "index": 800,
+        "timestamp": "2026-08-30T15:09:49.273Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la .git/hooks/ 2>&1 | head -20",
+        "commandClass": "git"
+      },
+      {
+        "index": 819,
+        "timestamp": "2026-08-30T15:09:53.740Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default le",
+        "commandClass": "test"
+      },
+      {
+        "index": 820,
+        "timestamp": "2026-08-30T15:09:53.740Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default le",
+        "commandClass": "test"
+      },
+      {
+        "index": 839,
+        "timestamp": "2026-08-30T15:09:57.372Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default lea",
+        "commandClass": "test"
+      },
+      {
+        "index": 840,
+        "timestamp": "2026-08-30T15:09:57.372Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default lea",
+        "commandClass": "test"
+      },
+      {
+        "index": 859,
+        "timestamp": "2026-08-30T15:10:02.517Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+        "commandClass": "test"
+      },
+      {
+        "index": 860,
+        "timestamp": "2026-08-30T15:10:02.517Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+        "commandClass": "test"
+      },
+      {
+        "index": 879,
+        "timestamp": "2026-08-30T15:11:12.706Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "npm install 2>&1 | tail -10",
+        "commandClass": "general"
+      },
+      {
+        "index": 880,
+        "timestamp": "2026-08-30T15:11:12.706Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "npm install 2>&1 | tail -10",
+        "commandClass": "general"
+      },
+      {
+        "index": 899,
+        "timestamp": "2026-08-30T15:11:25.161Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+        "commandClass": "test"
+      },
+      {
+        "index": 900,
+        "timestamp": "2026-08-30T15:11:25.161Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+        "commandClass": "test"
+      },
+      {
+        "index": 919,
+        "timestamp": "2026-08-30T15:11:53.365Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+        "commandClass": "test"
+      },
+      {
+        "index": 920,
+        "timestamp": "2026-08-30T15:11:53.365Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+        "commandClass": "test"
+      },
+      {
+        "index": 939,
+        "timestamp": "2026-08-30T15:12:23.554Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat > /tmp/check-mri.mjs << 'EOF'\nimport mri from 'mri';\n// Simulate what happens with --base-url\nconsole.log('Parse --base-url https://gitlab.com:');",
+        "commandClass": "general"
+      },
+      {
+        "index": 940,
+        "timestamp": "2026-08-30T15:12:23.554Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat > /tmp/check-mri.mjs << 'EOF'\nimport mri from 'mri';\n// Simulate what happens with --base-url\nconsole.log('Parse --base-url https://gitlab.com:');",
+        "commandClass": "general"
+      },
+      {
+        "index": 959,
+        "timestamp": "2026-08-30T15:12:26.897Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cp /tmp/check-mri.mjs ./check-mri.mjs && node check-mri.mjs && rm check-mri.mjs",
+        "commandClass": "general"
+      },
+      {
+        "index": 960,
+        "timestamp": "2026-08-30T15:12:26.897Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cp /tmp/check-mri.mjs ./check-mri.mjs && node check-mri.mjs && rm check-mri.mjs",
+        "commandClass": "general"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 45,
+        "timestamp": "2026-08-30T15:04:37.765Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 257,
+        "timestamp": "2026-08-30T15:05:08.891Z",
+        "detail": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates al"
+      }
+    ],
+    "errors": [
+      {
+        "index": 283,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-2c6fb2e7\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 284,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-2c6fb2e7\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 285,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 286,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 287,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 288,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 363,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-d00b9baa\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 364,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-d00b9baa\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 365,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 366,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 367,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 368,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 401,
+        "tool": "bash",
+        "error": "Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Manage App Execution Aliases.\r\n\n\nCommand exited with code 49"
+      },
+      {
+        "index": 402,
+        "tool": "bash",
+        "error": "Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Manage App Execution Aliases.\r\n\n\nCommand exited with code 49"
+      },
+      {
+        "index": 403,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 404,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 405,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 406,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 497,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-c15dec26\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 498,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-c15dec26\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 499,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 500,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 501,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 502,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 945,
+        "tool": "bash",
+        "error": "node:internal/modules/package_json_reader:314\r\n  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);\r\n        ^\r\n\r\nError [ERR_MODULE_NOT_FOUND]: Cannot find package 'mri' imported from C:\\Users\\cooll\\AppData\\Local\\Temp\\check-mri.mjs\r\n    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)\r\n    at packageResolve (node:internal/modules/esm/resolve:768:81)\r\n    at moduleResolve (node:internal/modules/esm/resolve:855:18)\r\n    at defaultResolve (node:inte"
+      },
+      {
+        "index": 946,
+        "tool": "bash",
+        "error": "node:internal/modules/package_json_reader:314\r\n  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);\r\n        ^\r\n\r\nError [ERR_MODULE_NOT_FOUND]: Cannot find package 'mri' imported from C:\\Users\\cooll\\AppData\\Local\\Temp\\check-mri.mjs\r\n    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)\r\n    at packageResolve (node:internal/modules/esm/resolve:768:81)\r\n    at moduleResolve (node:internal/modules/esm/resolve:855:18)\r\n    at defaultResolve (node:inte"
+      },
+      {
+        "index": 947,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 948,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 949,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 950,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 257,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+        "exitCode": 0
+      },
+      {
+        "index": 258,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+        "exitCode": 0
+      },
+      {
+        "index": 263,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+        "exitCode": 0,
+        "outputSnippet": "hyp-2c6fb2e7\n"
+      },
+      {
+        "index": 264,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+        "exitCode": 0,
+        "outputSnippet": "hyp-2c6fb2e7\n"
+      },
+      {
+        "index": 265,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+        "exitCode": 0
+      },
+      {
+        "index": 266,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+        "exitCode": 0
+      },
+      {
+        "index": 267,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+        "exitCode": 0
+      },
+      {
+        "index": 268,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+        "exitCode": 0
+      },
+      {
+        "index": 435,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+        "exitCode": 0
+      },
+      {
+        "index": 436,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+        "exitCode": 0
+      },
+      {
+        "index": 443,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+        "exitCode": 0,
+        "outputSnippet": "hyp-b2e94522\nhypotheses: [\n  {\n    \"id\": \"hyp-b2e94522\",\n    \"description\": \"Test\",\n    \"evidence\": [],\n    \"confidence\": 0.5,\n    \"status\": \"active\",\n    \"files\": [\n      \"src/CAC.ts\"\n    ]\n  }\n]\n"
+      },
+      {
+        "index": 444,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+        "exitCode": 0,
+        "outputSnippet": "hyp-b2e94522\nhypotheses: [\n  {\n    \"id\": \"hyp-b2e94522\",\n    \"description\": \"Test\",\n    \"evidence\": [],\n    \"confidence\": 0.5,\n    \"status\": \"active\",\n    \"files\": [\n      \"src/CAC.ts\"\n    ]\n  }\n]\n"
+      },
+      {
+        "index": 445,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+        "exitCode": 0
+      },
+      {
+        "index": 446,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+        "exitCode": 0
+      },
+      {
+        "index": 447,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+        "exitCode": 0
+      },
+      {
+        "index": 448,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+        "exitCode": 0
+      },
+      {
+        "index": 471,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+        "exitCode": 0
+      },
+      {
+        "index": 472,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+        "exitCode": 0
+      },
+      {
+        "index": 477,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+        "exitCode": 0,
+        "outputSnippet": "hyp-c15dec26\n"
+      },
+      {
+        "index": 478,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+        "exitCode": 0,
+        "outputSnippet": "hyp-c15dec26\n"
+      },
+      {
+        "index": 479,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+        "exitCode": 0
+      },
+      {
+        "index": 480,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+        "exitCode": 0
+      },
+      {
+        "index": 481,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+        "exitCode": 0
+      },
+      {
+        "index": 482,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+        "exitCode": 0
+      },
+      {
+        "index": 819,
+        "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+        "exitCode": 0
+      },
+      {
+        "index": 820,
+        "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+        "exitCode": 0
+      },
+      {
+        "index": 825,
+        "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+        "exitCode": 0,
+        "outputSnippet": "/tmp/repro.test.ts\n"
+      },
+      {
+        "index": 826,
+        "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+        "exitCode": 0,
+        "outputSnippet": "/tmp/repro.test.ts\n"
+      },
+      {
+        "index": 827,
+        "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+        "exitCode": 0
+      },
+      {
+        "index": 828,
+        "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+        "exitCode": 0
+      },
+      {
+        "index": 829,
+        "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+        "exitCode": 0
+      },
+      {
+        "index": 830,
+        "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+        "exitCode": 0
+      },
+      {
+        "index": 839,
+        "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+        "exitCode": 0
+      },
+      {
+        "index": 840,
+        "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+        "exitCode": 0
+      },
+      {
+        "index": 845,
+        "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+        "exitCode": 0,
+        "outputSnippet": ".v1/repro.test.ts\n"
+      },
+      {
+        "index": 846,
+        "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+        "exitCode": 0,
+        "outputSnippet": ".v1/repro.test.ts\n"
+      },
+      {
+        "index": 847,
+        "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+        "exitCode": 0
+      },
+      {
+        "index": 848,
+        "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+        "exitCode": 0
+      },
+      {
+        "index": 849,
+        "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+        "exitCode": 0
+      },
+      {
+        "index": 850,
+        "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+        "exitCode": 0
+      },
+      {
+        "index": 859,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+        "exitCode": 0
+      },
+      {
+        "index": 860,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+        "exitCode": 0
+      },
+      {
+        "index": 865,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+        "exitCode": 0,
+        "outputSnippet": "npm warn exec The following package was not found and will be installed: vitest@4.1.11\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n\n ❯ .v1/repro.t"
+      },
+      {
+        "index": 866,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+        "exitCode": 0,
+        "outputSnippet": "npm warn exec The following package was not found and will be installed: vitest@4.1.11\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n\n ❯ .v1/repro.t"
+      },
+      {
+        "index": 867,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+        "exitCode": 0
+      },
+      {
+        "index": 868,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+        "exitCode": 0
+      },
+      {
+        "index": 869,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+        "exitCode": 0
+      },
+      {
+        "index": 870,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+        "exitCode": 0
+      },
+      {
+        "index": 899,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+        "exitCode": 0
+      },
+      {
+        "index": 900,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+        "exitCode": 0
+      },
+      {
+        "index": 905,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n\n ❯ .v1/repro.test.ts (2 tests | 1 failed) 40ms\n     × default should NOT leak to alias when other ali"
+      },
+      {
+        "index": 906,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n\n ❯ .v1/repro.test.ts (2 tests | 1 failed) 40ms\n     × default should NOT leak to alias when other ali"
+      },
+      {
+        "index": 907,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+        "exitCode": 0
+      },
+      {
+        "index": 908,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+        "exitCode": 0
+      },
+      {
+        "index": 909,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+        "exitCode": 0
+      },
+      {
+        "index": 910,
+        "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+        "exitCode": 0
+      },
+      {
+        "index": 919,
+        "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+        "exitCode": 0
+      },
+      {
+        "index": 920,
+        "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+        "exitCode": 0
+      },
+      {
+        "index": 925,
+        "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  16:12:15\n   Duration  1.21s (transf"
+      },
+      {
+        "index": 926,
+        "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  16:12:15\n   Duration  1.21s (transf"
+      },
+      {
+        "index": 927,
+        "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+        "exitCode": 0
+      },
+      {
+        "index": 928,
+        "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+        "exitCode": 0
+      },
+      {
+        "index": 929,
+        "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+        "exitCode": 0
+      },
+      {
+        "index": 930,
+        "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+        "exitCode": 0
+      }
+    ]
+  }
+}

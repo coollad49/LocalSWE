@@ -1,0 +1,36 @@
+diff --git a/src/spyOn.ts b/src/spyOn.ts
+index 4889eaf..d24bb2b 100644
+--- a/src/spyOn.ts
++++ b/src/spyOn.ts
+@@ -100,6 +100,9 @@ export function internalSpyOn<T, K extends string & keyof T>(
+ 
+   let original: Procedure | undefined
+ 
++  // Track whether the original method was an own property (vs inherited from prototype)
++  let hadOwnProperty = accessName in obj && Object.prototype.hasOwnProperty.call(obj, accessName)
++
+   if (originalDescriptor) {
+     original = originalDescriptor[accessType]
+   } else if (accessType !== 'value') {
+@@ -123,10 +126,17 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     ;(desc as PropertyDescriptor)[accessType] = cb
+     define(obj, accessName, desc)
+   }
+-  let restore = () =>
+-    originalDescriptor && !original
+-      ? define(obj, accessName, originalDescriptor)
+-      : reassign(original)
++  let restore = () => {
++    if (originalDescriptor && !original) {
++      define(obj, accessName, originalDescriptor)
++    } else if (!hadOwnProperty) {
++      // Method was inherited from prototype - delete the own property we created
++      // so the prototype method is visible again
++      delete (obj as any)[accessName]
++    } else {
++      reassign(original)
++    }
++  }
+ 
+   if (!mock) mock = original
+ 

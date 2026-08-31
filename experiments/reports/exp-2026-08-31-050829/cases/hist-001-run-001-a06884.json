@@ -1,0 +1,79 @@
+{
+  "runId": "hist-001-run-001-a06884",
+  "caseId": "hist-001",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 1717,
+  "startedAt": "2026-08-31T08:41:58.583Z",
+  "completedAt": "2026-08-31T08:42:00.300Z",
+  "caseMeta": {
+    "repository": "cac",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "validation",
+      "parsing"
+    ]
+  },
+  "metrics": {
+    "durationMs": 600465,
+    "totalTurns": 118,
+    "toolCalls": 56,
+    "commandsExecuted": 20,
+    "filesInspected": 12,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 158044,
+    "outputTokens": 117140,
+    "totalTokens": 1590904
+  },
+  "cost": {
+    "inputTokens": 158044,
+    "outputTokens": 117140,
+    "totalTokens": 275184,
+    "inputCostUsd": 0.047413,
+    "outputCostUsd": 0.140568,
+    "totalCostUsd": 0.266924,
+    "costUsd": 0.266924,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 281,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-001-ehfz4m\\patch-1788165719560.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 454,
+      "command": "bun run benchmark\\cases\\hist-001\\public\\reproduce.ts",
+      "stdout": "Test --base-url: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://gitlab.com\"} => FAIL (hasB=true b=https://github.com baseUrl=https://gitlab.com)\nTest -b: options={\"--\":[],\"b\":\"https://gitlab.com\",\"baseUrl\":\"https://gitlab.com\"} => PASS\nTest no args: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://github.com\"} => PASS\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  }
+}

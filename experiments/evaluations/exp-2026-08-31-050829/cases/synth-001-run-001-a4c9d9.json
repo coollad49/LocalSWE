@@ -1,0 +1,83 @@
+{
+  "runId": "synth-001-run-001-a4c9d9",
+  "caseId": "synth-001",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 2125,
+  "startedAt": "2026-08-31T08:43:24.630Z",
+  "completedAt": "2026-08-31T08:43:26.755Z",
+  "caseMeta": {
+    "repository": "task-manager",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "state-management",
+      "business-logic"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 214,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-001-Okuwpl\\patch-1788165805754.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 300,
+      "command": "bun run benchmark\\cases\\synth-001\\public\\reproduce.ts",
+      "stdout": "description=\"keep me\" expected \"keep me\"\npriority=2 expected 2\nstatus=pending expected pending\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 291,
+      "command": "bun test benchmark\\cases\\synth-001\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-001\\private\\oracle.test.ts:\n(pass) synth-001 oracle: updateTask preserves fields > update only provided field [2.21ms]\n(pass) synth-001 oracle: updateTask preserves fields > update multiple fields preserves others [0.34ms]\n(pass) synth-001 oracle: updateTask preserves fields > update with empty object changes nothing except updatedAt [0.15ms]\n\n 3 pass\n 0 fail\n 10 expect() calls\nRan 3 tests across 1 file. [232.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 191,
+      "command": "bun test benchmark\\repositories\\task-manager\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\task-manager\\tests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [1.08ms]\n(pass) TaskManager > createTask validates priority [0.46ms]\n(pass) TaskManager > createTask validates title [0.19ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.34ms]\n(pass) TaskManager > updateTask only updates provided fields [0.24ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [1.53ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.41ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [1.38ms]\n(pass) TaskManager > filterByStatus validates status [0.20ms]\n(pass) TaskManager > getTasksByPriority filters correctly [5.32ms]\n(pass) TaskManager > deleteTask removes task [0.51ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [141.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "metrics": {
+    "durationMs": 148404,
+    "totalTurns": 94,
+    "toolCalls": 44,
+    "commandsExecuted": 22,
+    "filesInspected": 9,
+    "filesChanged": 2,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 54260,
+    "outputTokens": 10524,
+    "totalTokens": 570128
+  },
+  "cost": {
+    "inputTokens": 54260,
+    "outputTokens": 10524,
+    "totalTokens": 64784,
+    "inputCostUsd": 0.016278,
+    "outputCostUsd": 0.012629,
+    "totalCostUsd": 0.059227,
+    "costUsd": 0.059227,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  }
+}

@@ -1,0 +1,833 @@
+{
+  "evaluationId": "eval-884a2b4d-1788165604701",
+  "runId": "hard-001-run-001-a76370",
+  "caseId": "hard-001",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v1",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:40:04.701Z",
+  "completedAt": "2026-08-31T08:40:07.613Z",
+  "durationMs": 2912,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-001-run-001-a76370\\patch.diff",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-001-PRFcwm\\benchmark\\repositories\\immer",
+      "stdout": "empty patch - no changes applied",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 1313,
+      "command": "node tsx benchmark\\cases\\hard-001\\public\\reproduce.ts",
+      "stdout": "Test reverse: baseUnchanged=false nextCorrect=true => FAIL\n  baseState=[{\"id\":1},{\"id\":2},{\"id\":99}] expected [{\"id\":1},{\"id\":2},{\"id\":3}]\n  reordered={\"id\":99} expected {\"id\":3}\n  nextState=[{\"id\":99},{\"id\":2},{\"id\":1}] expected [{\"id\":99},{\"id\":2},{\"id\":1}]\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "immer",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "state-management",
+      "lifecycle",
+      "api-behavior"
+    ]
+  },
+  "metrics": {
+    "durationMs": 616724,
+    "totalTurns": 132,
+    "toolCalls": 62,
+    "commandsExecuted": 10,
+    "filesInspected": 20,
+    "filesChanged": 0,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 154854,
+    "outputTokens": 7478,
+    "totalTokens": 2365468
+  },
+  "cost": {
+    "inputTokens": 154854,
+    "outputTokens": 7478,
+    "totalTokens": 162332,
+    "inputCostUsd": 0.046456,
+    "outputCostUsd": 0.008974,
+    "totalCostUsd": 0.187618,
+    "costUsd": 0.187618,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-001-run-001-a76370",
+    "caseId": "hard-001",
+    "agentVersion": "agent-v1",
+    "benchmarkVersion": "0.5",
+    "model": "mimo-v2.5",
+    "trajectoryHash": "sha256:4a81c0b99b1c790c770620a9053e44df4245ab4c9c502a52569c061ca58fde6c",
+    "trajectory": {
+      "eventCount": 555,
+      "durationMs": 616686,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "workflow_init": 1,
+        "helpers_ready": 1,
+        "runtime_key_set": 1,
+        "available_models": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "phase_start": 1,
+        "agent_start": 6,
+        "turn_start": 66,
+        "message_start": 128,
+        "message_end": 128,
+        "tool_execution_start": 62,
+        "tool_execution_update": 18,
+        "tool_execution_end": 60,
+        "turn_end": 64,
+        "agent_end": 4,
+        "auto_retry_start": 2,
+        "auto_retry_end": 2,
+        "timeout": 1,
+        "session_disposed": 1,
+        "patch_captured": 1
+      },
+      "assistantMessages": 196,
+      "userMessages": 4,
+      "toolCalls": 62,
+      "toolResults": 242,
+      "thinkingEvents": 28,
+      "unknownEvents": 98,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 62,
+      "uniqueTools": 4,
+      "byTool": {
+        "bash": {
+          "calls": 10,
+          "failures": 0
+        },
+        "read": {
+          "calls": 40,
+          "failures": 6
+        },
+        "ls": {
+          "calls": 10,
+          "failures": 0
+        },
+        "grep": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 154854,
+      "output": 7478,
+      "cacheRead": 2203136,
+      "cacheWrite": 0,
+      "total": 2365468,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.187618,
+      "inputCostUsd": 0.046456,
+      "outputCostUsd": 0.008974,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 28,
+      "characterCount": 71572,
+      "averageCharacters": 2556,
+      "maxCharacters": 17449,
+      "firstThinkingAt": "2026-08-30T14:54:13.561Z",
+      "lastThinkingAt": "2026-08-30T15:03:12.911Z",
+      "thinkingDurationMs": 539350
+    },
+    "editing": {
+      "editCalls": 0,
+      "writeCalls": 0,
+      "filesTouched": [],
+      "uniqueFilesTouched": 0
+    },
+    "exploration": {
+      "readCalls": 40,
+      "grepCalls": 2,
+      "findCalls": 0,
+      "lsCalls": 10,
+      "bashCalls": 10,
+      "explorationToEditingRatio": null
+    },
+    "verification": {
+      "commandsDetected": 0,
+      "testsRun": false,
+      "testCommandCount": 0,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": []
+    },
+    "behavior": {
+      "repeatedToolCalls": 31,
+      "duplicateReadTargets": 20,
+      "duplicateEditTargets": 0,
+      "toolFailureCount": 6,
+      "topRepetitions": [
+        {
+          "signature": "8436f3211aa1",
+          "tool": "bash",
+          "target": "ls -la",
+          "count": 2
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "7c573b10a29d",
+          "tool": "ls",
+          "target": "src/core",
+          "count": 2
+        },
+        {
+          "signature": "c0fc404be6bc",
+          "tool": "ls",
+          "target": "src/plugins",
+          "count": 2
+        },
+        {
+          "signature": "28827d873432",
+          "tool": "read",
+          "target": "src/plugins/arrayMethods.ts",
+          "count": 2
+        },
+        {
+          "signature": "cd3e720ed597",
+          "tool": "read",
+          "target": "src/core/proxy.ts",
+          "count": 2
+        },
+        {
+          "signature": "249e3f4f94fc",
+          "tool": "read",
+          "target": "src/core/current.ts",
+          "count": 2
+        },
+        {
+          "signature": "e10d80bf34f5",
+          "tool": "read",
+          "target": "src/core/finalize.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "error",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-001-run-001-a76370",
+    "caseId": "hard-001",
+    "agentVersion": "agent-v1",
+    "timeline": [
+      {
+        "index": 25,
+        "timestamp": "2026-08-30T14:54:13.561Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 26,
+        "timestamp": "2026-08-30T14:54:13.561Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 45,
+        "timestamp": "2026-08-30T14:54:16.531Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 46,
+        "timestamp": "2026-08-30T14:54:16.531Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 61,
+        "timestamp": "2026-08-30T14:54:18.851Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 62,
+        "timestamp": "2026-08-30T14:54:18.851Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 77,
+        "timestamp": "2026-08-30T14:54:21.652Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 78,
+        "timestamp": "2026-08-30T14:54:21.652Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 93,
+        "timestamp": "2026-08-30T14:54:24.027Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src/core"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-30T14:54:24.027Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "src/core"
+      },
+      {
+        "index": 109,
+        "timestamp": "2026-08-30T14:54:26.584Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src/plugins"
+      },
+      {
+        "index": 110,
+        "timestamp": "2026-08-30T14:54:26.584Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "src/plugins"
+      },
+      {
+        "index": 125,
+        "timestamp": "2026-08-30T14:54:28.363Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/plugins/arrayMethods.ts"
+      },
+      {
+        "index": 126,
+        "timestamp": "2026-08-30T14:54:28.363Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/plugins/arrayMethods.ts"
+      },
+      {
+        "index": 141,
+        "timestamp": "2026-08-30T14:54:32.085Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/proxy.ts"
+      },
+      {
+        "index": 142,
+        "timestamp": "2026-08-30T14:54:32.085Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/proxy.ts"
+      },
+      {
+        "index": 157,
+        "timestamp": "2026-08-30T14:54:35.052Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/current.ts"
+      },
+      {
+        "index": 158,
+        "timestamp": "2026-08-30T14:54:35.052Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/current.ts"
+      },
+      {
+        "index": 173,
+        "timestamp": "2026-08-30T14:54:38.197Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/finalize.ts"
+      },
+      {
+        "index": 174,
+        "timestamp": "2026-08-30T14:54:38.197Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/finalize.ts"
+      },
+      {
+        "index": 189,
+        "timestamp": "2026-08-30T14:54:40.536Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils/errors.ts"
+      },
+      {
+        "index": 190,
+        "timestamp": "2026-08-30T14:54:40.536Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils/errors.ts"
+      },
+      {
+        "index": 205,
+        "timestamp": "2026-08-30T14:54:42.791Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils"
+      },
+      {
+        "index": 206,
+        "timestamp": "2026-08-30T14:54:42.791Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils"
+      },
+      {
+        "index": 221,
+        "timestamp": "2026-08-30T14:54:45.442Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src/utils"
+      },
+      {
+        "index": 222,
+        "timestamp": "2026-08-30T14:54:45.442Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "src/utils"
+      },
+      {
+        "index": 237,
+        "timestamp": "2026-08-30T14:54:49.035Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils/common.ts"
+      },
+      {
+        "index": 238,
+        "timestamp": "2026-08-30T14:54:49.035Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils/common.ts"
+      },
+      {
+        "index": 253,
+        "timestamp": "2026-08-30T14:54:51.422Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 254,
+        "timestamp": "2026-08-30T14:54:51.422Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 269,
+        "timestamp": "2026-08-30T14:55:00.664Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 270,
+        "timestamp": "2026-08-30T14:55:00.664Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 285,
+        "timestamp": "2026-08-30T14:55:05.373Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/immer.ts"
+      },
+      {
+        "index": 286,
+        "timestamp": "2026-08-30T14:55:05.373Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/immer.ts"
+      },
+      {
+        "index": 301,
+        "timestamp": "2026-08-30T14:55:08.082Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/internal.ts"
+      },
+      {
+        "index": 302,
+        "timestamp": "2026-08-30T14:55:08.082Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/internal.ts"
+      },
+      {
+        "index": 331,
+        "timestamp": "2026-08-30T14:58:16.696Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils/plugins.ts"
+      },
+      {
+        "index": 332,
+        "timestamp": "2026-08-30T14:58:16.696Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils/plugins.ts"
+      },
+      {
+        "index": 347,
+        "timestamp": "2026-08-30T14:59:38.273Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/immerClass.ts"
+      },
+      {
+        "index": 348,
+        "timestamp": "2026-08-30T14:59:38.273Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/immerClass.ts"
+      },
+      {
+        "index": 363,
+        "timestamp": "2026-08-30T14:59:42.244Z",
+        "event": "grep",
+        "tool": "grep",
+        "target": "AppData/Local/Temp/frontier-hard-001-hard-001-run-001-a76370-zNwhGe"
+      },
+      {
+        "index": 364,
+        "timestamp": "2026-08-30T14:59:42.244Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "grep",
+        "tool": "grep",
+        "target": "AppData/Local/Temp/frontier-hard-001-hard-001-run-001-a76370-zNwhGe"
+      },
+      {
+        "index": 379,
+        "timestamp": "2026-08-30T14:59:47.714Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 380,
+        "timestamp": "2026-08-30T14:59:47.714Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 395,
+        "timestamp": "2026-08-30T14:59:50.669Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/helpers.js"
+      },
+      {
+        "index": 396,
+        "timestamp": "2026-08-30T14:59:50.669Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/helpers.js"
+      },
+      {
+        "index": 411,
+        "timestamp": "2026-08-30T14:59:54.138Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/plugins/patches.ts"
+      },
+      {
+        "index": 412,
+        "timestamp": "2026-08-30T14:59:54.138Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/plugins/patches.ts"
+      },
+      {
+        "index": 441,
+        "timestamp": "2026-08-30T15:03:07.748Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/scope.ts"
+      },
+      {
+        "index": 442,
+        "timestamp": "2026-08-30T15:03:07.748Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/scope.ts"
+      },
+      {
+        "index": 457,
+        "timestamp": "2026-08-30T15:03:12.890Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tsconfig.json"
+      },
+      {
+        "index": 458,
+        "timestamp": "2026-08-30T15:03:12.890Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tsconfig.json"
+      },
+      {
+        "index": 473,
+        "timestamp": "2026-08-30T15:03:17.172Z",
+        "event": "read",
+        "tool": "read",
+        "target": "vitest.config.ts"
+      },
+      {
+        "index": 474,
+        "timestamp": "2026-08-30T15:03:17.172Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "vitest.config.ts"
+      },
+      {
+        "index": 489,
+        "timestamp": "2026-08-30T15:03:21.199Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls node_modules 2>&1 | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 490,
+        "timestamp": "2026-08-30T15:03:21.199Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls node_modules 2>&1 | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 509,
+        "timestamp": "2026-08-30T15:03:27.639Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-a76370-zNwhGe && ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 510,
+        "timestamp": "2026-08-30T15:03:27.639Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-a76370-zNwhGe && ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 529,
+        "timestamp": "2026-08-30T15:03:31.748Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-a76370-zNwhGe && npm install 2>&1 | tail -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 530,
+        "timestamp": "2026-08-30T15:03:31.748Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-a76370-zNwhGe && npm install 2>&1 | tail -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 549,
+        "timestamp": "2026-08-30T15:03:48.095Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-a76370-zNwhGe && npm install --legacy-peer-deps 2>&1 | tail -10",
+        "commandClass": "general"
+      },
+      {
+        "index": 550,
+        "timestamp": "2026-08-30T15:03:48.095Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-a76370-zNwhGe && npm install --legacy-peer-deps 2>&1 | tail -10",
+        "commandClass": "general"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 45,
+        "timestamp": "2026-08-30T14:54:16.531Z",
+        "detail": "ISSUE.md"
+      }
+    ],
+    "errors": [
+      {
+        "index": 207,
+        "tool": "read",
+        "error": "EISDIR: illegal operation on a directory, read"
+      },
+      {
+        "index": 208,
+        "tool": "read",
+        "error": "EISDIR: illegal operation on a directory, read"
+      },
+      {
+        "index": 209,
+        "tool": "read",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 210,
+        "tool": "read",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 211,
+        "tool": "read",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 212,
+        "tool": "read",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": []
+  }
+}

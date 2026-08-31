@@ -1,0 +1,719 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# Issue: Updating a task erases fields not included in update\r\n\r\n## Problem\r\n\r\nUpdating a task with only some fields should leave the other fields unchanged. Currently, fields not included in the update are erased or set to undefined.\r\n",
+  "filesInspected": [
+    "ISSUE.md",
+    "package.json",
+    "src",
+    "tests",
+    "src/index.ts",
+    "src/types.ts",
+    "src/task-manager.ts",
+    "src/validators.ts",
+    "src/utils.ts",
+    "tests/task-manager.test.ts",
+    ".v1/state.json",
+    ".v1",
+    ".v1/helpers.js"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "total 111\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 ..\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .git\n-rw-r--r-- 1 cooll 197609  35 Aug 30 16:14 .gitignore\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .v1\n-rw-r--r-- 1 cooll 197609 236 Aug 30 15:13 ISSUE.md\n-rw-r--r-- 1 cooll 197609 349 Aug 30 15:13 package.json\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 src\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 tests\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:14:46.981Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hyp-b30be236\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:15:27.560Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "hypothesis not found hyp-b30be236\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:15:30.667Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "{\n  \"phase\": \"reconnaissance\",\n  \"issue\": \"# Issue: Updating a task erases fields not included in update\\r\\n\\r\\n## Problem\\r\\n\\r\\nUpdating a task with only some fields should leave the other fields unchanged. Currently, fields not included in the update are erased or set to undefined.\\r\\n\",\n  \"filesInspected\": [\n    \"ISSUE.md\",\n    \"package.json\",\n    \"src\",\n    \"tests\",\n    \"src/index.ts\",\n    \"src/types.ts\",\n    \"src/task-manager.ts\",\n    \"src/validators.ts\",\n    \"src/utils.ts\",\n    \"tests/task-manager.test.ts\",\n    \".v1/state.json\",\n    \".v1\",\n    \".v1/helpers.js\"\n  ],\n  \"commandsExecuted\": [\n    {\n      \"command\": \"\",\n      \"exitCode\": 0,\n      \"stdout\": \"total 111\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 ..\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .git\\n-rw-r--r-- 1 cooll 197609  35 Aug 30 16:14 .gitignore\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .v1\\n-rw-r--r-- 1 cooll 197609 236 Aug 30 15:13 ISSUE.md\\n-rw-r--r-- 1 cooll 197609 349 Aug 30 15:13 package.json\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 src\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 tests\\n\",\n      \"stderr\": \"\",\n      \"durationMs\": 0,\n      \"phase\": \"reconnaissance\",\n      \"timestamp\": \"2026-08-30T15:14:46.981Z\"\n    },\n    {\n      \"command\": \"\",\n      \"exitCode\": 0,\n      \"stdout\": \"hyp-b30be236\\n\",\n      \"stderr\": \"\",\n      \"durationMs\": 0,\n      \"phase\": \"reconnaissance\",\n      \"timestamp\": \"2026-08-30T15:15:27.560Z\"\n    },\n    {\n      \"command\": \"\",\n      \"exitCode\": 1,\n      \"stdout\": \"hypothesis not found hyp-b30be236\\n\\n\\nCommand exited with code 1\",\n      \"stderr\": \"\",\n      \"durationMs\": 0,\n      \"phase\": \"reconnaissance\",\n      \"timestamp\": \"2026-08-30T15:15:30.667Z\"\n    }\n  ],\n  \"hypotheses\": [],\n  \"changesMade\": [],\n  \"verificationAttempts\": [],\n  \"evidence\": [\n    {\n      \"id\": \"ev-eab9be63\",\n      \"type\": \"command_result\",\n      \"description\": \"bash: ls -la\",\n      \"source\": \"ls -la\",\n      \"timestamp\": \"2026-08-30T15:14:46.508Z",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:15:34.475Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "[]\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:15:43.512Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hyp-64d1bec4\n[\n  {\n    \"id\": \"hyp-64d1bec4\",\n    \"description\": \"test\",\n    \"evidence\": [],\n    \"confidence\": 0.5,\n    \"status\": \"active\",\n    \"files\": [\n      \"src/task-manager.ts\"\n    ]\n  }\n]\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:15:49.499Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hyp-a8489aa7\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:15:54.713Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "hypothesis not found hyp-a8489aa7\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:15:57.640Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "/tmp/frontier-synth-001-synth-001-run-001-281284-eTtlrm\nC:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-synth-001-synth-001-run-001-281284-eTtlrm\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:16:01.342Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "[]\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:17:05.789Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "total 32\ndrwxr-xr-x 1 cooll 197609     0 Aug 30 16:14 .\ndrwxr-xr-x 1 cooll 197609     0 Aug 30 16:14 ..\n-rwxr-xr-x 1 cooll 197609  5743 Aug 30 16:14 helpers.js\n-rw-r--r-- 1 cooll 197609 16827 Aug 30 16:17 state.json\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:17:09.115Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "12\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:17:11.866Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "      \"stdout\": \"hyp-b30be236\\n\",\n      \"stdout\": \"hypothesis not found hyp-b30be236\\n\\n\\nCommand exited with code 1\",\n      \"stdout\": \"{\\n  \\\"phase\\\": \\\"reconnaissance\\\",\\n  \\\"issue\\\": \\\"# Issue: Updating a task erases fields not included in update\\\\r\\\\n\\\\r\\\\n## Problem\\\\r\\\\n\\\\r\\\\nUpdating a task with only some fields should leave the other fields unchanged. Currently, fields not included in the update are erased or set to undefined.\\\\r\\\\n\\\",\\n  \\\"filesInspected\\\": [\\n    \\\"ISSUE.md\\\",\\n    \\\"package.json\\\",\\n    \\\"src\\\",\\n    \\\"tests\\\",\\n    \\\"src/index.ts\\\",\\n    \\\"src/types.ts\\\",\\n    \\\"src/task-manager.ts\\\",\\n    \\\"src/validators.ts\\\",\\n    \\\"src/utils.ts\\\",\\n    \\\"tests/task-manager.test.ts\\\",\\n    \\\".v1/state.json\\\",\\n    \\\".v1\\\",\\n    \\\".v1/helpers.js\\\"\\n  ],\\n  \\\"commandsExecuted\\\": [\\n    {\\n      \\\"command\\\": \\\"\\\",\\n      \\\"exitCode\\\": 0,\\n      \\\"stdout\\\": \\\"total 111\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 ..\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .git\\\\n-rw-r--r-- 1 cooll 197609  35 Aug 30 16:14 .gitignore\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .v1\\\\n-rw-r--r-- 1 cooll 197609 236 Aug 30 15:13 ISSUE.md\\\\n-rw-r--r-- 1 cooll 197609 349 Aug 30 15:13 package.json\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 src\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 tests\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\",\\n      \\\"durationMs\\\": 0,\\n      \\\"phase\\\": \\\"reconnaissance\\\",\\n      \\\"timestamp\\\": \\\"2026-08-30T15:14:46.981Z\\\"\\n    },\\n    {\\n      \\\"command\\\": \\\"\\\",\\n      \\\"exitCode\\\": 0,\\n      \\\"stdout\\\": \\\"hyp-b30be236\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\",\\n      \\\"durationMs\\\": 0,\\n      \\\"phase\\\": \\\"reconnaissance\\\",\\n      \\\"timestamp\\\": \\\"2026-08-30T15:15:27.560Z\\\"\\n    },\\n    {\\n      \\\"command\\\": \\\"\\\",\\n      \\\"exitCode\\\": 1,\\n      \\\"stdout\\\": \\\"hypothesis not found hyp-b30be236\\\\n\\\\n\\\\nCommand exited with code 1\\\",\\n      \\\"stderr\\\": \\\"\\\",\\n      \\\"durationMs\\\": 0,\\n      \\\"phase\\\": \\\"reconnaissance\\\",\\n      ",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:17:14.682Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hyp-84ee1891\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:17:24.538Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "count: 0\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:17:28.071Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "v22.23.2\r\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:17:36.891Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "before: 0\nafter: 1\nsaved\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:17:43.505Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "count: 0\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:17:47.429Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "  File: .v1/state.json\n  Size: 24397     \tBlocks: 24         IO Block: 65536  regular file\nDevice: 26a3f660h/648279648d\tInode: 1407374884036828  Links: 1\nAccess: (0644/-rw-r--r--)  Uid: (197609/   cooll)   Gid: (197609/ UNKNOWN)\nAccess: 2026-08-30 16:17:50.523231900 +0100\nModify: 2026-08-30 16:17:50.523231900 +0100\nChange: 2026-08-30 16:17:50.523231900 +0100\n Birth: 2026-08-30 16:14:43.374539400 +0100\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:17:51.014Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Sun Aug 30 16:17:55 WCAST 2026\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:17:55.138Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "{\n}",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:17:58.618Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "50:      \"stdout\": \"{\\n  \\\"phase\\\": \\\"reconnaissance\\\",\\n  \\\"issue\\\": \\\"# Issue: Updating a task erases fields not included in update\\\\r\\\\n\\\\r\\\\n## Problem\\\\r\\\\n\\\\r\\\\nUpdating a task with only some fields should leave the other fields unchanged. Currently, fields not included in the update are erased or set to undefined.\\\\r\\\\n\\\",\\n  \\\"filesInspected\\\": [\\n    \\\"ISSUE.md\\\",\\n    \\\"package.json\\\",\\n    \\\"src\\\",\\n    \\\"tests\\\",\\n    \\\"src/index.ts\\\",\\n    \\\"src/types.ts\\\",\\n    \\\"src/task-manager.ts\\\",\\n    \\\"src/validators.ts\\\",\\n    \\\"src/utils.ts\\\",\\n    \\\"tests/task-manager.test.ts\\\",\\n    \\\".v1/state.json\\\",\\n    \\\".v1\\\",\\n    \\\".v1/helpers.js\\\"\\n  ],\\n  \\\"commandsExecuted\\\": [\\n    {\\n      \\\"command\\\": \\\"\\\",\\n      \\\"exitCode\\\": 0,\\n      \\\"stdout\\\": \\\"total 111\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 ..\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .git\\\\n-rw-r--r-- 1 cooll 197609  35 Aug 30 16:14 .gitignore\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .v1\\\\n-rw-r--r-- 1 cooll 197609 236 Aug 30 15:13 ISSUE.md\\\\n-rw-r--r-- 1 cooll 197609 349 Aug 30 15:13 package.json\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 src\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 tests\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\",\\n      \\\"durationMs\\\": 0,\\n      \\\"phase\\\": \\\"reconnaissance\\\",\\n      \\\"timestamp\\\": \\\"2026-08-30T15:14:46.981Z\\\"\\n    },\\n    {\\n      \\\"command\\\": \\\"\\\",\\n      \\\"exitCode\\\": 0,\\n      \\\"stdout\\\": \\\"hyp-b30be236\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\",\\n      \\\"durationMs\\\": 0,\\n      \\\"phase\\\": \\\"reconnaissance\\\",\\n      \\\"timestamp\\\": \\\"2026-08-30T15:15:27.560Z\\\"\\n    },\\n    {\\n      \\\"command\\\": \\\"\\\",\\n      \\\"exitCode\\\": 1,\\n      \\\"stdout\\\": \\\"hypothesis not found hyp-b30be236\\\\n\\\\n\\\\nCommand exited with code 1\\\",\\n      \\\"stderr\\\": \\\"\\\",\\n      \\\"durationMs\\\": 0,\\n      \\\"phase\\\": \\\"reconnaissance\\\",\\n      \\\"timestamp\\\": \\\"2026-08-30T15:15:30.667Z\\\"\\n    }\\n  ],\\n  \\\"hypotheses\\\": [],\\n  \\\"changesMade\\\": [],\\n  \\\"verific",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:18:04.660Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "      \"command\": \"\",\n      \"exitCode\": 0,\n      \"stdout\": \"50:      \\\"stdout\\\": \\\"{\\\\n  \\\\\\\"phase\\\\\\\": \\\\\\\"reconnaissance\\\\\\\",\\\\n  \\\\\\\"issue\\\\\\\": \\\\\\\"# Issue: Updating a task erases fields not included in update\\\\\\\\r\\\\\\\\n\\\\\\\\r\\\\\\\\n## Problem\\\\\\\\r\\\\\\\\n\\\\\\\\r\\\\\\\\nUpdating a task with only some fields should leave the other fields unchanged. Currently, fields not included in the update are erased or set to undefined.\\\\\\\\r\\\\\\\\n\\\\\\\",\\\\n  \\\\\\\"filesInspected\\\\\\\": [\\\\n    \\\\\\\"ISSUE.md\\\\\\\",\\\\n    \\\\\\\"package.json\\\\\\\",\\\\n    \\\\\\\"src\\\\\\\",\\\\n    \\\\\\\"tests\\\\\\\",\\\\n    \\\\\\\"src/index.ts\\\\\\\",\\\\n    \\\\\\\"src/types.ts\\\\\\\",\\\\n    \\\\\\\"src/task-manager.ts\\\\\\\",\\\\n    \\\\\\\"src/validators.ts\\\\\\\",\\\\n    \\\\\\\"src/utils.ts\\\\\\\",\\\\n    \\\\\\\"tests/task-manager.test.ts\\\\\\\",\\\\n    \\\\\\\".v1/state.json\\\\\\\",\\\\n    \\\\\\\".v1\\\\\\\",\\\\n    \\\\\\\".v1/helpers.js\\\\\\\"\\\\n  ],\\\\n  \\\\\\\"commandsExecuted\\\\\\\": [\\\\n    {\\\\n      \\\\\\\"command\\\\\\\": \\\\\\\"\\\\\\\",\\\\n      \\\\\\\"exitCode\\\\\\\": 0,\\\\n      \\\\\\\"stdout\\\\\\\": \\\\\\\"total 111\\\\\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .\\\\\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 ..\\\\\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .git\\\\\\\\n-rw-r--r-- 1 cooll 197609  35 Aug 30 16:14 .gitignore\\\\\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 .v1\\\\\\\\n-rw-r--r-- 1 cooll 197609 236 Aug 30 15:13 ISSUE.md\\\\\\\\n-rw-r--r-- 1 cooll 197609 349 Aug 30 15:13 package.json\\\\\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 src\\\\\\\\ndrwxr-xr-x 1 cooll 197609   0 Aug 30 16:14 tests\\\\\\\\n\\\\\\\",\\\\n      \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\",\\\\n      \\\\\\\"durationMs\\\\\\\": 0,\\\\n      \\\\\\\"phase\\\\\\\": \\\\\\\"reconnaissance\\\\\\\",\\\\n      \\\\\\\"timestamp\\\\\\\": \\\\\\\"2026-08-30T15:14:46.981Z\\\\\\\"\\\\n    },\\\\n    {\\\\n      \\\\\\\"command\\\\\\\": \\\\\\\"\\\\\\\",\\\\n      \\\\\\\"exitCode\\\\\\\": 0,\\\\n      \\\\\\\"stdout\\\\\\\": \\\\\\\"hyp-b30be236\\\\\\\\n\\\\\\\",\\\\n      \\\\\\\"stderr\\\\\\\": \\\\\\\"\\\\\\\",\\\\n      \\\\\\\"durationMs\\\\\\\": 0,\\\\n      \\\\\\\"phase\\\\\\\": \\\\\\\"reconnaissance\\\\\\\",\\\\n      \\\\\\\"timestamp\\\\\\\": \\\\\\\"2026-08-30T15:15:27.560Z\\\\\\\"\\\\n    },\\\\n    {\\\\n      \\\\\\\"command\\\\\\\": \\\\\\\"\\\\\\\",\\\\n     ",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:18:08.531Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hyp-1da902db\n\n    {\n      \"id\": \"hyp-1da902db\",\n      \"description\": \"h-test\",\n      \"evidence\": [\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:18:22.435Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "hypothesis not found hyp-1da902db\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:18:28.273Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "[]\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:21:43.312Z"
+    }
+  ],
+  "hypotheses": [],
+  "changesMade": [],
+  "verificationAttempts": [],
+  "evidence": [
+    {
+      "id": "ev-eab9be63",
+      "type": "command_result",
+      "description": "bash: ls -la",
+      "source": "ls -la",
+      "timestamp": "2026-08-30T15:14:46.508Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-aa2c6e4e",
+      "type": "file_inspection",
+      "description": "Inspected ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-30T15:14:48.564Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-15b1dbb6",
+      "type": "file_inspection",
+      "description": "read ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-30T15:14:48.565Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8438736e",
+      "type": "file_inspection",
+      "description": "Inspected package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-30T15:14:50.276Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-714c6f11",
+      "type": "file_inspection",
+      "description": "read package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-30T15:14:50.277Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3ffcf694",
+      "type": "file_inspection",
+      "description": "Inspected src",
+      "source": "src",
+      "timestamp": "2026-08-30T15:14:51.883Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f11bcea2",
+      "type": "file_inspection",
+      "description": "read src",
+      "source": "src",
+      "timestamp": "2026-08-30T15:14:51.884Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b09d7636",
+      "type": "file_inspection",
+      "description": "Inspected tests",
+      "source": "tests",
+      "timestamp": "2026-08-30T15:14:55.732Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-37bdc5b0",
+      "type": "file_inspection",
+      "description": "read tests",
+      "source": "tests",
+      "timestamp": "2026-08-30T15:14:55.733Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7569af74",
+      "type": "file_inspection",
+      "description": "Inspected src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-30T15:14:57.560Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3ad6e3e9",
+      "type": "file_inspection",
+      "description": "read src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-30T15:14:57.561Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-23254b9e",
+      "type": "file_inspection",
+      "description": "Inspected src/types.ts",
+      "source": "src/types.ts",
+      "timestamp": "2026-08-30T15:14:59.534Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-12d98fb2",
+      "type": "file_inspection",
+      "description": "read src/types.ts",
+      "source": "src/types.ts",
+      "timestamp": "2026-08-30T15:14:59.536Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0ad8c997",
+      "type": "file_inspection",
+      "description": "Inspected src/task-manager.ts",
+      "source": "src/task-manager.ts",
+      "timestamp": "2026-08-30T15:15:04.481Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7bb8b4ec",
+      "type": "file_inspection",
+      "description": "read src/task-manager.ts",
+      "source": "src/task-manager.ts",
+      "timestamp": "2026-08-30T15:15:04.482Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-444b332f",
+      "type": "file_inspection",
+      "description": "Inspected src/validators.ts",
+      "source": "src/validators.ts",
+      "timestamp": "2026-08-30T15:15:06.994Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5eb26e96",
+      "type": "file_inspection",
+      "description": "read src/validators.ts",
+      "source": "src/validators.ts",
+      "timestamp": "2026-08-30T15:15:06.995Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3055bcdd",
+      "type": "file_inspection",
+      "description": "Inspected src/utils.ts",
+      "source": "src/utils.ts",
+      "timestamp": "2026-08-30T15:15:09.116Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-66d4cbe1",
+      "type": "file_inspection",
+      "description": "read src/utils.ts",
+      "source": "src/utils.ts",
+      "timestamp": "2026-08-30T15:15:09.118Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1937df78",
+      "type": "file_inspection",
+      "description": "Inspected tests/task-manager.test.ts",
+      "source": "tests/task-manager.test.ts",
+      "timestamp": "2026-08-30T15:15:10.801Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-66da3e6b",
+      "type": "file_inspection",
+      "description": "read tests/task-manager.test.ts",
+      "source": "tests/task-manager.test.ts",
+      "timestamp": "2026-08-30T15:15:10.802Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-2339d7b2",
+      "type": "file_inspection",
+      "description": "Inspected .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-30T15:15:12.725Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7876a0cb",
+      "type": "file_inspection",
+      "description": "read .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-30T15:15:12.726Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4df1e9a8",
+      "type": "file_inspection",
+      "description": "Inspected .v1",
+      "source": ".v1",
+      "timestamp": "2026-08-30T15:15:15.971Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e309def9",
+      "type": "file_inspection",
+      "description": "read .v1",
+      "source": ".v1",
+      "timestamp": "2026-08-30T15:15:15.972Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-44e79593",
+      "type": "file_inspection",
+      "description": "Inspected .v1/helpers.js",
+      "source": ".v1/helpers.js",
+      "timestamp": "2026-08-30T15:15:18.818Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-57588c25",
+      "type": "file_inspection",
+      "description": "read .v1/helpers.js",
+      "source": ".v1/helpers.js",
+      "timestamp": "2026-08-30T15:15:18.820Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3ebd64e1",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js add-hypothesis '{\"description\":\"updateTask spreads UpdateTaskInput fields unconditionally, so fields not included in updates become undefined. Fix: only assign each field if update",
+      "source": "node .v1/helpers.js add-hypothesis '{\"description\":\"updateTask spreads UpdateTaskInput fields unconditionally, so fields not included in updates become undefined. Fix: only assign each field if updates[field] !== undefined.\",\"evidence\":[\"src/task-manager.ts:38-43\"],\"confidence\":0.97,\"files\":[\"src/task-manager.ts\"]}'",
+      "timestamp": "2026-08-30T15:15:27.168Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-58b96f0f",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js select-hypothesis hyp-b30be236",
+      "source": "node .v1/helpers.js select-hypothesis hyp-b30be236",
+      "timestamp": "2026-08-30T15:15:30.168Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8f6fb2a0",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js status 2>&1 | head -100",
+      "source": "node .v1/helpers.js status 2>&1 | head -100",
+      "timestamp": "2026-08-30T15:15:33.902Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-11365dbf",
+      "type": "command_result",
+      "description": "bash: node -e \"console.log(JSON.stringify(JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8')).hypotheses, null, 2))\"",
+      "source": "node -e \"console.log(JSON.stringify(JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8')).hypotheses, null, 2))\"",
+      "timestamp": "2026-08-30T15:15:43.082Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-bac6fb48",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.5,\"files\":[\"src/task-manager.ts\"]}' && node -e \"console.log(JSON.stringify(JSON.parse(require('fs').readFileSync(",
+      "source": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.5,\"files\":[\"src/task-manager.ts\"]}' && node -e \"console.log(JSON.stringify(JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8')).hypotheses, null, 2))\"",
+      "timestamp": "2026-08-30T15:15:48.656Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-41f24346",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js add-hypothesis '{\"description\":\"updateTask spreads UpdateTaskInput fields unconditionally, so fields not included in updates become undefined. Fix: only assign each field if update",
+      "source": "node .v1/helpers.js add-hypothesis '{\"description\":\"updateTask spreads UpdateTaskInput fields unconditionally, so fields not included in updates become undefined. Fix: only assign each field if updates[field] !== undefined.\",\"evidence\":[\"src/task-manager.ts:38-43\"],\"confidence\":0.97,\"files\":[\"src/task-manager.ts\"]}'",
+      "timestamp": "2026-08-30T15:15:54.373Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8270758f",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js select-hypothesis hyp-a8489aa7",
+      "source": "node .v1/helpers.js select-hypothesis hyp-a8489aa7",
+      "timestamp": "2026-08-30T15:15:57.139Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b3913368",
+      "type": "command_result",
+      "description": "bash: pwd && node -e \"console.log(process.cwd())\"",
+      "source": "pwd && node -e \"console.log(process.cwd())\"",
+      "timestamp": "2026-08-30T15:16:00.529Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6354a322",
+      "type": "command_result",
+      "description": "bash: node -e \"console.log(JSON.stringify(JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8')).hypotheses, null, 2))\"",
+      "source": "node -e \"console.log(JSON.stringify(JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8')).hypotheses, null, 2))\"",
+      "timestamp": "2026-08-30T15:17:05.398Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0e1536ac",
+      "type": "command_result",
+      "description": "bash: ls -la .v1/",
+      "source": "ls -la .v1/",
+      "timestamp": "2026-08-30T15:17:08.909Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-d15094ea",
+      "type": "command_result",
+      "description": "bash: grep -c \"hyp-\" .v1/state.json",
+      "source": "grep -c \"hyp-\" .v1/state.json",
+      "timestamp": "2026-08-30T15:17:11.546Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0a84701b",
+      "type": "command_result",
+      "description": "bash: grep \"hyp-\" .v1/state.json",
+      "source": "grep \"hyp-\" .v1/state.json",
+      "timestamp": "2026-08-30T15:17:14.301Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-bd1ee627",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js add-hypothesis '{\"description\":\"h1\",\"confidence\":0.5,\"files\":[]}'",
+      "source": "node .v1/helpers.js add-hypothesis '{\"description\":\"h1\",\"confidence\":0.5,\"files\":[]}'",
+      "timestamp": "2026-08-30T15:17:23.702Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-09087d13",
+      "type": "command_result",
+      "description": "bash: node -e \"const s = JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8')); console.log('count:', s.hypotheses.length); for (const h of s.hypotheses) console.log(h.id)\"",
+      "source": "node -e \"const s = JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8')); console.log('count:', s.hypotheses.length); for (const h of s.hypotheses) console.log(h.id)\"",
+      "timestamp": "2026-08-30T15:17:27.581Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0e38e825",
+      "type": "command_result",
+      "description": "bash: node --version",
+      "source": "node --version",
+      "timestamp": "2026-08-30T15:17:36.102Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-880a72b6",
+      "type": "command_result",
+      "description": "bash: node -e \"\nconst { readFileSync, writeFileSync, existsSync, mkdirSync } = require('node:fs');\nconst { join, dirname } = require('node:path');\nconst { randomUUID } = require('node:crypto');\nconst STATE_",
+      "source": "node -e \"\nconst { readFileSync, writeFileSync, existsSync, mkdirSync } = require('node:fs');\nconst { join, dirname } = require('node:path');\nconst { randomUUID } = require('node:crypto');\nconst STATE_PATH = join(process.cwd(), '.v1/state.json');\nconst raw = readFileSync(STATE_PATH, 'utf-8');\nconst s = JSON.parse(raw);\nconsole.log('before:', s.hypotheses.length);\ns.hypotheses.push({ id: 'test-xyz', description: 'manual' });\nconsole.log('after:', s.hypotheses.length);\nwriteFileSync(STATE_PATH, JSON.stringify(s, null, 2));\nconsole.log('saved');\n\"",
+      "timestamp": "2026-08-30T15:17:42.137Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ccbb8da2",
+      "type": "command_result",
+      "description": "bash: node -e \"const s = JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8')); console.log('count:', s.hypotheses.length);\"",
+      "source": "node -e \"const s = JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8')); console.log('count:', s.hypotheses.length);\"",
+      "timestamp": "2026-08-30T15:17:46.997Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5e5592de",
+      "type": "command_result",
+      "description": "bash: stat .v1/state.json",
+      "source": "stat .v1/state.json",
+      "timestamp": "2026-08-30T15:17:50.507Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7c5920f0",
+      "type": "command_result",
+      "description": "bash: date",
+      "source": "date",
+      "timestamp": "2026-08-30T15:17:54.381Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-769db1e4",
+      "type": "command_result",
+      "description": "bash: head -1 .v1/state.json && tail -1 .v1/state.json",
+      "source": "head -1 .v1/state.json && tail -1 .v1/state.json",
+      "timestamp": "2026-08-30T15:17:57.799Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6e8e2f8c",
+      "type": "file_inspection",
+      "description": "Inspected .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-30T15:18:01.696Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-bb05d6c3",
+      "type": "file_inspection",
+      "description": "read .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-30T15:18:01.698Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-dc564be9",
+      "type": "command_result",
+      "description": "bash: grep -n \"hypotheses\" .v1/state.json | head -5",
+      "source": "grep -n \"hypotheses\" .v1/state.json | head -5",
+      "timestamp": "2026-08-30T15:18:04.142Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b7418795",
+      "type": "command_result",
+      "description": "bash: sed -n '210,212p' .v1/state.json",
+      "source": "sed -n '210,212p' .v1/state.json",
+      "timestamp": "2026-08-30T15:18:07.476Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3d97b62d",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js add-hypothesis '{\"description\":\"h-test\",\"confidence\":0.5,\"files\":[]}' && node -e \"console.log(require('fs').readFileSync('.v1/state.json','utf-8').match(/\\\"hypotheses\\\":\\\\s*\\\\[([^\\",
+      "source": "node .v1/helpers.js add-hypothesis '{\"description\":\"h-test\",\"confidence\":0.5,\"files\":[]}' && node -e \"console.log(require('fs').readFileSync('.v1/state.json','utf-8').match(/\\\"hypotheses\\\":\\\\s*\\\\[([^\\\\]]*)\\\\]/)?.[1])\"",
+      "timestamp": "2026-08-30T15:18:21.554Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1467275f",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js select-hypothesis hyp-1da902db",
+      "source": "node .v1/helpers.js select-hypothesis hyp-1da902db",
+      "timestamp": "2026-08-30T15:18:27.931Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-66e4f269",
+      "type": "command_result",
+      "description": "bash: node -e \"const s = JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8')); console.log(JSON.stringify(s.hypotheses.map(h=>h.id)));\"",
+      "source": "node -e \"const s = JSON.parse(require('fs').readFileSync('.v1/state.json','utf-8')); console.log(JSON.stringify(s.hypotheses.map(h=>h.id)));\"",
+      "timestamp": "2026-08-30T15:21:42.643Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a06c41da",
+      "type": "diff_inspection",
+      "description": "Final diff stat: (no changes)",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-30T15:24:43.637Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 0,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-30T15:14:43.372Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-30T15:14:43.372Z",
+      "exitedAt": "2026-08-30T15:24:43.384Z",
+      "durationMs": 600012
+    }
+  ],
+  "terminationReason": "timeout"
+}

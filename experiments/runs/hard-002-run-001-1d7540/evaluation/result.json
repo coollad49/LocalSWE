@@ -1,0 +1,723 @@
+{
+  "evaluationId": "eval-61dcf3b4-1788165612518",
+  "runId": "hard-002-run-001-1d7540",
+  "caseId": "hard-002",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:40:12.518Z",
+  "completedAt": "2026-08-31T08:40:15.579Z",
+  "durationMs": 3061,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-002-run-001-1d7540\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 254,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-002-bvAS2g\\patch-1788165613806.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 778,
+      "command": "bun run benchmark\\cases\\hard-002\\public\\reproduce.ts",
+      "stdout": "Test overflow flatten: PASS\n  result={\"a\":{\"0\":\"1\",\"1\":\"2\",\"2\":\"3\",\"3\":\"4\",\"4\":\"5\",\"5\":\"6\",\"6\":\"7\",\"7\":\"8\"}}\n  expected={\"a\":{\"0\":\"1\",\"1\":\"2\",\"2\":\"3\",\"3\":\"4\",\"4\":\"5\",\"5\":\"6\",\"6\":\"7\",\"7\":\"8\"}}\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 356,
+      "command": "bun test benchmark\\cases\\hard-002\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hard-002\\private\\oracle.test.ts:\n(pass) hard-002 oracle: qs combine overflow flatten > spreads a comma group appended to an already-overflowed object [14.33ms]\n(pass) hard-002 oracle: qs combine overflow flatten > keeps a []= comma group as one element when appended to an already-overflowed key [0.44ms]\n(pass) hard-002 oracle: qs combine overflow flatten > spreads every later comma group appended to an already-overflowed object [0.31ms]\n(pass) hard-002 oracle: qs combine overflow flatten > spreads a comma group appended to an object overflowed under the default arrayLimit [7.06ms]\n(pass) hard-002 oracle: qs combine overflow flatten > spreads a comma group appended to an already-overflowed object with plainObjects [1.01ms]\n(pass) hard-002 oracle: qs combine overflow flatten > still throws with throwOnLimitExceeded when a comma group is appended to an already-overflowed object [0.42ms]\n(pass) hard-002 oracle: qs combine overflow flatten > does not throw for comma groups nested under bracket notation [0.35ms]\n(pass) hard-002 oracle: qs combine overflow flatten > single scalar after overflow not nested [0.29ms]\n\n 8 pass\n 0 fail\n 8 expect() calls\nRan 8 tests across 1 file. [289.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 377,
+      "command": "bun test benchmark\\repositories\\qs\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\qs\\tests\\basic.test.ts:\n(pass) qs regression > basic parse [13.88ms]\n(pass) qs regression > basic stringify [2.39ms]\n(pass) qs regression > array parse [0.92ms]\n\n 3 pass\n 0 fail\n 3 expect() calls\nRan 3 tests across 1 file. [312.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "qs",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "parsing",
+      "boundary",
+      "state-management"
+    ]
+  },
+  "metrics": {
+    "durationMs": 67268,
+    "totalTurns": 54,
+    "toolCalls": 26,
+    "commandsExecuted": 10,
+    "filesInspected": 4,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 54720,
+    "outputTokens": 12828,
+    "totalTokens": 449500
+  },
+  "cost": {
+    "inputTokens": 54720,
+    "outputTokens": 12828,
+    "totalTokens": 67548,
+    "inputCostUsd": 0.007661,
+    "outputCostUsd": 0.003592,
+    "totalCostUsd": 0.012322,
+    "costUsd": 0.012322,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-002-run-001-1d7540",
+    "caseId": "hard-002",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:e1324bf64478266a1491301a56ea61d72662c8ac6ecc49670240956b5d1ef9dc",
+    "trajectory": {
+      "eventCount": 253,
+      "durationMs": 67240,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 2,
+        "turn_start": 24,
+        "message_start": 52,
+        "message_end": 52,
+        "tool_execution_start": 26,
+        "tool_execution_end": 26,
+        "turn_end": 24,
+        "tool_execution_update": 30,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "prompt_completed": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 72,
+      "userMessages": 4,
+      "toolCalls": 26,
+      "toolResults": 104,
+      "thinkingEvents": 48,
+      "unknownEvents": 59,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 26,
+      "uniqueTools": 4,
+      "byTool": {
+        "read": {
+          "calls": 8,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 10,
+          "failures": 6
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 54720,
+      "output": 12828,
+      "cacheRead": 381952,
+      "cacheWrite": 0,
+      "total": 449500,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.012322,
+      "inputCostUsd": 0.007661,
+      "outputCostUsd": 0.003592,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 48,
+      "characterCount": 18684,
+      "averageCharacters": 389,
+      "maxCharacters": 1997,
+      "firstThinkingAt": "2026-08-31T04:08:44.320Z",
+      "lastThinkingAt": "2026-08-31T04:09:47.072Z",
+      "thinkingDurationMs": 62752
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "lib/utils.js"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 8,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 10,
+      "explorationToEditingRatio": 12
+    },
+    "verification": {
+      "commandsDetected": 16,
+      "testsRun": true,
+      "testCommandCount": 4,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 14,
+      "duplicateReadTargets": 4,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 6,
+      "topRepetitions": [
+        {
+          "signature": "65073069cc29",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && node -e \"const qs = require('./lib/index.js'); console.log(JSON.stringify(qs.parse('a=1,2,3,4,5,6&a=7,8', { comma: true, arrayLimit: 5 })));\"",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "fb4f24eb4421",
+          "tool": "ls",
+          "target": "AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo",
+          "count": 2
+        },
+        {
+          "signature": "89379771070d",
+          "tool": "ls",
+          "target": "lib",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "9c327b6dce00",
+          "tool": "read",
+          "target": "lib/parse.js",
+          "count": 2
+        },
+        {
+          "signature": "c1bfd619d153",
+          "tool": "read",
+          "target": "lib/utils.js",
+          "count": 2
+        },
+        {
+          "signature": "6bdb002aed6b",
+          "tool": "read",
+          "target": "tests/basic.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "b82613849531",
+          "tool": "edit",
+          "target": "lib/utils.js",
+          "count": 2
+        },
+        {
+          "signature": "177f2a29a1ae",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && node -e \"\nconst qs = require('./lib/index.js');\n\n// Original issue case\nconsole.log('Test 1:', JSON.stringify(qs.parse('a=1,2,3,4,5,6&a=7,8', { comma: true, arrayLimit: 5 })));\n\n// Single value after overflow\nconsole.log('Test 2:', JSON.stringify(qs.parse('a=1,2,3,4,5,6&a=7', { comma: true, arrayLimit: 5 })));\n\n// Multiple overflow batches\nconsole.log('Test 3:', JSON.stringify(qs.parse('a=1,2,3,4,5,6&a=7,8,9&a=10', { comma: true, arrayLimit: 5 })));\n\n// No overflow case (should still work)\nconsole.log('Test 4:', JSON.stringify(qs.parse('a=1,2,3&a=4,5', { comma: true, arrayLimit: 10 })));\n\n// Without comma mode (should still work)\nconsole.log('Test 5:', JSON.stringify(qs.parse('a=1&a=2&a=3', { arrayLimit: 2 })));\n\"",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-002-run-001-1d7540",
+    "caseId": "hard-002",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-31T04:08:44.320Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-31T04:08:44.320Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 24,
+        "timestamp": "2026-08-31T04:08:44.323Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo"
+      },
+      {
+        "index": 25,
+        "timestamp": "2026-08-31T04:08:44.323Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo"
+      },
+      {
+        "index": 46,
+        "timestamp": "2026-08-31T04:08:47.321Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "lib"
+      },
+      {
+        "index": 47,
+        "timestamp": "2026-08-31T04:08:47.321Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "lib"
+      },
+      {
+        "index": 48,
+        "timestamp": "2026-08-31T04:08:47.321Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 49,
+        "timestamp": "2026-08-31T04:08:47.321Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 70,
+        "timestamp": "2026-08-31T04:08:49.127Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/parse.js"
+      },
+      {
+        "index": 71,
+        "timestamp": "2026-08-31T04:08:49.127Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/parse.js"
+      },
+      {
+        "index": 86,
+        "timestamp": "2026-08-31T04:08:51.977Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/utils.js"
+      },
+      {
+        "index": 87,
+        "timestamp": "2026-08-31T04:08:51.977Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/utils.js"
+      },
+      {
+        "index": 102,
+        "timestamp": "2026-08-31T04:08:54.532Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 103,
+        "timestamp": "2026-08-31T04:08:54.532Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 118,
+        "timestamp": "2026-08-31T04:09:02.283Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && node -e \"const qs = require('./lib/index.js'); console.log(",
+        "commandClass": "general"
+      },
+      {
+        "index": 119,
+        "timestamp": "2026-08-31T04:09:02.283Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && node -e \"const qs = require('./lib/index.js'); console.log(",
+        "commandClass": "general"
+      },
+      {
+        "index": 138,
+        "timestamp": "2026-08-31T04:09:12.435Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "lib/utils.js"
+      },
+      {
+        "index": 139,
+        "timestamp": "2026-08-31T04:09:12.435Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "lib/utils.js"
+      },
+      {
+        "index": 154,
+        "timestamp": "2026-08-31T04:09:14.454Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && node -e \"const qs = require('./lib/index.js'); console.log(",
+        "commandClass": "general"
+      },
+      {
+        "index": 155,
+        "timestamp": "2026-08-31T04:09:14.454Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && node -e \"const qs = require('./lib/index.js'); console.log(",
+        "commandClass": "general"
+      },
+      {
+        "index": 174,
+        "timestamp": "2026-08-31T04:09:19.920Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && node -e \"\nconst qs = require('./lib/index.js');\n\n// Origina",
+        "commandClass": "general"
+      },
+      {
+        "index": 175,
+        "timestamp": "2026-08-31T04:09:19.920Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && node -e \"\nconst qs = require('./lib/index.js');\n\n// Origina",
+        "commandClass": "general"
+      },
+      {
+        "index": 196,
+        "timestamp": "2026-08-31T04:09:24.030Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 197,
+        "timestamp": "2026-08-31T04:09:24.030Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 218,
+        "timestamp": "2026-08-31T04:09:33.311Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 219,
+        "timestamp": "2026-08-31T04:09:33.311Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 22,
+        "timestamp": "2026-08-31T04:08:44.320Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 138,
+        "timestamp": "2026-08-31T04:09:12.435Z",
+        "detail": "lib/utils.js"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 196,
+        "timestamp": "2026-08-31T04:09:24.030Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 204,
+        "timestamp": "2026-08-31T04:09:28.478Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 205,
+        "timestamp": "2026-08-31T04:09:28.478Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 206,
+        "timestamp": "2026-08-31T04:09:28.481Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 207,
+        "timestamp": "2026-08-31T04:09:28.481Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 208,
+        "timestamp": "2026-08-31T04:09:28.481Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 209,
+        "timestamp": "2026-08-31T04:09:28.481Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test "
+      }
+    ],
+    "errors": [
+      {
+        "index": 204,
+        "tool": "bash",
+        "error": "\n> qs@6.15.3 pretest\n> npm run --silent readme && npm run --silent lint\n\n'evalmd' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 205,
+        "tool": "bash",
+        "error": "\n> qs@6.15.3 pretest\n> npm run --silent readme && npm run --silent lint\n\n'evalmd' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 206,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 207,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 208,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 209,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 196,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 197,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 204,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n> qs@6.15.3 pretest\n> npm run --silent readme && npm run --silent lint\n\n'evalmd' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 205,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n> qs@6.15.3 pretest\n> npm run --silent readme && npm run --silent lint\n\n'evalmd' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 206,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 207,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 208,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 209,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 218,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 219,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 230,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  05:09:41\n   Duration  1.25s (transf"
+      },
+      {
+        "index": 231,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  05:09:41\n   Duration  1.25s (transf"
+      },
+      {
+        "index": 232,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 233,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 234,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 235,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-002-hard-002-run-001-1d7540-79Dseo\" && npx vitest run 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

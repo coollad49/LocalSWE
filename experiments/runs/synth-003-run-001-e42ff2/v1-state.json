@@ -1,0 +1,322 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# Issue: Failed jobs are reported as successful\r\n\r\n## Problem\r\n\r\nWhen a queued job throws an error, it should be reported as a failure and retried according to policy. Currently, failures are reported as successes and retries never happen.\r\n",
+  "filesInspected": [
+    "ISSUE.md",
+    ".",
+    "src",
+    "package.json",
+    "src/index.ts",
+    "src/job.ts",
+    "src/queue.ts",
+    "tests",
+    "tests/queue.test.ts"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 51ms\n     × processJob retry re-enqueues 21ms\n     × processNext surfaces errors via retry 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processJob retry re-enqueues\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/queue.test.ts:61:24\n     59|     };\n     60|     const r1 = await q.processJob(dequeued, handler);\n     61|     expect(r1.success).toBe(false);\n       |                        ^\n     62|     expect(r1.job.attempts).toBe(1);\n     63|     expect(q.size()).toBe(1); // re-enqueued\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processNext surfaces errors via retry\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/queue.test.ts:97:25\n     95|     };\n     96|     const r1 = await q.processNext(handler);\n     97|     expect(r1!.success).toBe(false);\n       |                         ^\n     98|     expect(called).toBe(1);\n     99|     const r2 = await q.processNext(handler);\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 7 passed (9)\n   Start at  05:29:09\n   Duration  962ms (transform 123ms, setup 0ms, import 184ms, tests 51ms, environment 0ms)\n\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:10.356Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:29:27\n   Duration  1.12s (transform 135ms, setup 0ms, import 201ms, tests 29ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:29.099Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "diff --git a/src/queue.ts b/src/queue.ts\nindex 104f669..9955340 100644\n--- a/src/queue.ts\n+++ b/src/queue.ts\n@@ -84,8 +84,10 @@ export class AsyncQueue<T = unknown> {\n       await handler(current.payload);\n       return { success: true, job: current };\n     } catch (err) {\n-      // BUG: swallows error and reports success\n-      return { success: true, job: current };\n+      if (current.attempts < current.maxAttempts) {\n+        this.queue.push(current);\n+      }\n+      return { success: false, job: current };\n     }\n   }\n \n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:31.699Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:29:45\n   Duration  1.52s (transform 165ms, setup 0ms, import 232ms, tests 29ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:47.580Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:29:57\n   Duration  1.23s (transform 166ms, setup 0ms, import 228ms, tests 31ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:59.482Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:33:14\n   Duration  1.08s (transform 125ms, setup 0ms, import 186ms, tests 29ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:33:16.011Z"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "hyp-826fd1c0",
+      "description": "Root cause identified and repaired in src/queue.ts",
+      "evidence": [
+        "Code inspection and passing verification"
+      ],
+      "confidence": 0.9,
+      "status": "selected",
+      "files": [
+        "src/queue.ts"
+      ]
+    }
+  ],
+  "changesMade": [
+    {
+      "path": "src/queue.ts",
+      "summary": "edit src/queue.ts",
+      "iteration": 0,
+      "timestamp": "2026-08-31T04:29:17.775Z"
+    },
+    {
+      "path": "src/queue.ts",
+      "summary": "modified src/queue.ts",
+      "iteration": 3,
+      "timestamp": "2026-08-31T04:33:19.120Z"
+    }
+  ],
+  "verificationAttempts": [],
+  "evidence": [
+    {
+      "id": "ev-35683dc0",
+      "type": "file_inspection",
+      "description": "Inspected ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T04:28:50.600Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-60ddb4f0",
+      "type": "file_inspection",
+      "description": "read ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T04:28:50.600Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-dd411a0b",
+      "type": "file_inspection",
+      "description": "Inspected .",
+      "source": ".",
+      "timestamp": "2026-08-31T04:28:52.963Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ba8e0161",
+      "type": "file_inspection",
+      "description": "read .",
+      "source": ".",
+      "timestamp": "2026-08-31T04:28:52.964Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-675cbc3e",
+      "type": "file_inspection",
+      "description": "Inspected src",
+      "source": "src",
+      "timestamp": "2026-08-31T04:28:54.624Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-174b041f",
+      "type": "file_inspection",
+      "description": "read src",
+      "source": "src",
+      "timestamp": "2026-08-31T04:28:54.625Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5f85cfc0",
+      "type": "file_inspection",
+      "description": "Inspected package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-31T04:28:54.626Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-68be494c",
+      "type": "file_inspection",
+      "description": "read package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-31T04:28:54.627Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6ea829db",
+      "type": "file_inspection",
+      "description": "Inspected src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-31T04:28:56.498Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e88c769c",
+      "type": "file_inspection",
+      "description": "read src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-31T04:28:56.499Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e4a714f5",
+      "type": "file_inspection",
+      "description": "Inspected src/job.ts",
+      "source": "src/job.ts",
+      "timestamp": "2026-08-31T04:28:56.512Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-65bfbaf9",
+      "type": "file_inspection",
+      "description": "read src/job.ts",
+      "source": "src/job.ts",
+      "timestamp": "2026-08-31T04:28:56.513Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-69fd69de",
+      "type": "file_inspection",
+      "description": "Inspected src/queue.ts",
+      "source": "src/queue.ts",
+      "timestamp": "2026-08-31T04:28:56.517Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-533d24b8",
+      "type": "file_inspection",
+      "description": "read src/queue.ts",
+      "source": "src/queue.ts",
+      "timestamp": "2026-08-31T04:28:56.517Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c0524a33",
+      "type": "file_inspection",
+      "description": "Inspected tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T04:28:59.736Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-283f87a5",
+      "type": "file_inspection",
+      "description": "read tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T04:28:59.737Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3ec92a29",
+      "type": "file_inspection",
+      "description": "Inspected tests/queue.test.ts",
+      "source": "tests/queue.test.ts",
+      "timestamp": "2026-08-31T04:29:01.396Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8a8cf14a",
+      "type": "file_inspection",
+      "description": "read tests/queue.test.ts",
+      "source": "tests/queue.test.ts",
+      "timestamp": "2026-08-31T04:29:01.398Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1e9f68fe",
+      "type": "command_result",
+      "description": "bash: cd . && npm test 2>&1",
+      "source": "cd . && npm test 2>&1",
+      "timestamp": "2026-08-31T04:29:04.637Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b4fb9e7c",
+      "type": "command_result",
+      "description": "bash: cd . && npm test 2>&1",
+      "source": "cd . && npm test 2>&1",
+      "timestamp": "2026-08-31T04:29:19.492Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-657cd478",
+      "type": "command_result",
+      "description": "bash: cd . && git diff HEAD",
+      "source": "cd . && git diff HEAD",
+      "timestamp": "2026-08-31T04:29:31.198Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0767b917",
+      "type": "command_result",
+      "description": "bash: cd . && npm test 2>&1",
+      "source": "cd . && npm test 2>&1",
+      "timestamp": "2026-08-31T04:29:36.882Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-484e266e",
+      "type": "command_result",
+      "description": "bash: cd . && npm test 2>&1",
+      "source": "cd . && npm test 2>&1",
+      "timestamp": "2026-08-31T04:29:51.266Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ede32d1c",
+      "type": "command_result",
+      "description": "bash: cd . && npm test 2>&1",
+      "source": "cd . && npm test 2>&1",
+      "timestamp": "2026-08-31T04:33:10.426Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ff8cd150",
+      "type": "diff_inspection",
+      "description": "Final diff stat:  src/queue.ts | 6 ++++--\n 1 file changed, 4 insertions(+), 2 deletions(-)\n",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-31T04:33:18.545Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 3,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-31T04:28:48.760Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-31T04:28:48.760Z",
+      "exitedAt": "2026-08-31T04:33:18.365Z",
+      "durationMs": 269605
+    }
+  ],
+  "selectedHypothesis": "hyp-826fd1c0",
+  "terminationReason": "completed"
+}

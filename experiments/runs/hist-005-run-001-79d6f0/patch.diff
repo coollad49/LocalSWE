@@ -1,0 +1,33 @@
+diff --git a/lib/index.js b/lib/index.js
+index 3a9e1c6..d461ed6 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -36,6 +36,13 @@ module.exports = function (args, opts) {
+ 		}
+ 	}
+ 
++	if (defaults) {
++		for (k in opts.default) {
++			opts.alias[k] = opts.alias[k] || [];
++			(opts[typeof opts.default[k]] || []).push(k);
++		}
++	}
++
+ 	opts.boolean.forEach(key => {
+ 		opts.boolean = opts.boolean.concat(opts.alias[key] = opts.alias[key] || []);
+ 	});
+@@ -44,13 +51,6 @@ module.exports = function (args, opts) {
+ 		opts.string = opts.string.concat(opts.alias[key] = opts.alias[key] || []);
+ 	});
+ 
+-	if (defaults) {
+-		for (k in opts.default) {
+-			opts.alias[k] = opts.alias[k] || [];
+-			(opts[typeof opts.default[k]] || []).push(k);
+-		}
+-	}
+-
+ 	const keys = strict ? Object.keys(opts.alias) : [];
+ 
+ 	for (i=0; i < len; i++) {
+

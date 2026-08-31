@@ -1,0 +1,21 @@
+diff --git a/src/index.ts b/src/index.ts
+index f617424..23128c7 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -2,6 +2,7 @@ const DEFAULT_DELIMITER = "/";
+ const NOOP_VALUE = (value: string) => value;
+ const ID_START = /^[$_\p{ID_Start}]$/u;
+ const ID_CONTINUE = /^[$\u200c\u200d\p{ID_Continue}]$/u;
++const ID_CONTINUE_FIRST = /^(?:[$_\u200c\u200d]|\p{ID_Continue})/u;
+ const ID = /^[$_\p{ID_Start}][$\u200c\u200d\p{ID_Continue}]*$/u;
+ 
+ /**
+@@ -676,7 +677,7 @@ function quoteName(name: string): string {
+ function stringifyName(name: string, next: Token | undefined): string {
+   if (!ID.test(name)) return quoteName(name);
+ 
+-  if (next?.type === "text" && ID_CONTINUE.test(next.value[0])) {
++  if (next?.type === "text" && ID_CONTINUE_FIRST.test(next.value)) {
+     return quoteName(name);
+   }
+ 

@@ -1,0 +1,438 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# Issue: spyOn leaks own property when spying on prototype method\r\n\r\n## Problem\r\n\r\nWhen spying on a method defined on an object's prototype and then restoring, the spy incorrectly leaves an own property on the instance instead of removing it, so the prototype method is not correctly restored.\r\n",
+  "filesInspected": [
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/ISSUE.md",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/package.json",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/tests",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/spyOn.ts",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/internal.ts",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/utils.ts",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/constants.ts",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/index.ts",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/restoreAll.ts",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/spy.ts",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/tests/tinyspy.test.ts",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/.v1/state.json",
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/.v1/helpers.js"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "total 118\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 .\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 ..\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 .git\n-rw-r--r-- 1 cooll 197609   35 Aug 30 16:04 .gitignore\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 .v1\n-rw-r--r-- 1 cooll 197609  295 Aug 30 15:13 ISSUE.md\n-rw-r--r-- 1 cooll 197609 1086 Aug 30 15:13 LICENSE\n-rw-r--r-- 1 cooll 197609 1554 Aug 30 15:13 package.json\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 src\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 tests\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:04:35.525Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "node_modules/\n.vite/\ndist/\n.turbo/\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:05:13.039Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "total 28\ndrwxr-xr-x 1 cooll 197609     0 Aug 30 16:04 .\ndrwxr-xr-x 1 cooll 197609     0 Aug 30 16:04 ..\n-rwxr-xr-x 1 cooll 197609  5743 Aug 30 16:04 helpers.js\n-rw-r--r-- 1 cooll 197609 13695 Aug 30 16:05 state.json\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:05:18.949Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "ls: cannot access 'node_modules': No such file or directory\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:05:27.275Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "which: no pnpm in (/mingw64/bin:/usr/bin:/c/Users/cooll/bin:/c/Users/cooll/.pi/agent/bin:/c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin:/c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin:/c/Users/cooll/Documents/code/node_modules/.bin:/c/Users/cooll/Documents/node_modules/.bin:/c/Users/cooll/node_modules/.bin:/c/Users/node_modules/.bin:/c/node_modules/.bin:/c/WINDOWS/system32:/c/WINDOWS:/c/WINDOWS/System32/Wbem:/c/WINDOWS/System32/WindowsPowerShell/v1.0:/c/WINDOWS/System32/OpenSSH:/c/Program Files/GitHub CLI:/cmd:/c/Program Files/nodejs:/c/Users/cooll/.postgres_bin/pgsql/bin:/c/Users/cooll/AppData/Local/Microsoft/WindowsApps:/c/Users/cooll/.bun/bin:/c/Users/cooll/AppData/Local/Programs/Microsoft VS Code/bin:/c/Users/cooll/AppData/Roaming/npm)\n/c/Program Files/nodejs/npm\n/c/Program Files/nodejs/node\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:08:44.068Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "v22.23.2\r\n10.9.8\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:08:47.928Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me\n\n> tinyspy@4.0.2 prepare\n> husky\n\n\nadded 326 packages in 2m\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:11:07.600Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "tsup\ntsup-node\ntsup-node.cmd\ntsup-node.ps1\ntsup.cmd\ntsup.ps1\nvitest\nvitest.cmd\nvitest.ps1\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:11:11.255Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n\u001b[1m\u001b[46m RUN \u001b[49m\u001b[22m \u001b[36mv3.2.7 \u001b[39m\u001b[90mC:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\u001b[39m\n\n \u001b[31m❯\u001b[39m tests/tinyspy.test.ts \u001b[2m(\u001b[22m\u001b[2m3 tests\u001b[22m\u001b[2m | \u001b[22m\u001b[31m1 failed\u001b[39m\u001b[2m)\u001b[22m\u001b[32m 45\u001b[2mms\u001b[22m\u001b[39m\n\u001b[31m   \u001b[31m×\u001b[31m tinyspy regression\u001b[2m > \u001b[22mspyOn mocks prototype method and restores cleanly\u001b[39m\u001b[32m 32\u001b[2mms\u001b[22m\u001b[39m\n\u001b[31m     → expected { value: [Function f], …(3) } to be undefined\u001b[39m\n   \u001b[32m✓\u001b[39m tinyspy regression\u001b[2m > \u001b[22mspy creates mock function with call tracking\u001b[32m 4\u001b[2mms\u001b[22m\u001b[39m\n   \u001b[32m✓\u001b[39m tinyspy regression\u001b[2m > \u001b[22mspyOn inherited getter preserves setter\u001b[32m 4\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[31m⎯⎯⎯⎯⎯⎯⎯\u001b[39m\u001b[1m\u001b[41m Failed Tests 1 \u001b[49m\u001b[22m\u001b[31m⎯⎯⎯⎯⎯⎯⎯\u001b[39m\n\n\u001b[41m\u001b[1m FAIL \u001b[22m\u001b[49m tests/tinyspy.test.ts\u001b[2m > \u001b[22mtinyspy regression\u001b[2m > \u001b[22mspyOn mocks prototype method and restores cleanly\n\u001b[31m\u001b[1mAssertionError\u001b[22m: expected { value: [Function f], …(3) } to be undefined\u001b[39m\n\n\u001b[32m- Expected:\u001b[39m \nundefined\n\n\u001b[31m+ Received:\u001b[39m \n{\n  \"configurable\": true,\n  \"enumerable\": false,\n  \"value\": [Function f],\n  \"writable\": true,\n}\n\n\u001b[36m \u001b[2m❯\u001b[22m tests/tinyspy.test.ts:\u001b[2m14:55\u001b[22m\u001b[39m\n    \u001b[90m 12| \u001b[39m    s\u001b[33m.\u001b[39m\u001b[34mrestore\u001b[39m()\u001b[33m;\u001b[39m\n    \u001b[90m 13| \u001b[39m    \u001b[34mexpect\u001b[39m(foo\u001b[33m.\u001b[39m\u001b[34mf\u001b[39m())\u001b[33m.\u001b[39m\u001b[34mtoBe\u001b[39m(\u001b[32m'original'\u001b[39m)\u001b[33m;\u001b[39m\n    \u001b[90m 14| \u001b[39m    \u001b[34mexpect\u001b[39m(\u001b[33mObject\u001b[39m\u001b[33m.\u001b[39m\u001b[34mgetOwnPropertyDescriptor\u001b[39m(foo\u001b[33m,\u001b[39m \u001b[32m'f'\u001b[39m))\u001b[33m.\u001b[39m\u001b[34mtoBeUndefined\u001b[39m()\u001b[33m;\u001b[39m\n    \u001b[90m   | \u001b[39m                                                      \u001b[31m^\u001b[39m\n    \u001b[90m 15| \u001b[39m  })\u001b[33m;\u001b[39m\n    \u001b[90m 16| \u001b[39m\n\n\u001b[31m\u001b[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\u001b[22m\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[31m1 failed\u001b[39m\u001b[22m\u001b[90m (1)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[31m1 failed\u001b[39m\u001b[22m\u001b[2m | \u001b[22m\u001b[1m\u001b[32m2 passed\u001b[39m\u001b[22m\u001b[90m (3)\u001b[39m\n\u001b[2m   Start at \u001b[22m 16:11:58\n\u001b[2m   Duration \u001b[22m 8.42s\u001b[2m (tra",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:12:07.974Z"
+    }
+  ],
+  "hypotheses": [],
+  "changesMade": [
+    {
+      "path": "package-lock.json",
+      "summary": "modified package-lock.json",
+      "iteration": 0,
+      "timestamp": "2026-08-30T15:14:32.990Z"
+    }
+  ],
+  "verificationAttempts": [],
+  "evidence": [
+    {
+      "id": "ev-c5efd95b",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && ls -la",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && ls -la",
+      "timestamp": "2026-08-30T15:04:34.903Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-dcd00aed",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/ISSUE.md",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/ISSUE.md",
+      "timestamp": "2026-08-30T15:04:37.195Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-9e707b74",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/ISSUE.md",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/ISSUE.md",
+      "timestamp": "2026-08-30T15:04:37.196Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5614dd71",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/package.json",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/package.json",
+      "timestamp": "2026-08-30T15:04:39.274Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-49d462c5",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/package.json",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/package.json",
+      "timestamp": "2026-08-30T15:04:39.275Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1982bd3f",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src",
+      "timestamp": "2026-08-30T15:04:40.438Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0151f363",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src",
+      "timestamp": "2026-08-30T15:04:40.438Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-01d86203",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/tests",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/tests",
+      "timestamp": "2026-08-30T15:04:41.806Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c0b59a52",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/tests",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/tests",
+      "timestamp": "2026-08-30T15:04:41.807Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3ef60f81",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/spyOn.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/spyOn.ts",
+      "timestamp": "2026-08-30T15:04:43.347Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-751c0606",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/spyOn.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/spyOn.ts",
+      "timestamp": "2026-08-30T15:04:43.348Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-eaca5ae6",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/internal.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/internal.ts",
+      "timestamp": "2026-08-30T15:04:44.715Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-529b820b",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/internal.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/internal.ts",
+      "timestamp": "2026-08-30T15:04:44.716Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ef565426",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/utils.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/utils.ts",
+      "timestamp": "2026-08-30T15:04:46.383Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4d6135cc",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/utils.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/utils.ts",
+      "timestamp": "2026-08-30T15:04:46.384Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0f7dc86b",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/constants.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/constants.ts",
+      "timestamp": "2026-08-30T15:04:48.036Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b39b4705",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/constants.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/constants.ts",
+      "timestamp": "2026-08-30T15:04:48.037Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-739b96df",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/index.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/index.ts",
+      "timestamp": "2026-08-30T15:04:49.911Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4c8c869b",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/index.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/index.ts",
+      "timestamp": "2026-08-30T15:04:49.912Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-fb58dbc1",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/restoreAll.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/restoreAll.ts",
+      "timestamp": "2026-08-30T15:04:51.630Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b1c0123f",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/restoreAll.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/restoreAll.ts",
+      "timestamp": "2026-08-30T15:04:51.632Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f2b55cb7",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/spy.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/spy.ts",
+      "timestamp": "2026-08-30T15:04:53.064Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-9573c57b",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/spy.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/src/spy.ts",
+      "timestamp": "2026-08-30T15:04:53.065Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-11a39a8c",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/tests/tinyspy.test.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/tests/tinyspy.test.ts",
+      "timestamp": "2026-08-30T15:04:54.269Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c8077539",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/tests/tinyspy.test.ts",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/tests/tinyspy.test.ts",
+      "timestamp": "2026-08-30T15:04:54.270Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ffa24e7d",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && cat .gitignore",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && cat .gitignore",
+      "timestamp": "2026-08-30T15:05:10.143Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-feca7f98",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && ls -la .v1/",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && ls -la .v1/",
+      "timestamp": "2026-08-30T15:05:15.718Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-d18a37fc",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/.v1/state.json",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/.v1/state.json",
+      "timestamp": "2026-08-30T15:05:20.158Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5bf61285",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/.v1/state.json",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/.v1/state.json",
+      "timestamp": "2026-08-30T15:05:20.160Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5577a6e9",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/.v1/helpers.js",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/.v1/helpers.js",
+      "timestamp": "2026-08-30T15:05:22.212Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7e2b8c49",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/.v1/helpers.js",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I/.v1/helpers.js",
+      "timestamp": "2026-08-30T15:05:22.214Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-eb17de0e",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && ls -la node_modules 2>&1 | head -20",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && ls -la node_modules 2>&1 | head -20",
+      "timestamp": "2026-08-30T15:05:25.309Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4d8df3ff",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && which pnpm npm node 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && which pnpm npm node 2>&1",
+      "timestamp": "2026-08-30T15:08:43.751Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1f6d9b1e",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && node --version && npm --version",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && node --version && npm --version",
+      "timestamp": "2026-08-30T15:08:45.592Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-84adfd96",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && npm install --no-audit --no-fund --prefer-offline 2>&1 | tail -30",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && npm install --no-audit --no-fund --prefer-offline 2>&1 | tail -30",
+      "timestamp": "2026-08-30T15:09:06.649Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b9b95187",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && ls node_modules/.bin | grep -E \"vitest|tsup\" 2>&1 | head",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && ls node_modules/.bin | grep -E \"vitest|tsup\" 2>&1 | head",
+      "timestamp": "2026-08-30T15:11:10.332Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0ce88555",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && npx vitest run 2>&1 | tail -80",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-58c6e2-Nc5v9I\" && npx vitest run 2>&1 | tail -80",
+      "timestamp": "2026-08-30T15:11:25.084Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-54888633",
+      "type": "diff_inspection",
+      "description": "Final diff stat: (no changes)",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-30T15:14:30.720Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 0,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-30T15:04:29.357Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-30T15:04:29.357Z",
+      "exitedAt": "2026-08-30T15:14:30.135Z",
+      "durationMs": 600778
+    }
+  ],
+  "terminationReason": "timeout"
+}

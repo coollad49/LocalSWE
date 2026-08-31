@@ -1,0 +1,522 @@
+{
+  "evaluationId": "eval-adaba1d7-1788165864934",
+  "runId": "synth-005-run-001-e03bab",
+  "caseId": "synth-005",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:44:24.934Z",
+  "completedAt": "2026-08-31T08:44:27.175Z",
+  "durationMs": 2241,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-005-run-001-e03bab\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 200,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-005-k2MA7X\\patch-1788165866097.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 180,
+      "command": "bun run benchmark\\cases\\synth-005\\public\\reproduce.ts",
+      "stdout": "100 USD -> EUR {\"amount\":92.35,\"currency\":\"EUR\"} expected 92.35 (100*0.92345=92.345)\n10 USD -> EUR @0.10055 {\"amount\":1.01,\"currency\":\"EUR\"} expected 1.01\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 275,
+      "command": "bun test benchmark\\cases\\synth-005\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-005\\private\\oracle.test.ts:\n(pass) synth-005 oracle: convertCurrency rounding > rounds correctly with half-cent edge [1.31ms]\n(pass) synth-005 oracle: convertCurrency rounding > rounds standard cases [0.18ms]\n(pass) synth-005 oracle: convertCurrency rounding > same currency no conversion [0.11ms]\n\n 3 pass\n 0 fail\n 6 expect() calls\nRan 3 tests across 1 file. [219.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 419,
+      "command": "bun test benchmark\\repositories\\money-utils\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\money-utils\\tests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.58ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.47ms]\n(pass) money-utils > parseMoney handles comma-separated [2.01ms]\n(pass) money-utils > parseMoney handles simple amounts [0.27ms]\n(pass) money-utils > add validates currency mismatch [0.99ms]\n(pass) money-utils > subtract validates currency [0.33ms]\n(pass) money-utils > multiply [0.19ms]\n(pass) money-utils > convertCurrency precision [0.48ms]\n(pass) money-utils > convertCurrency throws missing rate [0.25ms]\n(pass) money-utils > createMoney validates [0.23ms]\n\n 10 pass\n 0 fail\n 22 expect() calls\nRan 10 tests across 1 file. [363.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "money-utils",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "boundary",
+      "data-transformation"
+    ]
+  },
+  "metrics": {
+    "durationMs": 35098,
+    "totalTurns": 36,
+    "toolCalls": 20,
+    "commandsExecuted": 2,
+    "filesInspected": 4,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 26728,
+    "outputTokens": 4108,
+    "totalTokens": 95860
+  },
+  "cost": {
+    "inputTokens": 26728,
+    "outputTokens": 4108,
+    "totalTokens": 30836,
+    "inputCostUsd": 0.003742,
+    "outputCostUsd": 0.00115,
+    "totalCostUsd": 0.005074,
+    "costUsd": 0.005074,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-005-run-001-e03bab",
+    "caseId": "synth-005",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:d185ab3991d564b90578ce6fa3a1c9c8de6d33c1c37912019d6cbe1c5c39b44c",
+    "trajectory": {
+      "eventCount": 163,
+      "durationMs": 35096,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 2,
+        "turn_start": 12,
+        "message_start": 34,
+        "message_end": 34,
+        "tool_execution_start": 20,
+        "tool_execution_end": 20,
+        "turn_end": 12,
+        "tool_execution_update": 12,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "prompt_completed": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 36,
+      "userMessages": 4,
+      "toolCalls": 20,
+      "toolResults": 80,
+      "thinkingEvents": 24,
+      "unknownEvents": 29,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 20,
+      "uniqueTools": 4,
+      "byTool": {
+        "read": {
+          "calls": 10,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 26728,
+      "output": 4108,
+      "cacheRead": 65024,
+      "cacheWrite": 0,
+      "total": 95860,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.005074,
+      "inputCostUsd": 0.003742,
+      "outputCostUsd": 0.00115,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 24,
+      "characterCount": 6836,
+      "averageCharacters": 285,
+      "maxCharacters": 1213,
+      "firstThinkingAt": "2026-08-31T04:16:42.611Z",
+      "lastThinkingAt": "2026-08-31T04:17:14.423Z",
+      "thinkingDurationMs": 31812
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/money.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 10,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 2,
+      "explorationToEditingRatio": 9
+    },
+    "verification": {
+      "commandsDetected": 8,
+      "testsRun": true,
+      "testCommandCount": 2,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 11,
+      "duplicateReadTargets": 6,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 0,
+      "topRepetitions": [
+        {
+          "signature": "cec7100b2e9d",
+          "tool": "read",
+          "target": "src/money.ts",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "58cc7666d7a3",
+          "tool": "read",
+          "target": "tests/money.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "fee3c4976bbc",
+          "tool": "edit",
+          "target": "src/money.ts",
+          "count": 2
+        },
+        {
+          "signature": "9a44e1741f7d",
+          "tool": "bash",
+          "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-005-run-001-e03bab",
+    "caseId": "synth-005",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-31T04:16:42.611Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-31T04:16:42.611Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 24,
+        "timestamp": "2026-08-31T04:16:42.693Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 25,
+        "timestamp": "2026-08-31T04:16:42.693Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 46,
+        "timestamp": "2026-08-31T04:16:44.516Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 47,
+        "timestamp": "2026-08-31T04:16:44.516Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 48,
+        "timestamp": "2026-08-31T04:16:44.552Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 49,
+        "timestamp": "2026-08-31T04:16:44.552Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 70,
+        "timestamp": "2026-08-31T04:16:46.477Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 71,
+        "timestamp": "2026-08-31T04:16:46.477Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 72,
+        "timestamp": "2026-08-31T04:16:46.495Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 73,
+        "timestamp": "2026-08-31T04:16:46.495Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 74,
+        "timestamp": "2026-08-31T04:16:46.540Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/money.test.ts"
+      },
+      {
+        "index": 75,
+        "timestamp": "2026-08-31T04:16:46.540Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/money.test.ts"
+      },
+      {
+        "index": 102,
+        "timestamp": "2026-08-31T04:16:52.809Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 103,
+        "timestamp": "2026-08-31T04:16:52.809Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 118,
+        "timestamp": "2026-08-31T04:16:55.221Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 119,
+        "timestamp": "2026-08-31T04:16:55.221Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 120,
+        "timestamp": "2026-08-31T04:16:55.238Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 121,
+        "timestamp": "2026-08-31T04:16:55.238Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 22,
+        "timestamp": "2026-08-31T04:16:42.611Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 102,
+        "timestamp": "2026-08-31T04:16:52.809Z",
+        "detail": "src/money.ts"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 120,
+        "timestamp": "2026-08-31T04:16:55.238Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test "
+      }
+    ],
+    "errors": [],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 120,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 121,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 136,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> money-utils@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   S"
+      },
+      {
+        "index": 137,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> money-utils@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   S"
+      },
+      {
+        "index": 142,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 143,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 144,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 145,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-e03bab-M7sl5S && npm test 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

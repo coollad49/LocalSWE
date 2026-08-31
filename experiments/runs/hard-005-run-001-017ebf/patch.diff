@@ -1,0 +1,45 @@
+diff --git a/src/index.ts b/src/index.ts
+index f617424..a5ecb04 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -676,7 +676,7 @@ function quoteName(name: string): string {
+ function stringifyName(name: string, next: Token | undefined): string {
+   if (!ID.test(name)) return quoteName(name);
+ 
+-  if (next?.type === "text" && ID_CONTINUE.test(next.value[0])) {
++  if (next?.type === "text" && ID_CONTINUE.test(String.fromCodePoint(next.value.codePointAt(0)))) {
+     return quoteName(name);
+   }
+ 
+diff --git a/tests/basic.test.ts b/tests/basic.test.ts
+index ea7f3b8..bd1cea2 100644
+--- a/tests/basic.test.ts
++++ b/tests/basic.test.ts
+@@ -1,5 +1,5 @@
+ import { describe, test, expect } from "vitest";
+-import { parse, stringify } from "../src/index.js";
++import { parse, stringify, TokenData } from "../src/index.js";
+ 
+ describe("path-to-regexp regression", () => {
+   test("basic parse/stringify", () => {
+@@ -12,4 +12,20 @@ describe("path-to-regexp regression", () => {
+     const tokens = parse("/*splat");
+     expect(tokens).toBeDefined();
+   });
++
++  test("stringify quotes param names followed by astral ID_Continue", () => {
++    // Construct tokens manually: a param 'a' followed by text starting with astral char
++    const data = new TokenData([
++      { type: "param", name: "a" },
++      { type: "text", value: "\u{10400}" },
++    ]);
++    const str = stringify(data);
++    // The name 'a' should be quoted because the next text starts with ID_Continue astral char
++    // Without quoting, parse will absorb the astral char into the param name
++    expect(str).toBe(':"a"\u{10400}');
++    // Round trip must work
++    const tokens2 = parse(str);
++    const str2 = stringify(tokens2);
++    expect(str2).toBe(str);
++  });
+ });

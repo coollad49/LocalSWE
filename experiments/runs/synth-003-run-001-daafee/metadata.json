@@ -1,0 +1,220 @@
+{
+  "runId": "synth-003-run-001-daafee",
+  "caseId": "synth-003",
+  "benchmarkVersion": "0.5",
+  "agentVersion": "agent-v1",
+  "agentRuntime": "pi",
+  "piVersion": "0.84.4",
+  "model": "opencode-go/mimo-v2.5",
+  "modelConfiguration": {
+    "thinkingLevel": "medium",
+    "maxTurns": 25,
+    "agentTimeoutMs": 600000,
+    "commandTimeoutSec": 30,
+    "maxIterations": 5
+  },
+  "agentPromptVersion": "agent-v1",
+  "agentPromptPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\agents\\agent-v1.md",
+  "startTime": "2026-08-31T03:07:33.402Z",
+  "endTime": "2026-08-31T03:12:03.472Z",
+  "durationMs": 270070,
+  "terminationStatus": "success",
+  "terminationReason": "completed",
+  "changedFiles": [
+    "src/queue.ts"
+  ],
+  "testCommands": [
+    "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+    "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1"
+  ],
+  "testResults": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+      "exitCode": 1,
+      "durationMs": 4468,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 53ms\n     × processJob retry re-enqueues 22ms\n     × processNext surfaces errors via retry 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processJob retry re-enqueues\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/queue.test.ts:61:24\n     59|     };\n     60|     const r1 = await q.processJob(dequeued, handler);\n     61|     expect(r1.success).toBe(false);\n       |                        ^\n     62|     expect(r1.job.attempts).toBe(1);\n     63|     expect(q.size()).toBe(1); // re-enqueued\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processNext surfaces errors via retry\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/queue.test.ts:97:25\n     95|     };\n     96|     const r1 = await q.processNext(handler);\n     97|     expect(r1!.success).toBe(false);\n       |                         ^\n     98|     expect(called).toBe(1);\n     99|     const r2 = await q.processNext(handler);\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 7 passed (9)\n   Start at  04:10:59\n   Duration  872ms (transform 151ms, setup 0ms, import 209ms, tests 53ms, environment 0ms)\n\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 6872,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  04:11:15\n   Duration  1.11s (transform 137ms, setup 0ms, import 212ms, tests 29ms, environment 0ms)\n\n"
+    }
+  ],
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-daafee\\trajectory.jsonl",
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-daafee\\patch.diff",
+  "resultPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-daafee\\result.json",
+  "workspacePath": "C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-synth-003-synth-003-run-001-daafee-6Zk9OM",
+  "nodeVersion": "v22.23.2",
+  "platform": "win32",
+  "v1": {
+    "phaseTransitions": [
+      {
+        "from": "init",
+        "to": "reconnaissance",
+        "timestamp": "2026-08-31T03:07:33.408Z",
+        "iteration": 0
+      }
+    ],
+    "phaseDurations": [
+      {
+        "phase": "reconnaissance",
+        "enteredAt": "2026-08-31T03:07:33.408Z",
+        "exitedAt": "2026-08-31T03:12:02.215Z",
+        "durationMs": 268807
+      }
+    ],
+    "iterationCount": 0,
+    "maxIterations": 5,
+    "commandsExecuted": [
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hyp-3f04cea2\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:08:28.789Z"
+      },
+      {
+        "command": "",
+        "exitCode": 1,
+        "stdout": "hypothesis not found hyp-3f04cea2\n\n\nCommand exited with code 1",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:10:28.052Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "{\n  \"phase\": \"reconnaissance\",\n  \"issue\": \"# Issue: Failed jobs are reported as successful\\r\\n\\r\\n## Problem\\r\\n\\r\\nWhen a queued job throws an error, it should be reported as a failure and retried according to policy. Currently, failures are reported as successes and retries never happen.\\r\\n\",\n  \"filesInspected\": [\n    \".\",\n    \"package.json\",\n    \"src\",\n    \"tests\",\n    \"src/index.ts\",\n    \"src/job.ts\",\n    \"src/queue.ts\",\n    \"tests/queue.test.ts\",\n    \".v1/state.json\",\n    \".v1/helpers.js\"\n  ],\n  \"commandsExecuted\": [\n    {\n      \"command\": \"\",\n      \"exitCode\": 0,\n      \"stdout\": \"hyp-3f04cea2\\n\",\n      \"stderr\": \"\",\n      \"durationMs\": 0,\n      \"phase\": \"reconnaissance\",\n      \"timestamp\": \"2026-08-31T03:08:28.789Z\"\n    },\n    {\n      \"command\": \"\",\n      \"exitCode\": 1,\n      \"stdout\": \"hypothesis not found hyp-3f04cea2\\n\\n\\nCommand exited with code 1\",\n      \"stderr\": \"\",\n      \"durationMs\": 0,\n      \"phase\": \"reconnaissance\",\n      \"timestamp\": \"2026-08-31T03:10:28.052Z\"\n    }\n  ],\n  \"hypotheses\": [],\n  \"changesMade\": [],\n  \"verificationAttempts\": [],\n  \"evidence\": [\n    {\n      \"id\": \"ev-57a9fcf4\",\n      \"type\": \"file_inspection\",\n      \"description\": \"Inspected .\",\n      \"source\": \".\",\n      \"timestamp\": \"2026-08-31T03:07:38.213Z\",\n      \"phase\": \"reconnaissance\"\n    },\n    {\n      \"id\": \"ev-1a680ec8\",\n      \"type\": \"file_inspection\",\n      \"description\": \"read .\",\n      \"source\": \".\",\n      \"timestamp\": \"2026-08-31T03:07:38.214Z\",\n      \"phase\": \"reconnaissance\"\n    },\n    {\n      \"id\": \"ev-b3d8afd6\",\n      \"type\": \"file_inspection\",\n      \"description\": \"Inspected package.json\",\n      \"source\": \"package.json\",\n      \"timestamp\": \"2026-08-31T03:07:40.942Z\",\n      \"phase\": \"reconnaissance\"\n    },\n    {\n      \"id\": \"ev-ef4bdbaf\",\n      \"type\": \"file_inspection\",\n      \"description\": \"read package.json\",\n      \"source\": \"package.json\",\n      \"timestamp\": \"2026-08-31T03:07:40.942Z\",\n      \"phase\": \"reconnaissance\"\n    },\n    {\n      \"id\": \"ev-ece179f8\",\n    ",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:10:30.856Z"
+      },
+      {
+        "command": "",
+        "exitCode": 1,
+        "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 53ms\n     × processJob retry re-enqueues 22ms\n     × processNext surfaces errors via retry 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processJob retry re-enqueues\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/queue.test.ts:61:24\n     59|     };\n     60|     const r1 = await q.processJob(dequeued, handler);\n     61|     expect(r1.success).toBe(false);\n       |                        ^\n     62|     expect(r1.job.attempts).toBe(1);\n     63|     expect(q.size()).toBe(1); // re-enqueued\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processNext surfaces errors via retry\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/queue.test.ts:97:25\n     95|     };\n     96|     const r1 = await q.processNext(handler);\n     97|     expect(r1!.success).toBe(false);\n       |                         ^\n     98|     expect(called).toBe(1);\n     99|     const r2 = await q.processNext(handler);\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 7 passed (9)\n   Start at  04:10:59\n   Duration  872ms (transform 151ms, setup 0ms, import 209ms, tests 53ms, environment 0ms)\n\n\n\nCommand exited with code 1",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:11:00.704Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  04:11:15\n   Duration  1.11s (transform 137ms, setup 0ms, import 212ms, tests 29ms, environment 0ms)\n\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:11:17.226Z"
+      },
+      {
+        "command": "",
+        "exitCode": 1,
+        "stdout": "\n> async-queue@1.0.0 check-types\n> tsc --noEmit\n\nVersion 7.0.2\ntsc: The TypeScript Compiler - Version 7.0.2\n\nCOMMON COMMANDS\n\n  tsc\n  Compiles the current project (tsconfig.json in the working directory.)\n\n  tsc app.ts util.ts\n  Ignoring tsconfig.json, compiles the specified files with default compiler options.\n\n  tsc -b\n  Build a composite project in the working directory.\n\n  tsc --init\n  Creates a tsconfig.json with the recommended settings in the working directory.\n\n  tsc -p ./path/to/tsconfig.json\n  Compiles the TypeScript project located at the specified path.\n\n  tsc --help --all\n  An expanded version of this information, showing all possible compiler options\n\n  tsc --noEmit\n  tsc --target esnext\n  Compiles the current project, with additional settings.\n\nCOMMAND LINE FLAGS\n\n--help, -h\nPrint this message.\n\n--watch, -w\nWatch input files.\n\n--all\nShow all compiler options.\n\n--version, -v\nPrint the compiler's version.\n\n--init\nInitializes a TypeScript project and creates a tsconfig.json file.\n\n--project, -p\nCompile the project given the path to its configuration file, or to a folder with a 'tsconfig.json'.\n\n--showConfig\nPrint the final configuration instead of building.\n\n--ignoreConfig\nIgnore the tsconfig found and build with commandline options and files.\n\n--build, -b\nBuild one or more projects and their dependencies, if out of date\n\nCOMMON COMPILER OPTIONS\n\n--pretty\nEnable color and formatting in TypeScript's output to make compiler errors easier to read.\ntype: boolean\ndefault: true\n\n--declaration, -d\nGenerate .d.ts files from TypeScript and JavaScript files in your project.\ntype: boolean\ndefault: `false`, unless `composite` is set\n\n--declarationMap\nCreate sourcemaps for d.ts files.\ntype: boolean\ndefault: false\n\n--emitDeclarationOnly\nOnly output d.ts files and not JavaScript files.\ntype: boolean\ndefault: false\n\n--sourceMap\nCreate source map files for emitted JavaScript files.\ntype: boolean\ndefault: false\n\n--noEmit\nDisable emitting files from a compilation.\ntype: bo",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:11:25.502Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "ls: cannot access 'C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM/tsconfig.json': No such file or directory\nNo tsconfig.json found\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:11:29.644Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "diff --git a/src/queue.ts b/src/queue.ts\nindex 104f669..9955340 100644\n--- a/src/queue.ts\n+++ b/src/queue.ts\n@@ -84,8 +84,10 @@ export class AsyncQueue<T = unknown> {\n       await handler(current.payload);\n       return { success: true, job: current };\n     } catch (err) {\n-      // BUG: swallows error and reports success\n-      return { success: true, job: current };\n+      if (current.attempts < current.maxAttempts) {\n+        this.queue.push(current);\n+      }\n+      return { success: false, job: current };\n     }\n   }\n \n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:11:36.043Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": " src/queue.ts | 6 ++++--\n 1 file changed, 4 insertions(+), 2 deletions(-)\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:11:43.226Z"
+      },
+      {
+        "command": "npm test",
+        "exitCode": 1,
+        "stdout": "2 tests failed",
+        "stderr": ""
+      },
+      {
+        "command": "npm test",
+        "exitCode": 0,
+        "stdout": "9 tests passed",
+        "stderr": ""
+      },
+      {
+        "command": "git diff HEAD --stat",
+        "exitCode": 0,
+        "stdout": "1 file changed, 4 insertions(+), 2 deletions(-)",
+        "stderr": ""
+      }
+    ],
+    "commandCount": 12,
+    "filesInspected": [
+      ".",
+      "package.json",
+      "src",
+      "tests",
+      "src/index.ts",
+      "src/job.ts",
+      "src/queue.ts",
+      "tests/queue.test.ts",
+      ".v1/state.json",
+      ".v1/helpers.js"
+    ],
+    "fileCount": 10,
+    "filesChanged": [
+      "src/queue.ts"
+    ],
+    "toolCallCount": 96,
+    "tokenUsage": null,
+    "cost": null,
+    "hypotheses": [
+      {
+        "id": "hyp-001",
+        "description": "processJob catch block returns success:true instead of success:false, and lacks retry re-enqueue logic",
+        "evidence": [
+          "src/queue.ts:63-64: catch block returns success:true with comment noting BUG",
+          "tests/queue.test.ts:42: expects r1.success to be false",
+          "tests/queue.test.ts:45: expects q.size() to be 1 (re-enqueued)"
+        ],
+        "confidence": 0.95,
+        "status": "selected",
+        "files": [
+          "src/queue.ts"
+        ]
+      }
+    ],
+    "evidenceCount": 34,
+    "verificationAttempts": [
+      {
+        "method": "vitest",
+        "command": "npm test",
+        "passed": true,
+        "output": "9 tests passed"
+      }
+    ],
+    "finalPatchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-daafee\\patch.diff",
+    "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-daafee\\trajectory.jsonl",
+    "evidencePath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-daafee\\evidence.jsonl",
+    "v1StatePath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-daafee\\v1-state.json"
+  }
+}

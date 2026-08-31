@@ -1,0 +1,186 @@
+diff --git a/package-lock.json b/package-lock.json
+new file mode 100644
+index 0000000..c1d42ba
+--- /dev/null
++++ b/package-lock.json
+@@ -0,0 +1,53 @@
++{
++  "name": "defu",
++  "version": "6.1.4",
++  "lockfileVersion": 3,
++  "requires": true,
++  "packages": {
++    "": {
++      "name": "defu",
++      "version": "6.1.4",
++      "license": "MIT",
++      "devDependencies": {
++        "@types/bun": "latest"
++      }
++    },
++    "node_modules/@types/bun": {
++      "version": "1.4.0",
++      "resolved": "https://registry.npmjs.org/@types/bun/-/bun-1.4.0.tgz",
++      "integrity": "sha512-K+lZULY23vRgK/CfTjFIV+tyifaNdSMlPh9j+6mQ/cLfpOznLyAuzgV/JQysyECpkBQLVMSyvjlr2fBUSA9wFQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "bun-types": "1.4.0"
++      }
++    },
++    "node_modules/@types/node": {
++      "version": "26.4.0",
++      "resolved": "https://registry.npmjs.org/@types/node/-/node-26.4.0.tgz",
++      "integrity": "sha512-faiGnoIrLH/V8cibOMEAZ8pMw6oXqSukl29ra4mN8GdaB2ZewzeaLj+INpV5N+Z1eKWzY+IzaIZH2EIR6YZRNQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "undici-types": "~8.3.0"
++      }
++    },
++    "node_modules/bun-types": {
++      "version": "1.4.0",
++      "resolved": "https://registry.npmjs.org/bun-types/-/bun-types-1.4.0.tgz",
++      "integrity": "sha512-iIKw23BspnQQYd3prITOBxeUsxBHnwzX6YJfGMuNOZzeNcMmVqzIIVGRm1l69ogaPQmb4wB6BN8mA5bE9YuC5Q==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@types/node": "*"
++      }
++    },
++    "node_modules/undici-types": {
++      "version": "8.3.0",
++      "resolved": "https://registry.npmjs.org/undici-types/-/undici-types-8.3.0.tgz",
++      "integrity": "sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==",
++      "dev": true,
++      "license": "MIT"
++    }
++  }
++}
+diff --git a/tmp_test.js b/tmp_test.js
+new file mode 100644
+index 0000000..efc3f98
+--- /dev/null
++++ b/tmp_test.js
+@@ -0,0 +1,52 @@
++import { defu, createDefu } from "./src/defu.ts";
++
++// Test 1: defu({}, JSON.parse('{"__proto__":{"polluted":true}}'))
++{
++  // Clean up first
++  delete (Object.prototype as any).polluted;
++  const payload = JSON.parse('{"__proto__":{"polluted":true}}');
++  const result = defu({}, payload);
++  console.log("Test 1 - defu({}, payload):");
++  console.log("  Object.prototype.polluted:", (Object.prototype as any).polluted);
++  console.log("  result.polluted:", (result as any).polluted);
++  console.log("  Object.getPrototypeOf(result):", Object.getPrototypeOf(result));
++  console.log("  result:", result);
++  console.log("  Object.getOwnPropertyDescriptor(result, '__proto__'):", Object.getOwnPropertyDescriptor(result, "__proto__"));
++}
++
++// Test 2: defu(payload, {})
++{
++  delete (Object.prototype as any).polluted;
++  const payload = JSON.parse('{"__proto__":{"polluted":true}}');
++  const result = defu(payload, {});
++  console.log("\nTest 2 - defu(payload, {}):");
++  console.log("  Object.prototype.polluted:", (Object.prototype as any).polluted);
++  console.log("  result.polluted:", (result as any).polluted);
++  console.log("  Object.getPrototypeOf(result):", Object.getPrototypeOf(result));
++}
++
++// Test 3: defu(payload, payload)
++{
++  delete (Object.prototype as any).polluted;
++  const payload = JSON.parse('{"__proto__":{"polluted":true}}');
++  const result = defu(payload, payload);
++  console.log("\nTest 3 - defu(payload, payload):");
++  console.log("  Object.prototype.polluted:", (Object.prototype as any).polluted);
++  console.log("  result.polluted:", (result as any).polluted);
++  console.log("  Object.getPrototypeOf(result):", Object.getPrototypeOf(result));
++}
++
++// Test 4: nested
++{
++  delete (Object.prototype as any).polluted;
++  const payload = JSON.parse('{"a":{"__proto__":{"polluted":true}}}');
++  const result = defu({a:{x:1}}, payload);
++  console.log("\nTest 4 - defu({a:{x:1}}, payload):");
++  console.log("  Object.prototype.polluted:", (Object.prototype as any).polluted);
++  console.log("  result:", JSON.stringify(result));
++  console.log("  result.a.polluted:", (result.a as any).polluted);
++  console.log("  Object.getPrototypeOf(result.a):", Object.getPrototypeOf(result.a));
++}
++
++// Final check
++console.log("\nFinal: ({}).polluted =", ({} as any).polluted);
+diff --git a/tmp_test.mjs b/tmp_test.mjs
+new file mode 100644
+index 0000000..21dad8c
+--- /dev/null
++++ b/tmp_test.mjs
+@@ -0,0 +1,63 @@
++import { defu, createDefu } from "./src/defu.ts";
++
++// Test 1: defu({}, JSON.parse('{"__proto__":{"polluted":true}}'))
++{
++  delete Object.prototype.polluted;
++  const payload = JSON.parse('{"__proto__":{"polluted":true}}');
++  const result = defu({}, payload);
++  console.log("Test 1 - defu({}, payload):");
++  console.log("  Object.prototype.polluted:", Object.prototype.polluted);
++  console.log("  result.polluted:", result.polluted);
++  console.log("  Object.getPrototypeOf(result):", Object.getPrototypeOf(result));
++  console.log("  result:", result);
++  console.log("  Object.getOwnPropertyDescriptor(result, '__proto__'):", Object.getOwnPropertyDescriptor(result, "__proto__"));
++}
++
++// Test 2: defu(payload, {})
++{
++  delete Object.prototype.polluted;
++  const payload = JSON.parse('{"__proto__":{"polluted":true}}');
++  const result = defu(payload, {});
++  console.log("\nTest 2 - defu(payload, {}):");
++  console.log("  Object.prototype.polluted:", Object.prototype.polluted);
++  console.log("  result.polluted:", result.polluted);
++  console.log("  Object.getPrototypeOf(result):", Object.getPrototypeOf(result));
++}
++
++// Test 3: defu(payload, payload)
++{
++  delete Object.prototype.polluted;
++  const payload = JSON.parse('{"__proto__":{"polluted":true}}');
++  const result = defu(payload, payload);
++  console.log("\nTest 3 - defu(payload, payload):");
++  console.log("  Object.prototype.polluted:", Object.prototype.polluted);
++  console.log("  result.polluted:", result.polluted);
++  console.log("  Object.getPrototypeOf(result):", Object.getPrototypeOf(result));
++}
++
++// Test 4: nested
++{
++  delete Object.prototype.polluted;
++  const payload = JSON.parse('{"a":{"__proto__":{"polluted":true}}}');
++  const result = defu({a:{x:1}}, payload);
++  console.log("\nTest 4 - defu({a:{x:1}}, payload):");
++  console.log("  Object.prototype.polluted:", Object.prototype.polluted);
++  console.log("  result:", JSON.stringify(result));
++  console.log("  result.a.polluted:", result.a.polluted);
++  console.log("  Object.getPrototypeOf(result.a):", Object.getPrototypeOf(result.a));
++}
++
++// Test 5: deep nested with isAdmin
++{
++  delete Object.prototype.isAdmin;
++  const payload = JSON.parse('{"a":{"b":{"__proto__":{"isAdmin":true}}}}');
++  const result = defu({a:{b:{c:1}}}, payload);
++  console.log("\nTest 5 - deep nested:");
++  console.log("  Object.prototype.isAdmin:", Object.prototype.isAdmin);
++  console.log("  result.a.b.isAdmin:", result.a.b.isAdmin);
++  console.log("  Object.getPrototypeOf(result.a.b):", Object.getPrototypeOf(result.a.b));
++}
++
++// Final check
++console.log("\nFinal: ({}).polluted =", ({}).polluted);
++console.log("Final: ({}).isAdmin =", ({}).isAdmin);

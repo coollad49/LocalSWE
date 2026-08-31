@@ -1,0 +1,1197 @@
+{
+  "evaluationId": "eval-2d3e74e7-1788165726571",
+  "runId": "hist-001-run-001-d913a2",
+  "caseId": "hist-001",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:42:06.571Z",
+  "completedAt": "2026-08-31T08:42:08.896Z",
+  "durationMs": 2325,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-001-run-001-d913a2\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 244,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-001-fRjAx6\\patch-1788165727881.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 268,
+      "command": "bun run benchmark\\cases\\hist-001\\public\\reproduce.ts",
+      "stdout": "Test --base-url: options={\"--\":[],\"baseUrl\":\"https://gitlab.com\"} => PASS (hasB=false b=undefined baseUrl=https://gitlab.com)\nTest -b: options={\"--\":[],\"b\":\"https://gitlab.com\",\"baseUrl\":\"https://gitlab.com\"} => PASS\nTest no args: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://github.com\"} => PASS\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 276,
+      "command": "bun test benchmark\\cases\\hist-001\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-001\\private\\oracle.test.ts:\n(pass) hist-001 oracle: option default alias leak > default value for option [13.44ms]\n(pass) hist-001 oracle: option default alias leak > default value for option names 1 (-b) [1.08ms]\n(pass) hist-001 oracle: option default alias leak > default value for option names 2 (--base-url) [0.44ms]\n(pass) hist-001 oracle: option default alias leak > default value for option names 3 (boolean skip) [0.30ms]\n\n 4 pass\n 0 fail\n 4 expect() calls\nRan 4 tests across 1 file. [216.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 219,
+      "command": "bun test benchmark\\repositories\\cac\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\cac\\tests\\cac.test.ts:\n(pass) cac regression > parses basic option [11.46ms]\n(pass) cac regression > parses short flag and help not thrown [0.57ms]\n(pass) cac regression > command parsing [1.33ms]\n(pass) cac regression > default value without args [0.64ms]\n\n 4 pass\n 0 fail\n 6 expect() calls\nRan 4 tests across 1 file. [156.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "cac",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "validation",
+      "parsing"
+    ]
+  },
+  "metrics": {
+    "durationMs": 238850,
+    "totalTurns": 102,
+    "toolCalls": 48,
+    "commandsExecuted": 22,
+    "filesInspected": 7,
+    "filesChanged": 2,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 71608,
+    "outputTokens": 27308,
+    "totalTokens": 1074132
+  },
+  "cost": {
+    "inputTokens": 71608,
+    "outputTokens": 27308,
+    "totalTokens": 98916,
+    "inputCostUsd": 0.021482,
+    "outputCostUsd": 0.03277,
+    "totalCostUsd": 0.112765,
+    "costUsd": 0.112765,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-001-run-001-d913a2",
+    "caseId": "hist-001",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "mimo-v2.5",
+    "trajectoryHash": "sha256:72f6dd6a74003109080ea7edaf6f87ae94536fcb8cfda73b4a07823b2d1a5f88",
+    "trajectory": {
+      "eventCount": 457,
+      "durationMs": 238805,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "available_models": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 2,
+        "turn_start": 50,
+        "message_start": 100,
+        "message_end": 100,
+        "tool_execution_start": 48,
+        "tool_execution_update": 42,
+        "tool_execution_end": 48,
+        "turn_end": 50,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "prompt_completed": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 150,
+      "userMessages": 4,
+      "toolCalls": 48,
+      "toolResults": 192,
+      "thinkingEvents": 52,
+      "unknownEvents": 97,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 48,
+      "uniqueTools": 4,
+      "byTool": {
+        "bash": {
+          "calls": 22,
+          "failures": 0
+        },
+        "read": {
+          "calls": 20,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 4,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 71608,
+      "output": 27308,
+      "cacheRead": 975216,
+      "cacheWrite": 0,
+      "total": 1074132,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.112765,
+      "inputCostUsd": 0.021482,
+      "outputCostUsd": 0.03277,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 52,
+      "characterCount": 69500,
+      "averageCharacters": 1337,
+      "maxCharacters": 9938,
+      "firstThinkingAt": "2026-08-31T02:14:57.546Z",
+      "lastThinkingAt": "2026-08-31T02:18:47.642Z",
+      "thinkingDurationMs": 230096
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/CAC.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 20,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 4,
+      "bashCalls": 22,
+      "explorationToEditingRatio": 23
+    },
+    "verification": {
+      "commandsDetected": 56,
+      "testsRun": true,
+      "testCommandCount": 12,
+      "buildRun": true,
+      "typecheckRun": true,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 28,
+      "duplicateReadTargets": 13,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 0,
+      "topRepetitions": [
+        {
+          "signature": "4ab58faacb8f",
+          "tool": "read",
+          "target": "src/CAC.ts",
+          "count": 8
+        },
+        {
+          "signature": "62cf6fc5fa87",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+          "count": 4
+        },
+        {
+          "signature": "7660ff8408a3",
+          "tool": "bash",
+          "target": "ls",
+          "count": 2
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "d58e763780fa",
+          "tool": "read",
+          "target": "src/Option.ts",
+          "count": 2
+        },
+        {
+          "signature": "73d3e0dc87c9",
+          "tool": "read",
+          "target": "src/Command.ts",
+          "count": 2
+        },
+        {
+          "signature": "c94e8782b700",
+          "tool": "read",
+          "target": "tests/cac.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-001-run-001-d913a2",
+    "caseId": "hist-001",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-31T02:14:57.547Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls",
+        "commandClass": "general"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-31T02:14:57.547Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls",
+        "commandClass": "general"
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-31T02:14:58.580Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 43,
+        "timestamp": "2026-08-31T02:14:58.580Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-31T02:15:01.660Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-31T02:15:01.660Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 74,
+        "timestamp": "2026-08-31T02:15:03.025Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 75,
+        "timestamp": "2026-08-31T02:15:03.025Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 90,
+        "timestamp": "2026-08-31T02:15:03.913Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/Option.ts"
+      },
+      {
+        "index": 91,
+        "timestamp": "2026-08-31T02:15:03.913Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/Option.ts"
+      },
+      {
+        "index": 106,
+        "timestamp": "2026-08-31T02:15:05.235Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/Command.ts"
+      },
+      {
+        "index": 107,
+        "timestamp": "2026-08-31T02:15:05.235Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/Command.ts"
+      },
+      {
+        "index": 122,
+        "timestamp": "2026-08-31T02:15:07.736Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 123,
+        "timestamp": "2026-08-31T02:15:07.736Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 138,
+        "timestamp": "2026-08-31T02:15:09.854Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/cac.test.ts"
+      },
+      {
+        "index": 139,
+        "timestamp": "2026-08-31T02:15:09.854Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/cac.test.ts"
+      },
+      {
+        "index": 154,
+        "timestamp": "2026-08-31T02:15:18.342Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 155,
+        "timestamp": "2026-08-31T02:15:18.342Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 170,
+        "timestamp": "2026-08-31T02:15:19.584Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "commandClass": "test"
+      },
+      {
+        "index": 171,
+        "timestamp": "2026-08-31T02:15:19.584Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "commandClass": "test"
+      },
+      {
+        "index": 190,
+        "timestamp": "2026-08-31T02:15:25.890Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm install 2>&1 | tail -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 191,
+        "timestamp": "2026-08-31T02:15:25.890Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm install 2>&1 | tail -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 210,
+        "timestamp": "2026-08-31T02:15:38.349Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "commandClass": "test"
+      },
+      {
+        "index": 211,
+        "timestamp": "2026-08-31T02:15:38.349Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "commandClass": "test"
+      },
+      {
+        "index": 230,
+        "timestamp": "2026-08-31T02:15:45.292Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 231,
+        "timestamp": "2026-08-31T02:15:45.292Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 246,
+        "timestamp": "2026-08-31T02:15:47.887Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, ",
+        "commandClass": "test"
+      },
+      {
+        "index": 247,
+        "timestamp": "2026-08-31T02:15:47.887Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, ",
+        "commandClass": "test"
+      },
+      {
+        "index": 266,
+        "timestamp": "2026-08-31T02:16:16.082Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+        "commandClass": "test"
+      },
+      {
+        "index": 267,
+        "timestamp": "2026-08-31T02:16:16.082Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+        "commandClass": "test"
+      },
+      {
+        "index": 284,
+        "timestamp": "2026-08-31T02:16:18.980Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 285,
+        "timestamp": "2026-08-31T02:16:18.980Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 300,
+        "timestamp": "2026-08-31T02:16:20.081Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 301,
+        "timestamp": "2026-08-31T02:16:20.081Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 316,
+        "timestamp": "2026-08-31T02:16:23.761Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 317,
+        "timestamp": "2026-08-31T02:16:23.761Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 332,
+        "timestamp": "2026-08-31T02:16:25.723Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+        "commandClass": "test"
+      },
+      {
+        "index": 333,
+        "timestamp": "2026-08-31T02:16:25.723Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+        "commandClass": "test"
+      },
+      {
+        "index": 352,
+        "timestamp": "2026-08-31T02:16:38.893Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test,",
+        "commandClass": "test"
+      },
+      {
+        "index": 353,
+        "timestamp": "2026-08-31T02:16:38.893Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test,",
+        "commandClass": "test"
+      },
+      {
+        "index": 372,
+        "timestamp": "2026-08-31T02:17:12.097Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/fron",
+        "commandClass": "test"
+      },
+      {
+        "index": 373,
+        "timestamp": "2026-08-31T02:17:12.097Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/fron",
+        "commandClass": "test"
+      },
+      {
+        "index": 392,
+        "timestamp": "2026-08-31T02:18:06.736Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm run check-types 2>&1 | tail -20",
+        "commandClass": "typecheck"
+      },
+      {
+        "index": 393,
+        "timestamp": "2026-08-31T02:18:06.736Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm run check-types 2>&1 | tail -20",
+        "commandClass": "typecheck"
+      },
+      {
+        "index": 412,
+        "timestamp": "2026-08-31T02:18:30.695Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npx tsc --noEmit 2>&1 | tail -30",
+        "commandClass": "build"
+      },
+      {
+        "index": 413,
+        "timestamp": "2026-08-31T02:18:30.695Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npx tsc --noEmit 2>&1 | tail -30",
+        "commandClass": "build"
+      },
+      {
+        "index": 432,
+        "timestamp": "2026-08-31T02:18:47.637Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 433,
+        "timestamp": "2026-08-31T02:18:47.637Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 42,
+        "timestamp": "2026-08-31T02:14:58.580Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 170,
+        "timestamp": "2026-08-31T02:15:19.584Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test "
+      },
+      {
+        "type": "first_repro",
+        "eventIndex": 266,
+        "timestamp": "2026-08-31T02:16:16.082Z",
+        "detail": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.t"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 316,
+        "timestamp": "2026-08-31T02:16:23.761Z",
+        "detail": "src/CAC.ts"
+      }
+    ],
+    "errors": [],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 170,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 171,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 176,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0,
+        "outputSnippet": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\n\n ❯ tests/cac.test.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL "
+      },
+      {
+        "index": 177,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0,
+        "outputSnippet": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\n\n ❯ tests/cac.test.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL "
+      },
+      {
+        "index": 178,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 179,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 180,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 181,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 210,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 211,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 216,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0,
+        "outputSnippet": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  03:"
+      },
+      {
+        "index": 217,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0,
+        "outputSnippet": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  03:"
+      },
+      {
+        "index": 218,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 219,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 220,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 221,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 246,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+        "exitCode": 0
+      },
+      {
+        "index": 247,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+        "exitCode": 0
+      },
+      {
+        "index": 252,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+        "exitCode": 0,
+        "outputSnippet": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\n\n ❯ tests/repro.test.ts (1 test | 1 failed) 35ms\n     × when alias par"
+      },
+      {
+        "index": 253,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+        "exitCode": 0,
+        "outputSnippet": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\n\n ❯ tests/repro.test.ts (1 test | 1 failed) 35ms\n     × when alias par"
+      },
+      {
+        "index": 254,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+        "exitCode": 0
+      },
+      {
+        "index": 255,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+        "exitCode": 0
+      },
+      {
+        "index": 256,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+        "exitCode": 0
+      },
+      {
+        "index": 257,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../sr",
+        "exitCode": 0
+      },
+      {
+        "index": 266,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 267,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 270,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 271,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 272,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 273,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 274,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 275,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 332,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+        "exitCode": 0
+      },
+      {
+        "index": 333,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+        "exitCode": 0
+      },
+      {
+        "index": 338,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+        "exitCode": 0,
+        "outputSnippet": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  03:"
+      },
+      {
+        "index": 339,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+        "exitCode": 0,
+        "outputSnippet": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  03:"
+      },
+      {
+        "index": 340,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+        "exitCode": 0
+      },
+      {
+        "index": 341,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+        "exitCode": 0
+      },
+      {
+        "index": 342,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+        "exitCode": 0
+      },
+      {
+        "index": 343,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && npm test 2>&1 | tail -20",
+        "exitCode": 0
+      },
+      {
+        "index": 352,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+        "exitCode": 0
+      },
+      {
+        "index": 353,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+        "exitCode": 0
+      },
+      {
+        "index": 358,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+        "exitCode": 0,
+        "outputSnippet": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\n\n\n Test Files  2 passed (2)\n      Tests  7 passed (7)\n   Start at  03:"
+      },
+      {
+        "index": 359,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+        "exitCode": 0,
+        "outputSnippet": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\n\n\n Test Files  2 passed (2)\n      Tests  7 passed (7)\n   Start at  03:"
+      },
+      {
+        "index": 360,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+        "exitCode": 0
+      },
+      {
+        "index": 361,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+        "exitCode": 0
+      },
+      {
+        "index": 362,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+        "exitCode": 0
+      },
+      {
+        "index": 363,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../s",
+        "exitCode": 0
+      },
+      {
+        "index": 372,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+        "exitCode": 0
+      },
+      {
+        "index": 373,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+        "exitCode": 0
+      },
+      {
+        "index": 378,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+        "exitCode": 0,
+        "outputSnippet": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  03:"
+      },
+      {
+        "index": 379,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+        "exitCode": 0,
+        "outputSnippet": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  03:"
+      },
+      {
+        "index": 380,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+        "exitCode": 0
+      },
+      {
+        "index": 381,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+        "exitCode": 0
+      },
+      {
+        "index": 382,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+        "exitCode": 0
+      },
+      {
+        "index": 383,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw/tests/repro.test.ts\"\ncd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-d913a2-9ErOMw\" && n",
+        "exitCode": 0
+      }
+    ]
+  }
+}

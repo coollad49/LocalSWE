@@ -1,0 +1,36 @@
+diff --git a/src/task-manager.ts b/src/task-manager.ts
+index 0fa3bc4..2e50759 100644
+--- a/src/task-manager.ts
++++ b/src/task-manager.ts
+@@ -38,21 +38,20 @@ export class TaskManager {
+     if (updates.status !== undefined) validateStatus(updates.status);
+     if (updates.dueDate !== undefined) validateDueDate(updates.dueDate);
+ 
+-    // BUG: spreads undefined values and overwrites existing fields
++    // Only include fields that are explicitly provided (not undefined)
++    const updateFields: Partial<Task> = {};
++    if (updates.title !== undefined) updateFields.title = updates.title;
++    if (updates.description !== undefined) updateFields.description = updates.description;
++    if (updates.priority !== undefined) updateFields.priority = updates.priority;
++    if (updates.status !== undefined) updateFields.status = updates.status;
++    if (updates.dueDate !== undefined) updateFields.dueDate = updates.dueDate;
++
+     const updated: Task = {
+       ...existing,
+-      title: updates.title as any,
+-      description: updates.description as any,
+-      priority: updates.priority as any,
+-      status: updates.status as any,
+-      dueDate: updates.dueDate as any,
++      ...updateFields,
+       updatedAt: toISOTimestamp(new Date()),
+     };
+-    // Remove undefined check - this will set fields to undefined if not provided
+-    // Simulate buggy behavior: if update field is undefined, it still overwrites
+-    // The above already does it. Need to ensure we don't preserve old values.
+-    // In JS, spreading with undefined overwrites: { ...existing, title: undefined } => title undefined
+-    this.tasks.set(id, updated as Task);
++    this.tasks.set(id, updated);
+     this.invalidateCache();
+     return { ...updated };
+   }

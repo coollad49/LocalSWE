@@ -1,0 +1,37 @@
+diff --git a/src/spyOn.ts b/src/spyOn.ts
+index 4889eaf..317127e 100644
+--- a/src/spyOn.ts
++++ b/src/spyOn.ts
+@@ -112,6 +112,9 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     original = original[SYMBOL_STATE].getOriginal()
+   }
+ 
++  // Capture whether the original was an own property before we modify the object
++  let wasOwnProperty = Object.prototype.hasOwnProperty.call(obj, accessName)
++
+   let reassign = (cb: any) => {
+     let { value, ...desc } = originalDescriptor || {
+       configurable: true,
+@@ -123,10 +126,18 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     ;(desc as PropertyDescriptor)[accessType] = cb
+     define(obj, accessName, desc)
+   }
+-  let restore = () =>
+-    originalDescriptor && !original
+-      ? define(obj, accessName, originalDescriptor)
+-      : reassign(original)
++  let restore = () => {
++    if (originalDescriptor && !original) {
++      define(obj, accessName, originalDescriptor)
++    } else if (original) {
++      if (wasOwnProperty) {
++        reassign(original)
++      } else {
++        // The original was on the prototype; remove the own property that the spy added
++        delete obj[accessName as keyof T]
++      }
++    }
++  }
+ 
+   if (!mock) mock = original
+ 

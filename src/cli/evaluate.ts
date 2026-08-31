@@ -25,7 +25,7 @@ import { computeHistoricalVsSynthetic, computeDifficultyBreakdown, computeCatego
 import { buildExperimentEvaluation, buildExperimentReport, generateReportMarkdown, generateSummaryJson } from "../evaluator/report.ts";
 import { loadPricingConfig } from "../evaluator/pricing.ts";
 import { TrajectoryDatasetAggregator } from "../evaluator/trajectory/aggregation.ts";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { readFile, readdir, writeFile, mkdir, symlink, lstat } from "node:fs/promises";
 import { join, resolve, dirname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -174,10 +174,28 @@ async function evaluateExperimentRuns(params: {
     throw e;
   }
 
-  const runIds: string[] = [];
+  const allRunIds: string[] = [];
+  const matchedRunIds: string[] = [];
+
   for (const name of entries) {
-    if (existsSync(join(resolvedRunsDir, name, "patch.diff"))) runIds.push(name);
+    const runDir = join(resolvedRunsDir, name);
+    if (!existsSync(join(runDir, "patch.diff"))) continue;
+    allRunIds.push(name);
+
+    if (experimentId && experimentId !== "all" && experimentId !== "default") {
+      const metaPath = join(runDir, "metadata.json");
+      if (existsSync(metaPath)) {
+        try {
+          const meta = JSON.parse(readFileSync(metaPath, "utf-8")) as Record<string, unknown>;
+          if (meta.experimentName === experimentId || meta.experimentId === experimentId) {
+            matchedRunIds.push(name);
+          }
+        } catch {}
+      }
+    }
   }
+
+  const runIds = (matchedRunIds.length > 0) ? matchedRunIds : allRunIds;
   if (runIds.length === 0) {
     console.log(`No runs with patch.diff found in ${resolvedRunsDir}`);
     const identity = await loadBenchmarkIdentity();

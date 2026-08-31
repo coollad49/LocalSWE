@@ -1,0 +1,61 @@
+diff --git a/bun.lock b/bun.lock
+new file mode 100644
+index 0000000..3a3c99f
+--- /dev/null
++++ b/bun.lock
+@@ -0,0 +1,21 @@
++{
++  "lockfileVersion": 1,
++  "configVersion": 1,
++  "workspaces": {
++    "": {
++      "name": "task-manager",
++      "devDependencies": {
++        "@types/bun": "latest",
++      },
++    },
++  },
++  "packages": {
++    "@types/bun": ["@types/bun@1.4.0", "", { "dependencies": { "bun-types": "1.4.0" } }, "sha512-K+lZULY23vRgK/CfTjFIV+tyifaNdSMlPh9j+6mQ/cLfpOznLyAuzgV/JQysyECpkBQLVMSyvjlr2fBUSA9wFQ=="],
++
++    "@types/node": ["@types/node@26.4.0", "", { "dependencies": { "undici-types": "~8.3.0" } }, "sha512-faiGnoIrLH/V8cibOMEAZ8pMw6oXqSukl29ra4mN8GdaB2ZewzeaLj+INpV5N+Z1eKWzY+IzaIZH2EIR6YZRNQ=="],
++
++    "bun-types": ["bun-types@1.4.0", "", { "dependencies": { "@types/node": "*" } }, "sha512-iIKw23BspnQQYd3prITOBxeUsxBHnwzX6YJfGMuNOZzeNcMmVqzIIVGRm1l69ogaPQmb4wB6BN8mA5bE9YuC5Q=="],
++
++    "undici-types": ["undici-types@8.3.0", "", {}, "sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ=="],
++  }
++}
+diff --git a/src/task-manager.ts b/src/task-manager.ts
+index 0fa3bc4..ceaa130 100644
+--- a/src/task-manager.ts
++++ b/src/task-manager.ts
+@@ -38,21 +38,18 @@ export class TaskManager {
+     if (updates.status !== undefined) validateStatus(updates.status);
+     if (updates.dueDate !== undefined) validateDueDate(updates.dueDate);
+ 
+-    // BUG: spreads undefined values and overwrites existing fields
++    // Only apply fields that are defined in the update payload so that omitted
++    // fields preserve their existing values instead of being overwritten with undefined.
+     const updated: Task = {
+       ...existing,
+-      title: updates.title as any,
+-      description: updates.description as any,
+-      priority: updates.priority as any,
+-      status: updates.status as any,
+-      dueDate: updates.dueDate as any,
++      ...(updates.title !== undefined ? { title: updates.title } : {}),
++      ...(updates.description !== undefined ? { description: updates.description } : {}),
++      ...(updates.priority !== undefined ? { priority: updates.priority } : {}),
++      ...(updates.status !== undefined ? { status: updates.status } : {}),
++      ...(updates.dueDate !== undefined ? { dueDate: updates.dueDate } : {}),
+       updatedAt: toISOTimestamp(new Date()),
+     };
+-    // Remove undefined check - this will set fields to undefined if not provided
+-    // Simulate buggy behavior: if update field is undefined, it still overwrites
+-    // The above already does it. Need to ensure we don't preserve old values.
+-    // In JS, spreading with undefined overwrites: { ...existing, title: undefined } => title undefined
+-    this.tasks.set(id, updated as Task);
++    this.tasks.set(id, updated);
+     this.invalidateCache();
+     return { ...updated };
+   }

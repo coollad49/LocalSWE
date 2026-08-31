@@ -1,0 +1,1669 @@
+{
+  "evaluationId": "eval-60a73a20-1788165877337",
+  "runId": "synth-006-run-001-f04458",
+  "caseId": "synth-006",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v1",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:44:37.336Z",
+  "completedAt": "2026-08-31T08:44:39.410Z",
+  "durationMs": 2074,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-006-run-001-f04458\\patch.diff",
+  "status": "completed",
+  "verdict": "false_confidence",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 317,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-WZhDJv\\patch-1788165878420.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 382,
+      "command": "bun run benchmark\\cases\\synth-006\\public\\reproduce.ts",
+      "stdout": "threw: Cannot dequeue from an empty queue PASS\ndequeue after enqueue a expected a\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 287,
+      "command": "bun test benchmark\\cases\\synth-006\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-006\\private\\oracle.test.ts:\n2 | import { AsyncQueue } from \"../../../repositories/async-queue/src/queue.ts\";\n3 | \n4 | describe(\"synth-006 oracle: dequeue throws on empty\", () => {\n5 |   test(\"throws when empty\", () => {\n6 |     const q = new AsyncQueue<string>();\n7 |     expect(() => q.dequeue()).toThrow(/Queue is empty/);\n                                  ^\nerror: expect(received).toThrow(expected)\n\nExpected pattern: /Queue is empty/\nReceived message: \"Cannot dequeue from an empty queue\"\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-WZhDJv\\benchmark\\cases\\synth-006\\private\\oracle.test.ts:7:31)\n(fail) synth-006 oracle: dequeue throws on empty > throws when empty [1.85ms]\n(pass) synth-006 oracle: dequeue throws on empty > does not throw when not empty [0.83ms]\n(pass) synth-006 oracle: dequeue throws on empty > processNext returns null on empty, not throw [0.69ms]\n(pass) synth-006 oracle: dequeue throws on empty > clear then dequeue throws [0.43ms]\n\n 3 pass\n 1 fail\n 5 expect() calls\nRan 4 tests across 1 file. [207.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "async-queue",
+    "type": "synthetic",
+    "difficulty": "easy",
+    "categories": [
+      "api-behavior",
+      "error-handling"
+    ]
+  },
+  "metrics": {
+    "durationMs": 257394,
+    "totalTurns": 152,
+    "toolCalls": 76,
+    "commandsExecuted": 30,
+    "filesInspected": 9,
+    "filesChanged": 1,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 195300,
+    "outputTokens": 37308,
+    "totalTokens": 2791584
+  },
+  "cost": {
+    "inputTokens": 195300,
+    "outputTokens": 37308,
+    "totalTokens": 232608,
+    "inputCostUsd": 0.027342,
+    "outputCostUsd": 0.010446,
+    "totalCostUsd": 0.044953,
+    "costUsd": 0.044953,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-006-run-001-f04458",
+    "caseId": "synth-006",
+    "agentVersion": "agent-v1",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:aaad2b32c90144d1aac3a805ea549d841e4e32b06b182edb78f3f1341f9b3f41",
+    "trajectory": {
+      "eventCount": 705,
+      "durationMs": 257382,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "workflow_init": 1,
+        "helpers_ready": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "phase_start": 3,
+        "agent_start": 6,
+        "turn_start": 64,
+        "message_start": 146,
+        "message_end": 146,
+        "tool_execution_start": 76,
+        "tool_execution_end": 76,
+        "turn_end": 64,
+        "tool_execution_update": 96,
+        "agent_end": 6,
+        "agent_settled": 3,
+        "phase_sync": 1,
+        "phase_transition": 2,
+        "early_verification_detected": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 192,
+      "userMessages": 12,
+      "toolCalls": 76,
+      "toolResults": 304,
+      "thinkingEvents": 128,
+      "unknownEvents": 175,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 76,
+      "uniqueTools": 5,
+      "byTool": {
+        "ls": {
+          "calls": 8,
+          "failures": 0
+        },
+        "read": {
+          "calls": 26,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 30,
+          "failures": 24
+        },
+        "edit": {
+          "calls": 6,
+          "failures": 6
+        },
+        "write": {
+          "calls": 6,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 195300,
+      "output": 37308,
+      "cacheRead": 2558976,
+      "cacheWrite": 0,
+      "total": 2791584,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.044953,
+      "inputCostUsd": 0.027342,
+      "outputCostUsd": 0.010446,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 128,
+      "characterCount": 38788,
+      "averageCharacters": 303,
+      "maxCharacters": 1288,
+      "firstThinkingAt": "2026-08-31T03:12:09.891Z",
+      "lastThinkingAt": "2026-08-31T03:16:19.869Z",
+      "thinkingDurationMs": 249978
+    },
+    "editing": {
+      "editCalls": 6,
+      "writeCalls": 6,
+      "filesTouched": [
+        ".v1/state.json",
+        "src/queue.ts",
+        ".v1/repro.ts"
+      ],
+      "uniqueFilesTouched": 3
+    },
+    "exploration": {
+      "readCalls": 26,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 8,
+      "bashCalls": 30,
+      "explorationToEditingRatio": 5.33
+    },
+    "verification": {
+      "commandsDetected": 56,
+      "testsRun": true,
+      "testCommandCount": 12,
+      "buildRun": false,
+      "typecheckRun": true,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx .v1/repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx .v1/repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx .v1/repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx .v1/repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx .v1/repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx .v1/repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx .v1/repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx .v1/repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npm test 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 49,
+      "duplicateReadTargets": 18,
+      "duplicateEditTargets": 9,
+      "toolFailureCount": 30,
+      "topRepetitions": [
+        {
+          "signature": "7f6e1bef26e9",
+          "tool": "read",
+          "target": ".v1/state.json",
+          "count": 10
+        },
+        {
+          "signature": "4dc66c4c623e",
+          "tool": "bash",
+          "target": "npm test 2>&1",
+          "count": 8
+        },
+        {
+          "signature": "2107b5f3f42e",
+          "tool": "read",
+          "target": "src/queue.ts",
+          "count": 4
+        },
+        {
+          "signature": "3f90d6951762",
+          "tool": "edit",
+          "target": ".v1/state.json",
+          "count": 4
+        },
+        {
+          "signature": "3c5215bb0a5b",
+          "tool": "bash",
+          "target": "git diff HEAD -- src/queue.ts",
+          "count": 4
+        },
+        {
+          "signature": "5430a76eb31d",
+          "tool": "write",
+          "target": ".v1/state.json",
+          "count": 4
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-006-run-001-f04458",
+    "caseId": "synth-006",
+    "agentVersion": "agent-v1",
+    "timeline": [
+      {
+        "index": 25,
+        "timestamp": "2026-08-31T03:12:09.892Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 26,
+        "timestamp": "2026-08-31T03:12:09.892Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 27,
+        "timestamp": "2026-08-31T03:12:09.897Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 28,
+        "timestamp": "2026-08-31T03:12:09.897Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 49,
+        "timestamp": "2026-08-31T03:12:13.004Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 50,
+        "timestamp": "2026-08-31T03:12:13.004Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 51,
+        "timestamp": "2026-08-31T03:12:13.006Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 52,
+        "timestamp": "2026-08-31T03:12:13.006Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 53,
+        "timestamp": "2026-08-31T03:12:13.008Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 54,
+        "timestamp": "2026-08-31T03:12:13.008Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 55,
+        "timestamp": "2026-08-31T03:12:13.010Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": ".v1"
+      },
+      {
+        "index": 56,
+        "timestamp": "2026-08-31T03:12:13.010Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": ".v1"
+      },
+      {
+        "index": 89,
+        "timestamp": "2026-08-31T03:12:15.396Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 90,
+        "timestamp": "2026-08-31T03:12:15.396Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 91,
+        "timestamp": "2026-08-31T03:12:15.398Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 92,
+        "timestamp": "2026-08-31T03:12:15.398Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 93,
+        "timestamp": "2026-08-31T03:12:15.401Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/job.ts"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-31T03:12:15.401Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/job.ts"
+      },
+      {
+        "index": 95,
+        "timestamp": "2026-08-31T03:12:15.407Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/queue.test.ts"
+      },
+      {
+        "index": 96,
+        "timestamp": "2026-08-31T03:12:15.407Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tests/queue.test.ts"
+      },
+      {
+        "index": 129,
+        "timestamp": "2026-08-31T03:12:26.572Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 130,
+        "timestamp": "2026-08-31T03:12:26.572Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 145,
+        "timestamp": "2026-08-31T03:12:39.536Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns u",
+        "commandClass": "test"
+      },
+      {
+        "index": 146,
+        "timestamp": "2026-08-31T03:12:39.536Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns u",
+        "commandClass": "test"
+      },
+      {
+        "index": 165,
+        "timestamp": "2026-08-31T03:12:42.738Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-0d44649c",
+        "commandClass": "general"
+      },
+      {
+        "index": 166,
+        "timestamp": "2026-08-31T03:12:42.738Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-0d44649c",
+        "commandClass": "general"
+      },
+      {
+        "index": 185,
+        "timestamp": "2026-08-31T03:12:47.550Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/helpers.js"
+      },
+      {
+        "index": 186,
+        "timestamp": "2026-08-31T03:12:47.550Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/helpers.js"
+      },
+      {
+        "index": 187,
+        "timestamp": "2026-08-31T03:12:47.553Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 188,
+        "timestamp": "2026-08-31T03:12:47.553Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 209,
+        "timestamp": "2026-08-31T03:12:55.106Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: ",
+        "commandClass": "test"
+      },
+      {
+        "index": 210,
+        "timestamp": "2026-08-31T03:12:55.106Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: ",
+        "commandClass": "test"
+      },
+      {
+        "index": 229,
+        "timestamp": "2026-08-31T03:12:57.742Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-bdda42ee",
+        "commandClass": "general"
+      },
+      {
+        "index": 230,
+        "timestamp": "2026-08-31T03:12:57.742Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-bdda42ee",
+        "commandClass": "general"
+      },
+      {
+        "index": 249,
+        "timestamp": "2026-08-31T03:13:02.925Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"const s = JSON.parse(require('fs').readFileSync('.v1/state.json','utf8')); console.log('hypotheses:', JSON.stringify(s.hypotheses))\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 250,
+        "timestamp": "2026-08-31T03:13:02.925Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"const s = JSON.parse(require('fs').readFileSync('.v1/state.json','utf8')); console.log('hypotheses:', JSON.stringify(s.hypotheses))\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 269,
+        "timestamp": "2026-08-31T03:13:11.763Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 270,
+        "timestamp": "2026-08-31T03:13:11.763Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 285,
+        "timestamp": "2026-08-31T03:13:23.023Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 286,
+        "timestamp": "2026-08-31T03:13:23.023Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "edit",
+        "tool": "edit",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 301,
+        "timestamp": "2026-08-31T03:13:28.358Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 302,
+        "timestamp": "2026-08-31T03:13:28.358Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "edit",
+        "tool": "edit",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 317,
+        "timestamp": "2026-08-31T03:13:33.515Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 318,
+        "timestamp": "2026-08-31T03:13:33.515Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 345,
+        "timestamp": "2026-08-31T03:13:46.289Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 346,
+        "timestamp": "2026-08-31T03:13:46.289Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 361,
+        "timestamp": "2026-08-31T03:13:49.114Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 362,
+        "timestamp": "2026-08-31T03:13:49.114Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 387,
+        "timestamp": "2026-08-31T03:14:01.228Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "npm run check-types 2>&1",
+        "commandClass": "typecheck"
+      },
+      {
+        "index": 388,
+        "timestamp": "2026-08-31T03:14:01.228Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "npm run check-types 2>&1",
+        "commandClass": "typecheck"
+      },
+      {
+        "index": 411,
+        "timestamp": "2026-08-31T03:14:06.894Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls *.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 412,
+        "timestamp": "2026-08-31T03:14:06.894Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls *.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 431,
+        "timestamp": "2026-08-31T03:14:13.065Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "git diff HEAD --stat",
+        "commandClass": "git"
+      },
+      {
+        "index": 432,
+        "timestamp": "2026-08-31T03:14:13.065Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "git diff HEAD --stat",
+        "commandClass": "git"
+      },
+      {
+        "index": 433,
+        "timestamp": "2026-08-31T03:14:13.067Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "git diff HEAD -- src/queue.ts",
+        "commandClass": "git"
+      },
+      {
+        "index": 434,
+        "timestamp": "2026-08-31T03:14:13.067Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "git diff HEAD -- src/queue.ts",
+        "commandClass": "git"
+      },
+      {
+        "index": 483,
+        "timestamp": "2026-08-31T03:14:26.374Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 484,
+        "timestamp": "2026-08-31T03:14:26.374Z",
+        "phase": "diagnosis",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 499,
+        "timestamp": "2026-08-31T03:14:46.032Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 500,
+        "timestamp": "2026-08-31T03:14:46.033Z",
+        "phase": "diagnosis",
+        "iteration": 0,
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 515,
+        "timestamp": "2026-08-31T03:14:51.815Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 516,
+        "timestamp": "2026-08-31T03:14:51.815Z",
+        "phase": "diagnosis",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 543,
+        "timestamp": "2026-08-31T03:15:01.782Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 544,
+        "timestamp": "2026-08-31T03:15:01.782Z",
+        "phase": "diagnosis",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 578,
+        "timestamp": "2026-08-31T03:15:21.912Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/repro.ts"
+      },
+      {
+        "index": 579,
+        "timestamp": "2026-08-31T03:15:21.912Z",
+        "phase": "investigation",
+        "iteration": 0,
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/repro.ts"
+      },
+      {
+        "index": 594,
+        "timestamp": "2026-08-31T03:15:26.584Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx .v1/repro.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 595,
+        "timestamp": "2026-08-31T03:15:26.584Z",
+        "phase": "investigation",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx .v1/repro.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 616,
+        "timestamp": "2026-08-31T03:15:37.175Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 617,
+        "timestamp": "2026-08-31T03:15:37.175Z",
+        "phase": "investigation",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 644,
+        "timestamp": "2026-08-31T03:15:44.537Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "git diff HEAD -- src/queue.ts",
+        "commandClass": "git"
+      },
+      {
+        "index": 645,
+        "timestamp": "2026-08-31T03:15:44.537Z",
+        "phase": "investigation",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "git diff HEAD -- src/queue.ts",
+        "commandClass": "git"
+      },
+      {
+        "index": 664,
+        "timestamp": "2026-08-31T03:15:50.023Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 665,
+        "timestamp": "2026-08-31T03:15:50.023Z",
+        "phase": "investigation",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 680,
+        "timestamp": "2026-08-31T03:16:07.492Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 681,
+        "timestamp": "2026-08-31T03:16:07.493Z",
+        "phase": "investigation",
+        "iteration": 0,
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/state.json"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 27,
+        "timestamp": "2026-08-31T03:12:09.897Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 145,
+        "timestamp": "2026-08-31T03:12:39.536Z",
+        "detail": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not th"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 285,
+        "timestamp": "2026-08-31T03:13:23.023Z",
+        "detail": ".v1/state.json"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 331,
+        "timestamp": "2026-08-31T03:13:38.728Z",
+        "detail": "npm test 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 332,
+        "timestamp": "2026-08-31T03:13:38.728Z",
+        "detail": "npm test 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 333,
+        "timestamp": "2026-08-31T03:13:38.733Z",
+        "detail": "npm test 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 334,
+        "timestamp": "2026-08-31T03:13:38.733Z",
+        "detail": "npm test 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 335,
+        "timestamp": "2026-08-31T03:13:38.733Z",
+        "detail": "npm test 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 336,
+        "timestamp": "2026-08-31T03:13:38.733Z",
+        "detail": "npm test 2>&1"
+      },
+      {
+        "type": "first_repro",
+        "eventIndex": 594,
+        "timestamp": "2026-08-31T03:15:26.584Z",
+        "detail": "npx tsx .v1/repro.ts 2>&1"
+      }
+    ],
+    "errors": [
+      {
+        "index": 171,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-0d44649c\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 172,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-0d44649c\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 173,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 174,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 175,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 176,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 235,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-bdda42ee\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 236,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-bdda42ee\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 237,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 238,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 239,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 240,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 287,
+        "tool": "edit",
+        "error": "Found 8 occurrences of edits[1] in .v1/state.json. Each oldText must be unique. Please provide more context to make it unique."
+      },
+      {
+        "index": 288,
+        "tool": "edit",
+        "error": "Found 8 occurrences of edits[1] in .v1/state.json. Each oldText must be unique. Please provide more context to make it unique."
+      },
+      {
+        "index": 289,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 290,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 291,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 292,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 331,
+        "tool": "bash",
+        "error": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-f04458-tzl0RL\n\n ❯ tests/queue.test.ts (9 tests | 1 failed) 40ms\n     × dequeue throws on empty 18ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > dequeue throws on empty\nAssertionError: expected [Function] to throw an error\n\n- Expected:\nnull\n\n+ Received:\nundefined\n\n ❯ tests/queue.test.ts:17:31\n     15|   test(\"dequeue throws on empty\", () => {"
+      },
+      {
+        "index": 332,
+        "tool": "bash",
+        "error": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-f04458-tzl0RL\n\n ❯ tests/queue.test.ts (9 tests | 1 failed) 40ms\n     × dequeue throws on empty 18ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > dequeue throws on empty\nAssertionError: expected [Function] to throw an error\n\n- Expected:\nnull\n\n+ Received:\nundefined\n\n ❯ tests/queue.test.ts:17:31\n     15|   test(\"dequeue throws on empty\", () => {"
+      },
+      {
+        "index": 333,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 334,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 335,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 336,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 397,
+        "tool": "bash",
+        "error": "\n> async-queue@1.0.0 check-types\n> tsc --noEmit\n\nVersion 7.0.2\ntsc: The TypeScript Compiler - Version 7.0.2\n\nCOMMON COMMANDS\n\n  tsc\n  Compiles the current project (tsconfig.json in the working directory.)\n\n  tsc app.ts util.ts\n  Ignoring tsconfig.json, compiles the specified files with default compiler options.\n\n  tsc -b\n  Build a composite project in the working directory.\n\n  tsc --init\n  Creates a tsconfig.json with the recommended settings in the working directory.\n\n  tsc -p ./path/to/tsconfi"
+      },
+      {
+        "index": 398,
+        "tool": "bash",
+        "error": "\n> async-queue@1.0.0 check-types\n> tsc --noEmit\n\nVersion 7.0.2\ntsc: The TypeScript Compiler - Version 7.0.2\n\nCOMMON COMMANDS\n\n  tsc\n  Compiles the current project (tsconfig.json in the working directory.)\n\n  tsc app.ts util.ts\n  Ignoring tsconfig.json, compiles the specified files with default compiler options.\n\n  tsc -b\n  Build a composite project in the working directory.\n\n  tsc --init\n  Creates a tsconfig.json with the recommended settings in the working directory.\n\n  tsc -p ./path/to/tsconfi"
+      },
+      {
+        "index": 399,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 400,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 401,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 402,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 145,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+        "exitCode": 0
+      },
+      {
+        "index": 146,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+        "exitCode": 0
+      },
+      {
+        "index": 151,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+        "exitCode": 0,
+        "outputSnippet": "hyp-0d44649c\n"
+      },
+      {
+        "index": 152,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+        "exitCode": 0,
+        "outputSnippet": "hyp-0d44649c\n"
+      },
+      {
+        "index": 153,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+        "exitCode": 0
+      },
+      {
+        "index": 154,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+        "exitCode": 0
+      },
+      {
+        "index": 155,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+        "exitCode": 0
+      },
+      {
+        "index": 156,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() in src/queue.ts line 35-38 does not throw when the queue is empty; it silently returns undefined (cast to Job<T>). The fix is to add an em",
+        "exitCode": 0
+      },
+      {
+        "index": 209,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+        "exitCode": 0
+      },
+      {
+        "index": 210,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+        "exitCode": 0
+      },
+      {
+        "index": 215,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+        "exitCode": 0,
+        "outputSnippet": "hyp-bdda42ee\n"
+      },
+      {
+        "index": 216,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+        "exitCode": 0,
+        "outputSnippet": "hyp-bdda42ee\n"
+      },
+      {
+        "index": 217,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+        "exitCode": 0
+      },
+      {
+        "index": 218,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+        "exitCode": 0
+      },
+      {
+        "index": 219,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+        "exitCode": 0
+      },
+      {
+        "index": 220,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"dequeue() does not throw when queue is empty - it silently returns undefined cast to Job<T>. Fix: check queue length before shift and throw Error wi",
+        "exitCode": 0
+      },
+      {
+        "index": 317,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 318,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 331,
+        "command": "npm test 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-f04458-tzl0RL\n\n ❯ tests/queue.test.ts (9 tests | 1 failed) 40ms\n     × deq"
+      },
+      {
+        "index": 332,
+        "command": "npm test 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-f04458-tzl0RL\n\n ❯ tests/queue.test.ts (9 tests | 1 failed) 40ms\n     × deq"
+      },
+      {
+        "index": 333,
+        "command": "npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 334,
+        "command": "npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 335,
+        "command": "npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 336,
+        "command": "npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 361,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 362,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 373,
+        "command": "npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-f04458-tzl0RL\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 374,
+        "command": "npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-f04458-tzl0RL\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 375,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 376,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 377,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 378,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 515,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 516,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 529,
+        "command": "npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-f04458-tzl0RL\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 530,
+        "command": "npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-f04458-tzl0RL\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 531,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 532,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 533,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 534,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 594,
+        "command": "npx tsx .v1/repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 595,
+        "command": "npx tsx .v1/repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 602,
+        "command": "npx tsx .v1/repro.ts 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "=== Reproduction: dequeue on empty queue ===\n\nTest 1: dequeue() on empty queue\n  PASS: Threw Error with message: \"Cannot dequeue from an empty queue\"\n\nTest 2: enqueue then dequeue\n  PASS: Dequeued job"
+      },
+      {
+        "index": 603,
+        "command": "npx tsx .v1/repro.ts 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "=== Reproduction: dequeue on empty queue ===\n\nTest 1: dequeue() on empty queue\n  PASS: Threw Error with message: \"Cannot dequeue from an empty queue\"\n\nTest 2: enqueue then dequeue\n  PASS: Dequeued job"
+      },
+      {
+        "index": 604,
+        "command": "npx tsx .v1/repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 605,
+        "command": "npx tsx .v1/repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 606,
+        "command": "npx tsx .v1/repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 607,
+        "command": "npx tsx .v1/repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 616,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 617,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 630,
+        "command": "npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-f04458-tzl0RL\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 631,
+        "command": "npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-f04458-tzl0RL\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 632,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 633,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 634,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 635,
+        "command": "npm test 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

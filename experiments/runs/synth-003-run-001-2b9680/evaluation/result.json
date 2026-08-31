@@ -1,0 +1,1308 @@
+{
+  "evaluationId": "eval-299af1e0-1788165832388",
+  "runId": "synth-003-run-001-2b9680",
+  "caseId": "synth-003",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:43:52.388Z",
+  "completedAt": "2026-08-31T08:43:54.501Z",
+  "durationMs": 2113,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-2b9680\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 440,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-003-KUcVAJ\\patch-1788165833386.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 245,
+      "command": "bun run benchmark\\cases\\synth-003\\public\\reproduce.ts",
+      "stdout": "success=false expected false\nattempts=1 expected 1\nsize=1 expected 1 (retry)\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 206,
+      "command": "bun test benchmark\\cases\\synth-003\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-003\\private\\oracle.test.ts:\n(pass) synth-003 oracle: error handling > reports failure and retries [2.69ms]\n(pass) synth-003 oracle: error handling > success true only on no throw [0.51ms]\n(pass) synth-003 oracle: error handling > processNext retries [0.86ms]\n\n 3 pass\n 0 fail\n 8 expect() calls\nRan 3 tests across 1 file. [146.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 219,
+      "command": "bun test benchmark\\repositories\\async-queue\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\async-queue\\tests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [1.44ms]\n(pass) AsyncQueue > dequeue throws on empty [0.58ms]\n(pass) AsyncQueue > pause and resume preserves jobs [0.60ms]\n(pass) AsyncQueue > pause resume multiple cycles [0.81ms]\n(pass) AsyncQueue > processJob retry re-enqueues [1.27ms]\n(pass) AsyncQueue > processJob succeeds [0.38ms]\n(pass) AsyncQueue > processNext handles empty [0.45ms]\n(pass) AsyncQueue > processNext surfaces errors via retry [0.60ms]\n(pass) AsyncQueue > clear empties queue [0.23ms]\n\n 9 pass\n 0 fail\n 35 expect() calls\nRan 9 tests across 1 file. [157.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "async-queue",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "error-handling",
+      "asynchronous"
+    ]
+  },
+  "metrics": {
+    "durationMs": 419208,
+    "totalTurns": 170,
+    "toolCalls": 82,
+    "commandsExecuted": 62,
+    "filesInspected": 6,
+    "filesChanged": 3,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 94436,
+    "outputTokens": 25872,
+    "totalTokens": 1663988
+  },
+  "cost": {
+    "inputTokens": 94436,
+    "outputTokens": 25872,
+    "totalTokens": 120308,
+    "inputCostUsd": 0.028331,
+    "outputCostUsd": 0.031046,
+    "totalCostUsd": 0.151998,
+    "costUsd": 0.151998,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-003-run-001-2b9680",
+    "caseId": "synth-003",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "mimo-v2.5",
+    "trajectoryHash": "sha256:41373ee4162779f266c76b509aae248212306acbe75a190b9775536fe521e174",
+    "trajectory": {
+      "eventCount": 833,
+      "durationMs": 419205,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "available_models": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 2,
+        "turn_start": 84,
+        "message_start": 168,
+        "message_end": 168,
+        "tool_execution_start": 82,
+        "tool_execution_update": 146,
+        "tool_execution_end": 82,
+        "turn_end": 84,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "prompt_completed": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 252,
+      "userMessages": 4,
+      "toolCalls": 82,
+      "toolResults": 328,
+      "thinkingEvents": 56,
+      "unknownEvents": 235,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 82,
+      "uniqueTools": 4,
+      "byTool": {
+        "bash": {
+          "calls": 62,
+          "failures": 12
+        },
+        "read": {
+          "calls": 14,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 4,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 94436,
+      "output": 25872,
+      "cacheRead": 1543680,
+      "cacheWrite": 0,
+      "total": 1663988,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.151998,
+      "inputCostUsd": 0.028331,
+      "outputCostUsd": 0.031046,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 56,
+      "characterCount": 46352,
+      "averageCharacters": 828,
+      "maxCharacters": 7808,
+      "firstThinkingAt": "2026-08-30T15:17:28.222Z",
+      "lastThinkingAt": "2026-08-30T15:24:08.607Z",
+      "thinkingDurationMs": 400385
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/queue.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 14,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 4,
+      "bashCalls": 62,
+      "explorationToEditingRatio": 40
+    },
+    "verification": {
+      "commandsDetected": 32,
+      "testsRun": true,
+      "testCommandCount": 8,
+      "buildRun": true,
+      "typecheckRun": true,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 42,
+      "duplicateReadTargets": 8,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 12,
+      "topRepetitions": [
+        {
+          "signature": "2107b5f3f42e",
+          "tool": "read",
+          "target": "src/queue.ts",
+          "count": 4
+        },
+        {
+          "signature": "8436f3211aa1",
+          "tool": "bash",
+          "target": "ls -la",
+          "count": 2
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "acfc63a28d77",
+          "tool": "read",
+          "target": "src/job.ts",
+          "count": 2
+        },
+        {
+          "signature": "48bb11fb60ea",
+          "tool": "read",
+          "target": "tests/queue.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "f8993ae4adc2",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ls node_modules/.bin/ 2>/dev/null | head -20",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-003-run-001-2b9680",
+    "caseId": "synth-003",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-30T15:17:28.222Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-30T15:17:28.222Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-30T15:17:31.683Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 43,
+        "timestamp": "2026-08-30T15:17:31.683Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-30T15:17:34.177Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-30T15:17:34.177Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 74,
+        "timestamp": "2026-08-30T15:17:35.512Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 75,
+        "timestamp": "2026-08-30T15:17:35.512Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 90,
+        "timestamp": "2026-08-30T15:17:39.419Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 91,
+        "timestamp": "2026-08-30T15:17:39.419Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 106,
+        "timestamp": "2026-08-30T15:17:41.579Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 107,
+        "timestamp": "2026-08-30T15:17:41.579Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 122,
+        "timestamp": "2026-08-30T15:17:43.192Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/job.ts"
+      },
+      {
+        "index": 123,
+        "timestamp": "2026-08-30T15:17:43.192Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/job.ts"
+      },
+      {
+        "index": 138,
+        "timestamp": "2026-08-30T15:17:46.566Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 139,
+        "timestamp": "2026-08-30T15:17:46.566Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 154,
+        "timestamp": "2026-08-30T15:17:48.788Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/queue.test.ts"
+      },
+      {
+        "index": 155,
+        "timestamp": "2026-08-30T15:17:48.788Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/queue.test.ts"
+      },
+      {
+        "index": 170,
+        "timestamp": "2026-08-30T15:18:17.637Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ls node_modules/.bin/ 2>/dev/null | head -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 171,
+        "timestamp": "2026-08-30T15:18:17.637Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ls node_modules/.bin/ 2>/dev/null | head -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 188,
+        "timestamp": "2026-08-30T15:18:20.641Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && which node bun npm 2>&1; node --version 2>&1; bun --versi",
+        "commandClass": "general"
+      },
+      {
+        "index": 189,
+        "timestamp": "2026-08-30T15:18:20.641Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && which node bun npm 2>&1; node --version 2>&1; bun --versi",
+        "commandClass": "general"
+      },
+      {
+        "index": 212,
+        "timestamp": "2026-08-30T15:18:23.891Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun install 2>&1 | tail -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 213,
+        "timestamp": "2026-08-30T15:18:23.891Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun install 2>&1 | tail -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 232,
+        "timestamp": "2026-08-30T15:18:30.007Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+        "commandClass": "test"
+      },
+      {
+        "index": 233,
+        "timestamp": "2026-08-30T15:18:30.007Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+        "commandClass": "test"
+      },
+      {
+        "index": 252,
+        "timestamp": "2026-08-30T15:19:36.384Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 253,
+        "timestamp": "2026-08-30T15:19:36.384Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 268,
+        "timestamp": "2026-08-30T15:21:30.053Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 269,
+        "timestamp": "2026-08-30T15:21:30.053Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 284,
+        "timestamp": "2026-08-30T15:21:32.299Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+        "commandClass": "test"
+      },
+      {
+        "index": 285,
+        "timestamp": "2026-08-30T15:21:32.299Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+        "commandClass": "test"
+      },
+      {
+        "index": 304,
+        "timestamp": "2026-08-30T15:21:35.825Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun run check-types 2>&1 | tail -20",
+        "commandClass": "typecheck"
+      },
+      {
+        "index": 305,
+        "timestamp": "2026-08-30T15:21:35.825Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun run check-types 2>&1 | tail -20",
+        "commandClass": "typecheck"
+      },
+      {
+        "index": 324,
+        "timestamp": "2026-08-30T15:21:40.399Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun x tsc --noEmit 2>&1 | tail -30",
+        "commandClass": "build"
+      },
+      {
+        "index": 325,
+        "timestamp": "2026-08-30T15:21:40.399Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun x tsc --noEmit 2>&1 | tail -30",
+        "commandClass": "build"
+      },
+      {
+        "index": 344,
+        "timestamp": "2026-08-30T15:21:44.527Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && npx -y -p typescript@latest tsc --noEmit 2>&1 | tail -20",
+        "commandClass": "build"
+      },
+      {
+        "index": 345,
+        "timestamp": "2026-08-30T15:21:44.527Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && npx -y -p typescript@latest tsc --noEmit 2>&1 | tail -20",
+        "commandClass": "build"
+      },
+      {
+        "index": 364,
+        "timestamp": "2026-08-30T15:22:15.946Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && npm i -D typescript 2>&1 | tail -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 365,
+        "timestamp": "2026-08-30T15:22:15.946Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && npm i -D typescript 2>&1 | tail -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 384,
+        "timestamp": "2026-08-30T15:22:27.598Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ./node_modules/.bin/tsc --noEmit 2>&1 | tail -20",
+        "commandClass": "build"
+      },
+      {
+        "index": 385,
+        "timestamp": "2026-08-30T15:22:27.598Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ./node_modules/.bin/tsc --noEmit 2>&1 | tail -20",
+        "commandClass": "build"
+      },
+      {
+        "index": 404,
+        "timestamp": "2026-08-30T15:22:34.681Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ./node_modules/.bin/tsc --version 2>&1; echo \"---\"; ./nod",
+        "commandClass": "build"
+      },
+      {
+        "index": 405,
+        "timestamp": "2026-08-30T15:22:34.681Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ./node_modules/.bin/tsc --version 2>&1; echo \"---\"; ./nod",
+        "commandClass": "build"
+      },
+      {
+        "index": 428,
+        "timestamp": "2026-08-30T15:22:41.015Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ls node_modules/typescript/bin/ 2>&1; echo \"---\"; cat nod",
+        "commandClass": "build"
+      },
+      {
+        "index": 429,
+        "timestamp": "2026-08-30T15:22:41.016Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ls node_modules/typescript/bin/ 2>&1; echo \"---\"; cat nod",
+        "commandClass": "build"
+      },
+      {
+        "index": 450,
+        "timestamp": "2026-08-30T15:22:43.747Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && node ./node_modules/typescript/bin/tsc --noEmit 2>&1 | ta",
+        "commandClass": "build"
+      },
+      {
+        "index": 451,
+        "timestamp": "2026-08-30T15:22:43.747Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && node ./node_modules/typescript/bin/tsc --noEmit 2>&1 | ta",
+        "commandClass": "build"
+      },
+      {
+        "index": 470,
+        "timestamp": "2026-08-30T15:22:47.421Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && node ./node_modules/typescript/lib/tsc.js --noEmit 2>&1 |",
+        "commandClass": "build"
+      },
+      {
+        "index": 471,
+        "timestamp": "2026-08-30T15:22:47.421Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && node ./node_modules/typescript/lib/tsc.js --noEmit 2>&1 |",
+        "commandClass": "build"
+      },
+      {
+        "index": 490,
+        "timestamp": "2026-08-30T15:22:50.861Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && node ./node_modules/typescript/lib/tsc.js --help 2>&1 | h",
+        "commandClass": "build"
+      },
+      {
+        "index": 491,
+        "timestamp": "2026-08-30T15:22:50.861Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && node ./node_modules/typescript/lib/tsc.js --help 2>&1 | h",
+        "commandClass": "build"
+      },
+      {
+        "index": 510,
+        "timestamp": "2026-08-30T15:22:56.190Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && npm i -D typescript@5 2>&1 | tail -3 && node ./node_modul",
+        "commandClass": "build"
+      },
+      {
+        "index": 511,
+        "timestamp": "2026-08-30T15:22:56.190Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && npm i -D typescript@5 2>&1 | tail -3 && node ./node_modul",
+        "commandClass": "build"
+      },
+      {
+        "index": 532,
+        "timestamp": "2026-08-30T15:23:08.734Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && node ./node_modules/typescript/bin/tsc --version 2>&1",
+        "commandClass": "build"
+      },
+      {
+        "index": 533,
+        "timestamp": "2026-08-30T15:23:08.734Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && node ./node_modules/typescript/bin/tsc --version 2>&1",
+        "commandClass": "build"
+      },
+      {
+        "index": 552,
+        "timestamp": "2026-08-30T15:23:12.778Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && node ./node_modules/typescript/bin/tsc --version && node ",
+        "commandClass": "build"
+      },
+      {
+        "index": 553,
+        "timestamp": "2026-08-30T15:23:12.778Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && node ./node_modules/typescript/bin/tsc --version && node ",
+        "commandClass": "build"
+      },
+      {
+        "index": 574,
+        "timestamp": "2026-08-30T15:23:15.969Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && cat ./node_modules/typescript/bin/tsc",
+        "commandClass": "build"
+      },
+      {
+        "index": 575,
+        "timestamp": "2026-08-30T15:23:15.969Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && cat ./node_modules/typescript/bin/tsc",
+        "commandClass": "build"
+      },
+      {
+        "index": 594,
+        "timestamp": "2026-08-30T15:23:18.903Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ls node_modules/typescript/lib/ | head -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 595,
+        "timestamp": "2026-08-30T15:23:18.903Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ls node_modules/typescript/lib/ | head -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 614,
+        "timestamp": "2026-08-30T15:23:22.405Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ls node_modules/typescript/lib/tsc* 2>&1; echo \"---\"; hea",
+        "commandClass": "build"
+      },
+      {
+        "index": 615,
+        "timestamp": "2026-08-30T15:23:22.405Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && ls node_modules/typescript/lib/tsc* 2>&1; echo \"---\"; hea",
+        "commandClass": "build"
+      },
+      {
+        "index": 636,
+        "timestamp": "2026-08-30T15:23:24.990Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && node -e \"const tsc = require('./node_modules/typescript/l",
+        "commandClass": "build"
+      },
+      {
+        "index": 637,
+        "timestamp": "2026-08-30T15:23:24.990Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && node -e \"const tsc = require('./node_modules/typescript/l",
+        "commandClass": "build"
+      },
+      {
+        "index": 658,
+        "timestamp": "2026-08-30T15:23:29.564Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && head -50 node_modules/typescript/lib/_tsc.js",
+        "commandClass": "general"
+      },
+      {
+        "index": 659,
+        "timestamp": "2026-08-30T15:23:29.564Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && head -50 node_modules/typescript/lib/_tsc.js",
+        "commandClass": "general"
+      },
+      {
+        "index": 678,
+        "timestamp": "2026-08-30T15:23:33.313Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit'",
+        "commandClass": "build"
+      },
+      {
+        "index": 679,
+        "timestamp": "2026-08-30T15:23:33.313Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit'",
+        "commandClass": "build"
+      },
+      {
+        "index": 698,
+        "timestamp": "2026-08-30T15:23:37.404Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc -p ./tsco",
+        "commandClass": "build"
+      },
+      {
+        "index": 699,
+        "timestamp": "2026-08-30T15:23:37.404Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc -p ./tsco",
+        "commandClass": "build"
+      },
+      {
+        "index": 722,
+        "timestamp": "2026-08-30T15:23:42.428Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit ",
+        "commandClass": "test"
+      },
+      {
+        "index": 723,
+        "timestamp": "2026-08-30T15:23:42.428Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit ",
+        "commandClass": "test"
+      },
+      {
+        "index": 742,
+        "timestamp": "2026-08-30T15:24:02.745Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && npm uninstall typescript 2>&1 | tail -3 && cat package.js",
+        "commandClass": "general"
+      },
+      {
+        "index": 743,
+        "timestamp": "2026-08-30T15:24:02.745Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && npm uninstall typescript 2>&1 | tail -3 && cat package.js",
+        "commandClass": "general"
+      },
+      {
+        "index": 764,
+        "timestamp": "2026-08-30T15:24:11.988Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && git status 2>&1",
+        "commandClass": "git"
+      },
+      {
+        "index": 765,
+        "timestamp": "2026-08-30T15:24:11.988Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && git status 2>&1",
+        "commandClass": "git"
+      },
+      {
+        "index": 784,
+        "timestamp": "2026-08-30T15:24:14.700Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && git diff src/queue.ts",
+        "commandClass": "git"
+      },
+      {
+        "index": 785,
+        "timestamp": "2026-08-30T15:24:14.700Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && git diff src/queue.ts",
+        "commandClass": "git"
+      },
+      {
+        "index": 804,
+        "timestamp": "2026-08-30T15:24:17.775Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+        "commandClass": "test"
+      },
+      {
+        "index": 805,
+        "timestamp": "2026-08-30T15:24:17.775Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 42,
+        "timestamp": "2026-08-30T15:17:31.683Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 232,
+        "timestamp": "2026-08-30T15:18:30.007Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun tes"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 252,
+        "timestamp": "2026-08-30T15:19:36.384Z",
+        "detail": "src/queue.ts"
+      }
+    ],
+    "errors": [
+      {
+        "index": 644,
+        "tool": "bash",
+        "error": "Version 5.9.3\r\ntsc: The TypeScript Compiler - Version 5.9.3\r\n\r\nCOMMON COMMANDS\r\n\r\n  tsc\r\n  Compiles the current project (tsconfig.json in the working directory.)\r\n\r\n  tsc app.ts util.ts\r\n  Ignoring tsconfig.json, compiles the specified files with default compiler options.\r\n\r\n  tsc -b\r\n  Build a composite project in the working directory.\r\n\r\n  tsc --init\r\n  Creates a tsconfig.json with the recommended settings in the working directory.\r\n\r\n  tsc -p ./path/to/tsconfig.json\r\n  Compiles the TypeScrip"
+      },
+      {
+        "index": 645,
+        "tool": "bash",
+        "error": "Version 5.9.3\r\ntsc: The TypeScript Compiler - Version 5.9.3\r\n\r\nCOMMON COMMANDS\r\n\r\n  tsc\r\n  Compiles the current project (tsconfig.json in the working directory.)\r\n\r\n  tsc app.ts util.ts\r\n  Ignoring tsconfig.json, compiles the specified files with default compiler options.\r\n\r\n  tsc -b\r\n  Build a composite project in the working directory.\r\n\r\n  tsc --init\r\n  Creates a tsconfig.json with the recommended settings in the working directory.\r\n\r\n  tsc -p ./path/to/tsconfig.json\r\n  Compiles the TypeScrip"
+      },
+      {
+        "index": 646,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 647,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 648,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 649,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 708,
+        "tool": "bash",
+        "error": "error TS5058: The specified path does not exist: './tsconfig.json'.\r\n---\nls: cannot access 'tsconfig*': No such file or directory\n\n\nCommand exited with code 2"
+      },
+      {
+        "index": 709,
+        "tool": "bash",
+        "error": "error TS5058: The specified path does not exist: './tsconfig.json'.\r\n---\nls: cannot access 'tsconfig*': No such file or directory\n\n\nCommand exited with code 2"
+      },
+      {
+        "index": 710,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 711,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 712,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 713,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 232,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+        "exitCode": 0
+      },
+      {
+        "index": 233,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+        "exitCode": 0
+      },
+      {
+        "index": 238,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [7.27ms]\n(pass) AsyncQueue > dequeue throws on empty [4.41ms]\n(pass) AsyncQueue > pause and resume preserves j"
+      },
+      {
+        "index": 239,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [7.27ms]\n(pass) AsyncQueue > dequeue throws on empty [4.41ms]\n(pass) AsyncQueue > pause and resume preserves j"
+      },
+      {
+        "index": 240,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+        "exitCode": 0
+      },
+      {
+        "index": 241,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+        "exitCode": 0
+      },
+      {
+        "index": 242,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+        "exitCode": 0
+      },
+      {
+        "index": 243,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+        "exitCode": 0
+      },
+      {
+        "index": 284,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 285,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 290,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [1.31ms]\n(pass) AsyncQueue > dequeue throws on empty [0.77ms]\n(pass) AsyncQueue > pause and resume preserves j"
+      },
+      {
+        "index": 291,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [1.31ms]\n(pass) AsyncQueue > dequeue throws on empty [0.77ms]\n(pass) AsyncQueue > pause and resume preserves j"
+      },
+      {
+        "index": 292,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 293,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 294,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 295,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 722,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+        "exitCode": 0
+      },
+      {
+        "index": 723,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+        "exitCode": 0
+      },
+      {
+        "index": 728,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+        "exitCode": 0,
+        "outputSnippet": "src/index.ts(1,15): error TS5097: An import path can only end with a '.ts' extension when 'allowImportingTsExtensions' is enabled.\r\nsrc/index.ts(2,15): error TS5097: An import path can only end with a"
+      },
+      {
+        "index": 729,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+        "exitCode": 0,
+        "outputSnippet": "src/index.ts(1,15): error TS5097: An import path can only end with a '.ts' extension when 'allowImportingTsExtensions' is enabled.\r\nsrc/index.ts(2,15): error TS5097: An import path can only end with a"
+      },
+      {
+        "index": 730,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+        "exitCode": 0
+      },
+      {
+        "index": 731,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+        "exitCode": 0
+      },
+      {
+        "index": 732,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+        "exitCode": 0
+      },
+      {
+        "index": 733,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bash -c 'node ./node_modules/typescript/bin/tsc --noEmit src/queue.ts src/job.ts src/index.ts tests/queue.t",
+        "exitCode": 0
+      },
+      {
+        "index": 804,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+        "exitCode": 0
+      },
+      {
+        "index": 805,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+        "exitCode": 0
+      },
+      {
+        "index": 810,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [0.95ms]\n(pass) AsyncQueue > dequeue throws on empty [0.42ms]\n(pass) AsyncQueue > pause and resume preserves j"
+      },
+      {
+        "index": 811,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [0.95ms]\n(pass) AsyncQueue > dequeue throws on empty [0.42ms]\n(pass) AsyncQueue > pause and resume preserves j"
+      },
+      {
+        "index": 812,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+        "exitCode": 0
+      },
+      {
+        "index": 813,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+        "exitCode": 0
+      },
+      {
+        "index": 814,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+        "exitCode": 0
+      },
+      {
+        "index": 815,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+        "exitCode": 0
+      }
+    ]
+  }
+}

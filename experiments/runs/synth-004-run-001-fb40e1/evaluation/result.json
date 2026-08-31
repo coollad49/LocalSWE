@@ -1,0 +1,1023 @@
+{
+  "evaluationId": "eval-688c56eb-1788165851835",
+  "runId": "synth-004-run-001-fb40e1",
+  "caseId": "synth-004",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v1",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:44:11.835Z",
+  "completedAt": "2026-08-31T08:44:13.865Z",
+  "durationMs": 2030,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-004-run-001-fb40e1\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 218,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-004-W7qSXK\\patch-1788165852952.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 204,
+      "command": "bun run benchmark\\cases\\synth-004\\public\\reproduce.ts",
+      "stdout": "after 1 pending: 1 expected 1\nafter 2 pending: 2 expected 2\nafter update pending=1 expected 1, completed=1 expected 1\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 280,
+      "command": "bun test benchmark\\cases\\synth-004\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-004\\private\\oracle.test.ts:\n(pass) synth-004 oracle: filterByStatus cache invalidation > reflects new tasks [3.86ms]\n(pass) synth-004 oracle: filterByStatus cache invalidation > reflects status updates [0.70ms]\n(pass) synth-004 oracle: filterByStatus cache invalidation > reflects delete and clear [0.38ms]\n\n 3 pass\n 0 fail\n 6 expect() calls\nRan 3 tests across 1 file. [222.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 206,
+      "command": "bun test benchmark\\repositories\\task-manager\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\task-manager\\tests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [1.61ms]\n(pass) TaskManager > createTask validates priority [0.69ms]\n(pass) TaskManager > createTask validates title [0.21ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.45ms]\n(pass) TaskManager > updateTask only updates provided fields [0.30ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [4.77ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.29ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [1.65ms]\n(pass) TaskManager > filterByStatus validates status [0.18ms]\n(pass) TaskManager > getTasksByPriority filters correctly [2.67ms]\n(pass) TaskManager > deleteTask removes task [0.45ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [150.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "task-manager",
+    "type": "synthetic",
+    "difficulty": "hard",
+    "categories": [
+      "state-management",
+      "api-behavior"
+    ]
+  },
+  "metrics": {
+    "durationMs": 96398,
+    "totalTurns": 78,
+    "toolCalls": 32,
+    "commandsExecuted": 12,
+    "filesInspected": 6,
+    "filesChanged": 1,
+    "iterations": 3,
+    "iterationsSource": "v1-state",
+    "inputTokens": 41060,
+    "outputTokens": 4704,
+    "totalTokens": 393924
+  },
+  "cost": {
+    "inputTokens": 41060,
+    "outputTokens": 4704,
+    "totalTokens": 45764,
+    "inputCostUsd": 0.005748,
+    "outputCostUsd": 0.001317,
+    "totalCostUsd": 0.00804,
+    "costUsd": 0.00804,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-004-run-001-fb40e1",
+    "caseId": "synth-004",
+    "agentVersion": "agent-v1",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:9c6dce01aa3ea08b0972f6587116c4b32e3e423287e27dfd43bda592976e342a",
+    "trajectory": {
+      "eventCount": 355,
+      "durationMs": 96389,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "workflow_init": 1,
+        "helpers_ready": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "phase_start": 1,
+        "agent_start": 8,
+        "turn_start": 30,
+        "message_start": 70,
+        "message_end": 70,
+        "tool_execution_start": 32,
+        "tool_execution_end": 32,
+        "turn_end": 30,
+        "tool_execution_update": 52,
+        "agent_end": 8,
+        "agent_settled": 4,
+        "verification_nudge": 3,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 90,
+      "userMessages": 16,
+      "toolCalls": 32,
+      "toolResults": 128,
+      "thinkingEvents": 60,
+      "unknownEvents": 102,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 32,
+      "uniqueTools": 4,
+      "byTool": {
+        "read": {
+          "calls": 12,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 12,
+          "failures": 6
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 41060,
+      "output": 4704,
+      "cacheRead": 348160,
+      "cacheWrite": 0,
+      "total": 393924,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.00804,
+      "inputCostUsd": 0.005748,
+      "outputCostUsd": 0.001317,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 60,
+      "characterCount": 5700,
+      "averageCharacters": 95,
+      "maxCharacters": 577,
+      "firstThinkingAt": "2026-08-31T04:29:01.635Z",
+      "lastThinkingAt": "2026-08-31T04:30:35.876Z",
+      "thinkingDurationMs": 94241
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/task-manager.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 12,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 12,
+      "explorationToEditingRatio": 15
+    },
+    "verification": {
+      "commandsDetected": 40,
+      "testsRun": true,
+      "testCommandCount": 10,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 20,
+      "duplicateReadTargets": 6,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 6,
+      "topRepetitions": [
+        {
+          "signature": "730861c7c241",
+          "tool": "bash",
+          "target": "npx vitest run 2>&1",
+          "count": 10
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "ec8ec0fa57e2",
+          "tool": "ls",
+          "target": ".",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "a073f2962659",
+          "tool": "read",
+          "target": "src/task-manager.ts",
+          "count": 2
+        },
+        {
+          "signature": "3366904cebb3",
+          "tool": "read",
+          "target": "src/types.ts",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "6e6cdb409bf3",
+          "tool": "read",
+          "target": "tests/task-manager.test.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-004-run-001-fb40e1",
+    "caseId": "synth-004",
+    "agentVersion": "agent-v1",
+    "timeline": [
+      {
+        "index": 25,
+        "timestamp": "2026-08-31T04:29:01.635Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 26,
+        "timestamp": "2026-08-31T04:29:01.635Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 41,
+        "timestamp": "2026-08-31T04:29:03.194Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-31T04:29:03.194Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 57,
+        "timestamp": "2026-08-31T04:29:05.081Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-31T04:29:05.081Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-31T04:29:05.089Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 60,
+        "timestamp": "2026-08-31T04:29:05.089Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 61,
+        "timestamp": "2026-08-31T04:29:05.097Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 62,
+        "timestamp": "2026-08-31T04:29:05.097Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 89,
+        "timestamp": "2026-08-31T04:29:06.810Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 90,
+        "timestamp": "2026-08-31T04:29:06.810Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 91,
+        "timestamp": "2026-08-31T04:29:06.828Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/types.ts"
+      },
+      {
+        "index": 92,
+        "timestamp": "2026-08-31T04:29:06.828Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/types.ts"
+      },
+      {
+        "index": 93,
+        "timestamp": "2026-08-31T04:29:06.841Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-31T04:29:06.841Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 95,
+        "timestamp": "2026-08-31T04:29:06.851Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/task-manager.test.ts"
+      },
+      {
+        "index": 96,
+        "timestamp": "2026-08-31T04:29:06.851Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tests/task-manager.test.ts"
+      },
+      {
+        "index": 129,
+        "timestamp": "2026-08-31T04:29:09.949Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 130,
+        "timestamp": "2026-08-31T04:29:09.949Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 155,
+        "timestamp": "2026-08-31T04:29:28.835Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 156,
+        "timestamp": "2026-08-31T04:29:28.835Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 171,
+        "timestamp": "2026-08-31T04:29:30.609Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 172,
+        "timestamp": "2026-08-31T04:29:30.609Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 197,
+        "timestamp": "2026-08-31T04:29:47.667Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "git diff HEAD",
+        "commandClass": "git"
+      },
+      {
+        "index": 198,
+        "timestamp": "2026-08-31T04:29:47.667Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "git diff HEAD",
+        "commandClass": "git"
+      },
+      {
+        "index": 235,
+        "timestamp": "2026-08-31T04:29:52.515Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 236,
+        "timestamp": "2026-08-31T04:29:52.515Z",
+        "phase": "reconnaissance",
+        "iteration": 1,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 277,
+        "timestamp": "2026-08-31T04:30:12.025Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 278,
+        "timestamp": "2026-08-31T04:30:12.025Z",
+        "phase": "reconnaissance",
+        "iteration": 2,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 321,
+        "timestamp": "2026-08-31T04:30:24.970Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 322,
+        "timestamp": "2026-08-31T04:30:24.970Z",
+        "phase": "reconnaissance",
+        "iteration": 3,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 25,
+        "timestamp": "2026-08-31T04:29:01.635Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 129,
+        "timestamp": "2026-08-31T04:29:09.949Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 141,
+        "timestamp": "2026-08-31T04:29:24.901Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 142,
+        "timestamp": "2026-08-31T04:29:24.901Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 143,
+        "timestamp": "2026-08-31T04:29:24.924Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 144,
+        "timestamp": "2026-08-31T04:29:24.924Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 145,
+        "timestamp": "2026-08-31T04:29:24.924Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 146,
+        "timestamp": "2026-08-31T04:29:24.925Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 155,
+        "timestamp": "2026-08-31T04:29:28.835Z",
+        "detail": "src/task-manager.ts"
+      }
+    ],
+    "errors": [
+      {
+        "index": 141,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n ❯ tests/task-manager.test.ts (11 tests | 1 failed) 50ms\n     × filterByStatus returns correct tasks and not stale 22ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/task-manager.test.ts > TaskManager > filterByStatus returns correct tasks and not stale\nAssertionError: expected 1 to be 2 // Object.is equality\n\n- Expected\n+ Received\n\n- 2\n+ 1\n\n ❯ tests/task-manager.test.ts:73:28\n     71|     tm.cre"
+      },
+      {
+        "index": 142,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n ❯ tests/task-manager.test.ts (11 tests | 1 failed) 50ms\n     × filterByStatus returns correct tasks and not stale 22ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/task-manager.test.ts > TaskManager > filterByStatus returns correct tasks and not stale\nAssertionError: expected 1 to be 2 // Object.is equality\n\n- Expected\n+ Received\n\n- 2\n+ 1\n\n ❯ tests/task-manager.test.ts:73:28\n     71|     tm.cre"
+      },
+      {
+        "index": 143,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 144,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 145,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 146,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 129,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 130,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 141,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n ❯ tests/task-manager.test.ts (11 tests | 1 failed) 50ms\n     × filterByStatus returns correct task"
+      },
+      {
+        "index": 142,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n ❯ tests/task-manager.test.ts (11 tests | 1 failed) 50ms\n     × filterByStatus returns correct task"
+      },
+      {
+        "index": 143,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 144,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 145,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 146,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 171,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 172,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 183,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:29:43\n   Duration  1.95s (tr"
+      },
+      {
+        "index": 184,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:29:43\n   Duration  1.95s (tr"
+      },
+      {
+        "index": 185,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 186,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 187,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 188,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 235,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 236,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 245,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:30:05\n   Duration  1.54s (tr"
+      },
+      {
+        "index": 246,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:30:05\n   Duration  1.54s (tr"
+      },
+      {
+        "index": 247,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 248,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 249,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 250,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 277,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 278,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 289,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:30:19\n   Duration  960ms (tr"
+      },
+      {
+        "index": 290,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:30:19\n   Duration  960ms (tr"
+      },
+      {
+        "index": 291,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 292,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 293,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 294,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 321,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 322,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 333,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:30:32\n   Duration  1.11s (tr"
+      },
+      {
+        "index": 334,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:30:32\n   Duration  1.11s (tr"
+      },
+      {
+        "index": 335,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 336,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 337,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 338,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

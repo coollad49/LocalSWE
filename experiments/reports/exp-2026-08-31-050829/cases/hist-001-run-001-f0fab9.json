@@ -1,0 +1,79 @@
+{
+  "runId": "hist-001-run-001-f0fab9",
+  "caseId": "hist-001",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "mock",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 1588,
+  "startedAt": "2026-08-31T02:36:47.277Z",
+  "completedAt": "2026-08-31T02:36:48.865Z",
+  "caseMeta": {
+    "repository": "cac",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "validation",
+      "parsing"
+    ]
+  },
+  "metrics": {
+    "durationMs": 1211,
+    "totalTurns": 7,
+    "toolCalls": 5,
+    "commandsExecuted": 3,
+    "filesInspected": 2,
+    "filesChanged": 1,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": null,
+    "outputTokens": null,
+    "totalTokens": null
+  },
+  "cost": {
+    "inputTokens": null,
+    "outputTokens": null,
+    "totalTokens": null,
+    "inputCostUsd": null,
+    "outputCostUsd": null,
+    "totalCostUsd": null,
+    "costUsd": null,
+    "costStatus": "unavailable",
+    "costSource": "none",
+    "pricingModel": "mock"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 294,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-001-DjLwaF\\patch-1788143808282.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 287,
+      "command": "bun run benchmark\\cases\\hist-001\\public\\reproduce.ts",
+      "stdout": "Test --base-url: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://gitlab.com\"} => FAIL (hasB=true b=https://github.com baseUrl=https://gitlab.com)\nTest -b: options={\"--\":[],\"b\":\"https://gitlab.com\",\"baseUrl\":\"https://gitlab.com\"} => PASS\nTest no args: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://github.com\"} => PASS\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  }
+}

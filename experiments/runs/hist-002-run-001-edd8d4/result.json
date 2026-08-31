@@ -1,0 +1,46 @@
+{
+  "runId": "hist-002-run-001-edd8d4",
+  "caseId": "hist-002",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 80122,
+  "changedFiles": [
+    "src/defu.ts",
+    "tests/defu.test.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-002-run-001-edd8d4\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-002-run-001-edd8d4\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-002-run-001-edd8d4\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-edd8d4-XQxOGF\" && npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 8003,
+      "stdout": "\n> defu@6.1.4 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-edd8d4-XQxOGF\n\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  05:10:16\n   Duration  1.08s (transform 174ms, setup 0ms, import 266ms, tests 19ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-edd8d4-XQxOGF\" && npx vitest run -t \"__proto__\" 2>&1",
+      "exitCode": 0,
+      "durationMs": 7229,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-edd8d4-XQxOGF\n\n\n Test Files  1 skipped (1)\n      Tests  7 skipped (7)\n   Start at  05:10:30\n   Duration  984ms (transform 135ms, setup 0ms, import 204ms, tests 0ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-edd8d4-XQxOGF\" && cat > /tmp/test-proto.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { defu } from \"../src/defu.ts\";\n\ndescribe(\"prototype pollution\", () => {\n  test(\"does not pollute Object.prototype via __proto__\", () => {\n    const payload = JSON.parse('{\"__proto__\":{\"polluted\":true}}');\n    defu({}, payload);\n    // @ts-ignore\n    expect(({} as any).polluted).toBe(undefined);\n  });\n});\nEOF\nnpx vitest run /tmp/test-proto.ts 2>&1",
+      "exitCode": 1,
+      "durationMs": 10945,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-edd8d4-XQxOGF\n\nNo test files found, exiting with code 1\n\nfilter: C:/Users/cooll/AppData/Local/Temp/test-proto.ts\ninclude: **/*.{test,spec}.?(c|m)[jt]s?(x)\nexclude:  **/node_modules/**, **/.git/**\n\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-edd8d4-XQxOGF\" && npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 5857,
+      "stdout": "\n> defu@6.1.4 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-edd8d4-XQxOGF\n\n\n Test Files  1 passed (1)\n      Tests  8 passed (8)\n   Start at  05:10:58\n   Duration  1.12s (transform 136ms, setup 0ms, import 203ms, tests 22ms, environment 0ms)\n\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T04:09:48.881Z",
+  "endedAt": "2026-08-31T04:11:09.003Z"
+}

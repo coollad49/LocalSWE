@@ -1,0 +1,2078 @@
+{
+  "evaluationId": "eval-55a47e63-1788165649393",
+  "runId": "hard-004-run-001-36f07b",
+  "caseId": "hard-004",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:40:49.393Z",
+  "completedAt": "2026-08-31T08:40:51.807Z",
+  "durationMs": 2414,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-004-run-001-36f07b\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 296,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-N5CPa0\\patch-1788165650435.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 260,
+      "command": "bun run benchmark\\cases\\hard-004\\public\\reproduce.ts",
+      "stdout": "Test queued abort: outcome=rejected notRan=true sizeOk=true => PASS\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 313,
+      "command": "bun test benchmark\\cases\\hard-004\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hard-004\\private\\oracle.test.ts:\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject when signal is aborted while task is waiting in queue [9.40ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject immediately when signal is already aborted and task is queued [0.58ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should not affect running task when queued task is aborted [29.08ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > abort with custom reason forwards the reason [3.47ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should remove aborted task from priority queue [2.03ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > signal abort not called when task already started should not affect queue size [21.02ms]\n\n 6 pass\n 0 fail\n 15 expect() calls\nRan 6 tests across 1 file. [248.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 498,
+      "command": "bun test benchmark\\repositories\\p-queue\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\nBefore abort: queue.size = 1 firstTaskStarted = true\nImmediately after abort: queue.size = 0\n",
+      "stderr": "\nbenchmark\\repositories\\p-queue\\tests\\basic.test.ts:\n(pass) p-queue regression > basic queue [5.55ms]\n(pass) p-queue regression > concurrency [44.88ms]\n\nbenchmark\\repositories\\p-queue\\tests\\repro.test.ts:\n(pass) p-queue signal abort while queued > aborting signal while task is queued should reject the task and remove it from the queue [215.27ms]\n\n 3 pass\n 0 fail\n 7 expect() calls\nRan 3 tests across 2 files. [438.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "p-queue",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "asynchronous",
+      "state-management",
+      "error-handling"
+    ]
+  },
+  "metrics": {
+    "durationMs": 611530,
+    "totalTurns": 168,
+    "toolCalls": 84,
+    "commandsExecuted": 54,
+    "filesInspected": 7,
+    "filesChanged": 5,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 67562,
+    "outputTokens": 59964,
+    "totalTokens": 4037088
+  },
+  "cost": {
+    "inputTokens": 67562,
+    "outputTokens": 59964,
+    "totalTokens": 127526,
+    "inputCostUsd": 0.020269,
+    "outputCostUsd": 0.071957,
+    "totalCostUsd": 0.326799,
+    "costUsd": 0.326799,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-004-run-001-36f07b",
+    "caseId": "hard-004",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "mimo-v2.5",
+    "trajectoryHash": "sha256:0cd01098acf9f711da7acb725765a504ec6f9aebda6b65082a00725ae76ae72a",
+    "trajectory": {
+      "eventCount": 779,
+      "durationMs": 604058,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "available_models": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 2,
+        "turn_start": 84,
+        "message_start": 168,
+        "message_end": 168,
+        "tool_execution_start": 84,
+        "tool_execution_update": 96,
+        "tool_execution_end": 82,
+        "turn_end": 82,
+        "session_disposed": 1,
+        "timeout": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 250,
+      "userMessages": 4,
+      "toolCalls": 84,
+      "toolResults": 330,
+      "thinkingEvents": 54,
+      "unknownEvents": 182,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 84,
+      "uniqueTools": 4,
+      "byTool": {
+        "bash": {
+          "calls": 54,
+          "failures": 6
+        },
+        "read": {
+          "calls": 20,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 4,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 6,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 67562,
+      "output": 59964,
+      "cacheRead": 3909562,
+      "cacheWrite": 0,
+      "total": 4037088,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.326799,
+      "inputCostUsd": 0.020269,
+      "outputCostUsd": 0.071957,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 54,
+      "characterCount": 173770,
+      "averageCharacters": 3218,
+      "maxCharacters": 19917,
+      "firstThinkingAt": "2026-08-31T02:03:57.917Z",
+      "lastThinkingAt": "2026-08-31T02:13:33.311Z",
+      "thinkingDurationMs": 575394
+    },
+    "editing": {
+      "editCalls": 6,
+      "writeCalls": 0,
+      "filesTouched": [
+        "source/queue.ts",
+        "source/priority-queue.ts",
+        "source/index.ts"
+      ],
+      "uniqueFilesTouched": 3
+    },
+    "exploration": {
+      "readCalls": 20,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 4,
+      "bashCalls": 54,
+      "explorationToEditingRatio": 13
+    },
+    "verification": {
+      "commandsDetected": 114,
+      "testsRun": true,
+      "testCommandCount": 30,
+      "buildRun": true,
+      "typecheckRun": true,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 46,
+      "duplicateReadTargets": 13,
+      "duplicateEditTargets": 3,
+      "toolFailureCount": 6,
+      "topRepetitions": [
+        {
+          "signature": "1cb99e70a005",
+          "tool": "read",
+          "target": "source/index.ts",
+          "count": 6
+        },
+        {
+          "signature": "6bdb002aed6b",
+          "tool": "read",
+          "target": "tests/basic.test.ts",
+          "count": 4
+        },
+        {
+          "signature": "ee96c9968b36",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+          "count": 4
+        },
+        {
+          "signature": "7660ff8408a3",
+          "tool": "bash",
+          "target": "ls",
+          "count": 2
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "0fe7b4654c52",
+          "tool": "ls",
+          "target": "source",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "9ee4fa743735",
+          "tool": "read",
+          "target": "source/queue.ts",
+          "count": 2
+        },
+        {
+          "signature": "1fa266d95677",
+          "tool": "read",
+          "target": "source/options.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-004-run-001-36f07b",
+    "caseId": "hard-004",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-31T02:03:57.917Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls",
+        "commandClass": "general"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-31T02:03:57.917Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls",
+        "commandClass": "general"
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-31T02:03:59.483Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 43,
+        "timestamp": "2026-08-31T02:03:59.483Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-31T02:04:00.722Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-31T02:04:00.722Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 74,
+        "timestamp": "2026-08-31T02:04:03.074Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "source"
+      },
+      {
+        "index": 75,
+        "timestamp": "2026-08-31T02:04:03.074Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "source"
+      },
+      {
+        "index": 90,
+        "timestamp": "2026-08-31T02:04:04.721Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 91,
+        "timestamp": "2026-08-31T02:04:04.721Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 106,
+        "timestamp": "2026-08-31T02:04:05.994Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 107,
+        "timestamp": "2026-08-31T02:04:05.994Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 122,
+        "timestamp": "2026-08-31T02:04:08.981Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/queue.ts"
+      },
+      {
+        "index": 123,
+        "timestamp": "2026-08-31T02:04:08.981Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/queue.ts"
+      },
+      {
+        "index": 138,
+        "timestamp": "2026-08-31T02:04:11.031Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/options.ts"
+      },
+      {
+        "index": 139,
+        "timestamp": "2026-08-31T02:04:11.031Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/options.ts"
+      },
+      {
+        "index": 154,
+        "timestamp": "2026-08-31T02:04:15.312Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 155,
+        "timestamp": "2026-08-31T02:04:15.312Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 170,
+        "timestamp": "2026-08-31T02:04:17.353Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -r \"signal\" tests/ source/ --include=\"*.ts\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 171,
+        "timestamp": "2026-08-31T02:04:17.353Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -r \"signal\" tests/ source/ --include=\"*.ts\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 190,
+        "timestamp": "2026-08-31T02:04:20.148Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/priority-queue.ts"
+      },
+      {
+        "index": 191,
+        "timestamp": "2026-08-31T02:04:20.148Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/priority-queue.ts"
+      },
+      {
+        "index": 206,
+        "timestamp": "2026-08-31T02:04:49.198Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -r \"implements Queue\" source/ tests/ --include=\"*.ts\" 2>/dev/null || echo \"No matches\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 207,
+        "timestamp": "2026-08-31T02:04:49.198Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -r \"implements Queue\" source/ tests/ --include=\"*.ts\" 2>/dev/null || echo \"No matches\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 226,
+        "timestamp": "2026-08-31T02:04:51.778Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -r \"queueClass\" source/ tests/ --include=\"*.ts\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 227,
+        "timestamp": "2026-08-31T02:04:51.778Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -r \"queueClass\" source/ tests/ --include=\"*.ts\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 246,
+        "timestamp": "2026-08-31T02:05:18.755Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -rn \"remove/|abort/|reject\" source/index.ts | head -50",
+        "commandClass": "general"
+      },
+      {
+        "index": 247,
+        "timestamp": "2026-08-31T02:05:18.755Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -rn \"remove/|abort/|reject\" source/index.ts | head -50",
+        "commandClass": "general"
+      },
+      {
+        "index": 266,
+        "timestamp": "2026-08-31T02:05:21.242Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 267,
+        "timestamp": "2026-08-31T02:05:21.242Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 282,
+        "timestamp": "2026-08-31T02:05:23.206Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 283,
+        "timestamp": "2026-08-31T02:05:23.206Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 298,
+        "timestamp": "2026-08-31T02:05:24.982Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat tsconfig.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 299,
+        "timestamp": "2026-08-31T02:05:24.982Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat tsconfig.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 318,
+        "timestamp": "2026-08-31T02:05:27.643Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "commandClass": "test"
+      },
+      {
+        "index": 319,
+        "timestamp": "2026-08-31T02:05:27.643Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "commandClass": "test"
+      },
+      {
+        "index": 336,
+        "timestamp": "2026-08-31T02:05:29.794Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls node_modules/ 2>/dev/null | head -10 || echo \"no node_modules\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 337,
+        "timestamp": "2026-08-31T02:05:29.794Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls node_modules/ 2>/dev/null | head -10 || echo \"no node_modules\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 354,
+        "timestamp": "2026-08-31T02:05:32.395Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 355,
+        "timestamp": "2026-08-31T02:05:32.395Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 374,
+        "timestamp": "2026-08-31T02:05:34.962Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd /c/Users/cooll/Documents/code/frontier-verifier && ls node_modules/.bin/ 2>/dev/null | head -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 375,
+        "timestamp": "2026-08-31T02:05:34.962Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd /c/Users/cooll/Documents/code/frontier-verifier && ls node_modules/.bin/ 2>/dev/null | head -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 394,
+        "timestamp": "2026-08-31T02:05:37.380Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd /c/Users/cooll/Documents/code/frontier-verifier && ls node_modules/.bin/ 2>/dev/null | wc -l && which node && which npm",
+        "commandClass": "general"
+      },
+      {
+        "index": 395,
+        "timestamp": "2026-08-31T02:05:37.381Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd /c/Users/cooll/Documents/code/frontier-verifier && ls node_modules/.bin/ 2>/dev/null | wc -l && which node && which npm",
+        "commandClass": "general"
+      },
+      {
+        "index": 418,
+        "timestamp": "2026-08-31T02:05:40.254Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npm install 2>&1 | tail -30",
+        "commandClass": "general"
+      },
+      {
+        "index": 419,
+        "timestamp": "2026-08-31T02:05:40.254Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npm install 2>&1 | tail -30",
+        "commandClass": "general"
+      },
+      {
+        "index": 438,
+        "timestamp": "2026-08-31T02:08:37.743Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc",
+        "commandClass": "test"
+      },
+      {
+        "index": 439,
+        "timestamp": "2026-08-31T02:08:37.743Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc",
+        "commandClass": "test"
+      },
+      {
+        "index": 458,
+        "timestamp": "2026-08-31T02:08:41.276Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 459,
+        "timestamp": "2026-08-31T02:08:41.276Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 478,
+        "timestamp": "2026-08-31T02:08:56.616Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+        "commandClass": "test"
+      },
+      {
+        "index": 479,
+        "timestamp": "2026-08-31T02:08:56.616Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+        "commandClass": "test"
+      },
+      {
+        "index": 496,
+        "timestamp": "2026-08-31T02:10:04.793Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "commandClass": "test"
+      },
+      {
+        "index": 497,
+        "timestamp": "2026-08-31T02:10:04.793Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "commandClass": "test"
+      },
+      {
+        "index": 514,
+        "timestamp": "2026-08-31T02:10:44.464Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modu",
+        "commandClass": "test"
+      },
+      {
+        "index": 515,
+        "timestamp": "2026-08-31T02:10:44.464Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modu",
+        "commandClass": "test"
+      },
+      {
+        "index": 534,
+        "timestamp": "2026-08-31T02:10:51.487Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+        "commandClass": "test"
+      },
+      {
+        "index": 535,
+        "timestamp": "2026-08-31T02:10:51.487Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+        "commandClass": "test"
+      },
+      {
+        "index": 554,
+        "timestamp": "2026-08-31T02:10:59.001Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat package.json | grep -A 5 '\"scripts\"'",
+        "commandClass": "general"
+      },
+      {
+        "index": 555,
+        "timestamp": "2026-08-31T02:10:59.001Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat package.json | grep -A 5 '\"scripts\"'",
+        "commandClass": "general"
+      },
+      {
+        "index": 574,
+        "timestamp": "2026-08-31T02:11:03.764Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/de",
+        "commandClass": "test"
+      },
+      {
+        "index": 575,
+        "timestamp": "2026-08-31T02:11:03.764Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/de",
+        "commandClass": "test"
+      },
+      {
+        "index": 592,
+        "timestamp": "2026-08-31T02:11:07.538Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest",
+        "commandClass": "test"
+      },
+      {
+        "index": 593,
+        "timestamp": "2026-08-31T02:11:07.538Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest",
+        "commandClass": "test"
+      },
+      {
+        "index": 610,
+        "timestamp": "2026-08-31T02:11:09.861Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -",
+        "commandClass": "test"
+      },
+      {
+        "index": 611,
+        "timestamp": "2026-08-31T02:11:09.861Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -",
+        "commandClass": "test"
+      },
+      {
+        "index": 630,
+        "timestamp": "2026-08-31T02:11:38.088Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, ",
+        "commandClass": "test"
+      },
+      {
+        "index": 631,
+        "timestamp": "2026-08-31T02:11:38.088Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, ",
+        "commandClass": "test"
+      },
+      {
+        "index": 648,
+        "timestamp": "2026-08-31T02:11:43.656Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -",
+        "commandClass": "test"
+      },
+      {
+        "index": 649,
+        "timestamp": "2026-08-31T02:11:43.656Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -",
+        "commandClass": "test"
+      },
+      {
+        "index": 668,
+        "timestamp": "2026-08-31T02:12:25.025Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test,",
+        "commandClass": "test"
+      },
+      {
+        "index": 669,
+        "timestamp": "2026-08-31T02:12:25.025Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test,",
+        "commandClass": "test"
+      },
+      {
+        "index": 688,
+        "timestamp": "2026-08-31T02:12:44.890Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/queue.ts"
+      },
+      {
+        "index": 689,
+        "timestamp": "2026-08-31T02:12:44.890Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/queue.ts"
+      },
+      {
+        "index": 704,
+        "timestamp": "2026-08-31T02:12:52.164Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/priority-queue.ts"
+      },
+      {
+        "index": 705,
+        "timestamp": "2026-08-31T02:12:52.164Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/priority-queue.ts"
+      },
+      {
+        "index": 720,
+        "timestamp": "2026-08-31T02:12:54.990Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 721,
+        "timestamp": "2026-08-31T02:12:54.990Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 736,
+        "timestamp": "2026-08-31T02:13:04.872Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 737,
+        "timestamp": "2026-08-31T02:13:04.872Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 752,
+        "timestamp": "2026-08-31T02:13:07.493Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -",
+        "commandClass": "test"
+      },
+      {
+        "index": 753,
+        "timestamp": "2026-08-31T02:13:07.493Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -",
+        "commandClass": "test"
+      },
+      {
+        "index": 772,
+        "timestamp": "2026-08-31T02:13:33.311Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "commandClass": "test"
+      },
+      {
+        "index": 773,
+        "timestamp": "2026-08-31T02:13:33.311Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 42,
+        "timestamp": "2026-08-31T02:03:59.483Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 318,
+        "timestamp": "2026-08-31T02:05:27.643Z",
+        "detail": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 482,
+        "timestamp": "2026-08-31T02:10:00.675Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 483,
+        "timestamp": "2026-08-31T02:10:00.675Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 484,
+        "timestamp": "2026-08-31T02:10:00.675Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 485,
+        "timestamp": "2026-08-31T02:10:00.675Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 486,
+        "timestamp": "2026-08-31T02:10:00.675Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 487,
+        "timestamp": "2026-08-31T02:10:00.676Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vites"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 688,
+        "timestamp": "2026-08-31T02:12:44.890Z",
+        "detail": "source/queue.ts"
+      }
+    ],
+    "errors": [
+      {
+        "index": 482,
+        "tool": "bash",
+        "error": "Command timed out after 60 seconds"
+      },
+      {
+        "index": 483,
+        "tool": "bash",
+        "error": "Command timed out after 60 seconds"
+      },
+      {
+        "index": 484,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 485,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 486,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 487,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 318,
+        "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0
+      },
+      {
+        "index": 319,
+        "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0
+      },
+      {
+        "index": 322,
+        "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 323,
+        "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 324,
+        "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0
+      },
+      {
+        "index": 325,
+        "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0
+      },
+      {
+        "index": 326,
+        "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0
+      },
+      {
+        "index": 327,
+        "command": "ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0
+      },
+      {
+        "index": 438,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0
+      },
+      {
+        "index": 439,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0
+      },
+      {
+        "index": 444,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0,
+        "outputSnippet": "tsc\ntsc.cmd\ntsc.ps1\ntsx\ntsx.cmd\ntsx.ps1\n"
+      },
+      {
+        "index": 445,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0,
+        "outputSnippet": "tsc\ntsc.cmd\ntsc.ps1\ntsx\ntsx.cmd\ntsx.ps1\n"
+      },
+      {
+        "index": 446,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0
+      },
+      {
+        "index": 447,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0
+      },
+      {
+        "index": 448,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0
+      },
+      {
+        "index": 449,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/.bin/ 2>/dev/null | grep -E \"vitest|tsx|tsc\" | head -10",
+        "exitCode": 0
+      },
+      {
+        "index": 458,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 459,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 464,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "vitest/4.1.11 win32-x64 node-v22.23.2\n"
+      },
+      {
+        "index": 465,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "vitest/4.1.11 win32-x64 node-v22.23.2\n"
+      },
+      {
+        "index": 466,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 467,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 468,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 469,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest --version 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 478,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 479,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 482,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+        "exitCode": 1,
+        "outputSnippet": "Command timed out after 60 seconds"
+      },
+      {
+        "index": 483,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+        "exitCode": 1,
+        "outputSnippet": "Command timed out after 60 seconds"
+      },
+      {
+        "index": 484,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+        "exitCode": 1
+      },
+      {
+        "index": 485,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+        "exitCode": 1
+      },
+      {
+        "index": 486,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+        "exitCode": 1
+      },
+      {
+        "index": 487,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && npx vitest run 2>&1 | tail -30",
+        "exitCode": 1
+      },
+      {
+        "index": 496,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 497,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 500,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 501,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 502,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 503,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 504,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 505,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 514,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 515,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 520,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0,
+        "outputSnippet": "cat: node_modules/.bin/vitest: No such file or directory\n"
+      },
+      {
+        "index": 521,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0,
+        "outputSnippet": "cat: node_modules/.bin/vitest: No such file or directory\n"
+      },
+      {
+        "index": 522,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 523,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 524,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 525,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.bin/vitest 2>&1 | head -5 || ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 534,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 535,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 540,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0,
+        "outputSnippet": "ls: cannot access 'node_modules/vitest': No such file or directory\n"
+      },
+      {
+        "index": 541,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0,
+        "outputSnippet": "ls: cannot access 'node_modules/vitest': No such file or directory\n"
+      },
+      {
+        "index": 542,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 543,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 544,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 545,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && ls node_modules/vitest 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 574,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 575,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 578,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 579,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 580,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 581,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 582,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 583,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && find . -name \"vitest.config*\" -o -name \"vite.config*\" 2>/dev/null | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 592,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+        "exitCode": 0
+      },
+      {
+        "index": 593,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+        "exitCode": 0
+      },
+      {
+        "index": 596,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 597,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 598,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+        "exitCode": 0
+      },
+      {
+        "index": 599,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+        "exitCode": 0
+      },
+      {
+        "index": 600,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+        "exitCode": 0
+      },
+      {
+        "index": 601,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat node_modules/.package-lock.json 2>&1 | grep -E '\"vitest\"' | head -3",
+        "exitCode": 0
+      },
+      {
+        "index": 610,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+        "exitCode": 0
+      },
+      {
+        "index": 611,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+        "exitCode": 0
+      },
+      {
+        "index": 616,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  03:11:29\n   Duration  2.42s (transf"
+      },
+      {
+        "index": 617,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  03:11:29\n   Duration  2.42s (transf"
+      },
+      {
+        "index": 618,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+        "exitCode": 0
+      },
+      {
+        "index": 619,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+        "exitCode": 0
+      },
+      {
+        "index": 620,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+        "exitCode": 0
+      },
+      {
+        "index": 621,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/basic.test.ts 2>&1 | tail -40",
+        "exitCode": 0
+      },
+      {
+        "index": 630,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+        "exitCode": 0
+      },
+      {
+        "index": 631,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+        "exitCode": 0
+      },
+      {
+        "index": 634,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 635,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 636,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+        "exitCode": 0
+      },
+      {
+        "index": 637,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+        "exitCode": 0
+      },
+      {
+        "index": 638,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+        "exitCode": 0
+      },
+      {
+        "index": 639,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../sou",
+        "exitCode": 0
+      },
+      {
+        "index": 648,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+        "exitCode": 0
+      },
+      {
+        "index": 649,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+        "exitCode": 0
+      },
+      {
+        "index": 654,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\n\n\n Test Files  1 passed (1)\n      Tests  1 passed (1)\n   Start at  03:12:10\n   Duration  1.49s (transf"
+      },
+      {
+        "index": 655,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\n\n\n Test Files  1 passed (1)\n      Tests  1 passed (1)\n   Start at  03:12:10\n   Duration  1.49s (transf"
+      },
+      {
+        "index": 656,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+        "exitCode": 0
+      },
+      {
+        "index": 657,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+        "exitCode": 0
+      },
+      {
+        "index": 658,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+        "exitCode": 0
+      },
+      {
+        "index": 659,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -50",
+        "exitCode": 0
+      },
+      {
+        "index": 668,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+        "exitCode": 0
+      },
+      {
+        "index": 669,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+        "exitCode": 0
+      },
+      {
+        "index": 674,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\n\nstdout | tests/repro.test.ts > p-queue signal abort while queued > aborting signal while task is queu"
+      },
+      {
+        "index": 675,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\n\nstdout | tests/repro.test.ts > p-queue signal abort while queued > aborting signal while task is queu"
+      },
+      {
+        "index": 676,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+        "exitCode": 0
+      },
+      {
+        "index": 677,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+        "exitCode": 0
+      },
+      {
+        "index": 678,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+        "exitCode": 0
+      },
+      {
+        "index": 679,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && cat > tests/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport PQueue from \"../so",
+        "exitCode": 0
+      },
+      {
+        "index": 752,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 753,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 758,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\n\n\n Test Files  1 passed (1)\n      Tests  1 passed (1)\n   Start at  03:13:26\n   Duration  3.45s (transf"
+      },
+      {
+        "index": 759,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\n\n\n Test Files  1 passed (1)\n      Tests  1 passed (1)\n   Start at  03:13:26\n   Duration  3.45s (transf"
+      },
+      {
+        "index": 760,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 761,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 762,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 763,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run tests/repro.test.ts 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 772,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 773,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-36f07b-YSO4i4\" && timeout 30 npx vitest run 2>&1 | tail -30",
+        "exitCode": 0
+      }
+    ]
+  }
+}

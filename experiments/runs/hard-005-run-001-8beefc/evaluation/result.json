@@ -1,0 +1,2660 @@
+{
+  "evaluationId": "eval-2d0e7569-1788165706066",
+  "runId": "hard-005-run-001-8beefc",
+  "caseId": "hard-005",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v1",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:41:46.066Z",
+  "completedAt": "2026-08-31T08:41:47.899Z",
+  "durationMs": 1833,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-005-run-001-8beefc\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 193,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-005-d6AkVf\\patch-1788165706940.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 281,
+      "command": "bun run benchmark\\cases\\hard-005\\public\\reproduce.ts",
+      "stdout": "Test astral ID_Continue: result=\"/:\\\"test\\\"𝛼\" expected=\"/:\\\"test\\\"𝛼\" => PASS\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 240,
+      "command": "bun test benchmark\\cases\\hard-005\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hard-005\\private\\oracle.test.ts:\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > quotes param name when followed by astral ID_Continue [5.43ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > quotes wildcard name when followed by astral ID_Continue [0.26ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > does not quote when followed by non-ID_Continue astral [0.15ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > quotes when next text starts with BMP ID_Continue [0.85ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > does not quote when next is not text or is empty [0.19ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > round-trip parse -> stringify -> parse for astral [1.61ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > parse correctly handles astral ID_Continue in param name [0.17ms]\n\n 7 pass\n 0 fail\n 9 expect() calls\nRan 7 tests across 1 file. [190.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 242,
+      "command": "bun test benchmark\\repositories\\path-to-regexp\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\path-to-regexp\\tests\\basic.test.ts:\n(pass) path-to-regexp regression > basic parse/stringify [4.81ms]\n(pass) path-to-regexp regression > wildcard [0.20ms]\n\n 2 pass\n 0 fail\n 3 expect() calls\nRan 2 tests across 1 file. [182.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "path-to-regexp",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "parsing",
+      "api-behavior",
+      "data-transformation"
+    ]
+  },
+  "metrics": {
+    "durationMs": 471206,
+    "totalTurns": 192,
+    "toolCalls": 84,
+    "commandsExecuted": 56,
+    "filesInspected": 9,
+    "filesChanged": 1,
+    "iterations": 3,
+    "iterationsSource": "v1-state",
+    "inputTokens": 158336,
+    "outputTokens": 33796,
+    "totalTokens": 4356484
+  },
+  "cost": {
+    "inputTokens": 158336,
+    "outputTokens": 33796,
+    "totalTokens": 192132,
+    "inputCostUsd": 0.022167,
+    "outputCostUsd": 0.009463,
+    "totalCostUsd": 0.04329,
+    "costUsd": 0.04329,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-005-run-001-8beefc",
+    "caseId": "hard-005",
+    "agentVersion": "agent-v1",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:bcd83b9929d9d4fca26ab1e09f0f0417d2ce6c49a5907e3b79629e9fd6c50acb",
+    "trajectory": {
+      "eventCount": 919,
+      "durationMs": 471194,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "workflow_init": 1,
+        "helpers_ready": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "phase_start": 1,
+        "agent_start": 8,
+        "turn_start": 92,
+        "message_start": 184,
+        "message_end": 184,
+        "tool_execution_start": 84,
+        "tool_execution_end": 84,
+        "turn_end": 92,
+        "tool_execution_update": 160,
+        "agent_end": 8,
+        "agent_settled": 4,
+        "verification_nudge": 3,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 276,
+      "userMessages": 16,
+      "toolCalls": 84,
+      "toolResults": 336,
+      "thinkingEvents": 184,
+      "unknownEvents": 272,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 84,
+      "uniqueTools": 6,
+      "byTool": {
+        "read": {
+          "calls": 12,
+          "failures": 6
+        },
+        "ls": {
+          "calls": 4,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 56,
+          "failures": 12
+        },
+        "glob": {
+          "calls": 2,
+          "failures": 6
+        },
+        "write": {
+          "calls": 8,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 158336,
+      "output": 33796,
+      "cacheRead": 4164352,
+      "cacheWrite": 0,
+      "total": 4356484,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.04329,
+      "inputCostUsd": 0.022167,
+      "outputCostUsd": 0.009463,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 184,
+      "characterCount": 46660,
+      "averageCharacters": 254,
+      "maxCharacters": 2282,
+      "firstThinkingAt": "2026-08-31T04:19:16.775Z",
+      "lastThinkingAt": "2026-08-31T04:27:04.208Z",
+      "thinkingDurationMs": 467433
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 8,
+      "filesTouched": [
+        ".v1/repro.js",
+        "src/index.ts",
+        ".v1/repro2.js",
+        ".v1/verify.js"
+      ],
+      "uniqueFilesTouched": 4
+    },
+    "exploration": {
+      "readCalls": 12,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 4,
+      "bashCalls": 56,
+      "explorationToEditingRatio": 7.2
+    },
+    "verification": {
+      "commandsDetected": 152,
+      "testsRun": true,
+      "testCommandCount": 28,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "npx vitest run 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/basic.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/basic.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/basic.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/basic.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/basic.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/basic.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/basic.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/basic.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx .v1/repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx .v1/repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx .v1/repro.js 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx tsx .v1/repro.js 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx tsx .v1/repro.js 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx tsx .v1/repro.js 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx tsx .v1/repro.js 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx tsx .v1/repro.js 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd .v1 && npx tsx repro.js 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+          "exitCode": 0
+        },
+        {
+          "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+          "exitCode": 0
+        },
+        {
+          "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+          "exitCode": 0
+        },
+        {
+          "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+          "exitCode": 0
+        },
+        {
+          "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+          "exitCode": 0
+        },
+        {
+          "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+          "exitCode": 0
+        },
+        {
+          "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+          "exitCode": 0
+        },
+        {
+          "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run tests/ 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 49,
+      "duplicateReadTargets": 6,
+      "duplicateEditTargets": 6,
+      "toolFailureCount": 24,
+      "topRepetitions": [
+        {
+          "signature": "fdc6c438f854",
+          "tool": "bash",
+          "target": "npx vitest run tests/ 2>&1",
+          "count": 10
+        },
+        {
+          "signature": "5dbb02f991fa",
+          "tool": "write",
+          "target": ".v1/repro.js",
+          "count": 4
+        },
+        {
+          "signature": "cf3e31c8a5d8",
+          "tool": "bash",
+          "target": "cd .v1 && npx tsx repro.js 2>&1",
+          "count": 4
+        },
+        {
+          "signature": "fa99120b4aff",
+          "tool": "bash",
+          "target": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "5eaa0363d758",
+          "tool": "read",
+          "target": "tests/cases.spec.ts",
+          "count": 2
+        },
+        {
+          "signature": "aa8fa7841d2d",
+          "tool": "read",
+          "target": "src/cases.spec.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-005-run-001-8beefc",
+    "caseId": "hard-005",
+    "agentVersion": "agent-v1",
+    "timeline": [
+      {
+        "index": 25,
+        "timestamp": "2026-08-31T04:19:16.776Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 26,
+        "timestamp": "2026-08-31T04:19:16.776Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 41,
+        "timestamp": "2026-08-31T04:19:18.359Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-31T04:19:18.359Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 57,
+        "timestamp": "2026-08-31T04:19:20.232Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-31T04:19:20.232Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 73,
+        "timestamp": "2026-08-31T04:19:22.146Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 74,
+        "timestamp": "2026-08-31T04:19:22.146Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 89,
+        "timestamp": "2026-08-31T04:19:26.245Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/cases.spec.ts"
+      },
+      {
+        "index": 90,
+        "timestamp": "2026-08-31T04:19:26.245Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tests/cases.spec.ts"
+      },
+      {
+        "index": 105,
+        "timestamp": "2026-08-31T04:19:27.933Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/cases.spec.ts"
+      },
+      {
+        "index": 106,
+        "timestamp": "2026-08-31T04:19:27.933Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/cases.spec.ts"
+      },
+      {
+        "index": 121,
+        "timestamp": "2026-08-31T04:19:30.471Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 122,
+        "timestamp": "2026-08-31T04:19:30.471Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 137,
+        "timestamp": "2026-08-31T04:19:37.520Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1 | head -100",
+        "commandClass": "test"
+      },
+      {
+        "index": 138,
+        "timestamp": "2026-08-31T04:19:37.520Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1 | head -100",
+        "commandClass": "test"
+      },
+      {
+        "index": 157,
+        "timestamp": "2026-08-31T04:19:52.954Z",
+        "event": "other",
+        "tool": "glob",
+        "target": "**/*.spec.ts"
+      },
+      {
+        "index": 158,
+        "timestamp": "2026-08-31T04:19:52.954Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "other",
+        "tool": "glob",
+        "target": "**/*.spec.ts"
+      },
+      {
+        "index": 173,
+        "timestamp": "2026-08-31T04:19:56.306Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "find . -name \"*.spec.ts\" -o -name \"*.test.ts\" 2>/dev/null",
+        "commandClass": "general"
+      },
+      {
+        "index": 174,
+        "timestamp": "2026-08-31T04:19:56.306Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "find . -name \"*.spec.ts\" -o -name \"*.test.ts\" 2>/dev/null",
+        "commandClass": "general"
+      },
+      {
+        "index": 193,
+        "timestamp": "2026-08-31T04:19:59.775Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 194,
+        "timestamp": "2026-08-31T04:19:59.775Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 209,
+        "timestamp": "2026-08-31T04:20:02.293Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/basic.test.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 210,
+        "timestamp": "2026-08-31T04:20:02.293Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/basic.test.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 235,
+        "timestamp": "2026-08-31T04:20:22.071Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/repro.js"
+      },
+      {
+        "index": 236,
+        "timestamp": "2026-08-31T04:20:22.071Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/repro.js"
+      },
+      {
+        "index": 251,
+        "timestamp": "2026-08-31T04:20:24.929Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx .v1/repro.js 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 252,
+        "timestamp": "2026-08-31T04:20:24.929Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx .v1/repro.js 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 271,
+        "timestamp": "2026-08-31T04:20:36.109Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/repro.js"
+      },
+      {
+        "index": 272,
+        "timestamp": "2026-08-31T04:20:36.109Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/repro.js"
+      },
+      {
+        "index": 287,
+        "timestamp": "2026-08-31T04:20:45.399Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd .v1 && npx tsx repro.js 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 288,
+        "timestamp": "2026-08-31T04:20:45.399Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd .v1 && npx tsx repro.js 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 309,
+        "timestamp": "2026-08-31T04:21:06.425Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 310,
+        "timestamp": "2026-08-31T04:21:06.425Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 325,
+        "timestamp": "2026-08-31T04:21:08.606Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd .v1 && npx tsx repro.js 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 326,
+        "timestamp": "2026-08-31T04:21:08.607Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd .v1 && npx tsx repro.js 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 347,
+        "timestamp": "2026-08-31T04:21:24.951Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 348,
+        "timestamp": "2026-08-31T04:21:24.951Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 373,
+        "timestamp": "2026-08-31T04:21:41.883Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/ 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 374,
+        "timestamp": "2026-08-31T04:21:41.883Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/ 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 399,
+        "timestamp": "2026-08-31T04:21:53.679Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 400,
+        "timestamp": "2026-08-31T04:21:53.679Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 425,
+        "timestamp": "2026-08-31T04:22:12.810Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/repro2.js"
+      },
+      {
+        "index": 426,
+        "timestamp": "2026-08-31T04:22:12.810Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/repro2.js"
+      },
+      {
+        "index": 441,
+        "timestamp": "2026-08-31T04:22:16.439Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd .v1 && npx tsx repro2.js 2>&1",
+        "commandClass": "general"
+      },
+      {
+        "index": 442,
+        "timestamp": "2026-08-31T04:22:16.439Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd .v1 && npx tsx repro2.js 2>&1",
+        "commandClass": "general"
+      },
+      {
+        "index": 463,
+        "timestamp": "2026-08-31T04:22:29.670Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd .v1 && npx tsx -e \"\nconst { parse, stringify } = require('../src/index.ts');\nconst data = parse('/:test');\nconst TokenData = data.constructor;\n\n// ",
+        "commandClass": "general"
+      },
+      {
+        "index": 464,
+        "timestamp": "2026-08-31T04:22:29.670Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd .v1 && npx tsx -e \"\nconst { parse, stringify } = require('../src/index.ts');\nconst data = parse('/:test');\nconst TokenData = data.constructor;\n\n// ",
+        "commandClass": "general"
+      },
+      {
+        "index": 481,
+        "timestamp": "2026-08-31T04:22:48.608Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd .v1 && npx tsx -e \"\nconst { parse } = require('../src/index.ts');\n\n// Without quotes, é gets absorbed into the param name\nconst parsed = parse('/:t",
+        "commandClass": "general"
+      },
+      {
+        "index": 482,
+        "timestamp": "2026-08-31T04:22:48.608Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd .v1 && npx tsx -e \"\nconst { parse } = require('../src/index.ts');\n\n// Without quotes, é gets absorbed into the param name\nconst parsed = parse('/:t",
+        "commandClass": "general"
+      },
+      {
+        "index": 499,
+        "timestamp": "2026-08-31T04:23:05.707Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx -e \"\nimport { parse } from './src/index.ts';\n// Without quotes, é gets absorbed into the param name\nconst parsed = parse('/:testé');\nconsole.l",
+        "commandClass": "general"
+      },
+      {
+        "index": 500,
+        "timestamp": "2026-08-31T04:23:05.707Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx -e \"\nimport { parse } from './src/index.ts';\n// Without quotes, é gets absorbed into the param name\nconst parsed = parse('/:testé');\nconsole.l",
+        "commandClass": "general"
+      },
+      {
+        "index": 517,
+        "timestamp": "2026-08-31T04:23:16.792Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+        "commandClass": "test"
+      },
+      {
+        "index": 518,
+        "timestamp": "2026-08-31T04:23:16.792Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+        "commandClass": "test"
+      },
+      {
+        "index": 537,
+        "timestamp": "2026-08-31T04:23:31.999Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx -e \"\nimport { parse } from './src/index.ts';\n// Parse é case from the test suite\nconst parsed = parse('//\"test/\"é');\nconsole.log(JSON.stringif",
+        "commandClass": "general"
+      },
+      {
+        "index": 538,
+        "timestamp": "2026-08-31T04:23:31.999Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx -e \"\nimport { parse } from './src/index.ts';\n// Parse é case from the test suite\nconst parsed = parse('//\"test/\"é');\nconsole.log(JSON.stringif",
+        "commandClass": "general"
+      },
+      {
+        "index": 555,
+        "timestamp": "2026-08-31T04:23:44.948Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:/\"test/\"é\"); console.log(JSON.stringify(p.tokens));'",
+        "commandClass": "test"
+      },
+      {
+        "index": 556,
+        "timestamp": "2026-08-31T04:23:44.948Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:/\"test/\"é\"); console.log(JSON.stringify(p.tokens));'",
+        "commandClass": "test"
+      },
+      {
+        "index": 575,
+        "timestamp": "2026-08-31T04:24:03.068Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "git diff HEAD",
+        "commandClass": "git"
+      },
+      {
+        "index": 576,
+        "timestamp": "2026-08-31T04:24:03.068Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "git diff HEAD",
+        "commandClass": "git"
+      },
+      {
+        "index": 595,
+        "timestamp": "2026-08-31T04:24:06.860Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/ 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 596,
+        "timestamp": "2026-08-31T04:24:06.860Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/ 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 621,
+        "timestamp": "2026-08-31T04:24:31.602Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Test case from STRINGIFY_TESTS: param followed by astral ID_Continue\nco",
+        "commandClass": "general"
+      },
+      {
+        "index": 622,
+        "timestamp": "2026-08-31T04:24:31.602Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Test case from STRINGIFY_TESTS: param followed by astral ID_Continue\nco",
+        "commandClass": "general"
+      },
+      {
+        "index": 639,
+        "timestamp": "2026-08-31T04:24:52.474Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/verify.js"
+      },
+      {
+        "index": 640,
+        "timestamp": "2026-08-31T04:24:52.474Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/verify.js"
+      },
+      {
+        "index": 655,
+        "timestamp": "2026-08-31T04:24:55.291Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx .v1/verify.js 2>&1",
+        "commandClass": "general"
+      },
+      {
+        "index": 656,
+        "timestamp": "2026-08-31T04:24:55.291Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx .v1/verify.js 2>&1",
+        "commandClass": "general"
+      },
+      {
+        "index": 677,
+        "timestamp": "2026-08-31T04:25:04.696Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+        "commandClass": "test"
+      },
+      {
+        "index": 678,
+        "timestamp": "2026-08-31T04:25:04.696Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+        "commandClass": "test"
+      },
+      {
+        "index": 713,
+        "timestamp": "2026-08-31T04:25:12.537Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/ 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 714,
+        "timestamp": "2026-08-31T04:25:12.537Z",
+        "phase": "reconnaissance",
+        "iteration": 1,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/ 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 737,
+        "timestamp": "2026-08-31T04:25:30.953Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 738,
+        "timestamp": "2026-08-31T04:25:30.953Z",
+        "phase": "reconnaissance",
+        "iteration": 1,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 763,
+        "timestamp": "2026-08-31T04:25:47.284Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst dat",
+        "commandClass": "test"
+      },
+      {
+        "index": 764,
+        "timestamp": "2026-08-31T04:25:47.284Z",
+        "phase": "reconnaissance",
+        "iteration": 1,
+        "event": "bash",
+        "tool": "bash",
+        "target": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst dat",
+        "commandClass": "test"
+      },
+      {
+        "index": 781,
+        "timestamp": "2026-08-31T04:26:03.540Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"tes",
+        "commandClass": "test"
+      },
+      {
+        "index": 782,
+        "timestamp": "2026-08-31T04:26:03.540Z",
+        "phase": "reconnaissance",
+        "iteration": 1,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"tes",
+        "commandClass": "test"
+      },
+      {
+        "index": 819,
+        "timestamp": "2026-08-31T04:26:22.138Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/ 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 820,
+        "timestamp": "2026-08-31T04:26:22.138Z",
+        "phase": "reconnaissance",
+        "iteration": 2,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/ 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 845,
+        "timestamp": "2026-08-31T04:26:37.581Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"tes",
+        "commandClass": "test"
+      },
+      {
+        "index": 846,
+        "timestamp": "2026-08-31T04:26:37.581Z",
+        "phase": "reconnaissance",
+        "iteration": 2,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"tes",
+        "commandClass": "test"
+      },
+      {
+        "index": 885,
+        "timestamp": "2026-08-31T04:26:51.422Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/ 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 886,
+        "timestamp": "2026-08-31T04:26:51.422Z",
+        "phase": "reconnaissance",
+        "iteration": 3,
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run tests/ 2>&1",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 25,
+        "timestamp": "2026-08-31T04:19:16.776Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 137,
+        "timestamp": "2026-08-31T04:19:37.520Z",
+        "detail": "npx vitest run 2>&1 | head -100"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 235,
+        "timestamp": "2026-08-31T04:20:22.071Z",
+        "detail": ".v1/repro.js"
+      },
+      {
+        "type": "first_repro",
+        "eventIndex": 251,
+        "timestamp": "2026-08-31T04:20:24.929Z",
+        "detail": "npx tsx .v1/repro.js 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 257,
+        "timestamp": "2026-08-31T04:20:31.906Z",
+        "detail": "npx tsx .v1/repro.js 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 258,
+        "timestamp": "2026-08-31T04:20:31.906Z",
+        "detail": "npx tsx .v1/repro.js 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 259,
+        "timestamp": "2026-08-31T04:20:31.915Z",
+        "detail": "npx tsx .v1/repro.js 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 260,
+        "timestamp": "2026-08-31T04:20:31.915Z",
+        "detail": "npx tsx .v1/repro.js 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 261,
+        "timestamp": "2026-08-31T04:20:31.915Z",
+        "detail": "npx tsx .v1/repro.js 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 262,
+        "timestamp": "2026-08-31T04:20:31.915Z",
+        "detail": "npx tsx .v1/repro.js 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 359,
+        "timestamp": "2026-08-31T04:21:35.192Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 360,
+        "timestamp": "2026-08-31T04:21:35.192Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 361,
+        "timestamp": "2026-08-31T04:21:35.197Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 362,
+        "timestamp": "2026-08-31T04:21:35.197Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 363,
+        "timestamp": "2026-08-31T04:21:35.197Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 364,
+        "timestamp": "2026-08-31T04:21:35.197Z",
+        "detail": "npx vitest run 2>&1"
+      }
+    ],
+    "errors": [
+      {
+        "index": 91,
+        "tool": "read",
+        "error": "ENOENT: no such file or directory, access 'C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\\tests\\cases.spec.ts'"
+      },
+      {
+        "index": 92,
+        "tool": "read",
+        "error": "ENOENT: no such file or directory, access 'C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\\tests\\cases.spec.ts'"
+      },
+      {
+        "index": 93,
+        "tool": "read",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 94,
+        "tool": "read",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 95,
+        "tool": "read",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 96,
+        "tool": "read",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 159,
+        "tool": "glob",
+        "error": "Tool glob not found"
+      },
+      {
+        "index": 160,
+        "tool": "glob",
+        "error": "Tool glob not found"
+      },
+      {
+        "index": 161,
+        "tool": "glob",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 162,
+        "tool": "glob",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 163,
+        "tool": "glob",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 164,
+        "tool": "glob",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 257,
+        "tool": "bash",
+        "error": "node:internal/modules/cjs/loader:1430\r\n  const err = new Error(message);\r\n              ^\r\n\r\nError: Cannot find module './src/index.ts'\r\nRequire stack:\r\n- C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\\.v1\\repro.js\r\n    at node:internal/modules/cjs/loader:1430:15\r\n    at nextResolveSimple (C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\node_modules\\tsx\\dist\\register-OY9cqBEN.cjs:10:1006)\r\n    at C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\node_modules\\tsx"
+      },
+      {
+        "index": 258,
+        "tool": "bash",
+        "error": "node:internal/modules/cjs/loader:1430\r\n  const err = new Error(message);\r\n              ^\r\n\r\nError: Cannot find module './src/index.ts'\r\nRequire stack:\r\n- C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\\.v1\\repro.js\r\n    at node:internal/modules/cjs/loader:1430:15\r\n    at nextResolveSimple (C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\node_modules\\tsx\\dist\\register-OY9cqBEN.cjs:10:1006)\r\n    at C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\node_modules\\tsx"
+      },
+      {
+        "index": 259,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 260,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 261,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 262,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 359,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.spec.ts ]\nError: No test suite found in file C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V/src/cases.spec.ts\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed | 1 passed (2)\n      Tests  2 passed (2)\n   Start at  05:21:33\n   Duration  1.83s (transform 677ms, "
+      },
+      {
+        "index": 360,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.spec.ts ]\nError: No test suite found in file C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V/src/cases.spec.ts\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed | 1 passed (2)\n      Tests  2 passed (2)\n   Start at  05:21:33\n   Duration  1.83s (transform 677ms, "
+      },
+      {
+        "index": 361,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 362,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 363,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 364,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 137,
+        "command": "npx vitest run 2>&1 | head -100",
+        "exitCode": 0
+      },
+      {
+        "index": 138,
+        "command": "npx vitest run 2>&1 | head -100",
+        "exitCode": 0
+      },
+      {
+        "index": 143,
+        "command": "npx vitest run 2>&1 | head -100",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.s"
+      },
+      {
+        "index": 144,
+        "command": "npx vitest run 2>&1 | head -100",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.s"
+      },
+      {
+        "index": 145,
+        "command": "npx vitest run 2>&1 | head -100",
+        "exitCode": 0
+      },
+      {
+        "index": 146,
+        "command": "npx vitest run 2>&1 | head -100",
+        "exitCode": 0
+      },
+      {
+        "index": 147,
+        "command": "npx vitest run 2>&1 | head -100",
+        "exitCode": 0
+      },
+      {
+        "index": 148,
+        "command": "npx vitest run 2>&1 | head -100",
+        "exitCode": 0
+      },
+      {
+        "index": 209,
+        "command": "npx vitest run tests/basic.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 210,
+        "command": "npx vitest run tests/basic.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 221,
+        "command": "npx vitest run tests/basic.test.ts 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:20:13\n   Duration  1.09s (transf"
+      },
+      {
+        "index": 222,
+        "command": "npx vitest run tests/basic.test.ts 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:20:13\n   Duration  1.09s (transf"
+      },
+      {
+        "index": 223,
+        "command": "npx vitest run tests/basic.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 224,
+        "command": "npx vitest run tests/basic.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 225,
+        "command": "npx vitest run tests/basic.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 226,
+        "command": "npx vitest run tests/basic.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 251,
+        "command": "npx tsx .v1/repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 252,
+        "command": "npx tsx .v1/repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 257,
+        "command": "npx tsx .v1/repro.js 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "node:internal/modules/cjs/loader:1430\r\n  const err = new Error(message);\r\n              ^\r\n\r\nError: Cannot find module './src/index.ts'\r\nRequire stack:\r\n- C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-ha"
+      },
+      {
+        "index": 258,
+        "command": "npx tsx .v1/repro.js 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "node:internal/modules/cjs/loader:1430\r\n  const err = new Error(message);\r\n              ^\r\n\r\nError: Cannot find module './src/index.ts'\r\nRequire stack:\r\n- C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-ha"
+      },
+      {
+        "index": 259,
+        "command": "npx tsx .v1/repro.js 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 260,
+        "command": "npx tsx .v1/repro.js 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 261,
+        "command": "npx tsx .v1/repro.js 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 262,
+        "command": "npx tsx .v1/repro.js 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 287,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 288,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 295,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "Stringified: \"/:test𝛼\"\nExpected:    \"/:\\\"test\\\"𝛼\"\nMatch: false\nRe-stringified: \"/:test𝛼\"\nRound-trip OK: true\n\n--- Without quotes, what happens ---\nBad parsed: [\n  {\n    \"type\": \"text\",\n    \"value\":"
+      },
+      {
+        "index": 296,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "Stringified: \"/:test𝛼\"\nExpected:    \"/:\\\"test\\\"𝛼\"\nMatch: false\nRe-stringified: \"/:test𝛼\"\nRound-trip OK: true\n\n--- Without quotes, what happens ---\nBad parsed: [\n  {\n    \"type\": \"text\",\n    \"value\":"
+      },
+      {
+        "index": 297,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 298,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 299,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 300,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 325,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 326,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 333,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "Stringified: \"/:\\\"test\\\"𝛼\"\nExpected:    \"/:\\\"test\\\"𝛼\"\nMatch: true\nRe-stringified: \"/:\\\"test\\\"𝛼\"\nRound-trip OK: true\n\n--- Without quotes, what happens ---\nBad parsed: [\n  {\n    \"type\": \"text\",\n    \""
+      },
+      {
+        "index": 334,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "Stringified: \"/:\\\"test\\\"𝛼\"\nExpected:    \"/:\\\"test\\\"𝛼\"\nMatch: true\nRe-stringified: \"/:\\\"test\\\"𝛼\"\nRound-trip OK: true\n\n--- Without quotes, what happens ---\nBad parsed: [\n  {\n    \"type\": \"text\",\n    \""
+      },
+      {
+        "index": 335,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 336,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 337,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 338,
+        "command": "cd .v1 && npx tsx repro.js 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 347,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 348,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 359,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.s"
+      },
+      {
+        "index": 360,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.s"
+      },
+      {
+        "index": 361,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 362,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 363,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 364,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 373,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 374,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 385,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:21:48\n   Duration  1.00s (transf"
+      },
+      {
+        "index": 386,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:21:48\n   Duration  1.00s (transf"
+      },
+      {
+        "index": 387,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 388,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 389,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 390,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 399,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 400,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 411,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:22:02\n   Duration  1.35s (transf"
+      },
+      {
+        "index": 412,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:22:02\n   Duration  1.35s (transf"
+      },
+      {
+        "index": 413,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 414,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 415,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 416,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 517,
+        "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+        "exitCode": 0
+      },
+      {
+        "index": 518,
+        "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+        "exitCode": 0
+      },
+      {
+        "index": 523,
+        "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+        "exitCode": 0,
+        "outputSnippet": "[{\"type\":\"text\",\"value\":\"/\"},{\"type\":\"param\",\"name\":\"testé\"}]\n"
+      },
+      {
+        "index": 524,
+        "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+        "exitCode": 0,
+        "outputSnippet": "[{\"type\":\"text\",\"value\":\"/\"},{\"type\":\"param\",\"name\":\"testé\"}]\n"
+      },
+      {
+        "index": 525,
+        "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+        "exitCode": 0
+      },
+      {
+        "index": 526,
+        "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+        "exitCode": 0
+      },
+      {
+        "index": 527,
+        "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+        "exitCode": 0
+      },
+      {
+        "index": 528,
+        "command": "npx tsx -e \"import { parse } from './src/index.ts'; const parsed = parse('/:testé'); console.log(JSON.stringify(parsed.tokens));\"",
+        "exitCode": 0
+      },
+      {
+        "index": 555,
+        "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+        "exitCode": 0
+      },
+      {
+        "index": 556,
+        "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+        "exitCode": 0
+      },
+      {
+        "index": 561,
+        "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+        "exitCode": 0,
+        "outputSnippet": "[{\"type\":\"text\",\"value\":\"/\"},{\"type\":\"param\",\"name\":\"test\"},{\"type\":\"text\",\"value\":\"é\"}]\n"
+      },
+      {
+        "index": 562,
+        "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+        "exitCode": 0,
+        "outputSnippet": "[{\"type\":\"text\",\"value\":\"/\"},{\"type\":\"param\",\"name\":\"test\"},{\"type\":\"text\",\"value\":\"é\"}]\n"
+      },
+      {
+        "index": 563,
+        "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+        "exitCode": 0
+      },
+      {
+        "index": 564,
+        "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+        "exitCode": 0
+      },
+      {
+        "index": 565,
+        "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+        "exitCode": 0
+      },
+      {
+        "index": 566,
+        "command": "npx tsx -e 'import { parse } from \"./src/index.ts\"; const p = parse(\"/:\\\"test\\\"é\"); console.log(JSON.stringify(p.tokens));'",
+        "exitCode": 0
+      },
+      {
+        "index": 595,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 596,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 607,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:24:22\n   Duration  1.65s (transf"
+      },
+      {
+        "index": 608,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:24:22\n   Duration  1.65s (transf"
+      },
+      {
+        "index": 609,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 610,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 611,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 612,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 677,
+        "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+        "exitCode": 0
+      },
+      {
+        "index": 678,
+        "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+        "exitCode": 0
+      },
+      {
+        "index": 681,
+        "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 682,
+        "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 683,
+        "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+        "exitCode": 0
+      },
+      {
+        "index": 684,
+        "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+        "exitCode": 0
+      },
+      {
+        "index": 685,
+        "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+        "exitCode": 0
+      },
+      {
+        "index": 686,
+        "command": "rm -rf .v1/repro.js .v1/repro2.js .v1/verify.js",
+        "exitCode": 0
+      },
+      {
+        "index": 713,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 714,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 723,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:25:26\n   Duration  1.42s (transf"
+      },
+      {
+        "index": 724,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:25:26\n   Duration  1.42s (transf"
+      },
+      {
+        "index": 725,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 726,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 727,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 728,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 737,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 738,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 749,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:25:40\n   Duration  1.06s (transf"
+      },
+      {
+        "index": 750,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:25:40\n   Duration  1.06s (transf"
+      },
+      {
+        "index": 751,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 752,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 753,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 754,
+        "command": "npx vitest run --exclude='src/cases.spec.ts' 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 763,
+        "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+        "exitCode": 0
+      },
+      {
+        "index": 764,
+        "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+        "exitCode": 0
+      },
+      {
+        "index": 767,
+        "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 768,
+        "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 769,
+        "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+        "exitCode": 0
+      },
+      {
+        "index": 770,
+        "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+        "exitCode": 0
+      },
+      {
+        "index": 771,
+        "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+        "exitCode": 0
+      },
+      {
+        "index": 772,
+        "command": "npx tsx -e '\nimport { parse, stringify, TokenData } from \"./src/index.ts\";\n\n// Reproduce the exact bug: param followed by astral ID_Continue\nconst data = new TokenData([\n  { type: \"text\", value: \"/\" }",
+        "exitCode": 0
+      },
+      {
+        "index": 781,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0
+      },
+      {
+        "index": 782,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0
+      },
+      {
+        "index": 787,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0,
+        "outputSnippet": "Astral ID_Continue: PASS\nRound-trip: PASS\n"
+      },
+      {
+        "index": 788,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0,
+        "outputSnippet": "Astral ID_Continue: PASS\nRound-trip: PASS\n"
+      },
+      {
+        "index": 789,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0
+      },
+      {
+        "index": 790,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0
+      },
+      {
+        "index": 791,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0
+      },
+      {
+        "index": 792,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0
+      },
+      {
+        "index": 819,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 820,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 831,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:26:32\n   Duration  1.15s (transf"
+      },
+      {
+        "index": 832,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:26:32\n   Duration  1.15s (transf"
+      },
+      {
+        "index": 833,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 834,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 835,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 836,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 845,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0
+      },
+      {
+        "index": 846,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0
+      },
+      {
+        "index": 853,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0,
+        "outputSnippet": "Astral ID_Continue quoting: PASS\nRound-trip: PASS\n"
+      },
+      {
+        "index": 854,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0,
+        "outputSnippet": "Astral ID_Continue quoting: PASS\nRound-trip: PASS\n"
+      },
+      {
+        "index": 855,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0
+      },
+      {
+        "index": 856,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0
+      },
+      {
+        "index": 857,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0
+      },
+      {
+        "index": 858,
+        "command": "npx tsx --eval 'import { parse, stringify, TokenData } from \"./src/index.ts\"; const d = new TokenData([{type:\"text\",value:\"/\"},{type:\"param\",name:\"test\"},{type:\"text\",value:\"\\u{1D6FC}\"}]); const r = s",
+        "exitCode": 0
+      },
+      {
+        "index": 885,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 886,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 897,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:27:00\n   Duration  1.12s (transf"
+      },
+      {
+        "index": 898,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-8beefc-Vmw29V\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  05:27:00\n   Duration  1.12s (transf"
+      },
+      {
+        "index": 899,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 900,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 901,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 902,
+        "command": "npx vitest run tests/ 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

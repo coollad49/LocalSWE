@@ -1,0 +1,101 @@
+diff --git a/bun.lock b/bun.lock
+new file mode 100644
+index 0000000..5ae1b13
+--- /dev/null
++++ b/bun.lock
+@@ -0,0 +1,21 @@
++{
++  "lockfileVersion": 1,
++  "configVersion": 1,
++  "workspaces": {
++    "": {
++      "name": "async-queue",
++      "devDependencies": {
++        "@types/bun": "latest",
++      },
++    },
++  },
++  "packages": {
++    "@types/bun": ["@types/bun@1.4.0", "", { "dependencies": { "bun-types": "1.4.0" } }, "sha512-K+lZULY23vRgK/CfTjFIV+tyifaNdSMlPh9j+6mQ/cLfpOznLyAuzgV/JQysyECpkBQLVMSyvjlr2fBUSA9wFQ=="],
++
++    "@types/node": ["@types/node@26.4.0", "", { "dependencies": { "undici-types": "~8.3.0" } }, "sha512-faiGnoIrLH/V8cibOMEAZ8pMw6oXqSukl29ra4mN8GdaB2ZewzeaLj+INpV5N+Z1eKWzY+IzaIZH2EIR6YZRNQ=="],
++
++    "bun-types": ["bun-types@1.4.0", "", { "dependencies": { "@types/node": "*" } }, "sha512-iIKw23BspnQQYd3prITOBxeUsxBHnwzX6YJfGMuNOZzeNcMmVqzIIVGRm1l69ogaPQmb4wB6BN8mA5bE9YuC5Q=="],
++
++    "undici-types": ["undici-types@8.3.0", "", {}, "sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ=="],
++  }
++}
+diff --git a/package-lock.json b/package-lock.json
+new file mode 100644
+index 0000000..07ad196
+--- /dev/null
++++ b/package-lock.json
+@@ -0,0 +1,47 @@
++{
++  "name": "async-queue",
++  "version": "1.0.0",
++  "lockfileVersion": 3,
++  "requires": true,
++  "packages": {
++    "": {
++      "name": "async-queue",
++      "version": "1.0.0",
++      "license": "MIT",
++      "devDependencies": {
++        "@types/bun": "latest"
++      }
++    },
++    "node_modules/@types/bun": {
++      "version": "1.4.0",
++      "resolved": "https://registry.npmjs.org/@types/bun/-/bun-1.4.0.tgz",
++      "integrity": "sha512-K+lZULY23vRgK/CfTjFIV+tyifaNdSMlPh9j+6mQ/cLfpOznLyAuzgV/JQysyECpkBQLVMSyvjlr2fBUSA9wFQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "bun-types": "1.4.0"
++      }
++    },
++    "node_modules/@types/node": {
++      "version": "26.4.0",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "undici-types": "~8.3.0"
++      }
++    },
++    "node_modules/bun-types": {
++      "version": "1.4.0",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@types/node": "*"
++      }
++    },
++    "node_modules/undici-types": {
++      "version": "8.3.0",
++      "dev": true,
++      "license": "MIT"
++    }
++  }
++}
+diff --git a/src/queue.ts b/src/queue.ts
+index 104f669..630ebfb 100644
+--- a/src/queue.ts
++++ b/src/queue.ts
+@@ -84,8 +84,14 @@ export class AsyncQueue<T = unknown> {
+       await handler(current.payload);
+       return { success: true, job: current };
+     } catch (err) {
+-      // BUG: swallows error and reports success
+-      return { success: true, job: current };
++      if (current.attempts < current.maxAttempts) {
++        if (this.paused) {
++          this.pendingJobs.push(current);
++        } else {
++          this.queue.push(current);
++        }
++      }
++      return { success: false, job: current };
+     }
+   }
+ 

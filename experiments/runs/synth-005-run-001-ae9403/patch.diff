@@ -1,0 +1,12 @@
+diff --git a/src/money.ts b/src/money.ts
+index 1a9728c..a67c7bd 100644
+--- a/src/money.ts
++++ b/src/money.ts
+@@ -56,6 +56,5 @@ export function convertCurrency(money: Money, targetCurrency: string, rates: Rec
+   const rate = rates[key];
+   if (rate === undefined) throw new Error(`Missing exchange rate: ${key}`);
+   const converted = money.amount * rate;
+-  // BUG: truncates instead of rounding
+-  return { amount: Math.floor(converted * 100) / 100, currency: target };
++  return { amount: roundToCents(converted), currency: target };
+ }

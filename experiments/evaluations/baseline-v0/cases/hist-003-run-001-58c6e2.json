@@ -1,0 +1,77 @@
+{
+  "runId": "hist-003-run-001-58c6e2",
+  "caseId": "hist-003",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 1462,
+  "startedAt": "2026-08-30T15:38:17.995Z",
+  "completedAt": "2026-08-30T15:38:19.457Z",
+  "caseMeta": {
+    "repository": "tinyspy",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "state-management",
+      "api-behavior"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 232,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-003-x7veGH\\patch-1788104298963.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 259,
+      "command": "bun run benchmark\\cases\\hist-003\\public\\reproduce.ts",
+      "stdout": "before: foo.f()=original own=undefined\nbefore descriptors: {}\nafter spy: foo.f()=mocked ownDesc={\"writable\":true,\"enumerable\":false,\"configurable\":true}\nafter restore: foo.f()=original ownDesc=[object Object]\nall own descriptors after restore: {\"f\":{\"writable\":true,\"enumerable\":false,\"configurable\":true}}\nFAIL: leak detected - own property still exists after restore (buggy)\n{\n  \"writable\": true,\n  \"enumerable\": false,\n  \"configurable\": true\n}\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "metrics": {
+    "durationMs": 603706,
+    "totalTurns": 100,
+    "toolCalls": 46,
+    "commandsExecuted": 18,
+    "filesInspected": 12,
+    "filesChanged": 1,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": null,
+    "outputTokens": null,
+    "totalTokens": null
+  },
+  "cost": {
+    "inputTokens": null,
+    "outputTokens": null,
+    "totalTokens": null,
+    "inputCostUsd": null,
+    "outputCostUsd": null,
+    "totalCostUsd": null,
+    "costUsd": null,
+    "costStatus": "unavailable",
+    "costSource": "none",
+    "pricingModel": "mimo-v2.5"
+  }
+}

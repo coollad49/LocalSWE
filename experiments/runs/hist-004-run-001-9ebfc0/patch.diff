@@ -1,0 +1,75 @@
+diff --git a/lib/index.js b/lib/index.js
+index b4d8a0a..1b5f05a 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -5,7 +5,7 @@ function toArr(any) {
+ function toVal(out, key, val, opts) {
+ 	var x, old=out[key], nxt=(
+ 		!!~opts.string.indexOf(key) ? (val == null || val === true ? '' : String(val))
+-		: !!~opts.boolean.indexOf(key) ? (val === 'false' ? false : val === 'true' || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))
++		: !!~opts.boolean.indexOf(key) ? (typeof val === 'boolean' ? val : val === 'false' ? false : val === 'true' || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))
+ 		: typeof val === 'boolean' ? val
+ 		: (x = +val,x * 0 === 0) ? x : val
+ 	);
+diff --git a/package-lock.json b/package-lock.json
+new file mode 100644
+index 0000000..876f65e
+--- /dev/null
++++ b/package-lock.json
+@@ -0,0 +1,56 @@
++{
++  "name": "mri",
++  "version": "1.1.4",
++  "lockfileVersion": 3,
++  "requires": true,
++  "packages": {
++    "": {
++      "name": "mri",
++      "version": "1.1.4",
++      "license": "MIT",
++      "devDependencies": {
++        "@types/bun": "latest"
++      },
++      "engines": {
++        "node": ">=4"
++      }
++    },
++    "node_modules/@types/bun": {
++      "version": "1.4.0",
++      "resolved": "https://registry.npmjs.org/@types/bun/-/bun-1.4.0.tgz",
++      "integrity": "sha512-K+lZULY23vRgK/CfTjFIV+tyifaNdSMlPh9j+6mQ/cLfpOznLyAuzgV/JQysyECpkBQLVMSyvjlr2fBUSA9wFQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "bun-types": "1.4.0"
++      }
++    },
++    "node_modules/@types/node": {
++      "version": "26.4.0",
++      "resolved": "https://registry.npmjs.org/@types/node/-/node-26.4.0.tgz",
++      "integrity": "sha512-faiGnoIrLH/V8cibOMEAZ8pMw6oXqSukl29ra4mN8GdaB2ZewzeaLj+INpV5N+Z1eKWzY+IzaIZH2EIR6YZRNQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "undici-types": "~8.3.0"
++      }
++    },
++    "node_modules/bun-types": {
++      "version": "1.4.0",
++      "resolved": "https://registry.npmjs.org/bun-types/-/bun-types-1.4.0.tgz",
++      "integrity": "sha512-iIKw23BspnQQYd3prITOBxeUsxBHnwzX6YJfGMuNOZzeNcMmVqzIIVGRm1l69ogaPQmb4wB6BN8mA5bE9YuC5Q==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@types/node": "*"
++      }
++    },
++    "node_modules/undici-types": {
++      "version": "8.3.0",
++      "resolved": "https://registry.npmjs.org/undici-types/-/undici-types-8.3.0.tgz",
++      "integrity": "sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==",
++      "dev": true,
++      "license": "MIT"
++    }
++  }
++}

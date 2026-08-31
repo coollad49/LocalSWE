@@ -1,0 +1,80 @@
+{
+  "runId": "hard-002-run-001-e88bde",
+  "caseId": "hard-002",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 2054,
+  "startedAt": "2026-08-30T15:37:08.312Z",
+  "completedAt": "2026-08-30T15:37:10.366Z",
+  "caseMeta": {
+    "repository": "qs",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "parsing",
+      "boundary",
+      "state-management"
+    ]
+  },
+  "metrics": {
+    "durationMs": 601213,
+    "totalTurns": 76,
+    "toolCalls": 34,
+    "commandsExecuted": 20,
+    "filesInspected": 5,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": null,
+    "outputTokens": null,
+    "totalTokens": null
+  },
+  "cost": {
+    "inputTokens": null,
+    "outputTokens": null,
+    "totalTokens": null,
+    "inputCostUsd": null,
+    "outputCostUsd": null,
+    "totalCostUsd": null,
+    "costUsd": null,
+    "costStatus": "unavailable",
+    "costSource": "none",
+    "pricingModel": "mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 516,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-002-dCfcbj\\patch-1788104229287.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 560,
+      "command": "bun run benchmark\\cases\\hard-002\\public\\reproduce.ts",
+      "stdout": "Test overflow flatten: FAIL\n  result={\"a\":{\"0\":\"1\",\"1\":\"2\",\"2\":\"3\",\"3\":\"4\",\"4\":\"5\",\"5\":\"6\",\"6\":[\"7\",\"8\"]}}\n  expected={\"a\":{\"0\":\"1\",\"1\":\"2\",\"2\":\"3\",\"3\":\"4\",\"4\":\"5\",\"5\":\"6\",\"6\":\"7\",\"7\":\"8\"}}\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  }
+}

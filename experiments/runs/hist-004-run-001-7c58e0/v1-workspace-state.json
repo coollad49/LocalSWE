@@ -1,0 +1,423 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# Issue: Boolean defaults leak into _ (mri)\r\n\r\n## Problem\r\n\r\nWhen a boolean default is provided and a boolean flag is supplied, the parser incorrectly coerces the boolean default and pushes a numeric value into the positional arguments array.\r\n",
+  "filesInspected": [
+    "ISSUE.md",
+    "package.json",
+    "lib",
+    "tests",
+    "lib/index.js",
+    "tests/mri.test.ts",
+    ".v1"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:25:15\n   Duration  1.30s (transform 135ms, setup 0ms, import 201ms, tests 28ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:25:17.270Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Result: {\"_\":[1],\"verbose\":true}\n_ array: [ 1 ]\nExpected _ to be [], got: [1]\nResult2: {\"_\":[\"foo\"],\"verbose\":true}\n_ array2: [ 'foo' ]\nExpected _ to be [\"foo\"], got: [\"foo\"]\nResult3 (no default): {\"_\":[\"foo\"],\"verbose\":true}\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:25:23.768Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Case 1: Boolean default + boolean flag (should be _:[], verbose:true)\n  Result: {\"_\":[1],\"verbose\":true}\n\nCase 2: No default (works correctly)\n  Result: {\"_\":[1],\"verbose\":true}\n\nCase 3: String default + boolean flag\n  Result: {\"_\":[],\"verbose\":\"\"}\n\nCase 4: Boolean default with short flag\n  Result: {\"_\":[],\"v\":true,\"verbose\":false}\n\nCase 5: Boolean default with value after\n  Result: {\"_\":[\"file.txt\"],\"verbose\":true}\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:25:46.271Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Case A: --verbose alone with boolean type + default\n  Result: {\"_\":[1],\"verbose\":true}\n  Expected _:[], got _: [1]\n\nCase B: --verbose alone with boolean type, no default\n  Result: {\"_\":[1],\"verbose\":true}\n\nCase C: -t moo with boolean type (no default) - from existing test\n  Result: {\"_\":[\"moo\"],\"t\":true}\n\nCase D: --verbose with trailing string\n  Result: {\"_\":[\"bar\"],\"verbose\":true}\n\nCase E: -v alone, short flag, with boolean default\n  Result: {\"_\":[1],\"v\":true}\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:26:09.125Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Case 1: val=false (boolean default)\n  +false = 0\n  +false * 0 === 0: true\n  Result: {\"_\":[0],\"verbose\":false}\nCase 2: val=undefined (boolean flag at end)\n  +undefined = NaN\n  +undefined * 0 === 0: false\n  Result: {\"_\":[null],\"verbose\":false}\nCase 3: val=true (explicit true value)\n  Result: {\"_\":[1],\"verbose\":true}\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:26:53.587Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "=== Tracing [\"--verbose\"] ===\nProcessing arg: \"--verbose\" at index 0\n  j = 2 (number of leading dashes)\n  idx = 9 (arg.length = 9 )\n  name = \"verbose\"\n  arg.substring(idx) = \"\"\n  i+1 === len: true\n  val = true boolean\n  [toVal boolean branch]\n    val === \"false\": false\n    val === \"true\": false\n    +val = 1\n    +val * 0 === 0: true\n    Would push: 1\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:27:08.409Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "=== After Fix ===\nCase A: --verbose alone with boolean type + default\n  Result: {\"_\":[],\"verbose\":true}\n  _: [] (expected: [])\n\nCase B: --verbose alone with boolean type, no default\n  Result: {\"_\":[],\"verbose\":true}\n  _: [] (expected: [])\n\nCase C: -t moo with boolean type (from existing test)\n  Result: {\"_\":[\"moo\"],\"t\":true}\n  Expected: { t: true, _: [\"moo\"] }\n\nCase D: -v alone, short flag, with boolean default\n  Result: {\"_\":[],\"v\":true}\n  Expected _: [], got _: []\n\nCase E: -ab val with short flags\n  Result: {\"_\":[],\"a\":true,\"b\":\"val\"}\n  Expected: { a: true, b: \"val\", _: [] }\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:27:32.411Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:27:46\n   Duration  1.18s (transform 173ms, setup 0ms, import 234ms, tests 28ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:27:47.680Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "diff --git a/lib/index.js b/lib/index.js\nindex b4d8a0a..e6f1cc8 100644\n--- a/lib/index.js\n+++ b/lib/index.js\n@@ -5,7 +5,7 @@ function toArr(any) {\n function toVal(out, key, val, opts) {\n \tvar x, old=out[key], nxt=(\n \t\t!!~opts.string.indexOf(key) ? (val == null || val === true ? '' : String(val))\n-\t\t: !!~opts.boolean.indexOf(key) ? (val === 'false' ? false : val === 'true' || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))\n+\t\t: !!~opts.boolean.indexOf(key) ? (val === 'false' ? false : (val === 'true' || val === true) || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))\n \t\t: typeof val === 'boolean' ? val\n \t\t: (x = +val,x * 0 === 0) ? x : val\n \t);\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:27:51.864Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:28:10\n   Duration  1.08s (transform 116ms, setup 0ms, import 177ms, tests 29ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:28:11.968Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Result: {\"_\":[],\"verbose\":true}\n_ is empty array: true\nverbose is true: true\nBUG FIXED: true\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:28:17.075Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:28:35\n   Duration  1.14s (transform 126ms, setup 0ms, import 191ms, tests 29ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:28:36.778Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:28:55\n   Duration  1.14s (transform 119ms, setup 0ms, import 181ms, tests 28ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:28:57.276Z"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "hyp-ffc5763c",
+      "description": "Root cause identified and repaired in lib/index.js",
+      "evidence": [
+        "Code inspection and passing verification"
+      ],
+      "confidence": 0.9,
+      "status": "selected",
+      "files": [
+        "lib/index.js"
+      ]
+    }
+  ],
+  "changesMade": [
+    {
+      "path": "lib/index.js",
+      "summary": "edit lib/index.js",
+      "iteration": 0,
+      "timestamp": "2026-08-31T04:27:26.314Z"
+    },
+    {
+      "path": "lib/index.js",
+      "summary": "modified lib/index.js",
+      "iteration": 3,
+      "timestamp": "2026-08-31T04:29:01.711Z"
+    }
+  ],
+  "verificationAttempts": [],
+  "evidence": [
+    {
+      "id": "ev-2d55e9a6",
+      "type": "file_inspection",
+      "description": "Inspected ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T04:24:51.199Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-88a5a4ed",
+      "type": "file_inspection",
+      "description": "read ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T04:24:51.200Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-50c0c19c",
+      "type": "file_inspection",
+      "description": "Inspected package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-31T04:24:53.123Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b6efcfdb",
+      "type": "file_inspection",
+      "description": "read package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-31T04:24:53.124Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f9588b87",
+      "type": "file_inspection",
+      "description": "Inspected lib",
+      "source": "lib",
+      "timestamp": "2026-08-31T04:24:53.128Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-739272c5",
+      "type": "file_inspection",
+      "description": "read lib",
+      "source": "lib",
+      "timestamp": "2026-08-31T04:24:53.129Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-28693a99",
+      "type": "file_inspection",
+      "description": "Inspected tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T04:24:53.136Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ee14a8e5",
+      "type": "file_inspection",
+      "description": "read tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T04:24:53.137Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7b4a4afe",
+      "type": "file_inspection",
+      "description": "Inspected lib/index.js",
+      "source": "lib/index.js",
+      "timestamp": "2026-08-31T04:24:54.884Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-117971df",
+      "type": "file_inspection",
+      "description": "read lib/index.js",
+      "source": "lib/index.js",
+      "timestamp": "2026-08-31T04:24:54.885Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-519ebccc",
+      "type": "file_inspection",
+      "description": "Inspected tests/mri.test.ts",
+      "source": "tests/mri.test.ts",
+      "timestamp": "2026-08-31T04:24:54.886Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-86bbfdad",
+      "type": "file_inspection",
+      "description": "read tests/mri.test.ts",
+      "source": "tests/mri.test.ts",
+      "timestamp": "2026-08-31T04:24:54.887Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-90226cd2",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:25:03.896Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-707c7e7a",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\nconst mri = require('./lib/index.js');\n\n// Issue: When a boolean default is provided and a boolean ",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\nconst mri = require('./lib/index.js');\n\n// Issue: When a boolean default is provided and a boolean flag is supplied\nconst res = mri(['--verbose'], { boolean: ['verbose'], default: { verbose: false } });\nconsole.log('Result:', JSON.stringify(res));\nconsole.log('_ array:', res._);\nconsole.log('Expected _ to be [], got:', JSON.stringify(res._));\n\n// Another test: boolean flag with value after it\nconst res2 = mri(['--verbose', 'foo'], { boolean: ['verbose'], default: { verbose: false } });\nconsole.log('Result2:', JSON.stringify(res2));\nconsole.log('_ array2:', res2._);\nconsole.log('Expected _ to be [\\\"foo\\\"], got:', JSON.stringify(res2._));\n\n// Test without default\nconst res3 = mri(['--verbose', 'foo'], { boolean: ['verbose'] });\nconsole.log('Result3 (no default):', JSON.stringify(res3));\n\"\n",
+      "timestamp": "2026-08-31T04:25:22.713Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f82ca698",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\nconst mri = require('./lib/index.js');\n\n// Trace: boolean default causes issue\nconsole.log('Case 1:",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\nconst mri = require('./lib/index.js');\n\n// Trace: boolean default causes issue\nconsole.log('Case 1: Boolean default + boolean flag (should be _:[], verbose:true)');\nconst res1 = mri(['--verbose'], { boolean: ['verbose'], default: { verbose: false } });\nconsole.log('  Result:', JSON.stringify(res1));\n\nconsole.log('');\nconsole.log('Case 2: No default (works correctly)');\nconst res2 = mri(['--verbose'], { boolean: ['verbose'] });\nconsole.log('  Result:', JSON.stringify(res2));\n\nconsole.log('');\nconsole.log('Case 3: String default + boolean flag');\nconst res3 = mri(['--verbose'], { boolean: ['verbose'], default: { verbose: 'no' } });\nconsole.log('  Result:', JSON.stringify(res3));\n\nconsole.log('');\nconsole.log('Case 4: Boolean default with short flag');\nconst res4 = mri(['-v'], { boolean: ['verbose'], default: { verbose: false } });\nconsole.log('  Result:', JSON.stringify(res4));\n\nconsole.log('');\nconsole.log('Case 5: Boolean default with value after');\nconst res5 = mri(['--verbose', 'file.txt'], { boolean: ['verbose'], default: { verbose: false } });\nconsole.log('  Result:', JSON.stringify(res5));\n\"\n",
+      "timestamp": "2026-08-31T04:25:45.095Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f4dd7457",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\nconst mri = require('./lib/index.js');\n\n// More targeted: isolated boolean flag with no following v",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\nconst mri = require('./lib/index.js');\n\n// More targeted: isolated boolean flag with no following value\nconsole.log('Case A: --verbose alone with boolean type + default');\nconst resA = mri(['--verbose'], { boolean: ['verbose'], default: { verbose: false } });\nconsole.log('  Result:', JSON.stringify(resA));\nconsole.log('  Expected _:[], got _:', JSON.stringify(resA._));\n\nconsole.log('');\nconsole.log('Case B: --verbose alone with boolean type, no default');\nconst resB = mri(['--verbose'], { boolean: ['verbose'] });\nconsole.log('  Result:', JSON.stringify(resB));\n\nconsole.log('');\nconsole.log('Case C: -t moo with boolean type (no default) - from existing test');\nconst resC = mri(['-t', 'moo'], { boolean: 't' });\nconsole.log('  Result:', JSON.stringify(resC));\n\nconsole.log('');\nconsole.log('Case D: --verbose with trailing string');\nconst resD = mri(['--verbose', 'bar'], { boolean: ['verbose'] });\nconsole.log('  Result:', JSON.stringify(resD));\n\nconsole.log('');\nconsole.log('Case E: -v alone, short flag, with boolean default');\nconst resE = mri(['-v'], { boolean: ['v'], default: { v: false } });\nconsole.log('  Result:', JSON.stringify(resE));\n\"\n",
+      "timestamp": "2026-08-31T04:26:08.439Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-091ccd92",
+      "type": "file_inspection",
+      "description": "Inspected .v1",
+      "source": ".v1",
+      "timestamp": "2026-08-31T04:26:34.055Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5b1528c4",
+      "type": "file_inspection",
+      "description": "read .v1",
+      "source": ".v1",
+      "timestamp": "2026-08-31T04:26:34.056Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0f74c6b7",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\n// Manually trace the toVal function behavior\nfunction toVal(out, key, val, opts) {\n    var x, old=",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\n// Manually trace the toVal function behavior\nfunction toVal(out, key, val, opts) {\n    var x, old=out[key], nxt=(\n        !!~opts.string.indexOf(key) ? (val == null || val === true ? '' : String(val))\n        : !!~opts.boolean.indexOf(key) ? (val === 'false' ? false : val === 'true' || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))\n        : typeof val === 'boolean' ? val\n        : (x = +val,x * 0 === 0) ? x : val\n    );\n    out[key] = old == null ? nxt : (Array.isArray(old) ? old.concat(nxt) : [old, nxt]);\n}\n\n// Case: val is false (boolean default)\nlet out1 = { _: [] };\nconsole.log('Case 1: val=false (boolean default)');\nconsole.log('  +false =', +false);\nconsole.log('  +false * 0 === 0:', +false * 0 === 0);\ntoVal(out1, 'verbose', false, { string: [], boolean: ['verbose'] });\nconsole.log('  Result:', JSON.stringify(out1));\n\n// Case: val is undefined (no value after boolean flag)\nlet out2 = { _: [] };\nconsole.log('Case 2: val=undefined (boolean flag at end)');\nconsole.log('  +undefined =', +undefined);\nconsole.log('  +undefined * 0 === 0:', +undefined * 0 === 0);\ntoVal(out2, 'verbose', undefined, { string: [], boolean: ['verbose'] });\nconsole.log('  Result:', JSON.stringify(out2));\n\n// Case: val is true (boolean flag)\nlet out3 = { _: [] };\nconsole.log('Case 3: val=true (explicit true value)');\ntoVal(out3, 'verbose', true, { string: [], boolean: ['verbose'] });\nconsole.log('  Result:', JSON.stringify(out3));\n\"\n",
+      "timestamp": "2026-08-31T04:26:52.914Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-66da8913",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\n// Trace exactly what happens when parsing --verbose with no value after\nfunction mriDebug(args, op",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\n// Trace exactly what happens when parsing --verbose with no value after\nfunction mriDebug(args, opts) {\n    opts = opts || {};\n    var k, arr, arg, name, val, out = { _: [] };\n    var i = 0, j = 0, idx = 0, len = args.length;\n\n    opts.alias = opts.alias || {};\n    opts.string = Array.isArray(opts.string) ? opts.string : (opts.string ? [opts.string] : []);\n    opts.boolean = Array.isArray(opts.boolean) ? opts.boolean : (opts.boolean ? [opts.boolean] : []);\n\n    // Skip defaults processing for simplicity\n    for (i = 0; i < len; i++) {\n        arg = args[i];\n        console.log('Processing arg:', JSON.stringify(arg), 'at index', i);\n\n        for (j = 0; j < arg.length; j++) {\n            if (arg.charCodeAt(j) !== 45) break;\n        }\n        console.log('  j =', j, '(number of leading dashes)');\n\n        if (j === 0) {\n            out._.push(arg);\n        } else {\n            for (idx = j + 1; idx < arg.length; idx++) {\n                if (arg.charCodeAt(idx) === 61) break;\n            }\n            console.log('  idx =', idx, '(arg.length =', arg.length, ')');\n\n            name = arg.substring(j, idx);\n            console.log('  name =', JSON.stringify(name));\n\n            // Key line - what val becomes:\n            val = arg.substring(++idx) || (i+1 === len || (''+args[i+1]).charCodeAt(0) === 45 || args[++i]);\n            console.log('  arg.substring(idx) =', JSON.stringify(arg.substring(idx)));\n            console.log('  i+1 === len:', i+1 === len);\n            console.log('  val =', JSON.stringify(val), typeof val);\n            \n            // toVal behavior for boolean key\n            if (~opts.boolean.indexOf(name)) {\n                console.log('  [toVal boolean branch]');\n                console.log('    val === \\\"false\\\":', val === 'false');\n                console.log('    val === \\\"true\\\":', val === 'true');\n                if (val !== 'false' && val !== 'true') {\n                    var x;\n                    console.log('    +val =', +val);\n                    console.log('    +val * 0 === 0:', (+val) * 0 === 0);\n                    console.log('    Would push:', (+val) * 0 === 0 ? +val : val);\n                }\n            }\n        }\n    }\n    return out;\n}\n\nconsole.log('=== Tracing [\\\"--verbose\\\"] ===');\nmriDebug(['--verbose'], { boolean: ['verbose'] });\n\"\n",
+      "timestamp": "2026-08-31T04:27:07.379Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-51ccc077",
+      "type": "file_inspection",
+      "description": "Inspected lib/index.js",
+      "source": "lib/index.js",
+      "timestamp": "2026-08-31T04:27:18.343Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-2bb4f2ff",
+      "type": "file_inspection",
+      "description": "read lib/index.js",
+      "source": "lib/index.js",
+      "timestamp": "2026-08-31T04:27:18.344Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a2c371bb",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\nconst mri = require('./lib/index.js');\n\nconsole.log('=== After Fix ===');\n\nconsole.log('Case A: --v",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\nconst mri = require('./lib/index.js');\n\nconsole.log('=== After Fix ===');\n\nconsole.log('Case A: --verbose alone with boolean type + default');\nconst resA = mri(['--verbose'], { boolean: ['verbose'], default: { verbose: false } });\nconsole.log('  Result:', JSON.stringify(resA));\nconsole.log('  _:', JSON.stringify(resA._), '(expected: [])');\n\nconsole.log('');\nconsole.log('Case B: --verbose alone with boolean type, no default');\nconst resB = mri(['--verbose'], { boolean: ['verbose'] });\nconsole.log('  Result:', JSON.stringify(resB));\nconsole.log('  _:', JSON.stringify(resB._), '(expected: [])');\n\nconsole.log('');\nconsole.log('Case C: -t moo with boolean type (from existing test)');\nconst resC = mri(['-t', 'moo'], { boolean: 't' });\nconsole.log('  Result:', JSON.stringify(resC));\nconsole.log('  Expected: { t: true, _: [\\\"moo\\\"] }');\n\nconsole.log('');\nconsole.log('Case D: -v alone, short flag, with boolean default');\nconst resD = mri(['-v'], { boolean: ['v'], default: { v: false } });\nconsole.log('  Result:', JSON.stringify(resD));\nconsole.log('  Expected _: [], got _:', JSON.stringify(resD._));\n\nconsole.log('');\nconsole.log('Case E: -ab val with short flags');\nconst resE = mri(['-ab', 'val']);\nconsole.log('  Result:', JSON.stringify(resE));\nconsole.log('  Expected: { a: true, b: \\\"val\\\", _: [] }');\n\"\n",
+      "timestamp": "2026-08-31T04:27:31.757Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6302a043",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:27:35.669Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1e58884c",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && git diff HEAD",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && git diff HEAD",
+      "timestamp": "2026-08-31T04:27:50.856Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-be5a4f79",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:27:59.920Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e5dc66a2",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\nconst mri = require('./lib/index.js');\n\n// The exact scenario from the issue: boolean default + boo",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && node -e \"\nconst mri = require('./lib/index.js');\n\n// The exact scenario from the issue: boolean default + boolean flag\nconst res = mri(['--verbose'], { boolean: ['verbose'], default: { verbose: false } });\nconsole.log('Result:', JSON.stringify(res));\nconsole.log('_ is empty array:', Array.isArray(res._) && res._.length === 0);\nconsole.log('verbose is true:', res.verbose === true);\nconsole.log('BUG FIXED:', Array.isArray(res._) && res._.length === 0 && res.verbose === true);\n\"\n",
+      "timestamp": "2026-08-31T04:28:15.752Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0dadf7c1",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:28:23.532Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b55e62e8",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-004-hist-004-run-001-7c58e0-MhM8AD\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:28:42.188Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a8512b5e",
+      "type": "diff_inspection",
+      "description": "Final diff stat:  lib/index.js | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-31T04:29:00.566Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 3,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-31T04:24:48.881Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-31T04:24:48.881Z",
+      "exitedAt": "2026-08-31T04:28:59.955Z",
+      "durationMs": 251074
+    }
+  ],
+  "selectedHypothesis": "hyp-ffc5763c",
+  "terminationReason": "completed"
+}

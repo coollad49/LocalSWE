@@ -1,0 +1,33 @@
+{
+  "runId": "synth-003-run-001-daafee",
+  "caseId": "synth-003",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 270070,
+  "changedFiles": [
+    "src/queue.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-daafee\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-daafee\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-daafee\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+      "exitCode": 1,
+      "durationMs": 4468,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 53ms\n     × processJob retry re-enqueues 22ms\n     × processNext surfaces errors via retry 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processJob retry re-enqueues\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/queue.test.ts:61:24\n     59|     };\n     60|     const r1 = await q.processJob(dequeued, handler);\n     61|     expect(r1.success).toBe(false);\n       |                        ^\n     62|     expect(r1.job.attempts).toBe(1);\n     63|     expect(q.size()).toBe(1); // re-enqueued\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processNext surfaces errors via retry\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/queue.test.ts:97:25\n     95|     };\n     96|     const r1 = await q.processNext(handler);\n     97|     expect(r1!.success).toBe(false);\n       |                         ^\n     98|     expect(called).toBe(1);\n     99|     const r2 = await q.processNext(handler);\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 7 passed (9)\n   Start at  04:10:59\n   Duration  872ms (transform 151ms, setup 0ms, import 209ms, tests 53ms, environment 0ms)\n\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 6872,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  04:11:15\n   Duration  1.11s (transform 137ms, setup 0ms, import 212ms, tests 29ms, environment 0ms)\n\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T03:07:33.402Z",
+  "endedAt": "2026-08-31T03:12:03.472Z"
+}

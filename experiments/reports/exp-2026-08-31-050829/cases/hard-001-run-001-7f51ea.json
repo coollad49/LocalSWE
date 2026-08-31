@@ -1,0 +1,80 @@
+{
+  "runId": "hard-001-run-001-7f51ea",
+  "caseId": "hard-001",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 2984,
+  "startedAt": "2026-08-31T08:40:01.455Z",
+  "completedAt": "2026-08-31T08:40:04.440Z",
+  "caseMeta": {
+    "repository": "immer",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "state-management",
+      "lifecycle",
+      "api-behavior"
+    ]
+  },
+  "metrics": {
+    "durationMs": 660027,
+    "totalTurns": 168,
+    "toolCalls": 84,
+    "commandsExecuted": 42,
+    "filesInspected": 13,
+    "filesChanged": 0,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 151918,
+    "outputTokens": 65706,
+    "totalTokens": 3089650
+  },
+  "cost": {
+    "inputTokens": 151918,
+    "outputTokens": 65706,
+    "totalTokens": 217624,
+    "inputCostUsd": 0.045575,
+    "outputCostUsd": 0.078847,
+    "totalCostUsd": 0.296744,
+    "costUsd": 0.296744,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-001-MoWZDp\\benchmark\\repositories\\immer",
+      "stdout": "empty patch - no changes applied",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 1302,
+      "command": "node tsx benchmark\\cases\\hard-001\\public\\reproduce.ts",
+      "stdout": "Test reverse: baseUnchanged=false nextCorrect=true => FAIL\n  baseState=[{\"id\":1},{\"id\":2},{\"id\":99}] expected [{\"id\":1},{\"id\":2},{\"id\":3}]\n  reordered={\"id\":99} expected {\"id\":3}\n  nextState=[{\"id\":99},{\"id\":2},{\"id\":1}] expected [{\"id\":99},{\"id\":2},{\"id\":1}]\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  }
+}

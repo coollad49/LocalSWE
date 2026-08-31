@@ -1,0 +1,26 @@
+{
+  "runId": "hist-006-run-001-c92da0",
+  "caseId": "hist-006",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "status": "timeout",
+  "durationMs": 601533,
+  "changedFiles": [],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-c92da0\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-c92da0\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-c92da0\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-c92da0-zOKY8E\" && npx vitest run 2>&1 | head -100",
+      "exitCode": 0,
+      "durationMs": 8304,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-c92da0-zOKY8E\n\n ❯ tests/tinyspy.test.ts (3 tests | 2 failed) 49ms\n     × spyOn mocks prototype method and restores cleanly 31ms\n     × spyOn inherited getter preserves setter 7ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn mocks prototype method and restores cleanly\nAssertionError: expected { value: [Function f], …(3) } to be undefined\n\n- Expected:\nundefined\n\n+ Received:\n{\n  \"configurable\": true,\n  \"enumerable\": false,\n  \"value\": [Function f],\n  \"writable\": true,\n}\n\n ❯ tests/tinyspy.test.ts:14:55\n     12|     s.restore();\n     13|     expect(foo.f()).toBe('original');\n     14|     expect(Object.getOwnPropertyDescriptor(foo, 'f')).toBeUndefined();\n       |                                                       ^\n     15|   });\n     16|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn inherited getter preserves setter\nAssertionError: expected [Function] to not throw an error but 'TypeError: Cannot set property v of #…' was thrown\n\n- Expected:\nundefined\n\n+ Received:\n\"TypeError: Cannot set property v of #<Foo> which has only a getter\"\n\n ❯ tests/tinyspy.test.ts:39:43\n     37|     const s = spyOn(foo, { getter: 'v' }, () => 'mocked');\n     38|     expect(foo.v).toBe('mocked');\n     39|     expect(() => { foo.v = 'test'; }).not.toThrow();\n       |                                           ^\n     40|     expect(foo.v).toBe('mocked');\n     41|     s.restore();\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 1 passed (3)\n   Start at  16:15:36\n   Duration  1.02s (transform 211ms, setup 0ms, import 287ms, tests 49ms, environment 0ms)\n\n"
+    }
+  ],
+  "error": "Agent timeout after 600000ms",
+  "model": "mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-30T15:14:43.411Z",
+  "endedAt": "2026-08-30T15:24:44.944Z"
+}

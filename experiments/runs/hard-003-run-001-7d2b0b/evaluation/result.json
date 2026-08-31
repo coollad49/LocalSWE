@@ -1,0 +1,623 @@
+{
+  "evaluationId": "eval-5cae7857-1788165635812",
+  "runId": "hard-003-run-001-7d2b0b",
+  "caseId": "hard-003",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v1",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:40:35.812Z",
+  "completedAt": "2026-08-31T08:40:37.451Z",
+  "durationMs": 1639,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-003-run-001-7d2b0b\\patch.diff",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-003-NEPj7e\\benchmark\\repositories\\superjson",
+      "stdout": "empty patch - no changes applied",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 233,
+      "command": "bun run benchmark\\cases\\hard-003\\public\\reproduce.ts",
+      "stdout": "Test escape: a0IsRegExp=false aIsArray=false bSlashIsSet=false => FAIL\n  parsed['a.0']= /test-regex/\n  parsed.a= [ /'a'[0]: string that becomes a regex/ ]\n  parsed['b\\\\']= [\n  [ 1 ]\n]\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "superjson",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "serialization",
+      "parsing",
+      "state-management"
+    ]
+  },
+  "metrics": {
+    "durationMs": 618079,
+    "totalTurns": 86,
+    "toolCalls": 36,
+    "commandsExecuted": 16,
+    "filesInspected": 10,
+    "filesChanged": 0,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 134524,
+    "outputTokens": 20008,
+    "totalTokens": 1220004
+  },
+  "cost": {
+    "inputTokens": 134524,
+    "outputTokens": 20008,
+    "totalTokens": 154532,
+    "inputCostUsd": 0.040357,
+    "outputCostUsd": 0.02401,
+    "totalCostUsd": 0.128295,
+    "costUsd": 0.128295,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-003-run-001-7d2b0b",
+    "caseId": "hard-003",
+    "agentVersion": "agent-v1",
+    "benchmarkVersion": "0.5",
+    "model": "mimo-v2.5",
+    "trajectoryHash": "sha256:441daa36733c0e5da95d138df77a550022b7840eec051d5e49bc4542aeb776da",
+    "trajectory": {
+      "eventCount": 386,
+      "durationMs": 618028,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "workflow_init": 1,
+        "helpers_ready": 1,
+        "runtime_key_set": 1,
+        "available_models": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "phase_start": 1,
+        "agent_start": 8,
+        "turn_start": 44,
+        "message_start": 80,
+        "message_end": 80,
+        "tool_execution_start": 36,
+        "tool_execution_update": 34,
+        "tool_execution_end": 36,
+        "turn_end": 42,
+        "agent_end": 6,
+        "auto_retry_start": 3,
+        "auto_retry_end": 2,
+        "timeout": 1,
+        "session_disposed": 1,
+        "patch_captured": 1
+      },
+      "assistantMessages": 126,
+      "userMessages": 4,
+      "toolCalls": 36,
+      "toolResults": 144,
+      "thinkingEvents": 28,
+      "unknownEvents": 97,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 36,
+      "uniqueTools": 2,
+      "byTool": {
+        "bash": {
+          "calls": 16,
+          "failures": 6
+        },
+        "read": {
+          "calls": 20,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 134524,
+      "output": 20008,
+      "cacheRead": 1065472,
+      "cacheWrite": 0,
+      "total": 1220004,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.128295,
+      "inputCostUsd": 0.040357,
+      "outputCostUsd": 0.02401,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 28,
+      "characterCount": 58948,
+      "averageCharacters": 2105,
+      "maxCharacters": 8466,
+      "firstThinkingAt": "2026-08-30T14:54:12.321Z",
+      "lastThinkingAt": "2026-08-30T15:02:53.116Z",
+      "thinkingDurationMs": 520795
+    },
+    "editing": {
+      "editCalls": 0,
+      "writeCalls": 0,
+      "filesTouched": [],
+      "uniqueFilesTouched": 0
+    },
+    "exploration": {
+      "readCalls": 20,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 0,
+      "bashCalls": 16,
+      "explorationToEditingRatio": null
+    },
+    "verification": {
+      "commandsDetected": 0,
+      "testsRun": false,
+      "testCommandCount": 0,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": []
+    },
+    "behavior": {
+      "repeatedToolCalls": 18,
+      "duplicateReadTargets": 10,
+      "duplicateEditTargets": 0,
+      "toolFailureCount": 6,
+      "topRepetitions": [
+        {
+          "signature": "637cee315164",
+          "tool": "bash",
+          "target": "pwd && ls -la",
+          "count": 2
+        },
+        {
+          "signature": "d4f05af4ee38",
+          "tool": "bash",
+          "target": "cat ISSUE.md package.json tsconfig.json",
+          "count": 2
+        },
+        {
+          "signature": "b2f7b45f061c",
+          "tool": "bash",
+          "target": "ls src/ tests/",
+          "count": 2
+        },
+        {
+          "signature": "2e5d540a64dc",
+          "tool": "read",
+          "target": "src/pathstringifier.ts",
+          "count": 2
+        },
+        {
+          "signature": "891729a8249c",
+          "tool": "read",
+          "target": "src/pathstringifier.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "336a91935ea4",
+          "tool": "read",
+          "target": "src/plainer.ts",
+          "count": 2
+        },
+        {
+          "signature": "5cc268016958",
+          "tool": "read",
+          "target": "src/accessDeep.ts",
+          "count": 2
+        },
+        {
+          "signature": "6bdb002aed6b",
+          "tool": "read",
+          "target": "tests/basic.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "bb0f06312db3",
+          "tool": "read",
+          "target": "src/transformer.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-003-run-001-7d2b0b",
+    "caseId": "hard-003",
+    "agentVersion": "agent-v1",
+    "timeline": [
+      {
+        "index": 25,
+        "timestamp": "2026-08-30T14:54:12.322Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "pwd && ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 26,
+        "timestamp": "2026-08-30T14:54:12.322Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "pwd && ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 47,
+        "timestamp": "2026-08-30T14:54:14.971Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat ISSUE.md package.json tsconfig.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 48,
+        "timestamp": "2026-08-30T14:54:14.971Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat ISSUE.md package.json tsconfig.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 69,
+        "timestamp": "2026-08-30T14:54:17.321Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls src/ tests/",
+        "commandClass": "general"
+      },
+      {
+        "index": 70,
+        "timestamp": "2026-08-30T14:54:17.321Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls src/ tests/",
+        "commandClass": "general"
+      },
+      {
+        "index": 89,
+        "timestamp": "2026-08-30T14:54:20.370Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/pathstringifier.ts"
+      },
+      {
+        "index": 90,
+        "timestamp": "2026-08-30T14:54:20.370Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/pathstringifier.ts"
+      },
+      {
+        "index": 105,
+        "timestamp": "2026-08-30T14:54:22.871Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/pathstringifier.test.ts"
+      },
+      {
+        "index": 106,
+        "timestamp": "2026-08-30T14:54:22.871Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/pathstringifier.test.ts"
+      },
+      {
+        "index": 121,
+        "timestamp": "2026-08-30T14:55:00.686Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 122,
+        "timestamp": "2026-08-30T14:55:00.686Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 137,
+        "timestamp": "2026-08-30T14:55:03.207Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/plainer.ts"
+      },
+      {
+        "index": 138,
+        "timestamp": "2026-08-30T14:55:03.207Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/plainer.ts"
+      },
+      {
+        "index": 153,
+        "timestamp": "2026-08-30T14:55:06.296Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/accessDeep.ts"
+      },
+      {
+        "index": 154,
+        "timestamp": "2026-08-30T14:55:06.296Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/accessDeep.ts"
+      },
+      {
+        "index": 196,
+        "timestamp": "2026-08-30T14:57:33.248Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 197,
+        "timestamp": "2026-08-30T14:57:33.248Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 212,
+        "timestamp": "2026-08-30T14:57:36.654Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/transformer.ts"
+      },
+      {
+        "index": 213,
+        "timestamp": "2026-08-30T14:57:36.654Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/transformer.ts"
+      },
+      {
+        "index": 228,
+        "timestamp": "2026-08-30T14:57:40.917Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.test.ts"
+      },
+      {
+        "index": 229,
+        "timestamp": "2026-08-30T14:57:40.917Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.test.ts"
+      },
+      {
+        "index": 244,
+        "timestamp": "2026-08-30T14:57:44.177Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la .v1/",
+        "commandClass": "general"
+      },
+      {
+        "index": 245,
+        "timestamp": "2026-08-30T14:57:44.177Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la .v1/",
+        "commandClass": "general"
+      },
+      {
+        "index": 264,
+        "timestamp": "2026-08-30T14:57:50.929Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/helpers.js"
+      },
+      {
+        "index": 265,
+        "timestamp": "2026-08-30T14:57:50.929Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/helpers.js"
+      },
+      {
+        "index": 280,
+        "timestamp": "2026-08-30T14:57:53.381Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 281,
+        "timestamp": "2026-08-30T14:57:53.381Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 296,
+        "timestamp": "2026-08-30T14:58:16.256Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -rn \"/bv:/s*1/b/|v:/s*/d\" src/",
+        "commandClass": "general"
+      },
+      {
+        "index": 297,
+        "timestamp": "2026-08-30T14:58:16.256Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -rn \"/bv:/s*1/b/|v:/s*/d\" src/",
+        "commandClass": "general"
+      },
+      {
+        "index": 316,
+        "timestamp": "2026-08-30T14:59:36.494Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -rn \"v: 1/|meta/./?v\" src/ tests/",
+        "commandClass": "general"
+      },
+      {
+        "index": 317,
+        "timestamp": "2026-08-30T14:59:36.494Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -rn \"v: 1/|meta/./?v\" src/ tests/",
+        "commandClass": "general"
+      },
+      {
+        "index": 336,
+        "timestamp": "2026-08-30T14:59:40.983Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -rn \"version/|meta//.v/|version:\" src/",
+        "commandClass": "general"
+      },
+      {
+        "index": 337,
+        "timestamp": "2026-08-30T14:59:40.983Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -rn \"version/|meta//.v/|version:\" src/",
+        "commandClass": "general"
+      },
+      {
+        "index": 370,
+        "timestamp": "2026-08-30T15:02:58.538Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -rn \"v:/s*/[\" src/ tests/",
+        "commandClass": "general"
+      },
+      {
+        "index": 371,
+        "timestamp": "2026-08-30T15:02:58.538Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -rn \"v:/s*/[\" src/ tests/",
+        "commandClass": "general"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 89,
+        "timestamp": "2026-08-30T14:54:20.370Z",
+        "detail": "src/pathstringifier.ts"
+      }
+    ],
+    "errors": [
+      {
+        "index": 374,
+        "tool": "bash",
+        "error": "(no output)\n\nCommand exited with code 1"
+      },
+      {
+        "index": 375,
+        "tool": "bash",
+        "error": "(no output)\n\nCommand exited with code 1"
+      },
+      {
+        "index": 376,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 377,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 378,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 379,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": []
+  }
+}

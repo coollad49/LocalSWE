@@ -1,0 +1,1025 @@
+{
+  "evaluationId": "eval-2b784a44-1788165836831",
+  "runId": "synth-003-run-001-e42ff2",
+  "caseId": "synth-003",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v1",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:43:56.831Z",
+  "completedAt": "2026-08-31T08:43:58.642Z",
+  "durationMs": 1811,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-e42ff2\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 229,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-003-D3tRfp\\patch-1788165837721.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 291,
+      "command": "bun run benchmark\\cases\\synth-003\\public\\reproduce.ts",
+      "stdout": "success=false expected false\nattempts=1 expected 1\nsize=1 expected 1 (retry)\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 198,
+      "command": "bun test benchmark\\cases\\synth-003\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-003\\private\\oracle.test.ts:\n(pass) synth-003 oracle: error handling > reports failure and retries [2.50ms]\n(pass) synth-003 oracle: error handling > success true only on no throw [0.40ms]\n(pass) synth-003 oracle: error handling > processNext retries [0.62ms]\n\n 3 pass\n 0 fail\n 8 expect() calls\nRan 3 tests across 1 file. [142.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 197,
+      "command": "bun test benchmark\\repositories\\async-queue\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\async-queue\\tests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [1.57ms]\n(pass) AsyncQueue > dequeue throws on empty [0.59ms]\n(pass) AsyncQueue > pause and resume preserves jobs [0.62ms]\n(pass) AsyncQueue > pause resume multiple cycles [0.81ms]\n(pass) AsyncQueue > processJob retry re-enqueues [1.22ms]\n(pass) AsyncQueue > processJob succeeds [0.38ms]\n(pass) AsyncQueue > processNext handles empty [0.46ms]\n(pass) AsyncQueue > processNext surfaces errors via retry [0.58ms]\n(pass) AsyncQueue > clear empties queue [0.16ms]\n\n 9 pass\n 0 fail\n 35 expect() calls\nRan 9 tests across 1 file. [138.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "async-queue",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "error-handling",
+      "asynchronous"
+    ]
+  },
+  "metrics": {
+    "durationMs": 270370,
+    "totalTurns": 86,
+    "toolCalls": 32,
+    "commandsExecuted": 12,
+    "filesInspected": 6,
+    "filesChanged": 1,
+    "iterations": 3,
+    "iterationsSource": "v1-state",
+    "inputTokens": 40096,
+    "outputTokens": 8316,
+    "totalTokens": 451100
+  },
+  "cost": {
+    "inputTokens": 40096,
+    "outputTokens": 8316,
+    "totalTokens": 48412,
+    "inputCostUsd": 0.005613,
+    "outputCostUsd": 0.002328,
+    "totalCostUsd": 0.009069,
+    "costUsd": 0.009069,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-003-run-001-e42ff2",
+    "caseId": "synth-003",
+    "agentVersion": "agent-v1",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:f498e1641ca87e7696ae77f53f5dd3247c47e6e5ca7e2da80dbef119989b9bb3",
+    "trajectory": {
+      "eventCount": 397,
+      "durationMs": 270361,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "workflow_init": 1,
+        "helpers_ready": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "phase_start": 1,
+        "agent_start": 10,
+        "turn_start": 36,
+        "message_start": 76,
+        "message_end": 76,
+        "tool_execution_start": 32,
+        "tool_execution_end": 32,
+        "turn_end": 36,
+        "tool_execution_update": 64,
+        "agent_end": 10,
+        "agent_settled": 4,
+        "verification_nudge": 3,
+        "auto_retry_start": 1,
+        "auto_retry_end": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 108,
+      "userMessages": 16,
+      "toolCalls": 32,
+      "toolResults": 128,
+      "thinkingEvents": 72,
+      "unknownEvents": 126,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 32,
+      "uniqueTools": 4,
+      "byTool": {
+        "read": {
+          "calls": 12,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 12,
+          "failures": 6
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 40096,
+      "output": 8316,
+      "cacheRead": 402688,
+      "cacheWrite": 0,
+      "total": 451100,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.009069,
+      "inputCostUsd": 0.005613,
+      "outputCostUsd": 0.002328,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 72,
+      "characterCount": 18284,
+      "averageCharacters": 254,
+      "maxCharacters": 1954,
+      "firstThinkingAt": "2026-08-31T04:28:50.561Z",
+      "lastThinkingAt": "2026-08-31T04:33:18.262Z",
+      "thinkingDurationMs": 267701
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/queue.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 12,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 12,
+      "explorationToEditingRatio": 15
+    },
+    "verification": {
+      "commandsDetected": 40,
+      "testsRun": true,
+      "testCommandCount": 10,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd . && npm test 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 20,
+      "duplicateReadTargets": 6,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 6,
+      "topRepetitions": [
+        {
+          "signature": "613f56690717",
+          "tool": "bash",
+          "target": "cd . && npm test 2>&1",
+          "count": 10
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "ec8ec0fa57e2",
+          "tool": "ls",
+          "target": ".",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "acfc63a28d77",
+          "tool": "read",
+          "target": "src/job.ts",
+          "count": 2
+        },
+        {
+          "signature": "2107b5f3f42e",
+          "tool": "read",
+          "target": "src/queue.ts",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "48bb11fb60ea",
+          "tool": "read",
+          "target": "tests/queue.test.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-003-run-001-e42ff2",
+    "caseId": "synth-003",
+    "agentVersion": "agent-v1",
+    "timeline": [
+      {
+        "index": 25,
+        "timestamp": "2026-08-31T04:28:50.561Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 26,
+        "timestamp": "2026-08-31T04:28:50.561Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 41,
+        "timestamp": "2026-08-31T04:28:52.936Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-31T04:28:52.936Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 57,
+        "timestamp": "2026-08-31T04:28:54.587Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-31T04:28:54.587Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-31T04:28:54.625Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 60,
+        "timestamp": "2026-08-31T04:28:54.625Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 81,
+        "timestamp": "2026-08-31T04:28:56.476Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 82,
+        "timestamp": "2026-08-31T04:28:56.476Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 83,
+        "timestamp": "2026-08-31T04:28:56.499Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/job.ts"
+      },
+      {
+        "index": 84,
+        "timestamp": "2026-08-31T04:28:56.499Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/job.ts"
+      },
+      {
+        "index": 85,
+        "timestamp": "2026-08-31T04:28:56.514Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 86,
+        "timestamp": "2026-08-31T04:28:56.514Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 113,
+        "timestamp": "2026-08-31T04:28:59.724Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 114,
+        "timestamp": "2026-08-31T04:28:59.724Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 129,
+        "timestamp": "2026-08-31T04:29:01.369Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/queue.test.ts"
+      },
+      {
+        "index": 130,
+        "timestamp": "2026-08-31T04:29:01.369Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tests/queue.test.ts"
+      },
+      {
+        "index": 145,
+        "timestamp": "2026-08-31T04:29:04.633Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd . && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 146,
+        "timestamp": "2026-08-31T04:29:04.633Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd . && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 173,
+        "timestamp": "2026-08-31T04:29:17.755Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 174,
+        "timestamp": "2026-08-31T04:29:17.755Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 189,
+        "timestamp": "2026-08-31T04:29:19.450Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd . && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 190,
+        "timestamp": "2026-08-31T04:29:19.450Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd . && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 217,
+        "timestamp": "2026-08-31T04:29:31.166Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd . && git diff HEAD",
+        "commandClass": "git"
+      },
+      {
+        "index": 218,
+        "timestamp": "2026-08-31T04:29:31.166Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd . && git diff HEAD",
+        "commandClass": "git"
+      },
+      {
+        "index": 255,
+        "timestamp": "2026-08-31T04:29:36.872Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd . && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 256,
+        "timestamp": "2026-08-31T04:29:36.872Z",
+        "phase": "reconnaissance",
+        "iteration": 1,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd . && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 301,
+        "timestamp": "2026-08-31T04:29:51.264Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd . && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 302,
+        "timestamp": "2026-08-31T04:29:51.264Z",
+        "phase": "reconnaissance",
+        "iteration": 2,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd . && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 361,
+        "timestamp": "2026-08-31T04:33:10.422Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd . && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 362,
+        "timestamp": "2026-08-31T04:33:10.422Z",
+        "phase": "reconnaissance",
+        "iteration": 3,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd . && npm test 2>&1",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 25,
+        "timestamp": "2026-08-31T04:28:50.561Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 145,
+        "timestamp": "2026-08-31T04:29:04.633Z",
+        "detail": "cd . && npm test 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 159,
+        "timestamp": "2026-08-31T04:29:10.353Z",
+        "detail": "cd . && npm test 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 160,
+        "timestamp": "2026-08-31T04:29:10.353Z",
+        "detail": "cd . && npm test 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 161,
+        "timestamp": "2026-08-31T04:29:10.357Z",
+        "detail": "cd . && npm test 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 162,
+        "timestamp": "2026-08-31T04:29:10.357Z",
+        "detail": "cd . && npm test 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 163,
+        "timestamp": "2026-08-31T04:29:10.358Z",
+        "detail": "cd . && npm test 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 164,
+        "timestamp": "2026-08-31T04:29:10.358Z",
+        "detail": "cd . && npm test 2>&1"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 173,
+        "timestamp": "2026-08-31T04:29:17.755Z",
+        "detail": "src/queue.ts"
+      }
+    ],
+    "errors": [
+      {
+        "index": 159,
+        "tool": "bash",
+        "error": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 51ms\n     × processJob retry re-enqueues 21ms\n     × processNext surfaces errors via retry 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processJob retry re-enqueues\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/que"
+      },
+      {
+        "index": 160,
+        "tool": "bash",
+        "error": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 51ms\n     × processJob retry re-enqueues 21ms\n     × processNext surfaces errors via retry 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processJob retry re-enqueues\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/que"
+      },
+      {
+        "index": 161,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 162,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 163,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 164,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 145,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 146,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 159,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 51ms\n     × pro"
+      },
+      {
+        "index": 160,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 51ms\n     × pro"
+      },
+      {
+        "index": 161,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 162,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 163,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 164,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 189,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 190,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 203,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 204,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 205,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 206,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 207,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 208,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 255,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 256,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 269,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 270,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 271,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 272,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 273,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 274,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 301,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 302,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 315,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 316,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 317,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 318,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 319,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 320,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 361,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 362,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 375,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 376,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 377,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 378,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 379,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 380,
+        "command": "cd . && npm test 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

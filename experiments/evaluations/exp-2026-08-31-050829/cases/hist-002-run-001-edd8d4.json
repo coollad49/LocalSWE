@@ -1,0 +1,80 @@
+{
+  "runId": "hist-002-run-001-edd8d4",
+  "caseId": "hist-002",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "false_confidence",
+  "durationMs": 1904,
+  "startedAt": "2026-08-31T08:42:13.049Z",
+  "completedAt": "2026-08-31T08:42:14.953Z",
+  "caseMeta": {
+    "repository": "defu",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "security",
+      "validation"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 269,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-002-UvLYTH\\patch-1788165734238.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 254,
+      "command": "bun run benchmark\\cases\\hist-002\\public\\reproduce.ts",
+      "stdout": "result: {\"__proto__\":{\"polluted\":true}} polluted=undefined hasPollution=false hasOwnProto=true proto=null\nObject.prototype.polluted=undefined ({}).polluted=undefined\nnormal merge 1: {\"a\":\"c\",\"d\":\"c\"} pass=true\nnormal merge 2 (nested): {\"a\":{\"d\":\"e\",\"b\":\"c\"}} pass=true\nnormal merge 3 (arrays): {\"array\":[\"a\",\"b\",\"c\",\"d\"]} pass=true\nPR case defu(malicious, {isAdmin:false}) => {\"isAdmin\":false} isAdmin=false globalIsAdmin=undefined pass=true\npollutionBlocked=true (expect true on fixed, false on buggy)\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 186,
+      "command": "bun test benchmark\\cases\\hist-002\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-002\\private\\oracle.test.ts:\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks __proto__ pollution via defaults (Object.assign vs spread) [1.88ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks __proto__ pollution with isAdmin payload (PR #156 case) [0.33ms]\n31 |   test(\"blocks pollution when defaults is first pollution vector via JSON\", () => {\n32 |     delete (Object.prototype as any).polluted;\n33 |     const payload = JSON.parse('{\"__proto__\":{\"polluted\":true}}');\n34 |     const r = defu({}, payload);\n35 |     expect((r as any).polluted).toBeUndefined();\n36 |     expect(Object.getPrototypeOf(r).polluted).toBeUndefined();\n                                       ^\nTypeError: null is not an object (evaluating 'Object.getPrototypeOf(r).polluted')\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-002-UvLYTH\\benchmark\\cases\\hist-002\\private\\oracle.test.ts:36:35)\n(fail) hist-002 oracle: prototype pollution via __proto__ > blocks pollution when defaults is first pollution vector via JSON [0.98ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks constructor.prototype pollution [0.27ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > normal merging still works (regression) [0.51ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > handles non-object defaults [0.70ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > merge with merger still works [0.80ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > defu does not pollute global after multiple calls [0.51ms]\n\n 7 pass\n 1 fail\n 20 expect() calls\nRan 8 tests across 1 file. [136.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "metrics": {
+    "durationMs": 80122,
+    "totalTurns": 64,
+    "toolCalls": 34,
+    "commandsExecuted": 10,
+    "filesInspected": 6,
+    "filesChanged": 2,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 40652,
+    "outputTokens": 10940,
+    "totalTokens": 306056
+  },
+  "cost": {
+    "inputTokens": 40652,
+    "outputTokens": 10940,
+    "totalTokens": 51592,
+    "inputCostUsd": 0.005691,
+    "outputCostUsd": 0.003063,
+    "totalCostUsd": 0.009467,
+    "costUsd": 0.009467,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  }
+}

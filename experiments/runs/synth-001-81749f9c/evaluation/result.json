@@ -1,0 +1,64 @@
+{
+  "evaluationId": "eval-19a89088-1788101156052",
+  "runId": "synth-001-81749f9c",
+  "caseId": "synth-001",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:20f1003c3f0e10bcd6293f49ca2a2167011941f5b0677076c93103b10f411dde",
+  "agentVersion": "test",
+  "startedAt": "2026-08-30T14:45:56.052Z",
+  "completedAt": "2026-08-30T14:45:58.758Z",
+  "durationMs": 2706,
+  "patchPath": "inline-synth-001.diff",
+  "status": "completed",
+  "verdict": "regression_failure",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 844,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-001-YfgrJX\\patch-1788101157332.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 233,
+      "command": "bun run benchmark\\cases\\synth-001\\public\\reproduce.ts",
+      "stdout": "description=\"keep me\" expected \"keep me\"\npriority=2 expected 2\nstatus=pending expected pending\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 174,
+      "command": "bun test benchmark\\cases\\synth-001\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-001\\private\\oracle.test.ts:\n(pass) synth-001 oracle: updateTask preserves fields > update only provided field [1.53ms]\n(pass) synth-001 oracle: updateTask preserves fields > update multiple fields preserves others [0.30ms]\n(pass) synth-001 oracle: updateTask preserves fields > update with empty object changes nothing except updatedAt [0.13ms]\n\n 3 pass\n 0 fail\n 10 expect() calls\nRan 3 tests across 1 file. [113.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 172,
+      "command": "bun test benchmark\\repositories\\task-manager\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\task-manager\\tests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [1.05ms]\n(pass) TaskManager > createTask validates priority [0.75ms]\n(pass) TaskManager > createTask validates title [0.28ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [1.01ms]\n(pass) TaskManager > updateTask only updates provided fields [0.32ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [1.75ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.25ms]\n64 |   test(\"filterByStatus returns correct tasks and not stale\", () => {\n65 |     const tm = new TaskManager();\n66 |     tm.createTask({ title: \"a\", priority: 1, status: \"pending\" });\n67 |     tm.createTask({ title: \"b\", priority: 1, status: \"completed\" });\n68 |     let pending = tm.filterByStatus(\"pending\");\n69 |     expect(pending.length).toBe(1);\n                                ^\nerror: expect(received).toBe(expected)\n\nExpected: 1\nReceived: 0\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-001-YfgrJX\\benchmark\\repositories\\task-manager\\tests\\task-manager.test.ts:69:28)\n(fail) TaskManager > filterByStatus returns correct tasks and not stale [0.76ms]\n(pass) TaskManager > filterByStatus validates status [0.21ms]\n(pass) TaskManager > getTasksByPriority filters correctly [0.34ms]\n(pass) TaskManager > deleteTask removes task [0.29ms]\n\n 10 pass\n 1 fail\n 24 expect() calls\nRan 11 tests across 1 file. [121.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "task-manager",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "state-management",
+      "business-logic"
+    ]
+  }
+}

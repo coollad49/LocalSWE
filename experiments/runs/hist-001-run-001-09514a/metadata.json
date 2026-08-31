@@ -1,0 +1,91 @@
+{
+  "runId": "hist-001-run-001-09514a",
+  "caseId": "hist-001",
+  "benchmarkVersion": "0.5",
+  "agentVersion": "baseline-v0",
+  "agentRuntime": "pi",
+  "piVersion": "0.84.4",
+  "model": "opencode-go/mimo-v2.5",
+  "modelConfiguration": {
+    "thinkingLevel": "medium",
+    "maxTurns": 25,
+    "agentTimeoutMs": 600000,
+    "commandTimeoutSec": 30
+  },
+  "agentPromptVersion": "baseline-v0",
+  "agentPromptPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\agents\\baseline-v0.md",
+  "startTime": "2026-08-31T02:44:42.271Z",
+  "endTime": "2026-08-31T02:49:16.556Z",
+  "durationMs": 274285,
+  "terminationStatus": "success",
+  "changedFiles": [
+    "package-lock.json",
+    "src/CAC.ts"
+  ],
+  "testCommands": [
+    "cd /tmp && npm test 2>&1",
+    "npm test 2>&1",
+    "npm test 2>&1",
+    "cat > /tmp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo/tests/issue-test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"option default leak issue\", () => {\n  test(\"default should not leak to alias when long form parsed\", () => {\n    const cli = cac();\n    cli.option(\"-b, --base-url <baseUrl>\", \"Set the instance URL\", {\n      default: \"https://github.com\",\n    });\n    const { options } = cli.parse([\"node\", \"bin\", \"--base-url\", \"https://gitlab.com\"]);\n    expect(options.baseUrl).toBe(\"https://gitlab.com\");\n    expect(options.b).toBe(\"https://gitlab.com\");\n  });\n\n  test(\"default should not leak to alias when short form parsed\", () => {\n    const cli = cac();\n    cli.option(\"-b, --base-url <baseUrl>\", \"Set the instance URL\", {\n      default: \"https://github.com\",\n    });\n    const { options } = cli.parse([\"node\", \"bin\", \"-b\", \"https://gitlab.com\"]);\n    expect(options.baseUrl).toBe(\"https://gitlab.com\");\n    expect(options.b).toBe(\"https://gitlab.com\");\n  });\n});\nEOF\n",
+    "cd /tmp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo && npx vitest run tests/issue-test.ts 2>&1",
+    "cd /tmp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo && mv tests/issue-test.ts tests/issue.test.ts && npx vitest run tests/issue.test.ts 2>&1",
+    "cd /tmp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo && npx vitest run 2>&1",
+    "cd /tmp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo && npx vitest run 2>&1"
+  ],
+  "testResults": [
+    {
+      "command": "cd /tmp && npm test 2>&1",
+      "exitCode": 1,
+      "durationMs": 13303,
+      "stdout": "npm error code ENOENT\nnpm error syscall open\nnpm error path C:\\Users\\cooll\\AppData\\Local\\Temp\\package.json\nnpm error errno -4058\nnpm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open 'C:\\Users\\cooll\\AppData\\Local\\Temp\\package.json'\nnpm error enoent This is related to npm not being able to find a file.\nnpm error enoent\nnpm error A complete log of this run can be found in: C:\\Users\\cooll\\AppData\\Local\\npm-cache\\_logs\\2026-08-31T02_45_43_751Z-debug-0.log\n\n\nCommand exited with code 127"
+    },
+    {
+      "command": "npm test 2>&1",
+      "exitCode": 1,
+      "durationMs": 13176,
+      "stdout": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo\n\n ❯ tests/cac.test.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/cac.test.ts [ tests/cac.test.ts ]\nError: Cannot find package 'mri' imported from C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo/src/CAC.ts\n ❯ src/CAC.ts:2:1\n      1| import { EventEmitter } from 'events'\n      2| import mri from 'mri'\n       | ^\n      3| import Command, {\n      4|   GlobalCommand,\n ❯ src/index.ts:1:1\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  no tests\n   Start at  03:46:03\n   Duration  2.23s (transform 282ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 7972,
+      "stdout": "\n> cac@6.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  03:46:36\n   Duration  1.47s (transform 414ms, setup 0ms, import 530ms, tests 22ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cat > /tmp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo/tests/issue-test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"option default leak issue\", () => {\n  test(\"default should not leak to alias when long form parsed\", () => {\n    const cli = cac();\n    cli.option(\"-b, --base-url <baseUrl>\", \"Set the instance URL\", {\n      default: \"https://github.com\",\n    });\n    const { options } = cli.parse([\"node\", \"bin\", \"--base-url\", \"https://gitlab.com\"]);\n    expect(options.baseUrl).toBe(\"https://gitlab.com\");\n    expect(options.b).toBe(\"https://gitlab.com\");\n  });\n\n  test(\"default should not leak to alias when short form parsed\", () => {\n    const cli = cac();\n    cli.option(\"-b, --base-url <baseUrl>\", \"Set the instance URL\", {\n      default: \"https://github.com\",\n    });\n    const { options } = cli.parse([\"node\", \"bin\", \"-b\", \"https://gitlab.com\"]);\n    expect(options.baseUrl).toBe(\"https://gitlab.com\");\n    expect(options.b).toBe(\"https://gitlab.com\");\n  });\n});\nEOF\n",
+      "exitCode": 0,
+      "durationMs": 317,
+      "stdout": "(no output)"
+    },
+    {
+      "command": "cd /tmp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo && npx vitest run tests/issue-test.ts 2>&1",
+      "exitCode": 1,
+      "durationMs": 9446,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo\n\nNo test files found, exiting with code 1\n\nfilter: tests/issue-test.ts\ninclude: **/*.{test,spec}.?(c|m)[jt]s?(x)\nexclude:  **/node_modules/**, **/.git/**\n\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd /tmp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo && mv tests/issue-test.ts tests/issue.test.ts && npx vitest run tests/issue.test.ts 2>&1",
+      "exitCode": 1,
+      "durationMs": 32901,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo\n\n ❯ tests/issue.test.ts (2 tests | 1 failed) 34ms\n     × default should not leak to alias when long form parsed 27ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/issue.test.ts > option default leak issue > default should not leak to alias when long form parsed\nAssertionError: expected 'https://github.com' to be 'https://gitlab.com' // Object.is equality\n\nExpected: \"https://gitlab.com\"\nReceived: \"https://github.com\"\n\n ❯ tests/issue.test.ts:12:23\n     10|     const { options } = cli.parse([\"node\", \"bin\", \"--base-url\", \"https…\n     11|     expect(options.baseUrl).toBe(\"https://gitlab.com\");\n     12|     expect(options.b).toBe(\"https://gitlab.com\");\n       |                       ^\n     13|   });\n     14|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  1 failed | 1 passed (2)\n   Start at  03:47:30\n   Duration  2.80s (transform 621ms, setup 0ms, import 715ms, tests 34ms, environment 0ms)\n\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd /tmp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo && npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 16190,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo\n\n\n Test Files  2 passed (2)\n      Tests  6 passed (6)\n   Start at  03:47:56\n   Duration  2.37s (transform 809ms, setup 0ms, import 1.16s, tests 48ms, environment 1ms)\n\n"
+    },
+    {
+      "command": "cd /tmp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo && npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 24407,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-09514a-qLiOUo\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  03:48:51\n   Duration  1.87s (transform 431ms, setup 0ms, import 532ms, tests 21ms, environment 0ms)\n\n"
+    }
+  ],
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-001-run-001-09514a\\trajectory.jsonl",
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-001-run-001-09514a\\patch.diff",
+  "resultPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-001-run-001-09514a\\result.json",
+  "workspacePath": "C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-001-hist-001-run-001-09514a-qLiOUo",
+  "nodeVersion": "v22.23.2",
+  "platform": "win32"
+}

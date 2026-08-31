@@ -1,0 +1,16 @@
+diff --git a/src/task-manager.ts b/src/task-manager.ts
+index 7e2f02c..813a35d 100644
+--- a/src/task-manager.ts
++++ b/src/task-manager.ts
+@@ -91,9 +91,8 @@ export class TaskManager {
+   }
+ 
+   private invalidateCache(): void {
+-    // BUG: do not invalidate, cache stays valid and stale
+-    // this.cacheValid = false;
+-    // this.statusCache = null;
++    this.cacheValid = false;
++    this.statusCache = null;
+   }
+ 
+   getOverdueTasks(now: Date = new Date()): Task[] {

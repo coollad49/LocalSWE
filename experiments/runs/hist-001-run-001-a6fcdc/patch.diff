@@ -1,0 +1,25 @@
+diff --git a/src/CAC.ts b/src/CAC.ts
+index 7a3df11..724392a 100644
+--- a/src/CAC.ts
++++ b/src/CAC.ts
+@@ -284,7 +284,18 @@ class CAC extends EventEmitter {
+     let transforms = Object.create(null)
+ 
+     for (const cliOption of cliOptions) {
+-      if (!ignoreDefault && cliOption.config.default !== undefined) {
++      // Check if any alias was already parsed
++      const parsedAlias = cliOption.names.find(
++        (name) => parsed[name] !== undefined
++      )
++
++      if (parsedAlias !== undefined) {
++        // If any alias was parsed, set all aliases to the parsed value
++        for (const name of cliOption.names) {
++          options[name] = parsed[parsedAlias]
++        }
++      } else if (!ignoreDefault && cliOption.config.default !== undefined) {
++        // Otherwise, set defaults if applicable
+         for (const name of cliOption.names) {
+           options[name] = cliOption.config.default
+         }
+

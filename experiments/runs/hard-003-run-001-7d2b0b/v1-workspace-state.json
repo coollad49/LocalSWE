@@ -1,0 +1,346 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# SuperJSON path escape mapping mishandles backslashes and versioning\r\n\r\n## Problem\r\n\r\nSerializing an object with keys containing backslashes or dots and non-JSON values (like Set or RegExp) does not round-trip correctly. For example, a key like `b\\` with a Set value is not correctly restored after stringify and parse.\r\n",
+  "filesInspected": [
+    "src/pathstringifier.ts",
+    "src/pathstringifier.test.ts",
+    "src/index.ts",
+    "src/plainer.ts",
+    "src/accessDeep.ts",
+    "tests/basic.test.ts",
+    "src/transformer.ts",
+    "src/index.test.ts",
+    ".v1/helpers.js",
+    ".v1/state.json"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "/tmp/frontier-hard-003-hard-003-run-001-7d2b0b-1NxqDS\ntotal 119\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 15:54 .\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 15:53 ..\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 15:54 .git\n-rw-r--r-- 1 cooll 197609   35 Aug 30 15:53 .gitignore\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 15:54 .v1\n-rw-r--r-- 1 cooll 197609  322 Aug 30 15:13 ISSUE.md\n-rw-r--r-- 1 cooll 197609 1116 Aug 30 15:13 LICENSE\n-rw-r--r-- 1 cooll 197609 1778 Aug 30 15:13 package.json\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 15:53 src\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 15:53 tests\n-rw-r--r-- 1 cooll 197609  557 Aug 30 15:13 tsconfig.json\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T14:54:12.602Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "# SuperJSON path escape mapping mishandles backslashes and versioning\r\n\r\n## Problem\r\n\r\nSerializing an object with keys containing backslashes or dots and non-JSON values (like Set or RegExp) does not round-trip correctly. For example, a key like `b\\` with a Set value is not correctly restored after stringify and parse.\r\n{\r\n  \"version\": \"2.2.2\",\r\n  \"license\": \"MIT\",\r\n  \"type\": \"module\",\r\n  \"typings\": \"dist/index.d.ts\",\r\n  \"main\": \"./dist/index.js\",\r\n  \"exports\": {\r\n    \".\": \"./dist/index.js\"\r\n  },\r\n  \"files\": [\r\n    \"dist\"\r\n  ],\r\n  \"engines\": {\r\n    \"node\": \">=16\"\r\n  },\r\n  \"scripts\": {\r\n    \"build\": \"tsc\",\r\n    \"test\": \"vitest run\",\r\n    \"lint\": \"tsdx lint\",\r\n    \"prepack\": \"yarn build\",\r\n    \"prepare\": \"husky install\",\r\n    \"publish-please\": \"publish-please\",\r\n    \"prepublishOnly\": \"publish-please guard\"\r\n  },\r\n  \"importSort\": {\r\n    \".ts\": {\r\n      \"style\": \"module\"\r\n    }\r\n  },\r\n  \"prettier\": {\r\n    \"printWidth\": 80,\r\n    \"semi\": true,\r\n    \"singleQuote\": true,\r\n    \"trailingComma\": \"es5\"\r\n  },\r\n  \"name\": \"superjson\",\r\n  \"author\": {\r\n    \"name\": \"Simon Knott\",\r\n    \"email\": \"info@simonknott.de\",\r\n    \"url\": \"https://simonknott.de\"\r\n  },\r\n  \"contributors\": [\r\n    {\r\n      \"name\": \"Dylan Brookes\",\r\n      \"email\": \"dylan@brookes.net\",\r\n      \"url\": \"https://github.com/merelinguist\"\r\n    },\r\n    {\r\n      \"name\": \"Brandon Bayer\",\r\n      \"email\": \"b@bayer.w\",\r\n      \"url\": \"https://twitter.com/flybayer\"\r\n    }\r\n  ],\r\n  \"repository\": {\r\n    \"type\": \"git\",\r\n    \"url\": \"https://github.com/blitz-js/superjson\"\r\n  },\r\n  \"devDependencies\": {\r\n    \"@types/debug\": \"^4.1.5\",\r\n    \"@types/mongodb\": \"^3.6.12\",\r\n    \"@types/node\": \"^18.7.18\",\r\n    \"benchmark\": \"^2.1.4\",\r\n    \"decimal.js\": \"^10.3.1\",\r\n    \"eslint-plugin-es5\": \"^1.5.0\",\r\n    \"husky\": \"^6.0.0\",\r\n    \"mongodb\": \"^3.6.6\",\r\n    \"publish-please\": \"^5.5.2\",\r\n    \"tsdx\": \"^0.14.1\",\r\n    \"typescript\": \"^4.2.4\",\r\n    \"vitest\": \"^0.34.6\"\r\n  },\r\n  \"dependencies\": {\r\n    \"copy-anything\": \"^4\"\r\n  },\r\n  \"resolutions\": {\r\n    \"**/@t",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T14:54:15.132Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "src/:\naccessDeep.test.ts\naccessDeep.ts\nclass-registry.ts\ncustom-transformer-registry.ts\ndouble-indexed-kv.ts\nindex.test.ts\nindex.ts\nis.test.ts\nis.ts\npathstringifier.test.ts\npathstringifier.ts\nplainer.spec.ts\nplainer.ts\nregistry.test.ts\nregistry.ts\ntransformer.test.ts\ntransformer.ts\ntypes.ts\nutil.ts\n\ntests/:\nbasic.test.ts\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T14:54:17.591Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "total 24\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 15:54 .\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 15:54 ..\n-rwxr-xr-x 1 cooll 197609 5743 Aug 30 15:54 helpers.js\n-rw-r--r-- 1 cooll 197609 9804 Aug 30 15:57 state.json\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T14:57:48.064Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "src/index.test.ts:829:        v: 1,\nsrc/index.test.ts:893:        v: 1,\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T14:58:18.110Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "src/index.test.ts:829:        v: 1,\nsrc/index.test.ts:893:        v: 1,\nsrc/index.ts:67:      result = applyValueAnnotations(result, meta.values, this);\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T14:59:36.745Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "src/index.test.ts:22:const isNode10 = process.version.indexOf('v10') === 0;\nsrc/index.ts:67:      result = applyValueAnnotations(result, meta.values, this);\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T14:59:41.784Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "(no output)\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:02:59.074Z"
+    }
+  ],
+  "hypotheses": [],
+  "changesMade": [],
+  "verificationAttempts": [],
+  "evidence": [
+    {
+      "id": "ev-bbe565dd",
+      "type": "command_result",
+      "description": "bash: pwd && ls -la",
+      "source": "pwd && ls -la",
+      "timestamp": "2026-08-30T14:54:12.323Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6e0c6383",
+      "type": "command_result",
+      "description": "bash: cat ISSUE.md package.json tsconfig.json",
+      "source": "cat ISSUE.md package.json tsconfig.json",
+      "timestamp": "2026-08-30T14:54:14.971Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-df7a1b31",
+      "type": "command_result",
+      "description": "bash: ls src/ tests/",
+      "source": "ls src/ tests/",
+      "timestamp": "2026-08-30T14:54:17.321Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6cea2aa8",
+      "type": "file_inspection",
+      "description": "Inspected src/pathstringifier.ts",
+      "source": "src/pathstringifier.ts",
+      "timestamp": "2026-08-30T14:54:20.370Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1b17698a",
+      "type": "file_inspection",
+      "description": "read src/pathstringifier.ts",
+      "source": "src/pathstringifier.ts",
+      "timestamp": "2026-08-30T14:54:20.372Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-2302b774",
+      "type": "file_inspection",
+      "description": "Inspected src/pathstringifier.test.ts",
+      "source": "src/pathstringifier.test.ts",
+      "timestamp": "2026-08-30T14:54:22.872Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5341d84c",
+      "type": "file_inspection",
+      "description": "read src/pathstringifier.test.ts",
+      "source": "src/pathstringifier.test.ts",
+      "timestamp": "2026-08-30T14:54:22.873Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1422434e",
+      "type": "file_inspection",
+      "description": "Inspected src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-30T14:55:00.689Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-49d44ef5",
+      "type": "file_inspection",
+      "description": "read src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-30T14:55:00.690Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f6d7a532",
+      "type": "file_inspection",
+      "description": "Inspected src/plainer.ts",
+      "source": "src/plainer.ts",
+      "timestamp": "2026-08-30T14:55:03.215Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-60987c1a",
+      "type": "file_inspection",
+      "description": "read src/plainer.ts",
+      "source": "src/plainer.ts",
+      "timestamp": "2026-08-30T14:55:03.216Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-9f6672af",
+      "type": "file_inspection",
+      "description": "Inspected src/accessDeep.ts",
+      "source": "src/accessDeep.ts",
+      "timestamp": "2026-08-30T14:55:06.296Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-41f97d19",
+      "type": "file_inspection",
+      "description": "read src/accessDeep.ts",
+      "source": "src/accessDeep.ts",
+      "timestamp": "2026-08-30T14:55:06.298Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-fe15245b",
+      "type": "file_inspection",
+      "description": "Inspected tests/basic.test.ts",
+      "source": "tests/basic.test.ts",
+      "timestamp": "2026-08-30T14:57:33.265Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-067d14d6",
+      "type": "file_inspection",
+      "description": "read tests/basic.test.ts",
+      "source": "tests/basic.test.ts",
+      "timestamp": "2026-08-30T14:57:33.266Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ebad355a",
+      "type": "file_inspection",
+      "description": "Inspected src/transformer.ts",
+      "source": "src/transformer.ts",
+      "timestamp": "2026-08-30T14:57:36.693Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-2fa43ec0",
+      "type": "file_inspection",
+      "description": "read src/transformer.ts",
+      "source": "src/transformer.ts",
+      "timestamp": "2026-08-30T14:57:36.694Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-783551f0",
+      "type": "file_inspection",
+      "description": "Inspected src/index.test.ts",
+      "source": "src/index.test.ts",
+      "timestamp": "2026-08-30T14:57:40.922Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-351f14a0",
+      "type": "file_inspection",
+      "description": "read src/index.test.ts",
+      "source": "src/index.test.ts",
+      "timestamp": "2026-08-30T14:57:40.924Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-43b761e8",
+      "type": "command_result",
+      "description": "bash: ls -la .v1/",
+      "source": "ls -la .v1/",
+      "timestamp": "2026-08-30T14:57:44.272Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4246683b",
+      "type": "file_inspection",
+      "description": "Inspected .v1/helpers.js",
+      "source": ".v1/helpers.js",
+      "timestamp": "2026-08-30T14:57:51.004Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-40a95332",
+      "type": "file_inspection",
+      "description": "read .v1/helpers.js",
+      "source": ".v1/helpers.js",
+      "timestamp": "2026-08-30T14:57:51.006Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1fa07695",
+      "type": "file_inspection",
+      "description": "Inspected .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-30T14:57:53.403Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7067734d",
+      "type": "file_inspection",
+      "description": "read .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-30T14:57:53.404Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8d6e85ae",
+      "type": "command_result",
+      "description": "bash: grep -rn \"\\bv:\\s*1\\b\\|v:\\s*\\d\" src/",
+      "source": "grep -rn \"\\bv:\\s*1\\b\\|v:\\s*\\d\" src/",
+      "timestamp": "2026-08-30T14:58:16.269Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-eab851c7",
+      "type": "command_result",
+      "description": "bash: grep -rn \"v: 1\\|meta\\.\\?v\" src/ tests/",
+      "source": "grep -rn \"v: 1\\|meta\\.\\?v\" src/ tests/",
+      "timestamp": "2026-08-30T14:59:36.495Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f0d32b02",
+      "type": "command_result",
+      "description": "bash: grep -rn \"version\\|meta\\\\.v\\|version:\" src/",
+      "source": "grep -rn \"version\\|meta\\\\.v\\|version:\" src/",
+      "timestamp": "2026-08-30T14:59:40.993Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1db26368",
+      "type": "command_result",
+      "description": "bash: grep -rn \"v:\\s*\\[\" src/ tests/",
+      "source": "grep -rn \"v:\\s*\\[\" src/ tests/",
+      "timestamp": "2026-08-30T15:02:58.546Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-cc8da675",
+      "type": "diff_inspection",
+      "description": "Final diff stat: (no changes)",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-30T15:04:23.525Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 0,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-30T14:54:08.235Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-30T14:54:08.235Z",
+      "exitedAt": "2026-08-30T15:04:22.566Z",
+      "durationMs": 614331
+    }
+  ],
+  "terminationReason": "timeout"
+}

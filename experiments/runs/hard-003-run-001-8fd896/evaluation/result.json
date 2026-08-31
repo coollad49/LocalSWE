@@ -1,0 +1,507 @@
+{
+  "evaluationId": "eval-5c2a28f8-1788165640252",
+  "runId": "hard-003-run-001-8fd896",
+  "caseId": "hard-003",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:40:40.252Z",
+  "completedAt": "2026-08-31T08:40:42.097Z",
+  "durationMs": 1845,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-003-run-001-8fd896\\patch.diff",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-003-GKdPiN\\benchmark\\repositories\\superjson",
+      "stdout": "empty patch - no changes applied",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 355,
+      "command": "bun run benchmark\\cases\\hard-003\\public\\reproduce.ts",
+      "stdout": "Test escape: a0IsRegExp=false aIsArray=false bSlashIsSet=false => FAIL\n  parsed['a.0']= /test-regex/\n  parsed.a= [ /'a'[0]: string that becomes a regex/ ]\n  parsed['b\\\\']= [\n  [ 1 ]\n]\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "superjson",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "serialization",
+      "parsing",
+      "state-management"
+    ]
+  },
+  "metrics": {
+    "durationMs": 612211,
+    "totalTurns": 72,
+    "toolCalls": 30,
+    "commandsExecuted": 4,
+    "filesInspected": 8,
+    "filesChanged": 0,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 65368,
+    "outputTokens": 9820,
+    "totalTokens": 511172
+  },
+  "cost": {
+    "inputTokens": 65368,
+    "outputTokens": 9820,
+    "totalTokens": 75188,
+    "inputCostUsd": 0.01961,
+    "outputCostUsd": 0.011784,
+    "totalCostUsd": 0.057553,
+    "costUsd": 0.057553,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-003-run-001-8fd896",
+    "caseId": "hard-003",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "mimo-v2.5",
+    "trajectoryHash": "sha256:e459ebab9ee66a6313f6528bcb4b929e92014256747edad9c90f1b50a8c953ab",
+    "trajectory": {
+      "eventCount": 298,
+      "durationMs": 612190,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "available_models": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 6,
+        "turn_start": 36,
+        "message_start": 68,
+        "message_end": 66,
+        "tool_execution_start": 30,
+        "tool_execution_update": 8,
+        "tool_execution_end": 30,
+        "turn_end": 34,
+        "agent_end": 4,
+        "auto_retry_start": 2,
+        "auto_retry_end": 2,
+        "session_disposed": 1,
+        "timeout": 1,
+        "patch_captured": 1
+      },
+      "assistantMessages": 104,
+      "userMessages": 4,
+      "toolCalls": 30,
+      "toolResults": 120,
+      "thinkingEvents": 16,
+      "unknownEvents": 58,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 30,
+      "uniqueTools": 4,
+      "byTool": {
+        "bash": {
+          "calls": 4,
+          "failures": 0
+        },
+        "read": {
+          "calls": 18,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 2,
+          "failures": 0
+        },
+        "grep": {
+          "calls": 6,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 65368,
+      "output": 9820,
+      "cacheRead": 435984,
+      "cacheWrite": 0,
+      "total": 511172,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.057553,
+      "inputCostUsd": 0.01961,
+      "outputCostUsd": 0.011784,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 16,
+      "characterCount": 19204,
+      "averageCharacters": 1200,
+      "maxCharacters": 2445,
+      "firstThinkingAt": "2026-08-30T14:52:33.860Z",
+      "lastThinkingAt": "2026-08-30T14:59:28.104Z",
+      "thinkingDurationMs": 414244
+    },
+    "editing": {
+      "editCalls": 0,
+      "writeCalls": 0,
+      "filesTouched": [],
+      "uniqueFilesTouched": 0
+    },
+    "exploration": {
+      "readCalls": 18,
+      "grepCalls": 6,
+      "findCalls": 0,
+      "lsCalls": 2,
+      "bashCalls": 4,
+      "explorationToEditingRatio": null
+    },
+    "verification": {
+      "commandsDetected": 0,
+      "testsRun": false,
+      "testCommandCount": 0,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": []
+    },
+    "behavior": {
+      "repeatedToolCalls": 18,
+      "duplicateReadTargets": 10,
+      "duplicateEditTargets": 0,
+      "toolFailureCount": 0,
+      "topRepetitions": [
+        {
+          "signature": "7f02178889f1",
+          "tool": "grep",
+          "target": "src",
+          "count": 6
+        },
+        {
+          "signature": "2e5d540a64dc",
+          "tool": "read",
+          "target": "src/pathstringifier.ts",
+          "count": 4
+        },
+        {
+          "signature": "322ef7068598",
+          "tool": "bash",
+          "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-8fd896-DiFFLN && ls",
+          "count": 2
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "891729a8249c",
+          "tool": "read",
+          "target": "src/pathstringifier.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "5cc268016958",
+          "tool": "read",
+          "target": "src/accessDeep.ts",
+          "count": 2
+        },
+        {
+          "signature": "336a91935ea4",
+          "tool": "read",
+          "target": "src/plainer.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-003-run-001-8fd896",
+    "caseId": "hard-003",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-30T14:52:33.860Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-8fd896-DiFFLN && ls",
+        "commandClass": "general"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-30T14:52:33.860Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-8fd896-DiFFLN && ls",
+        "commandClass": "general"
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-30T14:52:38.302Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 43,
+        "timestamp": "2026-08-30T14:52:38.302Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-30T14:52:39.559Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-30T14:52:39.559Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 74,
+        "timestamp": "2026-08-30T14:52:40.609Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 75,
+        "timestamp": "2026-08-30T14:52:40.609Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 90,
+        "timestamp": "2026-08-30T14:52:46.970Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/pathstringifier.ts"
+      },
+      {
+        "index": 91,
+        "timestamp": "2026-08-30T14:52:46.970Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/pathstringifier.ts"
+      },
+      {
+        "index": 106,
+        "timestamp": "2026-08-30T14:52:50.593Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/pathstringifier.test.ts"
+      },
+      {
+        "index": 107,
+        "timestamp": "2026-08-30T14:52:50.593Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/pathstringifier.test.ts"
+      },
+      {
+        "index": 122,
+        "timestamp": "2026-08-30T14:52:57.661Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/pathstringifier.ts"
+      },
+      {
+        "index": 123,
+        "timestamp": "2026-08-30T14:52:57.661Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/pathstringifier.ts"
+      },
+      {
+        "index": 138,
+        "timestamp": "2026-08-30T14:52:59.000Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 139,
+        "timestamp": "2026-08-30T14:52:59.000Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 154,
+        "timestamp": "2026-08-30T14:53:02.573Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/accessDeep.ts"
+      },
+      {
+        "index": 155,
+        "timestamp": "2026-08-30T14:53:02.573Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/accessDeep.ts"
+      },
+      {
+        "index": 184,
+        "timestamp": "2026-08-30T14:56:08.476Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/plainer.ts"
+      },
+      {
+        "index": 185,
+        "timestamp": "2026-08-30T14:56:08.476Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/plainer.ts"
+      },
+      {
+        "index": 214,
+        "timestamp": "2026-08-30T14:59:21.480Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.test.ts"
+      },
+      {
+        "index": 215,
+        "timestamp": "2026-08-30T14:59:21.480Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.test.ts"
+      },
+      {
+        "index": 230,
+        "timestamp": "2026-08-30T14:59:27.798Z",
+        "event": "grep",
+        "tool": "grep",
+        "target": "src"
+      },
+      {
+        "index": 231,
+        "timestamp": "2026-08-30T14:59:27.798Z",
+        "event": "grep",
+        "tool": "grep",
+        "target": "src"
+      },
+      {
+        "index": 246,
+        "timestamp": "2026-08-30T14:59:34.898Z",
+        "event": "grep",
+        "tool": "grep",
+        "target": "src"
+      },
+      {
+        "index": 247,
+        "timestamp": "2026-08-30T14:59:34.898Z",
+        "event": "grep",
+        "tool": "grep",
+        "target": "src"
+      },
+      {
+        "index": 262,
+        "timestamp": "2026-08-30T14:59:38.180Z",
+        "event": "grep",
+        "tool": "grep",
+        "target": "src"
+      },
+      {
+        "index": 263,
+        "timestamp": "2026-08-30T14:59:38.180Z",
+        "event": "grep",
+        "tool": "grep",
+        "target": "src"
+      },
+      {
+        "index": 278,
+        "timestamp": "2026-08-30T14:59:41.827Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-8fd896-DiFFLN && cat src/index.test.ts | head -100",
+        "commandClass": "general"
+      },
+      {
+        "index": 279,
+        "timestamp": "2026-08-30T14:59:41.827Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-8fd896-DiFFLN && cat src/index.test.ts | head -100",
+        "commandClass": "general"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 42,
+        "timestamp": "2026-08-30T14:52:38.302Z",
+        "detail": "ISSUE.md"
+      }
+    ],
+    "errors": [],
+    "repetitions": [],
+    "verificationEvents": []
+  }
+}

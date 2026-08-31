@@ -1,0 +1,46 @@
+{
+  "runId": "synth-004-run-001-3a67f2",
+  "caseId": "synth-004",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "status": "timeout",
+  "durationMs": 603553,
+  "changedFiles": [
+    "src/task-manager.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-004-run-001-3a67f2\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-004-run-001-3a67f2\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-004-run-001-3a67f2\\metadata.json",
+  "tests": [
+    {
+      "command": "cd /tmp/frontier-synth-004-synth-004-run-001-3a67f2-0uiRXB && bun test 2>&1 | head -100",
+      "exitCode": 0,
+      "durationMs": 1123,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [7.52ms]\n(pass) TaskManager > createTask validates priority [2.97ms]\n(pass) TaskManager > createTask validates title [0.35ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.51ms]\n(pass) TaskManager > updateTask only updates provided fields [0.64ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [9.10ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.29ms]\n68 |     let pending = tm.filterByStatus(\"pending\");\n69 |     expect(pending.length).toBe(1);\n70 |     // add another pending and ensure cache invalidates\n71 |     tm.createTask({ title: \"c\", priority: 1, status: \"pending\" });\n72 |     pending = tm.filterByStatus(\"pending\");\n73 |     expect(pending.length).toBe(2);\n                                ^\nerror: expect(received).toBe(expected)\n\nExpected: 2\nReceived: 1\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-synth-004-synth-004-run-001-3a67f2-0uiRXB\\tests\\task-manager.test.ts:73:28)\n(fail) TaskManager > filterByStatus returns correct tasks and not stale [3.59ms]\n(pass) TaskManager > filterByStatus validates status [0.25ms]\n(pass) TaskManager > getTasksByPriority filters correctly [0.36ms]\n(pass) TaskManager > deleteTask removes task [1.12ms]\n\n 10 pass\n 1 fail\n 25 expect() calls\nRan 11 tests across 1 file. [475.00ms]\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-004-synth-004-run-001-3a67f2-0uiRXB && bun test 2>&1 | tail -30",
+      "exitCode": 0,
+      "durationMs": 587,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [1.71ms]\n(pass) TaskManager > createTask validates priority [0.59ms]\n(pass) TaskManager > createTask validates title [0.26ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.46ms]\n(pass) TaskManager > updateTask only updates provided fields [0.31ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [2.48ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.31ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [1.12ms]\n(pass) TaskManager > filterByStatus validates status [0.14ms]\n(pass) TaskManager > getTasksByPriority filters correctly [4.05ms]\n(pass) TaskManager > deleteTask removes task [0.35ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [294.00ms]\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-004-synth-004-run-001-3a67f2-0uiRXB && bun x vitest run 2>&1 | tail -30",
+      "exitCode": 0,
+      "durationMs": 3801,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-3a67f2-0uiRXB\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  16:30:12\n   Duration  1.26s (transform 191ms, setup 0ms, import 260ms, tests 31ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-004-synth-004-run-001-3a67f2-0uiRXB && node .v1/helpers.js add-verification '{\"method\":\"vitest\",\"command\":\"vitest run\",\"passed\":true,\"output\":\"Test Files  1 passed (1)\\nTests  11 passed (11)\",\"type\":\"test_result\"}'",
+      "exitCode": 0,
+      "durationMs": 878,
+      "stdout": "verification recorded\n"
+    }
+  ],
+  "error": "Agent timeout after 600000ms",
+  "model": "mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-30T15:24:47.096Z",
+  "endedAt": "2026-08-30T15:34:50.650Z"
+}

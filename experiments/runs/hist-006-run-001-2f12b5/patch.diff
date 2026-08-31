@@ -1,0 +1,44 @@
+diff --git a/src/spyOn.ts b/src/spyOn.ts
+index cf0f3f8..a9a2ef2 100644
+--- a/src/spyOn.ts
++++ b/src/spyOn.ts
+@@ -66,9 +66,13 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     throw new Error('specify getter or setter to spy on')
+   })()
+   let objDescriptor = getDescriptor(obj, accessName)
++  // Walk the full prototype chain to find the descriptor
++  let originalDescriptor: PropertyDescriptor | undefined = objDescriptor
+   let proto = Object.getPrototypeOf(obj)
+-  let protoDescriptor = proto && getDescriptor(proto, accessName)
+-  let originalDescriptor = objDescriptor || protoDescriptor
++  while (!originalDescriptor && proto && proto !== Object.prototype) {
++    originalDescriptor = getDescriptor(proto, accessName)
++    proto = Object.getPrototypeOf(proto)
++  }
+ 
+   assert(
+     originalDescriptor || accessName in obj,
+@@ -114,10 +118,18 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     ;(desc as PropertyDescriptor)[accessType] = cb
+     define(obj, accessName, desc)
+   }
+-  let restore = () =>
+-    originalDescriptor && !original
+-      ? define(obj, accessName, originalDescriptor)
+-      : reassign(original)
++  let restore = () => {
++    if (objDescriptor) {
++      // Property was an own property, restore it
++      define(obj, accessName, originalDescriptor)
++    } else if (originalDescriptor) {
++      // Property was inherited, just delete our spy to reveal the inherited one
++      delete (obj as any)[accessName]
++    } else {
++      // No original descriptor at all, reassign original
++      reassign(original)
++    }
++  }
+ 
+   if (!mock) mock = original
+ 
+

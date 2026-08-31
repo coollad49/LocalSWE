@@ -1,0 +1,67 @@
+diff --git a/src/core/proxy.ts b/src/core/proxy.ts
+index bd98e27..b32276c 100644
+--- a/src/core/proxy.ts
++++ b/src/core/proxy.ts
+@@ -2,6 +2,7 @@ import {
+ 	has,
+ 	is,
+ 	isDraftable,
++	isDraft,
+ 	shallowCopy,
+ 	latest,
+ 	ImmerBaseState,
+@@ -21,8 +22,7 @@ import {
+ 	CONFIGURABLE,
+ 	ENUMERABLE,
+ 	VALUE,
+-	isArray,
+-	isArrayIndex
++	isArray
+ } from "../internal"
+ 
+ interface ProxyBaseState extends ImmerBaseState {
+@@ -131,21 +131,13 @@ export const objectTraps: ProxyHandler<ProxyState> = {
+ 			return value
+ 		}
+ 
+-		// During mutating array operations, defer proxy creation for array elements
+-		// This optimization avoids creating unnecessary proxies during sort/reverse
+-		if (
+-			isArrayWithStringProp &&
+-			(state as ProxyArrayState).operationMethod &&
+-			arrayPlugin?.isMutatingArrayMethod(
+-				(state as ProxyArrayState).operationMethod!
+-			) &&
+-			isArrayIndex(prop)
+-		) {
+-			// Return raw value during mutating operations, create proxy only if modified
++		// If value is already a draft proxy, return it directly
++		if (isDraft(value)) {
+ 			return value
+ 		}
+-		// Check for existing draft in modified state.
+-		// Assigned values are never drafted. This catches any drafts we created, too.
++
++		// If value is the same as base, it's a new element from the base state
++		// that hasn't been accessed yet - create a proxy for copy-on-write.
+ 		if (value === peek(state.base_, prop)) {
+ 			prepareCopy(state)
+ 			// Ensure array keys are always numbers
+@@ -154,7 +146,16 @@ export const objectTraps: ProxyHandler<ProxyState> = {
+ 
+ 			return (state.copy_![childKey] = childDraft)
+ 		}
+-		return value
++
++		// Value differs from base and is not a draft. This can happen after sort/reverse
++		// when elements were reordered, or when a user explicitly assigns a new object.
++		// In both cases, we create a proxy to ensure copy-on-write semantics:
++		// - For reordered base objects: proxy prevents mutating base state
++		// - For user-assigned objects: standard Immer behavior for nested tracking
++		prepareCopy(state)
++		const childKey = state.type_ === ArchType.Array ? +(prop as string) : prop
++		const childDraft = createProxy(state.scope_, value, state, childKey)
++		return (state.copy_![childKey] = childDraft)
+ 	},
+ 	has(state, prop) {
+ 		return prop in latest(state)

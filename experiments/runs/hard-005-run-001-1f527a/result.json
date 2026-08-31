@@ -1,0 +1,82 @@
+{
+  "runId": "hard-005-run-001-1f527a",
+  "caseId": "hard-005",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 371648,
+  "changedFiles": [
+    "package-lock.json",
+    "src/index.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-005-run-001-1f527a\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-005-run-001-1f527a\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-005-run-001-1f527a\\metadata.json",
+  "tests": [
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo && ls node_modules/.bin/ | grep -i \"vitest\\|tsc\"",
+      "exitCode": 0,
+      "durationMs": 1456,
+      "stdout": "tsc\ntsc.cmd\ntsc.ps1\nvitest\nvitest.cmd\nvitest.ps1\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo && ls node_modules/vitest 2>/dev/null | head",
+      "exitCode": 0,
+      "durationMs": 703,
+      "stdout": "LICENSE.md\nREADME.md\nbrowser.d.ts\nconfig.d.ts\ncoverage.d.ts\ndist\nenvironments.d.ts\nexecute.d.ts\nglobals.d.ts\nimport-meta.d.ts\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo && ./node_modules/.bin/vitest run tests/basic.test.ts 2>&1 | tail -40",
+      "exitCode": 0,
+      "durationMs": 19302,
+      "stdout": "\n\u001b[1m\u001b[46m RUN \u001b[49m\u001b[22m \u001b[36mv3.2.7 \u001b[39m\u001b[90mC:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo\u001b[39m\n\n \u001b[32m✓\u001b[39m tests/basic.test.ts \u001b[2m(\u001b[22m\u001b[2m2 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 11\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m1 passed\u001b[39m\u001b[22m\u001b[90m (1)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m2 passed\u001b[39m\u001b[22m\u001b[90m (2)\u001b[39m\n\u001b[2m   Start at \u001b[22m 03:18:58\n\u001b[2m   Duration \u001b[22m 5.32s\u001b[2m (transform 330ms, setup 0ms, collect 591ms, tests 11ms, environment 1ms, prepare 2.50s)\u001b[22m\n\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo && ./node_modules/.bin/vitest run tests/repro.test.ts 2>&1 | tail -40",
+      "exitCode": 0,
+      "durationMs": 5521,
+      "stdout": "\u001b[31m\u001b[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\u001b[22m\u001b[39m\n\n\u001b[41m\u001b[1m FAIL \u001b[22m\u001b[49m tests/repro.test.ts\u001b[2m > \u001b[22mpath-to-regexp regression - astral ID_Continue\u001b[2m > \u001b[22mround-trip parse/stringify works\n\u001b[31m\u001b[1mAssertionError\u001b[22m: expected [ { type: 'text', value: '/' }, …(1) ] to deeply equal [ { type: 'text', value: '/' }, …(2) ]\u001b[39m\n\n\u001b[32m- Expected\u001b[39m\n\u001b[31m+ Received\u001b[39m\n\n\u001b[33m@@ -2,13 +2,9 @@\u001b[39m\n\u001b[2m    {\u001b[22m\n\u001b[2m      \"type\": \"text\",\u001b[22m\n\u001b[2m      \"value\": \"/\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    {\u001b[22m\n\u001b[32m-     \"name\": \"test\",\u001b[39m\n\u001b[31m+     \"name\": \"test𝛼\",\u001b[39m\n\u001b[2m      \"type\": \"param\",\u001b[22m\n\u001b[32m-   },\u001b[39m\n\u001b[32m-   {\u001b[39m\n\u001b[32m-     \"type\": \"text\",\u001b[39m\n\u001b[32m-     \"value\": \"𝛼\",\u001b[39m\n\u001b[2m    },\u001b[22m\n\u001b[2m  ]\u001b[22m\n\n\u001b[36m \u001b[2m❯\u001b[22m tests/repro.test.ts:\u001b[2m19:28\u001b[22m\u001b[39m\n    \u001b[90m 17| \u001b[39m    \u001b[35mconst\u001b[39m str \u001b[33m=\u001b[39m \u001b[34mstringify\u001b[39m(tokens)\u001b[33m;\u001b[39m\n    \u001b[90m 18| \u001b[39m    \u001b[35mconst\u001b[39m tokens2 \u001b[33m=\u001b[39m \u001b[34mparse\u001b[39m(str)\u001b[33m;\u001b[39m\n    \u001b[90m 19| \u001b[39m    \u001b[34mexpect\u001b[39m(tokens2\u001b[33m.\u001b[39mtokens)\u001b[33m.\u001b[39m\u001b[34mtoEqual\u001b[39m(tokens\u001b[33m.\u001b[39mtokens)\u001b[33m;\u001b[39m\n    \u001b[90m   | \u001b[39m                           \u001b[31m^\u001b[39m\n    \u001b[90m 20| \u001b[39m  })\u001b[33m;\u001b[39m\n    \u001b[90m 21| \u001b[39m})\u001b[33m;\u001b[39m\n\n\u001b[31m\u001b[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\u001b[22m\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[31m1 failed\u001b[39m\u001b[22m\u001b[90m (1)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[31m2 failed\u001b[39m\u001b[22m\u001b[90m (2)\u001b[39m\n\u001b[2m   Start at \u001b[22m 03:19:17\n\u001b[2m   Duration \u001b[22m 1.66s\u001b[2m (transform 264ms, setup 0ms, collect 305ms, tests 55ms, environment 1ms, prepare 416ms)\u001b[22m\n\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo && ./node_modules/.bin/vitest run tests/repro.test.ts 2>&1 | tail -20",
+      "exitCode": 0,
+      "durationMs": 5497,
+      "stdout": "\nExpected: \u001b[32m\"/:\u001b[7m\"\u001b[27mtest\u001b[7m\"\u001b[27m𝛼\"\u001b[39m\nReceived: \u001b[31m\"/:test𝛼\"\u001b[39m\n\n\u001b[36m \u001b[2m❯\u001b[22m tests/repro.test.ts:\u001b[2m12:17\u001b[22m\u001b[39m\n    \u001b[90m 10| \u001b[39m    \u001b[90m// After parse, we expect tokens for [/, :test, 𝛼]\u001b[39m\n    \u001b[90m 11| \u001b[39m    // After stringify, the param name should be quoted because 𝛼 is …\n    \u001b[90m 12| \u001b[39m    \u001b[34mexpect\u001b[39m(str)\u001b[33m.\u001b[39m\u001b[34mtoBe\u001b[39m(\u001b[32m'/:\"test\"\\u{1D6FC}'\u001b[39m)\u001b[33m;\u001b[39m\n    \u001b[90m   | \u001b[39m                \u001b[31m^\u001b[39m\n    \u001b[90m 13| \u001b[39m  })\u001b[33m;\u001b[39m\n    \u001b[90m 14| \u001b[39m  \u001b[34mtest\u001b[39m(\u001b[32m\"round-trip parse/stringify works\"\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n\n\u001b[31m\u001b[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\u001b[22m\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[31m1 failed\u001b[39m\u001b[22m\u001b[90m (1)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[31m1 failed\u001b[39m\u001b[22m\u001b[2m | \u001b[22m\u001b[1m\u001b[32m1 passed\u001b[39m\u001b[22m\u001b[90m (2)\u001b[39m\n\u001b[2m   Start at \u001b[22m 03:19:34\n\u001b[2m   Duration \u001b[22m 1.73s\u001b[2m (transform 276ms, setup 0ms, collect 292ms, tests 42ms, environment 1ms, prepare 451ms)\u001b[22m\n\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo && ./node_modules/.bin/vitest run tests/repro.test.ts 2>&1 | tail -20",
+      "exitCode": 0,
+      "durationMs": 6999,
+      "stdout": "\n\u001b[1m\u001b[46m RUN \u001b[49m\u001b[22m \u001b[36mv3.2.7 \u001b[39m\u001b[90mC:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo\u001b[39m\n\n\u001b[90mstdout\u001b[2m | tests/repro.test.ts\u001b[2m > \u001b[22m\u001b[2mpath-to-regexp regression - astral ID_Continue\u001b[2m > \u001b[22m\u001b[2mstringify quotes param name followed by astral ID_Continue\n\u001b[22m\u001b[39mstr = \"/:\\\"test\\\"𝛼\"\n\n\u001b[90mstdout\u001b[2m | tests/repro.test.ts\u001b[2m > \u001b[22m\u001b[2mpath-to-regexp regression - astral ID_Continue\u001b[2m > \u001b[22m\u001b[2mround-trip parse/stringify works\n\u001b[22m\u001b[39mround-trip str = \"/:\\\"test\\\"𝛼\"\n\n \u001b[32m✓\u001b[39m tests/repro.test.ts \u001b[2m(\u001b[22m\u001b[2m3 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 19\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m1 passed\u001b[39m\u001b[22m\u001b[90m (1)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m3 passed\u001b[39m\u001b[22m\u001b[90m (3)\u001b[39m\n\u001b[2m   Start at \u001b[22m 03:19:50\n\u001b[2m   Duration \u001b[22m 1.84s\u001b[2m (transform 330ms, setup 0ms, collect 349ms, tests 19ms, environment 1ms, prepare 463ms)\u001b[22m\n\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo && ./node_modules/.bin/vitest run tests/basic.test.ts 2>&1 | tail -10",
+      "exitCode": 0,
+      "durationMs": 6683,
+      "stdout": "\n\u001b[1m\u001b[46m RUN \u001b[49m\u001b[22m \u001b[36mv3.2.7 \u001b[39m\u001b[90mC:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo\u001b[39m\n\n \u001b[32m✓\u001b[39m tests/basic.test.ts \u001b[2m(\u001b[22m\u001b[2m2 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 11\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m1 passed\u001b[39m\u001b[22m\u001b[90m (1)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m2 passed\u001b[39m\u001b[22m\u001b[90m (2)\u001b[39m\n\u001b[2m   Start at \u001b[22m 03:19:58\n\u001b[2m   Duration \u001b[22m 2.02s\u001b[2m (transform 379ms, setup 0ms, collect 400ms, tests 11ms, environment 1ms, prepare 637ms)\u001b[22m\n\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo && ./node_modules/.bin/vitest run tests/repro.test.ts 2>&1 | tail -30",
+      "exitCode": 0,
+      "durationMs": 6214,
+      "stdout": "\n\u001b[1m\u001b[46m RUN \u001b[49m\u001b[22m \u001b[36mv3.2.7 \u001b[39m\u001b[90mC:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo\u001b[39m\n\n \u001b[32m✓\u001b[39m tests/repro.test.ts \u001b[2m(\u001b[22m\u001b[2m4 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 18\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m1 passed\u001b[39m\u001b[22m\u001b[90m (1)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m4 passed\u001b[39m\u001b[22m\u001b[90m (4)\u001b[39m\n\u001b[2m   Start at \u001b[22m 03:20:11\n\u001b[2m   Duration \u001b[22m 2.18s\u001b[2m (transform 532ms, setup 0ms, collect 613ms, tests 18ms, environment 1ms, prepare 422ms)\u001b[22m\n\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo && ./node_modules/.bin/vitest run tests/sanity.test.ts tests/basic.test.ts 2>&1 | tail -20",
+      "exitCode": 0,
+      "durationMs": 9205,
+      "stdout": "\n\u001b[1m\u001b[46m RUN \u001b[49m\u001b[22m \u001b[36mv3.2.7 \u001b[39m\u001b[90mC:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo\u001b[39m\n\n \u001b[32m✓\u001b[39m tests/basic.test.ts \u001b[2m(\u001b[22m\u001b[2m2 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 12\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m tests/sanity.test.ts \u001b[2m(\u001b[22m\u001b[2m1 test\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 13\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m2 passed\u001b[39m\u001b[22m\u001b[90m (2)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m3 passed\u001b[39m\u001b[22m\u001b[90m (3)\u001b[39m\n\u001b[2m   Start at \u001b[22m 03:20:34\n\u001b[2m   Duration \u001b[22m 3.48s\u001b[2m (transform 1.72s, setup 0ms, collect 1.98s, tests 25ms, environment 1ms, prepare 1.35s)\u001b[22m\n\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo && ./node_modules/.bin/vitest run tests/basic.test.ts 2>&1 | tail -10",
+      "exitCode": 0,
+      "durationMs": 5574,
+      "stdout": "\n\u001b[1m\u001b[46m RUN \u001b[49m\u001b[22m \u001b[36mv3.2.7 \u001b[39m\u001b[90mC:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-1f527a-4BD3wo\u001b[39m\n\n \u001b[32m✓\u001b[39m tests/basic.test.ts \u001b[2m(\u001b[22m\u001b[2m2 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 11\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m1 passed\u001b[39m\u001b[22m\u001b[90m (1)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m2 passed\u001b[39m\u001b[22m\u001b[90m (2)\u001b[39m\n\u001b[2m   Start at \u001b[22m 03:20:56\n\u001b[2m   Duration \u001b[22m 1.58s\u001b[2m (transform 302ms, setup 0ms, collect 318ms, tests 11ms, environment 1ms, prepare 380ms)\u001b[22m\n\n"
+    }
+  ],
+  "model": "mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T02:14:54.050Z",
+  "endedAt": "2026-08-31T02:21:05.698Z"
+}

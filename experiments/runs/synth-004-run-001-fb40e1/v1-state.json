@@ -1,0 +1,322 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# Issue: filterByStatus returns stale results after adding/updating tasks\r\n\r\n## Problem\r\n\r\nFiltering tasks by status should return the current matching tasks. Currently, it returns stale cached results after tasks are added or updated.\r\n",
+  "filesInspected": [
+    "ISSUE.md",
+    ".",
+    "src",
+    "tests",
+    "package.json",
+    "src/task-manager.ts",
+    "src/types.ts",
+    "src/index.ts",
+    "tests/task-manager.test.ts"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n ❯ tests/task-manager.test.ts (11 tests | 1 failed) 50ms\n     × filterByStatus returns correct tasks and not stale 22ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/task-manager.test.ts > TaskManager > filterByStatus returns correct tasks and not stale\nAssertionError: expected 1 to be 2 // Object.is equality\n\n- Expected\n+ Received\n\n- 2\n+ 1\n\n ❯ tests/task-manager.test.ts:73:28\n     71|     tm.createTask({ title: \"c\", priority: 1, status: \"pending\" });\n     72|     pending = tm.filterByStatus(\"pending\");\n     73|     expect(pending.length).toBe(2);\n       |                            ^\n     74|     // update status\n     75|     const t = pending[0]!;\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  1 failed | 10 passed (11)\n   Start at  05:29:22\n   Duration  1.71s (transform 291ms, setup 0ms, import 364ms, tests 50ms, environment 0ms)\n\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:24.923Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:29:43\n   Duration  1.95s (transform 306ms, setup 0ms, import 390ms, tests 33ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:45.894Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "diff --git a/src/task-manager.ts b/src/task-manager.ts\nindex 7e2f02c..813a35d 100644\n--- a/src/task-manager.ts\n+++ b/src/task-manager.ts\n@@ -91,9 +91,8 @@ export class TaskManager {\n   }\n \n   private invalidateCache(): void {\n-    // BUG: do not invalidate, cache stays valid and stale\n-    // this.cacheValid = false;\n-    // this.statusCache = null;\n+    this.cacheValid = false;\n+    this.statusCache = null;\n   }\n \n   getOverdueTasks(now: Date = new Date()): Task[] {\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:48.305Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:30:05\n   Duration  1.54s (transform 343ms, setup 0ms, import 414ms, tests 33ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:30:07.760Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:30:19\n   Duration  960ms (transform 165ms, setup 0ms, import 231ms, tests 33ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:30:20.697Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-fb40e1-tfHqTK\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  05:30:32\n   Duration  1.11s (transform 186ms, setup 0ms, import 254ms, tests 30ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T04:30:33.709Z"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "hyp-3fd1513b",
+      "description": "Root cause identified and repaired in src/task-manager.ts",
+      "evidence": [
+        "Code inspection and passing verification"
+      ],
+      "confidence": 0.9,
+      "status": "selected",
+      "files": [
+        "src/task-manager.ts"
+      ]
+    }
+  ],
+  "changesMade": [
+    {
+      "path": "src/task-manager.ts",
+      "summary": "edit src/task-manager.ts",
+      "iteration": 0,
+      "timestamp": "2026-08-31T04:29:28.878Z"
+    },
+    {
+      "path": "src/task-manager.ts",
+      "summary": "modified src/task-manager.ts",
+      "iteration": 3,
+      "timestamp": "2026-08-31T04:30:36.727Z"
+    }
+  ],
+  "verificationAttempts": [],
+  "evidence": [
+    {
+      "id": "ev-d6a7b43c",
+      "type": "file_inspection",
+      "description": "Inspected ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T04:29:01.682Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7abd3e38",
+      "type": "file_inspection",
+      "description": "read ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T04:29:01.683Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-529b4be9",
+      "type": "file_inspection",
+      "description": "Inspected .",
+      "source": ".",
+      "timestamp": "2026-08-31T04:29:03.218Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-512109b0",
+      "type": "file_inspection",
+      "description": "read .",
+      "source": ".",
+      "timestamp": "2026-08-31T04:29:03.219Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-881906d3",
+      "type": "file_inspection",
+      "description": "Inspected src",
+      "source": "src",
+      "timestamp": "2026-08-31T04:29:05.087Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ce43bd2e",
+      "type": "file_inspection",
+      "description": "read src",
+      "source": "src",
+      "timestamp": "2026-08-31T04:29:05.088Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8564f6b0",
+      "type": "file_inspection",
+      "description": "Inspected tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T04:29:05.096Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a0c6b720",
+      "type": "file_inspection",
+      "description": "read tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T04:29:05.097Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b7b4cb72",
+      "type": "file_inspection",
+      "description": "Inspected package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-31T04:29:05.105Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-77e85441",
+      "type": "file_inspection",
+      "description": "read package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-31T04:29:05.106Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4ef0c1cc",
+      "type": "file_inspection",
+      "description": "Inspected src/task-manager.ts",
+      "source": "src/task-manager.ts",
+      "timestamp": "2026-08-31T04:29:06.827Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f6e8a92c",
+      "type": "file_inspection",
+      "description": "read src/task-manager.ts",
+      "source": "src/task-manager.ts",
+      "timestamp": "2026-08-31T04:29:06.828Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6f94fa10",
+      "type": "file_inspection",
+      "description": "Inspected src/types.ts",
+      "source": "src/types.ts",
+      "timestamp": "2026-08-31T04:29:06.839Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-fa0eec22",
+      "type": "file_inspection",
+      "description": "read src/types.ts",
+      "source": "src/types.ts",
+      "timestamp": "2026-08-31T04:29:06.840Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-278f97b2",
+      "type": "file_inspection",
+      "description": "Inspected src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-31T04:29:06.849Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-fd53f6cc",
+      "type": "file_inspection",
+      "description": "read src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-31T04:29:06.850Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e916a2e5",
+      "type": "file_inspection",
+      "description": "Inspected tests/task-manager.test.ts",
+      "source": "tests/task-manager.test.ts",
+      "timestamp": "2026-08-31T04:29:06.860Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-36874b3e",
+      "type": "file_inspection",
+      "description": "read tests/task-manager.test.ts",
+      "source": "tests/task-manager.test.ts",
+      "timestamp": "2026-08-31T04:29:06.861Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0380e3e9",
+      "type": "command_result",
+      "description": "bash: npx vitest run 2>&1",
+      "source": "npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:29:09.956Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-23affb65",
+      "type": "command_result",
+      "description": "bash: npx vitest run 2>&1",
+      "source": "npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:29:30.629Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f805d64a",
+      "type": "command_result",
+      "description": "bash: git diff HEAD",
+      "source": "git diff HEAD",
+      "timestamp": "2026-08-31T04:29:47.693Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-9cfafcb9",
+      "type": "command_result",
+      "description": "bash: npx vitest run 2>&1",
+      "source": "npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:29:52.526Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3e49fadc",
+      "type": "command_result",
+      "description": "bash: npx vitest run 2>&1",
+      "source": "npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:30:12.025Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-54ccdc02",
+      "type": "command_result",
+      "description": "bash: npx vitest run 2>&1",
+      "source": "npx vitest run 2>&1",
+      "timestamp": "2026-08-31T04:30:24.970Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-57726316",
+      "type": "diff_inspection",
+      "description": "Final diff stat:  src/task-manager.ts | 5 ++---\n 1 file changed, 2 insertions(+), 3 deletions(-)\n",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-31T04:30:36.162Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 3,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-31T04:29:00.338Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-31T04:29:00.338Z",
+      "exitedAt": "2026-08-31T04:30:35.979Z",
+      "durationMs": 95641
+    }
+  ],
+  "selectedHypothesis": "hyp-3fd1513b",
+  "terminationReason": "completed"
+}

@@ -1,0 +1,85 @@
+{
+  "runId": "synth-003-run-001-daafee",
+  "caseId": "synth-003",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 1933,
+  "startedAt": "2026-08-31T08:43:54.717Z",
+  "completedAt": "2026-08-31T08:43:56.650Z",
+  "caseMeta": {
+    "repository": "async-queue",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "error-handling",
+      "asynchronous"
+    ]
+  },
+  "metrics": {
+    "durationMs": 270070,
+    "totalTurns": 94,
+    "toolCalls": 48,
+    "commandsExecuted": 18,
+    "filesInspected": 7,
+    "filesChanged": 1,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 100580,
+    "outputTokens": 20724,
+    "totalTokens": 1245656
+  },
+  "cost": {
+    "inputTokens": 100580,
+    "outputTokens": 20724,
+    "totalTokens": 121304,
+    "inputCostUsd": 0.014081,
+    "outputCostUsd": 0.005803,
+    "totalCostUsd": 0.023032,
+    "costUsd": 0.023032,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 235,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-003-laOCGX\\patch-1788165835743.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 270,
+      "command": "bun run benchmark\\cases\\synth-003\\public\\reproduce.ts",
+      "stdout": "success=false expected false\nattempts=1 expected 1\nsize=1 expected 1 (retry)\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 191,
+      "command": "bun test benchmark\\cases\\synth-003\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-003\\private\\oracle.test.ts:\n(pass) synth-003 oracle: error handling > reports failure and retries [2.33ms]\n(pass) synth-003 oracle: error handling > success true only on no throw [0.40ms]\n(pass) synth-003 oracle: error handling > processNext retries [0.84ms]\n\n 3 pass\n 0 fail\n 8 expect() calls\nRan 3 tests across 1 file. [140.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 204,
+      "command": "bun test benchmark\\repositories\\async-queue\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\async-queue\\tests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [1.53ms]\n(pass) AsyncQueue > dequeue throws on empty [0.64ms]\n(pass) AsyncQueue > pause and resume preserves jobs [0.63ms]\n(pass) AsyncQueue > pause resume multiple cycles [1.18ms]\n(pass) AsyncQueue > processJob retry re-enqueues [1.23ms]\n(pass) AsyncQueue > processJob succeeds [0.37ms]\n(pass) AsyncQueue > processNext handles empty [0.49ms]\n(pass) AsyncQueue > processNext surfaces errors via retry [0.68ms]\n(pass) AsyncQueue > clear empties queue [0.17ms]\n\n 9 pass\n 0 fail\n 35 expect() calls\nRan 9 tests across 1 file. [149.00ms]\n",
+      "timedOut": false
+    }
+  }
+}

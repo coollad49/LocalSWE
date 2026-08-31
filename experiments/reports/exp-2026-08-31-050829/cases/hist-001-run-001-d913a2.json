@@ -1,0 +1,85 @@
+{
+  "runId": "hist-001-run-001-d913a2",
+  "caseId": "hist-001",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 2325,
+  "startedAt": "2026-08-31T08:42:06.571Z",
+  "completedAt": "2026-08-31T08:42:08.896Z",
+  "caseMeta": {
+    "repository": "cac",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "validation",
+      "parsing"
+    ]
+  },
+  "metrics": {
+    "durationMs": 238850,
+    "totalTurns": 102,
+    "toolCalls": 48,
+    "commandsExecuted": 22,
+    "filesInspected": 7,
+    "filesChanged": 2,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 71608,
+    "outputTokens": 27308,
+    "totalTokens": 1074132
+  },
+  "cost": {
+    "inputTokens": 71608,
+    "outputTokens": 27308,
+    "totalTokens": 98916,
+    "inputCostUsd": 0.021482,
+    "outputCostUsd": 0.03277,
+    "totalCostUsd": 0.112765,
+    "costUsd": 0.112765,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 244,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-001-fRjAx6\\patch-1788165727881.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 268,
+      "command": "bun run benchmark\\cases\\hist-001\\public\\reproduce.ts",
+      "stdout": "Test --base-url: options={\"--\":[],\"baseUrl\":\"https://gitlab.com\"} => PASS (hasB=false b=undefined baseUrl=https://gitlab.com)\nTest -b: options={\"--\":[],\"b\":\"https://gitlab.com\",\"baseUrl\":\"https://gitlab.com\"} => PASS\nTest no args: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://github.com\"} => PASS\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 276,
+      "command": "bun test benchmark\\cases\\hist-001\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-001\\private\\oracle.test.ts:\n(pass) hist-001 oracle: option default alias leak > default value for option [13.44ms]\n(pass) hist-001 oracle: option default alias leak > default value for option names 1 (-b) [1.08ms]\n(pass) hist-001 oracle: option default alias leak > default value for option names 2 (--base-url) [0.44ms]\n(pass) hist-001 oracle: option default alias leak > default value for option names 3 (boolean skip) [0.30ms]\n\n 4 pass\n 0 fail\n 4 expect() calls\nRan 4 tests across 1 file. [216.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 219,
+      "command": "bun test benchmark\\repositories\\cac\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\cac\\tests\\cac.test.ts:\n(pass) cac regression > parses basic option [11.46ms]\n(pass) cac regression > parses short flag and help not thrown [0.57ms]\n(pass) cac regression > command parsing [1.33ms]\n(pass) cac regression > default value without args [0.64ms]\n\n 4 pass\n 0 fail\n 6 expect() calls\nRan 4 tests across 1 file. [156.00ms]\n",
+      "timedOut": false
+    }
+  }
+}

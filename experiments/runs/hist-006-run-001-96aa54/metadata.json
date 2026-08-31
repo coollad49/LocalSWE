@@ -1,0 +1,49 @@
+{
+  "runId": "hist-006-run-001-96aa54",
+  "caseId": "hist-006",
+  "benchmarkVersion": "0.5",
+  "agentVersion": "baseline-v0",
+  "agentRuntime": "pi",
+  "piVersion": "0.84.4",
+  "model": "mimo-v2.5",
+  "modelConfiguration": {
+    "thinkingLevel": "medium",
+    "maxTurns": 25,
+    "agentTimeoutMs": 600000,
+    "commandTimeoutSec": 30
+  },
+  "agentPromptVersion": "baseline-v0",
+  "agentPromptPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\agents\\baseline-v0.md",
+  "startTime": "2026-08-30T15:12:50.116Z",
+  "endTime": "2026-08-30T15:21:45.378Z",
+  "durationMs": 535262,
+  "terminationStatus": "success",
+  "changedFiles": [
+    "src/spyOn.ts"
+  ],
+  "testCommands": [
+    "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-96aa54-juXakW && npx vitest run 2>&1 | head -100",
+    "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-96aa54-juXakW && npx vitest run 2>&1 | tail -40"
+  ],
+  "testResults": [
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-96aa54-juXakW && npx vitest run 2>&1 | head -100",
+      "exitCode": 0,
+      "durationMs": 22001,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-96aa54-juXakW\n\n ❯ tests/tinyspy.test.ts (3 tests | 2 failed) 42ms\n     × spyOn mocks prototype method and restores cleanly 26ms\n     × spyOn inherited getter preserves setter 7ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn mocks prototype method and restores cleanly\nAssertionError: expected { value: [Function f], …(3) } to be undefined\n\n- Expected:\nundefined\n\n+ Received:\n{\n  \"configurable\": true,\n  \"enumerable\": false,\n  \"value\": [Function f],\n  \"writable\": true,\n}\n\n ❯ tests/tinyspy.test.ts:14:55\n     12|     s.restore();\n     13|     expect(foo.f()).toBe('original');\n     14|     expect(Object.getOwnPropertyDescriptor(foo, 'f')).toBeUndefined();\n       |                                                       ^\n     15|   });\n     16|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn inherited getter preserves setter\nAssertionError: expected [Function] to not throw an error but 'TypeError: Cannot set property v of #…' was thrown\n\n- Expected:\nundefined\n\n+ Received:\n\"TypeError: Cannot set property v of #<Foo> which has only a getter\"\n\n ❯ tests/tinyspy.test.ts:39:43\n     37|     const s = spyOn(foo, { getter: 'v' }, () => 'mocked');\n     38|     expect(foo.v).toBe('mocked');\n     39|     expect(() => { foo.v = 'test'; }).not.toThrow();\n       |                                           ^\n     40|     expect(foo.v).toBe('mocked');\n     41|     s.restore();\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 1 passed (3)\n   Start at  16:13:26\n   Duration  1.42s (transform 260ms, setup 0ms, import 343ms, tests 42ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-96aa54-juXakW && npx vitest run 2>&1 | tail -40",
+      "exitCode": 0,
+      "durationMs": 8989,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-96aa54-juXakW\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  16:18:31\n   Duration  1.04s (transform 201ms, setup 0ms, import 286ms, tests 23ms, environment 0ms)\n\n"
+    }
+  ],
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-96aa54\\trajectory.jsonl",
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-96aa54\\patch.diff",
+  "resultPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-96aa54\\result.json",
+  "workspacePath": "C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-006-hist-006-run-001-96aa54-juXakW",
+  "nodeVersion": "v22.23.2",
+  "platform": "win32",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf"
+}

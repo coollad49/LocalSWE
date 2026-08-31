@@ -1,0 +1,1075 @@
+{
+  "evaluationId": "eval-9e0d1925-1788165834717",
+  "runId": "synth-003-run-001-daafee",
+  "caseId": "synth-003",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v1",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:43:54.717Z",
+  "completedAt": "2026-08-31T08:43:56.650Z",
+  "durationMs": 1933,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-daafee\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 235,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-003-laOCGX\\patch-1788165835743.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 270,
+      "command": "bun run benchmark\\cases\\synth-003\\public\\reproduce.ts",
+      "stdout": "success=false expected false\nattempts=1 expected 1\nsize=1 expected 1 (retry)\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 191,
+      "command": "bun test benchmark\\cases\\synth-003\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-003\\private\\oracle.test.ts:\n(pass) synth-003 oracle: error handling > reports failure and retries [2.33ms]\n(pass) synth-003 oracle: error handling > success true only on no throw [0.40ms]\n(pass) synth-003 oracle: error handling > processNext retries [0.84ms]\n\n 3 pass\n 0 fail\n 8 expect() calls\nRan 3 tests across 1 file. [140.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 204,
+      "command": "bun test benchmark\\repositories\\async-queue\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\async-queue\\tests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [1.53ms]\n(pass) AsyncQueue > dequeue throws on empty [0.64ms]\n(pass) AsyncQueue > pause and resume preserves jobs [0.63ms]\n(pass) AsyncQueue > pause resume multiple cycles [1.18ms]\n(pass) AsyncQueue > processJob retry re-enqueues [1.23ms]\n(pass) AsyncQueue > processJob succeeds [0.37ms]\n(pass) AsyncQueue > processNext handles empty [0.49ms]\n(pass) AsyncQueue > processNext surfaces errors via retry [0.68ms]\n(pass) AsyncQueue > clear empties queue [0.17ms]\n\n 9 pass\n 0 fail\n 35 expect() calls\nRan 9 tests across 1 file. [149.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "async-queue",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "error-handling",
+      "asynchronous"
+    ]
+  },
+  "metrics": {
+    "durationMs": 270070,
+    "totalTurns": 94,
+    "toolCalls": 48,
+    "commandsExecuted": 18,
+    "filesInspected": 7,
+    "filesChanged": 1,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 100580,
+    "outputTokens": 20724,
+    "totalTokens": 1245656
+  },
+  "cost": {
+    "inputTokens": 100580,
+    "outputTokens": 20724,
+    "totalTokens": 121304,
+    "inputCostUsd": 0.014081,
+    "outputCostUsd": 0.005803,
+    "totalCostUsd": 0.023032,
+    "costUsd": 0.023032,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-003-run-001-daafee",
+    "caseId": "synth-003",
+    "agentVersion": "agent-v1",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:d553cd1ca52324489248605f83ffaf2f1b0a54291e7950e66a71e1f78a7428a6",
+    "trajectory": {
+      "eventCount": 445,
+      "durationMs": 270050,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "workflow_init": 1,
+        "helpers_ready": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "phase_start": 1,
+        "agent_start": 2,
+        "turn_start": 42,
+        "message_start": 92,
+        "message_end": 92,
+        "tool_execution_start": 48,
+        "tool_execution_end": 48,
+        "turn_end": 42,
+        "tool_execution_update": 58,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "phase_sync": 1,
+        "early_verification_detected": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 126,
+      "userMessages": 4,
+      "toolCalls": 48,
+      "toolResults": 192,
+      "thinkingEvents": 84,
+      "unknownEvents": 105,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 48,
+      "uniqueTools": 5,
+      "byTool": {
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "read": {
+          "calls": 18,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 18,
+          "failures": 18
+        },
+        "write": {
+          "calls": 4,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 100580,
+      "output": 20724,
+      "cacheRead": 1124352,
+      "cacheWrite": 0,
+      "total": 1245656,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.023032,
+      "inputCostUsd": 0.014081,
+      "outputCostUsd": 0.005803,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 84,
+      "characterCount": 26248,
+      "averageCharacters": 312,
+      "maxCharacters": 1604,
+      "firstThinkingAt": "2026-08-31T03:07:38.209Z",
+      "lastThinkingAt": "2026-08-31T03:12:02.201Z",
+      "thinkingDurationMs": 263992
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 4,
+      "filesTouched": [
+        ".v1/state.json",
+        "src/queue.ts"
+      ],
+      "uniqueFilesTouched": 2
+    },
+    "exploration": {
+      "readCalls": 18,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 18,
+      "explorationToEditingRatio": 7
+    },
+    "verification": {
+      "commandsDetected": 24,
+      "testsRun": true,
+      "testCommandCount": 6,
+      "buildRun": false,
+      "typecheckRun": true,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 28,
+      "duplicateReadTargets": 11,
+      "duplicateEditTargets": 4,
+      "toolFailureCount": 18,
+      "topRepetitions": [
+        {
+          "signature": "2107b5f3f42e",
+          "tool": "read",
+          "target": "src/queue.ts",
+          "count": 4
+        },
+        {
+          "signature": "7f6e1bef26e9",
+          "tool": "read",
+          "target": ".v1/state.json",
+          "count": 4
+        },
+        {
+          "signature": "5430a76eb31d",
+          "tool": "write",
+          "target": ".v1/state.json",
+          "count": 4
+        },
+        {
+          "signature": "3673ea32dd30",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+          "count": 4
+        },
+        {
+          "signature": "ec8ec0fa57e2",
+          "tool": "ls",
+          "target": ".",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "acfc63a28d77",
+          "tool": "read",
+          "target": "src/job.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-003-run-001-daafee",
+    "caseId": "synth-003",
+    "agentVersion": "agent-v1",
+    "timeline": [
+      {
+        "index": 25,
+        "timestamp": "2026-08-31T03:07:38.209Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 26,
+        "timestamp": "2026-08-31T03:07:38.209Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 41,
+        "timestamp": "2026-08-31T03:07:40.936Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-31T03:07:40.936Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 57,
+        "timestamp": "2026-08-31T03:07:45.149Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-31T03:07:45.149Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-31T03:07:45.154Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 60,
+        "timestamp": "2026-08-31T03:07:45.154Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 81,
+        "timestamp": "2026-08-31T03:07:47.952Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 82,
+        "timestamp": "2026-08-31T03:07:47.952Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 83,
+        "timestamp": "2026-08-31T03:07:47.956Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/job.ts"
+      },
+      {
+        "index": 84,
+        "timestamp": "2026-08-31T03:07:47.956Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/job.ts"
+      },
+      {
+        "index": 85,
+        "timestamp": "2026-08-31T03:07:47.961Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 86,
+        "timestamp": "2026-08-31T03:07:47.961Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 87,
+        "timestamp": "2026-08-31T03:07:47.968Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/queue.test.ts"
+      },
+      {
+        "index": 88,
+        "timestamp": "2026-08-31T03:07:47.968Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tests/queue.test.ts"
+      },
+      {
+        "index": 121,
+        "timestamp": "2026-08-31T03:08:00.204Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 122,
+        "timestamp": "2026-08-31T03:08:00.204Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 137,
+        "timestamp": "2026-08-31T03:08:05.096Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/helpers.js"
+      },
+      {
+        "index": 138,
+        "timestamp": "2026-08-31T03:08:05.096Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/helpers.js"
+      },
+      {
+        "index": 153,
+        "timestamp": "2026-08-31T03:08:21.563Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.",
+        "commandClass": "test"
+      },
+      {
+        "index": 154,
+        "timestamp": "2026-08-31T03:08:21.563Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.",
+        "commandClass": "test"
+      },
+      {
+        "index": 173,
+        "timestamp": "2026-08-31T03:10:27.609Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-3f04cea2",
+        "commandClass": "general"
+      },
+      {
+        "index": 174,
+        "timestamp": "2026-08-31T03:10:27.609Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-3f04cea2",
+        "commandClass": "general"
+      },
+      {
+        "index": 193,
+        "timestamp": "2026-08-31T03:10:30.425Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js status",
+        "commandClass": "general"
+      },
+      {
+        "index": 194,
+        "timestamp": "2026-08-31T03:10:30.425Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js status",
+        "commandClass": "general"
+      },
+      {
+        "index": 213,
+        "timestamp": "2026-08-31T03:10:34.892Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 214,
+        "timestamp": "2026-08-31T03:10:34.892Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 229,
+        "timestamp": "2026-08-31T03:10:47.633Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 230,
+        "timestamp": "2026-08-31T03:10:47.633Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 245,
+        "timestamp": "2026-08-31T03:10:56.234Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 246,
+        "timestamp": "2026-08-31T03:10:56.234Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 273,
+        "timestamp": "2026-08-31T03:11:07.526Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 274,
+        "timestamp": "2026-08-31T03:11:07.526Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 289,
+        "timestamp": "2026-08-31T03:11:10.348Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 290,
+        "timestamp": "2026-08-31T03:11:10.348Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 317,
+        "timestamp": "2026-08-31T03:11:22.193Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm run check-types 2>&1",
+        "commandClass": "typecheck"
+      },
+      {
+        "index": 318,
+        "timestamp": "2026-08-31T03:11:22.193Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm run check-types 2>&1",
+        "commandClass": "typecheck"
+      },
+      {
+        "index": 341,
+        "timestamp": "2026-08-31T03:11:29.435Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM/tsconfig.json\" 2>&1 || echo \"No tsconfig.json found\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 342,
+        "timestamp": "2026-08-31T03:11:29.435Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM/tsconfig.json\" 2>&1 || echo \"No tsconfig.json found\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 363,
+        "timestamp": "2026-08-31T03:11:35.784Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && git diff HEAD 2>&1",
+        "commandClass": "git"
+      },
+      {
+        "index": 364,
+        "timestamp": "2026-08-31T03:11:35.784Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && git diff HEAD 2>&1",
+        "commandClass": "git"
+      },
+      {
+        "index": 383,
+        "timestamp": "2026-08-31T03:11:39.257Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 384,
+        "timestamp": "2026-08-31T03:11:39.257Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 399,
+        "timestamp": "2026-08-31T03:11:42.961Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && git diff HEAD --stat 2>&1",
+        "commandClass": "git"
+      },
+      {
+        "index": 400,
+        "timestamp": "2026-08-31T03:11:42.961Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && git diff HEAD --stat 2>&1",
+        "commandClass": "git"
+      },
+      {
+        "index": 419,
+        "timestamp": "2026-08-31T03:11:54.614Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 420,
+        "timestamp": "2026-08-31T03:11:54.614Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "write",
+        "tool": "write",
+        "target": ".v1/state.json"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 41,
+        "timestamp": "2026-08-31T03:07:40.936Z",
+        "detail": "package.json"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 153,
+        "timestamp": "2026-08-31T03:08:21.563Z",
+        "detail": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lac"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 229,
+        "timestamp": "2026-08-31T03:10:47.633Z",
+        "detail": ".v1/state.json"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 259,
+        "timestamp": "2026-08-31T03:11:00.702Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 260,
+        "timestamp": "2026-08-31T03:11:00.702Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 261,
+        "timestamp": "2026-08-31T03:11:00.705Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 262,
+        "timestamp": "2026-08-31T03:11:00.705Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 263,
+        "timestamp": "2026-08-31T03:11:00.705Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 264,
+        "timestamp": "2026-08-31T03:11:00.705Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm tes"
+      }
+    ],
+    "errors": [
+      {
+        "index": 179,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-3f04cea2\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 180,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-3f04cea2\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 181,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 182,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 183,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 184,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 259,
+        "tool": "bash",
+        "error": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 53ms\n     × processJob retry re-enqueues 22ms\n     × processNext surfaces errors via retry 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processJob retry re-enqueues\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/que"
+      },
+      {
+        "index": 260,
+        "tool": "bash",
+        "error": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 53ms\n     × processJob retry re-enqueues 22ms\n     × processNext surfaces errors via retry 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processJob retry re-enqueues\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/que"
+      },
+      {
+        "index": 261,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 262,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 263,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 264,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 327,
+        "tool": "bash",
+        "error": "\n> async-queue@1.0.0 check-types\n> tsc --noEmit\n\nVersion 7.0.2\ntsc: The TypeScript Compiler - Version 7.0.2\n\nCOMMON COMMANDS\n\n  tsc\n  Compiles the current project (tsconfig.json in the working directory.)\n\n  tsc app.ts util.ts\n  Ignoring tsconfig.json, compiles the specified files with default compiler options.\n\n  tsc -b\n  Build a composite project in the working directory.\n\n  tsc --init\n  Creates a tsconfig.json with the recommended settings in the working directory.\n\n  tsc -p ./path/to/tsconfi"
+      },
+      {
+        "index": 328,
+        "tool": "bash",
+        "error": "\n> async-queue@1.0.0 check-types\n> tsc --noEmit\n\nVersion 7.0.2\ntsc: The TypeScript Compiler - Version 7.0.2\n\nCOMMON COMMANDS\n\n  tsc\n  Compiles the current project (tsconfig.json in the working directory.)\n\n  tsc app.ts util.ts\n  Ignoring tsconfig.json, compiles the specified files with default compiler options.\n\n  tsc -b\n  Build a composite project in the working directory.\n\n  tsc --init\n  Creates a tsconfig.json with the recommended settings in the working directory.\n\n  tsc -p ./path/to/tsconfi"
+      },
+      {
+        "index": 329,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 330,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 331,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 332,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 153,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+        "exitCode": 0
+      },
+      {
+        "index": 154,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+        "exitCode": 0
+      },
+      {
+        "index": 159,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+        "exitCode": 0,
+        "outputSnippet": "hyp-3f04cea2\n"
+      },
+      {
+        "index": 160,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+        "exitCode": 0,
+        "outputSnippet": "hyp-3f04cea2\n"
+      },
+      {
+        "index": 161,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+        "exitCode": 0
+      },
+      {
+        "index": 162,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+        "exitCode": 0
+      },
+      {
+        "index": 163,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+        "exitCode": 0
+      },
+      {
+        "index": 164,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"processJob returns success:true on error and lacks retry re-enqueue logic\",\"evidence\":[\"src/queue.ts:63-64: catch block returns success:true with co",
+        "exitCode": 0
+      },
+      {
+        "index": 245,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 246,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 259,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 53ms\n     × pro"
+      },
+      {
+        "index": 260,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 53ms\n     × pro"
+      },
+      {
+        "index": 261,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 262,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 263,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 264,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 289,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 290,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 303,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 304,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Sta"
+      },
+      {
+        "index": 305,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 306,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 307,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 308,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-daafee-6Zk9OM\" && npm test 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

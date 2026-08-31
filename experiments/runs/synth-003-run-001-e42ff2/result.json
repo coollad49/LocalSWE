@@ -1,0 +1,51 @@
+{
+  "runId": "synth-003-run-001-e42ff2",
+  "caseId": "synth-003",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 270370,
+  "changedFiles": [
+    "src/queue.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-e42ff2\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-e42ff2\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-e42ff2\\metadata.json",
+  "tests": [
+    {
+      "command": "cd . && npm test 2>&1",
+      "exitCode": 1,
+      "durationMs": 5720,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n ❯ tests/queue.test.ts (9 tests | 2 failed) 51ms\n     × processJob retry re-enqueues 21ms\n     × processNext surfaces errors via retry 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processJob retry re-enqueues\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/queue.test.ts:61:24\n     59|     };\n     60|     const r1 = await q.processJob(dequeued, handler);\n     61|     expect(r1.success).toBe(false);\n       |                        ^\n     62|     expect(r1.job.attempts).toBe(1);\n     63|     expect(q.size()).toBe(1); // re-enqueued\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > processNext surfaces errors via retry\nAssertionError: expected true to be false // Object.is equality\n\n- Expected\n+ Received\n\n- false\n+ true\n\n ❯ tests/queue.test.ts:97:25\n     95|     };\n     96|     const r1 = await q.processNext(handler);\n     97|     expect(r1!.success).toBe(false);\n       |                         ^\n     98|     expect(called).toBe(1);\n     99|     const r2 = await q.processNext(handler);\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 7 passed (9)\n   Start at  05:29:09\n   Duration  962ms (transform 123ms, setup 0ms, import 184ms, tests 51ms, environment 0ms)\n\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd . && npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 9645,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:29:27\n   Duration  1.12s (transform 135ms, setup 0ms, import 201ms, tests 29ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd . && npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 10692,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:29:45\n   Duration  1.52s (transform 165ms, setup 0ms, import 232ms, tests 29ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd . && npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 8212,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:29:57\n   Duration  1.23s (transform 166ms, setup 0ms, import 228ms, tests 31ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd . && npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 5588,
+      "stdout": "\n> async-queue@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-e42ff2-6W6C3Z\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  05:33:14\n   Duration  1.08s (transform 125ms, setup 0ms, import 186ms, tests 29ms, environment 0ms)\n\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T04:28:48.758Z",
+  "endedAt": "2026-08-31T04:33:19.128Z"
+}

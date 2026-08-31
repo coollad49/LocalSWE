@@ -1,0 +1,863 @@
+{
+  "evaluationId": "eval-236be909-1788165804630",
+  "runId": "synth-001-run-001-a4c9d9",
+  "caseId": "synth-001",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:43:24.630Z",
+  "completedAt": "2026-08-31T08:43:26.755Z",
+  "durationMs": 2125,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-001-run-001-a4c9d9\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 214,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-001-Okuwpl\\patch-1788165805754.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 300,
+      "command": "bun run benchmark\\cases\\synth-001\\public\\reproduce.ts",
+      "stdout": "description=\"keep me\" expected \"keep me\"\npriority=2 expected 2\nstatus=pending expected pending\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 291,
+      "command": "bun test benchmark\\cases\\synth-001\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-001\\private\\oracle.test.ts:\n(pass) synth-001 oracle: updateTask preserves fields > update only provided field [2.21ms]\n(pass) synth-001 oracle: updateTask preserves fields > update multiple fields preserves others [0.34ms]\n(pass) synth-001 oracle: updateTask preserves fields > update with empty object changes nothing except updatedAt [0.15ms]\n\n 3 pass\n 0 fail\n 10 expect() calls\nRan 3 tests across 1 file. [232.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 191,
+      "command": "bun test benchmark\\repositories\\task-manager\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\task-manager\\tests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [1.08ms]\n(pass) TaskManager > createTask validates priority [0.46ms]\n(pass) TaskManager > createTask validates title [0.19ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.34ms]\n(pass) TaskManager > updateTask only updates provided fields [0.24ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [1.53ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.41ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [1.38ms]\n(pass) TaskManager > filterByStatus validates status [0.20ms]\n(pass) TaskManager > getTasksByPriority filters correctly [5.32ms]\n(pass) TaskManager > deleteTask removes task [0.51ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [141.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "task-manager",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "state-management",
+      "business-logic"
+    ]
+  },
+  "metrics": {
+    "durationMs": 148404,
+    "totalTurns": 94,
+    "toolCalls": 44,
+    "commandsExecuted": 22,
+    "filesInspected": 9,
+    "filesChanged": 2,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 54260,
+    "outputTokens": 10524,
+    "totalTokens": 570128
+  },
+  "cost": {
+    "inputTokens": 54260,
+    "outputTokens": 10524,
+    "totalTokens": 64784,
+    "inputCostUsd": 0.016278,
+    "outputCostUsd": 0.012629,
+    "totalCostUsd": 0.059227,
+    "costUsd": 0.059227,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-001-run-001-a4c9d9",
+    "caseId": "synth-001",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "mimo-v2.5",
+    "trajectoryHash": "sha256:e478803f4939440775680b3e1491175e61765913bfe96ff7452699dcee3895c8",
+    "trajectory": {
+      "eventCount": 431,
+      "durationMs": 148399,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "available_models": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 2,
+        "turn_start": 46,
+        "message_start": 92,
+        "message_end": 92,
+        "tool_execution_start": 44,
+        "tool_execution_update": 48,
+        "tool_execution_end": 44,
+        "turn_end": 46,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "prompt_completed": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 138,
+      "userMessages": 4,
+      "toolCalls": 44,
+      "toolResults": 176,
+      "thinkingEvents": 36,
+      "unknownEvents": 99,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 44,
+      "uniqueTools": 3,
+      "byTool": {
+        "bash": {
+          "calls": 22,
+          "failures": 0
+        },
+        "read": {
+          "calls": 20,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 54260,
+      "output": 10524,
+      "cacheRead": 505344,
+      "cacheWrite": 0,
+      "total": 570128,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.059227,
+      "inputCostUsd": 0.016278,
+      "outputCostUsd": 0.012629,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 36,
+      "characterCount": 16888,
+      "averageCharacters": 469,
+      "maxCharacters": 1387,
+      "firstThinkingAt": "2026-08-31T01:23:43.500Z",
+      "lastThinkingAt": "2026-08-31T01:25:21.868Z",
+      "thinkingDurationMs": 98368
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/task-manager.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 20,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 0,
+      "bashCalls": 22,
+      "explorationToEditingRatio": 21
+    },
+    "verification": {
+      "commandsDetected": 24,
+      "testsRun": true,
+      "testCommandCount": 6,
+      "buildRun": true,
+      "typecheckRun": true,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+          "exitCode": 0
+        },
+        {
+          "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest --version 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest --version 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest --version 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest --version 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest --version 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest --version 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest --version 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest --version 2>&1 | head -5",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest run 2>&1 | tail -60",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest run 2>&1 | tail -60",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest run 2>&1 | tail -60",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest run 2>&1 | tail -60",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest run 2>&1 | tail -60",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest run 2>&1 | tail -60",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest run 2>&1 | tail -60",
+          "exitCode": 0
+        },
+        {
+          "command": "bunx vitest run 2>&1 | tail -60",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 23,
+      "duplicateReadTargets": 11,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 0,
+      "topRepetitions": [
+        {
+          "signature": "a073f2962659",
+          "tool": "read",
+          "target": "src/task-manager.ts",
+          "count": 4
+        },
+        {
+          "signature": "8436f3211aa1",
+          "tool": "bash",
+          "target": "ls -la",
+          "count": 2
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "d3b2da9d6415",
+          "tool": "bash",
+          "target": "ls -la src tests",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "3366904cebb3",
+          "tool": "read",
+          "target": "src/types.ts",
+          "count": 2
+        },
+        {
+          "signature": "16c17a125655",
+          "tool": "read",
+          "target": "src/utils.ts",
+          "count": 2
+        },
+        {
+          "signature": "e48b3e59eb44",
+          "tool": "read",
+          "target": "src/validators.ts",
+          "count": 2
+        },
+        {
+          "signature": "6e6cdb409bf3",
+          "tool": "read",
+          "target": "tests/task-manager.test.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-001-run-001-a4c9d9",
+    "caseId": "synth-001",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-31T01:23:43.502Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-31T01:23:43.502Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-31T01:23:47.488Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 43,
+        "timestamp": "2026-08-31T01:23:47.488Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-31T01:23:50.794Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-31T01:23:50.794Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 74,
+        "timestamp": "2026-08-31T01:23:58.180Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la src tests",
+        "commandClass": "general"
+      },
+      {
+        "index": 75,
+        "timestamp": "2026-08-31T01:23:58.180Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la src tests",
+        "commandClass": "general"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-31T01:24:03.220Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 95,
+        "timestamp": "2026-08-31T01:24:03.220Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 110,
+        "timestamp": "2026-08-31T01:24:05.429Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/types.ts"
+      },
+      {
+        "index": 111,
+        "timestamp": "2026-08-31T01:24:05.429Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/types.ts"
+      },
+      {
+        "index": 126,
+        "timestamp": "2026-08-31T01:24:07.630Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 127,
+        "timestamp": "2026-08-31T01:24:07.630Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 142,
+        "timestamp": "2026-08-31T01:24:12.391Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 143,
+        "timestamp": "2026-08-31T01:24:12.392Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 158,
+        "timestamp": "2026-08-31T01:24:14.850Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/validators.ts"
+      },
+      {
+        "index": 159,
+        "timestamp": "2026-08-31T01:24:14.850Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/validators.ts"
+      },
+      {
+        "index": 174,
+        "timestamp": "2026-08-31T01:24:17.466Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/task-manager.test.ts"
+      },
+      {
+        "index": 175,
+        "timestamp": "2026-08-31T01:24:17.466Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/task-manager.test.ts"
+      },
+      {
+        "index": 190,
+        "timestamp": "2026-08-31T01:24:22.394Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".gitignore"
+      },
+      {
+        "index": 191,
+        "timestamp": "2026-08-31T01:24:22.394Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".gitignore"
+      },
+      {
+        "index": 206,
+        "timestamp": "2026-08-31T01:24:24.631Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+        "commandClass": "test"
+      },
+      {
+        "index": 207,
+        "timestamp": "2026-08-31T01:24:24.632Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+        "commandClass": "test"
+      },
+      {
+        "index": 224,
+        "timestamp": "2026-08-31T01:24:27.256Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "which node; node --version; which bun 2>/dev/null; bun --version 2>/dev/null",
+        "commandClass": "general"
+      },
+      {
+        "index": 225,
+        "timestamp": "2026-08-31T01:24:27.256Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "which node; node --version; which bun 2>/dev/null; bun --version 2>/dev/null",
+        "commandClass": "general"
+      },
+      {
+        "index": 250,
+        "timestamp": "2026-08-31T01:24:36.800Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 251,
+        "timestamp": "2026-08-31T01:24:36.800Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 266,
+        "timestamp": "2026-08-31T01:24:38.585Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 267,
+        "timestamp": "2026-08-31T01:24:38.585Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 282,
+        "timestamp": "2026-08-31T01:24:41.427Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls node_modules 2>/dev/null | head -5; ls ~/.bun/install/cache 2>/dev/null | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 283,
+        "timestamp": "2026-08-31T01:24:41.427Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls node_modules 2>/dev/null | head -5; ls ~/.bun/install/cache 2>/dev/null | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 302,
+        "timestamp": "2026-08-31T01:24:43.904Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun install 2>&1 | tail -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 303,
+        "timestamp": "2026-08-31T01:24:43.904Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun install 2>&1 | tail -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 322,
+        "timestamp": "2026-08-31T01:24:48.673Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun pm ls 2>&1 | head -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 323,
+        "timestamp": "2026-08-31T01:24:48.673Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun pm ls 2>&1 | head -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 342,
+        "timestamp": "2026-08-31T01:24:52.012Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bunx vitest --version 2>&1 | head -5",
+        "commandClass": "test"
+      },
+      {
+        "index": 343,
+        "timestamp": "2026-08-31T01:24:52.012Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bunx vitest --version 2>&1 | head -5",
+        "commandClass": "test"
+      },
+      {
+        "index": 362,
+        "timestamp": "2026-08-31T01:24:55.210Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bunx vitest run 2>&1 | tail -60",
+        "commandClass": "test"
+      },
+      {
+        "index": 363,
+        "timestamp": "2026-08-31T01:24:55.210Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bunx vitest run 2>&1 | tail -60",
+        "commandClass": "test"
+      },
+      {
+        "index": 382,
+        "timestamp": "2026-08-31T01:25:07.379Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bunx tsc --noEmit 2>&1 | tail -20",
+        "commandClass": "build"
+      },
+      {
+        "index": 383,
+        "timestamp": "2026-08-31T01:25:07.379Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bunx tsc --noEmit 2>&1 | tail -20",
+        "commandClass": "build"
+      },
+      {
+        "index": 402,
+        "timestamp": "2026-08-31T01:25:10.218Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bunx tsc --noEmit 2>&1 | head -20",
+        "commandClass": "build"
+      },
+      {
+        "index": 403,
+        "timestamp": "2026-08-31T01:25:10.218Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bunx tsc --noEmit 2>&1 | head -20",
+        "commandClass": "build"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 42,
+        "timestamp": "2026-08-31T01:23:47.488Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 206,
+        "timestamp": "2026-08-31T01:24:24.631Z",
+        "detail": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 250,
+        "timestamp": "2026-08-31T01:24:36.800Z",
+        "detail": "src/task-manager.ts"
+      }
+    ],
+    "errors": [],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 206,
+        "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+        "exitCode": 0
+      },
+      {
+        "index": 207,
+        "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+        "exitCode": 0
+      },
+      {
+        "index": 210,
+        "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 211,
+        "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 212,
+        "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+        "exitCode": 0
+      },
+      {
+        "index": 213,
+        "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+        "exitCode": 0
+      },
+      {
+        "index": 214,
+        "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+        "exitCode": 0
+      },
+      {
+        "index": 215,
+        "command": "ls node_modules/.bin/vitest 2>/dev/null; ls node_modules 2>/dev/null | head -20",
+        "exitCode": 0
+      },
+      {
+        "index": 342,
+        "command": "bunx vitest --version 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 343,
+        "command": "bunx vitest --version 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 348,
+        "command": "bunx vitest --version 2>&1 | head -5",
+        "exitCode": 0,
+        "outputSnippet": "vitest/4.1.11 win32-x64 node-v22.23.2\n"
+      },
+      {
+        "index": 349,
+        "command": "bunx vitest --version 2>&1 | head -5",
+        "exitCode": 0,
+        "outputSnippet": "vitest/4.1.11 win32-x64 node-v22.23.2\n"
+      },
+      {
+        "index": 350,
+        "command": "bunx vitest --version 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 351,
+        "command": "bunx vitest --version 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 352,
+        "command": "bunx vitest --version 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 353,
+        "command": "bunx vitest --version 2>&1 | head -5",
+        "exitCode": 0
+      },
+      {
+        "index": 362,
+        "command": "bunx vitest run 2>&1 | tail -60",
+        "exitCode": 0
+      },
+      {
+        "index": 363,
+        "command": "bunx vitest run 2>&1 | tail -60",
+        "exitCode": 0
+      },
+      {
+        "index": 368,
+        "command": "bunx vitest run 2>&1 | tail -60",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-a4c9d9-TqntLe\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  02:25:01\n   Duration  2.78s (tr"
+      },
+      {
+        "index": 369,
+        "command": "bunx vitest run 2>&1 | tail -60",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-a4c9d9-TqntLe\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  02:25:01\n   Duration  2.78s (tr"
+      },
+      {
+        "index": 370,
+        "command": "bunx vitest run 2>&1 | tail -60",
+        "exitCode": 0
+      },
+      {
+        "index": 371,
+        "command": "bunx vitest run 2>&1 | tail -60",
+        "exitCode": 0
+      },
+      {
+        "index": 372,
+        "command": "bunx vitest run 2>&1 | tail -60",
+        "exitCode": 0
+      },
+      {
+        "index": 373,
+        "command": "bunx vitest run 2>&1 | tail -60",
+        "exitCode": 0
+      }
+    ]
+  }
+}

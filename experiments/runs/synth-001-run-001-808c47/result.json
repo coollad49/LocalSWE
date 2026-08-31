@@ -1,0 +1,105 @@
+{
+  "runId": "synth-001-run-001-808c47",
+  "caseId": "synth-001",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 267536,
+  "changedFiles": [
+    "src/task-manager.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-001-run-001-808c47\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-001-run-001-808c47\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-001-run-001-808c47\\metadata.json",
+  "tests": [
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && ls node_modules 2>&1 | head -5; which npm; which vitest 2>&1; npm --version 2>&1",
+      "exitCode": 0,
+      "durationMs": 4504,
+      "stdout": "ls: cannot access 'node_modules': No such file or directory\n/c/Program Files/nodejs/npm\n/c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest\n10.9.8\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && /c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest --version 2>&1; echo \"---\"; ls /c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/ 2>&1 | head -20",
+      "exitCode": 0,
+      "durationMs": 757,
+      "stdout": "vitest/4.1.11 win32-x64 node-v22.23.2\n---\nanthropic-ai-sdk.bunx\nanthropic-ai-sdk.exe\nesbuild.bunx\nesbuild.exe\njiti.bunx\njiti.exe\nmarked.bunx\nmarked.exe\nnanoid.bunx\nnanoid.exe\nnode-which.bunx\nnode-which.exe\npi-ai.bunx\npi-ai.exe\npi.bunx\npi.exe\nrolldown.bunx\nrolldown.exe\nsemver.bunx\nsemver.exe\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && /c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest run 2>&1 | head -80",
+      "exitCode": 0,
+      "durationMs": 3109,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH\n\n ❯ tests/task-manager.test.ts (11 tests | 2 failed) 60ms\n     × updateTask merges correctly without losing fields 22ms\n     × updateTask only updates provided fields 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/task-manager.test.ts > TaskManager > updateTask merges correctly without losing fields\nAssertionError: expected undefined to be 'desc' // Object.is equality\n\n- Expected:\n\"desc\"\n\n+ Received:\nundefined\n\n ❯ tests/task-manager.test.ts:32:33\n     30|     const updated = tm.updateTask(t.id, { title: \"Updated\" });\n     31|     expect(updated.title).toBe(\"Updated\");\n     32|     expect(updated.description).toBe(\"desc\");\n       |                                 ^\n     33|     expect(updated.priority).toBe(2);\n     34|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/task-manager.test.ts > TaskManager > updateTask only updates provided fields\nAssertionError: expected undefined to be 't' // Object.is equality\n\n- Expected:\n\"t\"\n\n+ Received:\nundefined\n\n ❯ tests/task-manager.test.ts:41:21\n     39|     const u = tm.updateTask(t.id, { status: \"completed\" });\n     40|     expect(u.status).toBe(\"completed\");\n     41|     expect(u.title).toBe(\"t\");\n       |                     ^\n     42|     expect(u.priority).toBe(1);\n     43|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 9 passed (11)\n   Start at  02:26:58\n   Duration  1.15s (transform 179ms, setup 0ms, import 252ms, tests 60ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && node .v1/helpers.js add-verification '{\"method\":\"vitest-baseline\",\"command\":\"/c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest run\",\"passed\":false,\"output\":\"2 failed: updateTask merges correctly without losing fields (expected desc, got undefined); updateTask only updates provided fields (expected t, got undefined). Confirms the bug.\",\"type\":\"test_result\"}'",
+      "exitCode": 0,
+      "durationMs": 428,
+      "stdout": "verification recorded\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && /c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest run 2>&1 | tail -40",
+      "exitCode": 0,
+      "durationMs": 2866,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  02:27:10\n   Duration  972ms (transform 204ms, setup 0ms, import 273ms, tests 34ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && /c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest run 2>&1 | tail -10",
+      "exitCode": 0,
+      "durationMs": 2848,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  02:27:57\n   Duration  977ms (transform 178ms, setup 0ms, import 250ms, tests 36ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && node .v1/helpers.js add-verification '{\"method\":\"vitest-after-fix\",\"command\":\"/c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest run\",\"passed\":true,\"output\":\"Tests 11 passed (11). All assertions pass after fix.\",\"type\":\"test_result\"}'",
+      "exitCode": 0,
+      "durationMs": 366,
+      "stdout": "verification recorded\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && /c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest run --reporter=verbose 2>&1 | tail -30",
+      "exitCode": 0,
+      "durationMs": 2926,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH\n\n ✓ tests/task-manager.test.ts > TaskManager > createTask creates task with defaults 8ms\n ✓ tests/task-manager.test.ts > TaskManager > createTask validates priority 5ms\n ✓ tests/task-manager.test.ts > TaskManager > createTask validates title 2ms\n ✓ tests/task-manager.test.ts > TaskManager > updateTask merges correctly without losing fields 1ms\n ✓ tests/task-manager.test.ts > TaskManager > updateTask only updates provided fields 1ms\n ✓ tests/task-manager.test.ts > TaskManager > getOverdueTasks detects overdue correctly 1ms\n ✓ tests/task-manager.test.ts > TaskManager > getOverdueTasks excludes completed tasks 1ms\n ✓ tests/task-manager.test.ts > TaskManager > filterByStatus returns correct tasks and not stale 2ms\n ✓ tests/task-manager.test.ts > TaskManager > filterByStatus validates status 2ms\n ✓ tests/task-manager.test.ts > TaskManager > getTasksByPriority filters correctly 1ms\n ✓ tests/task-manager.test.ts > TaskManager > deleteTask removes task 1ms\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  02:28:09\n   Duration  986ms (transform 179ms, setup 0ms, import 250ms, tests 32ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && ID=$(node .v1/helpers.js add-hypothesis '{\"description\":\"The updateTask method in src/task-manager.ts unconditionally assigns updates.X (cast as any) to every Task field, including when updates.X is undefined. This erases existing fields when the update payload omits them. Fix: only assign fields when updates[field] !== undefined.\",\"evidence\":[\"src/task-manager.ts:42-49 - { ...existing, title: updates.title as any, description: updates.description as any, priority: updates.priority as any, status: updates.status as any, dueDate: updates.dueDate as any } - unconditional overwrite\",\"src/types.ts:25-33 - UpdateTaskInput declares all five fields optional, signaling intended merge semantics\",\"tests/task-manager.test.ts:28-34 - test updateTask merges correctly without losing fields asserts title-only update preserves description+priority\",\"tests/task-manager.test.ts:36-43 - test updateTask only updates provided fields asserts status-only update preserves title+priority\",\"Bug confirmed via vitest baseline: 2 failed tests (description=undefined, title=undefined)\"],\"confidence\":0.99,\"files\":[\"src/task-manager.ts\"]}') && echo \"ID=$ID\" && node .v1/helpers.js select-hypothesis \"$ID\" && echo \"---state---\" && node -e \"const fs=require('fs');const p=require('path').join(process.cwd(),'.v1','state.json');const s=JSON.parse(fs.readFileSync(p,'utf-8'));console.log('selected:',s.selectedHypothesis);console.log('hypotheses:', JSON.stringify(s.hypotheses,null,2));\"",
+      "exitCode": 0,
+      "durationMs": 893,
+      "stdout": "ID=hyp-734b2da3\nselected hyp-734b2da3\n---state---\nselected: hyp-734b2da3\nhypotheses: [\n  {\n    \"id\": \"hyp-734b2da3\",\n    \"description\": \"The updateTask method in src/task-manager.ts unconditionally assigns updates.X (cast as any) to every Task field, including when updates.X is undefined. This erases existing fields when the update payload omits them. Fix: only assign fields when updates[field] !== undefined.\",\n    \"evidence\": [\n      \"src/task-manager.ts:42-49 - { ...existing, title: updates.title as any, description: updates.description as any, priority: updates.priority as any, status: updates.status as any, dueDate: updates.dueDate as any } - unconditional overwrite\",\n      \"src/types.ts:25-33 - UpdateTaskInput declares all five fields optional, signaling intended merge semantics\",\n      \"tests/task-manager.test.ts:28-34 - test updateTask merges correctly without losing fields asserts title-only update preserves description+priority\",\n      \"tests/task-manager.test.ts:36-43 - test updateTask only updates provided fields asserts status-only update preserves title+priority\",\n      \"Bug confirmed via vitest baseline: 2 failed tests (description=undefined, title=undefined)\"\n    ],\n    \"confidence\": 0.99,\n    \"status\": \"selected\",\n    \"files\": [\n      \"src/task-manager.ts\"\n    ]\n  }\n]\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && ID=$(node .v1/helpers.js add-hypothesis '{\"description\":\"The updateTask method in src/task-manager.ts unconditionally assigns updates.X (cast as any) to every Task field, including when updates.X is undefined. This erases existing fields when the update payload omits them. Fix: only assign fields when updates[field] !== undefined.\",\"evidence\":[\"src/task-manager.ts:42-49 - { ...existing, title: updates.title as any, ... } unconditional overwrite\",\"src/types.ts:25-33 - UpdateTaskInput all fields optional => merge semantics intended\",\"tests/task-manager.test.ts:28-34 and 36-43 - assertions that partial updates preserve other fields\",\"Pre-fix vitest run: 2 failed with received undefined, matches issue verbatim\"],\"confidence\":0.99,\"files\":[\"src/task-manager.ts\"]}') && echo \"ID=$ID\" && node .v1/helpers.js select-hypothesis \"$ID\"",
+      "exitCode": 0,
+      "durationMs": 693,
+      "stdout": "ID=hyp-b07d130a\nselected hyp-b07d130a\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && /c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest run --reporter=verbose 2>&1 | tee /tmp/vitest_after.txt | tail -20",
+      "exitCode": 0,
+      "durationMs": 2987,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH\n\n ✓ tests/task-manager.test.ts > TaskManager > createTask creates task with defaults 10ms\n ✓ tests/task-manager.test.ts > TaskManager > createTask validates priority 4ms\n ✓ tests/task-manager.test.ts > TaskManager > createTask validates title 1ms\n ✓ tests/task-manager.test.ts > TaskManager > updateTask merges correctly without losing fields 1ms\n ✓ tests/task-manager.test.ts > TaskManager > updateTask only updates provided fields 2ms\n ✓ tests/task-manager.test.ts > TaskManager > getOverdueTasks detects overdue correctly 2ms\n ✓ tests/task-manager.test.ts > TaskManager > getOverdueTasks excludes completed tasks 1ms\n ✓ tests/task-manager.test.ts > TaskManager > filterByStatus returns correct tasks and not stale 2ms\n ✓ tests/task-manager.test.ts > TaskManager > filterByStatus validates status 2ms\n ✓ tests/task-manager.test.ts > TaskManager > getTasksByPriority filters correctly 1ms\n ✓ tests/task-manager.test.ts > TaskManager > deleteTask removes task 1ms\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  02:28:32\n   Duration  960ms (transform 181ms, setup 0ms, import 256ms, tests 36ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && node .v1/helpers.js add-evidence '{\"type\":\"test_result\",\"description\":\"Post-fix vitest run: 11/11 tests pass, including the two previously failing partial-update assertions.\",\"source\":\"/c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest run --reporter=verbose\",\"result\":\"supports\"}' && node .v1/helpers.js add-evidence '{\"type\":\"test_result\",\"description\":\"Manual repro .v1/repro.cjs: 8/8 PASS covering partial updates, empty update, explicit null, explicit empty string, validation throws, updatedAt advance.\",\"source\":\"node .v1/repro.cjs\",\"result\":\"supports\"}' && node .v1/helpers.js add-evidence '{\"type\":\"file_inspection\",\"description\":\"git diff HEAD shows minimal change to src/task-manager.ts: only updateTask body replaced; no other source files touched. +10/-11 lines.\",\"source\":\"git diff HEAD -- src/task-manager.ts\",\"result\":\"supports\"}'",
+      "exitCode": 0,
+      "durationMs": 882,
+      "stdout": "evidence added\nevidence added\nevidence added\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && /c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest run 2>&1 | tee /tmp/vitest_verify.txt | tail -15; echo \"EXIT=$?\"",
+      "exitCode": 0,
+      "durationMs": 2941,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  02:29:33\n   Duration  939ms (transform 173ms, setup 0ms, import 241ms, tests 35ms, environment 0ms)\n\nEXIT=0\n"
+    },
+    {
+      "command": "cd /tmp/frontier-synth-001-synth-001-run-001-808c47-zjVkUH && node .v1/helpers.js add-verification '{\"method\":\"vitest\",\"command\":\"/c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/vitest run\",\"passed\":true,\"output\":\"Test Files 1 passed (1); Tests 11 passed (11); exit 0. Both previously failing tests now pass: updateTask merges correctly without losing fields, updateTask only updates provided fields.\",\"type\":\"test_result\"}' && node .v1/helpers.js add-verification '{\"method\":\"repro-script\",\"command\":\"node .v1/repro.cjs\",\"passed\":true,\"output\":\"8/8 PASS: case1 only title, case2 only status, case3 dueDate set, case4 dueDate null explicit, case5 empty update, case6 explicit empty string preserved, case7 invalid priority throws, case8 updatedAt advanced. ALL PASS. exit 0.\",\"type\":\"repro_script\"}' && node .v1/helpers.js add-verification '{\"method\":\"tsc\",\"command\":\"/c/Users/cooll/Documents/code/frontier-verifier/node_modules/.bin/tsc --noEmit --target esnext --module esnext --moduleResolution bundler --allowImportingTsExtensions --strict --skipLibCheck src/*.ts\",\"passed\":true,\"output\":\"No output, exit 0. No TypeScript errors in src files after fix.\",\"type\":\"type_check\"}'",
+      "exitCode": 0,
+      "durationMs": 863,
+      "stdout": "verification recorded\nverification recorded\nverification recorded\n"
+    }
+  ],
+  "model": "mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T01:25:24.286Z",
+  "endedAt": "2026-08-31T01:29:51.822Z"
+}

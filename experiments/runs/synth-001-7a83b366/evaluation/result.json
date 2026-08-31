@@ -1,0 +1,58 @@
+{
+  "evaluationId": "eval-65f10795-1788101175328",
+  "runId": "synth-001-7a83b366",
+  "caseId": "synth-001",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:20f1003c3f0e10bcd6293f49ca2a2167011941f5b0677076c93103b10f411dde",
+  "agentVersion": "test",
+  "startedAt": "2026-08-30T14:46:15.327Z",
+  "completedAt": "2026-08-30T14:46:16.865Z",
+  "durationMs": 1538,
+  "patchPath": "inline-synth-001.diff",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-001-Vq62eK\\benchmark\\repositories\\task-manager",
+      "stdout": "empty patch - no changes applied",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 173,
+      "command": "bun run benchmark\\cases\\synth-001\\public\\reproduce.ts",
+      "stdout": "description=undefined expected \"keep me\"\npriority=undefined expected 2\nstatus=undefined expected pending\nFAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "task-manager",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "state-management",
+      "business-logic"
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "runId": "hist-002-run-001-ec6bd1",
+  "caseId": "hist-002",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 1461,
+  "startedAt": "2026-08-31T08:42:11.365Z",
+  "completedAt": "2026-08-31T08:42:12.826Z",
+  "caseMeta": {
+    "repository": "defu",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "security",
+      "validation"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-002-xkqSic\\benchmark\\repositories\\defu",
+      "stdout": "empty patch - no changes applied",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 292,
+      "command": "bun run benchmark\\cases\\hist-002\\public\\reproduce.ts",
+      "stdout": "result: {} polluted=true hasPollution=true hasOwnProto=false proto={\"polluted\":true}\nObject.prototype.polluted=undefined ({}).polluted=undefined\nnormal merge 1: {\"a\":\"c\",\"d\":\"c\"} pass=true\nnormal merge 2 (nested): {\"a\":{\"d\":\"e\",\"b\":\"c\"}} pass=true\nnormal merge 3 (arrays): {\"array\":[\"a\",\"b\",\"c\",\"d\"]} pass=true\nPR case defu(malicious, {isAdmin:false}) => {\"isAdmin\":true} isAdmin=true globalIsAdmin=undefined pass=false\npollutionBlocked=false (expect true on fixed, false on buggy)\nFAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "metrics": {
+    "durationMs": 604256,
+    "totalTurns": 166,
+    "toolCalls": 80,
+    "commandsExecuted": 60,
+    "filesInspected": 10,
+    "filesChanged": 0,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 119728,
+    "outputTokens": 50336,
+    "totalTokens": 2902808
+  },
+  "cost": {
+    "inputTokens": 119728,
+    "outputTokens": 50336,
+    "totalTokens": 170064,
+    "inputCostUsd": 0.035918,
+    "outputCostUsd": 0.060403,
+    "totalCostUsd": 0.260286,
+    "costUsd": 0.260286,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  }
+}

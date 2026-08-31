@@ -1,0 +1,752 @@
+{
+  "evaluationId": "eval-233e87db-1788165718583",
+  "runId": "hist-001-run-001-a06884",
+  "caseId": "hist-001",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:41:58.583Z",
+  "completedAt": "2026-08-31T08:42:00.300Z",
+  "durationMs": 1717,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-001-run-001-a06884\\patch.diff",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 281,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-001-ehfz4m\\patch-1788165719560.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 454,
+      "command": "bun run benchmark\\cases\\hist-001\\public\\reproduce.ts",
+      "stdout": "Test --base-url: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://gitlab.com\"} => FAIL (hasB=true b=https://github.com baseUrl=https://gitlab.com)\nTest -b: options={\"--\":[],\"b\":\"https://gitlab.com\",\"baseUrl\":\"https://gitlab.com\"} => PASS\nTest no args: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://github.com\"} => PASS\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "cac",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "validation",
+      "parsing"
+    ]
+  },
+  "metrics": {
+    "durationMs": 600465,
+    "totalTurns": 118,
+    "toolCalls": 56,
+    "commandsExecuted": 20,
+    "filesInspected": 12,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 158044,
+    "outputTokens": 117140,
+    "totalTokens": 1590904
+  },
+  "cost": {
+    "inputTokens": 158044,
+    "outputTokens": 117140,
+    "totalTokens": 275184,
+    "inputCostUsd": 0.047413,
+    "outputCostUsd": 0.140568,
+    "totalCostUsd": 0.266924,
+    "costUsd": 0.266924,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-001-run-001-a06884",
+    "caseId": "hist-001",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "mimo-v2.5",
+    "trajectoryHash": "sha256:3d55eb96ae24cd73ec390ec69115b4a26404420bdb274dcc47453d004c501cc9",
+    "trajectory": {
+      "eventCount": 530,
+      "durationMs": 600462,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "available_models": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 4,
+        "turn_start": 60,
+        "message_start": 116,
+        "message_end": 116,
+        "tool_execution_start": 56,
+        "tool_execution_update": 48,
+        "tool_execution_end": 56,
+        "turn_end": 58,
+        "agent_end": 2,
+        "auto_retry_start": 1,
+        "auto_retry_end": 1,
+        "session_disposed": 1,
+        "timeout": 1,
+        "patch_captured": 1
+      },
+      "assistantMessages": 174,
+      "userMessages": 4,
+      "toolCalls": 56,
+      "toolResults": 224,
+      "thinkingEvents": 48,
+      "unknownEvents": 116,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 56,
+      "uniqueTools": 5,
+      "byTool": {
+        "bash": {
+          "calls": 20,
+          "failures": 6
+        },
+        "read": {
+          "calls": 20,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 4,
+          "failures": 0
+        },
+        "write": {
+          "calls": 10,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 158044,
+      "output": 117140,
+      "cacheRead": 1315720,
+      "cacheWrite": 0,
+      "total": 1590904,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.266924,
+      "inputCostUsd": 0.047413,
+      "outputCostUsd": 0.140568,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 48,
+      "characterCount": 433268,
+      "averageCharacters": 9026,
+      "maxCharacters": 61297,
+      "firstThinkingAt": "2026-08-30T15:02:46.121Z",
+      "lastThinkingAt": "2026-08-30T15:12:27.970Z",
+      "thinkingDurationMs": 581849
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 10,
+      "filesTouched": [
+        "/tmp/test-bug.mjs",
+        "tests/test-bug.mjs",
+        "tests/test-debug.mjs",
+        "tests/test-debug2.mjs",
+        "tests/test-debug3.mjs",
+        "tests/cac.test.ts"
+      ],
+      "uniqueFilesTouched": 6
+    },
+    "exploration": {
+      "readCalls": 20,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 4,
+      "bashCalls": 20,
+      "explorationToEditingRatio": 3.67
+    },
+    "verification": {
+      "commandsDetected": 0,
+      "testsRun": false,
+      "testCommandCount": 0,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": []
+    },
+    "behavior": {
+      "repeatedToolCalls": 31,
+      "duplicateReadTargets": 13,
+      "duplicateEditTargets": 6,
+      "toolFailureCount": 6,
+      "topRepetitions": [
+        {
+          "signature": "4ab58faacb8f",
+          "tool": "read",
+          "target": "src/CAC.ts",
+          "count": 6
+        },
+        {
+          "signature": "c94e8782b700",
+          "tool": "read",
+          "target": "tests/cac.test.ts",
+          "count": 4
+        },
+        {
+          "signature": "8436f3211aa1",
+          "tool": "bash",
+          "target": "ls -la",
+          "count": 2
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "73d3e0dc87c9",
+          "tool": "read",
+          "target": "src/Command.ts",
+          "count": 2
+        },
+        {
+          "signature": "d58e763780fa",
+          "tool": "read",
+          "target": "src/Option.ts",
+          "count": 2
+        },
+        {
+          "signature": "16c17a125655",
+          "tool": "read",
+          "target": "src/utils.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-001-run-001-a06884",
+    "caseId": "hist-001",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-30T15:02:46.121Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-30T15:02:46.121Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-30T15:02:49.397Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 43,
+        "timestamp": "2026-08-30T15:02:49.397Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-30T15:02:50.842Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-30T15:02:50.842Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 74,
+        "timestamp": "2026-08-30T15:02:52.218Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 75,
+        "timestamp": "2026-08-30T15:02:52.218Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 90,
+        "timestamp": "2026-08-30T15:02:53.538Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 91,
+        "timestamp": "2026-08-30T15:02:53.538Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 106,
+        "timestamp": "2026-08-30T15:02:55.135Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/Command.ts"
+      },
+      {
+        "index": 107,
+        "timestamp": "2026-08-30T15:02:55.135Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/Command.ts"
+      },
+      {
+        "index": 122,
+        "timestamp": "2026-08-30T15:02:56.278Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 123,
+        "timestamp": "2026-08-30T15:02:56.278Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 138,
+        "timestamp": "2026-08-30T15:03:00.623Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/Option.ts"
+      },
+      {
+        "index": 139,
+        "timestamp": "2026-08-30T15:03:00.623Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/Option.ts"
+      },
+      {
+        "index": 154,
+        "timestamp": "2026-08-30T15:03:02.128Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 155,
+        "timestamp": "2026-08-30T15:03:02.128Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 170,
+        "timestamp": "2026-08-30T15:03:04.395Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/cac.test.ts"
+      },
+      {
+        "index": 171,
+        "timestamp": "2026-08-30T15:03:04.395Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/cac.test.ts"
+      },
+      {
+        "index": 186,
+        "timestamp": "2026-08-30T15:03:15.900Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/cac.test.ts"
+      },
+      {
+        "index": 187,
+        "timestamp": "2026-08-30T15:03:15.900Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/cac.test.ts"
+      },
+      {
+        "index": 202,
+        "timestamp": "2026-08-30T15:03:17.895Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && cat > /tmp/test-bug.mjs << 'EOF'\nimport { cac } from \"./src/i",
+        "commandClass": "general"
+      },
+      {
+        "index": 203,
+        "timestamp": "2026-08-30T15:03:17.895Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && cat > /tmp/test-bug.mjs << 'EOF'\nimport { cac } from \"./src/i",
+        "commandClass": "general"
+      },
+      {
+        "index": 222,
+        "timestamp": "2026-08-30T15:03:19.585Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && cat package.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 223,
+        "timestamp": "2026-08-30T15:03:19.585Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && cat package.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 242,
+        "timestamp": "2026-08-30T15:03:20.966Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "which bun && bun --version",
+        "commandClass": "general"
+      },
+      {
+        "index": 243,
+        "timestamp": "2026-08-30T15:03:20.966Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "which bun && bun --version",
+        "commandClass": "general"
+      },
+      {
+        "index": 264,
+        "timestamp": "2026-08-30T15:03:24.987Z",
+        "event": "write",
+        "tool": "write",
+        "target": "/tmp/test-bug.mjs"
+      },
+      {
+        "index": 265,
+        "timestamp": "2026-08-30T15:03:24.987Z",
+        "event": "write",
+        "tool": "write",
+        "target": "/tmp/test-bug.mjs"
+      },
+      {
+        "index": 280,
+        "timestamp": "2026-08-30T15:03:26.423Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && bun /tmp/test-bug.mjs",
+        "commandClass": "general"
+      },
+      {
+        "index": 281,
+        "timestamp": "2026-08-30T15:03:26.423Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && bun /tmp/test-bug.mjs",
+        "commandClass": "general"
+      },
+      {
+        "index": 300,
+        "timestamp": "2026-08-30T15:03:28.949Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/test-bug.mjs"
+      },
+      {
+        "index": 301,
+        "timestamp": "2026-08-30T15:03:28.949Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/test-bug.mjs"
+      },
+      {
+        "index": 316,
+        "timestamp": "2026-08-30T15:03:31.224Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && bun tests/test-bug.mjs",
+        "commandClass": "general"
+      },
+      {
+        "index": 317,
+        "timestamp": "2026-08-30T15:03:31.224Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && bun tests/test-bug.mjs",
+        "commandClass": "general"
+      },
+      {
+        "index": 338,
+        "timestamp": "2026-08-30T15:04:06.950Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/test-debug.mjs"
+      },
+      {
+        "index": 339,
+        "timestamp": "2026-08-30T15:04:06.950Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/test-debug.mjs"
+      },
+      {
+        "index": 354,
+        "timestamp": "2026-08-30T15:04:08.916Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && bun tests/test-debug.mjs",
+        "commandClass": "general"
+      },
+      {
+        "index": 355,
+        "timestamp": "2026-08-30T15:04:08.916Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && bun tests/test-debug.mjs",
+        "commandClass": "general"
+      },
+      {
+        "index": 376,
+        "timestamp": "2026-08-30T15:04:15.113Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/test-debug2.mjs"
+      },
+      {
+        "index": 377,
+        "timestamp": "2026-08-30T15:04:15.113Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/test-debug2.mjs"
+      },
+      {
+        "index": 392,
+        "timestamp": "2026-08-30T15:04:17.221Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && bun tests/test-debug2.mjs",
+        "commandClass": "general"
+      },
+      {
+        "index": 393,
+        "timestamp": "2026-08-30T15:04:17.221Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && bun tests/test-debug2.mjs",
+        "commandClass": "general"
+      },
+      {
+        "index": 428,
+        "timestamp": "2026-08-30T15:07:36.726Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/test-debug3.mjs"
+      },
+      {
+        "index": 429,
+        "timestamp": "2026-08-30T15:07:36.726Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/test-debug3.mjs"
+      },
+      {
+        "index": 444,
+        "timestamp": "2026-08-30T15:07:38.838Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && bun tests/test-debug3.mjs",
+        "commandClass": "general"
+      },
+      {
+        "index": 445,
+        "timestamp": "2026-08-30T15:07:38.838Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && bun tests/test-debug3.mjs",
+        "commandClass": "general"
+      },
+      {
+        "index": 466,
+        "timestamp": "2026-08-30T15:07:57.850Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 467,
+        "timestamp": "2026-08-30T15:07:57.850Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 482,
+        "timestamp": "2026-08-30T15:07:59.380Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 483,
+        "timestamp": "2026-08-30T15:07:59.380Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/CAC.ts"
+      },
+      {
+        "index": 498,
+        "timestamp": "2026-08-30T15:10:36.609Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && rm -f tests/test-debug.mjs tests/test-debug2.mjs tests/test-d",
+        "commandClass": "general"
+      },
+      {
+        "index": 499,
+        "timestamp": "2026-08-30T15:10:36.609Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a06884-R4lVTR && rm -f tests/test-debug.mjs tests/test-debug2.mjs tests/test-d",
+        "commandClass": "general"
+      },
+      {
+        "index": 516,
+        "timestamp": "2026-08-30T15:12:27.890Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/cac.test.ts"
+      },
+      {
+        "index": 517,
+        "timestamp": "2026-08-30T15:12:27.890Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/cac.test.ts"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 42,
+        "timestamp": "2026-08-30T15:02:49.397Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 264,
+        "timestamp": "2026-08-30T15:03:24.987Z",
+        "detail": "/tmp/test-bug.mjs"
+      }
+    ],
+    "errors": [
+      {
+        "index": 286,
+        "tool": "bash",
+        "error": "error: Cannot find module './src/index.ts' from 'C:\\Users\\cooll\\AppData\\Local\\Temp\\test-bug.mjs'\n\nBun v1.3.14 (Windows x64)\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 287,
+        "tool": "bash",
+        "error": "error: Cannot find module './src/index.ts' from 'C:\\Users\\cooll\\AppData\\Local\\Temp\\test-bug.mjs'\n\nBun v1.3.14 (Windows x64)\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 288,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 289,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 290,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 291,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": []
+  }
+}

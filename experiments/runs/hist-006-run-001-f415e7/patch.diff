@@ -1,0 +1,51 @@
+diff --git a/src/spyOn.ts b/src/spyOn.ts
+index cf0f3f8..38cce3d 100644
+--- a/src/spyOn.ts
++++ b/src/spyOn.ts
+@@ -66,8 +66,14 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     throw new Error('specify getter or setter to spy on')
+   })()
+   let objDescriptor = getDescriptor(obj, accessName)
++  let protoDescriptor: PropertyDescriptor | null | undefined
+   let proto = Object.getPrototypeOf(obj)
+-  let protoDescriptor = proto && getDescriptor(proto, accessName)
++  // Walk up the prototype chain to find the descriptor
++  while (proto) {
++    protoDescriptor = getDescriptor(proto, accessName)
++    if (protoDescriptor) break
++    proto = Object.getPrototypeOf(proto)
++  }
+   let originalDescriptor = objDescriptor || protoDescriptor
+ 
+   assert(
+@@ -110,14 +116,26 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     }
+     if (accessType !== 'value') {
+       delete desc.writable // getter/setter can't have writable attribute at all
++      // Preserve the other accessor from the original descriptor
++      if (accessType === 'get' && originalDescriptor?.set) {
++        desc.set = originalDescriptor.set
++      } else if (accessType === 'set' && originalDescriptor?.get) {
++        desc.get = originalDescriptor.get
++      }
+     }
+     ;(desc as PropertyDescriptor)[accessType] = cb
+     define(obj, accessName, desc)
+   }
+-  let restore = () =>
+-    originalDescriptor && !original
+-      ? define(obj, accessName, originalDescriptor)
+-      : reassign(original)
++  let restore = () => {
++    if (originalDescriptor && !original) {
++      define(obj, accessName, originalDescriptor)
++    } else if (originalDescriptor && protoDescriptor && !objDescriptor) {
++      // The original was inherited from prototype, delete own property to restore
++      delete (obj as any)[accessName]
++    } else {
++      reassign(original)
++    }
++  }
+ 
+   if (!mock) mock = original
+ 

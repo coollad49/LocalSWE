@@ -1,0 +1,31 @@
+diff --git a/lib/index.js b/lib/index.js
+index b4d8a0a..72e73f3 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -5,7 +5,7 @@ function toArr(any) {
+ function toVal(out, key, val, opts) {
+ 	var x, old=out[key], nxt=(
+ 		!!~opts.string.indexOf(key) ? (val == null || val === true ? '' : String(val))
+-		: !!~opts.boolean.indexOf(key) ? (val === 'false' ? false : val === 'true' || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))
++		: !!~opts.boolean.indexOf(key) ? (val === 'false' ? false : val === true || val === 'true' || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))
+ 		: typeof val === 'boolean' ? val
+ 		: (x = +val,x * 0 === 0) ? x : val
+ 	);
+diff --git a/tests/mri.test.ts b/tests/mri.test.ts
+index d0b1825..62eab86 100644
+--- a/tests/mri.test.ts
++++ b/tests/mri.test.ts
+@@ -49,4 +49,13 @@ describe("mri regression", () => {
+     };
+     expect(() => mri(["--unknown", "val"], { unknown })).toThrow();
+   });
++
++  test("boolean defaults do not leak into positional args", () => {
++    // When a boolean default is provided and a boolean flag is supplied,
++    // the parser should not push a numeric value into the _ array
++    const res = mri(["--foo"], { boolean: ["foo"], default: { bar: true } });
++    expect(res._).toEqual([]);
++    expect(res.foo).toBe(true);
++    expect(res.bar).toBe(true);
++  });
+ });

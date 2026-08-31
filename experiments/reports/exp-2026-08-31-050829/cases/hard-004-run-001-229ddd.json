@@ -1,0 +1,80 @@
+{
+  "runId": "hard-004-run-001-229ddd",
+  "caseId": "hard-004",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 2083,
+  "startedAt": "2026-08-31T08:40:47.117Z",
+  "completedAt": "2026-08-31T08:40:49.200Z",
+  "caseMeta": {
+    "repository": "p-queue",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "asynchronous",
+      "state-management",
+      "error-handling"
+    ]
+  },
+  "metrics": {
+    "durationMs": 607819,
+    "totalTurns": 132,
+    "toolCalls": 66,
+    "commandsExecuted": 36,
+    "filesInspected": 9,
+    "filesChanged": 0,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 148008,
+    "outputTokens": 14658,
+    "totalTokens": 2801514
+  },
+  "cost": {
+    "inputTokens": 148008,
+    "outputTokens": 14658,
+    "totalTokens": 162666,
+    "inputCostUsd": 0.020721,
+    "outputCostUsd": 0.004104,
+    "totalCostUsd": 0.032214,
+    "costUsd": 0.032214,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-YJuFO8\\benchmark\\repositories\\p-queue",
+      "stdout": "empty patch - no changes applied",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 1143,
+      "command": "bun run benchmark\\cases\\hard-004\\public\\reproduce.ts",
+      "stdout": "Test queued abort: outcome=timeout notRan=true sizeOk=false => FAIL\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  }
+}

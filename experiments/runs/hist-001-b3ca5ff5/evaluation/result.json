@@ -1,0 +1,58 @@
+{
+  "evaluationId": "eval-b9e572bd-1788101177976",
+  "runId": "hist-001-b3ca5ff5",
+  "caseId": "hist-001",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:20f1003c3f0e10bcd6293f49ca2a2167011941f5b0677076c93103b10f411dde",
+  "agentVersion": "test",
+  "startedAt": "2026-08-30T14:46:17.976Z",
+  "completedAt": "2026-08-30T14:46:24.946Z",
+  "durationMs": 6970,
+  "patchPath": "inline-hist-001.diff",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-001-rDdYr3\\benchmark\\repositories\\cac",
+      "stdout": "empty patch - no changes applied",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 6047,
+      "command": "bun run benchmark\\cases\\hist-001\\public\\reproduce.ts",
+      "stdout": "Test --base-url: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://gitlab.com\"} => FAIL (hasB=true b=https://github.com baseUrl=https://gitlab.com)\nTest -b: options={\"--\":[],\"b\":\"https://gitlab.com\",\"baseUrl\":\"https://gitlab.com\"} => PASS\nTest no args: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://github.com\"} => PASS\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "cac",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "validation",
+      "parsing"
+    ]
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "runId": "hard-001-run-001-14d43b",
+  "caseId": "hard-001",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 12779,
+  "startedAt": "2026-08-31T08:39:25.125Z",
+  "completedAt": "2026-08-31T08:39:37.918Z",
+  "caseMeta": {
+    "repository": "immer",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "state-management",
+      "lifecycle",
+      "api-behavior"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 341,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-001-fPiVJd\\patch-1788165566544.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 1659,
+      "command": "node tsx benchmark\\cases\\hard-001\\public\\reproduce.ts",
+      "stdout": "Test reverse: baseUnchanged=true nextCorrect=true => PASS\n  baseState=[{\"id\":1},{\"id\":2},{\"id\":3}] expected [{\"id\":1},{\"id\":2},{\"id\":3}]\n  reordered={\"id\":3} expected {\"id\":3}\n  nextState=[{\"id\":99},{\"id\":2},{\"id\":1}] expected [{\"id\":99},{\"id\":2},{\"id\":1}]\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 3590,
+      "command": "node vitest run benchmark\\cases\\hard-001\\private\\oracle.test.ts",
+      "stdout": "\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/Users/cooll/AppData/Local/Temp/eval-hard-001-fPiVJd\u001b[39m\n\n \u001b[32m✓\u001b[39m benchmark/cases/hard-001/private/oracle.test.ts \u001b[2m(\u001b[22m\u001b[2m7 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 40\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m1 passed\u001b[39m\u001b[22m\u001b[90m (1)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m7 passed\u001b[39m\u001b[22m\u001b[90m (7)\u001b[39m\n\u001b[2m   Start at \u001b[22m 09:39:31\n\u001b[2m   Duration \u001b[22m 1.67s\u001b[2m (transform 698ms, setup 0ms, import 896ms, tests 40ms, environment 0ms)\u001b[22m\n\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 4012,
+      "command": "node vitest run benchmark\\repositories\\immer\\tests",
+      "stdout": "\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/Users/cooll/AppData/Local/Temp/eval-hard-001-fPiVJd\u001b[39m\n\n \u001b[32m✓\u001b[39m benchmark/repositories/immer/tests/basic.test.ts \u001b[2m(\u001b[22m\u001b[2m2 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 21\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m benchmark/repositories/immer/tests/repro-reverse-sort.test.ts \u001b[2m(\u001b[22m\u001b[2m3 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 25\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m2 passed\u001b[39m\u001b[22m\u001b[90m (2)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m5 passed\u001b[39m\u001b[22m\u001b[90m (5)\u001b[39m\n\u001b[2m   Start at \u001b[22m 09:39:35\n\u001b[2m   Duration \u001b[22m 1.89s\u001b[2m (transform 953ms, setup 0ms, import 1.51s, tests 46ms, environment 4ms)\u001b[22m\n\n",
+      "stderr": "",
+      "timedOut": false
+    }
+  },
+  "metrics": {
+    "durationMs": 416436,
+    "totalTurns": 198,
+    "toolCalls": 90,
+    "commandsExecuted": 40,
+    "filesInspected": 15,
+    "filesChanged": 2,
+    "iterations": 3,
+    "iterationsSource": "v1-state",
+    "inputTokens": 159852,
+    "outputTokens": 46968,
+    "totalTokens": 4237540
+  },
+  "cost": {
+    "inputTokens": 159852,
+    "outputTokens": 46968,
+    "totalTokens": 206820,
+    "inputCostUsd": 0.022379,
+    "outputCostUsd": 0.013151,
+    "totalCostUsd": 0.046816,
+    "costUsd": 0.046816,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  }
+}

@@ -1,0 +1,1275 @@
+{
+  "evaluationId": "eval-535ec0a0-1788165692948",
+  "runId": "hard-004-run-001-dcbb8b",
+  "caseId": "hard-004",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v1",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:41:32.948Z",
+  "completedAt": "2026-08-31T08:41:35.374Z",
+  "durationMs": 2426,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-004-run-001-dcbb8b\\patch.diff",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-XyYkeG\\benchmark\\repositories\\p-queue",
+      "stdout": "empty patch - no changes applied",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 1155,
+      "command": "bun run benchmark\\cases\\hard-004\\public\\reproduce.ts",
+      "stdout": "Test queued abort: outcome=timeout notRan=true sizeOk=false => FAIL\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "p-queue",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "asynchronous",
+      "state-management",
+      "error-handling"
+    ]
+  },
+  "metrics": {
+    "durationMs": 617554,
+    "totalTurns": 144,
+    "toolCalls": 68,
+    "commandsExecuted": 40,
+    "filesInspected": 10,
+    "filesChanged": 0,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 112176,
+    "outputTokens": 19780,
+    "totalTokens": 2712180
+  },
+  "cost": {
+    "inputTokens": 112176,
+    "outputTokens": 19780,
+    "totalTokens": 131956,
+    "inputCostUsd": 0.033653,
+    "outputCostUsd": 0.023736,
+    "totalCostUsd": 0.212202,
+    "costUsd": 0.212202,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-004-run-001-dcbb8b",
+    "caseId": "hard-004",
+    "agentVersion": "agent-v1",
+    "benchmarkVersion": "0.5",
+    "model": "mimo-v2.5",
+    "trajectoryHash": "sha256:40d6c68f685d77a0dd2d9bd1f6e0ae8771050f00065aacf9b7351d35cd8acaea",
+    "trajectory": {
+      "eventCount": 676,
+      "durationMs": 617512,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "workflow_init": 1,
+        "helpers_ready": 1,
+        "runtime_key_set": 1,
+        "available_models": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "phase_start": 1,
+        "agent_start": 6,
+        "turn_start": 72,
+        "message_start": 140,
+        "message_end": 140,
+        "tool_execution_start": 68,
+        "tool_execution_update": 92,
+        "tool_execution_end": 66,
+        "turn_end": 70,
+        "agent_end": 4,
+        "auto_retry_start": 2,
+        "auto_retry_end": 1,
+        "timeout": 1,
+        "session_disposed": 1,
+        "patch_captured": 1
+      },
+      "assistantMessages": 214,
+      "userMessages": 4,
+      "toolCalls": 68,
+      "toolResults": 266,
+      "thinkingEvents": 50,
+      "unknownEvents": 177,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 68,
+      "uniqueTools": 4,
+      "byTool": {
+        "bash": {
+          "calls": 40,
+          "failures": 18
+        },
+        "read": {
+          "calls": 22,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 4,
+          "failures": 0
+        },
+        "grep": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 112176,
+      "output": 19780,
+      "cacheRead": 2580224,
+      "cacheWrite": 0,
+      "total": 2712180,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.212202,
+      "inputCostUsd": 0.033653,
+      "outputCostUsd": 0.023736,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 50,
+      "characterCount": 44182,
+      "averageCharacters": 884,
+      "maxCharacters": 6969,
+      "firstThinkingAt": "2026-08-30T14:54:12.292Z",
+      "lastThinkingAt": "2026-08-30T15:01:39.274Z",
+      "thinkingDurationMs": 446982
+    },
+    "editing": {
+      "editCalls": 0,
+      "writeCalls": 0,
+      "filesTouched": [],
+      "uniqueFilesTouched": 0
+    },
+    "exploration": {
+      "readCalls": 22,
+      "grepCalls": 2,
+      "findCalls": 0,
+      "lsCalls": 4,
+      "bashCalls": 40,
+      "explorationToEditingRatio": null
+    },
+    "verification": {
+      "commandsDetected": 32,
+      "testsRun": true,
+      "testCommandCount": 8,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+          "exitCode": 0
+        },
+        {
+          "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 35,
+      "duplicateReadTargets": 12,
+      "duplicateEditTargets": 0,
+      "toolFailureCount": 18,
+      "topRepetitions": [
+        {
+          "signature": "1cb99e70a005",
+          "tool": "read",
+          "target": "source/index.ts",
+          "count": 4
+        },
+        {
+          "signature": "8436f3211aa1",
+          "tool": "bash",
+          "target": "ls -la",
+          "count": 2
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "0fe7b4654c52",
+          "tool": "ls",
+          "target": "source",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "1fa266d95677",
+          "tool": "read",
+          "target": "source/options.ts",
+          "count": 2
+        },
+        {
+          "signature": "6bdb002aed6b",
+          "tool": "read",
+          "target": "tests/basic.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "9ee4fa743735",
+          "tool": "read",
+          "target": "source/queue.ts",
+          "count": 2
+        },
+        {
+          "signature": "033c0539465d",
+          "tool": "read",
+          "target": "source/priority-queue.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-004-run-001-dcbb8b",
+    "caseId": "hard-004",
+    "agentVersion": "agent-v1",
+    "timeline": [
+      {
+        "index": 25,
+        "timestamp": "2026-08-30T14:54:12.292Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 26,
+        "timestamp": "2026-08-30T14:54:12.292Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 45,
+        "timestamp": "2026-08-30T14:54:15.706Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 46,
+        "timestamp": "2026-08-30T14:54:15.706Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 61,
+        "timestamp": "2026-08-30T14:54:17.290Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 62,
+        "timestamp": "2026-08-30T14:54:17.290Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 77,
+        "timestamp": "2026-08-30T14:54:18.478Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "source"
+      },
+      {
+        "index": 78,
+        "timestamp": "2026-08-30T14:54:18.478Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "source"
+      },
+      {
+        "index": 93,
+        "timestamp": "2026-08-30T14:54:20.781Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-30T14:54:20.781Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 109,
+        "timestamp": "2026-08-30T14:54:22.309Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 110,
+        "timestamp": "2026-08-30T14:54:22.309Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 125,
+        "timestamp": "2026-08-30T14:54:24.047Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/options.ts"
+      },
+      {
+        "index": 126,
+        "timestamp": "2026-08-30T14:54:24.047Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "source/options.ts"
+      },
+      {
+        "index": 141,
+        "timestamp": "2026-08-30T14:54:25.886Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 142,
+        "timestamp": "2026-08-30T14:54:25.886Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 157,
+        "timestamp": "2026-08-30T14:54:27.371Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/queue.ts"
+      },
+      {
+        "index": 158,
+        "timestamp": "2026-08-30T14:54:27.371Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "source/queue.ts"
+      },
+      {
+        "index": 173,
+        "timestamp": "2026-08-30T14:54:29.627Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/priority-queue.ts"
+      },
+      {
+        "index": 174,
+        "timestamp": "2026-08-30T14:54:29.627Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "source/priority-queue.ts"
+      },
+      {
+        "index": 189,
+        "timestamp": "2026-08-30T14:54:31.346Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tsconfig.json"
+      },
+      {
+        "index": 190,
+        "timestamp": "2026-08-30T14:54:31.346Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tsconfig.json"
+      },
+      {
+        "index": 205,
+        "timestamp": "2026-08-30T14:54:33.279Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la .v1/",
+        "commandClass": "general"
+      },
+      {
+        "index": 206,
+        "timestamp": "2026-08-30T14:54:33.279Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la .v1/",
+        "commandClass": "general"
+      },
+      {
+        "index": 225,
+        "timestamp": "2026-08-30T14:54:35.048Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 226,
+        "timestamp": "2026-08-30T14:54:35.048Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/state.json"
+      },
+      {
+        "index": 241,
+        "timestamp": "2026-08-30T14:54:37.616Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/helpers.js"
+      },
+      {
+        "index": 242,
+        "timestamp": "2026-08-30T14:54:37.616Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": ".v1/helpers.js"
+      },
+      {
+        "index": 257,
+        "timestamp": "2026-08-30T14:54:53.091Z",
+        "event": "grep",
+        "tool": "grep",
+        "target": "source"
+      },
+      {
+        "index": 258,
+        "timestamp": "2026-08-30T14:54:53.091Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "grep",
+        "tool": "grep",
+        "target": "source"
+      },
+      {
+        "index": 273,
+        "timestamp": "2026-08-30T14:55:03.561Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 274,
+        "timestamp": "2026-08-30T14:55:03.561Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 289,
+        "timestamp": "2026-08-30T14:55:08.035Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"Abort signal handling is only invoked when the task is dequeued (running). When a task is still qu",
+        "commandClass": "general"
+      },
+      {
+        "index": 290,
+        "timestamp": "2026-08-30T14:55:08.035Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"Abort signal handling is only invoked when the task is dequeued (running). When a task is still qu",
+        "commandClass": "general"
+      },
+      {
+        "index": 336,
+        "timestamp": "2026-08-30T15:00:35.380Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-da5d8fd3",
+        "commandClass": "general"
+      },
+      {
+        "index": 337,
+        "timestamp": "2026-08-30T15:00:35.380Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-da5d8fd3",
+        "commandClass": "general"
+      },
+      {
+        "index": 356,
+        "timestamp": "2026-08-30T15:00:38.897Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js status | head -50",
+        "commandClass": "general"
+      },
+      {
+        "index": 357,
+        "timestamp": "2026-08-30T15:00:38.897Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js status | head -50",
+        "commandClass": "general"
+      },
+      {
+        "index": 376,
+        "timestamp": "2026-08-30T15:00:42.694Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat .v1/state.json | grep -A 5 hypotheses",
+        "commandClass": "general"
+      },
+      {
+        "index": 377,
+        "timestamp": "2026-08-30T15:00:42.694Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat .v1/state.json | grep -A 5 hypotheses",
+        "commandClass": "general"
+      },
+      {
+        "index": 396,
+        "timestamp": "2026-08-30T15:00:47.398Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+        "commandClass": "test"
+      },
+      {
+        "index": 397,
+        "timestamp": "2026-08-30T15:00:47.398Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+        "commandClass": "test"
+      },
+      {
+        "index": 416,
+        "timestamp": "2026-08-30T15:00:50.964Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat .v1/state.json | python -c \"import json,sys; s=json.load(sys.stdin); print('hypotheses:', len(s.get('hypotheses',[]))); [print(h.get('id'), h.get(",
+        "commandClass": "general"
+      },
+      {
+        "index": 417,
+        "timestamp": "2026-08-30T15:00:50.964Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat .v1/state.json | python -c \"import json,sys; s=json.load(sys.stdin); print('hypotheses:', len(s.get('hypotheses',[]))); [print(h.get('id'), h.get(",
+        "commandClass": "general"
+      },
+      {
+        "index": 438,
+        "timestamp": "2026-08-30T15:00:57.087Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.length); s.hypotheses.forEach(h => console.log(h.id, h.descripti",
+        "commandClass": "general"
+      },
+      {
+        "index": 439,
+        "timestamp": "2026-08-30T15:00:57.087Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.length); s.hypotheses.forEach(h => console.log(h.id, h.descripti",
+        "commandClass": "general"
+      },
+      {
+        "index": 458,
+        "timestamp": "2026-08-30T15:01:02.093Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.j",
+        "commandClass": "test"
+      },
+      {
+        "index": 459,
+        "timestamp": "2026-08-30T15:01:02.093Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.j",
+        "commandClass": "test"
+      },
+      {
+        "index": 480,
+        "timestamp": "2026-08-30T15:01:06.084Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js status | head -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 481,
+        "timestamp": "2026-08-30T15:01:06.084Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js status | head -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 500,
+        "timestamp": "2026-08-30T15:01:09.663Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"Abort signal handling is only invoked when the task is dequeued (running). When a task is still qu",
+        "commandClass": "general"
+      },
+      {
+        "index": 501,
+        "timestamp": "2026-08-30T15:01:09.663Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"Abort signal handling is only invoked when the task is dequeued (running). When a task is still qu",
+        "commandClass": "general"
+      },
+      {
+        "index": 520,
+        "timestamp": "2026-08-30T15:01:13.167Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-ad029cc0",
+        "commandClass": "general"
+      },
+      {
+        "index": 521,
+        "timestamp": "2026-08-30T15:01:13.167Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js select-hypothesis hyp-ad029cc0",
+        "commandClass": "general"
+      },
+      {
+        "index": 540,
+        "timestamp": "2026-08-30T15:01:15.813Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+        "commandClass": "test"
+      },
+      {
+        "index": 541,
+        "timestamp": "2026-08-30T15:01:15.813Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+        "commandClass": "test"
+      },
+      {
+        "index": 562,
+        "timestamp": "2026-08-30T15:01:18.954Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat .v1/state.json | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 563,
+        "timestamp": "2026-08-30T15:01:18.954Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat .v1/state.json | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 582,
+        "timestamp": "2026-08-30T15:01:23.361Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"test2\",\"evidence\":[],\"confidence\":0.1}' && sleep 0.1 && cat .v1/state.json | head -3",
+        "commandClass": "general"
+      },
+      {
+        "index": 583,
+        "timestamp": "2026-08-30T15:01:23.361Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"test2\",\"evidence\":[],\"confidence\":0.1}' && sleep 0.1 && cat .v1/state.json | head -3",
+        "commandClass": "general"
+      },
+      {
+        "index": 604,
+        "timestamp": "2026-08-30T15:01:26.344Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -c hypotheses .v1/state.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 605,
+        "timestamp": "2026-08-30T15:01:26.344Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "grep -c hypotheses .v1/state.json",
+        "commandClass": "general"
+      },
+      {
+        "index": 624,
+        "timestamp": "2026-08-30T15:01:29.389Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"const s=require('./.v1/state.json'); console.log('phase:', s.phase); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2));\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 625,
+        "timestamp": "2026-08-30T15:01:29.389Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "node -e \"const s=require('./.v1/state.json'); console.log('phase:', s.phase); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2));\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 644,
+        "timestamp": "2026-08-30T15:01:33.999Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+        "commandClass": "test"
+      },
+      {
+        "index": 645,
+        "timestamp": "2026-08-30T15:01:33.999Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+        "commandClass": "test"
+      },
+      {
+        "index": 666,
+        "timestamp": "2026-08-30T15:01:39.274Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "pwd && ls -la .v1/ && find / -name \"state.json\" 2>/dev/null | head -10",
+        "commandClass": "general"
+      },
+      {
+        "index": 667,
+        "timestamp": "2026-08-30T15:01:39.274Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "pwd && ls -la .v1/ && find / -name \"state.json\" 2>/dev/null | head -10",
+        "commandClass": "general"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 45,
+        "timestamp": "2026-08-30T14:54:15.706Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 396,
+        "timestamp": "2026-08-30T15:00:47.398Z",
+        "detail": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confid"
+      }
+    ],
+    "errors": [
+      {
+        "index": 342,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-da5d8fd3\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 343,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-da5d8fd3\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 344,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 345,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 346,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 347,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 424,
+        "tool": "bash",
+        "error": "Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Manage App Execution Aliases.\r\n\n\nCommand exited with code 49"
+      },
+      {
+        "index": 425,
+        "tool": "bash",
+        "error": "Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Manage App Execution Aliases.\r\n\n\nCommand exited with code 49"
+      },
+      {
+        "index": 426,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 427,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 428,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 429,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 526,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-ad029cc0\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 527,
+        "tool": "bash",
+        "error": "hypothesis not found hyp-ad029cc0\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 528,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 529,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 530,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 531,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 396,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+        "exitCode": 0
+      },
+      {
+        "index": 397,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+        "exitCode": 0
+      },
+      {
+        "index": 402,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+        "exitCode": 0,
+        "outputSnippet": "hyp-677bf5aa\n"
+      },
+      {
+        "index": 403,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+        "exitCode": 0,
+        "outputSnippet": "hyp-677bf5aa\n"
+      },
+      {
+        "index": 404,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+        "exitCode": 0
+      },
+      {
+        "index": 405,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+        "exitCode": 0
+      },
+      {
+        "index": 406,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+        "exitCode": 0
+      },
+      {
+        "index": 407,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"source/index.ts:472\"],\"confidence\":0.5,\"files\":[\"source/index.ts\"]}'",
+        "exitCode": 0
+      },
+      {
+        "index": 458,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+        "exitCode": 0
+      },
+      {
+        "index": 459,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+        "exitCode": 0
+      },
+      {
+        "index": 466,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+        "exitCode": 0,
+        "outputSnippet": "hyp-6bcac957\nhypotheses: 1\n"
+      },
+      {
+        "index": 467,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+        "exitCode": 0,
+        "outputSnippet": "hyp-6bcac957\nhypotheses: 1\n"
+      },
+      {
+        "index": 468,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+        "exitCode": 0
+      },
+      {
+        "index": 469,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+        "exitCode": 0
+      },
+      {
+        "index": 470,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+        "exitCode": 0
+      },
+      {
+        "index": 471,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5,\"files\":[\"y\"]}' && node -e \"const s=require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses.len",
+        "exitCode": 0
+      },
+      {
+        "index": 540,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+        "exitCode": 0
+      },
+      {
+        "index": 541,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+        "exitCode": 0
+      },
+      {
+        "index": 548,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+        "exitCode": 0,
+        "outputSnippet": "hyp-636fa237\n      \"stdout\": \"  \\\"hypotheses\\\": [],\\n  \\\"changesMade\\\": [],\\n  \\\"verificationAttempts\\\": [],\\n  \\\"evidence\\\": [\\n    {\\n      \\\"id\\\": \\\"ev-3441f48d\\\",\\n--\\n      \\\"description\\\": \\\"bas"
+      },
+      {
+        "index": 549,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+        "exitCode": 0,
+        "outputSnippet": "hyp-636fa237\n      \"stdout\": \"  \\\"hypotheses\\\": [],\\n  \\\"changesMade\\\": [],\\n  \\\"verificationAttempts\\\": [],\\n  \\\"evidence\\\": [\\n    {\\n      \\\"id\\\": \\\"ev-3441f48d\\\",\\n--\\n      \\\"description\\\": \\\"bas"
+      },
+      {
+        "index": 550,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+        "exitCode": 0
+      },
+      {
+        "index": 551,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+        "exitCode": 0
+      },
+      {
+        "index": 552,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+        "exitCode": 0
+      },
+      {
+        "index": 553,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"test\",\"evidence\":[],\"confidence\":0.1}' && node .v1/helpers.js status | grep -A 2 hypotheses",
+        "exitCode": 0
+      },
+      {
+        "index": 644,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 645,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 652,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+        "exitCode": 0,
+        "outputSnippet": "hyp-b0ab71d0\n      \"stdout\": \"total 24\\ndrwxr-xr-x 1 cooll 197609     0 Aug 30 15:54 .\\ndrwxr-xr-x 1 cooll 197609     0 Aug 30 15:54 ..\\n-rwxr-xr-x 1 cooll 197609  5743 Aug 30 15:54 helpers.js\\n-rw-r-"
+      },
+      {
+        "index": 653,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+        "exitCode": 0,
+        "outputSnippet": "hyp-b0ab71d0\n      \"stdout\": \"total 24\\ndrwxr-xr-x 1 cooll 197609     0 Aug 30 15:54 .\\ndrwxr-xr-x 1 cooll 197609     0 Aug 30 15:54 ..\\n-rwxr-xr-x 1 cooll 197609  5743 Aug 30 15:54 helpers.js\\n-rw-r-"
+      },
+      {
+        "index": 654,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 655,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 656,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+        "exitCode": 0
+      },
+      {
+        "index": 657,
+        "command": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"evidence\":[\"x\"],\"confidence\":0.5}' && cat .v1/state.json | head -60 | tail -30",
+        "exitCode": 0
+      }
+    ]
+  }
+}

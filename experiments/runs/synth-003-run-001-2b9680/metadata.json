@@ -1,0 +1,58 @@
+{
+  "runId": "synth-003-run-001-2b9680",
+  "caseId": "synth-003",
+  "benchmarkVersion": "0.5",
+  "agentVersion": "baseline-v0",
+  "agentRuntime": "pi",
+  "piVersion": "0.84.4",
+  "model": "mimo-v2.5",
+  "modelConfiguration": {
+    "thinkingLevel": "medium",
+    "maxTurns": 25,
+    "agentTimeoutMs": 600000,
+    "commandTimeoutSec": 30
+  },
+  "agentPromptVersion": "baseline-v0",
+  "agentPromptPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\agents\\baseline-v0.md",
+  "startTime": "2026-08-30T15:17:24.399Z",
+  "endTime": "2026-08-30T15:24:23.607Z",
+  "durationMs": 419208,
+  "terminationStatus": "success",
+  "changedFiles": [
+    "bun.lock",
+    "package-lock.json",
+    "src/queue.ts"
+  ],
+  "testCommands": [
+    "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+    "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+    "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20"
+  ],
+  "testResults": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -50",
+      "exitCode": 0,
+      "durationMs": 1082,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [7.27ms]\n(pass) AsyncQueue > dequeue throws on empty [4.41ms]\n(pass) AsyncQueue > pause and resume preserves jobs [1.40ms]\n(pass) AsyncQueue > pause resume multiple cycles [2.39ms]\n56 |     const handler = () => {\n57 |       attempts++;\n58 |       throw new Error(\"fail\");\n59 |     };\n60 |     const r1 = await q.processJob(dequeued, handler);\n61 |     expect(r1.success).toBe(false);\n                            ^\nerror: expect(received).toBe(expected)\n\nExpected: false\nReceived: true\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\\tests\\queue.test.ts:61:24)\n(fail) AsyncQueue > processJob retry re-enqueues [10.83ms]\n(pass) AsyncQueue > processJob succeeds [0.56ms]\n(pass) AsyncQueue > processNext handles empty [0.86ms]\n92 |     const handler = () => {\n93 |       called++;\n94 |       throw new Error(\"oops\");\n95 |     };\n96 |     const r1 = await q.processNext(handler);\n97 |     expect(r1!.success).toBe(false);\n                             ^\nerror: expect(received).toBe(expected)\n\nExpected: false\nReceived: true\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\\tests\\queue.test.ts:97:25)\n(fail) AsyncQueue > processNext surfaces errors via retry [0.88ms]\n(pass) AsyncQueue > clear empties queue [0.22ms]\n\n 7 pass\n 2 fail\n 23 expect() calls\nRan 9 tests across 1 file. [399.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -30",
+      "exitCode": 0,
+      "durationMs": 527,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [1.31ms]\n(pass) AsyncQueue > dequeue throws on empty [0.77ms]\n(pass) AsyncQueue > pause and resume preserves jobs [0.56ms]\n(pass) AsyncQueue > pause resume multiple cycles [0.91ms]\n(pass) AsyncQueue > processJob retry re-enqueues [1.35ms]\n(pass) AsyncQueue > processJob succeeds [0.37ms]\n(pass) AsyncQueue > processNext handles empty [0.46ms]\n(pass) AsyncQueue > processNext surfaces errors via retry [1.07ms]\n(pass) AsyncQueue > clear empties queue [0.20ms]\n\n 9 pass\n 0 fail\n 35 expect() calls\nRan 9 tests across 1 file. [167.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-003-synth-003-run-001-2b9680-sGhPR3\" && bun test 2>&1 | tail -20",
+      "exitCode": 0,
+      "durationMs": 399,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [0.95ms]\n(pass) AsyncQueue > dequeue throws on empty [0.42ms]\n(pass) AsyncQueue > pause and resume preserves jobs [0.36ms]\n(pass) AsyncQueue > pause resume multiple cycles [0.61ms]\n(pass) AsyncQueue > processJob retry re-enqueues [1.03ms]\n(pass) AsyncQueue > processJob succeeds [0.23ms]\n(pass) AsyncQueue > processNext handles empty [0.26ms]\n(pass) AsyncQueue > processNext surfaces errors via retry [0.33ms]\n(pass) AsyncQueue > clear empties queue [0.15ms]\n\n 9 pass\n 0 fail\n 35 expect() calls\nRan 9 tests across 1 file. [115.00ms]\n"
+    }
+  ],
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-2b9680\\trajectory.jsonl",
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-2b9680\\patch.diff",
+  "resultPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-2b9680\\result.json",
+  "workspacePath": "C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-synth-003-synth-003-run-001-2b9680-sGhPR3",
+  "nodeVersion": "v22.23.2",
+  "platform": "win32",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf"
+}

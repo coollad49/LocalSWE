@@ -1,0 +1,92 @@
+diff --git a/package-lock.json b/package-lock.json
+new file mode 100644
+index 0000000..b56b78a
+--- /dev/null
++++ b/package-lock.json
+@@ -0,0 +1,65 @@
++{
++  "name": "cac",
++  "version": "6.0.0",
++  "lockfileVersion": 3,
++  "requires": true,
++  "packages": {
++    "": {
++      "name": "cac",
++      "version": "6.0.0",
++      "license": "MIT",
++      "dependencies": {
++        "mri": "^1.1.6"
++      },
++      "devDependencies": {
++        "@types/bun": "latest"
++      }
++    },
++    "node_modules/@types/bun": {
++      "version": "1.4.0",
++      "resolved": "https://registry.npmjs.org/@types/bun/-/bun-1.4.0.tgz",
++      "integrity": "sha512-K+lZULY23vRgK/CfTjFIV+tyifaNdSMlPh9j+6mQ/cLfpOznLyAuzgV/JQysyECpkBQLVMSyvjlr2fBUSA9wFQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "bun-types": "1.4.0"
++      }
++    },
++    "node_modules/@types/node": {
++      "version": "26.4.0",
++      "resolved": "https://registry.npmjs.org/@types/node/-/node-26.4.0.tgz",
++      "integrity": "sha512-faiGnoIrLH/V8cibOMEAZ8pMw6oXqSukl29ra4mN8GdaB2ZewzeaLj+INpV5N+Z1eKWzY+IzaIZH2EIR6YZRNQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "undici-types": "~8.3.0"
++      }
++    },
++    "node_modules/bun-types": {
++      "version": "1.4.0",
++      "resolved": "https://registry.npmjs.org/bun-types/-/bun-types-1.4.0.tgz",
++      "integrity": "sha512-iIKw23BspnQQYd3prITOBxeUsxBHnwzX6YJfGMuNOZzeNcMmVqzIIVGRm1l69ogaPQmb4wB6BN8mA5bE9YuC5Q==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@types/node": "*"
++      }
++    },
++    "node_modules/mri": {
++      "version": "1.2.0",
++      "resolved": "https://registry.npmjs.org/mri/-/mri-1.2.0.tgz",
++      "integrity": "sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==",
++      "license": "MIT",
++      "engines": {
++        "node": ">=4"
++      }
++    },
++    "node_modules/undici-types": {
++      "version": "8.3.0",
++      "resolved": "https://registry.npmjs.org/undici-types/-/undici-types-8.3.0.tgz",
++      "integrity": "sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==",
++      "dev": true,
++      "license": "MIT"
++    }
++  }
++}
+diff --git a/src/CAC.ts b/src/CAC.ts
+index 7a3df11..27ca7b7 100644
+--- a/src/CAC.ts
++++ b/src/CAC.ts
+@@ -308,6 +308,16 @@ class CAC extends EventEmitter {
+         const keys = key.split('.')
+         setDotProp(options, keys, parsed[key])
+         setByType(options, transforms)
++
++        // Also set all alias names of this option to the same value
++        const option = cliOptions.find(o => o.names.includes(keys[0]))
++        if (option) {
++          for (const name of option.names) {
++            if (name !== keys[0]) {
++              options[name] = parsed[key]
++            }
++          }
++        }
+       }
+     }
+ 

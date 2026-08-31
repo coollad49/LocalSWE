@@ -1,0 +1,69 @@
+{
+  "runId": "hist-002-run-001-f9fffa",
+  "caseId": "hist-002",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 438595,
+  "changedFiles": [
+    "src/defu.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-002-run-001-f9fffa\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-002-run-001-f9fffa\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-002-run-001-f9fffa\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\" && npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 12714,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\n\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  05:22:12\n   Duration  1.22s (transform 207ms, setup 0ms, import 282ms, tests 21ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\" && npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 11193,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\n\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  05:26:30\n   Duration  1.15s (transform 210ms, setup 0ms, import 283ms, tests 21ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\" && cat > tests/proto-pollution.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { defu } from \"../src/defu.ts\";\n\ndescribe(\"prototype pollution via __proto__\", () => {\n  test(\"does not pollute Object.prototype via __proto__ in defaults\", () => {\n    const before = ({} as any).polluted;\n    expect(before).toBe(undefined);\n    \n    const malicious = JSON.parse('{\"__proto__\":{\"polluted\":true}}');\n    defu({}, malicious);\n    \n    const after = ({} as any).polluted;\n    expect(after).toBe(undefined);\n  });\n\n  test(\"does not pollute Object.prototype via __proto__ in baseObject\", () => {\n    const malicious = JSON.parse('{\"__proto__\":{\"polluted\":true}}');\n    defu(malicious, {});\n    \n    const after = ({} as any).polluted;\n    expect(after).toBe(undefined);\n  });\n\n  test(\"does not pollute Object.prototype via __proto__ in both args\", () => {\n    const malicious1 = JSON.parse('{\"__proto__\":{\"polluted1\":true}}');\n    const malicious2 = JSON.parse('{\"__proto__\":{\"polluted2\":true}}');\n    defu(malicious1, malicious2);\n    \n    expect(({} as any).polluted1).toBe(undefined);\n    expect(({} as any).polluted2).toBe(undefined);\n  });\n\n  test(\"treats __proto__ as a regular key in the result\", () => {\n    const malicious = JSON.parse('{\"__proto__\":{\"polluted\":true},\"key\":\"value\"}');\n    const result = defu({}, malicious) as any;\n    \n    // __proto__ should not cause prototype pollution\n    expect(({} as any).polluted).toBe(undefined);\n    \n    // The key property should still be present\n    expect(result.key).toBe(\"value\");\n  });\n\n  test(\"does not corrupt the result object's prototype chain\", () => {\n    const malicious = JSON.parse('{\"__proto__\":{\"polluted\":true}}');\n    const result = defu({}, malicious) as any;\n    \n    // Result should still be a plain object\n    expect(Object.getPrototypeOf(result)).toBe(Object.prototype);\n    expect(result.hasOwnProperty).toBeDefined(); // should inherit from Object.prototype\n  });\n\n  test(\"constructor in defaults does not pollute\", () => {\n    const malicious = JSON.parse('{\"constructor\":{\"prototype\":{\"isAdmin\":true}}}');\n    defu({}, malicious);\n    // @ts-ignore\n    expect(({} as any).isAdmin).toBe(undefined);\n  });\n});\nEOF\nnpx vitest run 2>&1",
+      "exitCode": 1,
+      "durationMs": 8120,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\n\n ❯ tests/proto-pollution.test.ts (6 tests | 1 failed) 34ms\n     × does not corrupt the result object's prototype chain 18ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/proto-pollution.test.ts > prototype pollution via __proto__ > does not corrupt the result object's prototype chain\nAssertionError: expected null to be { …(12) } // Object.is equality\n\n- Expected:\n{}\n\n+ Received:\nnull\n\n ❯ tests/proto-pollution.test.ts:49:43\n     47|\n     48|     // Result should still be a plain object\n     49|     expect(Object.getPrototypeOf(result)).toBe(Object.prototype);\n       |                                           ^\n     50|     expect(result.hasOwnProperty).toBeDefined(); // should inherit fro…\n     51|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed | 1 passed (2)\n      Tests  1 failed | 12 passed (13)\n   Start at  05:26:48\n   Duration  948ms (transform 205ms, setup 0ms, import 330ms, tests 55ms, environment 1ms)\n\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\" && npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 10429,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\n\n\n Test Files  2 passed (2)\n      Tests  13 passed (13)\n   Start at  05:27:13\n   Duration  1.06s (transform 150ms, setup 0ms, import 307ms, tests 36ms, environment 1ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\" && npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 12808,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\n\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  05:27:40\n   Duration  1.26s (transform 143ms, setup 0ms, import 208ms, tests 22ms, environment 1ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\" && npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 10001,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\n\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  05:27:58\n   Duration  790ms (transform 110ms, setup 0ms, import 168ms, tests 16ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\" && npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 14271,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\n\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  05:28:18\n   Duration  799ms (transform 108ms, setup 0ms, import 163ms, tests 16ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\" && npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 16125,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-f9fffa-zuSwny\n\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  05:28:41\n   Duration  1.41s (transform 246ms, setup 0ms, import 313ms, tests 23ms, environment 0ms)\n\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T04:21:28.434Z",
+  "endedAt": "2026-08-31T04:28:47.029Z"
+}

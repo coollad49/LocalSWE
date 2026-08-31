@@ -1,0 +1,458 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# path-to-regexp stringify fails to quote param names followed by astral ID_Continue\r\n\r\n## Problem\r\n\r\nStringifying a parsed path that has a parameter name followed by text starting with an astral Unicode character that is an identifier continuation incorrectly fails to quote the parameter name, breaking parse/stringify round-trip.\r\n",
+  "filesInspected": [
+    "ISSUE.md",
+    "src",
+    "src/index.ts",
+    "tests/cases.spec.ts",
+    "tests",
+    "tests/basic.test.ts"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "{\r\n  \"name\": \"path-to-regexp\",\r\n  \"version\": \"8.4.2\",\r\n  \"description\": \"Express style path to RegExp utility\",\r\n  \"keywords\": [\r\n    \"express\",\r\n    \"regexp\",\r\n    \"route\",\r\n    \"routing\"\r\n  ],\r\n  \"repository\": {\r\n    \"type\": \"git\",\r\n    \"url\": \"https://github.com/pillarjs/path-to-regexp.git\"\r\n  },\r\n  \"funding\": {\r\n    \"type\": \"opencollective\",\r\n    \"url\": \"https://opencollective.com/express\"\r\n  },\r\n  \"license\": \"MIT\",\r\n  \"exports\": \"./dist/index.js\",\r\n  \"main\": \"dist/index.js\",\r\n  \"typings\": \"dist/index.d.ts\",\r\n  \"files\": [\r\n    \"dist/\"\r\n  ],\r\n  \"scripts\": {\r\n    \"bench\": \"vitest bench\",\r\n    \"build\": \"ts-scripts build\",\r\n    \"format\": \"ts-scripts format\",\r\n    \"lint\": \"ts-scripts lint\",\r\n    \"prepare\": \"ts-scripts install && npm run build\",\r\n    \"size\": \"size-limit\",\r\n    \"specs\": \"ts-scripts specs\",\r\n    \"test\": \"ts-scripts test && npm run size\"\r\n  },\r\n  \"devDependencies\": {\r\n    \"@borderless/ts-scripts\": \"^0.15.0\",\r\n    \"@size-limit/preset-small-lib\": \"^11.1.2\",\r\n    \"@types/node\": \"^22.7.2\",\r\n    \"@types/semver\": \"^7.3.1\",\r\n    \"@vitest/coverage-v8\": \"^3.0.5\",\r\n    \"recheck\": \"^4.5.0\",\r\n    \"size-limit\": \"^11.1.2\",\r\n    \"typescript\": \"^5.7.3\",\r\n    \"vitest\": \"^3.0.5\"\r\n  },\r\n  \"publishConfig\": {\r\n    \"access\": \"public\"\r\n  },\r\n  \"size-limit\": [\r\n    {\r\n      \"path\": \"dist/index.js\",\r\n      \"limit\": \"2 kB\"\r\n    }\r\n  ],\r\n  \"ts-scripts\": {\r\n    \"dist\": [\r\n      \"dist\"\r\n    ],\r\n    \"project\": [\r\n      \"tsconfig.build.json\"\r\n    ]\r\n  }\r\n}\r\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:50:32.379Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Original path: /:name𝐀suffix\nParsed tokens: {\n  \"tokens\": [\n    {\n      \"type\": \"text\",\n      \"value\": \"/\"\n    },\n    {\n      \"type\": \"param\",\n      \"name\": \"name𝐀suffix\"\n    }\n  ],\n  \"originalPath\": \"/:name𝐀suffix\"\n}\nStringified: /:name𝐀suffix\nRe-parsed tokens: {\n  \"tokens\": [\n    {\n      \"type\": \"text\",\n      \"value\": \"/\"\n    },\n    {\n      \"type\": \"param\",\n      \"name\": \"name𝐀suffix\"\n    }\n  ],\n  \"originalPath\": \"/:name𝐀suffix\"\n}\nRe-stringified: /:name𝐀suffix\n\nRound-trip OK\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:51:10.026Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Original path: /:id-𝐁suffix\nParsed tokens: {\n  \"tokens\": [\n    {\n      \"type\": \"text\",\n      \"value\": \"/\"\n    },\n    {\n      \"type\": \"param\",\n      \"name\": \"id\"\n    },\n    {\n      \"type\": \"text\",\n      \"value\": \"-𝐁suffix\"\n    }\n  ],\n  \"originalPath\": \"/:id-𝐁suffix\"\n}\nStringified: /:id-𝐁suffix\nRe-parsed tokens: {\n  \"tokens\": [\n    {\n      \"type\": \"text\",\n      \"value\": \"/\"\n    },\n    {\n      \"type\": \"param\",\n      \"name\": \"id\"\n    },\n    {\n      \"type\": \"text\",\n      \"value\": \"-𝐁suffix\"\n    }\n  ],\n  \"originalPath\": \"/:id-𝐁suffix\"\n}\nRe-stringified: /:id-𝐁suffix\n\nRound-trip OK\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:51:30.435Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "node:internal/modules/run_main:123\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nError: Transform failed with 2 errors:\r\nC:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-2598bc-7IypOO\\.v1\\repro3.ts:8:19: ERROR: Top-level await is currently not supported with the \"cjs\" output format\r\nC:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-005-hard-005-run-001-2598bc-7IypOO\\.v1\\repro3.ts:23:18: ERROR: Top-level await is currently not supported with the \"cjs\" output format\r\n    at failureErrorWithLog (C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\node_modules\\esbuild\\lib\\main.js:1752:15)\r\n    at C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\node_modules\\esbuild\\lib\\main.js:1019:50\r\n    at responseCallbacks.<computed> (C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\node_modules\\esbuild\\lib\\main.js:886:9)\r\n    at handleIncomingPacket (C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\node_modules\\esbuild\\lib\\main.js:941:12)\r\n    at Socket.readFromStdout (C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\node_modules\\esbuild\\lib\\main.js:864:7)\r\n    at Socket.emit (node:events:519:28)\r\n    at addChunk (node:internal/streams/readable:561:12)\r\n    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)\r\n    at Readable.push (node:internal/streams/readable:392:5)\r\n    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23) {\r\n  name: 'TransformError'\r\n}\r\n\r\nNode.js v22.23.2\r\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:51:56.623Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Tokens: {\n  \"tokens\": [\n    {\n      \"type\": \"text\",\n      \"value\": \"/\"\n    },\n    {\n      \"type\": \"param\",\n      \"name\": \"id\"\n    },\n    {\n      \"type\": \"text\",\n      \"value\": \"𝐀suffix\"\n    }\n  ]\n}\nStringified: /:id𝐀suffix\nRe-parsed tokens: {\n  \"tokens\": [\n    {\n      \"type\": \"text\",\n      \"value\": \"/\"\n    },\n    {\n      \"type\": \"param\",\n      \"name\": \"id𝐀suffix\"\n    }\n  ],\n  \"originalPath\": \"/:id𝐀suffix\"\n}\nRe-stringified: /:id𝐀suffix\n\nRound-trip OK\n\n--- Regex test ---\nastralChar: 𝐀\nastralChar code point: 1d400\nfirstChar via [0]: �\nfirstChar via [0] code point: d835\nfirstChar length: 1\nID_CONTINUE.test(firstChar): false\nID_CONTINUE.test(astralChar): true\n\nUsing spread:\nfirstCodePoint: 𝐀\nfirstCodePoint code point: 1d400\nID_CONTINUE.test(firstCodePoint): true\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:52:10.801Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Original tokens:\n  1. text '/'\n  2. param 'id'\n  3. text '𝐀suffix'\n\nStringified: /:id𝐀suffix\n\nRe-parsed:\n  text: /\n  param: id𝐀suffix\n\n--- What the fix should produce ---\nFixed stringify: /:id\"id\"𝐀suffix\nRe-parsed fixed:\n  text: /\n  param: id\n  text: \"id\"𝐀suffix\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:52:31.954Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.spec.ts ]\nError: No test suite found in file C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO/src/cases.spec.ts\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed | 1 passed (2)\n      Tests  2 passed (2)\n   Start at  04:52:45\n   Duration  1.23s (transform 455ms, setup 0ms, import 793ms, tests 14ms, environment 1ms)\n\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:52:46.418Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Tokens: {\n  \"tokens\": [\n    {\n      \"type\": \"text\",\n      \"value\": \"/\"\n    },\n    {\n      \"type\": \"param\",\n      \"name\": \"id\"\n    },\n    {\n      \"type\": \"text\",\n      \"value\": \"𝐀suffix\"\n    }\n  ]\n}\nStringified: /:\"id\"𝐀suffix\nRe-parsed tokens: {\n  \"tokens\": [\n    {\n      \"type\": \"text\",\n      \"value\": \"/\"\n    },\n    {\n      \"type\": \"param\",\n      \"name\": \"id\"\n    },\n    {\n      \"type\": \"text\",\n      \"value\": \"𝐀suffix\"\n    }\n  ],\n  \"originalPath\": \"/:\\\"id\\\"𝐀suffix\"\n}\nRe-stringified: /:\"id\"𝐀suffix\n\nRound-trip OK\n\n--- Regex test ---\nastralChar: 𝐀\nastralChar code point: 1d400\nfirstChar via [0]: �\nfirstChar via [0] code point: d835\nfirstChar length: 1\nID_CONTINUE.test(firstChar): false\nID_CONTINUE.test(astralChar): true\n\nUsing spread:\nfirstCodePoint: 𝐀\nfirstCodePoint code point: 1d400\nID_CONTINUE.test(firstCodePoint): true\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:53:01.601Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  04:53:12\n   Duration  804ms (transform 156ms, setup 0ms, import 215ms, tests 14ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:53:13.877Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "diff --git a/src/index.ts b/src/index.ts\nindex f617424..757fbf6 100644\n--- a/src/index.ts\n+++ b/src/index.ts\n@@ -676,7 +676,7 @@ function quoteName(name: string): string {\n function stringifyName(name: string, next: Token | undefined): string {\n   if (!ID.test(name)) return quoteName(name);\n \n-  if (next?.type === \"text\" && ID_CONTINUE.test(next.value[0])) {\n+  if (next?.type === \"text\" && ID_CONTINUE.test([ ...next.value ][0])) {\n     return quoteName(name);\n   }\n \n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:53:18.543Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\nTest: U+1D400 (MATHEMATICAL BOLD A) (𝐀)\n  ✓ Round-trip preserved param name correctly\n\nTest: U+1F600 (Emoji grinning face) (😀)\n  ✓ Round-trip preserved param name correctly\n\nTest: U+10300 (OLD ITALIC LETTER A) (𐌀)\n  ✓ Round-trip preserved param name correctly\n\nTest: U+20000 (CJK Unified Ideograph) (𠀀)\n  ✓ Round-trip preserved param name correctly\n\nAll tests passed!\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:53:35.004Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.spec.ts ]\nError: No test suite found in file C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO/src/cases.spec.ts\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed | 1 passed (2)\n      Tests  2 passed (2)\n   Start at  04:53:50\n   Duration  1.33s (transform 793ms, setup 0ms, import 936ms, tests 16ms, environment 1ms)\n\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:53:52.348Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  04:54:03\n   Duration  1.04s (transform 161ms, setup 0ms, import 221ms, tests 14ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:54:05.128Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\nTest: U+1D400 (MATHEMATICAL BOLD A) (𝐀)\n  ✓ Round-trip preserved param name correctly\n\nTest: U+1F600 (Emoji grinning face) (😀)\n  ✓ Round-trip preserved param name correctly\n\nTest: U+10300 (OLD ITALIC LETTER A) (𐌀)\n  ✓ Round-trip preserved param name correctly\n\nTest: U+20000 (CJK Unified Ideograph) (𠀀)\n  ✓ Round-trip preserved param name correctly\n\nAll tests passed!\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:54:15.163Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.spec.ts ]\nError: No test suite found in file C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO/src/cases.spec.ts\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed | 1 passed (2)\n      Tests  2 passed (2)\n   Start at  04:54:31\n   Duration  1.35s (transform 844ms, setup 0ms, import 1.00s, tests 15ms, environment 1ms)\n\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:54:33.278Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\nTest: U+1D400 (MATHEMATICAL BOLD A) (𝐀)\n  ✓ Round-trip preserved param name correctly\n\nTest: U+1F600 (Emoji grinning face) (😀)\n  ✓ Round-trip preserved param name correctly\n\nTest: U+10300 (OLD ITALIC LETTER A) (𐌀)\n  ✓ Round-trip preserved param name correctly\n\nTest: U+20000 (CJK Unified Ideograph) (𠀀)\n  ✓ Round-trip preserved param name correctly\n\nAll tests passed!\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:54:46.197Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\n\n ❯ src/cases.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/cases.spec.ts [ src/cases.spec.ts ]\nError: No test suite found in file C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO/src/cases.spec.ts\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed | 1 passed (2)\n      Tests  2 passed (2)\n   Start at  04:55:00\n   Duration  1.26s (transform 836ms, setup 0ms, import 976ms, tests 16ms, environment 1ms)\n\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:55:01.827Z"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "hyp-c7121496",
+      "description": "Root cause identified and repaired in src/index.ts",
+      "evidence": [
+        "Code inspection and passing verification"
+      ],
+      "confidence": 0.9,
+      "status": "selected",
+      "files": [
+        "src/index.ts"
+      ]
+    }
+  ],
+  "changesMade": [
+    {
+      "path": "src/index.ts",
+      "summary": "edit src/index.ts",
+      "iteration": 0,
+      "timestamp": "2026-08-31T03:52:52.278Z"
+    },
+    {
+      "path": "src/index.ts",
+      "summary": "modified src/index.ts",
+      "iteration": 3,
+      "timestamp": "2026-08-31T03:55:08.269Z"
+    }
+  ],
+  "verificationAttempts": [],
+  "evidence": [
+    {
+      "id": "ev-cd706c68",
+      "type": "file_inspection",
+      "description": "Inspected ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T03:50:06.670Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a4c7e6ae",
+      "type": "file_inspection",
+      "description": "read ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T03:50:06.671Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ccfbc089",
+      "type": "file_inspection",
+      "description": "Inspected src",
+      "source": "src",
+      "timestamp": "2026-08-31T03:50:11.457Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ac6a54a8",
+      "type": "file_inspection",
+      "description": "read src",
+      "source": "src",
+      "timestamp": "2026-08-31T03:50:11.458Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c7296a8f",
+      "type": "file_inspection",
+      "description": "Inspected src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-31T03:50:13.102Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8ee94ae5",
+      "type": "file_inspection",
+      "description": "read src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-31T03:50:13.103Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b3d1dc16",
+      "type": "file_inspection",
+      "description": "Inspected tests/cases.spec.ts",
+      "source": "tests/cases.spec.ts",
+      "timestamp": "2026-08-31T03:50:21.470Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5c93ca56",
+      "type": "file_inspection",
+      "description": "read tests/cases.spec.ts",
+      "source": "tests/cases.spec.ts",
+      "timestamp": "2026-08-31T03:50:21.471Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-86118532",
+      "type": "file_inspection",
+      "description": "Inspected tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T03:50:23.335Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ee19a3e9",
+      "type": "file_inspection",
+      "description": "read tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T03:50:23.336Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8679ab4c",
+      "type": "file_inspection",
+      "description": "Inspected tests/basic.test.ts",
+      "source": "tests/basic.test.ts",
+      "timestamp": "2026-08-31T03:50:25.363Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6f5f8e77",
+      "type": "file_inspection",
+      "description": "read tests/basic.test.ts",
+      "source": "tests/basic.test.ts",
+      "timestamp": "2026-08-31T03:50:25.364Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3161d344",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && cat package.json",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && cat package.json",
+      "timestamp": "2026-08-31T03:50:31.979Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1d1c195f",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && cat > .v1/repro.ts << 'EOF'\nimport { parse, stringify } from \"../src/index.js\";\n\n// Astral ID_Continue charac",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && cat > .v1/repro.ts << 'EOF'\nimport { parse, stringify } from \"../src/index.js\";\n\n// Astral ID_Continue character: MATHEMATICAL BOLD CAPITAL A (U+1D400)\n// This is an astral character that qualifies as ID_Continue\nconst astralChar = \"𝐀\"; // U+1D400\n\n// Parse a path with param name followed by astral ID_Continue char\nconst path = `/:name${astralChar}suffix`;\nconsole.log(\"Original path:\", path);\n\nconst tokens = parse(path);\nconsole.log(\"Parsed tokens:\", JSON.stringify(tokens, null, 2));\n\nconst stringified = stringify(tokens);\nconsole.log(\"Stringified:\", stringified);\n\n// Now parse the stringified version to check round-trip\nconst tokens2 = parse(stringified);\nconsole.log(\"Re-parsed tokens:\", JSON.stringify(tokens2, null, 2));\n\n// Check if they match\nconst stringified2 = stringify(tokens2);\nconsole.log(\"Re-stringified:\", stringified2);\n\nif (stringified !== stringified2) {\n  console.log(\"\\nBUG CONFIRMED: Round-trip broken!\");\n  console.log(`Expected: ${stringified2}`);\n  console.log(`Got: ${stringified}`);\n} else {\n  console.log(\"\\nRound-trip OK\");\n}\nEOF\nnpx tsx .v1/repro.ts",
+      "timestamp": "2026-08-31T03:51:02.259Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-753d011e",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && cat > .v1/repro2.ts << 'EOF'\nimport { parse, stringify } from \"../src/index.js\";\n\n// Astral ID_Continue chara",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && cat > .v1/repro2.ts << 'EOF'\nimport { parse, stringify } from \"../src/index.js\";\n\n// Astral ID_Continue character: MATHEMATICAL BOLD CAPITAL B (U+1D401)\nconst astralChar = \"𝐁\"; // U+1D401\n\n// Parse a path where param is followed by astral ID_Continue char (separate tokens)\n// Using a dash to separate param from the astral character\nconst path = `/:id-${astralChar}suffix`;\nconsole.log(\"Original path:\", path);\n\nconst tokens = parse(path);\nconsole.log(\"Parsed tokens:\", JSON.stringify(tokens, null, 2));\n\nconst stringified = stringify(tokens);\nconsole.log(\"Stringified:\", stringified);\n\n// Now parse the stringified version to check round-trip\nconst tokens2 = parse(stringified);\nconsole.log(\"Re-parsed tokens:\", JSON.stringify(tokens2, null, 2));\n\nconst stringified2 = stringify(tokens2);\nconsole.log(\"Re-stringified:\", stringified2);\n\nif (stringified !== stringified2) {\n  console.log(\"\\nBUG CONFIRMED: Round-trip broken!\");\n  console.log(`Expected: ${stringified2}`);\n  console.log(`Got: ${stringified}`);\n} else {\n  console.log(\"\\nRound-trip OK\");\n}\nEOF\nnpx tsx .v1/repro2.ts",
+      "timestamp": "2026-08-31T03:51:24.929Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e7d80d3a",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && cat > .v1/repro3.ts << 'EOF'\nimport { parse, stringify } from \"../src/index.js\";\n\n// Astral ID_Continue chara",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && cat > .v1/repro3.ts << 'EOF'\nimport { parse, stringify } from \"../src/index.js\";\n\n// Astral ID_Continue character: MATHEMATICAL BOLD CAPITAL A (U+1D400)\nconst astralChar = \"𝐀\"; // U+1D400\n\n// Manually create tokens where param is followed by text starting with astral char\n// This simulates what happens when we force the param name to not include the astral char\nconst TokenData = (await import(\"../src/index.js\")).TokenData;\n\n// Create token data manually: param \"id\" followed by text \"𝐀suffix\"\nconst tokens = new TokenData([\n  { type: \"text\", value: \"/\" },\n  { type: \"param\", name: \"id\" },\n  { type: \"text\", value: `${astralChar}suffix` }\n]);\n\nconsole.log(\"Tokens:\", JSON.stringify(tokens, null, 2));\n\nconst stringified = stringify(tokens);\nconsole.log(\"Stringified:\", stringified);\n\n// Now parse the stringified version to check round-trip\nconst { parse } = await import(\"../src/index.js\");\nconst tokens2 = parse(stringified);\nconsole.log(\"Re-parsed tokens:\", JSON.stringify(tokens2, null, 2));\n\nconst stringified2 = stringify(tokens2);\nconsole.log(\"Re-stringified:\", stringified2);\n\nif (stringified !== stringified2) {\n  console.log(\"\\nBUG CONFIRMED: Round-trip broken!\");\n  console.log(`Expected: ${stringified2}`);\n  console.log(`Got: ${stringified}`);\n} else {\n  console.log(\"\\nRound-trip OK\");\n}\n\n// Also test the ID_CONTINUE regex behavior\nconst ID_CONTINUE = /^[$\\u200c\\u200d\\p{ID_Continue}]$/u;\nconst firstChar = `${astralChar}suffix`[0];\nconsole.log(\"\\n--- Regex test ---\");\nconsole.log(\"astralChar:\", astralChar);\nconsole.log(\"astralChar code point:\", astralChar.codePointAt(0).toString(16));\nconsole.log(\"firstChar via [0]:\", firstChar);\nconsole.log(\"firstChar via [0] code point:\", firstChar.codePointAt(0).toString(16));\nconsole.log(\"firstChar length:\", firstChar.length);\nconsole.log(\"ID_CONTINUE.test(firstChar):\", ID_CONTINUE.test(firstChar));\nconsole.log(\"ID_CONTINUE.test(astralChar):\", ID_CONTINUE.test(astralChar));\n\n// Using spread operator\nconst [firstCodePoint] = [...`${astralChar}suffix`];\nconsole.log(\"\\nUsing spread:\");\nconsole.log(\"firstCodePoint:\", firstCodePoint);\nconsole.log(\"firstCodePoint code point:\", firstCodePoint.codePointAt(0).toString(16));\nconsole.log(\"ID_CONTINUE.test(firstCodePoint):\", ID_CONTINUE.test(firstCodePoint));\nEOF\nnpx tsx .v1/repro3.ts",
+      "timestamp": "2026-08-31T03:51:51.082Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-26fce497",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx tsx .v1/repro4.ts",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx tsx .v1/repro4.ts",
+      "timestamp": "2026-08-31T03:52:04.915Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-9f800525",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && cat > .v1/repro5.ts << 'EOF'\nimport { parse, stringify, TokenData } from \"../src/index.js\";\n\n// Astral ID_Con",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && cat > .v1/repro5.ts << 'EOF'\nimport { parse, stringify, TokenData } from \"../src/index.js\";\n\n// Astral ID_Continue character\nconst astralChar = \"𝐀\"; // U+1D400\n\n// The issue: if we manually construct tokens with param \"id\" followed by text \"𝐀suffix\"\nconst tokens = new TokenData([\n  { type: \"text\", value: \"/\" },\n  { type: \"param\", name: \"id\" },\n  { type: \"text\", value: `${astralChar}suffix` }\n]);\n\nconsole.log(\"Original tokens:\");\nconsole.log(\"  1. text '/'\");\nconsole.log(\"  2. param 'id'\");\nconsole.log(\"  3. text '𝐀suffix'\");\n\nconst stringified = stringify(tokens);\nconsole.log(\"\\nStringified:\", stringified);\n\n// If we re-parse, the param eats the astral character because it's ID_Continue\nconst tokens2 = parse(stringified);\nconsole.log(\"\\nRe-parsed:\");\nfor (const t of tokens2.tokens) {\n  console.log(`  ${t.type}: ${t.value || t.name}`);\n}\n\n// The param \"id\" and text \"𝐀suffix\" have been merged into \"id𝐀suffix\"\n// This is the bug - round-trip breaks the token structure\n\n// The fix: stringifyName should use [...next.value][0] instead of next.value[0]\n// Let's verify what the fixed output should look like\nconsole.log(\"\\n--- What the fix should produce ---\");\nconst fixedStringified = `/:id\"${\"id\"}\"𝐀suffix`;\nconsole.log(\"Fixed stringify:\", fixedStringified);\nconst tokens3 = parse(fixedStringified);\nconsole.log(\"Re-parsed fixed:\");\nfor (const t of tokens3.tokens) {\n  console.log(`  ${t.type}: ${t.value || t.name}`);\n}\nEOF\nnpx tsx .v1/repro5.ts",
+      "timestamp": "2026-08-31T03:52:26.361Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a9e42adf",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T03:52:39.147Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-39793168",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx tsx .v1/repro4.ts",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx tsx .v1/repro4.ts",
+      "timestamp": "2026-08-31T03:52:55.533Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-433b7e48",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx vitest run tests/ 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx vitest run tests/ 2>&1",
+      "timestamp": "2026-08-31T03:53:07.120Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5bfceb78",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && git diff HEAD",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && git diff HEAD",
+      "timestamp": "2026-08-31T03:53:18.313Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-09e12461",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && cat > .v1/repro_comprehensive.ts << 'EOF'\nimport { parse, stringify, TokenData } from \"../src/index.js\";\n\n// ",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && cat > .v1/repro_comprehensive.ts << 'EOF'\nimport { parse, stringify, TokenData } from \"../src/index.js\";\n\n// Various astral ID_Continue characters from different planes\nconst testCases = [\n  { name: \"U+1D400 (MATHEMATICAL BOLD A)\", char: \"𝐀\" },\n  { name: \"U+1F600 (Emoji grinning face)\", char: \"😀\" }, // Not ID_Continue\n  { name: \"U+10300 (OLD ITALIC LETTER A)\", char: \"𐌀\" }, // ID_Continue in supplementary\n  { name: \"U+20000 (CJK Unified Ideograph)\", char: \"𠀀\" }, // ID_Continue\n];\n\nlet allPassed = true;\n\nfor (const tc of testCases) {\n  const { name, char } = tc;\n  console.log(`\\nTest: ${name} (${char})`);\n  \n  // Create tokens: param \"id\" followed by text starting with astral char\n  const tokens = new TokenData([\n    { type: \"text\", value: \"/\" },\n    { type: \"param\", name: \"id\" },\n    { type: \"text\", value: `${char}rest` }\n  ]);\n\n  const stringified = stringify(tokens);\n  const tokens2 = parse(stringified);\n  const stringified2 = stringify(tokens2);\n  \n  // Check that the param name \"id\" is still just \"id\" (not \"id<rest>\")\n  const paramName = tokens2.tokens.find(t => t.type === \"param\")?.name;\n  \n  if (paramName === \"id\") {\n    console.log(`  ✓ Round-trip preserved param name correctly`);\n  } else {\n    console.log(`  ✗ Round-trip broke: param name became \"${paramName}\"`);\n    allPassed = false;\n  }\n}\n\nconsole.log(\"\\n\" + (allPassed ? \"All tests passed!\" : \"Some tests failed!\"));\nEOF\nnpx tsx .v1/repro_comprehensive.ts",
+      "timestamp": "2026-08-31T03:53:27.303Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-125b7857",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T03:53:45.057Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0de25874",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx vitest run tests/ 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx vitest run tests/ 2>&1",
+      "timestamp": "2026-08-31T03:53:56.220Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ab314d9d",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx tsx .v1/repro_comprehensive.ts",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx tsx .v1/repro_comprehensive.ts",
+      "timestamp": "2026-08-31T03:54:09.502Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4a373600",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T03:54:25.711Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ee198a50",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx tsx .v1/repro_comprehensive.ts 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx tsx .v1/repro_comprehensive.ts 2>&1",
+      "timestamp": "2026-08-31T03:54:39.025Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7ce811a8",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-005-hard-005-run-001-2598bc-7IypOO\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T03:54:54.599Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-90ee8e9c",
+      "type": "diff_inspection",
+      "description": "Final diff stat:  src/index.ts | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-31T03:55:07.364Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 3,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-31T03:49:51.363Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-31T03:49:51.363Z",
+      "exitedAt": "2026-08-31T03:55:07.098Z",
+      "durationMs": 315735
+    }
+  ],
+  "selectedHypothesis": "hyp-c7121496",
+  "terminationReason": "completed"
+}

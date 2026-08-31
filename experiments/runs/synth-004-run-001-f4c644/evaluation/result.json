@@ -1,0 +1,570 @@
+{
+  "evaluationId": "eval-f5251677-1788165849658",
+  "runId": "synth-004-run-001-f4c644",
+  "caseId": "synth-004",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:44:09.658Z",
+  "completedAt": "2026-08-31T08:44:11.723Z",
+  "durationMs": 2065,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-004-run-001-f4c644\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 226,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-004-fhyWQz\\patch-1788165850849.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 203,
+      "command": "bun run benchmark\\cases\\synth-004\\public\\reproduce.ts",
+      "stdout": "after 1 pending: 1 expected 1\nafter 2 pending: 2 expected 2\nafter update pending=1 expected 1, completed=1 expected 1\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 249,
+      "command": "bun test benchmark\\cases\\synth-004\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-004\\private\\oracle.test.ts:\n(pass) synth-004 oracle: filterByStatus cache invalidation > reflects new tasks [4.98ms]\n(pass) synth-004 oracle: filterByStatus cache invalidation > reflects status updates [0.64ms]\n(pass) synth-004 oracle: filterByStatus cache invalidation > reflects delete and clear [0.33ms]\n\n 3 pass\n 0 fail\n 6 expect() calls\nRan 3 tests across 1 file. [194.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 192,
+      "command": "bun test benchmark\\repositories\\task-manager\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\task-manager\\tests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [1.54ms]\n(pass) TaskManager > createTask validates priority [0.62ms]\n(pass) TaskManager > createTask validates title [0.21ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.46ms]\n(pass) TaskManager > updateTask only updates provided fields [0.30ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [2.07ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.23ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [0.90ms]\n(pass) TaskManager > filterByStatus validates status [0.16ms]\n(pass) TaskManager > getTasksByPriority filters correctly [0.79ms]\n(pass) TaskManager > deleteTask removes task [0.39ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [142.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "task-manager",
+    "type": "synthetic",
+    "difficulty": "hard",
+    "categories": [
+      "state-management",
+      "api-behavior"
+    ]
+  },
+  "metrics": {
+    "durationMs": 28733,
+    "totalTurns": 48,
+    "toolCalls": 26,
+    "commandsExecuted": 2,
+    "filesInspected": 5,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 25080,
+    "outputTokens": 4120,
+    "totalTokens": 148496
+  },
+  "cost": {
+    "inputTokens": 25080,
+    "outputTokens": 4120,
+    "totalTokens": 29200,
+    "inputCostUsd": 0.003511,
+    "outputCostUsd": 0.001154,
+    "totalCostUsd": 0.004999,
+    "costUsd": 0.004999,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-004-run-001-f4c644",
+    "caseId": "synth-004",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:88173a04b8b9c1531e6ca1b40f242d20c79ed65d0dc606cd0911a84adf5e2bd4",
+    "trajectory": {
+      "eventCount": 211,
+      "durationMs": 28730,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 2,
+        "turn_start": 18,
+        "message_start": 46,
+        "message_end": 46,
+        "tool_execution_start": 26,
+        "tool_execution_end": 26,
+        "turn_end": 18,
+        "tool_execution_update": 12,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "prompt_completed": 1,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 54,
+      "userMessages": 4,
+      "toolCalls": 26,
+      "toolResults": 104,
+      "thinkingEvents": 36,
+      "unknownEvents": 35,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 26,
+      "uniqueTools": 4,
+      "byTool": {
+        "read": {
+          "calls": 16,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 25080,
+      "output": 4120,
+      "cacheRead": 119296,
+      "cacheWrite": 0,
+      "total": 148496,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.004999,
+      "inputCostUsd": 0.003511,
+      "outputCostUsd": 0.001154,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 36,
+      "characterCount": 4696,
+      "averageCharacters": 130,
+      "maxCharacters": 526,
+      "firstThinkingAt": "2026-08-31T02:55:31.955Z",
+      "lastThinkingAt": "2026-08-31T02:55:57.514Z",
+      "thinkingDurationMs": 25559
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/task-manager.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 16,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 2,
+      "explorationToEditingRatio": 12
+    },
+    "verification": {
+      "commandsDetected": 8,
+      "testsRun": true,
+      "testCommandCount": 2,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 16,
+      "duplicateReadTargets": 11,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 0,
+      "topRepetitions": [
+        {
+          "signature": "a073f2962659",
+          "tool": "read",
+          "target": "src/task-manager.ts",
+          "count": 8
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "3366904cebb3",
+          "tool": "read",
+          "target": "src/types.ts",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "3a5593d220f2",
+          "tool": "edit",
+          "target": "src/task-manager.ts",
+          "count": 2
+        },
+        {
+          "signature": "dcacd30d3ef8",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-004-run-001-f4c644",
+    "caseId": "synth-004",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-31T02:55:31.955Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-31T02:55:31.955Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 24,
+        "timestamp": "2026-08-31T02:55:31.956Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 25,
+        "timestamp": "2026-08-31T02:55:31.956Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 46,
+        "timestamp": "2026-08-31T02:55:34.099Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 47,
+        "timestamp": "2026-08-31T02:55:34.099Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 48,
+        "timestamp": "2026-08-31T02:55:34.103Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 49,
+        "timestamp": "2026-08-31T02:55:34.103Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 50,
+        "timestamp": "2026-08-31T02:55:34.113Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 51,
+        "timestamp": "2026-08-31T02:55:34.113Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 78,
+        "timestamp": "2026-08-31T02:55:35.868Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 79,
+        "timestamp": "2026-08-31T02:55:35.868Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 80,
+        "timestamp": "2026-08-31T02:55:35.882Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/types.ts"
+      },
+      {
+        "index": 81,
+        "timestamp": "2026-08-31T02:55:35.882Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/types.ts"
+      },
+      {
+        "index": 82,
+        "timestamp": "2026-08-31T02:55:35.888Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 83,
+        "timestamp": "2026-08-31T02:55:35.888Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 110,
+        "timestamp": "2026-08-31T02:55:40.142Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 111,
+        "timestamp": "2026-08-31T02:55:40.142Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 126,
+        "timestamp": "2026-08-31T02:55:42.256Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 127,
+        "timestamp": "2026-08-31T02:55:42.256Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 154,
+        "timestamp": "2026-08-31T02:55:50.931Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 155,
+        "timestamp": "2026-08-31T02:55:50.931Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 170,
+        "timestamp": "2026-08-31T02:55:53.296Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 171,
+        "timestamp": "2026-08-31T02:55:53.296Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 186,
+        "timestamp": "2026-08-31T02:55:55.276Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 187,
+        "timestamp": "2026-08-31T02:55:55.276Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 22,
+        "timestamp": "2026-08-31T02:55:31.955Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 110,
+        "timestamp": "2026-08-31T02:55:40.142Z",
+        "detail": "src/task-manager.ts"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 126,
+        "timestamp": "2026-08-31T02:55:42.256Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm tes"
+      }
+    ],
+    "errors": [],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 126,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 127,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 140,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> task-manager@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   "
+      },
+      {
+        "index": 141,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> task-manager@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   "
+      },
+      {
+        "index": 142,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 143,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 144,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 145,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-f4c644-tSfe2I\" && npm test",
+        "exitCode": 0
+      }
+    ]
+  }
+}

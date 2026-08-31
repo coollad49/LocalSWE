@@ -1,0 +1,161 @@
+# Experiment Report — exp-2026-08-31-044622
+
+> **Results are descriptive measurements from repeated runs, not statistically powered estimates.**
+> With only 3 runs per case, small percentage differences are not statistically conclusive.
+
+**Benchmark:** 0.5 `sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf`
+**Evaluator:** `0.0.0`
+**Experiment:** exp-2026-08-31-044622
+**Runs Dir:** `C:\Users\cooll\Documents\code\frontier-verifier\experiments\runs`
+**Timestamp:** 2026-08-31T03:46:58.738Z
+**Total Runs:** 6 (valid 6, infra errors 0)
+
+## Agent Versions
+
+| Agent | Runs | VFR (overall) | VFR (valid) | Repro | Oracle | Regression-Free | FalseConf |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| agent-v1 | 3 | 0.00% | 0.00% | 0.00% | 0.00% | `null` | 0.00% |
+| baseline-v0 | 3 | 0.00% | 0.00% | 0.00% | 0.00% | `null` | 0.00% |
+
+## Primary Outcome
+
+- **VFR (overall):** 0.00% (0/6) — verified / total
+- **VFR (valid):** 0.00% (0/6) — verified / valid (excludes infra errors)
+- **Reproduction Rate:** 0.00% (0/6)
+- **Oracle Pass Rate:** 0.00% (0/6)
+- **Regression-Free Rate:** 0.00% (0/6) — regression passed / tested
+- **Patch-Apply Success:** 100.00%
+- **False Confidence Rate:** 0.00% (0/6)
+
+## Outcome Breakdown
+
+| Outcome | Count | % (overall) |
+| --- | --- | --- |
+| verified | 0 | 0.00% |
+| agent_failure | 6 | 100.00% |
+| false_confidence | 0 | 0.00% |
+| regression_failure | 0 | 0.00% |
+| patch_failed | 0 | 0.00% |
+| timeout (non-patch) | 0 | 0.00% |
+| error (infra) | 0 | 0.00% |
+
+## Failure Analysis
+
+### Where improvement is needed — by category (never merged)
+
+- **Agent failures** (repro still failing): 6 — synth-001 (check-4-1788103946175), synth-002 (synth-002-run-001-7b51ec), hist-001 (hist-001-run-001-09514a), hist-001 (hist-001-run-001-1757d7), synth-001 (synth-001-run-001-e38981), synth-002 (synth-002-run-001-9f48e6)
+- **False confidence** (repro pass / oracle fail): 0 — _none_
+  → Demonstrates visible reproduction success ≠ correctness.
+- **Regression failures** (oracle pass / regression fail): 0 — _none_
+- **Timeouts**: 0 — _none_
+- **Infrastructure errors**: 0 — _none_
+
+## Efficiency Metrics (per agent)
+
+| Agent | Avg Cost | Median Cost | Total Cost | Avg Duration | Median Duration | Avg Turns | Median Turns | Avg ToolCalls | Median ToolCalls | Avg Tokens | Median Tokens | Avg Iter | TimeoutRate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| agent-v1 | `null` | `null` | `null` | 3343ms | 3651ms | 7.00 | 7.00 | 5.00 | 5.00 | `null` | `null` | 0.00 | 0.00% |
+| baseline-v0 | `null` | `null` | `null` | 95115ms | 10086ms | 38.67 | 2.00 | 22.00 | 5.00 | `null` | `null` | 1.00 | 0.00% |
+
+> Cost is `null`/`unavailable` when token usage not exposed by Pi 0.84.4. Pricing snapshot exists but never used to invent costs.
+
+## Case-Level Breakdown
+
+| Case | Difficulty | Category | Agent | Runs | Verified | AgentFail | FalseConf | RegFail | Timeouts | Errors | VFR | VFR(valid) | AvgCost | AvgDur | AvgTurns | AvgToolCalls | Consistency |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| hist-001 | medium | validation | agent-v1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0.00% | 0.00% | `null` | 2415ms | 7.00 | 5.00 | 0.00% |
+| hist-001 | medium | validation | baseline-v0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0.00% | 0.00% | `null` | 274285ms | 112.00 | 56.00 | 0.00% |
+| synth-001 | medium | state-management | agent-v1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0.00% | 0.00% | `null` | 3962ms | 7.00 | 5.00 | 0.00% |
+| synth-001 | medium | state-management | baseline-v0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0.00% | 0.00% | `null` | 10086ms | 2.00 | 5.00 | 0.00% |
+| synth-002 | easy | validation | agent-v1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0.00% | 0.00% | `null` | 3651ms | 7.00 | 5.00 | 0.00% |
+| synth-002 | easy | validation | baseline-v0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0.00% | 0.00% | `null` | 975ms | 2.00 | 5.00 | 0.00% |
+
+## Comparative V0 vs V1
+
+| Metric | V0 | V1 | Delta |
+| --- | --- | --- | --- |
+| VFR | 0.00% | 0.00% | +0.00 pp |
+| VFR (valid) | 0.00% | 0.00% | +0.00 pp |
+| Reproduction Rate | 0.00% | 0.00% | +0.00 pp |
+| Oracle Pass Rate | 0.00% | 0.00% | +0.00 pp |
+| Regression-Free Rate | `null` | `null` | `null` |
+| False Confidence Rate | 0.00% | 0.00% | +0.00 pp |
+| Agent Failure Rate | 100.00% | 100.00% | +0.00 pp |
+| Timeout Rate | 0.00% | 0.00% | +0.00 pp |
+| Avg Cost (USD) | `null` | `null` | `null` |
+| Median Cost (USD) | `null` | `null` | `null` |
+| Total Cost (USD) | `null` | `null` | `null` |
+| Avg Duration (ms) | 95115.33 | 3342.67 | -91772.67 |
+| Median Duration (ms) | 10086.00 | 3651.00 | -6435.00 |
+| Avg Turns | 38.67 | 7.00 | -31.67 |
+| Median Turns | 2.00 | 7.00 | +5.00 |
+| Avg Tool Calls | 22.00 | 5.00 | -17.00 |
+| Median Tool Calls | 5.00 | 5.00 | +0.00 |
+| Avg Tokens | `null` | `null` | `null` |
+| Median Tokens | `null` | `null` | `null` |
+| Avg Iterations | 1.00 | 0.00 | -1.00 |
+
+> Deltas for percentages are percentage-point changes (e.g., V0 50% → V1 66.7% = +16.7 pp), not relative % improvement.
+
+## Reliability Across Repeated Runs
+
+| Case | Runs | Verified | Consistency | Has Variance |
+| --- | --- | --- | --- | --- |
+| hist-001 | 2 | 0 | 0.00% | no |
+| synth-001 | 2 | 0 | 0.00% | no |
+| synth-002 | 2 | 0 | 0.00% | no |
+
+All repeated cases deterministic (no variance).
+
+## Historical vs Synthetic
+
+| Type | Total | Verified | VFR | Oracle Rate | False Confidence |
+| --- | --- | --- | --- | --- | --- |
+| historical | 2 | 0 | 0.00% | 0.00% | 0.00% |
+| synthetic | 4 | 0 | 0.00% | 0.00% | 0.00% |
+
+## Difficulty Breakdown
+
+| Difficulty | Total | Verified | VFR | Repro Rate | Oracle Rate |
+| --- | --- | --- | --- | --- | --- |
+| easy | 2 | 0 | 0.00% | 0.00% | 0.00% |
+| medium | 4 | 0 | 0.00% | 0.00% | 0.00% |
+| hard | 0 | 0 | 0.00% | 0.00% | 0.00% |
+
+## Category Breakdown
+
+| Category | Total | Verified | VFR | False Confidence |
+| --- | --- | --- | --- | --- |
+| business-logic | 4 | 0 | 0.00% | 0.00% |
+| parsing | 2 | 0 | 0.00% | 0.00% |
+| state-management | 2 | 0 | 0.00% | 0.00% |
+| validation | 4 | 0 | 0.00% | 0.00% |
+
+## Cost Methodology
+
+- **Formula:** inputCost = inputTokens/1M * inputUsdPerMillion; outputCost = outputTokens/1M * outputUsdPerMillion; totalCost = inputCost+outputCost. If provider returns trustworthy cost, prefer provider cost and record source. If tokens unavailable, costUsd=null costStatus=unavailable, never $0.
+- **Snapshot:** `v2026-08-30-snapshot` Experiment pricing snapshot — not live provider billing; historical reports remain reproducible via embedded snapshot. Rates are benchmark baselines for opencode-go/muse-spark-1.2-contributor.
+  - `opencode-go/muse-spark-1.2-contributor`: input ${m.inputUsdPerMillionTokens}/M, output ${m.outputUsdPerMillionTokens}/M
+- **Guardrail:** If `inputTokens` is null, evaluator outputs `costUsd: null`, `costStatus: "unavailable"` even if pricing exists. Never $0.00.
+- **Source:** Prefer provider-returned trustworthy cost (`costSource: provider`) else computed (`costSource: computed`). Recorded per-run.
+
+## Limitations & Confidence
+
+- Results are descriptive measurements from repeated runs, not statistically powered estimates.
+- With only 3 runs per case, small percentage differences are not statistically conclusive.
+- Cost is null/unavailable when token usage not exposed by Pi 0.84.4; never assumed.
+- VFR reported both overall (verified/total) and valid-agent-run (verified/valid) — see validRunRate.
+
+## Per-Run Results
+
+| Run | Case | Agent | Verdict | Patch | Repro | Oracle | Regression | Duration | Cost | Turns | Tokens | Iter |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| hist-001-run-001-09514a | hist-001 | baseline-v0 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 2941ms | `unav` | 112 |  | 1 |
+| hist-001-run-001-1757d7 | hist-001 | agent-v1 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 3734ms | `unav` | 7 |  | 0 |
+| check-4-1788103946175 | synth-001 | baseline-v0 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 3098ms | `unav` | 2 |  | 1 |
+| synth-001-run-001-e38981 | synth-001 | agent-v1 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 4532ms | `unav` | 7 |  | 0 |
+| synth-002-run-001-7b51ec | synth-002 | baseline-v0 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 2580ms | `unav` | 2 |  | 1 |
+| synth-002-run-001-9f48e6 | synth-002 | agent-v1 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 2801ms | `unav` | 7 |  | 0 |
+
+---
+*Generated from executable evidence. Benchmark 0.5 sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf — Evaluator 0.0.0.*

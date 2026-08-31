@@ -1,0 +1,199 @@
+{
+  "runId": "hist-006-run-001-2f12b5",
+  "caseId": "hist-006",
+  "benchmarkVersion": "0.5",
+  "agentVersion": "agent-v1",
+  "agentRuntime": "pi",
+  "piVersion": "0.84.4",
+  "model": "opencode-go/mimo-v2.5",
+  "modelConfiguration": {
+    "thinkingLevel": "medium",
+    "maxTurns": 25,
+    "agentTimeoutMs": 600000,
+    "commandTimeoutSec": 30,
+    "maxIterations": 5
+  },
+  "agentPromptVersion": "agent-v1",
+  "agentPromptPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\agents\\agent-v1.md",
+  "startTime": "2026-08-31T03:07:33.404Z",
+  "endTime": "2026-08-31T03:11:53.290Z",
+  "durationMs": 259886,
+  "terminationStatus": "success",
+  "terminationReason": "completed",
+  "changedFiles": [
+    "src/spyOn.ts"
+  ],
+  "testCommands": [
+    "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && npm test 2>&1",
+    "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && npm test 2>&1"
+  ],
+  "testResults": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && npm test 2>&1",
+      "exitCode": 1,
+      "durationMs": 28248,
+      "stdout": "\n> tinyspy@4.0.2 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\n\n ❯ tests/tinyspy.test.ts (3 tests | 2 failed) 50ms\n     × spyOn mocks prototype method and restores cleanly 32ms\n     × spyOn inherited getter preserves setter 7ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn mocks prototype method and restores cleanly\nAssertionError: expected { value: [Function f], …(3) } to be undefined\n\n- Expected:\nundefined\n\n+ Received:\n{\n  \"configurable\": true,\n  \"enumerable\": false,\n  \"value\": [Function f],\n  \"writable\": true,\n}\n\n ❯ tests/tinyspy.test.ts:14:55\n     12|     s.restore();\n     13|     expect(foo.f()).toBe('original');\n     14|     expect(Object.getOwnPropertyDescriptor(foo, 'f')).toBeUndefined();\n       |                                                       ^\n     15|   });\n     16|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn inherited getter preserves setter\nAssertionError: expected [Function] to not throw an error but 'TypeError: Cannot set property v of #…' was thrown\n\n- Expected:\nundefined\n\n+ Received:\n\"TypeError: Cannot set property v of #<Foo> which has only a getter\"\n\n ❯ tests/tinyspy.test.ts:39:43\n     37|     const s = spyOn(foo, { getter: 'v' }, () => 'mocked');\n     38|     expect(foo.v).toBe('mocked');\n     39|     expect(() => { foo.v = 'test'; }).not.toThrow();\n       |                                           ^\n     40|     expect(foo.v).toBe('mocked');\n     41|     s.restore();\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 1 passed (3)\n   Start at  04:08:23\n   Duration  4.76s (transform 1.72s, setup 0ms, import 1.86s, tests 50ms, environment 0ms)\n\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && npm test 2>&1",
+      "exitCode": 0,
+      "durationMs": 4880,
+      "stdout": "\n> tinyspy@4.0.2 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  04:11:27\n   Duration  941ms (transform 268ms, setup 0ms, import 352ms, tests 23ms, environment 0ms)\n\n"
+    }
+  ],
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-2f12b5\\trajectory.jsonl",
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-2f12b5\\patch.diff",
+  "resultPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-2f12b5\\result.json",
+  "workspacePath": "C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk",
+  "nodeVersion": "v22.23.2",
+  "platform": "win32",
+  "v1": {
+    "phaseTransitions": [
+      {
+        "from": "init",
+        "to": "reconnaissance",
+        "timestamp": "2026-08-31T03:07:33.411Z",
+        "iteration": 0
+      }
+    ],
+    "phaseDurations": [
+      {
+        "phase": "reconnaissance",
+        "enteredAt": "2026-08-31T03:07:33.411Z",
+        "exitedAt": "2026-08-31T03:11:52.342Z",
+        "durationMs": 258931
+      }
+    ],
+    "iterationCount": 0,
+    "maxIterations": 5,
+    "commandsExecuted": [
+      {
+        "command": "",
+        "exitCode": 1,
+        "stdout": "\n> tinyspy@4.0.2 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\n\n ❯ tests/tinyspy.test.ts (3 tests | 2 failed) 50ms\n     × spyOn mocks prototype method and restores cleanly 32ms\n     × spyOn inherited getter preserves setter 7ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn mocks prototype method and restores cleanly\nAssertionError: expected { value: [Function f], …(3) } to be undefined\n\n- Expected:\nundefined\n\n+ Received:\n{\n  \"configurable\": true,\n  \"enumerable\": false,\n  \"value\": [Function f],\n  \"writable\": true,\n}\n\n ❯ tests/tinyspy.test.ts:14:55\n     12|     s.restore();\n     13|     expect(foo.f()).toBe('original');\n     14|     expect(Object.getOwnPropertyDescriptor(foo, 'f')).toBeUndefined();\n       |                                                       ^\n     15|   });\n     16|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn inherited getter preserves setter\nAssertionError: expected [Function] to not throw an error but 'TypeError: Cannot set property v of #…' was thrown\n\n- Expected:\nundefined\n\n+ Received:\n\"TypeError: Cannot set property v of #<Foo> which has only a getter\"\n\n ❯ tests/tinyspy.test.ts:39:43\n     37|     const s = spyOn(foo, { getter: 'v' }, () => 'mocked');\n     38|     expect(foo.v).toBe('mocked');\n     39|     expect(() => { foo.v = 'test'; }).not.toThrow();\n       |                                           ^\n     40|     expect(foo.v).toBe('mocked');\n     41|     s.restore();\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 1 passed (3)\n   Start at  04:08:23\n   Duration  4.76s (transform 1.72s, setup 0ms, import 1.86s, tests 50ms, environment 0ms)\n\n\n\nCommand exited with code 1",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:08:29.776Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hyp-f37b0a8e\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:09:44.633Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "hyp-ffb5e744\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:09:55.825Z"
+      },
+      {
+        "command": "",
+        "exitCode": 1,
+        "stdout": "hypothesis not found hyp-f37b0a8e\n\n\nCommand exited with code 1",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:09:59.735Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "=== Test 1: Prototype method ===\nBefore spyOn:\n  foo1.f(): original\n  own descriptor: undefined\n  prototype: {}\n  objDescriptor: undefined\n  protoDescriptor: {\n  value: [Function: f],\n  writable: true,\n  enumerable: false,\n  configurable: true\n}\n  originalDescriptor: {\n  value: [Function: f],\n  writable: true,\n  enumerable: false,\n  configurable: true\n}\n  original: [Function: f]\n\n  originalDescriptor && !original: false\n  => This is false because both exist\n  => So restore() calls reassign(original), which creates own property!\n\n=== Test 2: Getter/Setter inheritance ===\nBefore spyOn:\n  child2.v: parent\n  own descriptor: undefined\n  prototype: Parent2 {}\n  proto descriptor: undefined\n  objDescriptor: undefined\n  protoDescriptor: undefined\n  grandparentDescriptor: {\n  get: [Function: get v],\n  set: [Function: set v],\n  enumerable: false,\n  configurable: true\n}\n  originalDescriptor: undefined\n  Final desc for define(): { get: [Function (anonymous)] }\n  Does desc have 'set'? false\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:10:54.984Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "\n> tinyspy@4.0.2 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  04:11:27\n   Duration  941ms (transform 268ms, setup 0ms, import 352ms, tests 23ms, environment 0ms)\n\n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:11:28.651Z"
+      },
+      {
+        "command": "",
+        "exitCode": 0,
+        "stdout": "diff --git a/src/spyOn.ts b/src/spyOn.ts\nindex cf0f3f8..a9a2ef2 100644\n--- a/src/spyOn.ts\n+++ b/src/spyOn.ts\n@@ -66,9 +66,13 @@ export function internalSpyOn<T, K extends string & keyof T>(\n     throw new Error('specify getter or setter to spy on')\n   })()\n   let objDescriptor = getDescriptor(obj, accessName)\n+  // Walk the full prototype chain to find the descriptor\n+  let originalDescriptor: PropertyDescriptor | undefined = objDescriptor\n   let proto = Object.getPrototypeOf(obj)\n-  let protoDescriptor = proto && getDescriptor(proto, accessName)\n-  let originalDescriptor = objDescriptor || protoDescriptor\n+  while (!originalDescriptor && proto && proto !== Object.prototype) {\n+    originalDescriptor = getDescriptor(proto, accessName)\n+    proto = Object.getPrototypeOf(proto)\n+  }\n \n   assert(\n     originalDescriptor || accessName in obj,\n@@ -114,10 +118,18 @@ export function internalSpyOn<T, K extends string & keyof T>(\n     ;(desc as PropertyDescriptor)[accessType] = cb\n     define(obj, accessName, desc)\n   }\n-  let restore = () =>\n-    originalDescriptor && !original\n-      ? define(obj, accessName, originalDescriptor)\n-      : reassign(original)\n+  let restore = () => {\n+    if (objDescriptor) {\n+      // Property was an own property, restore it\n+      define(obj, accessName, originalDescriptor)\n+    } else if (originalDescriptor) {\n+      // Property was inherited, just delete our spy to reveal the inherited one\n+      delete (obj as any)[accessName]\n+    } else {\n+      // No original descriptor at all, reassign original\n+      reassign(original)\n+    }\n+  }\n \n   if (!mock) mock = original\n \n",
+        "stderr": "",
+        "durationMs": 0,
+        "phase": "reconnaissance",
+        "timestamp": "2026-08-31T03:11:32.850Z"
+      }
+    ],
+    "commandCount": 7,
+    "filesInspected": [
+      "C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk",
+      "ISSUE.md",
+      "package.json",
+      "src",
+      "tests",
+      ".v1",
+      "src/spyOn.ts",
+      "src/spy.ts",
+      "src/utils.ts",
+      "src/internal.ts",
+      "tests/tinyspy.test.ts",
+      ".v1/state.json",
+      ".v1/helpers.js"
+    ],
+    "fileCount": 13,
+    "filesChanged": [
+      "src/spyOn.ts"
+    ],
+    "toolCallCount": 108,
+    "tokenUsage": null,
+    "cost": null,
+    "hypotheses": [
+      {
+        "id": "hyp-1",
+        "description": "The restore function incorrectly creates an own property on the object when the original was inherited from a prototype.",
+        "evidence": [
+          "src/spyOn.ts:91-93",
+          "Reproduction confirmed"
+        ],
+        "confidence": 0.9,
+        "status": "confirmed",
+        "files": [
+          "src/spyOn.ts"
+        ]
+      },
+      {
+        "id": "hyp-2",
+        "description": "The getDescriptor function only checks the immediate prototype, not the full prototype chain.",
+        "evidence": [
+          "src/spyOn.ts:48-50",
+          "Reproduction confirmed"
+        ],
+        "confidence": 0.9,
+        "status": "confirmed",
+        "files": [
+          "src/spyOn.ts"
+        ]
+      }
+    ],
+    "evidenceCount": 38,
+    "verificationAttempts": [
+      {
+        "method": "vitest",
+        "command": "npm test",
+        "passed": true,
+        "output": "3 passed (3)"
+      }
+    ],
+    "finalPatchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-2f12b5\\patch.diff",
+    "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-2f12b5\\trajectory.jsonl",
+    "evidencePath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-2f12b5\\evidence.jsonl",
+    "v1StatePath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-2f12b5\\v1-state.json"
+  }
+}

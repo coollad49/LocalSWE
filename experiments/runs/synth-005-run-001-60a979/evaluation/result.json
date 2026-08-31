@@ -1,0 +1,1078 @@
+{
+  "evaluationId": "eval-436c24bf-1788165856946",
+  "runId": "synth-005-run-001-60a979",
+  "caseId": "synth-005",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v1",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:44:16.946Z",
+  "completedAt": "2026-08-31T08:44:18.813Z",
+  "durationMs": 1867,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-005-run-001-60a979\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 220,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-005-YpVSr7\\patch-1788165857880.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 177,
+      "command": "bun run benchmark\\cases\\synth-005\\public\\reproduce.ts",
+      "stdout": "100 USD -> EUR {\"amount\":92.35,\"currency\":\"EUR\"} expected 92.35 (100*0.92345=92.345)\n10 USD -> EUR @0.10055 {\"amount\":1.01,\"currency\":\"EUR\"} expected 1.01\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 203,
+      "command": "bun test benchmark\\cases\\synth-005\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-005\\private\\oracle.test.ts:\n(pass) synth-005 oracle: convertCurrency rounding > rounds correctly with half-cent edge [1.26ms]\n(pass) synth-005 oracle: convertCurrency rounding > rounds standard cases [0.18ms]\n(pass) synth-005 oracle: convertCurrency rounding > same currency no conversion [0.12ms]\n\n 3 pass\n 0 fail\n 6 expect() calls\nRan 3 tests across 1 file. [146.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 329,
+      "command": "bun test benchmark\\repositories\\money-utils\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\money-utils\\tests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.65ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.42ms]\n(pass) money-utils > parseMoney handles comma-separated [1.84ms]\n(pass) money-utils > parseMoney handles simple amounts [0.17ms]\n(pass) money-utils > add validates currency mismatch [0.94ms]\n(pass) money-utils > subtract validates currency [0.37ms]\n(pass) money-utils > multiply [0.28ms]\n(pass) money-utils > convertCurrency precision [0.76ms]\n(pass) money-utils > convertCurrency throws missing rate [0.26ms]\n(pass) money-utils > createMoney validates [0.28ms]\n\n 10 pass\n 0 fail\n 22 expect() calls\nRan 10 tests across 1 file. [248.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "money-utils",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "boundary",
+      "data-transformation"
+    ]
+  },
+  "metrics": {
+    "durationMs": 95981,
+    "totalTurns": 74,
+    "toolCalls": 30,
+    "commandsExecuted": 18,
+    "filesInspected": 5,
+    "filesChanged": 1,
+    "iterations": 3,
+    "iterationsSource": "v1-state",
+    "inputTokens": 42636,
+    "outputTokens": 8808,
+    "totalTokens": 390132
+  },
+  "cost": {
+    "inputTokens": 42636,
+    "outputTokens": 8808,
+    "totalTokens": 51444,
+    "inputCostUsd": 0.005969,
+    "outputCostUsd": 0.002466,
+    "totalCostUsd": 0.009384,
+    "costUsd": 0.009384,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-005-run-001-60a979",
+    "caseId": "synth-005",
+    "agentVersion": "agent-v1",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:e2758fc97aaaac2168aa26fc182b5de03ec1ec3dde134305b02acd139bd1064b",
+    "trajectory": {
+      "eventCount": 365,
+      "durationMs": 95970,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "workflow_init": 1,
+        "helpers_ready": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "phase_start": 1,
+        "agent_start": 8,
+        "turn_start": 28,
+        "message_start": 66,
+        "message_end": 66,
+        "tool_execution_start": 30,
+        "tool_execution_update": 78,
+        "tool_execution_end": 30,
+        "turn_end": 28,
+        "agent_end": 8,
+        "agent_settled": 4,
+        "verification_nudge": 3,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 84,
+      "userMessages": 16,
+      "toolCalls": 30,
+      "toolResults": 120,
+      "thinkingEvents": 56,
+      "unknownEvents": 126,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 30,
+      "uniqueTools": 3,
+      "byTool": {
+        "read": {
+          "calls": 10,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 18,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 42636,
+      "output": 8808,
+      "cacheRead": 338688,
+      "cacheWrite": 0,
+      "total": 390132,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.009384,
+      "inputCostUsd": 0.005969,
+      "outputCostUsd": 0.002466,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 56,
+      "characterCount": 10724,
+      "averageCharacters": 192,
+      "maxCharacters": 1244,
+      "firstThinkingAt": "2026-08-31T04:29:06.012Z",
+      "lastThinkingAt": "2026-08-31T04:30:38.449Z",
+      "thinkingDurationMs": 92437
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/money.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 10,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 0,
+      "bashCalls": 18,
+      "explorationToEditingRatio": 14
+    },
+    "verification": {
+      "commandsDetected": 54,
+      "testsRun": true,
+      "testCommandCount": 10,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 18,
+      "duplicateReadTargets": 5,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 0,
+      "topRepetitions": [
+        {
+          "signature": "38d4d55e5b8a",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+          "count": 8
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "7725e3c04e36",
+          "tool": "bash",
+          "target": "find . -name \"*.ts\" -o -name \"*.js\" -o -name \"*.json\" | head -50",
+          "count": 2
+        },
+        {
+          "signature": "cec7100b2e9d",
+          "tool": "read",
+          "target": "src/money.ts",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "58cc7666d7a3",
+          "tool": "read",
+          "target": "tests/money.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "f9e7f3c6512d",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport('./src/money.ts').then(({ convertCurrency, createMoney }) => {\n  const m = createMoney(100.05, 'USD');\n  const rates = { 'USD_EUR': 0.9234 };\n  const result = convertCurrency(m, 'EUR', rates);\n  console.log('Result:', result.amount);\n  console.log('Expected (rounded):', 92.39);\n  console.log('Bug present:', result.amount === 92.38);\n});\n\" 2>&1",
+          "count": 2
+        },
+        {
+          "signature": "fee3c4976bbc",
+          "tool": "edit",
+          "target": "src/money.ts",
+          "count": 2
+        },
+        {
+          "signature": "3b1f059f6f4e",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\nimport('./src/money.ts').then(({ convertCurrency, createMoney }) => {\n  const m = createMoney(100.05, 'USD');\n  const rates = { 'USD_EUR': 0.9234 };\n  const result = convertCurrency(m, 'EUR', rates);\n  console.log('Result:', result.amount);\n  console.log('Expected (rounded):', 92.39);\n  console.log('Bug fixed:', result.amount === 92.39);\n});\n\" 2>&1",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-005-run-001-60a979",
+    "caseId": "synth-005",
+    "agentVersion": "agent-v1",
+    "timeline": [
+      {
+        "index": 25,
+        "timestamp": "2026-08-31T04:29:06.012Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 26,
+        "timestamp": "2026-08-31T04:29:06.012Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 27,
+        "timestamp": "2026-08-31T04:29:06.034Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "find . -name \"*.ts\" -o -name \"*.js\" -o -name \"*.json\" | head -50",
+        "commandClass": "general"
+      },
+      {
+        "index": 28,
+        "timestamp": "2026-08-31T04:29:06.034Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "find . -name \"*.ts\" -o -name \"*.js\" -o -name \"*.json\" | head -50",
+        "commandClass": "general"
+      },
+      {
+        "index": 53,
+        "timestamp": "2026-08-31T04:29:08.993Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 54,
+        "timestamp": "2026-08-31T04:29:08.993Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 55,
+        "timestamp": "2026-08-31T04:29:09.003Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 56,
+        "timestamp": "2026-08-31T04:29:09.003Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 57,
+        "timestamp": "2026-08-31T04:29:09.014Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/money.test.ts"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-31T04:29:09.014Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tests/money.test.ts"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-31T04:29:09.017Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 60,
+        "timestamp": "2026-08-31T04:29:09.017Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 93,
+        "timestamp": "2026-08-31T04:29:12.354Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-31T04:29:12.354Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 121,
+        "timestamp": "2026-08-31T04:29:30.481Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> sho",
+        "commandClass": "test"
+      },
+      {
+        "index": 122,
+        "timestamp": "2026-08-31T04:29:30.481Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> sho",
+        "commandClass": "test"
+      },
+      {
+        "index": 143,
+        "timestamp": "2026-08-31T04:29:35.465Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 144,
+        "timestamp": "2026-08-31T04:29:35.465Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 159,
+        "timestamp": "2026-08-31T04:29:38.408Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\nimport('./src/money.ts').then(({ convertCurrenc",
+        "commandClass": "general"
+      },
+      {
+        "index": 160,
+        "timestamp": "2026-08-31T04:29:38.408Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\nimport('./src/money.ts').then(({ convertCurrenc",
+        "commandClass": "general"
+      },
+      {
+        "index": 161,
+        "timestamp": "2026-08-31T04:29:38.420Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 162,
+        "timestamp": "2026-08-31T04:29:38.421Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 201,
+        "timestamp": "2026-08-31T04:29:51.825Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && git diff HEAD",
+        "commandClass": "git"
+      },
+      {
+        "index": 202,
+        "timestamp": "2026-08-31T04:29:51.825Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && git diff HEAD",
+        "commandClass": "git"
+      },
+      {
+        "index": 239,
+        "timestamp": "2026-08-31T04:29:58.280Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 240,
+        "timestamp": "2026-08-31T04:29:58.280Z",
+        "phase": "reconnaissance",
+        "iteration": 1,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 285,
+        "timestamp": "2026-08-31T04:30:13.541Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 286,
+        "timestamp": "2026-08-31T04:30:13.541Z",
+        "phase": "reconnaissance",
+        "iteration": 2,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 331,
+        "timestamp": "2026-08-31T04:30:25.192Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 332,
+        "timestamp": "2026-08-31T04:30:25.192Z",
+        "phase": "reconnaissance",
+        "iteration": 3,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 25,
+        "timestamp": "2026-08-31T04:29:06.012Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 93,
+        "timestamp": "2026-08-31T04:29:12.354Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm tes"
+      },
+      {
+        "type": "first_repro",
+        "eventIndex": 121,
+        "timestamp": "2026-08-31T04:29:30.481Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 143,
+        "timestamp": "2026-08-31T04:29:35.465Z",
+        "detail": "src/money.ts"
+      }
+    ],
+    "errors": [],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 93,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 94,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 107,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> money-utils@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   S"
+      },
+      {
+        "index": 108,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> money-utils@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   S"
+      },
+      {
+        "index": 109,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 110,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 111,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 112,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 121,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+        "exitCode": 0
+      },
+      {
+        "index": 122,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+        "exitCode": 0
+      },
+      {
+        "index": 129,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+        "exitCode": 0,
+        "outputSnippet": "Result: 92.38\nExpected (rounded): 92.39\nBug present: true\n"
+      },
+      {
+        "index": 130,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+        "exitCode": 0,
+        "outputSnippet": "Result: 92.38\nExpected (rounded): 92.39\nBug present: true\n"
+      },
+      {
+        "index": 131,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+        "exitCode": 0
+      },
+      {
+        "index": 132,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+        "exitCode": 0
+      },
+      {
+        "index": 133,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+        "exitCode": 0
+      },
+      {
+        "index": 134,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && node -e \"\n// Reproduce: 100.05 * 0.9234 = 92.38617 -> should round to 92.39, but truncates to 92.38\nimport(",
+        "exitCode": 0
+      },
+      {
+        "index": 161,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 162,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 171,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "Result: 92.39\nExpected (rounded): 92.39\nBug fixed: true\n"
+      },
+      {
+        "index": 172,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "Result: 92.39\nExpected (rounded): 92.39\nBug fixed: true\n"
+      },
+      {
+        "index": 183,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> money-utils@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   S"
+      },
+      {
+        "index": 184,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> money-utils@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   S"
+      },
+      {
+        "index": 185,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 186,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 187,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 188,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 189,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 190,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 191,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 192,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 239,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 240,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 253,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> money-utils@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   S"
+      },
+      {
+        "index": 254,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> money-utils@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   S"
+      },
+      {
+        "index": 255,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 256,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 257,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 258,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 285,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 286,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 299,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> money-utils@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   S"
+      },
+      {
+        "index": 300,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> money-utils@1.0.0 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   S"
+      },
+      {
+        "index": 301,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 302,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 303,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 304,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 331,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 332,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 343,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:30:32\n   Duration  1.13s (tr"
+      },
+      {
+        "index": 344,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:30:32\n   Duration  1.13s (tr"
+      },
+      {
+        "index": 345,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 346,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 347,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 348,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-60a979-iQBBWH\" && npx vitest run",
+        "exitCode": 0
+      }
+    ]
+  }
+}

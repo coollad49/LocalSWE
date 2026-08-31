@@ -1,0 +1,878 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# Issue: Option default leaks to alias names when one alias parsed\r\n\r\n## Problem\r\n\r\nWhen an option has multiple names/aliases (e.g., `-b, --base-url`) and a default value, the default was incorrectly applied to all alias names even when one alias was already parsed. For example, parsing `--base-url https://gitlab.com` with a default of `https://github.com` incorrectly leaves `b` set to the default.\r\n",
+  "filesInspected": [
+    "ISSUE.md",
+    "package.json",
+    "src",
+    "tests",
+    "src/Option.ts",
+    "src/CAC.ts",
+    "tests/cac.test.ts",
+    "src/Command.ts",
+    "src/utils.ts",
+    "src/index.ts",
+    ".v1/state.json",
+    ".v1/helpers.js"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "total 115\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 .\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 ..\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 .git\n-rw-r--r-- 1 cooll 197609   35 Aug 30 16:04 .gitignore\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 .v1\n-rw-r--r-- 1 cooll 197609  403 Aug 30 15:13 ISSUE.md\n-rw-r--r-- 1 cooll 197609 1138 Aug 30 15:13 LICENSE\n-rw-r--r-- 1 cooll 197609  388 Aug 30 15:13 package.json\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 src\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 tests\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:04:35.519Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "total 20\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 .\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 ..\n-rwxr-xr-x 1 cooll 197609 5743 Aug 30 16:04 helpers.js\n-rw-r--r-- 1 cooll 197609 7267 Aug 30 16:04 state.json\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:04:58.057Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hyp-2c6fb2e7\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:05:12.847Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "hypothesis not found hyp-2c6fb2e7\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:05:19.428Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "    {\n      \"id\": \"ev-d14874d3\",\n      \"type\": \"file_inspection\",\n      \"description\": \"read .v1/helpers.js\",\n      \"source\": \".v1/helpers.js\",\n      \"timestamp\": \"2026-08-30T15:04:59.300Z\",\n      \"phase\": \"reconnaissance\"\n    },\n    {\n      \"id\": \"ev-860aab6f\",\n      \"type\": \"command_result\",\n      \"description\": \"bash: node .v1/helpers.js add-hypothesis '{\\\"description\\\":\\\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias \",\n      \"source\": \"node .v1/helpers.js add-hypothesis '{\\\"description\\\":\\\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias was already parsed. Fix: skip setting defaults if any of the option names is present in the parsed result.\\\",\\\"evidence\\\":[\\\"src/CAC.ts:188-198 (default-setting loop)\\\",\\\"tests/cac.test.ts (no test exercises parse-with-alias-vs-default behavior)\\\",\\\"ISSUE.md (describes leak from --base-url to alias b)\\\"],\\\"confidence\\\":0.92,\\\"files\\\":[\\\"src/CAC.ts\\\"]}'\",\n      \"timestamp\": \"2026-08-30T15:05:08.901Z\",\n      \"phase\": \"reconnaissance\"\n    },\n    {\n      \"id\": \"ev-4181e199\",\n      \"type\": \"command_result\",\n      \"description\": \"bash: node .v1/helpers.js select-hypothesis hyp-2c6fb2e7\",\n      \"source\": \"node .v1/helpers.js select-hypothesis hyp-2c6fb2e7\",\n      \"timestamp\": \"2026-08-30T15:05:15.993Z\",\n      \"phase\": \"reconnaissance\"\n    },\n    {\n      \"id\": \"ev-7cf7a1d0\",\n      \"type\": \"command_result\",\n      \"description\": \"bash: node .v1/helpers.js status 2>&1 | tail -50\",\n      \"source\": \"node .v1/helpers.js status 2>&1 | tail -50\",\n      \"timestamp\": \"2026-08-30T15:05:20.824Z\",\n      \"phase\": \"reconnaissance\"\n    }\n  ],\n  \"iteration\": 0,\n  \"maxIterations\": 5,\n  \"phaseHistory\": [\n    {\n      \"from\": \"init\",\n      \"to\": \"reconnaissance\",\n      \"timestamp\": \"2026-08-30T15:04:28.348Z\",\n      \"iteration\": 0\n    }\n  ],\n  \"phaseDurations\":",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:05:25.882Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "  \"hypotheses\": [],\n  \"changesMade\": [],\n  \"verificationAttempts\": [],\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:05:31.164Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hyp-d00b9baa\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:05:37.245Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "hypothesis not found hyp-d00b9baa\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:05:41.863Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Manage App Execution Aliases.\r\n\n\nCommand exited with code 49",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:06:01.668Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hypotheses: []\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:06:16.642Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hyp-b2e94522\nhypotheses: [\n  {\n    \"id\": \"hyp-b2e94522\",\n    \"description\": \"Test\",\n    \"evidence\": [],\n    \"confidence\": 0.5,\n    \"status\": \"active\",\n    \"files\": [\n      \"src/CAC.ts\"\n    ]\n  }\n]\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:06:29.138Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hyp-c15dec26\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:08:42.757Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "hypothesis not found hyp-c15dec26\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:08:44.650Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hypotheses: []\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:08:46.582Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "/tmp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n-rw-r--r-- 1 cooll 197609 20290 Aug 30 16:09 .v1/state.json\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:05.496Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "6587\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:07.716Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "keys: [\n  'phase',\n  'issue',\n  'filesInspected',\n  'commandsExecuted',\n  'hypotheses',\n  'changesMade',\n  'verificationAttempts',\n  'evidence',\n  'iteration',\n  'maxIterations',\n  'phaseHistory',\n  'phaseDurations'\n]\nhypotheses: []\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:09.823Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Length: 22774\nAround offset 6580: \"15:06:29.138Z\\\"\\n    },\\n    {\\n      \\\"command\\\": \\\"\\\",\\n      \\\"exitCode\\\": 0,\\n      \\\"stdout\\\": \\\"hyp-c15dec26\\\\n\\\",\\n      \\\"stderr\\\": \\\"\\\",\\n      \\\"durationMs\\\": 0,\\n      \\\"phase\\\": \\\"reconnaissance\\\",\\n      \\\"timestamp\\\": \\\"\"\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:12.633Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "67:      \"stdout\": \"  \\\"hypotheses\\\": [],\\n  \\\"changesMade\\\": [],\\n  \\\"verificationAttempts\\\": [],\\n\",\n103:      \"stdout\": \"hypotheses: []\\n\",\n112:      \"stdout\": \"hyp-b2e94522\\nhypotheses: [\\n  {\\n    \\\"id\\\": \\\"hyp-b2e94522\\\",\\n    \\\"description\\\": \\\"Test\\\",\\n    \\\"evidence\\\": [],\\n    \\\"confidence\\\": 0.5,\\n    \\\"status\\\": \\\"active\\\",\\n    \\\"files\\\": [\\n      \\\"src/CAC.ts\\\"\\n    ]\\n  }\\n]\\n\",\n139:      \"stdout\": \"hypotheses: []\\n\",\n166:      \"stdout\": \"keys: [\\n  'phase',\\n  'issue',\\n  'filesInspected',\\n  'commandsExecuted',\\n  'hypotheses',\\n  'changesMade',\\n  'verificationAttempts',\\n  'evidence',\\n  'iteration',\\n  'maxIterations',\\n  'phaseHistory',\\n  'phaseDurations'\\n]\\nhypotheses: []\\n\",\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:14.811Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "191:  \"hypotheses\": [],\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:16.705Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "11\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:23.260Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "49:      \"stdout\": \"hypothesis not found hyp-2c6fb2e7\\n\\n\\nCommand exited with code 1\",\n85:      \"stdout\": \"hypothesis not found hyp-d00b9baa\\n\\n\\nCommand exited with code 1\",\n130:      \"stdout\": \"hypothesis not found hyp-c15dec26\\n\\n\\nCommand exited with code 1\",\n608:      \"description\": \"bash: grep -n \\\"hypothesis not found\\\" .v1/state.json | head -5\",\n609:      \"source\": \"grep -n \\\"hypothesis not found\\\" .v1/state.json | head -5\",\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:25.490Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hypotheses array: []\nhypotheses length: 0\nAfter write, hypotheses: 1\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:37.424Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hypotheses: []\nselected: undefined\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:40.268Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Same read: 1 hyp-c15dec26\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:43.433Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "After delay: 0 undefined\nAfter 1s: 0 undefined\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:47.361Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "total 57\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 .\ndrwxr-xr-x 1 cooll 197609    0 Aug 30 16:04 ..\n-rwxr-xr-x 1 cooll 197609  478 Aug 30 16:04 applypatch-msg.sample\n-rwxr-xr-x 1 cooll 197609 1972 Aug 30 16:04 commit-msg.sample\n-rwxr-xr-x 1 cooll 197609 4611 Aug 30 16:04 fsmonitor-watchman.sample\n-rwxr-xr-x 1 cooll 197609  189 Aug 30 16:04 post-update.sample\n-rwxr-xr-x 1 cooll 197609  424 Aug 30 16:04 pre-applypatch.sample\n-rwxr-xr-x 1 cooll 197609 1649 Aug 30 16:04 pre-commit.sample\n-rwxr-xr-x 1 cooll 197609  416 Aug 30 16:04 pre-merge-commit.sample\n-rwxr-xr-x 1 cooll 197609 1374 Aug 30 16:04 pre-push.sample\n-rwxr-xr-x 1 cooll 197609 4898 Aug 30 16:04 pre-rebase.sample\n-rwxr-xr-x 1 cooll 197609  544 Aug 30 16:04 pre-receive.sample\n-rwxr-xr-x 1 cooll 197609 1492 Aug 30 16:04 prepare-commit-msg.sample\n-rwxr-xr-x 1 cooll 197609 2783 Aug 30 16:04 push-to-checkout.sample\n-rwxr-xr-x 1 cooll 197609 2308 Aug 30 16:04 sendemail-validate.sample\n-rwxr-xr-x 1 cooll 197609 3650 Aug 30 16:04 update.sample\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:49.941Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "/tmp/repro.test.ts\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:54.549Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": ".v1/repro.test.ts\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:09:59.436Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "npm warn exec The following package was not found and will be installed: vitest@4.1.11\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n\n ❯ .v1/repro.test.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  .v1/repro.test.ts [ .v1/repro.test.ts ]\nError: Cannot find package 'mri' imported from C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L/src/CAC.ts\n ❯ src/CAC.ts:2:1\n      1| import { EventEmitter } from 'events'\n      2| import mri from 'mri'\n       | ^\n      3| import Command, {\n      4|   GlobalCommand,\n ❯ src/index.ts:1:1\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  no tests\n   Start at  16:11:08\n   Duration  2.59s (transform 239ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:11:11.125Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\nadded 5 packages, and audited 6 packages in 7s\n\nfound 0 vulnerabilities\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:11:22.305Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n\n ❯ .v1/repro.test.ts (2 tests | 1 failed) 40ms\n     × default should NOT leak to alias when other alias is parsed 32ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  .v1/repro.test.ts > repro: default leak to aliases > default should NOT leak to alias when other alias is parsed\nAssertionError: expected 'https://github.com' to be undefined\n\n- Expected:\nundefined\n\n+ Received:\n\"https://github.com\"\n\n ❯ .v1/repro.test.ts:13:23\n     11|     expect(options.baseUrl).toBe(\"https://gitlab.com\");\n     12|     // b should NOT have the default\n     13|     expect(options.b).toBeUndefined();\n       |                       ^\n     14|   });\n     15|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  1 failed | 1 passed (2)\n   Start at  16:11:40\n   Duration  5.86s (transform 2.80s, setup 0ms, import 2.89s, tests 40ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:11:49.413Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  16:12:15\n   Duration  1.21s (transform 281ms, setup 0ms, import 375ms, tests 23ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:12:16.912Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "node:internal/modules/package_json_reader:314\r\n  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);\r\n        ^\r\n\r\nError [ERR_MODULE_NOT_FOUND]: Cannot find package 'mri' imported from C:\\Users\\cooll\\AppData\\Local\\Temp\\check-mri.mjs\r\n    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)\r\n    at packageResolve (node:internal/modules/esm/resolve:768:81)\r\n    at moduleResolve (node:internal/modules/esm/resolve:855:18)\r\n    at defaultResolve (node:internal/modules/esm/resolve:985:11)\r\n    at #cachedDefaultResolve (node:internal/modules/esm/loader:747:20)\r\n    at ModuleLoader.resolve (node:internal/modules/esm/loader:724:38)\r\n    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:320:38)\r\n    at ModuleJob._link (node:internal/modules/esm/module_job:182:49) {\r\n  code: 'ERR_MODULE_NOT_FOUND'\r\n}\r\n\r\nNode.js v22.23.2\r\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:12:24.031Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "Parse --base-url https://gitlab.com:\n{ _: [], 'base-url': 'https://gitlab.com' }\nParse -b https://gitlab.com:\n{ _: [], b: 'https://gitlab.com', baseUrl: 'https://gitlab.com' }\nParse nothing:\n{ _: [] }\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-30T15:12:27.838Z"
+    }
+  ],
+  "hypotheses": [],
+  "changesMade": [
+    {
+      "path": "package-lock.json",
+      "summary": "modified package-lock.json",
+      "iteration": 0,
+      "timestamp": "2026-08-30T15:14:32.355Z"
+    }
+  ],
+  "verificationAttempts": [],
+  "evidence": [
+    {
+      "id": "ev-513e92aa",
+      "type": "command_result",
+      "description": "bash: ls -la",
+      "source": "ls -la",
+      "timestamp": "2026-08-30T15:04:34.986Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4efde833",
+      "type": "file_inspection",
+      "description": "Inspected ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-30T15:04:37.782Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-49935998",
+      "type": "file_inspection",
+      "description": "read ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-30T15:04:37.784Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8469e9b9",
+      "type": "file_inspection",
+      "description": "Inspected package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-30T15:04:38.984Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1202e469",
+      "type": "file_inspection",
+      "description": "read package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-30T15:04:38.985Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-94debd61",
+      "type": "file_inspection",
+      "description": "Inspected src",
+      "source": "src",
+      "timestamp": "2026-08-30T15:04:40.296Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a762f113",
+      "type": "file_inspection",
+      "description": "read src",
+      "source": "src",
+      "timestamp": "2026-08-30T15:04:40.298Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-900836f3",
+      "type": "file_inspection",
+      "description": "Inspected tests",
+      "source": "tests",
+      "timestamp": "2026-08-30T15:04:41.224Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1a64c26a",
+      "type": "file_inspection",
+      "description": "read tests",
+      "source": "tests",
+      "timestamp": "2026-08-30T15:04:41.225Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3b275c6e",
+      "type": "file_inspection",
+      "description": "Inspected src/Option.ts",
+      "source": "src/Option.ts",
+      "timestamp": "2026-08-30T15:04:44.336Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-d4de5617",
+      "type": "file_inspection",
+      "description": "read src/Option.ts",
+      "source": "src/Option.ts",
+      "timestamp": "2026-08-30T15:04:44.337Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-2dfa3b76",
+      "type": "file_inspection",
+      "description": "Inspected src/CAC.ts",
+      "source": "src/CAC.ts",
+      "timestamp": "2026-08-30T15:04:45.313Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-2b8da1fc",
+      "type": "file_inspection",
+      "description": "read src/CAC.ts",
+      "source": "src/CAC.ts",
+      "timestamp": "2026-08-30T15:04:45.314Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-d15a4ce3",
+      "type": "file_inspection",
+      "description": "Inspected tests/cac.test.ts",
+      "source": "tests/cac.test.ts",
+      "timestamp": "2026-08-30T15:04:47.803Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-fb7560ae",
+      "type": "file_inspection",
+      "description": "read tests/cac.test.ts",
+      "source": "tests/cac.test.ts",
+      "timestamp": "2026-08-30T15:04:47.804Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c1c3bfde",
+      "type": "file_inspection",
+      "description": "Inspected src/Command.ts",
+      "source": "src/Command.ts",
+      "timestamp": "2026-08-30T15:04:50.061Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-23160547",
+      "type": "file_inspection",
+      "description": "read src/Command.ts",
+      "source": "src/Command.ts",
+      "timestamp": "2026-08-30T15:04:50.063Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f40749ac",
+      "type": "file_inspection",
+      "description": "Inspected src/utils.ts",
+      "source": "src/utils.ts",
+      "timestamp": "2026-08-30T15:04:51.440Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ee859e72",
+      "type": "file_inspection",
+      "description": "read src/utils.ts",
+      "source": "src/utils.ts",
+      "timestamp": "2026-08-30T15:04:51.441Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-492c578e",
+      "type": "file_inspection",
+      "description": "Inspected src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-30T15:04:52.627Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-bf4052ab",
+      "type": "file_inspection",
+      "description": "read src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-30T15:04:52.628Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a6df6981",
+      "type": "file_inspection",
+      "description": "Inspected .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-30T15:04:54.404Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-36f06ddf",
+      "type": "file_inspection",
+      "description": "read .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-30T15:04:54.405Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1c2d8c5b",
+      "type": "command_result",
+      "description": "bash: ls -la .v1/",
+      "source": "ls -la .v1/",
+      "timestamp": "2026-08-30T15:04:56.657Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0294439e",
+      "type": "file_inspection",
+      "description": "Inspected .v1/helpers.js",
+      "source": ".v1/helpers.js",
+      "timestamp": "2026-08-30T15:04:59.298Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-d14874d3",
+      "type": "file_inspection",
+      "description": "read .v1/helpers.js",
+      "source": ".v1/helpers.js",
+      "timestamp": "2026-08-30T15:04:59.300Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-860aab6f",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+      "source": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias was already parsed. Fix: skip setting defaults if any of the option names is present in the parsed result.\",\"evidence\":[\"src/CAC.ts:188-198 (default-setting loop)\",\"tests/cac.test.ts (no test exercises parse-with-alias-vs-default behavior)\",\"ISSUE.md (describes leak from --base-url to alias b)\"],\"confidence\":0.92,\"files\":[\"src/CAC.ts\"]}'",
+      "timestamp": "2026-08-30T15:05:08.901Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4181e199",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js select-hypothesis hyp-2c6fb2e7",
+      "source": "node .v1/helpers.js select-hypothesis hyp-2c6fb2e7",
+      "timestamp": "2026-08-30T15:05:15.993Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7cf7a1d0",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js status 2>&1 | tail -50",
+      "source": "node .v1/helpers.js status 2>&1 | tail -50",
+      "timestamp": "2026-08-30T15:05:20.824Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ebd191c5",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js status 2>&1 | grep -A2 '\"hypotheses\"' | head -30",
+      "source": "node .v1/helpers.js status 2>&1 | grep -A2 '\"hypotheses\"' | head -30",
+      "timestamp": "2026-08-30T15:05:27.450Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-50e1b911",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias ",
+      "source": "node .v1/helpers.js add-hypothesis '{\"description\":\"The default-value loop in CAC.ts:mri iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases even when one alias was already parsed. Fix: skip setting defaults if any of the option names is present in the parsed result.\",\"evidence\":[\"src/CAC.ts:188-198\"],\"confidence\":0.92,\"files\":[\"src/CAC.ts\"]}'",
+      "timestamp": "2026-08-30T15:05:34.978Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-42849828",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js select-hypothesis hyp-d00b9baa",
+      "source": "node .v1/helpers.js select-hypothesis hyp-d00b9baa",
+      "timestamp": "2026-08-30T15:05:40.107Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6a13fdbd",
+      "type": "file_inspection",
+      "description": "Inspected .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-30T15:05:45.996Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-d5c14ee0",
+      "type": "file_inspection",
+      "description": "read .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-30T15:05:45.998Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4dd15d45",
+      "type": "command_result",
+      "description": "bash: cat .v1/state.json | python -c \"import json,sys; d=json.load(sys.stdin); print('hypotheses:', d.get('hypotheses', 'MISSING'))\"",
+      "source": "cat .v1/state.json | python -c \"import json,sys; d=json.load(sys.stdin); print('hypotheses:', d.get('hypotheses', 'MISSING'))\"",
+      "timestamp": "2026-08-30T15:05:58.941Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f510d398",
+      "type": "command_result",
+      "description": "bash: node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses)\"",
+      "source": "node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', s.hypotheses)\"",
+      "timestamp": "2026-08-30T15:06:13.028Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-eb3d12bf",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+      "source": "node .v1/helpers.js add-hypothesis '{\"description\":\"Test\",\"files\":[\"src/CAC.ts\"]}' && node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+      "timestamp": "2026-08-30T15:06:19.642Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-21c85ffd",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was alread",
+      "source": "node .v1/helpers.js add-hypothesis '{\"description\":\"CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was already parsed. Fix: skip default application when any of the option names is present in parsed result.\",\"evidence\":[\"src/CAC.ts:188-198\",\"ISSUE.md\",\"tests/cac.test.ts (no test for partial parse with default)\"],\"confidence\":0.92,\"files\":[\"src/CAC.ts\"]}'",
+      "timestamp": "2026-08-30T15:08:42.234Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-d981eb86",
+      "type": "command_result",
+      "description": "bash: node .v1/helpers.js select-hypothesis hyp-c15dec26",
+      "source": "node .v1/helpers.js select-hypothesis hyp-c15dec26",
+      "timestamp": "2026-08-30T15:08:44.144Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8900573a",
+      "type": "command_result",
+      "description": "bash: node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+      "source": "node -e \"const s = require('./.v1/state.json'); console.log('hypotheses:', JSON.stringify(s.hypotheses, null, 2))\"",
+      "timestamp": "2026-08-30T15:08:46.181Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6375de1c",
+      "type": "command_result",
+      "description": "bash: pwd && ls -la .v1/state.json",
+      "source": "pwd && ls -la .v1/state.json",
+      "timestamp": "2026-08-30T15:09:05.292Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-28289b85",
+      "type": "command_result",
+      "description": "bash: node -e \"console.log(require('fs').readFileSync('.v1/state.json', 'utf-8').indexOf('hyp-c15dec26'))\"",
+      "source": "node -e \"console.log(require('fs').readFileSync('.v1/state.json', 'utf-8').indexOf('hyp-c15dec26'))\"",
+      "timestamp": "2026-08-30T15:09:07.273Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-64b5bfe6",
+      "type": "command_result",
+      "description": "bash: node -e \"const s = require('./.v1/state.json'); console.log('keys:', Object.keys(s)); console.log('hypotheses:', JSON.stringify(s.hypotheses));\"",
+      "source": "node -e \"const s = require('./.v1/state.json'); console.log('keys:', Object.keys(s)); console.log('hypotheses:', JSON.stringify(s.hypotheses));\"",
+      "timestamp": "2026-08-30T15:09:09.413Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b986af64",
+      "type": "command_result",
+      "description": "bash: node -e \"\nconst fs = require('fs');\nconst data = fs.readFileSync('.v1/state.json', 'utf-8');\nconsole.log('Length:', data.length);\nconsole.log('Around offset 6580:', JSON.stringify(data.substring(6500,",
+      "source": "node -e \"\nconst fs = require('fs');\nconst data = fs.readFileSync('.v1/state.json', 'utf-8');\nconsole.log('Length:', data.length);\nconsole.log('Around offset 6580:', JSON.stringify(data.substring(6500, 6700)));\"",
+      "timestamp": "2026-08-30T15:09:12.322Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-266bce95",
+      "type": "command_result",
+      "description": "bash: grep -n \"hypotheses\" .v1/state.json | head -5",
+      "source": "grep -n \"hypotheses\" .v1/state.json | head -5",
+      "timestamp": "2026-08-30T15:09:14.537Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-482f5682",
+      "type": "command_result",
+      "description": "bash: grep -n '\"hypotheses\"' .v1/state.json | head -5",
+      "source": "grep -n '\"hypotheses\"' .v1/state.json | head -5",
+      "timestamp": "2026-08-30T15:09:16.360Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a4af8677",
+      "type": "file_inspection",
+      "description": "Inspected .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-30T15:09:19.119Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-88b88c7e",
+      "type": "file_inspection",
+      "description": "read .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-30T15:09:19.120Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0c1f3e67",
+      "type": "command_result",
+      "description": "bash: grep -c \"add-hypothesis\" .v1/state.json",
+      "source": "grep -c \"add-hypothesis\" .v1/state.json",
+      "timestamp": "2026-08-30T15:09:22.772Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b54590c7",
+      "type": "command_result",
+      "description": "bash: grep -n \"hypothesis not found\" .v1/state.json | head -5",
+      "source": "grep -n \"hypothesis not found\" .v1/state.json | head -5",
+      "timestamp": "2026-08-30T15:09:24.765Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-2966321e",
+      "type": "command_result",
+      "description": "bash: node -e \"\nconst fs = require('fs');\nconst s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('hypotheses array:', s.hypotheses);\nconsole.log('hypotheses length:', s.hypotheses.len",
+      "source": "node -e \"\nconst fs = require('fs');\nconst s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('hypotheses array:', s.hypotheses);\nconsole.log('hypotheses length:', s.hypotheses.length);\n// Add hypothesis directly\ns.hypotheses.push({\n  id: 'hyp-c15dec26',\n  description: 'CAC.ts:mri default-setting loop iterates all aliases and sets them unconditionally, leaking defaults to non-parsed aliases when one alias was already parsed. Fix: skip default application when any of the option names is present in parsed result.',\n  evidence: ['src/CAC.ts:188-198', 'ISSUE.md', 'tests/cac.test.ts'],\n  confidence: 0.92,\n  status: 'selected',\n  files: ['src/CAC.ts']\n});\ns.selectedHypothesis = 'hyp-c15dec26';\nfs.writeFileSync('.v1/state.json', JSON.stringify(s, null, 2), 'utf-8');\nconsole.log('After write, hypotheses:', s.hypotheses.length);\n\"",
+      "timestamp": "2026-08-30T15:09:37.089Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ab301114",
+      "type": "command_result",
+      "description": "bash: node -e \"\nconst fs = require('fs');\nconst s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('hypotheses:', s.hypotheses);\nconsole.log('selected:', s.selectedHypothesis);\n\"",
+      "source": "node -e \"\nconst fs = require('fs');\nconst s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('hypotheses:', s.hypotheses);\nconsole.log('selected:', s.selectedHypothesis);\n\"",
+      "timestamp": "2026-08-30T15:09:39.978Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5fbb58ea",
+      "type": "command_result",
+      "description": "bash: node -e \"\nconst fs = require('fs');\nlet s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\ns.hypotheses.push({\n  id: 'hyp-c15dec26',\n  description: 'Fix CAC default leak',\n  evidence: ['src/C",
+      "source": "node -e \"\nconst fs = require('fs');\nlet s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\ns.hypotheses.push({\n  id: 'hyp-c15dec26',\n  description: 'Fix CAC default leak',\n  evidence: ['src/CAC.ts:188-198'],\n  confidence: 0.92,\n  status: 'selected',\n  files: ['src/CAC.ts']\n});\ns.selectedHypothesis = 'hyp-c15dec26';\nfs.writeFileSync('.v1/state.json', JSON.stringify(s, null, 2), 'utf-8');\nlet s2 = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('Same read:', s2.hypotheses.length, s2.selectedHypothesis);\n\"",
+      "timestamp": "2026-08-30T15:09:42.825Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c328b0d6",
+      "type": "command_result",
+      "description": "bash: node -e \"\nconst fs = require('fs');\nlet s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('After delay:', s.hypotheses.length, s.selectedHypothesis);\n\" && sleep 1 && node -e \"\nco",
+      "source": "node -e \"\nconst fs = require('fs');\nlet s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('After delay:', s.hypotheses.length, s.selectedHypothesis);\n\" && sleep 1 && node -e \"\nconst fs = require('fs');\nlet s = JSON.parse(fs.readFileSync('.v1/state.json', 'utf-8'));\nconsole.log('After 1s:', s.hypotheses.length, s.selectedHypothesis);\n\"",
+      "timestamp": "2026-08-30T15:09:45.111Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-045080b4",
+      "type": "command_result",
+      "description": "bash: ls -la .git/hooks/ 2>&1 | head -20",
+      "source": "ls -la .git/hooks/ 2>&1 | head -20",
+      "timestamp": "2026-08-30T15:09:49.280Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3c6e5203",
+      "type": "command_result",
+      "description": "bash: cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT",
+      "source": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT leak to alias when other alias is parsed\", () => {\n    const cli = cac();\n    cli.option(\"-b, --base-url <baseUrl>\", \"Set the instance URL\", {\n      default: \"https://github.com\",\n    });\n    const { options } = cli.parse([\"node\", \"bin\", \"--base-url\", \"https://gitlab.com\"]);\n    expect(options.baseUrl).toBe(\"https://gitlab.com\");\n    // b should NOT have the default\n    expect(options.b).toBeUndefined();\n  });\n\n  test(\"default SHOULD apply to all aliases when nothing parsed\", () => {\n    const cli = cac();\n    cli.option(\"-b, --base-url <baseUrl>\", \"Set the instance URL\", {\n      default: \"https://github.com\",\n    });\n    const { options } = cli.parse([\"node\", \"bin\"]);\n    expect(options.baseUrl).toBe(\"https://github.com\");\n    expect(options.b).toBe(\"https://github.com\");\n  });\n});\nEOF\nls /tmp/repro.test.ts",
+      "timestamp": "2026-08-30T15:09:53.768Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8d4e19b3",
+      "type": "command_result",
+      "description": "bash: cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT ",
+      "source": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT leak to alias when other alias is parsed\", () => {\n    const cli = cac();\n    cli.option(\"-b, --base-url <baseUrl>\", \"Set the instance URL\", {\n      default: \"https://github.com\",\n    });\n    const { options } = cli.parse([\"node\", \"bin\", \"--base-url\", \"https://gitlab.com\"]);\n    expect(options.baseUrl).toBe(\"https://gitlab.com\");\n    // b should NOT have the default\n    expect(options.b).toBeUndefined();\n  });\n\n  test(\"default SHOULD apply to all aliases when nothing parsed\", () => {\n    const cli = cac();\n    cli.option(\"-b, --base-url <baseUrl>\", \"Set the instance URL\", {\n      default: \"https://github.com\",\n    });\n    const { options } = cli.parse([\"node\", \"bin\"]);\n    expect(options.baseUrl).toBe(\"https://github.com\");\n    expect(options.b).toBe(\"https://github.com\");\n  });\n});\nEOF\nls .v1/repro.test.ts",
+      "timestamp": "2026-08-30T15:09:57.398Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-173d6e95",
+      "type": "command_result",
+      "description": "bash: npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+      "source": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+      "timestamp": "2026-08-30T15:10:02.738Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3961e725",
+      "type": "command_result",
+      "description": "bash: npm install 2>&1 | tail -10",
+      "source": "npm install 2>&1 | tail -10",
+      "timestamp": "2026-08-30T15:11:12.706Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-05c1d752",
+      "type": "command_result",
+      "description": "bash: npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+      "source": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+      "timestamp": "2026-08-30T15:11:25.161Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-2554f176",
+      "type": "command_result",
+      "description": "bash: npx vitest run tests/cac.test.ts 2>&1 | head -30",
+      "source": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+      "timestamp": "2026-08-30T15:11:53.365Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3514ed88",
+      "type": "command_result",
+      "description": "bash: cat > /tmp/check-mri.mjs << 'EOF'\nimport mri from 'mri';\n// Simulate what happens with --base-url\nconsole.log('Parse --base-url https://gitlab.com:');\nconsole.log(mri(['--base-url', 'https://gitlab.co",
+      "source": "cat > /tmp/check-mri.mjs << 'EOF'\nimport mri from 'mri';\n// Simulate what happens with --base-url\nconsole.log('Parse --base-url https://gitlab.com:');\nconsole.log(mri(['--base-url', 'https://gitlab.com'], { alias: { b: ['baseUrl'] } }));\nconsole.log('Parse -b https://gitlab.com:');\nconsole.log(mri(['-b', 'https://gitlab.com'], { alias: { b: ['baseUrl'] } }));\nconsole.log('Parse nothing:');\nconsole.log(mri([], { alias: { b: ['baseUrl'] } }));\nEOF\nnode /tmp/check-mri.mjs",
+      "timestamp": "2026-08-30T15:12:23.554Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-57182e96",
+      "type": "command_result",
+      "description": "bash: cp /tmp/check-mri.mjs ./check-mri.mjs && node check-mri.mjs && rm check-mri.mjs",
+      "source": "cp /tmp/check-mri.mjs ./check-mri.mjs && node check-mri.mjs && rm check-mri.mjs",
+      "timestamp": "2026-08-30T15:12:26.897Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-9612fe69",
+      "type": "diff_inspection",
+      "description": "Final diff stat: (no changes)",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-30T15:14:30.621Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 0,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-30T15:04:28.348Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-30T15:04:28.348Z",
+      "exitedAt": "2026-08-30T15:14:30.105Z",
+      "durationMs": 601757
+    }
+  ],
+  "terminationReason": "timeout"
+}

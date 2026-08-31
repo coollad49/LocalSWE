@@ -1,0 +1,988 @@
+{
+  "evaluationId": "eval-2885e93f-1788165819921",
+  "runId": "synth-002-run-001-a9bece",
+  "caseId": "synth-002",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v1",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:43:39.921Z",
+  "completedAt": "2026-08-31T08:43:41.598Z",
+  "durationMs": 1677,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-002-run-001-a9bece\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 234,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-002-cwMHjA\\patch-1788165820823.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 173,
+      "command": "bun run benchmark\\cases\\synth-002\\public\\reproduce.ts",
+      "stdout": "add threw: Currency mismatch: USD vs EUR PASS\nadd USD+USD {\"amount\":15,\"currency\":\"USD\"} expected 15 USD\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 175,
+      "command": "bun test benchmark\\cases\\synth-002\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-002\\private\\oracle.test.ts:\n(pass) synth-002 oracle: currency mismatch validation > add throws on mismatch [1.23ms]\n(pass) synth-002 oracle: currency mismatch validation > subtract throws on mismatch [0.27ms]\n(pass) synth-002 oracle: currency mismatch validation > add succeeds same currency [0.15ms]\n(pass) synth-002 oracle: currency mismatch validation > subtract succeeds same currency [0.11ms]\n\n 4 pass\n 0 fail\n 5 expect() calls\nRan 4 tests across 1 file. [124.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 187,
+      "command": "bun test benchmark\\repositories\\money-utils\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\money-utils\\tests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.53ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.33ms]\n(pass) money-utils > parseMoney handles comma-separated [1.27ms]\n(pass) money-utils > parseMoney handles simple amounts [0.16ms]\n(pass) money-utils > add validates currency mismatch [0.51ms]\n(pass) money-utils > subtract validates currency [0.20ms]\n(pass) money-utils > multiply [0.16ms]\n(pass) money-utils > convertCurrency precision [0.28ms]\n(pass) money-utils > convertCurrency throws missing rate [2.46ms]\n(pass) money-utils > createMoney validates [0.23ms]\n\n 10 pass\n 0 fail\n 22 expect() calls\nRan 10 tests across 1 file. [132.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "money-utils",
+    "type": "synthetic",
+    "difficulty": "easy",
+    "categories": [
+      "validation",
+      "business-logic"
+    ]
+  },
+  "metrics": {
+    "durationMs": 119831,
+    "totalTurns": 74,
+    "toolCalls": 28,
+    "commandsExecuted": 12,
+    "filesInspected": 4,
+    "filesChanged": 1,
+    "iterations": 3,
+    "iterationsSource": "v1-state",
+    "inputTokens": 34508,
+    "outputTokens": 6148,
+    "totalTokens": 372176
+  },
+  "cost": {
+    "inputTokens": 34508,
+    "outputTokens": 6148,
+    "totalTokens": 40656,
+    "inputCostUsd": 0.004831,
+    "outputCostUsd": 0.001721,
+    "totalCostUsd": 0.007481,
+    "costUsd": 0.007481,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-002-run-001-a9bece",
+    "caseId": "synth-002",
+    "agentVersion": "agent-v1",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:9437cb0fae62f77c3f7e79232c3a61080dbf8b5044c8be189326c4f0086505b3",
+    "trajectory": {
+      "eventCount": 341,
+      "durationMs": 119821,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "workflow_init": 1,
+        "helpers_ready": 1,
+        "runtime_key_set": 1,
+        "model_resolved": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "phase_start": 1,
+        "agent_start": 8,
+        "turn_start": 30,
+        "message_start": 66,
+        "message_end": 66,
+        "tool_execution_start": 28,
+        "tool_execution_end": 28,
+        "turn_end": 30,
+        "tool_execution_update": 54,
+        "agent_end": 8,
+        "agent_settled": 4,
+        "verification_nudge": 3,
+        "final_response": 1,
+        "session_disposed": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 90,
+      "userMessages": 16,
+      "toolCalls": 28,
+      "toolResults": 112,
+      "thinkingEvents": 60,
+      "unknownEvents": 104,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 28,
+      "uniqueTools": 4,
+      "byTool": {
+        "read": {
+          "calls": 8,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 12,
+          "failures": 6
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 34508,
+      "output": 6148,
+      "cacheRead": 331520,
+      "cacheWrite": 0,
+      "total": 372176,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.007481,
+      "inputCostUsd": 0.004831,
+      "outputCostUsd": 0.001721,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 60,
+      "characterCount": 6780,
+      "averageCharacters": 113,
+      "maxCharacters": 674,
+      "firstThinkingAt": "2026-08-31T04:28:17.547Z",
+      "lastThinkingAt": "2026-08-31T04:30:13.536Z",
+      "thinkingDurationMs": 115989
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/money.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 8,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 12,
+      "explorationToEditingRatio": 13
+    },
+    "verification": {
+      "commandsDetected": 40,
+      "testsRun": true,
+      "testCommandCount": 10,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 18,
+      "duplicateReadTargets": 4,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 6,
+      "topRepetitions": [
+        {
+          "signature": "cbabbb7b9d8c",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+          "count": 10
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "cec7100b2e9d",
+          "tool": "read",
+          "target": "src/money.ts",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "58cc7666d7a3",
+          "tool": "read",
+          "target": "tests/money.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "fee3c4976bbc",
+          "tool": "edit",
+          "target": "src/money.ts",
+          "count": 2
+        },
+        {
+          "signature": "735fe87ab3c1",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && git diff HEAD",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-002-run-001-a9bece",
+    "caseId": "synth-002",
+    "agentVersion": "agent-v1",
+    "timeline": [
+      {
+        "index": 25,
+        "timestamp": "2026-08-31T04:28:17.547Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 26,
+        "timestamp": "2026-08-31T04:28:17.547Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 41,
+        "timestamp": "2026-08-31T04:28:19.222Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-31T04:28:19.222Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 57,
+        "timestamp": "2026-08-31T04:28:21.030Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-31T04:28:21.030Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-31T04:28:21.033Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 60,
+        "timestamp": "2026-08-31T04:28:21.033Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 81,
+        "timestamp": "2026-08-31T04:28:22.868Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 82,
+        "timestamp": "2026-08-31T04:28:22.868Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 83,
+        "timestamp": "2026-08-31T04:28:22.875Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 84,
+        "timestamp": "2026-08-31T04:28:22.875Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 85,
+        "timestamp": "2026-08-31T04:28:22.878Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/money.test.ts"
+      },
+      {
+        "index": 86,
+        "timestamp": "2026-08-31T04:28:22.878Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "read",
+        "tool": "read",
+        "target": "tests/money.test.ts"
+      },
+      {
+        "index": 113,
+        "timestamp": "2026-08-31T04:28:25.744Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 114,
+        "timestamp": "2026-08-31T04:28:25.744Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 139,
+        "timestamp": "2026-08-31T04:28:45.596Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 140,
+        "timestamp": "2026-08-31T04:28:45.596Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 155,
+        "timestamp": "2026-08-31T04:28:47.709Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 156,
+        "timestamp": "2026-08-31T04:28:47.709Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 181,
+        "timestamp": "2026-08-31T04:29:05.799Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && git diff HEAD",
+        "commandClass": "git"
+      },
+      {
+        "index": 182,
+        "timestamp": "2026-08-31T04:29:05.799Z",
+        "phase": "reconnaissance",
+        "iteration": 0,
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && git diff HEAD",
+        "commandClass": "git"
+      },
+      {
+        "index": 219,
+        "timestamp": "2026-08-31T04:29:11.513Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 220,
+        "timestamp": "2026-08-31T04:29:11.513Z",
+        "phase": "reconnaissance",
+        "iteration": 1,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 263,
+        "timestamp": "2026-08-31T04:29:31.866Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 264,
+        "timestamp": "2026-08-31T04:29:31.866Z",
+        "phase": "reconnaissance",
+        "iteration": 2,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 307,
+        "timestamp": "2026-08-31T04:29:53.437Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 308,
+        "timestamp": "2026-08-31T04:29:53.437Z",
+        "phase": "reconnaissance",
+        "iteration": 3,
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 25,
+        "timestamp": "2026-08-31T04:28:17.547Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 113,
+        "timestamp": "2026-08-31T04:28:25.744Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vit"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 125,
+        "timestamp": "2026-08-31T04:28:41.581Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vit"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 126,
+        "timestamp": "2026-08-31T04:28:41.581Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vit"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 127,
+        "timestamp": "2026-08-31T04:28:41.596Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vit"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 128,
+        "timestamp": "2026-08-31T04:28:41.596Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vit"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 129,
+        "timestamp": "2026-08-31T04:28:41.596Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vit"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 130,
+        "timestamp": "2026-08-31T04:28:41.596Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vit"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 139,
+        "timestamp": "2026-08-31T04:28:45.596Z",
+        "detail": "src/money.ts"
+      }
+    ],
+    "errors": [
+      {
+        "index": 125,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n ❯ tests/money.test.ts (10 tests | 2 failed) 50ms\n     × add validates currency mismatch 19ms\n     × subtract validates currency 2ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/money.test.ts > money-utils > add validates currency mismatch\nAssertionError: expected [Function] to throw an error\n\n- Expected:\nnull\n\n+ Received:\nundefined\n\n ❯ tests/money.test.ts:31:29\n     29|     const a = createMone"
+      },
+      {
+        "index": 126,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n ❯ tests/money.test.ts (10 tests | 2 failed) 50ms\n     × add validates currency mismatch 19ms\n     × subtract validates currency 2ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/money.test.ts > money-utils > add validates currency mismatch\nAssertionError: expected [Function] to throw an error\n\n- Expected:\nnull\n\n+ Received:\nundefined\n\n ❯ tests/money.test.ts:31:29\n     29|     const a = createMone"
+      },
+      {
+        "index": 127,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 128,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 129,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 130,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 113,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 114,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 125,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n ❯ tests/money.test.ts (10 tests | 2 failed) 50ms\n     × add validates currency mismatch 19ms\n     "
+      },
+      {
+        "index": 126,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n ❯ tests/money.test.ts (10 tests | 2 failed) 50ms\n     × add validates currency mismatch 19ms\n     "
+      },
+      {
+        "index": 127,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 128,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 129,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 130,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 155,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 156,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 167,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:29:01\n   Duration  1.37s (tr"
+      },
+      {
+        "index": 168,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:29:01\n   Duration  1.37s (tr"
+      },
+      {
+        "index": 169,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 170,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 171,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 172,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 219,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 220,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 231,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:29:26\n   Duration  1.19s (tr"
+      },
+      {
+        "index": 232,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:29:26\n   Duration  1.19s (tr"
+      },
+      {
+        "index": 233,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 234,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 235,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 236,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 263,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 264,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 275,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:29:45\n   Duration  1.63s (tr"
+      },
+      {
+        "index": 276,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:29:45\n   Duration  1.63s (tr"
+      },
+      {
+        "index": 277,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 278,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 279,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 280,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 307,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 308,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 319,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:30:08\n   Duration  922ms (tr"
+      },
+      {
+        "index": 320,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  05:30:08\n   Duration  922ms (tr"
+      },
+      {
+        "index": 321,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 322,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 323,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 324,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-a9bece-pyvNvc\" && npx vitest run 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

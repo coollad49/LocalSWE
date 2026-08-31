@@ -1,0 +1,76 @@
+{
+  "runId": "synth-002-run-001-274217",
+  "caseId": "synth-002",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "status": "timeout",
+  "durationMs": 600850,
+  "changedFiles": [
+    "src/money.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-002-run-001-274217\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-002-run-001-274217\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-002-run-001-274217\\metadata.json",
+  "tests": [
+    {
+      "command": "npx vitest run 2>&1 | head -60",
+      "exitCode": 0,
+      "durationMs": 23962,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-274217-gLBPk9\n\n ❯ tests/money.test.ts (10 tests | 2 failed) 44ms\n     × add validates currency mismatch 17ms\n     × subtract validates currency 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/money.test.ts > money-utils > add validates currency mismatch\nAssertionError: expected [Function] to throw an error\n\n- Expected:\nnull\n\n+ Received:\nundefined\n\n ❯ tests/money.test.ts:31:29\n     29|     const a = createMoney(10, \"USD\");\n     30|     const b = createMoney(5, \"EUR\");\n     31|     expect(() => add(a, b)).toThrow(/Currency mismatch/);\n       |                             ^\n     32|     expect(add(a, createMoney(5, \"USD\"))).toEqual({ amount: 15, curren…\n     33|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/money.test.ts > money-utils > subtract validates currency\nAssertionError: expected [Function] to throw an error\n ❯ tests/money.test.ts:36:75\n     34|\n     35|   test(\"subtract validates currency\", () => {\n     36|     expect(() => subtract(createMoney(10, \"USD\"), createMoney(5, \"EUR\"…\n       |                                                                           ^\n     37|   });\n     38|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 8 passed (10)\n   Start at  04:10:03\n   Duration  1.20s (transform 162ms, setup 0ms, import 221ms, tests 44ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "npx vitest run",
+      "exitCode": 0,
+      "durationMs": 6266,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-274217-gLBPk9\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  04:10:21\n   Duration  801ms (transform 112ms, setup 0ms, import 166ms, tests 20ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "node .v1/helpers.js add-verification '{\"method\":\"vitest\",\"command\":\"npx vitest run\",\"passed\":true,\"output\":\"10 passed (10)\"}'",
+      "exitCode": 0,
+      "durationMs": 346,
+      "stdout": "verification recorded\n"
+    },
+    {
+      "command": "npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 7655,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-274217-gLBPk9\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  04:11:11\n   Duration  1.09s (transform 161ms, setup 0ms, import 221ms, tests 30ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 7069,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-274217-gLBPk9\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  04:14:21\n   Duration  775ms (transform 108ms, setup 0ms, import 166ms, tests 21ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 6330,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-274217-gLBPk9\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  04:15:15\n   Duration  972ms (transform 121ms, setup 0ms, import 183ms, tests 30ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "node .v1/helpers.js add-evidence '{\"type\":\"test_result\",\"description\":\"vitest run: 10 tests passed, confirming fix works for add/subtract currency validation\",\"source\":\"npx vitest run\",\"result\":\"supports\"}'",
+      "exitCode": 0,
+      "durationMs": 475,
+      "stdout": "evidence added\n"
+    },
+    {
+      "command": "node .v1/helpers.js add-verification '{\"method\":\"vitest\",\"command\":\"npx vitest run\",\"passed\":true,\"output\":\"10 passed (10)\"}'",
+      "exitCode": 0,
+      "durationMs": 349,
+      "stdout": "verification recorded\n"
+    },
+    {
+      "command": "npx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 6116,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-002-synth-002-run-001-274217-gLBPk9\n\n\n Test Files  1 passed (1)\n      Tests  10 passed (10)\n   Start at  04:17:17\n   Duration  826ms (transform 105ms, setup 0ms, import 161ms, tests 25ms, environment 0ms)\n\n"
+    }
+  ],
+  "error": "Agent timeout after 600000ms",
+  "model": "opencode-go/mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T03:07:33.722Z",
+  "endedAt": "2026-08-31T03:17:34.572Z"
+}

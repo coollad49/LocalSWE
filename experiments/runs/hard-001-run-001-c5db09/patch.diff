@@ -1,0 +1,108 @@
+diff --git a/src/plugins/arrayMethods.ts b/src/plugins/arrayMethods.ts
+index 7c4cb7f..657dc3e 100644
+--- a/src/plugins/arrayMethods.ts
++++ b/src/plugins/arrayMethods.ts
+@@ -5,7 +5,10 @@ import {
+ 	markChanged,
+ 	prepareCopy,
+ 	handleCrossReference,
+-	ProxyArrayState
++	ProxyArrayState,
++	isDraftable,
++	shallowCopy,
++	isArray
+ } from "../internal"
+ 
+ /**
+diff --git a/test-reverse.mjs b/test-reverse.mjs
+new file mode 100644
+index 0000000..958d4ff
+--- /dev/null
++++ b/test-reverse.mjs
+@@ -0,0 +1,37 @@
++import { produce, enableArrayMethods } from "./src/immer.ts";
++
++enableArrayMethods();
++
++// Test case: reverse then mutate
++console.log("Test 1: reverse then mutate element");
++const base1 = [{a: 1}, {a: 2}];
++const next1 = produce(base1, draft => {
++    draft.reverse();
++    draft[0].a = 3;
++});
++console.log("next1:", JSON.stringify(next1));
++console.log("base1:", JSON.stringify(base1));
++console.log("base1[1] should still be {a: 2}:", base1[1].a === 2 ? "PASS" : "FAIL (got " + base1[1].a + ")");
++
++// Test case: sort then mutate
++console.log("\nTest 2: sort then mutate element");
++const base2 = [{a: 3}, {a: 1}, {a: 2}];
++const next2 = produce(base2, draft => {
++    draft.sort((a, b) => a.a - b.a);
++    draft[0].a = 10;
++});
++console.log("next2:", JSON.stringify(next2));
++console.log("base2:", JSON.stringify(base2));
++console.log("base2[1] should still be {a: 1}:", base2[1].a === 1 ? "PASS" : "FAIL (got " + base2[1].a + ")");
++
++// Test case: reverse twice (should return to original order)
++console.log("\nTest 3: reverse twice then mutate");
++const base3 = [{a: 1}, {a: 2}];
++const next3 = produce(base3, draft => {
++    draft.reverse();
++    draft.reverse();
++    draft[0].a = 99;
++});
++console.log("next3:", JSON.stringify(next3));
++console.log("base3:", JSON.stringify(base3));
++console.log("base3[0] should still be {a: 1}:", base3[0].a === 1 ? "PASS" : "FAIL (got " + base3[0].a + ")");
+diff --git a/tests/basic.test.ts b/tests/basic.test.ts
+index b685b64..01f3ca8 100644
+--- a/tests/basic.test.ts
++++ b/tests/basic.test.ts
+@@ -1,5 +1,7 @@
+ import { describe, test, expect } from "vitest";
+-import { produce } from "../src/immer";
++import { produce, enableArrayMethods } from "../src/immer";
++
++enableArrayMethods();
+ 
+ describe("immer regression", () => {
+   test("basic produce", () => {
+@@ -15,4 +17,35 @@ describe("immer regression", () => {
+     expect(next).toEqual([1,2,3,4]);
+     expect(base).toEqual([1,2,3]);
+   });
++
++  test("reverse then mutate should not mutate base", () => {
++    const base = [{a: 1}, {a: 2}];
++    const next = produce(base, draft => {
++      draft.reverse();
++      draft[0].a = 3;
++    });
++    expect(next).toEqual([{a: 3}, {a: 1}]);
++    expect(base).toEqual([{a: 1}, {a: 2}]);
++  });
++
++  test("sort then mutate should not mutate base", () => {
++    const base = [{a: 3}, {a: 1}, {a: 2}];
++    const next = produce(base, draft => {
++      draft.sort((a, b) => a.a - b.a);
++      draft[0].a = 10;
++    });
++    expect(next).toEqual([{a: 10}, {a: 2}, {a: 3}]);
++    expect(base).toEqual([{a: 3}, {a: 1}, {a: 2}]);
++  });
++
++  test("reverse twice then mutate should not mutate base", () => {
++    const base = [{a: 1}, {a: 2}];
++    const next = produce(base, draft => {
++      draft.reverse();
++      draft.reverse();
++      draft[0].a = 99;
++    });
++    expect(next).toEqual([{a: 99}, {a: 2}]);
++    expect(base).toEqual([{a: 1}, {a: 2}]);
++  });
+ });

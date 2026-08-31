@@ -1,0 +1,63 @@
+{
+  "runId": "synth-004-run-001-c6b9e2",
+  "caseId": "synth-004",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 483138,
+  "changedFiles": [
+    "src/task-manager.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-004-run-001-c6b9e2\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-004-run-001-c6b9e2\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-004-run-001-c6b9e2\\metadata.json",
+  "tests": [
+    {
+      "command": "bun test",
+      "exitCode": 0,
+      "durationMs": 406,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [3.66ms]\n(pass) TaskManager > createTask validates priority [1.55ms]\n(pass) TaskManager > createTask validates title [0.21ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.37ms]\n(pass) TaskManager > updateTask only updates provided fields [0.24ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [3.73ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.23ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [0.69ms]\n(pass) TaskManager > filterByStatus validates status [0.15ms]\n(pass) TaskManager > getTasksByPriority filters correctly [1.31ms]\n(pass) TaskManager > deleteTask removes task [1.17ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [135.00ms]\n"
+    },
+    {
+      "command": "cat > .v1/state.json << 'ENDSTATE'\n{\n  \"phase\": \"diagnosis\",\n  \"issue\": \"# Issue: filterByStatus returns stale results after adding/updating tasks\",\n  \"hypotheses\": [\n    {\n      \"id\": \"hyp-1\",\n      \"description\": \"The invalidateCache() method in TaskManager has its cache invalidation code commented out (lines 90-93 of src/task-manager.ts), so the statusCache is never invalidated after task mutations (createTask, updateTask, deleteTask, clear). This causes filterByStatus() to return stale cached results.\",\n      \"evidence\": [\"src/task-manager.ts:90-93 - invalidateCache method body is commented out\", \"src/task-manager.ts:27,49,71,87 - invalidateCache is called after mutations but does nothing\", \"tests/task-manager.test.ts:52-63 - test filterByStatus returns correct tasks and not stale\"],\n      \"confidence\": 0.99,\n      \"status\": \"selected\",\n      \"files\": [\"src/task-manager.ts\"]\n    }\n  ],\n  \"selectedHypothesis\": \"hyp-1\",\n  \"filesInspected\": [\"ISSUE.md\", \"src/task-manager.ts\", \"tests/task-manager.test.ts\"],\n  \"commandsExecuted\": [],\n  \"changesMade\": [\n    {\n      \"path\": \"src/task-manager.ts\",\n      \"summary\": \"Uncommented cache invalidation code in invalidateCache() method\",\n      \"iteration\": 0,\n      \"timestamp\": \"2026-08-31T03:10:32.003Z\"\n    }\n  ],\n  \"verificationAttempts\": [\n    {\n      \"method\": \"reproduction\",\n      \"command\": \"bun run .v1/repro.ts\",\n      \"passed\": true,\n      \"output\": \"After fix: pending count=2 (correct), completed count=2 (correct)\"\n    },\n    {\n      \"method\": \"vitest\",\n      \"command\": \"bun test\",\n      \"passed\": true,\n      \"output\": \"11 pass, 0 fail\"\n    }\n  ],\n  \"evidence\": [],\n  \"iteration\": 0,\n  \"maxIterations\": 5\n}\nENDSTATE\necho \"State file updated\"",
+      "exitCode": 0,
+      "durationMs": 356,
+      "stdout": "State file updated\n"
+    },
+    {
+      "command": "bun test 2>&1",
+      "exitCode": 0,
+      "durationMs": 499,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [1.46ms]\n(pass) TaskManager > createTask validates priority [0.55ms]\n(pass) TaskManager > createTask validates title [0.20ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.44ms]\n(pass) TaskManager > updateTask only updates provided fields [0.30ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [2.06ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.23ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [0.90ms]\n(pass) TaskManager > filterByStatus validates status [0.24ms]\n(pass) TaskManager > getTasksByPriority filters correctly [1.18ms]\n(pass) TaskManager > deleteTask removes task [0.35ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [170.00ms]\n"
+    },
+    {
+      "command": "bun test 2>&1",
+      "exitCode": 0,
+      "durationMs": 396,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [1.99ms]\n(pass) TaskManager > createTask validates priority [0.58ms]\n(pass) TaskManager > createTask validates title [0.23ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.46ms]\n(pass) TaskManager > updateTask only updates provided fields [0.30ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [2.40ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.39ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [1.21ms]\n(pass) TaskManager > filterByStatus validates status [0.17ms]\n(pass) TaskManager > getTasksByPriority filters correctly [1.54ms]\n(pass) TaskManager > deleteTask removes task [0.52ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [174.00ms]\n"
+    },
+    {
+      "command": "node .v1/helpers.js add-verification '{\"method\":\"vitest\",\"command\":\"bun test\",\"passed\":true,\"output\":\"11 pass, 0 fail - all tests including filterByStatus stale cache test pass\"}'",
+      "exitCode": 0,
+      "durationMs": 504,
+      "stdout": "verification recorded\n"
+    },
+    {
+      "command": "bun test 2>&1",
+      "exitCode": 0,
+      "durationMs": 594,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [1.71ms]\n(pass) TaskManager > createTask validates priority [0.66ms]\n(pass) TaskManager > createTask validates title [0.25ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.54ms]\n(pass) TaskManager > updateTask only updates provided fields [1.47ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [2.12ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.27ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [0.99ms]\n(pass) TaskManager > filterByStatus validates status [0.17ms]\n(pass) TaskManager > getTasksByPriority filters correctly [2.75ms]\n(pass) TaskManager > deleteTask removes task [0.42ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [257.00ms]\n"
+    },
+    {
+      "command": "node .v1/helpers.js add-verification '{\"method\":\"vitest\",\"command\":\"bun test\",\"passed\":true,\"output\":\"11 pass, 0 fail - all tests including filterByStatus stale cache test pass\"}'",
+      "exitCode": 0,
+      "durationMs": 382,
+      "stdout": "verification recorded\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T03:07:33.405Z",
+  "endedAt": "2026-08-31T03:15:36.543Z"
+}

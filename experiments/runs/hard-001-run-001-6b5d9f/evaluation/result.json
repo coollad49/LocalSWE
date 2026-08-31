@@ -1,0 +1,648 @@
+{
+  "evaluationId": "eval-f848dbad-1788165582886",
+  "runId": "hard-001-run-001-6b5d9f",
+  "caseId": "hard-001",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "baseline-v0",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-31T08:39:42.886Z",
+  "completedAt": "2026-08-31T08:39:46.028Z",
+  "durationMs": 3143,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-001-run-001-6b5d9f\\patch.diff",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-001-NFSLCy\\benchmark\\repositories\\immer",
+      "stdout": "empty patch - no changes applied",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 1570,
+      "command": "node tsx benchmark\\cases\\hard-001\\public\\reproduce.ts",
+      "stdout": "Test reverse: baseUnchanged=false nextCorrect=true => FAIL\n  baseState=[{\"id\":1},{\"id\":2},{\"id\":99}] expected [{\"id\":1},{\"id\":2},{\"id\":3}]\n  reordered={\"id\":99} expected {\"id\":3}\n  nextState=[{\"id\":99},{\"id\":2},{\"id\":1}] expected [{\"id\":99},{\"id\":2},{\"id\":1}]\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "immer",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "state-management",
+      "lifecycle",
+      "api-behavior"
+    ]
+  },
+  "metrics": {
+    "durationMs": 612377,
+    "totalTurns": 84,
+    "toolCalls": 38,
+    "commandsExecuted": 10,
+    "filesInspected": 9,
+    "filesChanged": 0,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 70304,
+    "outputTokens": 3142,
+    "totalTokens": 837912
+  },
+  "cost": {
+    "inputTokens": 70304,
+    "outputTokens": 3142,
+    "totalTokens": 73446,
+    "inputCostUsd": 0.021091,
+    "outputCostUsd": 0.00377,
+    "totalCostUsd": 0.07073,
+    "costUsd": 0.07073,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-001-run-001-6b5d9f",
+    "caseId": "hard-001",
+    "agentVersion": "baseline-v0",
+    "benchmarkVersion": "0.5",
+    "model": "mimo-v2.5",
+    "trajectoryHash": "sha256:5432415631efd4423ba6296f867b0ac5de1c1a11bb19579de634096bc9087740",
+    "trajectory": {
+      "eventCount": 360,
+      "durationMs": 612356,
+      "eventTypes": {
+        "run_start": 1,
+        "agent_instructions": 1,
+        "task_issue": 1,
+        "runtime_key_set": 1,
+        "available_models": 1,
+        "resource_loader_ready": 1,
+        "auth_check": 1,
+        "session_created": 1,
+        "prompt_sent": 1,
+        "agent_start": 6,
+        "turn_start": 42,
+        "message_start": 80,
+        "message_end": 80,
+        "tool_execution_start": 38,
+        "tool_execution_update": 18,
+        "tool_execution_end": 36,
+        "turn_end": 40,
+        "agent_end": 4,
+        "auto_retry_start": 2,
+        "auto_retry_end": 1,
+        "session_disposed": 1,
+        "timeout": 1,
+        "patch_captured": 1,
+        "test_commands_extracted": 1
+      },
+      "assistantMessages": 124,
+      "userMessages": 4,
+      "toolCalls": 38,
+      "toolResults": 146,
+      "thinkingEvents": 28,
+      "unknownEvents": 73,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 38,
+      "uniqueTools": 3,
+      "byTool": {
+        "bash": {
+          "calls": 10,
+          "failures": 0
+        },
+        "read": {
+          "calls": 18,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 10,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 70304,
+      "output": 3142,
+      "cacheRead": 764466,
+      "cacheWrite": 0,
+      "total": 837912,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.07073,
+      "inputCostUsd": 0.021091,
+      "outputCostUsd": 0.00377,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 28,
+      "characterCount": 38132,
+      "averageCharacters": 1362,
+      "maxCharacters": 8318,
+      "firstThinkingAt": "2026-08-30T14:52:33.547Z",
+      "lastThinkingAt": "2026-08-30T14:59:34.857Z",
+      "thinkingDurationMs": 421310
+    },
+    "editing": {
+      "editCalls": 0,
+      "writeCalls": 0,
+      "filesTouched": [],
+      "uniqueFilesTouched": 0
+    },
+    "exploration": {
+      "readCalls": 18,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 10,
+      "bashCalls": 10,
+      "explorationToEditingRatio": null
+    },
+    "verification": {
+      "commandsDetected": 8,
+      "testsRun": true,
+      "testCommandCount": 2,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 19,
+      "duplicateReadTargets": 9,
+      "duplicateEditTargets": 0,
+      "toolFailureCount": 0,
+      "topRepetitions": [
+        {
+          "signature": "8436f3211aa1",
+          "tool": "bash",
+          "target": "ls -la",
+          "count": 2
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "7c573b10a29d",
+          "tool": "ls",
+          "target": "src/core",
+          "count": 2
+        },
+        {
+          "signature": "c0fc404be6bc",
+          "tool": "ls",
+          "target": "src/plugins",
+          "count": 2
+        },
+        {
+          "signature": "28827d873432",
+          "tool": "read",
+          "target": "src/plugins/arrayMethods.ts",
+          "count": 2
+        },
+        {
+          "signature": "cd3e720ed597",
+          "tool": "read",
+          "target": "src/core/proxy.ts",
+          "count": 2
+        },
+        {
+          "signature": "e10d80bf34f5",
+          "tool": "read",
+          "target": "src/core/finalize.ts",
+          "count": 2
+        },
+        {
+          "signature": "2390225ba2e6",
+          "tool": "read",
+          "target": "src/plugins/patches.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "error",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-001-run-001-6b5d9f",
+    "caseId": "hard-001",
+    "agentVersion": "baseline-v0",
+    "timeline": [
+      {
+        "index": 22,
+        "timestamp": "2026-08-30T14:52:33.548Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 23,
+        "timestamp": "2026-08-30T14:52:33.548Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls -la",
+        "commandClass": "general"
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-30T14:52:35.540Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 43,
+        "timestamp": "2026-08-30T14:52:35.540Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 58,
+        "timestamp": "2026-08-30T14:52:36.370Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 59,
+        "timestamp": "2026-08-30T14:52:36.370Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 74,
+        "timestamp": "2026-08-30T14:52:37.313Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 75,
+        "timestamp": "2026-08-30T14:52:37.313Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 90,
+        "timestamp": "2026-08-30T14:52:38.261Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src/core"
+      },
+      {
+        "index": 91,
+        "timestamp": "2026-08-30T14:52:38.261Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src/core"
+      },
+      {
+        "index": 106,
+        "timestamp": "2026-08-30T14:52:39.133Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src/plugins"
+      },
+      {
+        "index": 107,
+        "timestamp": "2026-08-30T14:52:39.133Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src/plugins"
+      },
+      {
+        "index": 122,
+        "timestamp": "2026-08-30T14:52:40.640Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/plugins/arrayMethods.ts"
+      },
+      {
+        "index": 123,
+        "timestamp": "2026-08-30T14:52:40.640Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/plugins/arrayMethods.ts"
+      },
+      {
+        "index": 138,
+        "timestamp": "2026-08-30T14:52:41.945Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/proxy.ts"
+      },
+      {
+        "index": 139,
+        "timestamp": "2026-08-30T14:52:41.945Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/proxy.ts"
+      },
+      {
+        "index": 154,
+        "timestamp": "2026-08-30T14:52:43.657Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/finalize.ts"
+      },
+      {
+        "index": 155,
+        "timestamp": "2026-08-30T14:52:43.657Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/core/finalize.ts"
+      },
+      {
+        "index": 170,
+        "timestamp": "2026-08-30T14:52:47.921Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/plugins/patches.ts"
+      },
+      {
+        "index": 171,
+        "timestamp": "2026-08-30T14:52:47.921Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/plugins/patches.ts"
+      },
+      {
+        "index": 186,
+        "timestamp": "2026-08-30T14:52:49.816Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 187,
+        "timestamp": "2026-08-30T14:52:49.816Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 202,
+        "timestamp": "2026-08-30T14:52:51.414Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 203,
+        "timestamp": "2026-08-30T14:52:51.414Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 218,
+        "timestamp": "2026-08-30T14:52:53.250Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/immer.ts"
+      },
+      {
+        "index": 219,
+        "timestamp": "2026-08-30T14:52:53.250Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/immer.ts"
+      },
+      {
+        "index": 234,
+        "timestamp": "2026-08-30T14:52:55.193Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src/utils"
+      },
+      {
+        "index": 235,
+        "timestamp": "2026-08-30T14:52:55.193Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src/utils"
+      },
+      {
+        "index": 250,
+        "timestamp": "2026-08-30T14:52:56.608Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils/common.ts"
+      },
+      {
+        "index": 251,
+        "timestamp": "2026-08-30T14:52:56.608Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils/common.ts"
+      },
+      {
+        "index": 293,
+        "timestamp": "2026-08-30T14:59:21.670Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+        "commandClass": "test"
+      },
+      {
+        "index": 294,
+        "timestamp": "2026-08-30T14:59:21.670Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+        "commandClass": "test"
+      },
+      {
+        "index": 313,
+        "timestamp": "2026-08-30T14:59:39.547Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && ls node_modules 2>&1 | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 314,
+        "timestamp": "2026-08-30T14:59:39.547Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && ls node_modules 2>&1 | head -5",
+        "commandClass": "general"
+      },
+      {
+        "index": 333,
+        "timestamp": "2026-08-30T14:59:41.853Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm install 2>&1 | tail -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 334,
+        "timestamp": "2026-08-30T14:59:41.853Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm install 2>&1 | tail -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 353,
+        "timestamp": "2026-08-30T15:00:29.924Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm install --legacy-peer-deps 2>&1 | tail -20",
+        "commandClass": "general"
+      },
+      {
+        "index": 354,
+        "timestamp": "2026-08-30T15:00:29.924Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm install --legacy-peer-deps 2>&1 | tail -20",
+        "commandClass": "general"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 42,
+        "timestamp": "2026-08-30T14:52:35.540Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 293,
+        "timestamp": "2026-08-30T14:59:21.670Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>"
+      }
+    ],
+    "errors": [],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 293,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+        "exitCode": 0
+      },
+      {
+        "index": 294,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+        "exitCode": 0
+      },
+      {
+        "index": 299,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+        "exitCode": 0,
+        "outputSnippet": "\n> immer@10.0.3-beta test\n> vitest run && yarn test:build && yarn test:flow\n\nvitest.config.ts (1:469) \u001b[33m[UNRESOLVED_IMPORT] \u001b[0mCould not resolve 'vitest/config' in vitest.config.ts\n - Module not f"
+      },
+      {
+        "index": 300,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+        "exitCode": 0,
+        "outputSnippet": "\n> immer@10.0.3-beta test\n> vitest run && yarn test:build && yarn test:flow\n\nvitest.config.ts (1:469) \u001b[33m[UNRESOLVED_IMPORT] \u001b[0mCould not resolve 'vitest/config' in vitest.config.ts\n - Module not f"
+      },
+      {
+        "index": 301,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+        "exitCode": 0
+      },
+      {
+        "index": 302,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+        "exitCode": 0
+      },
+      {
+        "index": 303,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+        "exitCode": 0
+      },
+      {
+        "index": 304,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-001-hard-001-run-001-6b5d9f-R9MwfM && npm test 2>&1 | head -100",
+        "exitCode": 0
+      }
+    ]
+  }
+}

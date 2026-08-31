@@ -1,0 +1,52 @@
+{
+  "runId": "hist-001-run-001-a20e85",
+  "caseId": "hist-001",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "status": "timeout",
+  "durationMs": 604021,
+  "changedFiles": [
+    "package-lock.json"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-001-run-001-a20e85\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-001-run-001-a20e85\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-001-run-001-a20e85\\metadata.json",
+  "tests": [
+    {
+      "command": "cat > /tmp/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT leak to alias when other alias is parsed\", () => {\n    const cli = cac();\n    cli.option(\"-b, --base-url <baseUrl>\", \"Set the instance URL\", {\n      default: \"https://github.com\",\n    });\n    const { options } = cli.parse([\"node\", \"bin\", \"--base-url\", \"https://gitlab.com\"]);\n    expect(options.baseUrl).toBe(\"https://gitlab.com\");\n    // b should NOT have the default\n    expect(options.b).toBeUndefined();\n  });\n\n  test(\"default SHOULD apply to all aliases when nothing parsed\", () => {\n    const cli = cac();\n    cli.option(\"-b, --base-url <baseUrl>\", \"Set the instance URL\", {\n      default: \"https://github.com\",\n    });\n    const { options } = cli.parse([\"node\", \"bin\"]);\n    expect(options.baseUrl).toBe(\"https://github.com\");\n    expect(options.b).toBe(\"https://github.com\");\n  });\n});\nEOF\nls /tmp/repro.test.ts",
+      "exitCode": 0,
+      "durationMs": 802,
+      "stdout": "/tmp/repro.test.ts\n"
+    },
+    {
+      "command": "cat > .v1/repro.test.ts << 'EOF'\nimport { describe, test, expect } from \"vitest\";\nimport { cac } from \"../src/index.ts\";\n\ndescribe(\"repro: default leak to aliases\", () => {\n  test(\"default should NOT leak to alias when other alias is parsed\", () => {\n    const cli = cac();\n    cli.option(\"-b, --base-url <baseUrl>\", \"Set the instance URL\", {\n      default: \"https://github.com\",\n    });\n    const { options } = cli.parse([\"node\", \"bin\", \"--base-url\", \"https://gitlab.com\"]);\n    expect(options.baseUrl).toBe(\"https://gitlab.com\");\n    // b should NOT have the default\n    expect(options.b).toBeUndefined();\n  });\n\n  test(\"default SHOULD apply to all aliases when nothing parsed\", () => {\n    const cli = cac();\n    cli.option(\"-b, --base-url <baseUrl>\", \"Set the instance URL\", {\n      default: \"https://github.com\",\n    });\n    const { options } = cli.parse([\"node\", \"bin\"]);\n    expect(options.baseUrl).toBe(\"https://github.com\");\n    expect(options.b).toBe(\"https://github.com\");\n  });\n});\nEOF\nls .v1/repro.test.ts",
+      "exitCode": 0,
+      "durationMs": 2054,
+      "stdout": ".v1/repro.test.ts\n"
+    },
+    {
+      "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -50",
+      "exitCode": 0,
+      "durationMs": 68608,
+      "stdout": "npm warn exec The following package was not found and will be installed: vitest@4.1.11\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n\n ❯ .v1/repro.test.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  .v1/repro.test.ts [ .v1/repro.test.ts ]\nError: Cannot find package 'mri' imported from C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L/src/CAC.ts\n ❯ src/CAC.ts:2:1\n      1| import { EventEmitter } from 'events'\n      2| import mri from 'mri'\n       | ^\n      3| import Command, {\n      4|   GlobalCommand,\n ❯ src/index.ts:1:1\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  no tests\n   Start at  16:11:08\n   Duration  2.59s (transform 239ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "npx vitest run .v1/repro.test.ts 2>&1 | head -60",
+      "exitCode": 0,
+      "durationMs": 24251,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n\n ❯ .v1/repro.test.ts (2 tests | 1 failed) 40ms\n     × default should NOT leak to alias when other alias is parsed 32ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  .v1/repro.test.ts > repro: default leak to aliases > default should NOT leak to alias when other alias is parsed\nAssertionError: expected 'https://github.com' to be undefined\n\n- Expected:\nundefined\n\n+ Received:\n\"https://github.com\"\n\n ❯ .v1/repro.test.ts:13:23\n     11|     expect(options.baseUrl).toBe(\"https://gitlab.com\");\n     12|     // b should NOT have the default\n     13|     expect(options.b).toBeUndefined();\n       |                       ^\n     14|   });\n     15|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  1 failed | 1 passed (2)\n   Start at  16:11:40\n   Duration  5.86s (transform 2.80s, setup 0ms, import 2.89s, tests 40ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "npx vitest run tests/cac.test.ts 2>&1 | head -30",
+      "exitCode": 0,
+      "durationMs": 23547,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-a20e85-WY2Z6L\n\n\n Test Files  1 passed (1)\n      Tests  4 passed (4)\n   Start at  16:12:15\n   Duration  1.21s (transform 281ms, setup 0ms, import 375ms, tests 23ms, environment 0ms)\n\n"
+    }
+  ],
+  "error": "Agent timeout after 600000ms",
+  "model": "mimo-v2.5",
+  "thinkingLevel": "medium",
+  "piVersion": "0.84.4",
+  "startedAt": "2026-08-30T15:04:28.346Z",
+  "endedAt": "2026-08-30T15:14:32.367Z"
+}

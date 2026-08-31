@@ -1,0 +1,14 @@
+diff --git a/src/index.ts b/src/index.ts
+index f617424..a5ecb04 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -676,7 +676,7 @@ function quoteName(name: string): string {
+ function stringifyName(name: string, next: Token | undefined): string {
+   if (!ID.test(name)) return quoteName(name);
+ 
+-  if (next?.type === "text" && ID_CONTINUE.test(next.value[0])) {
++  if (next?.type === "text" && ID_CONTINUE.test(String.fromCodePoint(next.value.codePointAt(0)))) {
+     return quoteName(name);
+   }
+ 
+

@@ -1,0 +1,48 @@
+diff --git a/src/pathstringifier.ts b/src/pathstringifier.ts
+index a3d4d37..f7654df 100644
+--- a/src/pathstringifier.ts
++++ b/src/pathstringifier.ts
+@@ -9,18 +9,36 @@ export const stringifyPath = (path: Path): StringifiedPath =>
+     .map(escapeKey)
+     .join('.');
+ 
+-export const parsePath = (string: StringifiedPath) => {
++export const parsePath = (string: StringifiedPath, isLegacy = true) => {
+   const result: string[] = [];
+ 
+   let segment = '';
+   for (let i = 0; i < string.length; i++) {
+     let char = string.charAt(i);
+ 
+-    const isEscapedDot = char === '\\' && string.charAt(i + 1) === '.';
+-    if (isEscapedDot) {
+-      segment += '.';
+-      i++;
+-      continue;
++    if (char === '\\') {
++      const next = string.charAt(i + 1);
++      if (isLegacy) {
++        // Legacy mode: only \. is special (escaped dot)
++        if (next === '.') {
++          segment += '.';
++          i++;
++          continue;
++        }
++      } else {
++        // New mode: \. is escaped dot, \\ is two literal backslashes
++        if (next === '.') {
++          segment += '.';
++          i++;
++          continue;
++        } else if (next === '\\') {
++          segment += '\\';
++          i++;
++          continue;
++        } else {
++          throw new Error(`Invalid path string: ${string}`);
++        }
++      }
+     }
+ 
+     const isEndOfSegment = char === '.';
+

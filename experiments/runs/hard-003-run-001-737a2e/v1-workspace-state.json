@@ -1,0 +1,426 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# SuperJSON path escape mapping mishandles backslashes and versioning\r\n\r\n## Problem\r\n\r\nSerializing an object with keys containing backslashes or dots and non-JSON values (like Set or RegExp) does not round-trip correctly. For example, a key like `b\\` with a Set value is not correctly restored after stringify and parse.\r\n",
+  "filesInspected": [
+    "ISSUE.md",
+    "package.json",
+    "tsconfig.json",
+    "src",
+    "tests",
+    ".v1",
+    ".v1/state.json",
+    "src/index.ts",
+    "src/pathstringifier.ts",
+    "src/plainer.ts",
+    "src/pathstringifier.test.ts",
+    "src/accessDeep.ts",
+    "src/accessDeep.test.ts",
+    "src/index.test.ts",
+    "tests/basic.test.ts",
+    "src/transformer.ts",
+    "src/transformer.test.ts",
+    ".v1/helpers.js"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-737a2e-kcDv0W\n\n ❯ src/pathstringifier.test.ts (13 tests | 4 failed) 57ms\n     × parsePath(%p) === %p 25ms\n     × parsePath(%p) === %p 5ms\n     × parsePath(%p) is rejected 6ms\n     × parsePath(%p) is rejected 2ms\n ❯ src/index.test.ts (0 test)\n ❯ src/transformer.test.ts (0 test)\n ❯ tests/basic.test.ts (0 test)\n ❯ src/plainer.spec.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 4 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/index.test.ts [ src/index.test.ts ]\nError: Cannot find package 'copy-anything' imported from C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-737a2e-kcDv0W/src/index.ts\n ❯ src/index.ts:14:1\n     12|   walker,\n     13| } from './plainer.js';\n     14| import { copy } from 'copy-anything';\n       | ^\n     15|\n     16| export default class SuperJSON {\n ❯ src/index.test.ts:6:1\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯\n\n FAIL  src/plainer.spec.ts [ src/plainer.spec.ts ]\nError: Cannot find package 'copy-anything' imported from C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-737a2e-kcDv0W/src/index.ts\n ❯ src/index.ts:14:1\n     12|   walker,\n     13| } from './plainer.js';\n     14| import { copy } from 'copy-anything';\n       | ^\n     15|\n     16| export default class SuperJSON {\n ❯ src/plainer.spec.ts:1:1\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯\n\n FAIL  src/transformer.test.ts [ src/transformer.test.ts ]\nError: Cannot find package 'copy-anything' imported from C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-737a2e-kcDv0W/src/index.ts\n ❯ src/index.ts:14:1\n     12|   walker,\n     13| } from './plainer.js';\n     14| import { copy } from 'copy-anything';\n       | ^\n     15|\n     16| export default class SuperJSON {\n ❯ src/transformer.test.ts:1:1\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯\n\n FAIL  tests/basic.test.ts [ tests/basic.test.ts ]\nError: Cannot find package 'copy-anything' imported from C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-737a2e-kcDv0W/src/index",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T02:56:52.106Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n47 vulnerabilities (5 low, 24 moderate, 15 high, 3 critical)\n\nTo address issues that do not require attention, run:\n  npm audit fix\n\nTo address all issues (including breaking changes), run:\n  npm audit fix --force\n\nRun `npm audit` for details.\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:04:26.413Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "\n\u001b[7m\u001b[1m\u001b[36m RUN \u001b[39m\u001b[22m\u001b[27m \u001b[36mv0.34.6\u001b[39m \u001b[90mC:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-737a2e-kcDv0W\u001b[39m\n\n \u001b[33m❯\u001b[39m src/pathstringifier.test.ts \u001b[2m (\u001b[22m\u001b[2m13 tests\u001b[22m \u001b[2m|\u001b[22m \u001b[31m4 failed\u001b[39m\u001b[2m)\u001b[22m\u001b[90m 212\u001b[2mms\u001b[22m\u001b[39m\n\u001b[31m   \u001b[33m❯\u001b[31m src/pathstringifier.test.ts\u001b[2m > \u001b[22mparsePath\u001b[2m > \u001b[22mparsePath(%p) === %p test\\\\.a.b [ 'test\\', 'a', 'b' ]\u001b[39m\n\u001b[31m     → expected [ 'test\\.a', 'b' ] to deeply equal [ 'test\\', 'a', 'b' ]\u001b[39m\n\u001b[31m   \u001b[33m❯\u001b[31m src/pathstringifier.test.ts\u001b[2m > \u001b[22mparsePath\u001b[2m > \u001b[22mparsePath(%p) === %p test\\\\a.b [ 'test\\a', 'b' ]\u001b[39m\n\u001b[31m     → expected [ 'test\\\\a', 'b' ] to deeply equal [ 'test\\a', 'b' ]\u001b[39m\n\u001b[31m   \u001b[33m❯\u001b[31m src/pathstringifier.test.ts\u001b[2m > \u001b[22mparsePath\u001b[2m > \u001b[22mparsePath(%p) is rejected test\\a.b\u001b[39m\n\u001b[31m     → expected [Function] to throw an error\u001b[39m\n\u001b[31m   \u001b[33m❯\u001b[31m src/pathstringifier.test.ts\u001b[2m > \u001b[22mparsePath\u001b[2m > \u001b[22mparsePath(%p) is rejected foo.bar.baz\\\u001b[39m\n\u001b[31m     → expected [Function] to throw an error\u001b[39m\n \u001b[32m✓\u001b[39m src/is.test.ts \u001b[2m (\u001b[22m\u001b[2m5 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[90m 189\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m src/accessDeep.test.ts \u001b[2m (\u001b[22m\u001b[2m2 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[90m 36\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m src/transformer.test.ts \u001b[2m (\u001b[22m\u001b[2m1 test\u001b[22m\u001b[2m)\u001b[22m\u001b[90m 146\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m src/registry.test.ts \u001b[2m (\u001b[22m\u001b[2m1 test\u001b[22m\u001b[2m)\u001b[22m\u001b[90m 152\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m tests/basic.test.ts \u001b[2m (\u001b[22m\u001b[2m2 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[90m 135\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m src/plainer.spec.ts \u001b[2m (\u001b[22m\u001b[2m1 test\u001b[22m\u001b[2m)\u001b[22m\u001b[90m 60\u001b[2mms\u001b[22m\u001b[39m\n \u001b[33m❯\u001b[39m src/index.test.ts \u001b[2m (\u001b[22m\u001b[2m59 tests\u001b[22m \u001b[2m|\u001b[22m \u001b[31m37 failed\u001b[39m \u001b[2m|\u001b[22m \u001b[33m2 skipped\u001b[39m\u001b[2m)\u001b[22m\u001b[33m 885\u001b[2mms\u001b[22m\u001b[39m\n\u001b[31m   \u001b[33m❯\u001b[31m src/index.test.ts\u001b[2m > \u001b[22mstringify & parse\u001b[2m > \u001b[22mworks for arrays\u001b[39m\n\u001b[31m     → expected undefined to be 1 // Object.is equality\u001b[39m\n\u001b[31m   \u001b[33m❯\u001b[31m src/index.te",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:05:45.557Z"
+    }
+  ],
+  "hypotheses": [],
+  "changesMade": [
+    {
+      "path": ".husky/.gitignore",
+      "summary": "modified .husky/.gitignore",
+      "iteration": 0,
+      "timestamp": "2026-08-31T03:06:23.518Z"
+    },
+    {
+      "path": "package-lock.json",
+      "summary": "modified package-lock.json",
+      "iteration": 0,
+      "timestamp": "2026-08-31T03:06:23.519Z"
+    }
+  ],
+  "verificationAttempts": [],
+  "evidence": [
+    {
+      "id": "ev-6b1677e6",
+      "type": "file_inspection",
+      "description": "Inspected ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T02:56:20.495Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ae5ce8ff",
+      "type": "file_inspection",
+      "description": "read ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T02:56:20.496Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5f0cef23",
+      "type": "file_inspection",
+      "description": "Inspected package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-31T02:56:20.499Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-9e2c4045",
+      "type": "file_inspection",
+      "description": "read package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-31T02:56:20.500Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-361b1c17",
+      "type": "file_inspection",
+      "description": "Inspected tsconfig.json",
+      "source": "tsconfig.json",
+      "timestamp": "2026-08-31T02:56:20.501Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6141378b",
+      "type": "file_inspection",
+      "description": "read tsconfig.json",
+      "source": "tsconfig.json",
+      "timestamp": "2026-08-31T02:56:20.502Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a88f4893",
+      "type": "file_inspection",
+      "description": "Inspected src",
+      "source": "src",
+      "timestamp": "2026-08-31T02:56:20.503Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-6b64dec6",
+      "type": "file_inspection",
+      "description": "read src",
+      "source": "src",
+      "timestamp": "2026-08-31T02:56:20.503Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-9f7a9224",
+      "type": "file_inspection",
+      "description": "Inspected tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T02:56:20.505Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e5fcee9b",
+      "type": "file_inspection",
+      "description": "read tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T02:56:20.505Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-fa3b76b1",
+      "type": "file_inspection",
+      "description": "Inspected .v1",
+      "source": ".v1",
+      "timestamp": "2026-08-31T02:56:20.507Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-42304dce",
+      "type": "file_inspection",
+      "description": "read .v1",
+      "source": ".v1",
+      "timestamp": "2026-08-31T02:56:20.507Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-dd1862f4",
+      "type": "file_inspection",
+      "description": "Inspected .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-31T02:56:23.307Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-545c495c",
+      "type": "file_inspection",
+      "description": "read .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-31T02:56:23.308Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1be3fe91",
+      "type": "file_inspection",
+      "description": "Inspected src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-31T02:56:23.310Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-38bdfba9",
+      "type": "file_inspection",
+      "description": "read src/index.ts",
+      "source": "src/index.ts",
+      "timestamp": "2026-08-31T02:56:23.311Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c1e41b9d",
+      "type": "file_inspection",
+      "description": "Inspected src/pathstringifier.ts",
+      "source": "src/pathstringifier.ts",
+      "timestamp": "2026-08-31T02:56:23.312Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f44c0d7d",
+      "type": "file_inspection",
+      "description": "read src/pathstringifier.ts",
+      "source": "src/pathstringifier.ts",
+      "timestamp": "2026-08-31T02:56:23.313Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a606112c",
+      "type": "file_inspection",
+      "description": "Inspected src/plainer.ts",
+      "source": "src/plainer.ts",
+      "timestamp": "2026-08-31T02:56:23.314Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-ca141c54",
+      "type": "file_inspection",
+      "description": "read src/plainer.ts",
+      "source": "src/plainer.ts",
+      "timestamp": "2026-08-31T02:56:23.315Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-fa32673a",
+      "type": "file_inspection",
+      "description": "Inspected src/pathstringifier.test.ts",
+      "source": "src/pathstringifier.test.ts",
+      "timestamp": "2026-08-31T02:56:26.502Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7bb45347",
+      "type": "file_inspection",
+      "description": "read src/pathstringifier.test.ts",
+      "source": "src/pathstringifier.test.ts",
+      "timestamp": "2026-08-31T02:56:26.503Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8ea34c2d",
+      "type": "file_inspection",
+      "description": "Inspected src/accessDeep.ts",
+      "source": "src/accessDeep.ts",
+      "timestamp": "2026-08-31T02:56:26.504Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-86c55c43",
+      "type": "file_inspection",
+      "description": "read src/accessDeep.ts",
+      "source": "src/accessDeep.ts",
+      "timestamp": "2026-08-31T02:56:26.505Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-fda1a7d0",
+      "type": "file_inspection",
+      "description": "Inspected src/accessDeep.test.ts",
+      "source": "src/accessDeep.test.ts",
+      "timestamp": "2026-08-31T02:56:26.507Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e10d6919",
+      "type": "file_inspection",
+      "description": "read src/accessDeep.test.ts",
+      "source": "src/accessDeep.test.ts",
+      "timestamp": "2026-08-31T02:56:26.508Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b89263df",
+      "type": "file_inspection",
+      "description": "Inspected src/index.test.ts",
+      "source": "src/index.test.ts",
+      "timestamp": "2026-08-31T02:56:26.510Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5b4dab09",
+      "type": "file_inspection",
+      "description": "read src/index.test.ts",
+      "source": "src/index.test.ts",
+      "timestamp": "2026-08-31T02:56:26.510Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-112feb60",
+      "type": "file_inspection",
+      "description": "Inspected tests/basic.test.ts",
+      "source": "tests/basic.test.ts",
+      "timestamp": "2026-08-31T02:56:26.512Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-db4c613d",
+      "type": "file_inspection",
+      "description": "read tests/basic.test.ts",
+      "source": "tests/basic.test.ts",
+      "timestamp": "2026-08-31T02:56:26.512Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a080cbaf",
+      "type": "file_inspection",
+      "description": "Inspected src/transformer.ts",
+      "source": "src/transformer.ts",
+      "timestamp": "2026-08-31T02:56:40.112Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-884eb0f4",
+      "type": "file_inspection",
+      "description": "read src/transformer.ts",
+      "source": "src/transformer.ts",
+      "timestamp": "2026-08-31T02:56:40.113Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-571dd4a8",
+      "type": "file_inspection",
+      "description": "Inspected src/transformer.test.ts",
+      "source": "src/transformer.test.ts",
+      "timestamp": "2026-08-31T02:56:40.115Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5ef8fd1e",
+      "type": "file_inspection",
+      "description": "read src/transformer.test.ts",
+      "source": "src/transformer.test.ts",
+      "timestamp": "2026-08-31T02:56:40.116Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-16f20b96",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-737a2e-kcDv0W\" && npx vitest run 2>&1 | head -100",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-737a2e-kcDv0W\" && npx vitest run 2>&1 | head -100",
+      "timestamp": "2026-08-31T02:56:40.122Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-226d7981",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-737a2e-kcDv0W\" && npm install 2>&1 | tail -10",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-737a2e-kcDv0W\" && npm install 2>&1 | tail -10",
+      "timestamp": "2026-08-31T02:57:04.676Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-b23f859c",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-737a2e-kcDv0W\" && npx vitest run 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hard-003-hard-003-run-001-737a2e-kcDv0W\" && npx vitest run 2>&1",
+      "timestamp": "2026-08-31T03:04:35.610Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7eb16812",
+      "type": "file_inspection",
+      "description": "Inspected .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-31T03:06:12.882Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-990f2585",
+      "type": "file_inspection",
+      "description": "read .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-31T03:06:12.884Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-54eed7af",
+      "type": "file_inspection",
+      "description": "Inspected .v1/helpers.js",
+      "source": ".v1/helpers.js",
+      "timestamp": "2026-08-31T03:06:12.885Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-69acf33b",
+      "type": "file_inspection",
+      "description": "read .v1/helpers.js",
+      "source": ".v1/helpers.js",
+      "timestamp": "2026-08-31T03:06:12.887Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a190f03e",
+      "type": "diff_inspection",
+      "description": "Final diff stat: (no changes)",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-31T03:06:17.166Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 0,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-31T02:56:14.920Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-31T02:56:14.920Z",
+      "exitedAt": "2026-08-31T03:06:14.962Z",
+      "durationMs": 600042
+    }
+  ],
+  "terminationReason": "timeout"
+}

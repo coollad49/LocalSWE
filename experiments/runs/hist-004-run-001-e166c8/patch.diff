@@ -1,0 +1,36 @@
+diff --git a/lib/index.js b/lib/index.js
+index b4d8a0a..05f190c 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -5,7 +5,7 @@ function toArr(any) {
+ function toVal(out, key, val, opts) {
+ 	var x, old=out[key], nxt=(
+ 		!!~opts.string.indexOf(key) ? (val == null || val === true ? '' : String(val))
+-		: !!~opts.boolean.indexOf(key) ? (val === 'false' ? false : val === 'true' || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))
++		: !!~opts.boolean.indexOf(key) ? (val === 'false' ? false : val === 'true' || typeof val === 'boolean' || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))
+ 		: typeof val === 'boolean' ? val
+ 		: (x = +val,x * 0 === 0) ? x : val
+ 	);
+diff --git a/tests/mri.test.ts b/tests/mri.test.ts
+index d0b1825..1d46cc9 100644
+--- a/tests/mri.test.ts
++++ b/tests/mri.test.ts
+@@ -43,6 +43,17 @@ describe("mri regression", () => {
+     expect(res).toEqual({ _: [], foo: "bar" });
+   });
+ 
++  test("boolean default does not leak into _ when flag is supplied", () => {
++    const res = mri(["--foo"], { boolean: "foo", default: { foo: true } });
++    expect(res).toEqual({ _: [], foo: true });
++    expect(typeof res.foo).toBe("boolean");
++  });
++
++  test("boolean default with short flag does not leak into _", () => {
++    const res = mri(["-t"], { boolean: "t", default: { t: true } });
++    expect(res).toEqual({ _: [], t: true });
++  });
++
+   test("unknown handler strict", () => {
+     const unknown = (flag: string) => {
+       throw new Error(`unknown ${flag}`);
+

@@ -1,0 +1,69 @@
+diff --git a/src/index.ts b/src/index.ts
+index f617424..cabb31c 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -676,7 +676,7 @@ function quoteName(name: string): string {
+ function stringifyName(name: string, next: Token | undefined): string {
+   if (!ID.test(name)) return quoteName(name);
+ 
+-  if (next?.type === "text" && ID_CONTINUE.test(next.value[0])) {
++  if (next?.type === "text" && ID_CONTINUE.test([...next.value][0])) {
+     return quoteName(name);
+   }
+ 
+diff --git a/tests/basic.test.ts b/tests/basic.test.ts
+index ea7f3b8..258a136 100644
+--- a/tests/basic.test.ts
++++ b/tests/basic.test.ts
+@@ -1,5 +1,5 @@
+ import { describe, test, expect } from "vitest";
+-import { parse, stringify } from "../src/index.js";
++import { parse, stringify, TokenData } from "../src/index.js";
+ 
+ describe("path-to-regexp regression", () => {
+   test("basic parse/stringify", () => {
+@@ -12,4 +12,44 @@ describe("path-to-regexp regression", () => {
+     const tokens = parse("/*splat");
+     expect(tokens).toBeDefined();
+   });
++  test("param followed by astral ID_Continue in text token must be quoted", () => {
++    // \u{1D6FC} is an astral ID_Continue character (mathematical italic)
++    // When a param is followed by text starting with an astral ID_Continue character,
++    // stringify must quote the param name to prevent it from being absorbed on re-parse.
++    const data = new TokenData([
++      { type: "text", value: "/" },
++      { type: "param", name: "test" },
++      { type: "text", value: "\u{1D6FC}" },
++    ]);
++    const str = stringify(data);
++    // Must quote 'test' because next text starts with astral ID_Continue
++    expect(str).toBe('/:"test"\u{1D6FC}');
++    // Verify round-trip
++    const tokens2 = parse(str);
++    expect(stringify(tokens2)).toBe(str);
++  });
++  test("wildcard followed by astral ID_Continue in text token must be quoted", () => {
++    // Same for wildcard parameters
++    const data = new TokenData([
++      { type: "text", value: "/" },
++      { type: "wildcard", name: "test" },
++      { type: "text", value: "\u{1D6FC}" },
++    ]);
++    const str = stringify(data);
++    expect(str).toBe('/*"test"\u{1D6FC}');
++    const tokens2 = parse(str);
++    expect(stringify(tokens2)).toBe(str);
++  });
++  test("param followed by non-ID_Continue emoji stays unquoted", () => {
++    // \u{1F600} (😀) is NOT ID_Continue, so no quoting needed
++    const data = new TokenData([
++      { type: "text", value: "/" },
++      { type: "param", name: "test" },
++      { type: "text", value: "\u{1F600}" },
++    ]);
++    const str = stringify(data);
++    expect(str).toBe("/:test\u{1F600}");
++    const tokens2 = parse(str);
++    expect(stringify(tokens2)).toBe(str);
++  });
+ });

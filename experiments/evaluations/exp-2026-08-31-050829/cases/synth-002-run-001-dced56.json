@@ -1,0 +1,77 @@
+{
+  "runId": "synth-002-run-001-dced56",
+  "caseId": "synth-002",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 1204,
+  "startedAt": "2026-08-31T08:43:43.799Z",
+  "completedAt": "2026-08-31T08:43:45.003Z",
+  "caseMeta": {
+    "repository": "money-utils",
+    "type": "synthetic",
+    "difficulty": "easy",
+    "categories": [
+      "validation",
+      "business-logic"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-002-P7oqe9\\benchmark\\repositories\\money-utils",
+      "stdout": "empty patch - no changes applied",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 284,
+      "command": "bun run benchmark\\cases\\synth-002\\public\\reproduce.ts",
+      "stdout": "add USD+EUR returned {\"amount\":15,\"currency\":\"USD\"} expected throw\nFAIL: did not throw on currency mismatch\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "metrics": {
+    "durationMs": 602791,
+    "totalTurns": 156,
+    "toolCalls": 72,
+    "commandsExecuted": 60,
+    "filesInspected": 6,
+    "filesChanged": 0,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 100492,
+    "outputTokens": 17916,
+    "totalTokens": 1819272
+  },
+  "cost": {
+    "inputTokens": 100492,
+    "outputTokens": 17916,
+    "totalTokens": 118408,
+    "inputCostUsd": 0.030148,
+    "outputCostUsd": 0.021499,
+    "totalCostUsd": 0.153699,
+    "costUsd": 0.153699,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  }
+}

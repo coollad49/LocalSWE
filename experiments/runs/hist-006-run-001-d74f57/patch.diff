@@ -1,0 +1,56 @@
+diff --git a/src/spyOn.ts b/src/spyOn.ts
+index cf0f3f8..7683b1d 100644
+--- a/src/spyOn.ts
++++ b/src/spyOn.ts
+@@ -25,6 +25,19 @@ type Constructors<T> = {
+ let getDescriptor = (obj: any, method: string | symbol | number) =>
+   Object.getOwnPropertyDescriptor(obj, method)
+ 
++let getDescriptorFromChain = (
++  obj: any,
++  method: string | symbol | number
++): PropertyDescriptor | undefined => {
++  let current: any = obj
++  while (current && current !== Object.prototype && current !== Function.prototype) {
++    const desc = Object.getOwnPropertyDescriptor(current, method)
++    if (desc) return desc
++    current = Object.getPrototypeOf(current)
++  }
++  return undefined
++}
++
+ let setPototype = (fn: any, val: any) => {
+   if (val != null && typeof val === 'function' && val.prototype != null) {
+     // inherit prototype, keep original prototype chain
+@@ -66,9 +79,7 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     throw new Error('specify getter or setter to spy on')
+   })()
+   let objDescriptor = getDescriptor(obj, accessName)
+-  let proto = Object.getPrototypeOf(obj)
+-  let protoDescriptor = proto && getDescriptor(proto, accessName)
+-  let originalDescriptor = objDescriptor || protoDescriptor
++  let originalDescriptor = objDescriptor || getDescriptorFromChain(obj, accessName)
+ 
+   assert(
+     originalDescriptor || accessName in obj,
+@@ -114,10 +125,16 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     ;(desc as PropertyDescriptor)[accessType] = cb
+     define(obj, accessName, desc)
+   }
+-  let restore = () =>
+-    originalDescriptor && !original
+-      ? define(obj, accessName, originalDescriptor)
+-      : reassign(original)
++  let restore = () => {
++    if (!originalDescriptor || !original) return
++    // If the descriptor was inherited (not own), just delete the own property
++    // to restore the prototype chain behavior
++    if (objDescriptor) {
++      define(obj, accessName, originalDescriptor)
++    } else {
++      delete (obj as any)[accessName]
++    }
++  }
+ 
+   if (!mock) mock = original
+ 

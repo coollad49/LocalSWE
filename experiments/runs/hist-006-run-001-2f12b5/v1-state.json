@@ -1,0 +1,462 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# Issue: spyOn fails to mock inherited methods\r\n\r\n## Problem\r\n\r\nSpying on a getter that is inherited from a parent class prototype fails. The spy should correctly find and mock the descriptor from the prototype chain, but it only checks the immediate prototype and throws or fails to mock.\r\n",
+  "filesInspected": [
+    "C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk",
+    "ISSUE.md",
+    "package.json",
+    "src",
+    "tests",
+    ".v1",
+    "src/spyOn.ts",
+    "src/spy.ts",
+    "src/utils.ts",
+    "src/internal.ts",
+    "tests/tinyspy.test.ts",
+    ".v1/state.json",
+    ".v1/helpers.js"
+  ],
+  "commandsExecuted": [
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "\n> tinyspy@4.0.2 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\n\n ❯ tests/tinyspy.test.ts (3 tests | 2 failed) 50ms\n     × spyOn mocks prototype method and restores cleanly 32ms\n     × spyOn inherited getter preserves setter 7ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn mocks prototype method and restores cleanly\nAssertionError: expected { value: [Function f], …(3) } to be undefined\n\n- Expected:\nundefined\n\n+ Received:\n{\n  \"configurable\": true,\n  \"enumerable\": false,\n  \"value\": [Function f],\n  \"writable\": true,\n}\n\n ❯ tests/tinyspy.test.ts:14:55\n     12|     s.restore();\n     13|     expect(foo.f()).toBe('original');\n     14|     expect(Object.getOwnPropertyDescriptor(foo, 'f')).toBeUndefined();\n       |                                                       ^\n     15|   });\n     16|\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  tests/tinyspy.test.ts > tinyspy regression > spyOn inherited getter preserves setter\nAssertionError: expected [Function] to not throw an error but 'TypeError: Cannot set property v of #…' was thrown\n\n- Expected:\nundefined\n\n+ Received:\n\"TypeError: Cannot set property v of #<Foo> which has only a getter\"\n\n ❯ tests/tinyspy.test.ts:39:43\n     37|     const s = spyOn(foo, { getter: 'v' }, () => 'mocked');\n     38|     expect(foo.v).toBe('mocked');\n     39|     expect(() => { foo.v = 'test'; }).not.toThrow();\n       |                                           ^\n     40|     expect(foo.v).toBe('mocked');\n     41|     s.restore();\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 1 passed (3)\n   Start at  04:08:23\n   Duration  4.76s (transform 1.72s, setup 0ms, import 1.86s, tests 50ms, environment 0ms)\n\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:08:29.776Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hyp-f37b0a8e\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:09:44.633Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "hyp-ffb5e744\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:09:55.825Z"
+    },
+    {
+      "command": "",
+      "exitCode": 1,
+      "stdout": "hypothesis not found hyp-f37b0a8e\n\n\nCommand exited with code 1",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:09:59.735Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "=== Test 1: Prototype method ===\nBefore spyOn:\n  foo1.f(): original\n  own descriptor: undefined\n  prototype: {}\n  objDescriptor: undefined\n  protoDescriptor: {\n  value: [Function: f],\n  writable: true,\n  enumerable: false,\n  configurable: true\n}\n  originalDescriptor: {\n  value: [Function: f],\n  writable: true,\n  enumerable: false,\n  configurable: true\n}\n  original: [Function: f]\n\n  originalDescriptor && !original: false\n  => This is false because both exist\n  => So restore() calls reassign(original), which creates own property!\n\n=== Test 2: Getter/Setter inheritance ===\nBefore spyOn:\n  child2.v: parent\n  own descriptor: undefined\n  prototype: Parent2 {}\n  proto descriptor: undefined\n  objDescriptor: undefined\n  protoDescriptor: undefined\n  grandparentDescriptor: {\n  get: [Function: get v],\n  set: [Function: set v],\n  enumerable: false,\n  configurable: true\n}\n  originalDescriptor: undefined\n  Final desc for define(): { get: [Function (anonymous)] }\n  Does desc have 'set'? false\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:10:54.984Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "\n> tinyspy@4.0.2 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\n\n\n Test Files  1 passed (1)\n      Tests  3 passed (3)\n   Start at  04:11:27\n   Duration  941ms (transform 268ms, setup 0ms, import 352ms, tests 23ms, environment 0ms)\n\n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:11:28.651Z"
+    },
+    {
+      "command": "",
+      "exitCode": 0,
+      "stdout": "diff --git a/src/spyOn.ts b/src/spyOn.ts\nindex cf0f3f8..a9a2ef2 100644\n--- a/src/spyOn.ts\n+++ b/src/spyOn.ts\n@@ -66,9 +66,13 @@ export function internalSpyOn<T, K extends string & keyof T>(\n     throw new Error('specify getter or setter to spy on')\n   })()\n   let objDescriptor = getDescriptor(obj, accessName)\n+  // Walk the full prototype chain to find the descriptor\n+  let originalDescriptor: PropertyDescriptor | undefined = objDescriptor\n   let proto = Object.getPrototypeOf(obj)\n-  let protoDescriptor = proto && getDescriptor(proto, accessName)\n-  let originalDescriptor = objDescriptor || protoDescriptor\n+  while (!originalDescriptor && proto && proto !== Object.prototype) {\n+    originalDescriptor = getDescriptor(proto, accessName)\n+    proto = Object.getPrototypeOf(proto)\n+  }\n \n   assert(\n     originalDescriptor || accessName in obj,\n@@ -114,10 +118,18 @@ export function internalSpyOn<T, K extends string & keyof T>(\n     ;(desc as PropertyDescriptor)[accessType] = cb\n     define(obj, accessName, desc)\n   }\n-  let restore = () =>\n-    originalDescriptor && !original\n-      ? define(obj, accessName, originalDescriptor)\n-      : reassign(original)\n+  let restore = () => {\n+    if (objDescriptor) {\n+      // Property was an own property, restore it\n+      define(obj, accessName, originalDescriptor)\n+    } else if (originalDescriptor) {\n+      // Property was inherited, just delete our spy to reveal the inherited one\n+      delete (obj as any)[accessName]\n+    } else {\n+      // No original descriptor at all, reassign original\n+      reassign(original)\n+    }\n+  }\n \n   if (!mock) mock = original\n \n",
+      "stderr": "",
+      "durationMs": 0,
+      "phase": "reconnaissance",
+      "timestamp": "2026-08-31T03:11:32.850Z"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "hyp-1",
+      "description": "The restore function incorrectly creates an own property on the object when the original was inherited from a prototype.",
+      "evidence": [
+        "src/spyOn.ts:91-93",
+        "Reproduction confirmed"
+      ],
+      "confidence": 0.9,
+      "status": "confirmed",
+      "files": [
+        "src/spyOn.ts"
+      ]
+    },
+    {
+      "id": "hyp-2",
+      "description": "The getDescriptor function only checks the immediate prototype, not the full prototype chain.",
+      "evidence": [
+        "src/spyOn.ts:48-50",
+        "Reproduction confirmed"
+      ],
+      "confidence": 0.9,
+      "status": "confirmed",
+      "files": [
+        "src/spyOn.ts"
+      ]
+    }
+  ],
+  "changesMade": [
+    {
+      "path": "src/spyOn.ts",
+      "summary": "edit src/spyOn.ts",
+      "iteration": 0,
+      "timestamp": "2026-08-31T03:11:18.557Z"
+    },
+    "src/spyOn.ts - Walk full prototype chain instead of just one level",
+    "src/spyOn.ts - Fix restore() to delete inherited spy properties instead of reassigning",
+    {
+      "path": "src/spyOn.ts",
+      "summary": "modified src/spyOn.ts",
+      "iteration": 0,
+      "timestamp": "2026-08-31T03:11:53.267Z"
+    }
+  ],
+  "verificationAttempts": [
+    {
+      "method": "vitest",
+      "command": "npm test",
+      "passed": true,
+      "output": "3 passed (3)"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-67fb4d6f",
+      "type": "file_inspection",
+      "description": "Inspected C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk",
+      "timestamp": "2026-08-31T03:07:38.395Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-831bdac0",
+      "type": "file_inspection",
+      "description": "read C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk",
+      "source": "C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk",
+      "timestamp": "2026-08-31T03:07:38.396Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f7686ec0",
+      "type": "file_inspection",
+      "description": "Inspected ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T03:07:38.398Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-205c48df",
+      "type": "file_inspection",
+      "description": "read ISSUE.md",
+      "source": "ISSUE.md",
+      "timestamp": "2026-08-31T03:07:38.399Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1495f64b",
+      "type": "file_inspection",
+      "description": "Inspected package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-31T03:07:41.538Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-16e4c425",
+      "type": "file_inspection",
+      "description": "read package.json",
+      "source": "package.json",
+      "timestamp": "2026-08-31T03:07:41.539Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-d3dc21b4",
+      "type": "file_inspection",
+      "description": "Inspected src",
+      "source": "src",
+      "timestamp": "2026-08-31T03:07:41.541Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a02a3382",
+      "type": "file_inspection",
+      "description": "read src",
+      "source": "src",
+      "timestamp": "2026-08-31T03:07:41.541Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1e3987a2",
+      "type": "file_inspection",
+      "description": "Inspected tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T03:07:41.545Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1cad97e1",
+      "type": "file_inspection",
+      "description": "read tests",
+      "source": "tests",
+      "timestamp": "2026-08-31T03:07:41.546Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-e4e5d0d8",
+      "type": "file_inspection",
+      "description": "Inspected .v1",
+      "source": ".v1",
+      "timestamp": "2026-08-31T03:07:41.548Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-3028198a",
+      "type": "file_inspection",
+      "description": "read .v1",
+      "source": ".v1",
+      "timestamp": "2026-08-31T03:07:41.553Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-84301cdf",
+      "type": "file_inspection",
+      "description": "Inspected src/spyOn.ts",
+      "source": "src/spyOn.ts",
+      "timestamp": "2026-08-31T03:07:47.352Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-7f66423b",
+      "type": "file_inspection",
+      "description": "read src/spyOn.ts",
+      "source": "src/spyOn.ts",
+      "timestamp": "2026-08-31T03:07:47.354Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-8eebbd38",
+      "type": "file_inspection",
+      "description": "Inspected src/spy.ts",
+      "source": "src/spy.ts",
+      "timestamp": "2026-08-31T03:07:47.359Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a1f0b636",
+      "type": "file_inspection",
+      "description": "read src/spy.ts",
+      "source": "src/spy.ts",
+      "timestamp": "2026-08-31T03:07:47.360Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-0f556885",
+      "type": "file_inspection",
+      "description": "Inspected src/utils.ts",
+      "source": "src/utils.ts",
+      "timestamp": "2026-08-31T03:07:47.362Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-573da40a",
+      "type": "file_inspection",
+      "description": "read src/utils.ts",
+      "source": "src/utils.ts",
+      "timestamp": "2026-08-31T03:07:47.363Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c6f0e73c",
+      "type": "file_inspection",
+      "description": "Inspected src/internal.ts",
+      "source": "src/internal.ts",
+      "timestamp": "2026-08-31T03:07:47.367Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c226d8e2",
+      "type": "file_inspection",
+      "description": "read src/internal.ts",
+      "source": "src/internal.ts",
+      "timestamp": "2026-08-31T03:07:47.368Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-68f46619",
+      "type": "file_inspection",
+      "description": "Inspected tests/tinyspy.test.ts",
+      "source": "tests/tinyspy.test.ts",
+      "timestamp": "2026-08-31T03:07:50.618Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-acbaf866",
+      "type": "file_inspection",
+      "description": "read tests/tinyspy.test.ts",
+      "source": "tests/tinyspy.test.ts",
+      "timestamp": "2026-08-31T03:07:50.619Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5c6f9257",
+      "type": "file_inspection",
+      "description": "Inspected .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-31T03:07:50.625Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-4088ad7e",
+      "type": "file_inspection",
+      "description": "read .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-31T03:07:50.626Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-25009734",
+      "type": "file_inspection",
+      "description": "Inspected .v1/helpers.js",
+      "source": ".v1/helpers.js",
+      "timestamp": "2026-08-31T03:07:50.648Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-9ee27e85",
+      "type": "file_inspection",
+      "description": "read .v1/helpers.js",
+      "source": ".v1/helpers.js",
+      "timestamp": "2026-08-31T03:07:50.649Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-d62011eb",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && npm test 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && npm test 2>&1",
+      "timestamp": "2026-08-31T03:08:01.588Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f31fed51",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && node .v1/helpers.js add-hypothesis '{\"description\":\"The restore function incorrectly creates own property on ",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && node .v1/helpers.js add-hypothesis '{\"description\":\"The restore function incorrectly creates own property on object when original was inherited from prototype. When originalDescriptor is from prototype AND original exists, the code falls into reassign(original) instead of properly cleaning up the own property it created.\",\"evidence\":[\"src/spyOn.ts:91-93\"],\"confidence\":0.9,\"files\":[\"src/spyOn.ts\"]}'",
+      "timestamp": "2026-08-31T03:09:43.003Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1de89162",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && node .v1/helpers.js add-hypothesis '{\"description\":\"When spying on an inherited getter, the reassign function",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && node .v1/helpers.js add-hypothesis '{\"description\":\"When spying on an inherited getter, the reassign function loses the original setter. The reassign function spreads originalDescriptor but when setting desc.get = cb, it does not preserve the existing setter from the prototype descriptor.\",\"evidence\":[\"src/spyOn.ts:78-88\"],\"confidence\":0.85,\"files\":[\"src/spyOn.ts\"]}'",
+      "timestamp": "2026-08-31T03:09:53.085Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-c4e9f105",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && node .v1/helpers.js select-hypothesis hyp-f37b0a8e",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && node .v1/helpers.js select-hypothesis hyp-f37b0a8e",
+      "timestamp": "2026-08-31T03:09:58.427Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-20e235dc",
+      "type": "file_inspection",
+      "description": "Inspected .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-31T03:10:05.823Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-253ecd42",
+      "type": "file_inspection",
+      "description": "read .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-31T03:10:05.825Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-5579babb",
+      "type": "file_inspection",
+      "description": "Inspected .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-31T03:10:10.401Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-d47b4fca",
+      "type": "file_inspection",
+      "description": "read .v1/state.json",
+      "source": ".v1/state.json",
+      "timestamp": "2026-08-31T03:10:10.402Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-a58f7ded",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && node .v1/repro.js",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && node .v1/repro.js",
+      "timestamp": "2026-08-31T03:10:54.310Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-1e8b1c1b",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && npm test 2>&1",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && npm test 2>&1",
+      "timestamp": "2026-08-31T03:11:23.787Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-f8f64b22",
+      "type": "command_result",
+      "description": "bash: cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && git diff HEAD -- src/spyOn.ts",
+      "source": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-2f12b5-KRoQRk\" && git diff HEAD -- src/spyOn.ts",
+      "timestamp": "2026-08-31T03:11:32.625Z",
+      "phase": "reconnaissance"
+    },
+    {
+      "id": "ev-15d01e18",
+      "type": "diff_inspection",
+      "description": "Final diff stat:  src/spyOn.ts | 24 ++++++++++++++++++------\n 1 file changed, 18 insertions(+), 6 deletions(-)\n",
+      "source": "git diff HEAD --stat",
+      "timestamp": "2026-08-31T03:11:52.615Z",
+      "phase": "finalization"
+    }
+  ],
+  "iteration": 0,
+  "maxIterations": 5,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-31T03:07:33.411Z",
+      "iteration": 0
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-31T03:07:33.411Z",
+      "exitedAt": "2026-08-31T03:11:52.342Z",
+      "durationMs": 258931
+    }
+  ],
+  "selectedHypothesis": "hyp-1",
+  "terminationReason": "completed"
+}
