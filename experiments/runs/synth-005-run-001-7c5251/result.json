@@ -1,0 +1,49 @@
+{
+  "runId": "synth-005-run-001-7c5251",
+  "caseId": "synth-005",
+  "agentVersion": "agent-v3",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 110030,
+  "changedFiles": [
+    "src/money.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-005-run-001-7c5251\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-005-run-001-7c5251\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-005-run-001-7c5251\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+      "exitCode": 0,
+      "durationMs": 337,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.73ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.53ms]\n(pass) money-utils > parseMoney handles comma-separated [1.97ms]\n(pass) money-utils > parseMoney handles simple amounts [0.23ms]\n(pass) money-utils > add validates currency mismatch [0.73ms]\n(pass) money-utils > subtract validates currency [0.26ms]\n(pass) money-utils > multiply [0.18ms]\n(pass) money-utils > convertCurrency precision [0.38ms]\n(pass) money-utils > convertCurrency throws missing rate [0.22ms]\n(pass) money-utils > createMoney validates [0.19ms]\n\n 10 pass\n 0 fail\n 22 expect() calls\nRan 10 tests across 1 file. [116.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 274,
+      "stdout": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n9 files were searched [85.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 410,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Currency conversion rounding invariant > convertCurrency always rounds, never truncates [1.89ms]\n(pass) Currency conversion rounding invariant > convertCurrency result is always within ±0.01 of exact value [0.40ms]\n37 |   test(\"roundToCents always produces 2 decimal places\", () => {\n38 |     const values = [0.1, 0.01, 0.001, 1.999, 2.675, 1.005, -1.555];\n39 |     for (const v of values) {\n40 |       const rounded = roundToCents(v);\n41 |       // Should not have more than 2 decimal places\n42 |       expect(rounded * 100 % 1).toBe(0);\n                                     ^\nerror: expect(received).toBe(expected)\n\nExpected: 0\nReceived: -0\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-synth-005-synth-005-run-001-7c5251-zarKis\\.v3\\invariants.test.ts:42:33)\n(fail) Currency conversion rounding invariant > roundToCents always produces 2 decimal places [1.10ms]\n(pass) Currency conversion rounding invariant > concurrent conversions are consistent [23.58ms]\n(pass) Currency conversion rounding invariant > boundary: zero amount conversion [0.20ms]\n(pass) Currency conversion rounding invariant > boundary: very small positive amount [0.08ms]\n69 |   });\n70 | \n71 |   test(\"boundary: negative amount conversion\", () => {\n72 |     const money = createMoney(-100, \"USD\");\n73 |     const result = convertCurrency(money, \"EUR\", { USD_EUR: 0.92345 });\n74 |     expect(result.amount).toBe(-92.35);\n                               ^\nerror: expect(received).toBe(expected)\n\nExpected: -92.35\nReceived: -92.34\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-synth-005-synth-005-run-001-7c5251-zarKis\\.v3\\invariants.test.ts:74:27)\n(fail) Currency conversion rounding invariant > boundary: negative amount conversion [0.43ms]\n\n 5 pass\n 2 fail\n 73 expect() calls\nRan 7 tests across 1 file. [177.00ms]\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+      "exitCode": 0,
+      "durationMs": 308,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Currency conversion rounding invariant > convertCurrency always rounds, never truncates [1.72ms]\n(pass) Currency conversion rounding invariant > convertCurrency result is always within ±0.01 of exact value [0.29ms]\n(pass) Currency conversion rounding invariant > roundToCents always produces 2 decimal places [0.21ms]\n(pass) Currency conversion rounding invariant > concurrent conversions are consistent [13.45ms]\n(pass) Currency conversion rounding invariant > boundary: zero amount conversion [4.48ms]\n(pass) Currency conversion rounding invariant > boundary: very small positive amount [0.18ms]\n(pass) Currency conversion rounding invariant > boundary: negative amount conversion [0.11ms]\n\n 7 pass\n 0 fail\n 73 expect() calls\nRan 7 tests across 1 file. [122.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+      "exitCode": 0,
+      "durationMs": 273,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.59ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.38ms]\n(pass) money-utils > parseMoney handles comma-separated [1.73ms]\n(pass) money-utils > parseMoney handles simple amounts [0.22ms]\n(pass) money-utils > add validates currency mismatch [0.76ms]\n(pass) money-utils > subtract validates currency [0.24ms]\n(pass) money-utils > multiply [0.15ms]\n(pass) money-utils > convertCurrency precision [0.35ms]\n(pass) money-utils > convertCurrency throws missing rate [0.22ms]\n(pass) money-utils > createMoney validates [0.21ms]\n\n 10 pass\n 0 fail\n 22 expect() calls\nRan 10 tests across 1 file. [86.00ms]\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T14:37:14.598Z",
+  "endedAt": "2026-08-31T14:39:04.628Z"
+}

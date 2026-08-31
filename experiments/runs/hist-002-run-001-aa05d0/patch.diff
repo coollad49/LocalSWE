@@ -1,0 +1,27 @@
+diff --git a/src/defu.ts b/src/defu.ts
+index 168ddff..fb545f3 100644
+--- a/src/defu.ts
++++ b/src/defu.ts
+@@ -7,7 +7,20 @@ function _defu<T>(baseObject: T, defaults: any, namespace = ".", merger?: Merger
+     return _defu(baseObject, {}, namespace, merger);
+   }
+ 
+-  const object = Object.assign({}, defaults);
++  // Safe copy: avoid Object.assign which triggers __proto__ setter
++  const object: Record<string, any> = {};
++  for (const key of Object.keys(defaults)) {
++    if (key === "__proto__") {
++      Object.defineProperty(object, key, {
++        value: defaults[key],
++        writable: true,
++        enumerable: true,
++        configurable: true,
++      });
++    } else {
++      object[key] = defaults[key];
++    }
++  }
+ 
+   for (const key in baseObject) {
+     if (key === "__proto__" || key === "constructor") {
+

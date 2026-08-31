@@ -1,0 +1,30 @@
+diff --git a/lib/utils.js b/lib/utils.js
+index 10698bd..493a6e5 100644
+--- a/lib/utils.js
++++ b/lib/utils.js
+@@ -339,8 +339,22 @@ var combine = function combine(a, b, arrayLimit, plainObjects, throwOnLimitExcee
+             throw new RangeError('Array limit exceeded. Only ' + arrayLimit + ' element' + (arrayLimit === 1 ? '' : 's') + ' allowed in an array.');
+         }
+         var newIndex = getMaxIndex(a) + 1;
+-        a[newIndex] = b;
+-        setMaxIndex(a, newIndex);
++        if (isOverflow(b)) {
++            // Both are overflow objects - spread b's contents into a
++            var bKeys = Object.keys(b);
++            for (var k = 0; k < bKeys.length; k++) {
++                a[newIndex + k] = b[bKeys[k]];
++            }
++            setMaxIndex(a, newIndex + bKeys.length - 1);
++        } else if (isArray(b)) {
++            for (var i = 0; i < b.length; i++) {
++                a[newIndex + i] = b[i];
++            }
++            setMaxIndex(a, newIndex + b.length - 1);
++        } else {
++            a[newIndex] = b;
++            setMaxIndex(a, newIndex);
++        }
+         return a;
+     }
+ 
+

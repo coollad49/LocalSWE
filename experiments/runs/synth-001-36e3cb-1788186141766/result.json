@@ -1,0 +1,43 @@
+{
+  "runId": "synth-001-36e3cb-1788186141766",
+  "caseId": "synth-001",
+  "agentVersion": "agent-v3",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 176230,
+  "changedFiles": [
+    "src/task-manager.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-001-36e3cb-1788186141766\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-001-36e3cb-1788186141766\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-001-36e3cb-1788186141766\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-36e3cb-1788186141766-r4xWAW\" && bun test",
+      "exitCode": 0,
+      "durationMs": 326,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [2.10ms]\n(pass) TaskManager > createTask validates priority [0.72ms]\n(pass) TaskManager > createTask validates title [0.23ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.66ms]\n(pass) TaskManager > updateTask only updates provided fields [0.31ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [2.01ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.26ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [0.70ms]\n(pass) TaskManager > filterByStatus validates status [0.15ms]\n(pass) TaskManager > getTasksByPriority filters correctly [0.77ms]\n(pass) TaskManager > deleteTask removes task [0.40ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [104.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-36e3cb-1788186141766-r4xWAW\" && bun test .v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 272,
+      "stdout": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n12 files were searched [77.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-36e3cb-1788186141766-r4xWAW\" && bun test ./.v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 421,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) UpdateTask invariants > updating only title preserves description, priority, status, dueDate [2.53ms]\n(pass) UpdateTask invariants > updating only priority preserves all other fields [0.35ms]\n(pass) UpdateTask invariants > updating only status preserves all other fields [0.19ms]\n(pass) UpdateTask invariants > setting dueDate to null clears dueDate but preserves rest [0.19ms]\n77 |     expect(u.status).toBe(\"in_progress\");\n78 |     expect(u.dueDate).toBe(\"2025-03-10\");\n79 |     expect(u.id).toBe(t.id);\n80 |     expect(u.createdAt).toBe(t.createdAt);\n81 |     // updatedAt should be refreshed\n82 |     expect(u.updatedAt).not.toBe(t.updatedAt);\n                                 ^\nerror: expect(received).not.toBe(expected)\n\nExpected: not \"2026-08-31T14:24:54.720Z\"\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-synth-001-synth-001-36e3cb-1788186141766-r4xWAW\\.v3\\invariants.test.ts:82:29)\n(fail) UpdateTask invariants > empty update object leaves task unchanged except updatedAt [1.07ms]\n(pass) UpdateTask invariants > updating all fields at once works correctly [0.28ms]\n(pass) UpdateTask invariants > concurrent updates on same task do not cross-contaminate [1.03ms]\n(pass) UpdateTask invariants > updating non-existent task throws [0.23ms]\n(pass) UpdateTask invariants > update does not mutate original object returned by createTask [0.13ms]\n(pass) UpdateTask invariants > filterByStatus cache is consistent after update [1.69ms]\n\n 9 pass\n 1 fail\n 37 expect() calls\nRan 10 tests across 1 file. [166.00ms]\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-36e3cb-1788186141766-r4xWAW\" && bun test ./.v3/invariants.test.ts && bun test",
+      "exitCode": 0,
+      "durationMs": 556,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) UpdateTask invariants > updating only title preserves description, priority, status, dueDate [1.63ms]\n(pass) UpdateTask invariants > updating only priority preserves all other fields [0.18ms]\n(pass) UpdateTask invariants > updating only status preserves all other fields [0.10ms]\n(pass) UpdateTask invariants > setting dueDate to null clears dueDate but preserves rest [0.12ms]\n(pass) UpdateTask invariants > empty update object leaves task unchanged except updatedAt [0.14ms]\n(pass) UpdateTask invariants > updating all fields at once works correctly [0.11ms]\n(pass) UpdateTask invariants > concurrent updates on same task do not cross-contaminate [0.92ms]\n(pass) UpdateTask invariants > updating non-existent task throws [0.29ms]\n(pass) UpdateTask invariants > update does not mutate original object returned by createTask [0.12ms]\n(pass) UpdateTask invariants > filterByStatus cache is consistent after update [2.97ms]\n\n 10 pass\n 0 fail\n 37 expect() calls\nRan 10 tests across 1 file. [139.00ms]\nbun test v1.3.14 (0d9b296a)\n\ntests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [1.61ms]\n(pass) TaskManager > createTask validates priority [0.59ms]\n(pass) TaskManager > createTask validates title [0.23ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.49ms]\n(pass) TaskManager > updateTask only updates provided fields [0.31ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [2.29ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.25ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [0.68ms]\n(pass) TaskManager > filterByStatus validates status [0.16ms]\n(pass) TaskManager > getTasksByPriority filters correctly [0.76ms]\n(pass) TaskManager > deleteTask removes task [0.58ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [110.00ms]\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T14:22:23.039Z",
+  "endedAt": "2026-08-31T14:25:19.269Z"
+}

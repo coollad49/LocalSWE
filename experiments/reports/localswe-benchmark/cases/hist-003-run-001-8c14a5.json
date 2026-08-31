@@ -7,9 +7,9 @@
   "model": "opencode-go/mimo-v2.5",
   "status": "completed",
   "verdict": "verified",
-  "durationMs": 1404,
-  "startedAt": "2026-08-31T11:58:13.391Z",
-  "completedAt": "2026-08-31T11:58:14.795Z",
+  "durationMs": 1556,
+  "startedAt": "2026-08-31T15:33:34.941Z",
+  "completedAt": "2026-08-31T15:33:36.497Z",
   "caseMeta": {
     "repository": "tinyspy",
     "type": "historical",
@@ -48,15 +48,15 @@
     "patchApply": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 163,
-      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-003-pPxSUV\\patch-1788177494162.diff",
+      "durationMs": 170,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-003-ZjHa05\\patch-1788190415770.diff",
       "stdout": "",
       "stderr": ""
     },
     "reproduction": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 163,
+      "durationMs": 156,
       "command": "bun run benchmark\\cases\\hist-003\\public\\reproduce.ts",
       "stdout": "before: foo.f()=original own=undefined\nbefore descriptors: {}\nafter spy: foo.f()=mocked ownDesc={\"writable\":true,\"enumerable\":false,\"configurable\":true}\nafter restore: foo.f()=original ownDesc=undefined\nall own descriptors after restore: {}\nPASS: prototype restore is clean, no leak\n",
       "stderr": "",
@@ -65,19 +65,19 @@
     "oracle": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 136,
+      "durationMs": 220,
       "command": "bun test benchmark\\cases\\hist-003\\private\\oracle.test.ts",
       "stdout": "bun test v1.3.14 (0d9b296a)\n",
-      "stderr": "\nbenchmark\\cases\\hist-003\\private\\oracle.test.ts:\n(pass) hist-003 oracle: prototype restore leak > restore deletes own property for prototype method [3.44ms]\n(pass) hist-003 oracle: prototype restore leak > multiple spy/restore cycles remain clean [1.55ms]\n(pass) hist-003 oracle: prototype restore leak > prototype still owns method after restore [0.36ms]\n\n 3 pass\n 0 fail\n 27 expect() calls\nRan 3 tests across 1 file. [93.00ms]\n",
+      "stderr": "\nbenchmark\\cases\\hist-003\\private\\oracle.test.ts:\n(pass) hist-003 oracle: prototype restore leak > restore deletes own property for prototype method [4.95ms]\n(pass) hist-003 oracle: prototype restore leak > multiple spy/restore cycles remain clean [2.25ms]\n(pass) hist-003 oracle: prototype restore leak > prototype still owns method after restore [0.50ms]\n\n 3 pass\n 0 fail\n 27 expect() calls\nRan 3 tests across 1 file. [171.00ms]\n",
       "timedOut": false
     },
     "regression": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 168,
+      "durationMs": 176,
       "command": "bun test benchmark\\repositories\\tinyspy\\tests",
       "stdout": "bun test v1.3.14 (0d9b296a)\n",
-      "stderr": "\nbenchmark\\repositories\\tinyspy\\tests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [3.24ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [0.99ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [0.72ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [131.00ms]\n",
+      "stderr": "\nbenchmark\\repositories\\tinyspy\\tests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [5.12ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [0.83ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [0.84ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [129.00ms]\n",
       "timedOut": false
     }
   }

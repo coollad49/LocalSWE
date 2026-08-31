@@ -17,6 +17,8 @@ import { loadV1Config } from "../v1/config/V1Config.ts";
 import { V1Runner } from "../v1/runner/V1Runner.ts";
 import { loadV2Config } from "../v2/config/V2Config.ts";
 import { V2Runner } from "../v2/runner/V2Runner.ts";
+import { loadV3Config } from "../v3/config/V3Config.ts";
+import { V3Runner } from "../v3/runner/V3Runner.ts";
 import { CaseLoader } from "../runner/CaseLoader.ts";
 import { Evaluator } from "../evaluator/Evaluator.ts";
 import { loadBenchmarkIdentity } from "../evaluator/benchmarkIdentity.ts";
@@ -64,20 +66,28 @@ interface ExperimentCliOptions {
   reuseV1: boolean;
   runV2: boolean;
   skipV2: boolean;
+  reuseV2: boolean;
+  runV3: boolean;
+  skipV3: boolean;
+  reuseV3: boolean;
   experimentName: string;
 }
 
 function parseCliArgs(): ExperimentCliOptions {
   const args = process.argv.slice(2);
-  const useMock = args.includes("--mock") || process.env.BASELINE_MOCK === "1" || process.env.V1_MOCK === "1" || process.env.V2_MOCK === "1";
+  const useMock = args.includes("--mock") || process.env.BASELINE_MOCK === "1" || process.env.V1_MOCK === "1" || process.env.V2_MOCK === "1" || process.env.V3_MOCK === "1";
   const verbose = args.includes("--verbose") || args.includes("-v");
   const quiet = args.includes("--quiet") || args.includes("-q");
   const skipBaseline = args.includes("--skip-baseline");
   const reuseBaseline = args.includes("--reuse-baseline");
   const skipV1 = args.includes("--skip-v1");
   const reuseV1 = args.includes("--reuse-v1");
-  const runV2 = !args.includes("--skip-v2");
   const skipV2 = args.includes("--skip-v2");
+  const reuseV2 = args.includes("--reuse-v2");
+  const runV3 = args.includes("--v3") || args.includes("--agent-v3");
+  const skipV3 = args.includes("--skip-v3") || (!runV3 && !args.includes("--all"));
+  const reuseV3 = args.includes("--reuse-v3");
+  const runV2 = (args.includes("--v2") || args.includes("--agent-v2") || !skipV2 || reuseV2) && !skipV2;
 
   const runsIdx = args.indexOf("--runs");
   const runsPerCase = runsIdx !== -1 && args[runsIdx + 1] ? Math.max(1, Number.parseInt(args[runsIdx + 1]!, 10)) : 1;
@@ -112,6 +122,10 @@ function parseCliArgs(): ExperimentCliOptions {
     reuseV1,
     runV2,
     skipV2,
+    reuseV2,
+    runV3,
+    skipV3,
+    reuseV3,
     experimentName,
   };
 }
@@ -288,27 +302,98 @@ async function main(): Promise<void> {
     console.log("[2/3] Skipping Agent V1 (--skip-v1)\n");
   }
 
-  // --- Step 3: Agent V2 ---
+  // --- Step 3: Agent V2 (fresh or reused) ---
   if (opts.runV2 && !opts.skipV2) {
-    console.log(`[3/3] Running Agent V2 (${targetCases.length} cases × ${opts.runsPerCase} runs)...`);
-    const v2Config = await loadV2Config({
-      overrides: {
-        ...(opts.useMock ? { model: "mock" } : {}),
+    let casesToRun = targetCases;
+    if (opts.reuseV2) {
+      const existing = await findExistingRuns(runsRoot, targetCases, "agent-v2");
+      const reusedRuns: string[] = [];
+      const missingCases: string[] = [];
+      for (const c of targetCases) {
+        const found = existing.get(c);
+        if (found && found.length >= opts.runsPerCase) {
+          reusedRuns.push(...found.slice(0, opts.runsPerCase));
+        } else {
+          missingCases.push(c);
+        }
+      }
+      if (reusedRuns.length > 0) {
+        console.log(`[3/${opts.runV3 ? "4" : "3"}] Reusing ${reusedRuns.length} existing Agent V2 run(s) from disk...`);
+        for (const id of reusedRuns) runIdsToEvaluate.push(id);
+      }
+      casesToRun = missingCases;
+    }
+
+    if (casesToRun.length > 0) {
+      console.log(`[3/${opts.runV3 ? "4" : "3"}] Running Agent V2 (${casesToRun.length} cases × ${opts.runsPerCase} runs)...`);
+      const v2Config = await loadV2Config({
+        overrides: {
+          ...(opts.useMock ? { model: "mock" } : {}),
+          runsPerCase: opts.runsPerCase,
+        },
+      });
+      const v2Runner = new V2Runner(v2Config, runsRoot);
+      const startV2 = Date.now();
+      const v2Results = await v2Runner.runV2({
+        caseIds: casesToRun,
+        config: v2Config,
+        concurrency: opts.concurrency,
         runsPerCase: opts.runsPerCase,
-      },
-    });
-    const v2Runner = new V2Runner(v2Config, runsRoot);
-    const startV2 = Date.now();
-    const v2Results = await v2Runner.runV2({
-      caseIds: targetCases,
-      config: v2Config,
-      concurrency: opts.concurrency,
-      runsPerCase: opts.runsPerCase,
-      runsRoot,
-    });
-    const v2Elapsed = ((Date.now() - startV2) / 1000).toFixed(1);
-    console.log(`  ✓ Agent V2 completed: ${v2Results.length} runs in ${v2Elapsed}s\n`);
-    for (const r of v2Results) runIdsToEvaluate.push(r.runId);
+        runsRoot,
+      });
+      const v2Elapsed = ((Date.now() - startV2) / 1000).toFixed(1);
+      console.log(`  ✓ Agent V2 completed: ${v2Results.length} runs in ${v2Elapsed}s\n`);
+      for (const r of v2Results) runIdsToEvaluate.push(r.runId);
+    } else if (opts.reuseV2) {
+      console.log(`  ✓ All ${targetCases.length} Agent V2 runs successfully loaded from disk.\n`);
+    }
+  }
+
+  // --- Step 4: Agent V3 (fresh or reused) ---
+  if (opts.runV3 && !opts.skipV3) {
+    let casesToRun = targetCases;
+    if (opts.reuseV3) {
+      const existing = await findExistingRuns(runsRoot, targetCases, "agent-v3");
+      const reusedRuns: string[] = [];
+      const missingCases: string[] = [];
+      for (const c of targetCases) {
+        const found = existing.get(c);
+        if (found && found.length >= opts.runsPerCase) {
+          reusedRuns.push(...found.slice(0, opts.runsPerCase));
+        } else {
+          missingCases.push(c);
+        }
+      }
+      if (reusedRuns.length > 0) {
+        console.log(`[4/4] Reusing ${reusedRuns.length} existing Agent V3 run(s) from disk...`);
+        for (const id of reusedRuns) runIdsToEvaluate.push(id);
+      }
+      casesToRun = missingCases;
+    }
+
+    if (casesToRun.length > 0) {
+      console.log(`[4/4] Running Agent V3 (${casesToRun.length} cases × ${opts.runsPerCase} runs)...`);
+      const v3Config = await loadV3Config({
+        overrides: {
+          ...(opts.useMock ? { model: "mock" } : {}),
+          runsPerCase: opts.runsPerCase,
+        },
+      });
+      const v3Runner = new V3Runner(v3Config, runsRoot);
+      const startV3 = Date.now();
+      const v3Results = await v3Runner.runV3({
+        caseIds: casesToRun,
+        config: v3Config,
+        concurrency: opts.concurrency,
+        runsPerCase: opts.runsPerCase,
+        runsRoot,
+      });
+      const v3Elapsed = ((Date.now() - startV3) / 1000).toFixed(1);
+      console.log(`  ✓ Agent V3 completed: ${v3Results.length} runs in ${v3Elapsed}s\n`);
+      for (const r of v3Results) runIdsToEvaluate.push(r.runId);
+    } else if (opts.reuseV3) {
+      console.log(`  ✓ All ${targetCases.length} Agent V3 runs successfully loaded from disk.\n`);
+    }
   }
 
   // --- Step 4: Deterministic Evaluation Across All Collected Runs ---

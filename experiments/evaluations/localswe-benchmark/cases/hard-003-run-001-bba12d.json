@@ -1,0 +1,78 @@
+{
+  "runId": "hard-003-run-001-bba12d",
+  "caseId": "hard-003",
+  "agentVersion": "agent-v2",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 1535,
+  "startedAt": "2026-08-31T15:31:23.186Z",
+  "completedAt": "2026-08-31T15:31:24.721Z",
+  "caseMeta": {
+    "repository": "superjson",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "serialization",
+      "parsing",
+      "state-management"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 250,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-003-5byXC7\\patch-1788190284224.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 245,
+      "command": "bun run benchmark\\cases\\hard-003\\public\\reproduce.ts",
+      "stdout": "Test escape: a0IsRegExp=false aIsArray=false bSlashIsSet=true => FAIL\n  parsed['a.0']= /test-regex/\n  parsed.a= [ /'a'[0]: string that becomes a regex/ ]\n  parsed['b\\\\']= [\n  Set(1) {\n    1,\n  }\n]\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "metrics": {
+    "durationMs": 385435,
+    "totalTurns": 92,
+    "toolCalls": 48,
+    "commandsExecuted": 12,
+    "filesInspected": 9,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 91884,
+    "outputTokens": 37180,
+    "totalTokens": 1002280
+  },
+  "cost": {
+    "inputTokens": 91884,
+    "outputTokens": 37180,
+    "totalTokens": 129064,
+    "inputCostUsd": 0.012864,
+    "outputCostUsd": 0.01041,
+    "totalCostUsd": 0.025719,
+    "costUsd": 0.025719,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  }
+}

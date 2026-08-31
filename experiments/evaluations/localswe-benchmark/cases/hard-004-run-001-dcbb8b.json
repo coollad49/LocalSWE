@@ -1,0 +1,78 @@
+{
+  "runId": "hard-004-run-001-dcbb8b",
+  "caseId": "hard-004",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 2393,
+  "startedAt": "2026-08-31T15:32:14.458Z",
+  "completedAt": "2026-08-31T15:32:16.852Z",
+  "caseMeta": {
+    "repository": "p-queue",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "asynchronous",
+      "state-management",
+      "error-handling"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-EM1x1y\\benchmark\\repositories\\p-queue",
+      "stdout": "empty patch - no changes applied",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 1273,
+      "command": "bun run benchmark\\cases\\hard-004\\public\\reproduce.ts",
+      "stdout": "Test queued abort: outcome=timeout notRan=true sizeOk=false => FAIL\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "metrics": {
+    "durationMs": 617554,
+    "totalTurns": 144,
+    "toolCalls": 68,
+    "commandsExecuted": 40,
+    "filesInspected": 10,
+    "filesChanged": 0,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 112176,
+    "outputTokens": 19780,
+    "totalTokens": 2712180
+  },
+  "cost": {
+    "inputTokens": 112176,
+    "outputTokens": 19780,
+    "totalTokens": 131956,
+    "inputCostUsd": 0.033653,
+    "outputCostUsd": 0.023736,
+    "totalCostUsd": 0.212202,
+    "costUsd": 0.212202,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  }
+}

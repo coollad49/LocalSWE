@@ -1,0 +1,83 @@
+{
+  "runId": "hist-004-run-001-2610c2",
+  "caseId": "hist-004",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 1519,
+  "startedAt": "2026-08-31T15:33:41.038Z",
+  "completedAt": "2026-08-31T15:33:42.557Z",
+  "caseMeta": {
+    "repository": "mri",
+    "type": "historical",
+    "difficulty": "easy",
+    "categories": [
+      "parsing",
+      "type-coercion"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 171,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-004-rVUN7C\\patch-1788190421929.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 159,
+      "command": "bun run benchmark\\cases\\hist-004\\public\\reproduce.ts",
+      "stdout": "mri(['-t'], {default:{t:true}}) => {\"_\":[],\"t\":true}\n_ empty? true (length 0) expected true\nt is boolean? true expected true, t===true? true\nhas numeric leak (1 in _)? false expected false\nalias check mri(['-t'], {alias:{t:['tt']}, default:{t:true}}) => {\"_\":[],\"t\":true,\"tt\":true}\nalias check pass? true\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 140,
+      "command": "bun test benchmark\\cases\\hist-004\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-004\\private\\oracle.test.ts:\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > core bug: -t with default true does not leak into _ [1.49ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default variations [0.20ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default & alias [0.27ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default string & alias (string coercion branch) [0.16ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > no numeric pollution in _ for boolean defaults [0.79ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > regression: basic non-boolean parsing still works [0.22ms]\n\n 6 pass\n 0 fail\n 30 expect() calls\nRan 6 tests across 1 file. [94.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 151,
+      "command": "bun test benchmark\\repositories\\mri\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\mri\\tests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.87ms]\n(pass) mri regression > handles short flags [0.29ms]\n(pass) mri regression > handles -- separator [0.16ms]\n(pass) mri regression > coerces numbers by default [0.12ms]\n(pass) mri regression > string opts preserve string values [0.20ms]\n(pass) mri regression > boolean flag with no value [0.17ms]\n(pass) mri regression > alias mirrors values [0.14ms]\n(pass) mri regression > default values [0.07ms]\n(pass) mri regression > unknown handler strict [0.30ms]\n\n 9 pass\n 0 fail\n 15 expect() calls\nRan 9 tests across 1 file. [101.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "metrics": {
+    "durationMs": 186967,
+    "totalTurns": 94,
+    "toolCalls": 44,
+    "commandsExecuted": 26,
+    "filesInspected": 5,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 75420,
+    "outputTokens": 38808,
+    "totalTokens": 786996
+  },
+  "cost": {
+    "inputTokens": 75420,
+    "outputTokens": 38808,
+    "totalTokens": 114228,
+    "inputCostUsd": 0.022626,
+    "outputCostUsd": 0.04657,
+    "totalCostUsd": 0.109562,
+    "costUsd": 0.109562,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "runId": "synth-004-run-001-3a67f2",
+  "caseId": "synth-004",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 1996,
+  "startedAt": "2026-08-31T15:35:57.510Z",
+  "completedAt": "2026-08-31T15:35:59.506Z",
+  "caseMeta": {
+    "repository": "task-manager",
+    "type": "synthetic",
+    "difficulty": "hard",
+    "categories": [
+      "state-management",
+      "api-behavior"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 207,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-004-eT9HkG\\patch-1788190558460.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 213,
+      "command": "bun run benchmark\\cases\\synth-004\\public\\reproduce.ts",
+      "stdout": "after 1 pending: 1 expected 1\nafter 2 pending: 2 expected 2\nafter update pending=1 expected 1, completed=1 expected 1\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 418,
+      "command": "bun test benchmark\\cases\\synth-004\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-004\\private\\oracle.test.ts:\n(pass) synth-004 oracle: filterByStatus cache invalidation > reflects new tasks [4.30ms]\n(pass) synth-004 oracle: filterByStatus cache invalidation > reflects status updates [0.79ms]\n(pass) synth-004 oracle: filterByStatus cache invalidation > reflects delete and clear [0.46ms]\n\n 3 pass\n 0 fail\n 6 expect() calls\nRan 3 tests across 1 file. [352.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 204,
+      "command": "bun test benchmark\\repositories\\task-manager\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\task-manager\\tests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [2.17ms]\n(pass) TaskManager > createTask validates priority [0.59ms]\n(pass) TaskManager > createTask validates title [0.23ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.47ms]\n(pass) TaskManager > updateTask only updates provided fields [0.29ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [3.72ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.26ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [0.95ms]\n(pass) TaskManager > filterByStatus validates status [0.18ms]\n(pass) TaskManager > getTasksByPriority filters correctly [2.00ms]\n(pass) TaskManager > deleteTask removes task [0.44ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [150.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "metrics": {
+    "durationMs": 603553,
+    "totalTurns": 208,
+    "toolCalls": 98,
+    "commandsExecuted": 66,
+    "filesInspected": 9,
+    "filesChanged": 1,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 162728,
+    "outputTokens": 30548,
+    "totalTokens": 3930364
+  },
+  "cost": {
+    "inputTokens": 162728,
+    "outputTokens": 30548,
+    "totalTokens": 193276,
+    "inputCostUsd": 0.048818,
+    "outputCostUsd": 0.036658,
+    "totalCostUsd": 0.309701,
+    "costUsd": 0.309701,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  }
+}

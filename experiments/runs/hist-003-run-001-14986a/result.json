@@ -1,0 +1,55 @@
+{
+  "runId": "hist-003-run-001-14986a",
+  "caseId": "hist-003",
+  "agentVersion": "agent-v3",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 204531,
+  "changedFiles": [
+    "src/spyOn.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-003-run-001-14986a\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-003-run-001-14986a\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-003-run-001-14986a\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+      "exitCode": 0,
+      "durationMs": 330,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [2.98ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [0.89ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [0.73ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [94.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+      "exitCode": 1,
+      "durationMs": 424,
+      "stdout": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n15 files were searched [106.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+      "exitCode": 1,
+      "durationMs": 515,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n 8 |   describe(\"prototype method spy/restore\", () => {\n 9 |     test(\"no own property left after restore on plain object prototype\", () => {\n10 |       const proto = { f() { return \"proto\"; } };\n11 |       const obj = Object.create(proto);\n12 |       const s = spyOn(obj, \"f\");\n13 |       expect(obj.f()).not.toBe(\"proto\");\n                               ^\nerror: expect(received).not.toBe(expected)\n\nExpected: not \"proto\"\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-003-hist-003-run-001-14986a-J9c76u\\.v3\\invariants.test.ts:13:27)\n(fail) Phase 3: Invariant Tests > prototype method spy/restore > no own property left after restore on plain object prototype [5.53ms]\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > class instance prototype method restores cleanly [1.49ms]\n30 |     test(\"multiple instances sharing prototype are not affected by spy\", () => {\n31 |       class B { val() { return 1; } }\n32 |       const b1 = new B();\n33 |       const b2 = new B();\n34 |       const s = spyOn(b1, \"val\");\n35 |       expect(b1.val()).not.toBe(1);\n                                ^\nerror: expect(received).not.toBe(expected)\n\nExpected: not 1\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-003-hist-003-run-001-14986a-J9c76u\\.v3\\invariants.test.ts:35:28)\n(fail) Phase 3: Invariant Tests > prototype method spy/restore > multiple instances sharing prototype are not affected by spy [0.89ms]\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > deeply nested prototype chain restores correctly [0.76ms]\n(pass) Phase 3: Invariant Tests > own method spy/restore > own method is reassigned, not deleted [0.43ms]\n(pass) Phase 3: Invariant Tests > own method spy/restore > configurable: false own property is reassigned [0.41ms]\n(pass) Phase 3: Invariant Tests > getter/setter spy/restore > getter spy restores prototype getter [0.41ms]\n(pass) Phase 3: Invariant Tests > getter/setter spy/restore > setter spy restores prototype setter [0.46ms]\n(pass) Phase 3: Invariant Tests > getter/setter spy/restore > inherited getter preserves setter (from existing test) [2.45ms]\n(pass) Phase 3: Invariant Tests > async spy invariants > spy intercepts async method calls [1.03ms]\n(pass) Phase 3: Invariant Tests > async spy invariants > concurrent spy/restores don't interfere [0.67ms]\n(pass) Phase 3: Invariant Tests > restoreAll > restoreAll clears all spies and restores prototype methods [0.76ms]\n(pass) Phase 3: Invariant Tests > edge cases > spyOn method named 'toString' on prototype [0.55ms]\n(pass) Phase 3: Invariant Tests > edge cases > spyOn symbol-keyed prototype method [0.54ms]\n(pass) Phase 3: Invariant Tests > edge cases > spy on prototype, restore, then spy again works correctly [0.57ms]\n(pass) Phase 3: Invariant Tests > edge cases > restoring a spy that was never called [0.35ms]\n\n 14 pass\n 2 fail\n 45 expect() calls\nRan 16 tests across 1 file. [223.00ms]\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+      "exitCode": 0,
+      "durationMs": 696,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > no own property left after restore on plain object prototype [5.85ms]\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > class instance prototype method restores cleanly [3.08ms]\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > multiple instances sharing prototype are not affected by spy [0.68ms]\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > deeply nested prototype chain restores correctly [0.49ms]\n(pass) Phase 3: Invariant Tests > own method spy/restore > own method is reassigned, not deleted [1.66ms]\n(pass) Phase 3: Invariant Tests > own method spy/restore > configurable: false own property is reassigned [26.34ms]\n(pass) Phase 3: Invariant Tests > getter/setter spy/restore > getter spy restores prototype getter [0.48ms]\n(pass) Phase 3: Invariant Tests > getter/setter spy/restore > setter spy restores prototype setter [0.43ms]\n(pass) Phase 3: Invariant Tests > getter/setter spy/restore > inherited getter preserves setter (from existing test) [8.40ms]\n(pass) Phase 3: Invariant Tests > async spy invariants > spy intercepts async method calls [1.03ms]\n(pass) Phase 3: Invariant Tests > async spy invariants > concurrent spy/restores don't interfere [0.72ms]\n(pass) Phase 3: Invariant Tests > restoreAll > restoreAll clears all spies and restores prototype methods [1.37ms]\n(pass) Phase 3: Invariant Tests > edge cases > spyOn method named 'toString' on prototype [0.48ms]\n(pass) Phase 3: Invariant Tests > edge cases > spyOn symbol-keyed prototype method [0.48ms]\n(pass) Phase 3: Invariant Tests > edge cases > spy on prototype, restore, then spy again works correctly [4.23ms]\n(pass) Phase 3: Invariant Tests > edge cases > restoring a spy that was never called [0.38ms]\n\n 16 pass\n 0 fail\n 50 expect() calls\nRan 16 tests across 1 file. [268.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+      "exitCode": 0,
+      "durationMs": 304,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [2.96ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [0.85ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [1.08ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [91.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+      "exitCode": 0,
+      "durationMs": 561,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > no own property left after restore on plain object prototype [4.79ms]\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > class instance prototype method restores cleanly [2.87ms]\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > multiple instances sharing prototype are not affected by spy [0.43ms]\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > deeply nested prototype chain restores correctly [0.44ms]\n(pass) Phase 3: Invariant Tests > own method spy/restore > own method is reassigned, not deleted [1.71ms]\n(pass) Phase 3: Invariant Tests > own method spy/restore > configurable: false own property is reassigned [0.45ms]\n(pass) Phase 3: Invariant Tests > getter/setter spy/restore > getter spy restores prototype getter [1.43ms]\n(pass) Phase 3: Invariant Tests > getter/setter spy/restore > setter spy restores prototype setter [0.44ms]\n(pass) Phase 3: Invariant Tests > getter/setter spy/restore > inherited getter preserves setter (from existing test) [0.65ms]\n(pass) Phase 3: Invariant Tests > async spy invariants > spy intercepts async method calls [1.03ms]\n(pass) Phase 3: Invariant Tests > async spy invariants > concurrent spy/restores don't interfere [0.74ms]\n(pass) Phase 3: Invariant Tests > restoreAll > restoreAll clears all spies and restores prototype methods [0.74ms]\n(pass) Phase 3: Invariant Tests > edge cases > spyOn method named 'toString' on prototype [0.38ms]\n(pass) Phase 3: Invariant Tests > edge cases > spyOn symbol-keyed prototype method [0.91ms]\n(pass) Phase 3: Invariant Tests > edge cases > spy on prototype, restore, then spy again works correctly [0.55ms]\n(pass) Phase 3: Invariant Tests > edge cases > restoring a spy that was never called [0.26ms]\n\ntests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [0.49ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [0.34ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [0.66ms]\n\n 19 pass\n 0 fail\n 64 expect() calls\nRan 19 tests across 2 files. [219.00ms]\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T14:31:26.407Z",
+  "endedAt": "2026-08-31T14:34:50.938Z"
+}

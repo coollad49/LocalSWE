@@ -1,0 +1,36 @@
+diff --git a/src/core/proxy.ts b/src/core/proxy.ts
+index bd98e27..f7006bf 100644
+--- a/src/core/proxy.ts
++++ b/src/core/proxy.ts
+@@ -2,6 +2,7 @@ import {
+ 	has,
+ 	is,
+ 	isDraftable,
++	isDraft,
+ 	shallowCopy,
+ 	latest,
+ 	ImmerBaseState,
+@@ -154,6 +155,22 @@ export const objectTraps: ProxyHandler<ProxyState> = {
+ 
+ 			return (state.copy_![childKey] = childDraft)
+ 		}
++
++		// After reordering operations (sort/reverse), the copy contains raw values at
++		// new positions. We need to create draft proxies for these draftable values
++		// so mutations to them are properly tracked.
++		if (
++			isArrayWithStringProp &&
++			(state as ProxyArrayState).allIndicesReassigned_ &&
++			isDraftable(value) &&
++			!isDraft(value)
++		) {
++			prepareCopy(state)
++			const childKey = +(prop as string)
++			const childDraft = createProxy(state.scope_, value, state, childKey)
++			return (state.copy_![childKey] = childDraft)
++		}
++
+ 		return value
+ 	},
+ 	has(state, prop) {
+

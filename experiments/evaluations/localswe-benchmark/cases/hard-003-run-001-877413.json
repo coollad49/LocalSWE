@@ -1,0 +1,81 @@
+{
+  "runId": "hard-003-run-001-877413",
+  "caseId": "hard-003",
+  "agentVersion": "agent-v3",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "false_confidence",
+  "durationMs": 1580,
+  "startedAt": "2026-08-31T15:30:01.527Z",
+  "completedAt": "2026-08-31T15:30:03.107Z",
+  "caseMeta": {
+    "repository": "superjson",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "serialization",
+      "parsing",
+      "state-management"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 180,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-003-uZnU7h\\patch-1788190202498.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 248,
+      "command": "bun run benchmark\\cases\\hard-003\\public\\reproduce.ts",
+      "stdout": "Test escape: a0IsRegExp=true aIsArray=true bSlashIsSet=true => PASS\n  parsed['a.0']= /test-regex/\n  parsed.a= [ \"/'a'[0]: string that becomes a regex/\" ]\n  parsed['b\\\\']= [\n  Set(1) {\n    1,\n  }\n]\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 178,
+      "command": "bun test benchmark\\cases\\hard-003\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hard-003\\private\\oracle.test.ts:\n19 |     expect(parsed['b.0']).toBe(\"/'b.0': string that becomes a regex/\");\n20 |     expect(parsed['b\\\\']).toHaveLength(1);\n21 |     expect(parsed['b\\\\'][0]).toBeInstanceOf(RegExp);\n22 | \n23 |     const meta = (JSON.parse(str) as any).meta;\n24 |     expect(meta.v).toBe(1);\n                        ^\nerror: expect(received).toBe(expected)\n\nExpected: 1\nReceived: 2\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-003-uZnU7h\\benchmark\\cases\\hard-003\\private\\oracle.test.ts:24:20)\n(fail) hard-003 oracle: superjson path escape mapping > repro #310: meta path escape bug [8.71ms]\n(pass) hard-003 oracle: superjson path escape mapping > simple backslash key with Set [1.20ms]\n(pass) hard-003 oracle: superjson path escape mapping > dot in key with Date [1.44ms]\n45 |     expect(parsed.a.b).toBe(1);\n46 |   });\n47 | \n48 |   test(\"rejects malformed path with single backslash not escaping dot or slash\", async () => {\n49 |     const mod = await import(\"../../../repositories/superjson/src/pathstringifier.ts\");\n50 |     expect(() => mod.parsePath(\"a\\\\b\", false)).toThrow(\"invalid path\");\n                                                    ^\nerror: expect(received).toThrow(expected)\n\nExpected substring: \"invalid path\"\nReceived message: \"Invalid backslash-escape in path: \\\\b\"\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-003-uZnU7h\\benchmark\\cases\\hard-003\\private\\oracle.test.ts:50:48)\n(fail) hard-003 oracle: superjson path escape mapping > rejects malformed path with single backslash not escaping dot or slash [1.34ms]\n56 |     const input = { \"a.b\": new Date(\"2020-01-01\") } as any;\n57 |     const str = SuperJSON.stringify(input);\n58 |     const parsed: any = SuperJSON.parse(str);\n59 |     // New version should have v:1\n60 |     const meta = (JSON.parse(str) as any).meta;\n61 |     expect(meta.v).toBe(1);\n                        ^\nerror: expect(received).toBe(expected)\n\nExpected: 1\nReceived: 2\n\n      at",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "metrics": {
+    "durationMs": 2559415,
+    "totalTurns": 366,
+    "toolCalls": 184,
+    "commandsExecuted": 56,
+    "filesInspected": 22,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 803616,
+    "outputTokens": 530087,
+    "totalTokens": 38868807
+  },
+  "cost": {
+    "inputTokens": 803616,
+    "outputTokens": 530087,
+    "totalTokens": 1333703,
+    "inputCostUsd": 0.112506,
+    "outputCostUsd": 0.148424,
+    "totalCostUsd": 0.366029,
+    "costUsd": 0.366029,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  }
+}

@@ -7,9 +7,9 @@
   "model": "opencode-go/mimo-v2.5",
   "status": "completed",
   "verdict": "false_confidence",
-  "durationMs": 1097,
-  "startedAt": "2026-08-31T11:59:49.687Z",
-  "completedAt": "2026-08-31T11:59:50.784Z",
+  "durationMs": 1806,
+  "startedAt": "2026-08-31T15:36:29.108Z",
+  "completedAt": "2026-08-31T15:36:30.914Z",
   "caseMeta": {
     "repository": "async-queue",
     "type": "synthetic",
@@ -48,15 +48,15 @@
     "patchApply": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 159,
-      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-sTITkV\\patch-1788177590349.diff",
+      "durationMs": 277,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-2aQQVy\\patch-1788190590248.diff",
       "stdout": "",
       "stderr": ""
     },
     "reproduction": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 139,
+      "durationMs": 227,
       "command": "bun run benchmark\\cases\\synth-006\\public\\reproduce.ts",
       "stdout": "threw: Cannot dequeue from an empty queue PASS\ndequeue after enqueue a expected a\nPASS\n",
       "stderr": "",
@@ -65,10 +65,10 @@
     "oracle": {
       "status": "failed",
       "exitCode": 1,
-      "durationMs": 135,
+      "durationMs": 159,
       "command": "bun test benchmark\\cases\\synth-006\\private\\oracle.test.ts",
       "stdout": "bun test v1.3.14 (0d9b296a)\n",
-      "stderr": "\nbenchmark\\cases\\synth-006\\private\\oracle.test.ts:\n2 | import { AsyncQueue } from \"../../../repositories/async-queue/src/queue.ts\";\n3 | \n4 | describe(\"synth-006 oracle: dequeue throws on empty\", () => {\n5 |   test(\"throws when empty\", () => {\n6 |     const q = new AsyncQueue<string>();\n7 |     expect(() => q.dequeue()).toThrow(/Queue is empty/);\n                                  ^\nerror: expect(received).toThrow(expected)\n\nExpected pattern: /Queue is empty/\nReceived message: \"Cannot dequeue from an empty queue\"\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-sTITkV\\benchmark\\cases\\synth-006\\private\\oracle.test.ts:7:31)\n(fail) synth-006 oracle: dequeue throws on empty > throws when empty [2.01ms]\n(pass) synth-006 oracle: dequeue throws on empty > does not throw when not empty [0.83ms]\n(pass) synth-006 oracle: dequeue throws on empty > processNext returns null on empty, not throw [0.70ms]\n(pass) synth-006 oracle: dequeue throws on empty > clear then dequeue throws [0.25ms]\n\n 3 pass\n 1 fail\n 5 expect() calls\nRan 4 tests across 1 file. [93.00ms]\n",
+      "stderr": "\nbenchmark\\cases\\synth-006\\private\\oracle.test.ts:\n2 | import { AsyncQueue } from \"../../../repositories/async-queue/src/queue.ts\";\n3 | \n4 | describe(\"synth-006 oracle: dequeue throws on empty\", () => {\n5 |   test(\"throws when empty\", () => {\n6 |     const q = new AsyncQueue<string>();\n7 |     expect(() => q.dequeue()).toThrow(/Queue is empty/);\n                                  ^\nerror: expect(received).toThrow(expected)\n\nExpected pattern: /Queue is empty/\nReceived message: \"Cannot dequeue from an empty queue\"\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-2aQQVy\\benchmark\\cases\\synth-006\\private\\oracle.test.ts:7:31)\n(fail) synth-006 oracle: dequeue throws on empty > throws when empty [1.50ms]\n(pass) synth-006 oracle: dequeue throws on empty > does not throw when not empty [0.61ms]\n(pass) synth-006 oracle: dequeue throws on empty > processNext returns null on empty, not throw [0.52ms]\n(pass) synth-006 oracle: dequeue throws on empty > clear then dequeue throws [0.36ms]\n\n 3 pass\n 1 fail\n 5 expect() calls\nRan 4 tests across 1 file. [105.00ms]\n",
       "timedOut": false
     },
     "regression": {

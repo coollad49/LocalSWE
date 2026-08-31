@@ -1,0 +1,61 @@
+{
+  "runId": "hist-002-run-001-aa05d0",
+  "caseId": "hist-002",
+  "agentVersion": "agent-v3",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 556472,
+  "changedFiles": [
+    "src/defu.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-002-run-001-aa05d0\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-002-run-001-aa05d0\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-002-run-001-aa05d0\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+      "exitCode": 0,
+      "durationMs": 3271,
+      "stdout": "1843 | \t\t\tsuiteOptions = { timeout: suiteOptions };\n1844 | \t\t}\n1845 | \t\tconst currentSuite = collectorContext.currentSuite?.suite;\n1846 | \t\tconst parentTask = currentSuite ?? collectorContext.currentSuite?.file;\n1847 | \t\tconst suiteTags = toArray(suiteOptions?.tags);\n1848 | \t\tvalidateTags(runner.config, suiteTags);\n                      ^\nTypeError: undefined is not an object (evaluating 'runner.config')\n      at initSuite (C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\node_modules\\@vitest\\runner\\dist\\chunk-artifact.js:1848:16)\n      at createSuiteCollector (C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\node_modules\\@vitest\\runner\\dist\\chunk-artifact.js:1709:2)\n      at C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\\tests\\defu.test.ts:4:1\n\nBun v1.3.14 (Windows x64)\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  15:32:22\n   Duration  933ms (transform 145ms, setup 0ms, import 217ms, tests 21ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run test",
+      "exitCode": 0,
+      "durationMs": 2779,
+      "stdout": "$ vitest run\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  15:36:38\n   Duration  783ms (transform 113ms, setup 0ms, import 176ms, tests 17ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 377,
+      "stdout": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n11 files were searched [114.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 6559,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n ❯ .v3/invariants.test.ts (24 tests | 2 failed) 163ms\n     × defu with __proto__ alongside regular properties 27ms\n     × defu with only __proto__ key 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  .v3/invariants.test.ts > __proto__ pollution invariants > defu with __proto__ alongside regular properties\nAssertionError: expected { __proto__: { polluted: true }, …(2) } to deeply equal { a: 'b', c: 42 }\n\n- Expected\n+ Received\n\n  {\n+   \"__proto__\": {\n+     \"polluted\": true,\n+   },\n    \"a\": \"b\",\n    \"c\": 42,\n  }\n\n ❯ .v3/invariants.test.ts:65:20\n     63|     const result = defu({}, payload);\n     64|\n     65|     expect(result).toEqual({ __proto__: { polluted: true }, a: \"b\", c:…\n       |                    ^\n     66|     expect(Object.getPrototypeOf(result)).toBe(Object.prototype);\n     67|     expect((Object.prototype as any).polluted).toBeUndefined();\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯\n\n FAIL  .v3/invariants.test.ts > boundary and edge cases > defu with only __proto__ key\nAssertionError: expected {} to have property \"__proto__\"\n ❯ .v3/invariants.test.ts:245:20\n    243|     const result = defu(payload, {});\n    244|\n    245|     expect(result).toHaveProperty(\"__proto__\");\n       |                    ^\n    246|     expect(Object.getPrototypeOf(result)).toBe(Object.prototype);\n    247|   });\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯\n\n\n Test Files  1 failed (1)\n      Tests  2 failed | 22 passed (24)\n   Start at  15:37:21\n   Duration  1.05s (transform 175ms, setup 0ms, import 246ms, tests 163ms, environment 1ms)\n\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+      "exitCode": 0,
+      "durationMs": 6499,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n\n Test Files  1 passed (1)\n      Tests  24 passed (24)\n   Start at  15:37:45\n   Duration  1.03s (transform 163ms, setup 0ms, import 232ms, tests 124ms, environment 0ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+      "exitCode": 0,
+      "durationMs": 6154,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n\n Test Files  2 passed (2)\n      Tests  31 passed (31)\n   Start at  15:37:54\n   Duration  1.01s (transform 244ms, setup 0ms, import 439ms, tests 122ms, environment 1ms)\n\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+      "exitCode": 0,
+      "durationMs": 6404,
+      "stdout": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n\n Test Files  2 passed (2)\n      Tests  31 passed (31)\n   Start at  15:38:07\n   Duration  1.01s (transform 295ms, setup 0ms, import 425ms, tests 143ms, environment 1ms)\n\n--- All tests pass ---\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T14:29:28.438Z",
+  "endedAt": "2026-08-31T14:38:44.910Z"
+}

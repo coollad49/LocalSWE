@@ -1,0 +1,55 @@
+{
+  "runId": "hist-001-run-001-0b2e9b",
+  "caseId": "hist-001",
+  "agentVersion": "agent-v3",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 130168,
+  "changedFiles": [
+    "src/CAC.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-001-run-001-0b2e9b\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-001-run-001-0b2e9b\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-001-run-001-0b2e9b\\metadata.json",
+  "tests": [
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-0b2e9b-o963hk && bun test",
+      "exitCode": 0,
+      "durationMs": 324,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\cac.test.ts:\n(pass) cac regression > parses basic option [7.12ms]\n(pass) cac regression > parses short flag and help not thrown [0.61ms]\n(pass) cac regression > command parsing [1.36ms]\n(pass) cac regression > default value without args [0.45ms]\n\n 4 pass\n 0 fail\n 6 expect() calls\nRan 4 tests across 1 file. [121.00ms]\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-0b2e9b-o963hk && bun test .v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 255,
+      "stdout": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n16 files were searched [78.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-0b2e9b-o963hk && bun test ./.v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 422,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n 9 |     });\n10 |     const { options } = cli.parse([\"node\", \"bin\", \"-b\", \"https://gitlab.com\"]);\n11 | \n12 |     expect(options.b).toBe(\"https://gitlab.com\");\n13 |     expect(options.baseUrl).toBe(\"https://gitlab.com\");\n14 |     expect(options[\"base-url\"]).toBe(\"https://gitlab.com\");\n                                     ^\nerror: expect(received).toBe(expected)\n\nExpected: \"https://gitlab.com\"\nReceived: undefined\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-001-hist-001-run-001-0b2e9b-o963hk\\.v3\\invariants.test.ts:14:33)\n(fail) Option alias invariants > short flag -b sets all aliases to parsed value, not default [8.15ms]\n21 |     });\n22 |     const { options } = cli.parse([\"node\", \"bin\", \"--base-url\", \"https://gitlab.com\"]);\n23 | \n24 |     expect(options.b).toBe(\"https://gitlab.com\");\n25 |     expect(options.baseUrl).toBe(\"https://gitlab.com\");\n26 |     expect(options[\"base-url\"]).toBe(\"https://gitlab.com\");\n                                     ^\nerror: expect(received).toBe(expected)\n\nExpected: \"https://gitlab.com\"\nReceived: undefined\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-001-hist-001-run-001-0b2e9b-o963hk\\.v3\\invariants.test.ts:26:33)\n(fail) Option alias invariants > long flag --base-url sets all aliases to parsed value, not default [0.97ms]\n33 |     });\n34 |     const { options } = cli.parse([\"node\", \"bin\"]);\n35 | \n36 |     expect(options.b).toBe(\"https://github.com\");\n37 |     expect(options.baseUrl).toBe(\"https://github.com\");\n38 |     expect(options[\"base-url\"]).toBe(\"https://github.com\");\n                                     ^\nerror: expect(received).toBe(expected)\n\nExpected: \"https://github.com\"\nReceived: undefined\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-001-hist-001-run-001-0b2e9b-o963hk\\.v3\\invariants.test.ts:38:33)\n(fail) Option alias invariants > all aliases get default when no flag is parsed [0.69ms]\n45 |     });\n46 |     const { options } = cli.parse([\"node\", \"bin\", \"--baseUrl\", \"https://gitlab.com\"]);\n47 | \n48 |     expect(options.b).toBe(\"https://gitlab.com\");\n49 |     expect(options.baseUrl).toBe(\"https://gitlab.com\");\n50 |     expect(options[\"base-url\"]).toBe(\"https://gitlab.com\");\n                                     ^\nerror: expect(received).toBe(expected)\n\nExpected: \"https://gitlab.com\"\nReceived: undefined\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-001-hist-001-run-001-0b2e9b-o963hk\\.v3\\invariants.test.ts:50:33)\n(fail) Option alias invariants > camelCase flag sets all aliases [0.88ms]\n(pass) Option alias invariants > boolean option aliases are synced [0.52ms]\n(pass) Option alias invariants > boolean option defaults to false for all aliases [0.58ms]\n(pass) Option alias invariants > option without default - aliases still synced on parse [0.39ms]\n(pass) Option alias invariants > multiple options with aliases are all synced correctly [2.10ms]\n(pass) Option alias invariants > concurrent parsing - independent options stay independent [0.60ms]\n\n 5 pass\n 4 fail\n 26 expect() calls\nRan 9 tests across 1 file. [193.00ms]\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-0b2e9b-o963hk && bun test ./.v3/invariants.test.ts",
+      "exitCode": 0,
+      "durationMs": 348,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Option alias invariants > short flag -b sets all aliases to parsed value, not default [4.19ms]\n(pass) Option alias invariants > long flag --base-url sets all aliases to parsed value, not default [0.30ms]\n(pass) Option alias invariants > all aliases get default when no flag is parsed [0.17ms]\n(pass) Option alias invariants > camelCase flag sets all aliases [0.18ms]\n(pass) Option alias invariants > boolean option aliases are synced [0.42ms]\n(pass) Option alias invariants > boolean option defaults to false for all aliases [0.32ms]\n(pass) Option alias invariants > option without default - aliases still synced on parse [0.47ms]\n(pass) Option alias invariants > multiple options with aliases are all synced correctly [1.53ms]\n(pass) Option alias invariants > concurrent parsing - independent options stay independent [0.35ms]\n\n 9 pass\n 0 fail\n 22 expect() calls\nRan 9 tests across 1 file. [143.00ms]\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-0b2e9b-o963hk && bun test",
+      "exitCode": 0,
+      "durationMs": 318,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\cac.test.ts:\n(pass) cac regression > parses basic option [7.62ms]\n(pass) cac regression > parses short flag and help not thrown [0.60ms]\n(pass) cac regression > command parsing [1.31ms]\n(pass) cac regression > default value without args [0.50ms]\n\n 4 pass\n 0 fail\n 6 expect() calls\nRan 4 tests across 1 file. [108.00ms]\n"
+    },
+    {
+      "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hist-001-hist-001-run-001-0b2e9b-o963hk && bun test",
+      "exitCode": 0,
+      "durationMs": 349,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\cac.test.ts:\n(pass) cac regression > parses basic option [8.17ms]\n(pass) cac regression > parses short flag and help not thrown [0.48ms]\n(pass) cac regression > command parsing [1.19ms]\n(pass) cac regression > default value without args [0.40ms]\n\n 4 pass\n 0 fail\n 6 expect() calls\nRan 4 tests across 1 file. [136.00ms]\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T14:29:28.356Z",
+  "endedAt": "2026-08-31T14:31:38.524Z"
+}

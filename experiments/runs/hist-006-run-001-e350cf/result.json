@@ -1,0 +1,61 @@
+{
+  "runId": "hist-006-run-001-e350cf",
+  "caseId": "hist-006",
+  "agentVersion": "agent-v3",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 260330,
+  "changedFiles": [
+    "src/spyOn.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-e350cf\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-e350cf\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-006-run-001-e350cf\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-e350cf-grd7dj\" && bun test 2>&1",
+      "exitCode": 1,
+      "durationMs": 325,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\tinyspy.test.ts:\n 9 |     const s = spyOn(foo, 'f');\n10 |     s.willCall(() => 'mocked');\n11 |     expect(foo.f()).toBe('mocked');\n12 |     s.restore();\n13 |     expect(foo.f()).toBe('original');\n14 |     expect(Object.getOwnPropertyDescriptor(foo, 'f')).toBeUndefined();\n                                                           ^\nerror: expect(received).toBeUndefined()\n\nReceived: {\n  value: [Function: f],\n  writable: true,\n  enumerable: false,\n  configurable: true,\n}\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-006-hist-006-run-001-e350cf-grd7dj\\tests\\tinyspy.test.ts:14:55)\n(fail) tinyspy regression > spyOn mocks prototype method and restores cleanly [5.70ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [1.05ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [0.95ms]\n\n 2 pass\n 1 fail\n 14 expect() calls\nRan 3 tests across 1 file. [94.00ms]\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-e350cf-grd7dj\" && bun test 2>&1",
+      "exitCode": 0,
+      "durationMs": 408,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [4.50ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [1.08ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [1.05ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [165.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-e350cf-grd7dj\" && bun test .v3/invariants.test.ts 2>&1",
+      "exitCode": 1,
+      "durationMs": 369,
+      "stdout": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n15 files were searched [96.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-e350cf-grd7dj\" && bun test ./.v3/invariants.test.ts 2>&1",
+      "exitCode": 1,
+      "durationMs": 399,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) spyOn inherited methods - invariants > prototype chain depth > getter from 1 level up (parent) [3.09ms]\n(pass) spyOn inherited methods - invariants > prototype chain depth > getter from 2 levels up (grandparent) [1.37ms]\n(pass) spyOn inherited methods - invariants > prototype chain depth > getter from 3 levels up (great-grandparent) [0.93ms]\n(pass) spyOn inherited methods - invariants > prototype chain depth > method from 2 levels up [0.90ms]\n(pass) spyOn inherited methods - invariants > getter/setter combinations > getter with setter inherited from grandparent [0.63ms]\n(pass) spyOn inherited methods - invariants > getter/setter combinations > setter inherited from grandparent [0.61ms]\n(pass) spyOn inherited methods - invariants > getter/setter combinations > own getter still works correctly [0.29ms]\n(pass) spyOn inherited methods - invariants > multiple spy/restore cycles > can spy and restore multiple times on inherited getter [1.47ms]\n(pass) spyOn inherited methods - invariants > concurrent spy operations > spy on different inherited properties simultaneously [0.85ms]\n(pass) spyOn inherited methods - invariants > edge cases > spy on inherited getter with undefined return [0.57ms]\n(pass) spyOn inherited methods - invariants > edge cases > spy on inherited getter that returns null [0.38ms]\n(pass) spyOn inherited methods - invariants > edge cases > spy on inherited getter that returns an object [0.44ms]\n(pass) spyOn inherited methods - invariants > edge cases > willCall works on inherited getter spy [0.36ms]\n(pass) spyOn inherited methods - invariants > edge cases > getOriginal works on inherited getter spy [0.48ms]\n(pass) spyOn inherited methods - invariants > edge cases > inheritance with overridden getter in middle class [0.63ms]\n(pass) spyOn inherited methods - invariants > mixed own and inherited > own property takes precedence over inherited [0.47ms]\n321 |       // This shouldn't affect the spy\n322 |       Object.defineProperty(child, \"v\", { value: \"own\", configurable: true });\n323 | \n324 |       s.restore();\n325 |       // After restore, the own property we added should still be there\n326 |       expect(child.v).toBe(\"own\");\n                            ^\nerror: expect(received).toBe(expected)\n\nExpected: \"own\"\nReceived: \"grandparent\"\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-006-hist-006-run-001-e350cf-grd7dj\\.v3\\invariants.test.ts:326:23)\n(fail) spyOn inherited methods - invariants > mixed own and inherited > adding own property after spy on inherited [1.48ms]\n\n 16 pass\n 1 fail\n 57 expect() calls\nRan 17 tests across 1 file. [143.00ms]\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-e350cf-grd7dj\" && bun test ./.v3/invariants.test.ts 2>&1",
+      "exitCode": 0,
+      "durationMs": 368,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) spyOn inherited methods - invariants > prototype chain depth > getter from 1 level up (parent) [2.95ms]\n(pass) spyOn inherited methods - invariants > prototype chain depth > getter from 2 levels up (grandparent) [0.99ms]\n(pass) spyOn inherited methods - invariants > prototype chain depth > getter from 3 levels up (great-grandparent) [0.97ms]\n(pass) spyOn inherited methods - invariants > prototype chain depth > method from 2 levels up [0.85ms]\n(pass) spyOn inherited methods - invariants > getter/setter combinations > getter with setter inherited from grandparent [0.66ms]\n(pass) spyOn inherited methods - invariants > getter/setter combinations > setter inherited from grandparent [0.82ms]\n(pass) spyOn inherited methods - invariants > getter/setter combinations > own getter still works correctly [0.40ms]\n(pass) spyOn inherited methods - invariants > multiple spy/restore cycles > can spy and restore multiple times on inherited getter [1.57ms]\n(pass) spyOn inherited methods - invariants > concurrent spy operations > spy on different inherited properties simultaneously [0.95ms]\n(pass) spyOn inherited methods - invariants > edge cases > spy on inherited getter with undefined return [0.67ms]\n(pass) spyOn inherited methods - invariants > edge cases > spy on inherited getter that returns null [0.50ms]\n(pass) spyOn inherited methods - invariants > edge cases > spy on inherited getter that returns an object [0.47ms]\n(pass) spyOn inherited methods - invariants > edge cases > willCall works on inherited getter spy [0.37ms]\n(pass) spyOn inherited methods - invariants > edge cases > getOriginal works on inherited getter spy [0.35ms]\n(pass) spyOn inherited methods - invariants > edge cases > inheritance with overridden getter in middle class [0.54ms]\n(pass) spyOn inherited methods - invariants > mixed own and inherited > own property takes precedence over inherited [0.51ms]\n(pass) spyOn inherited methods - invariants > mixed own and inherited > adding own property after spy on inherited [0.50ms]\n\n 17 pass\n 0 fail\n 58 expect() calls\nRan 17 tests across 1 file. [130.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-e350cf-grd7dj\" && bun test 2>&1",
+      "exitCode": 0,
+      "durationMs": 373,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [4.24ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [0.99ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [0.90ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [108.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-006-hist-006-run-001-e350cf-grd7dj\" && bun test 2>&1",
+      "exitCode": 0,
+      "durationMs": 295,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [5.05ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [1.05ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [1.05ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [88.00ms]\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T14:34:52.595Z",
+  "endedAt": "2026-08-31T14:39:12.925Z"
+}

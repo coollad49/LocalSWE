@@ -1,0 +1,1426 @@
+{
+  "evaluationId": "eval-8c57fea0-1788190580885",
+  "runId": "synth-005-run-001-7c5251",
+  "caseId": "synth-005",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v3",
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T15:36:20.885Z",
+  "completedAt": "2026-08-31T15:36:22.702Z",
+  "durationMs": 1817,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-005-run-001-7c5251\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 231,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-005-1O6lkQ\\patch-1788190581776.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 312,
+      "command": "bun run benchmark\\cases\\synth-005\\public\\reproduce.ts",
+      "stdout": "100 USD -> EUR {\"amount\":92.35,\"currency\":\"EUR\"} expected 92.35 (100*0.92345=92.345)\n10 USD -> EUR @0.10055 {\"amount\":1.01,\"currency\":\"EUR\"} expected 1.01\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 191,
+      "command": "bun test benchmark\\cases\\synth-005\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-005\\private\\oracle.test.ts:\n(pass) synth-005 oracle: convertCurrency rounding > rounds correctly with half-cent edge [1.51ms]\n(pass) synth-005 oracle: convertCurrency rounding > rounds standard cases [0.22ms]\n(pass) synth-005 oracle: convertCurrency rounding > same currency no conversion [0.13ms]\n\n 3 pass\n 0 fail\n 6 expect() calls\nRan 3 tests across 1 file. [141.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 187,
+      "command": "bun test benchmark\\repositories\\money-utils\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\money-utils\\tests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.50ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.43ms]\n(pass) money-utils > parseMoney handles comma-separated [2.61ms]\n(pass) money-utils > parseMoney handles simple amounts [0.35ms]\n(pass) money-utils > add validates currency mismatch [0.71ms]\n(pass) money-utils > subtract validates currency [0.23ms]\n(pass) money-utils > multiply [0.16ms]\n(pass) money-utils > convertCurrency precision [0.36ms]\n(pass) money-utils > convertCurrency throws missing rate [0.20ms]\n(pass) money-utils > createMoney validates [0.18ms]\n\n 10 pass\n 0 fail\n 22 expect() calls\nRan 10 tests across 1 file. [132.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "money-utils",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "boundary",
+      "data-transformation"
+    ]
+  },
+  "metrics": {
+    "durationMs": 110030,
+    "totalTurns": 84,
+    "toolCalls": 44,
+    "commandsExecuted": 16,
+    "filesInspected": 8,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 92051,
+    "outputTokens": 28746,
+    "totalTokens": 856349
+  },
+  "cost": {
+    "inputTokens": 92051,
+    "outputTokens": 28746,
+    "totalTokens": 120797,
+    "inputCostUsd": 0.012887,
+    "outputCostUsd": 0.008049,
+    "totalCostUsd": 0.022996,
+    "costUsd": 0.022996,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-005-run-001-7c5251",
+    "caseId": "synth-005",
+    "agentVersion": "agent-v3",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:7067d1f9de34d2e8442910a8d7477ebc1a1d6528e91729ff1c8402595dd29fc3",
+    "trajectory": {
+      "eventCount": 1728,
+      "durationMs": 110014,
+      "eventTypes": {
+        "agent_start": 3,
+        "turn_start": 36,
+        "message_start": 82,
+        "message_end": 82,
+        "message_update": 1347,
+        "tool_execution_start": 44,
+        "tool_execution_end": 44,
+        "turn_end": 36,
+        "tool_execution_update": 50,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "diff_audit": 1
+      },
+      "assistantMessages": 1455,
+      "userMessages": 4,
+      "toolCalls": 44,
+      "toolResults": 176,
+      "thinkingEvents": 1455,
+      "unknownEvents": 92,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 44,
+      "uniqueTools": 5,
+      "byTool": {
+        "read": {
+          "calls": 12,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 8,
+          "failures": 0
+        },
+        "write": {
+          "calls": 4,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 16,
+          "failures": 18
+        },
+        "edit": {
+          "calls": 4,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 92051,
+      "output": 28746,
+      "cacheRead": 735552,
+      "cacheWrite": 0,
+      "total": 856349,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.022996,
+      "inputCostUsd": 0.012887,
+      "outputCostUsd": 0.008049,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 1455,
+      "characterCount": 716785,
+      "averageCharacters": 493,
+      "maxCharacters": 2150,
+      "firstThinkingAt": "2026-08-31T14:37:15.604Z",
+      "lastThinkingAt": "2026-08-31T14:39:03.767Z",
+      "thinkingDurationMs": 108163
+    },
+    "editing": {
+      "editCalls": 4,
+      "writeCalls": 4,
+      "filesTouched": [
+        "repro.ts",
+        "src/money.ts",
+        ".v3/invariants.test.ts"
+      ],
+      "uniqueFilesTouched": 3
+    },
+    "exploration": {
+      "readCalls": 12,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 8,
+      "bashCalls": 16,
+      "explorationToEditingRatio": 4.5
+    },
+    "verification": {
+      "commandsDetected": 64,
+      "testsRun": true,
+      "testCommandCount": 10,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 25,
+      "duplicateReadTargets": 6,
+      "duplicateEditTargets": 5,
+      "toolFailureCount": 18,
+      "topRepetitions": [
+        {
+          "signature": "1774840deae2",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+          "count": 4
+        },
+        {
+          "signature": "f08f8cb35053",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+          "count": 4
+        },
+        {
+          "signature": "c6d49bfee2be",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "cec7100b2e9d",
+          "tool": "read",
+          "target": "src/money.ts",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-005-run-001-7c5251",
+    "caseId": "synth-005",
+    "agentVersion": "agent-v3",
+    "timeline": [
+      {
+        "index": 35,
+        "timestamp": "2026-08-31T14:37:16.413Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 36,
+        "timestamp": "2026-08-31T14:37:16.413Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 37,
+        "timestamp": "2026-08-31T14:37:16.414Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 38,
+        "timestamp": "2026-08-31T14:37:16.414Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 90,
+        "timestamp": "2026-08-31T14:37:18.110Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 91,
+        "timestamp": "2026-08-31T14:37:18.110Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 92,
+        "timestamp": "2026-08-31T14:37:18.110Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 93,
+        "timestamp": "2026-08-31T14:37:18.110Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-31T14:37:18.110Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 95,
+        "timestamp": "2026-08-31T14:37:18.110Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 153,
+        "timestamp": "2026-08-31T14:37:20.453Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 154,
+        "timestamp": "2026-08-31T14:37:20.453Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 155,
+        "timestamp": "2026-08-31T14:37:20.453Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 156,
+        "timestamp": "2026-08-31T14:37:20.453Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 157,
+        "timestamp": "2026-08-31T14:37:20.453Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/money.test.ts"
+      },
+      {
+        "index": 158,
+        "timestamp": "2026-08-31T14:37:20.453Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/money.test.ts"
+      },
+      {
+        "index": 359,
+        "timestamp": "2026-08-31T14:37:28.395Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 360,
+        "timestamp": "2026-08-31T14:37:28.395Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 444,
+        "timestamp": "2026-08-31T14:37:32.295Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 445,
+        "timestamp": "2026-08-31T14:37:32.295Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 497,
+        "timestamp": "2026-08-31T14:37:35.762Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 498,
+        "timestamp": "2026-08-31T14:37:35.762Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/money.ts"
+      },
+      {
+        "index": 543,
+        "timestamp": "2026-08-31T14:37:37.877Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 544,
+        "timestamp": "2026-08-31T14:37:37.877Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 599,
+        "timestamp": "2026-08-31T14:37:40.266Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 600,
+        "timestamp": "2026-08-31T14:37:40.266Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 650,
+        "timestamp": "2026-08-31T14:37:42.941Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": ".v3"
+      },
+      {
+        "index": 651,
+        "timestamp": "2026-08-31T14:37:42.941Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": ".v3"
+      },
+      {
+        "index": 684,
+        "timestamp": "2026-08-31T14:37:45.292Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v3/fuzz-helpers.ts"
+      },
+      {
+        "index": 685,
+        "timestamp": "2026-08-31T14:37:45.292Z",
+        "event": "read",
+        "tool": "read",
+        "target": ".v3/fuzz-helpers.ts"
+      },
+      {
+        "index": 1100,
+        "timestamp": "2026-08-31T14:37:56.911Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 1101,
+        "timestamp": "2026-08-31T14:37:56.911Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 1144,
+        "timestamp": "2026-08-31T14:37:58.834Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 1145,
+        "timestamp": "2026-08-31T14:37:58.834Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 1208,
+        "timestamp": "2026-08-31T14:38:01.982Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 1209,
+        "timestamp": "2026-08-31T14:38:01.982Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 1499,
+        "timestamp": "2026-08-31T14:38:52.604Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 1500,
+        "timestamp": "2026-08-31T14:38:52.604Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 1541,
+        "timestamp": "2026-08-31T14:38:54.244Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 1542,
+        "timestamp": "2026-08-31T14:38:54.244Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 1599,
+        "timestamp": "2026-08-31T14:38:57.295Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 1600,
+        "timestamp": "2026-08-31T14:38:57.295Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 1653,
+        "timestamp": "2026-08-31T14:39:00.148Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+        "commandClass": "test"
+      },
+      {
+        "index": 1654,
+        "timestamp": "2026-08-31T14:39:00.149Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 35,
+        "timestamp": "2026-08-31T14:37:16.413Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 359,
+        "timestamp": "2026-08-31T14:37:28.395Z",
+        "detail": "repro.ts"
+      },
+      {
+        "type": "first_repro",
+        "eventIndex": 444,
+        "timestamp": "2026-08-31T14:37:32.295Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 452,
+        "timestamp": "2026-08-31T14:37:32.682Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 453,
+        "timestamp": "2026-08-31T14:37:32.682Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 454,
+        "timestamp": "2026-08-31T14:37:32.682Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 455,
+        "timestamp": "2026-08-31T14:37:32.682Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 456,
+        "timestamp": "2026-08-31T14:37:32.682Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 457,
+        "timestamp": "2026-08-31T14:37:32.682Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 599,
+        "timestamp": "2026-08-31T14:37:40.266Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1152,
+        "timestamp": "2026-08-31T14:37:59.108Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1153,
+        "timestamp": "2026-08-31T14:37:59.108Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1154,
+        "timestamp": "2026-08-31T14:37:59.108Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1155,
+        "timestamp": "2026-08-31T14:37:59.108Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1156,
+        "timestamp": "2026-08-31T14:37:59.108Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1157,
+        "timestamp": "2026-08-31T14:37:59.108Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1218,
+        "timestamp": "2026-08-31T14:38:02.392Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1219,
+        "timestamp": "2026-08-31T14:38:02.392Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1220,
+        "timestamp": "2026-08-31T14:38:02.392Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1221,
+        "timestamp": "2026-08-31T14:38:02.392Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1222,
+        "timestamp": "2026-08-31T14:38:02.392Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1223,
+        "timestamp": "2026-08-31T14:38:02.392Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun tes"
+      }
+    ],
+    "errors": [
+      {
+        "index": 452,
+        "tool": "bash",
+        "error": "Expected: 92.35 (rounded), Got: 92.34\nExpected: 92.36 (rounded), Got: 92.35\nBUG CONFIRMED: got 92.34 instead of 92.35\n92.35 from createMoney: 92.35\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 453,
+        "tool": "bash",
+        "error": "Expected: 92.35 (rounded), Got: 92.34\nExpected: 92.36 (rounded), Got: 92.35\nBUG CONFIRMED: got 92.34 instead of 92.35\n92.35 from createMoney: 92.35\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 454,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 455,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 456,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 457,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 1152,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n9 files were searched [85.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 1153,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n9 files were searched [85.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 1154,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 1155,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 1156,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 1157,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 1218,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Currency conversion rounding invariant > convertCurrency always rounds, never truncates [1.89ms]\n(pass) Currency conversion rounding invariant > convertCurrency result is always within ±0.01 of exact value [0.40ms]\n37 |   test(\"roundToCents always produces 2 decimal places\", () => {\n38 |     const values = [0.1, 0.01, 0.001, 1.999, 2.675, 1.005, -1.555];\n39 |     for (const v of values) {\n40 |       const rounded = roundToCents(v);\n41 |"
+      },
+      {
+        "index": 1219,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Currency conversion rounding invariant > convertCurrency always rounds, never truncates [1.89ms]\n(pass) Currency conversion rounding invariant > convertCurrency result is always within ±0.01 of exact value [0.40ms]\n37 |   test(\"roundToCents always produces 2 decimal places\", () => {\n38 |     const values = [0.1, 0.01, 0.001, 1.999, 2.675, 1.005, -1.555];\n39 |     for (const v of values) {\n40 |       const rounded = roundToCents(v);\n41 |"
+      },
+      {
+        "index": 1220,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 1221,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 1222,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 1223,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 444,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 445,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 452,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 1,
+        "outputSnippet": "Expected: 92.35 (rounded), Got: 92.34\nExpected: 92.36 (rounded), Got: 92.35\nBUG CONFIRMED: got 92.34 instead of 92.35\n92.35 from createMoney: 92.35\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 453,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 1,
+        "outputSnippet": "Expected: 92.35 (rounded), Got: 92.34\nExpected: 92.36 (rounded), Got: 92.35\nBUG CONFIRMED: got 92.34 instead of 92.35\n92.35 from createMoney: 92.35\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 454,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 455,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 456,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 457,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 543,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 544,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 551,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Expected: 92.35 (rounded), Got: 92.35\nExpected: 92.36 (rounded), Got: 92.36\n92.35 from createMoney: 92.35\n"
+      },
+      {
+        "index": 552,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Expected: 92.35 (rounded), Got: 92.35\nExpected: 92.36 (rounded), Got: 92.36\n92.35 from createMoney: 92.35\n"
+      },
+      {
+        "index": 553,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 554,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 555,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 556,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 599,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 600,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 609,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.73ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.53ms]\n(pass) money-utils > parseMo"
+      },
+      {
+        "index": 610,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.73ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.53ms]\n(pass) money-utils > parseMo"
+      },
+      {
+        "index": 611,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 612,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 613,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 614,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 1144,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1145,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1152,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n9 files were searched [85.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the "
+      },
+      {
+        "index": 1153,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n9 files were searched [85.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the "
+      },
+      {
+        "index": 1154,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 1155,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 1156,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 1157,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 1208,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1209,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1218,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Currency conversion rounding invariant > convertCurrency always rounds, never truncates [1.89ms]\n(pass) Currency conversion rounding invaria"
+      },
+      {
+        "index": 1219,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Currency conversion rounding invariant > convertCurrency always rounds, never truncates [1.89ms]\n(pass) Currency conversion rounding invaria"
+      },
+      {
+        "index": 1220,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 1221,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 1222,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 1223,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 1541,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1542,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1551,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Currency conversion rounding invariant > convertCurrency always rounds, never truncates [1.72ms]\n(pass) Currency conversion rounding invaria"
+      },
+      {
+        "index": 1552,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Currency conversion rounding invariant > convertCurrency always rounds, never truncates [1.72ms]\n(pass) Currency conversion rounding invaria"
+      },
+      {
+        "index": 1553,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1554,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1555,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1556,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1599,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 1600,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 1607,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.59ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.38ms]\n(pass) money-utils > parseMo"
+      },
+      {
+        "index": 1608,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.59ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.38ms]\n(pass) money-utils > parseMo"
+      },
+      {
+        "index": 1609,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 1610,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 1611,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 1612,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 1653,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 1654,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 1657,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 1658,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 1659,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 1660,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 1661,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 1662,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-005-synth-005-run-001-7c5251-zarKis/repro.ts\"",
+        "exitCode": 0
+      }
+    ]
+  }
+}

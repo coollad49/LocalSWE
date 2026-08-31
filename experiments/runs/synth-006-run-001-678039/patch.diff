@@ -1,0 +1,20 @@
+diff --git a/src/queue.ts b/src/queue.ts
+index dc4f03c..f3f91b8 100644
+--- a/src/queue.ts
++++ b/src/queue.ts
+@@ -34,9 +34,11 @@ export class AsyncQueue<T = unknown> {
+   }
+ 
+   dequeue(): Job<T> {
+-    // BUG: returns undefined instead of throwing
+-    const job = this.queue.shift();
+-    return job as Job<T>;
++    if (this.queue.length === 0) {
++      throw new Error("Cannot dequeue from an empty queue");
++    }
++    const job = this.queue.shift()!;
++    return job;
+   }
+ 
+   peek(): Job<T> | undefined {
+

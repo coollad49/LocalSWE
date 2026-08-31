@@ -1,0 +1,78 @@
+{
+  "runId": "hard-002-run-001-e88bde",
+  "caseId": "hard-002",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 1498,
+  "startedAt": "2026-08-31T15:29:48.581Z",
+  "completedAt": "2026-08-31T15:29:50.079Z",
+  "caseMeta": {
+    "repository": "qs",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "parsing",
+      "boundary",
+      "state-management"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 225,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-002-5bU7oj\\patch-1788190189381.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 470,
+      "command": "bun run benchmark\\cases\\hard-002\\public\\reproduce.ts",
+      "stdout": "Test overflow flatten: FAIL\n  result={\"a\":{\"0\":\"1\",\"1\":\"2\",\"2\":\"3\",\"3\":\"4\",\"4\":\"5\",\"5\":\"6\",\"6\":[\"7\",\"8\"]}}\n  expected={\"a\":{\"0\":\"1\",\"1\":\"2\",\"2\":\"3\",\"3\":\"4\",\"4\":\"5\",\"5\":\"6\",\"6\":\"7\",\"7\":\"8\"}}\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "metrics": {
+    "durationMs": 601213,
+    "totalTurns": 76,
+    "toolCalls": 34,
+    "commandsExecuted": 20,
+    "filesInspected": 5,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 61196,
+    "outputTokens": 6648,
+    "totalTokens": 609796
+  },
+  "cost": {
+    "inputTokens": 61196,
+    "outputTokens": 6648,
+    "totalTokens": 67844,
+    "inputCostUsd": 0.018359,
+    "outputCostUsd": 0.007978,
+    "totalCostUsd": 0.058854,
+    "costUsd": 0.058854,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  }
+}

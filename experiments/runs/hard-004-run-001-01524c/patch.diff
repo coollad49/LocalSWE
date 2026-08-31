@@ -1,0 +1,112 @@
+diff --git a/source/index.ts b/source/index.ts
+index a1dbca3..bb509b2 100644
+--- a/source/index.ts
++++ b/source/index.ts
+@@ -449,12 +449,62 @@ export default class PQueue<QueueType extends Queue<RunFunction, EnqueueOptionsT
+ 		};
+ 
+ 		return new Promise((resolve, reject) => {
++			let abortListener: (() => void) | undefined;
++			let settled = false;
++
++			const safeResolve = (value: TaskResultType) => {
++				if (settled) {
++					return;
++				}
++
++				settled = true;
++				resolve(value);
++			};
++
++			const safeReject = (reason: unknown) => {
++				if (settled) {
++					return;
++				}
++
++				settled = true;
++				reject(reason);
++			};
++
++			// Handle abort signal while task is still queued
++			if (options.signal) {
++				const {signal} = options;
++
++				// Check if already aborted
++				if (signal.aborted) {
++					safeReject(signal.reason);
++					return;
++				}
++
++				abortListener = () => {
++					// Remove from queue if still queued
++					this.#queue.remove(options.id!);
++					safeReject(signal.reason);
++				};
++
++				signal.addEventListener('abort', abortListener, {once: true});
++			}
++
++			const cleanupAbortListener = () => {
++				if (abortListener && options.signal) {
++					options.signal.removeEventListener('abort', abortListener);
++					abortListener = undefined;
++				}
++			};
++
+ 			// Create a unique symbol for tracking this task
+ 			const taskSymbol = Symbol(`task-${options.id}`);
+ 
+ 			this.#queue.enqueue(async () => {
+ 				this.#pending++;
+ 
++				// Clean up the queued abort listener since the task is now running
++				cleanupAbortListener();
++
+ 				// Track this running task
+ 				this.#runningTasks.set(taskSymbol, {
+ 					id: options.id,
+@@ -503,10 +553,10 @@ export default class PQueue<QueueType extends Queue<RunFunction, EnqueueOptionsT
+ 					}
+ 
+ 					const result = await operation;
+-					resolve(result);
++					safeResolve(result);
+ 					this.emit('completed', result);
+ 				} catch (error: unknown) {
+-					reject(error);
++					safeReject(error);
+ 					this.emit('error', error);
+ 				} finally {
+ 					// Clean up abort event listener
+diff --git a/source/priority-queue.ts b/source/priority-queue.ts
+index aace793..3c8b8ae 100644
+--- a/source/priority-queue.ts
++++ b/source/priority-queue.ts
+@@ -40,6 +40,16 @@ export default class PriorityQueue implements Queue<RunFunction, PriorityQueueOp
+ 		this.enqueue(item!.run, {priority, id});
+ 	}
+ 
++	remove(id: string): boolean {
++		const index = this.#queue.findIndex((element: Readonly<PriorityQueueOptions>) => element.id === id);
++		if (index === -1) {
++			return false;
++		}
++
++		this.#queue.splice(index, 1);
++		return true;
++	}
++
+ 	dequeue(): RunFunction | undefined {
+ 		const item = this.#queue.shift();
+ 		return item?.run;
+diff --git a/source/queue.ts b/source/queue.ts
+index 459d29b..f676270 100644
+--- a/source/queue.ts
++++ b/source/queue.ts
+@@ -6,4 +6,5 @@ export type Queue<Element, Options> = {
+ 	dequeue: () => Element | undefined;
+ 	enqueue: (run: Element, options?: Partial<Options>) => void;
+ 	setPriority: (id: string, priority: number) => void;
++	remove: (id: string) => boolean;
+ };
+

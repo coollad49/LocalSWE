@@ -1,5 +1,5 @@
 {
-  "evaluationId": "eval-9dfbbb4c-1788177499858",
+  "evaluationId": "eval-9575a23c-1788190422695",
   "runId": "hist-004-run-001-7c58e0",
   "caseId": "hist-004",
   "benchmarkVersion": "0.5",
@@ -7,17 +7,17 @@
   "agentVersion": "agent-v1",
   "model": "opencode-go/mimo-v2.5",
   "piVersion": "0.84.4",
-  "startedAt": "2026-08-31T11:58:19.858Z",
-  "completedAt": "2026-08-31T11:58:21.156Z",
-  "durationMs": 1298,
+  "startedAt": "2026-08-31T15:33:42.695Z",
+  "completedAt": "2026-08-31T15:33:44.204Z",
+  "durationMs": 1509,
   "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-004-run-001-7c58e0\\patch.diff",
   "status": "completed",
   "verdict": "verified",
   "verification": {
     "patchApply": {
       "status": "passed",
-      "durationMs": 158,
-      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-004-uQ0qrQ\\patch-1788177500571.diff",
+      "durationMs": 174,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-004-kk2GBv\\patch-1788190423531.diff",
       "stdout": "",
       "stderr": "",
       "exitCode": 0,
@@ -26,7 +26,7 @@
     "reproduction": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 162,
+      "durationMs": 139,
       "command": "bun run benchmark\\cases\\hist-004\\public\\reproduce.ts",
       "stdout": "mri(['-t'], {default:{t:true}}) => {\"_\":[],\"t\":true}\n_ empty? true (length 0) expected true\nt is boolean? true expected true, t===true? true\nhas numeric leak (1 in _)? false expected false\nalias check mri(['-t'], {alias:{t:['tt']}, default:{t:true}}) => {\"_\":[],\"t\":true,\"tt\":true}\nalias check pass? true\nPASS\n",
       "stderr": "",
@@ -35,19 +35,19 @@
     "oracle": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 133,
+      "durationMs": 207,
       "command": "bun test benchmark\\cases\\hist-004\\private\\oracle.test.ts",
       "stdout": "bun test v1.3.14 (0d9b296a)\n",
-      "stderr": "\nbenchmark\\cases\\hist-004\\private\\oracle.test.ts:\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > core bug: -t with default true does not leak into _ [2.23ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default variations [0.34ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default & alias [0.49ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default string & alias (string coercion branch) [0.33ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > no numeric pollution in _ for boolean defaults [1.05ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > regression: basic non-boolean parsing still works [0.26ms]\n\n 6 pass\n 0 fail\n 30 expect() calls\nRan 6 tests across 1 file. [98.00ms]\n",
+      "stderr": "\nbenchmark\\cases\\hist-004\\private\\oracle.test.ts:\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > core bug: -t with default true does not leak into _ [2.25ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default variations [0.98ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default & alias [0.52ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default string & alias (string coercion branch) [0.44ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > no numeric pollution in _ for boolean defaults [1.25ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > regression: basic non-boolean parsing still works [0.31ms]\n\n 6 pass\n 0 fail\n 30 expect() calls\nRan 6 tests across 1 file. [150.00ms]\n",
       "timedOut": false
     },
     "regression": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 128,
+      "durationMs": 150,
       "command": "bun test benchmark\\repositories\\mri\\tests",
       "stdout": "bun test v1.3.14 (0d9b296a)\n",
-      "stderr": "\nbenchmark\\repositories\\mri\\tests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.49ms]\n(pass) mri regression > handles short flags [0.12ms]\n(pass) mri regression > handles -- separator [0.09ms]\n(pass) mri regression > coerces numbers by default [0.10ms]\n(pass) mri regression > string opts preserve string values [0.18ms]\n(pass) mri regression > boolean flag with no value [0.16ms]\n(pass) mri regression > alias mirrors values [0.14ms]\n(pass) mri regression > default values [0.07ms]\n(pass) mri regression > unknown handler strict [0.28ms]\n\n 9 pass\n 0 fail\n 15 expect() calls\nRan 9 tests across 1 file. [93.00ms]\n",
+      "stderr": "\nbenchmark\\repositories\\mri\\tests\\mri.test.ts:\n(pass) mri regression > parses basic flags [2.23ms]\n(pass) mri regression > handles short flags [0.20ms]\n(pass) mri regression > handles -- separator [0.14ms]\n(pass) mri regression > coerces numbers by default [0.18ms]\n(pass) mri regression > string opts preserve string values [0.29ms]\n(pass) mri regression > boolean flag with no value [0.25ms]\n(pass) mri regression > alias mirrors values [0.33ms]\n(pass) mri regression > default values [0.30ms]\n(pass) mri regression > unknown handler strict [0.54ms]\n\n 9 pass\n 0 fail\n 15 expect() calls\nRan 9 tests across 1 file. [106.00ms]\n",
       "timedOut": false
     }
   },

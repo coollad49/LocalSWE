@@ -1,0 +1,78 @@
+{
+  "runId": "hard-005-run-001-6d1ede",
+  "caseId": "hard-005",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 1497,
+  "startedAt": "2026-08-31T15:32:25.227Z",
+  "completedAt": "2026-08-31T15:32:26.724Z",
+  "caseMeta": {
+    "repository": "path-to-regexp",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "parsing",
+      "api-behavior",
+      "data-transformation"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 327,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-005-CaQBrW\\patch-1788190346074.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 321,
+      "command": "bun run benchmark\\cases\\hard-005\\public\\reproduce.ts",
+      "stdout": "Test astral ID_Continue: result=\"/:test𝛼\" expected=\"/:\\\"test\\\"𝛼\" => FAIL\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "metrics": {
+    "durationMs": 601253,
+    "totalTurns": 144,
+    "toolCalls": 70,
+    "commandsExecuted": 46,
+    "filesInspected": 5,
+    "filesChanged": 1,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 82210,
+    "outputTokens": 7980,
+    "totalTokens": 1559118
+  },
+  "cost": {
+    "inputTokens": 82210,
+    "outputTokens": 7980,
+    "totalTokens": 90190,
+    "inputCostUsd": 0.024663,
+    "outputCostUsd": 0.009576,
+    "totalCostUsd": 0.122375,
+    "costUsd": 0.122375,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  }
+}

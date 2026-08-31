@@ -1,0 +1,1648 @@
+{
+  "evaluationId": "eval-151bc750-1788190402530",
+  "runId": "hist-003-run-001-14986a",
+  "caseId": "hist-003",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v3",
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T15:33:22.530Z",
+  "completedAt": "2026-08-31T15:33:24.929Z",
+  "durationMs": 2399,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-003-run-001-14986a\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 341,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-003-f7ByBw\\patch-1788190403716.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 411,
+      "command": "bun run benchmark\\cases\\hist-003\\public\\reproduce.ts",
+      "stdout": "before: foo.f()=original own=undefined\nbefore descriptors: {}\nafter spy: foo.f()=mocked ownDesc={\"writable\":true,\"enumerable\":false,\"configurable\":true}\nafter restore: foo.f()=original ownDesc=undefined\nall own descriptors after restore: {}\nPASS: prototype restore is clean, no leak\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 222,
+      "command": "bun test benchmark\\cases\\hist-003\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-003\\private\\oracle.test.ts:\n(pass) hist-003 oracle: prototype restore leak > restore deletes own property for prototype method [6.03ms]\n(pass) hist-003 oracle: prototype restore leak > multiple spy/restore cycles remain clean [3.43ms]\n(pass) hist-003 oracle: prototype restore leak > prototype still owns method after restore [3.07ms]\n\n 3 pass\n 0 fail\n 27 expect() calls\nRan 3 tests across 1 file. [158.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 232,
+      "command": "bun test benchmark\\repositories\\tinyspy\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\tinyspy\\tests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [4.76ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [4.68ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [0.88ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [159.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "tinyspy",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "state-management",
+      "api-behavior"
+    ]
+  },
+  "metrics": {
+    "durationMs": 204531,
+    "totalTurns": 100,
+    "toolCalls": 54,
+    "commandsExecuted": 20,
+    "filesInspected": 10,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 141111,
+    "outputTokens": 52348,
+    "totalTokens": 1695795
+  },
+  "cost": {
+    "inputTokens": 141111,
+    "outputTokens": 52348,
+    "totalTokens": 193459,
+    "inputCostUsd": 0.019756,
+    "outputCostUsd": 0.014657,
+    "totalCostUsd": 0.03862,
+    "costUsd": 0.03862,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-003-run-001-14986a",
+    "caseId": "hist-003",
+    "agentVersion": "agent-v3",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:85647edd172adfd4f1d5aa10e03f46919bc73732555ef9692afcee8611155773",
+    "trajectory": {
+      "eventCount": 3046,
+      "durationMs": 204498,
+      "eventTypes": {
+        "agent_start": 3,
+        "turn_start": 42,
+        "message_start": 98,
+        "message_end": 98,
+        "message_update": 2585,
+        "tool_execution_start": 54,
+        "tool_execution_end": 54,
+        "turn_end": 42,
+        "tool_execution_update": 66,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "diff_audit": 1
+      },
+      "assistantMessages": 2711,
+      "userMessages": 4,
+      "toolCalls": 54,
+      "toolResults": 216,
+      "thinkingEvents": 2711,
+      "unknownEvents": 114,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 54,
+      "uniqueTools": 5,
+      "byTool": {
+        "read": {
+          "calls": 18,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 8,
+          "failures": 0
+        },
+        "write": {
+          "calls": 4,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 20,
+          "failures": 18
+        },
+        "edit": {
+          "calls": 4,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 141111,
+      "output": 52348,
+      "cacheRead": 1502336,
+      "cacheWrite": 0,
+      "total": 1695795,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.03862,
+      "inputCostUsd": 0.019756,
+      "outputCostUsd": 0.014657,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 2711,
+      "characterCount": 2223765,
+      "averageCharacters": 820,
+      "maxCharacters": 3926,
+      "firstThinkingAt": "2026-08-31T14:31:27.695Z",
+      "lastThinkingAt": "2026-08-31T14:34:50.427Z",
+      "thinkingDurationMs": 202732
+    },
+    "editing": {
+      "editCalls": 4,
+      "writeCalls": 4,
+      "filesTouched": [
+        "repro.ts",
+        "src/spyOn.ts",
+        ".v3/invariants.test.ts"
+      ],
+      "uniqueFilesTouched": 3
+    },
+    "exploration": {
+      "readCalls": 18,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 8,
+      "bashCalls": 20,
+      "explorationToEditingRatio": 5.75
+    },
+    "verification": {
+      "commandsDetected": 80,
+      "testsRun": true,
+      "testCommandCount": 12,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 31,
+      "duplicateReadTargets": 10,
+      "duplicateEditTargets": 5,
+      "toolFailureCount": 18,
+      "topRepetitions": [
+        {
+          "signature": "6a8a37655088",
+          "tool": "read",
+          "target": "src/spyOn.ts",
+          "count": 4
+        },
+        {
+          "signature": "96b2bbd2cc96",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+          "count": 4
+        },
+        {
+          "signature": "360932974ef1",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+          "count": 4
+        },
+        {
+          "signature": "2af1cf77e9b3",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "111f7c140d64",
+          "tool": "read",
+          "target": "src/spy.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-003-run-001-14986a",
+    "caseId": "hist-003",
+    "agentVersion": "agent-v3",
+    "timeline": [
+      {
+        "index": 36,
+        "timestamp": "2026-08-31T14:31:28.086Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 37,
+        "timestamp": "2026-08-31T14:31:28.086Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 38,
+        "timestamp": "2026-08-31T14:31:28.086Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 39,
+        "timestamp": "2026-08-31T14:31:28.086Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 91,
+        "timestamp": "2026-08-31T14:31:29.898Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 92,
+        "timestamp": "2026-08-31T14:31:29.898Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 93,
+        "timestamp": "2026-08-31T14:31:29.898Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-31T14:31:29.898Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 95,
+        "timestamp": "2026-08-31T14:31:29.898Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 96,
+        "timestamp": "2026-08-31T14:31:29.898Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 158,
+        "timestamp": "2026-08-31T14:31:31.690Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 159,
+        "timestamp": "2026-08-31T14:31:31.690Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 160,
+        "timestamp": "2026-08-31T14:31:31.690Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spy.ts"
+      },
+      {
+        "index": 161,
+        "timestamp": "2026-08-31T14:31:31.690Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spy.ts"
+      },
+      {
+        "index": 162,
+        "timestamp": "2026-08-31T14:31:31.691Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/restoreAll.ts"
+      },
+      {
+        "index": 163,
+        "timestamp": "2026-08-31T14:31:31.691Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/restoreAll.ts"
+      },
+      {
+        "index": 216,
+        "timestamp": "2026-08-31T14:31:33.480Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/internal.ts"
+      },
+      {
+        "index": 217,
+        "timestamp": "2026-08-31T14:31:33.480Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/internal.ts"
+      },
+      {
+        "index": 218,
+        "timestamp": "2026-08-31T14:31:33.480Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 219,
+        "timestamp": "2026-08-31T14:31:33.480Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/utils.ts"
+      },
+      {
+        "index": 565,
+        "timestamp": "2026-08-31T14:31:48.712Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/tinyspy.test.ts"
+      },
+      {
+        "index": 566,
+        "timestamp": "2026-08-31T14:31:48.712Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/tinyspy.test.ts"
+      },
+      {
+        "index": 567,
+        "timestamp": "2026-08-31T14:31:48.712Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": ".v3"
+      },
+      {
+        "index": 568,
+        "timestamp": "2026-08-31T14:31:48.712Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": ".v3"
+      },
+      {
+        "index": 778,
+        "timestamp": "2026-08-31T14:31:53.490Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 779,
+        "timestamp": "2026-08-31T14:31:53.490Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 825,
+        "timestamp": "2026-08-31T14:31:59.949Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 826,
+        "timestamp": "2026-08-31T14:31:59.949Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 1061,
+        "timestamp": "2026-08-31T14:33:05.426Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 1062,
+        "timestamp": "2026-08-31T14:33:05.426Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 1110,
+        "timestamp": "2026-08-31T14:33:10.296Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 1111,
+        "timestamp": "2026-08-31T14:33:10.296Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 1168,
+        "timestamp": "2026-08-31T14:33:12.689Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 1169,
+        "timestamp": "2026-08-31T14:33:12.689Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 2333,
+        "timestamp": "2026-08-31T14:33:36.952Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 2334,
+        "timestamp": "2026-08-31T14:33:36.952Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 2379,
+        "timestamp": "2026-08-31T14:33:39.573Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 2380,
+        "timestamp": "2026-08-31T14:33:39.573Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 2434,
+        "timestamp": "2026-08-31T14:33:42.287Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 2435,
+        "timestamp": "2026-08-31T14:33:42.287Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 2598,
+        "timestamp": "2026-08-31T14:34:23.622Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 2599,
+        "timestamp": "2026-08-31T14:34:23.622Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 2645,
+        "timestamp": "2026-08-31T14:34:26.368Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 2646,
+        "timestamp": "2026-08-31T14:34:26.368Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 2710,
+        "timestamp": "2026-08-31T14:34:33.513Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 2711,
+        "timestamp": "2026-08-31T14:34:33.513Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 2766,
+        "timestamp": "2026-08-31T14:34:36.760Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 2767,
+        "timestamp": "2026-08-31T14:34:36.760Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 2805,
+        "timestamp": "2026-08-31T14:34:39.226Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 2806,
+        "timestamp": "2026-08-31T14:34:39.226Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/spyOn.ts"
+      },
+      {
+        "index": 2863,
+        "timestamp": "2026-08-31T14:34:41.847Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2",
+        "commandClass": "test"
+      },
+      {
+        "index": 2864,
+        "timestamp": "2026-08-31T14:34:41.847Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2",
+        "commandClass": "test"
+      },
+      {
+        "index": 2936,
+        "timestamp": "2026-08-31T14:34:45.049Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+        "commandClass": "test"
+      },
+      {
+        "index": 2937,
+        "timestamp": "2026-08-31T14:34:45.049Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 36,
+        "timestamp": "2026-08-31T14:31:28.086Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 778,
+        "timestamp": "2026-08-31T14:31:53.490Z",
+        "detail": "repro.ts"
+      },
+      {
+        "type": "first_repro",
+        "eventIndex": 825,
+        "timestamp": "2026-08-31T14:31:59.949Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run r"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 833,
+        "timestamp": "2026-08-31T14:32:00.658Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run r"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 834,
+        "timestamp": "2026-08-31T14:32:00.658Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run r"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 835,
+        "timestamp": "2026-08-31T14:32:00.658Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run r"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 836,
+        "timestamp": "2026-08-31T14:32:00.658Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run r"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 837,
+        "timestamp": "2026-08-31T14:32:00.658Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run r"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 838,
+        "timestamp": "2026-08-31T14:32:00.658Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run r"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 1168,
+        "timestamp": "2026-08-31T14:33:12.689Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 2387,
+        "timestamp": "2026-08-31T14:33:39.997Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 2388,
+        "timestamp": "2026-08-31T14:33:39.997Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 2389,
+        "timestamp": "2026-08-31T14:33:39.997Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 2390,
+        "timestamp": "2026-08-31T14:33:39.997Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 2391,
+        "timestamp": "2026-08-31T14:33:39.997Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 2392,
+        "timestamp": "2026-08-31T14:33:39.997Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 2444,
+        "timestamp": "2026-08-31T14:33:42.802Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 2445,
+        "timestamp": "2026-08-31T14:33:42.802Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 2446,
+        "timestamp": "2026-08-31T14:33:42.802Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 2447,
+        "timestamp": "2026-08-31T14:33:42.802Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 2448,
+        "timestamp": "2026-08-31T14:33:42.802Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 2449,
+        "timestamp": "2026-08-31T14:33:42.802Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test "
+      }
+    ],
+    "errors": [
+      {
+        "index": 833,
+        "tool": "bash",
+        "error": "Before spyOn:\n  foo.f(): original\n  own property \"f\"?: undefined\n\nAfter spyOn:\n  foo.f(): mocked\n  own property \"f\"?: {\n  value: [Function: fn],\n  writable: true,\n  enumerable: false,\n  configurable: true,\n}\n\nAfter restore:\n  foo.f(): original\n  own property \"f\"?: {\n  value: [Function: f],\n  writable: true,\n  enumerable: false,\n  configurable: true,\n}\n\n❌ BUG: own property \"f\" still exists after restore!\n   This shadows the prototype method.\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 834,
+        "tool": "bash",
+        "error": "Before spyOn:\n  foo.f(): original\n  own property \"f\"?: undefined\n\nAfter spyOn:\n  foo.f(): mocked\n  own property \"f\"?: {\n  value: [Function: fn],\n  writable: true,\n  enumerable: false,\n  configurable: true,\n}\n\nAfter restore:\n  foo.f(): original\n  own property \"f\"?: {\n  value: [Function: f],\n  writable: true,\n  enumerable: false,\n  configurable: true,\n}\n\n❌ BUG: own property \"f\" still exists after restore!\n   This shadows the prototype method.\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 835,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 836,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 837,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 838,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 2387,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n15 files were searched [106.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 2388,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n15 files were searched [106.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 2389,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 2390,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 2391,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 2392,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 2444,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n 8 |   describe(\"prototype method spy/restore\", () => {\n 9 |     test(\"no own property left after restore on plain object prototype\", () => {\n10 |       const proto = { f() { return \"proto\"; } };\n11 |       const obj = Object.create(proto);\n12 |       const s = spyOn(obj, \"f\");\n13 |       expect(obj.f()).not.toBe(\"proto\");\n                               ^\nerror: expect(received).not.toBe(expected)\n\nExpected: not \"proto\"\n\n      at <anonymous> ("
+      },
+      {
+        "index": 2445,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n 8 |   describe(\"prototype method spy/restore\", () => {\n 9 |     test(\"no own property left after restore on plain object prototype\", () => {\n10 |       const proto = { f() { return \"proto\"; } };\n11 |       const obj = Object.create(proto);\n12 |       const s = spyOn(obj, \"f\");\n13 |       expect(obj.f()).not.toBe(\"proto\");\n                               ^\nerror: expect(received).not.toBe(expected)\n\nExpected: not \"proto\"\n\n      at <anonymous> ("
+      },
+      {
+        "index": 2446,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 2447,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 2448,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 2449,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 825,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 826,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 833,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "Before spyOn:\n  foo.f(): original\n  own property \"f\"?: undefined\n\nAfter spyOn:\n  foo.f(): mocked\n  own property \"f\"?: {\n  value: [Function: fn],\n  writable: true,\n  enumerable: false,\n  configurable: "
+      },
+      {
+        "index": 834,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "Before spyOn:\n  foo.f(): original\n  own property \"f\"?: undefined\n\nAfter spyOn:\n  foo.f(): mocked\n  own property \"f\"?: {\n  value: [Function: fn],\n  writable: true,\n  enumerable: false,\n  configurable: "
+      },
+      {
+        "index": 835,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 836,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 837,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 838,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 1110,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1111,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1118,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "Before spyOn:\n  foo.f(): original\n  own property \"f\"?: undefined\n\nAfter spyOn:\n  foo.f(): mocked\n  own property \"f\"?: {\n  value: [Function: fn],\n  writable: true,\n  enumerable: false,\n  configurable: "
+      },
+      {
+        "index": 1119,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "Before spyOn:\n  foo.f(): original\n  own property \"f\"?: undefined\n\nAfter spyOn:\n  foo.f(): mocked\n  own property \"f\"?: {\n  value: [Function: fn],\n  writable: true,\n  enumerable: false,\n  configurable: "
+      },
+      {
+        "index": 1120,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1121,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1122,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1123,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun run repro.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1168,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1169,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1176,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [2.98ms]\n(pass) tinyspy regression > spy creates mock function with ca"
+      },
+      {
+        "index": 1177,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [2.98ms]\n(pass) tinyspy regression > spy creates mock function with ca"
+      },
+      {
+        "index": 1178,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1179,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1180,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1181,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2379,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2380,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2387,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n15 files were searched [106.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in th"
+      },
+      {
+        "index": 2388,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n15 files were searched [106.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in th"
+      },
+      {
+        "index": 2389,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 2390,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 2391,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 2392,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test .v3/invariants.test.ts 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 2434,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2435,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2444,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n 8 |   describe(\"prototype method spy/restore\", () => {\n 9 |     test(\"no own property left after restore on plain object prototype\", () => {\n10 | "
+      },
+      {
+        "index": 2445,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n 8 |   describe(\"prototype method spy/restore\", () => {\n 9 |     test(\"no own property left after restore on plain object prototype\", () => {\n10 | "
+      },
+      {
+        "index": 2446,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 2447,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 2448,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 2449,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 2645,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2646,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2657,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > no own property left after restore on plain object prototype [5.85ms]\n(pass) Phase"
+      },
+      {
+        "index": 2658,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > no own property left after restore on plain object prototype [5.85ms]\n(pass) Phase"
+      },
+      {
+        "index": 2659,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2660,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2661,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2662,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2710,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2711,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2718,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [2.96ms]\n(pass) tinyspy regression > spy creates mock function with ca"
+      },
+      {
+        "index": 2719,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [2.96ms]\n(pass) tinyspy regression > spy creates mock function with ca"
+      },
+      {
+        "index": 2720,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2721,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2722,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2723,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2766,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2767,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2770,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 2771,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 2772,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2773,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2774,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2775,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && rm repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2863,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2864,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2875,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > no own property left after restore on plain object prototype [4.79ms]\n(pass) Phase"
+      },
+      {
+        "index": 2876,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Phase 3: Invariant Tests > prototype method spy/restore > no own property left after restore on plain object prototype [4.79ms]\n(pass) Phase"
+      },
+      {
+        "index": 2877,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2878,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2879,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2880,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && bun test ./.v3/invariants.test.ts ./tests/tinyspy.test.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2936,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+        "exitCode": 0
+      },
+      {
+        "index": 2937,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+        "exitCode": 0
+      },
+      {
+        "index": 2944,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+        "exitCode": 0,
+        "outputSnippet": "ls: cannot access 'repro.ts': No such file or directory\nrepro.ts deleted (clean)\n"
+      },
+      {
+        "index": 2945,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+        "exitCode": 0,
+        "outputSnippet": "ls: cannot access 'repro.ts': No such file or directory\nrepro.ts deleted (clean)\n"
+      },
+      {
+        "index": 2946,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+        "exitCode": 0
+      },
+      {
+        "index": 2947,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+        "exitCode": 0
+      },
+      {
+        "index": 2948,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+        "exitCode": 0
+      },
+      {
+        "index": 2949,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-003-hist-003-run-001-14986a-J9c76u\" && ls repro.ts 2>&1 || echo \"repro.ts deleted (clean)\"",
+        "exitCode": 0
+      }
+    ]
+  }
+}

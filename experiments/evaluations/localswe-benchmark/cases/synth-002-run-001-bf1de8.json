@@ -1,0 +1,83 @@
+{
+  "runId": "synth-002-run-001-bf1de8",
+  "caseId": "synth-002",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 1780,
+  "startedAt": "2026-08-31T15:35:35.390Z",
+  "completedAt": "2026-08-31T15:35:37.170Z",
+  "caseMeta": {
+    "repository": "money-utils",
+    "type": "synthetic",
+    "difficulty": "easy",
+    "categories": [
+      "validation",
+      "business-logic"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 223,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-002-8zIQqv\\patch-1788190536339.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 230,
+      "command": "bun run benchmark\\cases\\synth-002\\public\\reproduce.ts",
+      "stdout": "add threw: Currency mismatch: USD and EUR PASS\nadd USD+USD {\"amount\":15,\"currency\":\"USD\"} expected 15 USD\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 211,
+      "command": "bun test benchmark\\cases\\synth-002\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-002\\private\\oracle.test.ts:\n(pass) synth-002 oracle: currency mismatch validation > add throws on mismatch [1.68ms]\n(pass) synth-002 oracle: currency mismatch validation > subtract throws on mismatch [0.29ms]\n(pass) synth-002 oracle: currency mismatch validation > add succeeds same currency [0.34ms]\n(pass) synth-002 oracle: currency mismatch validation > subtract succeeds same currency [0.11ms]\n\n 4 pass\n 0 fail\n 5 expect() calls\nRan 4 tests across 1 file. [132.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 162,
+      "command": "bun test benchmark\\repositories\\money-utils\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\money-utils\\tests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.45ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.61ms]\n(pass) money-utils > parseMoney handles comma-separated [1.79ms]\n(pass) money-utils > parseMoney handles simple amounts [0.17ms]\n(pass) money-utils > add validates currency mismatch [0.57ms]\n(pass) money-utils > subtract validates currency [0.22ms]\n(pass) money-utils > multiply [0.16ms]\n(pass) money-utils > convertCurrency precision [0.29ms]\n(pass) money-utils > convertCurrency throws missing rate [0.18ms]\n(pass) money-utils > createMoney validates [0.17ms]\n\n 10 pass\n 0 fail\n 22 expect() calls\nRan 10 tests across 1 file. [113.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "metrics": {
+    "durationMs": 43731,
+    "totalTurns": 48,
+    "toolCalls": 26,
+    "commandsExecuted": 6,
+    "filesInspected": 5,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 34656,
+    "outputTokens": 5608,
+    "totalTokens": 181576
+  },
+  "cost": {
+    "inputTokens": 34656,
+    "outputTokens": 5608,
+    "totalTokens": 40264,
+    "inputCostUsd": 0.004852,
+    "outputCostUsd": 0.00157,
+    "totalCostUsd": 0.006818,
+    "costUsd": 0.006818,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  }
+}

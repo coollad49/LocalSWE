@@ -1,0 +1,13 @@
+diff --git a/lib/index.js b/lib/index.js
+index 3a9e1c6..dcde855 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -48,6 +48,7 @@ module.exports = function (args, opts) {
+ 		for (k in opts.default) {
+ 			opts.alias[k] = opts.alias[k] || [];
+ 			(opts[typeof opts.default[k]] || []).push(k);
++		if (opts.alias[k]) (opts[typeof opts.default[k]] || []).push(...opts.alias[k]);
+ 		}
+ 	}
+ 
+

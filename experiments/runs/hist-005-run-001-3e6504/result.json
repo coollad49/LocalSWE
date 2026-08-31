@@ -1,0 +1,49 @@
+{
+  "runId": "hist-005-run-001-3e6504",
+  "caseId": "hist-005",
+  "agentVersion": "agent-v3",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 82356,
+  "changedFiles": [
+    "lib/index.js"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-005-run-001-3e6504\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-005-run-001-3e6504\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-005-run-001-3e6504\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-3e6504-tD7N52\" && bun test",
+      "exitCode": 0,
+      "durationMs": 293,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [2.49ms]\n(pass) mri regression > handles short flags [0.21ms]\n(pass) mri regression > handles -- separator [0.13ms]\n(pass) mri regression > coerces numbers by default [0.15ms]\n(pass) mri regression > string opts preserve string values [0.26ms]\n(pass) mri regression > boolean flag with no value [0.34ms]\n(pass) mri regression > alias mirrors values [0.21ms]\n(pass) mri regression > default values [0.15ms]\n(pass) mri regression > unknown handler strict [0.38ms]\n\n 9 pass\n 0 fail\n 15 expect() calls\nRan 9 tests across 1 file. [95.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-3e6504-tD7N52\" && bun test .v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 358,
+      "stdout": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n10 files were searched [97.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-3e6504-tD7N52\" && bun test ./.v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 318,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) alias defaults string type preservation > string default propagates string type to alias [1.57ms]\n(pass) alias defaults string type preservation > string default propagates string type to multiple aliases [0.17ms]\n(pass) alias defaults string type preservation > reversed alias direction (alias key points to canonical) [0.14ms]\n(pass) alias defaults string type preservation > boolean default does not break boolean aliases [0.10ms]\n(pass) alias defaults string type preservation > string type array option still works with aliases [0.17ms]\n(pass) alias defaults string type preservation > no default, no string option - number coercion still works [0.12ms]\n(pass) alias defaults string type preservation > explicit string option overrides default type inference [0.10ms]\n(pass) alias defaults string type preservation > empty string default preserves string type [0.10ms]\n(pass) alias defaults string type preservation > long flag with alias and string default [0.08ms]\n(pass) alias defaults string type preservation > multiple defaults with mixed types [0.15ms]\n(pass) alias defaults string type preservation > boundary: very long leading zeros [0.55ms]\n132 |   test(\"boundary: negative number as string default\", () => {\n133 |     const result = mri([\"-a\", \"-001\"], {\n134 |       alias: { arg: \"a\" },\n135 |       default: { arg: \"0\" },\n136 |     });\n137 |     expect(result.arg).toBe(\"-001\");\n                             ^\nerror: expect(received).toBe(expected)\n\nExpected: \"-001\"\nReceived: \"\"\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-005-hist-005-run-001-3e6504-tD7N52\\.v3\\invariants.test.ts:137:24)\n(fail) alias defaults string type preservation > boundary: negative number as string default [0.89ms]\n(pass) alias defaults string type preservation > boundary: no argument provided uses default [0.24ms]\n\n 12 pass\n 1 fail\n 55 expect() calls\nRan 13 tests across 1 file. [117.00ms]\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-3e6504-tD7N52\" && bun test ./.v3/invariants.test.ts",
+      "exitCode": 0,
+      "durationMs": 295,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) alias defaults string type preservation > string default propagates string type to alias [2.12ms]\n(pass) alias defaults string type preservation > string default propagates string type to multiple aliases [0.30ms]\n(pass) alias defaults string type preservation > reversed alias direction (alias key points to canonical) [0.19ms]\n(pass) alias defaults string type preservation > boolean default does not break boolean aliases [0.13ms]\n(pass) alias defaults string type preservation > string type array option still works with aliases [0.23ms]\n(pass) alias defaults string type preservation > no default, no string option - number coercion still works [0.19ms]\n(pass) alias defaults string type preservation > explicit string option overrides default type inference [0.21ms]\n(pass) alias defaults string type preservation > empty string default preserves string type [0.21ms]\n(pass) alias defaults string type preservation > long flag with alias and string default [0.18ms]\n(pass) alias defaults string type preservation > multiple defaults with mixed types [0.27ms]\n(pass) alias defaults string type preservation > boundary: very long leading zeros [0.64ms]\n(pass) alias defaults string type preservation > boundary: negative number-like value is treated as flag [0.28ms]\n(pass) alias defaults string type preservation > boundary: no argument provided uses default [0.22ms]\n\n 13 pass\n 0 fail\n 56 expect() calls\nRan 13 tests across 1 file. [113.00ms]\n"
+    },
+    {
+      "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-3e6504-tD7N52\" && bun test",
+      "exitCode": 0,
+      "durationMs": 291,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.49ms]\n(pass) mri regression > handles short flags [0.12ms]\n(pass) mri regression > handles -- separator [0.09ms]\n(pass) mri regression > coerces numbers by default [0.10ms]\n(pass) mri regression > string opts preserve string values [0.17ms]\n(pass) mri regression > boolean flag with no value [0.17ms]\n(pass) mri regression > alias mirrors values [0.14ms]\n(pass) mri regression > default values [0.09ms]\n(pass) mri regression > unknown handler strict [0.30ms]\n\n 9 pass\n 0 fail\n 15 expect() calls\nRan 9 tests across 1 file. [88.00ms]\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T14:34:19.566Z",
+  "endedAt": "2026-08-31T14:35:41.922Z"
+}

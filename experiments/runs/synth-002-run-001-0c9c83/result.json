@@ -1,0 +1,43 @@
+{
+  "runId": "synth-002-run-001-0c9c83",
+  "caseId": "synth-002",
+  "agentVersion": "agent-v3",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 48026,
+  "changedFiles": [
+    "src/money.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-002-run-001-0c9c83\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-002-run-001-0c9c83\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-002-run-001-0c9c83\\metadata.json",
+  "tests": [
+    {
+      "command": "bun test",
+      "exitCode": 0,
+      "durationMs": 262,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.68ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.42ms]\n(pass) money-utils > parseMoney handles comma-separated [1.77ms]\n(pass) money-utils > parseMoney handles simple amounts [0.24ms]\n(pass) money-utils > add validates currency mismatch [0.76ms]\n(pass) money-utils > subtract validates currency [0.27ms]\n(pass) money-utils > multiply [0.15ms]\n(pass) money-utils > convertCurrency precision [0.38ms]\n(pass) money-utils > convertCurrency throws missing rate [0.25ms]\n(pass) money-utils > createMoney validates [0.20ms]\n\n 10 pass\n 0 fail\n 22 expect() calls\nRan 10 tests across 1 file. [90.00ms]\n"
+    },
+    {
+      "command": "bun test .v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 307,
+      "stdout": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n9 files were searched [85.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "bun test ./.v3/invariants.test.ts",
+      "exitCode": 0,
+      "durationMs": 407,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) currency mismatch invariants > add rejects all currency mismatch permutations [1.07ms]\n(pass) currency mismatch invariants > subtract rejects all currency mismatch permutations [0.47ms]\n(pass) currency mismatch invariants > add accepts same currency including zero amount [0.20ms]\n(pass) currency mismatch invariants > subtract accepts same currency including zero amount [0.14ms]\n(pass) currency mismatch invariants > mixed-case same currency still matches (both uppercased at creation) [0.15ms]\n(pass) currency mismatch invariants > same currency, negative amounts [0.14ms]\n(pass) currency mismatch invariants > very small amounts same currency [0.10ms]\n(pass) currency mismatch invariants > very large amounts same currency [0.09ms]\n(pass) currency mismatch invariants > multiply never changes currency [0.21ms]\n\n 9 pass\n 0 fail\n 20 expect() calls\nRan 9 tests across 1 file. [160.00ms]\n"
+    },
+    {
+      "command": "rm repro.ts && bun test",
+      "exitCode": 0,
+      "durationMs": 419,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\money.test.ts:\n(pass) money-utils > roundToCents rounds half-up [0.44ms]\n(pass) money-utils > formatMoney formats to 2 decimals [0.35ms]\n(pass) money-utils > parseMoney handles comma-separated [1.33ms]\n(pass) money-utils > parseMoney handles simple amounts [0.16ms]\n(pass) money-utils > add validates currency mismatch [0.57ms]\n(pass) money-utils > subtract validates currency [0.21ms]\n(pass) money-utils > multiply [0.16ms]\n(pass) money-utils > convertCurrency precision [0.29ms]\n(pass) money-utils > convertCurrency throws missing rate [0.19ms]\n(pass) money-utils > createMoney validates [0.19ms]\n\n 10 pass\n 0 fail\n 22 expect() calls\nRan 10 tests across 1 file. [129.00ms]\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T14:35:43.129Z",
+  "endedAt": "2026-08-31T14:36:31.155Z"
+}

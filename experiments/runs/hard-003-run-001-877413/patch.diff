@@ -1,0 +1,227 @@
+diff --git a/src/index.ts b/src/index.ts
+index 6a53b49..f2e7291 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -37,6 +37,18 @@ export default class SuperJSON {
+       json: output.transformedValue,
+     };
+ 
++    const equalityAnnotations = generateReferentialEqualityAnnotations(
++      identities,
++      this.dedupe
++    );
++
++    if (output.annotations || equalityAnnotations) {
++      (res.meta as any) = {
++        ...res.meta,
++        v: 2,
++      };
++    }
++
+     if (output.annotations) {
+       res.meta = {
+         ...res.meta,
+@@ -44,10 +56,6 @@ export default class SuperJSON {
+       };
+     }
+ 
+-    const equalityAnnotations = generateReferentialEqualityAnnotations(
+-      identities,
+-      this.dedupe
+-    );
+     if (equalityAnnotations) {
+       res.meta = {
+         ...res.meta,
+@@ -63,14 +71,17 @@ export default class SuperJSON {
+ 
+     let result: T = copy(json) as any;
+ 
++    const legacy = !(meta as any)?.v || (meta as any).v < 2;
++
+     if (meta?.values) {
+-      result = applyValueAnnotations(result, meta.values, this);
++      result = applyValueAnnotations(result, meta.values, this, legacy);
+     }
+ 
+     if (meta?.referentialEqualities) {
+       result = applyReferentialEqualityAnnotations(
+         result,
+-        meta.referentialEqualities
++        meta.referentialEqualities,
++        legacy
+       );
+     }
+ 
+diff --git a/src/pathstringifier.ts b/src/pathstringifier.ts
+index a3d4d37..8d0bdd4 100644
+--- a/src/pathstringifier.ts
++++ b/src/pathstringifier.ts
+@@ -1,25 +1,49 @@
+ export type StringifiedPath = string;
+ type Path = string[];
+ 
+-export const escapeKey = (key: string) => key.replace(/\./g, '\\.');
++export const escapeKey = (key: string, legacy = true) =>
++  legacy
++    ? key.replace(/\./g, '\\.')
++    : key.replace(/\\/g, '\\\\').replace(/\./g, '\\.');
+ 
+-export const stringifyPath = (path: Path): StringifiedPath =>
++export const stringifyPath = (path: Path, legacy = true): StringifiedPath =>
+   path
+     .map(String)
+-    .map(escapeKey)
++    .map(k => escapeKey(k, legacy))
+     .join('.');
+ 
+-export const parsePath = (string: StringifiedPath) => {
++export const parsePath = (
++  string: StringifiedPath,
++  legacy = true
++): string[] => {
+   const result: string[] = [];
+ 
+   let segment = '';
+   for (let i = 0; i < string.length; i++) {
+     let char = string.charAt(i);
+ 
+-    const isEscapedDot = char === '\\' && string.charAt(i + 1) === '.';
+-    if (isEscapedDot) {
+-      segment += '.';
+-      i++;
++    if (char === '\\') {
++      const next = string.charAt(i + 1);
++      // Both modes: \. is escaped dot
++      if (next === '.') {
++        segment += '.';
++        i++;
++        continue;
++      }
++      // Non-legacy: \\ is escaped backslash (produces single \)
++      if (!legacy && next === '\\') {
++        segment += '\\';
++        i++;
++        continue;
++      }
++      // Non-legacy: \ followed by anything else is an error
++      if (!legacy) {
++        throw new Error(
++          `Invalid backslash-escape in path: \\${next || '(end of string)'}`
++        );
++      }
++      // Legacy: just a literal backslash
++      segment += char;
+       continue;
+     }
+ 
+diff --git a/src/plainer.ts b/src/plainer.ts
+index 114d76a..ad77611 100644
+--- a/src/plainer.ts
++++ b/src/plainer.ts
+@@ -27,7 +27,8 @@ export type MinimisedTree<T> = Tree<T> | Record<string, Tree<T>> | undefined;
+ function traverse<T>(
+   tree: MinimisedTree<T>,
+   walker: (v: T, path: string[]) => void,
+-  origin: string[] = []
++  origin: string[] = [],
++  legacy = true
+ ): void {
+   if (!tree) {
+     return;
+@@ -35,7 +36,7 @@ function traverse<T>(
+ 
+   if (!isArray(tree)) {
+     forEach(tree, (subtree, key) =>
+-      traverse(subtree, walker, [...origin, ...parsePath(key)])
++      traverse(subtree, walker, [...origin, ...parsePath(key, legacy)], legacy)
+     );
+     return;
+   }
+@@ -43,7 +44,7 @@ function traverse<T>(
+   const [nodeValue, children] = tree;
+   if (children) {
+     forEach(children, (child, key) => {
+-      traverse(child, walker, [...origin, ...parsePath(key)]);
++      traverse(child, walker, [...origin, ...parsePath(key, legacy)], legacy);
+     });
+   }
+ 
+@@ -53,31 +54,40 @@ function traverse<T>(
+ export function applyValueAnnotations(
+   plain: any,
+   annotations: MinimisedTree<TypeAnnotation>,
+-  superJson: SuperJSON
++  superJson: SuperJSON,
++  legacy = true
+ ) {
+-  traverse(annotations, (type, path) => {
+-    plain = setDeep(plain, path, v => untransformValue(v, type, superJson));
+-  });
++  traverse(
++    annotations,
++    (type, path) => {
++      plain = setDeep(plain, path, v => untransformValue(v, type, superJson));
++    },
++    [],
++    legacy
++  );
+ 
+   return plain;
+ }
+ 
+ export function applyReferentialEqualityAnnotations(
+   plain: any,
+-  annotations: ReferentialEqualityAnnotations
++  annotations: ReferentialEqualityAnnotations,
++  legacy = true
+ ) {
+   function apply(identicalPaths: string[], path: string) {
+-    const object = getDeep(plain, parsePath(path));
++    const object = getDeep(plain, parsePath(path, legacy));
+ 
+-    identicalPaths.map(parsePath).forEach(identicalObjectPath => {
+-      plain = setDeep(plain, identicalObjectPath, () => object);
+-    });
++    identicalPaths
++      .map(p => parsePath(p, legacy))
++      .forEach(identicalObjectPath => {
++        plain = setDeep(plain, identicalObjectPath, () => object);
++      });
+   }
+ 
+   if (isArray(annotations)) {
+     const [root, other] = annotations;
+     root.forEach(identicalPath => {
+-      plain = setDeep(plain, parsePath(identicalPath), () => plain);
++      plain = setDeep(plain, parsePath(identicalPath, legacy), () => plain);
+     });
+ 
+     if (other) {
+@@ -141,10 +151,10 @@ export function generateReferentialEqualityAnnotations(
+     const [representativePath, ...identicalPaths] = paths;
+ 
+     if (representativePath.length === 0) {
+-      rootEqualityPaths = identicalPaths.map(stringifyPath);
++      rootEqualityPaths = identicalPaths.map(p => stringifyPath(p, false));
+     } else {
+-      result[stringifyPath(representativePath)] = identicalPaths.map(
+-        stringifyPath
++      result[stringifyPath(representativePath, false)] = identicalPaths.map(
++        p => stringifyPath(p, false)
+       );
+     }
+   });
+@@ -239,10 +249,10 @@ export const walker = (
+     transformedValue[index] = recursiveResult.transformedValue;
+ 
+     if (isArray(recursiveResult.annotations)) {
+-      innerAnnotations[index] = recursiveResult.annotations;
++      innerAnnotations[escapeKey(index, false)] = recursiveResult.annotations;
+     } else if (isPlainObject(recursiveResult.annotations)) {
+       forEach(recursiveResult.annotations, (tree, key) => {
+-        innerAnnotations[escapeKey(index) + '.' + key] = tree;
++        innerAnnotations[escapeKey(index, false) + '.' + key] = tree;
+       });
+     }
+   });
+

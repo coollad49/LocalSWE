@@ -34,13 +34,10 @@ export class TrajectoryParser {
       };
     }
 
-    // Compute SHA-256 hash of entire raw trajectory
-    const rawContent = await readFile(filePath);
-    const hash = "sha256:" + createHash("sha256").update(rawContent).digest("hex");
-
     const events: NormalizedEvent[] = [];
     let parseErrors = 0;
     const meta: ParsedTrajectory["meta"] = {};
+    const hashSum = createHash("sha256");
 
     const fileStream = createReadStream(filePath, { encoding: "utf-8" });
     const rl = createInterface({ input: fileStream, crlfDelay: Infinity });
@@ -48,6 +45,7 @@ export class TrajectoryParser {
     let index = 0;
     for await (const line of rl) {
       if (!line.trim()) continue;
+      hashSum.update(line + "\n");
 
       let raw: any;
       try {
@@ -74,7 +72,7 @@ export class TrajectoryParser {
       }
     }
 
-    return { events, parseErrors, trajectoryHash: hash, meta };
+    return { events, parseErrors, trajectoryHash: "sha256:" + hashSum.digest("hex"), meta };
   }
 
   /**

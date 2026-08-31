@@ -1,0 +1,80 @@
+{
+  "runId": "synth-006-run-001-b56c68",
+  "caseId": "synth-006",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "false_confidence",
+  "durationMs": 1811,
+  "startedAt": "2026-08-31T15:36:40.842Z",
+  "completedAt": "2026-08-31T15:36:42.653Z",
+  "caseMeta": {
+    "repository": "async-queue",
+    "type": "synthetic",
+    "difficulty": "easy",
+    "categories": [
+      "api-behavior",
+      "error-handling"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 266,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-wAJu4z\\patch-1788190601914.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 197,
+      "command": "bun run benchmark\\cases\\synth-006\\public\\reproduce.ts",
+      "stdout": "threw: Cannot dequeue from an empty queue PASS\ndequeue after enqueue a expected a\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 272,
+      "command": "bun test benchmark\\cases\\synth-006\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-006\\private\\oracle.test.ts:\n2 | import { AsyncQueue } from \"../../../repositories/async-queue/src/queue.ts\";\n3 | \n4 | describe(\"synth-006 oracle: dequeue throws on empty\", () => {\n5 |   test(\"throws when empty\", () => {\n6 |     const q = new AsyncQueue<string>();\n7 |     expect(() => q.dequeue()).toThrow(/Queue is empty/);\n                                  ^\nerror: expect(received).toThrow(expected)\n\nExpected pattern: /Queue is empty/\nReceived message: \"Cannot dequeue from an empty queue\"\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-wAJu4z\\benchmark\\cases\\synth-006\\private\\oracle.test.ts:7:31)\n(fail) synth-006 oracle: dequeue throws on empty > throws when empty [1.93ms]\n(pass) synth-006 oracle: dequeue throws on empty > does not throw when not empty [0.80ms]\n(pass) synth-006 oracle: dequeue throws on empty > processNext returns null on empty, not throw [0.70ms]\n(pass) synth-006 oracle: dequeue throws on empty > clear then dequeue throws [0.28ms]\n\n 3 pass\n 1 fail\n 5 expect() calls\nRan 4 tests across 1 file. [219.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "metrics": {
+    "durationMs": 30619,
+    "totalTurns": 38,
+    "toolCalls": 18,
+    "commandsExecuted": 2,
+    "filesInspected": 3,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 23764,
+    "outputTokens": 3336,
+    "totalTokens": 126684
+  },
+  "cost": {
+    "inputTokens": 23764,
+    "outputTokens": 3336,
+    "totalTokens": 27100,
+    "inputCostUsd": 0.003327,
+    "outputCostUsd": 0.000934,
+    "totalCostUsd": 0.00454,
+    "costUsd": 0.00454,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  }
+}

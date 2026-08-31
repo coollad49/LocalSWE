@@ -1,0 +1,3697 @@
+{
+  "evaluationId": "eval-a4ff4efb-1788190424353",
+  "runId": "hist-004-run-001-80bf0e",
+  "caseId": "hist-004",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v3",
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T15:33:44.353Z",
+  "completedAt": "2026-08-31T15:33:46.008Z",
+  "durationMs": 1655,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-004-run-001-80bf0e\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 175,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-004-Ti8r4c\\patch-1788190425286.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 144,
+      "command": "bun run benchmark\\cases\\hist-004\\public\\reproduce.ts",
+      "stdout": "mri(['-t'], {default:{t:true}}) => {\"_\":[],\"t\":true}\n_ empty? true (length 0) expected true\nt is boolean? true expected true, t===true? true\nhas numeric leak (1 in _)? false expected false\nalias check mri(['-t'], {alias:{t:['tt']}, default:{t:true}}) => {\"_\":[],\"t\":true,\"tt\":true}\nalias check pass? true\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 153,
+      "command": "bun test benchmark\\cases\\hist-004\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-004\\private\\oracle.test.ts:\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > core bug: -t with default true does not leak into _ [2.27ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default variations [0.37ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default & alias [0.43ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default string & alias (string coercion branch) [0.28ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > no numeric pollution in _ for boolean defaults [1.03ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > regression: basic non-boolean parsing still works [0.25ms]\n\n 6 pass\n 0 fail\n 30 expect() calls\nRan 6 tests across 1 file. [111.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 245,
+      "command": "bun test benchmark\\repositories\\mri\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\mri\\tests\\mri.test.ts:\n(pass) mri regression > parses basic flags [2.13ms]\n(pass) mri regression > handles short flags [0.18ms]\n(pass) mri regression > handles -- separator [0.13ms]\n(pass) mri regression > coerces numbers by default [0.16ms]\n(pass) mri regression > string opts preserve string values [0.27ms]\n(pass) mri regression > boolean flag with no value [0.24ms]\n(pass) mri regression > alias mirrors values [0.22ms]\n(pass) mri regression > default values [0.10ms]\n(pass) mri regression > unknown handler strict [0.40ms]\n\n 9 pass\n 0 fail\n 15 expect() calls\nRan 9 tests across 1 file. [193.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "mri",
+    "type": "historical",
+    "difficulty": "easy",
+    "categories": [
+      "parsing",
+      "type-coercion"
+    ]
+  },
+  "metrics": {
+    "durationMs": 884877,
+    "totalTurns": 240,
+    "toolCalls": 122,
+    "commandsExecuted": 66,
+    "filesInspected": 6,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 519512,
+    "outputTokens": 342296,
+    "totalTokens": 15505904
+  },
+  "cost": {
+    "inputTokens": 519512,
+    "outputTokens": 342296,
+    "totalTokens": 861808,
+    "inputCostUsd": 0.072732,
+    "outputCostUsd": 0.095843,
+    "totalCostUsd": 0.209578,
+    "costUsd": 0.209578,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-004-run-001-80bf0e",
+    "caseId": "hist-004",
+    "agentVersion": "agent-v3",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:9055ad7220e9ce7e6ce9cf7758815b3151f632d906d39081c5b8efb5a703ad0e",
+    "trajectory": {
+      "eventCount": 19338,
+      "durationMs": 884861,
+      "eventTypes": {
+        "agent_start": 3,
+        "turn_start": 114,
+        "message_start": 238,
+        "message_end": 238,
+        "message_update": 18173,
+        "tool_execution_start": 122,
+        "tool_execution_end": 122,
+        "turn_end": 114,
+        "tool_execution_update": 210,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "diff_audit": 1
+      },
+      "assistantMessages": 18515,
+      "userMessages": 4,
+      "toolCalls": 122,
+      "toolResults": 488,
+      "thinkingEvents": 18515,
+      "unknownEvents": 330,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 122,
+      "uniqueTools": 5,
+      "byTool": {
+        "read": {
+          "calls": 14,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "write": {
+          "calls": 34,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 66,
+          "failures": 48
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 6
+        }
+      }
+    },
+    "tokens": {
+      "input": 519512,
+      "output": 342296,
+      "cacheRead": 14644096,
+      "cacheWrite": 0,
+      "total": 15505904,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.209578,
+      "inputCostUsd": 0.072732,
+      "outputCostUsd": 0.095843,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 18515,
+      "characterCount": 60823533,
+      "averageCharacters": 3285,
+      "maxCharacters": 9904,
+      "firstThinkingAt": "2026-08-31T14:31:41.372Z",
+      "lastThinkingAt": "2026-08-31T14:46:24.616Z",
+      "thinkingDurationMs": 883244
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 34,
+      "filesTouched": [
+        "repro.ts",
+        "lib/index.js",
+        ".v3/invariants.test.ts"
+      ],
+      "uniqueFilesTouched": 3
+    },
+    "exploration": {
+      "readCalls": 14,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 66,
+      "explorationToEditingRatio": 2.39
+    },
+    "verification": {
+      "commandsDetected": 208,
+      "testsRun": true,
+      "testCommandCount": 36,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cat -n repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cat -n repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cat -n repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cat -n repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cat -n repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cat -n repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cat -n repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cat -n repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun run repro.ts && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test ./.v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+          "exitCode": 0
+        },
+        {
+          "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+          "exitCode": 0
+        },
+        {
+          "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+          "exitCode": 0
+        },
+        {
+          "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+          "exitCode": 0
+        },
+        {
+          "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+          "exitCode": 0
+        },
+        {
+          "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+          "exitCode": 0
+        },
+        {
+          "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+          "exitCode": 0
+        },
+        {
+          "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+          "exitCode": 0
+        },
+        {
+          "command": "rm final_check.ts; bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "rm final_check.ts; bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "rm final_check.ts; bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "rm final_check.ts; bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "rm final_check.ts; bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "rm final_check.ts; bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "rm final_check.ts; bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "rm final_check.ts; bun test",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 96,
+      "duplicateReadTargets": 10,
+      "duplicateEditTargets": 33,
+      "toolFailureCount": 54,
+      "topRepetitions": [
+        {
+          "signature": "ac5d7f5a8725",
+          "tool": "write",
+          "target": "lib/index.js",
+          "count": 22
+        },
+        {
+          "signature": "d2c67ff53584",
+          "tool": "bash",
+          "target": "bun test ./.v3/invariants.test.ts",
+          "count": 14
+        },
+        {
+          "signature": "12caca53bac2",
+          "tool": "bash",
+          "target": "bun run repro.ts",
+          "count": 12
+        },
+        {
+          "signature": "78f3f7297af7",
+          "tool": "bash",
+          "target": "bun test",
+          "count": 12
+        },
+        {
+          "signature": "2ac9d700cc05",
+          "tool": "write",
+          "target": ".v3/invariants.test.ts",
+          "count": 10
+        },
+        {
+          "signature": "66c5e6c0102c",
+          "tool": "read",
+          "target": "lib/index.js",
+          "count": 6
+        },
+        {
+          "signature": "2cbc360ccd41",
+          "tool": "bash",
+          "target": "bun run repro.ts && bun test",
+          "count": 6
+        },
+        {
+          "signature": "26bd8fcc95bc",
+          "tool": "read",
+          "target": "tests/mri.test.ts",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "ec8ec0fa57e2",
+          "tool": "ls",
+          "target": ".",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-004-run-001-80bf0e",
+    "caseId": "hist-004",
+    "agentVersion": "agent-v3",
+    "timeline": [
+      {
+        "index": 36,
+        "timestamp": "2026-08-31T14:31:41.884Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 37,
+        "timestamp": "2026-08-31T14:31:41.884Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 38,
+        "timestamp": "2026-08-31T14:31:41.884Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 39,
+        "timestamp": "2026-08-31T14:31:41.884Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 90,
+        "timestamp": "2026-08-31T14:31:43.615Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "lib"
+      },
+      {
+        "index": 91,
+        "timestamp": "2026-08-31T14:31:43.615Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "lib"
+      },
+      {
+        "index": 92,
+        "timestamp": "2026-08-31T14:31:43.615Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 93,
+        "timestamp": "2026-08-31T14:31:43.615Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-31T14:31:43.615Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 95,
+        "timestamp": "2026-08-31T14:31:43.615Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 146,
+        "timestamp": "2026-08-31T14:31:45.345Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 147,
+        "timestamp": "2026-08-31T14:31:45.345Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 148,
+        "timestamp": "2026-08-31T14:31:45.345Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/mri.test.ts"
+      },
+      {
+        "index": 149,
+        "timestamp": "2026-08-31T14:31:45.345Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/mri.test.ts"
+      },
+      {
+        "index": 781,
+        "timestamp": "2026-08-31T14:32:18.046Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 782,
+        "timestamp": "2026-08-31T14:32:18.046Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 783,
+        "timestamp": "2026-08-31T14:32:18.046Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/mri.test.ts"
+      },
+      {
+        "index": 784,
+        "timestamp": "2026-08-31T14:32:18.046Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/mri.test.ts"
+      },
+      {
+        "index": 1803,
+        "timestamp": "2026-08-31T14:33:00.381Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 1804,
+        "timestamp": "2026-08-31T14:33:00.381Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 1835,
+        "timestamp": "2026-08-31T14:33:01.903Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 1836,
+        "timestamp": "2026-08-31T14:33:01.903Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 2656,
+        "timestamp": "2026-08-31T14:34:34.171Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 2657,
+        "timestamp": "2026-08-31T14:34:34.171Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 2701,
+        "timestamp": "2026-08-31T14:34:36.525Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat -A lib/index.js | head -80",
+        "commandClass": "general"
+      },
+      {
+        "index": 2702,
+        "timestamp": "2026-08-31T14:34:36.525Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat -A lib/index.js | head -80",
+        "commandClass": "general"
+      },
+      {
+        "index": 2749,
+        "timestamp": "2026-08-31T14:34:38.792Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat -A lib/index.js | head -100 | tail -25",
+        "commandClass": "general"
+      },
+      {
+        "index": 2750,
+        "timestamp": "2026-08-31T14:34:38.792Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat -A lib/index.js | head -100 | tail -25",
+        "commandClass": "general"
+      },
+      {
+        "index": 3050,
+        "timestamp": "2026-08-31T14:34:47.172Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 3051,
+        "timestamp": "2026-08-31T14:34:47.172Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 3088,
+        "timestamp": "2026-08-31T14:34:49.456Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 3089,
+        "timestamp": "2026-08-31T14:34:49.456Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 3695,
+        "timestamp": "2026-08-31T14:35:10.613Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 3696,
+        "timestamp": "2026-08-31T14:35:10.613Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 3725,
+        "timestamp": "2026-08-31T14:35:12.515Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 3726,
+        "timestamp": "2026-08-31T14:35:12.515Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 3770,
+        "timestamp": "2026-08-31T14:35:15.370Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 3771,
+        "timestamp": "2026-08-31T14:35:15.370Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 4983,
+        "timestamp": "2026-08-31T14:36:00.084Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 4984,
+        "timestamp": "2026-08-31T14:36:00.084Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 5016,
+        "timestamp": "2026-08-31T14:36:02.054Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test .v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 5017,
+        "timestamp": "2026-08-31T14:36:02.054Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test .v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 5060,
+        "timestamp": "2026-08-31T14:36:04.568Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 5061,
+        "timestamp": "2026-08-31T14:36:04.568Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 5822,
+        "timestamp": "2026-08-31T14:36:37.516Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 5823,
+        "timestamp": "2026-08-31T14:36:37.516Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 5856,
+        "timestamp": "2026-08-31T14:36:40.693Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 5857,
+        "timestamp": "2026-08-31T14:36:40.693Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 6754,
+        "timestamp": "2026-08-31T14:37:18.607Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 6755,
+        "timestamp": "2026-08-31T14:37:18.607Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 6786,
+        "timestamp": "2026-08-31T14:37:21.437Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 6787,
+        "timestamp": "2026-08-31T14:37:21.437Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 6831,
+        "timestamp": "2026-08-31T14:37:24.127Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 6832,
+        "timestamp": "2026-08-31T14:37:24.127Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 7293,
+        "timestamp": "2026-08-31T14:37:42.447Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 7294,
+        "timestamp": "2026-08-31T14:37:42.447Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 7914,
+        "timestamp": "2026-08-31T14:38:38.891Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 7915,
+        "timestamp": "2026-08-31T14:38:38.891Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 7943,
+        "timestamp": "2026-08-31T14:38:41.701Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 7944,
+        "timestamp": "2026-08-31T14:38:41.701Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 9011,
+        "timestamp": "2026-08-31T14:38:55.216Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 9012,
+        "timestamp": "2026-08-31T14:38:55.216Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 9042,
+        "timestamp": "2026-08-31T14:38:57.523Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 9043,
+        "timestamp": "2026-08-31T14:38:57.523Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 10495,
+        "timestamp": "2026-08-31T14:39:49.402Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 10496,
+        "timestamp": "2026-08-31T14:39:49.402Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 10807,
+        "timestamp": "2026-08-31T14:40:02.528Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 10808,
+        "timestamp": "2026-08-31T14:40:02.528Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 10848,
+        "timestamp": "2026-08-31T14:40:05.863Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 10849,
+        "timestamp": "2026-08-31T14:40:05.863Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 11914,
+        "timestamp": "2026-08-31T14:40:18.655Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 11915,
+        "timestamp": "2026-08-31T14:40:18.656Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 11945,
+        "timestamp": "2026-08-31T14:40:21.720Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 11946,
+        "timestamp": "2026-08-31T14:40:21.720Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 12445,
+        "timestamp": "2026-08-31T14:40:44.559Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 12446,
+        "timestamp": "2026-08-31T14:40:44.559Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 13042,
+        "timestamp": "2026-08-31T14:41:06.956Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 13043,
+        "timestamp": "2026-08-31T14:41:06.956Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 13078,
+        "timestamp": "2026-08-31T14:41:15.117Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun run repro.ts && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 13079,
+        "timestamp": "2026-08-31T14:41:15.117Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun run repro.ts && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 13379,
+        "timestamp": "2026-08-31T14:41:28.970Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat -n repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 13380,
+        "timestamp": "2026-08-31T14:41:28.970Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat -n repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 13495,
+        "timestamp": "2026-08-31T14:41:33.508Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat > debug.ts << 'EOF'\nimport mri from \"./lib/index.js\";\n\n// Debug alias with default\nconst res = mri([\"-v\", \"42\"], { default: { verbose: true }, ali",
+        "commandClass": "general"
+      },
+      {
+        "index": 13496,
+        "timestamp": "2026-08-31T14:41:33.508Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat > debug.ts << 'EOF'\nimport mri from \"./lib/index.js\";\n\n// Debug alias with default\nconst res = mri([\"-v\", \"42\"], { default: { verbose: true }, ali",
+        "commandClass": "general"
+      },
+      {
+        "index": 13750,
+        "timestamp": "2026-08-31T14:41:43.927Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat > debug2.ts << 'EOF'\nimport mri from \"./lib/index.js\";\n\n// Check what the original issue is about - the actual issue scenario\nconst res = mri([\"-v",
+        "commandClass": "general"
+      },
+      {
+        "index": 13751,
+        "timestamp": "2026-08-31T14:41:43.927Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat > debug2.ts << 'EOF'\nimport mri from \"./lib/index.js\";\n\n// Check what the original issue is about - the actual issue scenario\nconst res = mri([\"-v",
+        "commandClass": "general"
+      },
+      {
+        "index": 14772,
+        "timestamp": "2026-08-31T14:41:56.385Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 14773,
+        "timestamp": "2026-08-31T14:41:56.385Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 14805,
+        "timestamp": "2026-08-31T14:41:58.741Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 14806,
+        "timestamp": "2026-08-31T14:41:58.741Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 14845,
+        "timestamp": "2026-08-31T14:42:01.777Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 14846,
+        "timestamp": "2026-08-31T14:42:01.777Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 15755,
+        "timestamp": "2026-08-31T14:42:37.284Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 15756,
+        "timestamp": "2026-08-31T14:42:37.284Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 16267,
+        "timestamp": "2026-08-31T14:43:13.125Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 16268,
+        "timestamp": "2026-08-31T14:43:13.125Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 16484,
+        "timestamp": "2026-08-31T14:43:30.655Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun run repro.ts && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 16485,
+        "timestamp": "2026-08-31T14:43:30.655Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun run repro.ts && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 16524,
+        "timestamp": "2026-08-31T14:43:35.774Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 16525,
+        "timestamp": "2026-08-31T14:43:35.774Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 17002,
+        "timestamp": "2026-08-31T14:44:17.815Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 17003,
+        "timestamp": "2026-08-31T14:44:17.815Z",
+        "event": "write",
+        "tool": "write",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 17037,
+        "timestamp": "2026-08-31T14:44:21.859Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun run repro.ts && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 17038,
+        "timestamp": "2026-08-31T14:44:21.859Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun run repro.ts && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 17078,
+        "timestamp": "2026-08-31T14:44:27.308Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 17079,
+        "timestamp": "2026-08-31T14:44:27.308Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 17508,
+        "timestamp": "2026-08-31T14:44:54.862Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd /tmp && cat > test_original.js << 'EOF'\nfunction toArr(any) {\n\treturn any == null ? [] : Array.isArray(any) ? any : [any];\n}\nfunction toVal(out, ke",
+        "commandClass": "general"
+      },
+      {
+        "index": 17509,
+        "timestamp": "2026-08-31T14:44:54.862Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd /tmp && cat > test_original.js << 'EOF'\nfunction toArr(any) {\n\treturn any == null ? [] : Array.isArray(any) ? any : [any];\n}\nfunction toVal(out, ke",
+        "commandClass": "general"
+      },
+      {
+        "index": 18525,
+        "timestamp": "2026-08-31T14:45:17.727Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 18526,
+        "timestamp": "2026-08-31T14:45:17.727Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 18559,
+        "timestamp": "2026-08-31T14:45:23.875Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 18560,
+        "timestamp": "2026-08-31T14:45:23.875Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test ./.v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 18609,
+        "timestamp": "2026-08-31T14:45:36.178Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 18610,
+        "timestamp": "2026-08-31T14:45:36.178Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 18670,
+        "timestamp": "2026-08-31T14:45:42.257Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+        "commandClass": "test"
+      },
+      {
+        "index": 18671,
+        "timestamp": "2026-08-31T14:45:42.257Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+        "commandClass": "test"
+      },
+      {
+        "index": 18710,
+        "timestamp": "2026-08-31T14:45:51.262Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "git diff lib/index.js",
+        "commandClass": "git"
+      },
+      {
+        "index": 18711,
+        "timestamp": "2026-08-31T14:45:51.262Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "git diff lib/index.js",
+        "commandClass": "git"
+      },
+      {
+        "index": 19154,
+        "timestamp": "2026-08-31T14:46:08.159Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat > final_check.ts << 'EOF'\nimport mri from \"./lib/index.js\";\n\n// The core bug from ISSUE.md\nconsole.log(\"=== Core bug fix ===\");\nconst r1 = mri([\"-",
+        "commandClass": "general"
+      },
+      {
+        "index": 19155,
+        "timestamp": "2026-08-31T14:46:08.159Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cat > final_check.ts << 'EOF'\nimport mri from \"./lib/index.js\";\n\n// The core bug from ISSUE.md\nconsole.log(\"=== Core bug fix ===\");\nconst r1 = mri([\"-",
+        "commandClass": "general"
+      },
+      {
+        "index": 19201,
+        "timestamp": "2026-08-31T14:46:11.262Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "rm final_check.ts; bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 19202,
+        "timestamp": "2026-08-31T14:46:11.262Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "rm final_check.ts; bun test",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 36,
+        "timestamp": "2026-08-31T14:31:41.884Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 1803,
+        "timestamp": "2026-08-31T14:33:00.381Z",
+        "detail": "repro.ts"
+      },
+      {
+        "type": "first_repro",
+        "eventIndex": 1835,
+        "timestamp": "2026-08-31T14:33:01.903Z",
+        "detail": "bun run repro.ts"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 3770,
+        "timestamp": "2026-08-31T14:35:15.370Z",
+        "detail": "bun test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 5024,
+        "timestamp": "2026-08-31T14:36:02.312Z",
+        "detail": "bun test .v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 5025,
+        "timestamp": "2026-08-31T14:36:02.312Z",
+        "detail": "bun test .v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 5026,
+        "timestamp": "2026-08-31T14:36:02.312Z",
+        "detail": "bun test .v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 5027,
+        "timestamp": "2026-08-31T14:36:02.312Z",
+        "detail": "bun test .v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 5028,
+        "timestamp": "2026-08-31T14:36:02.312Z",
+        "detail": "bun test .v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 5029,
+        "timestamp": "2026-08-31T14:36:02.312Z",
+        "detail": "bun test .v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 5070,
+        "timestamp": "2026-08-31T14:36:04.898Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 5071,
+        "timestamp": "2026-08-31T14:36:04.898Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 5072,
+        "timestamp": "2026-08-31T14:36:04.898Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 5073,
+        "timestamp": "2026-08-31T14:36:04.898Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 5074,
+        "timestamp": "2026-08-31T14:36:04.898Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 5075,
+        "timestamp": "2026-08-31T14:36:04.898Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 6839,
+        "timestamp": "2026-08-31T14:37:24.394Z",
+        "detail": "bun test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 6840,
+        "timestamp": "2026-08-31T14:37:24.394Z",
+        "detail": "bun test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 6841,
+        "timestamp": "2026-08-31T14:37:24.394Z",
+        "detail": "bun test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 6842,
+        "timestamp": "2026-08-31T14:37:24.394Z",
+        "detail": "bun test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 6843,
+        "timestamp": "2026-08-31T14:37:24.394Z",
+        "detail": "bun test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 6844,
+        "timestamp": "2026-08-31T14:37:24.395Z",
+        "detail": "bun test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9052,
+        "timestamp": "2026-08-31T14:38:57.830Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9053,
+        "timestamp": "2026-08-31T14:38:57.830Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9054,
+        "timestamp": "2026-08-31T14:38:57.830Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9055,
+        "timestamp": "2026-08-31T14:38:57.830Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9056,
+        "timestamp": "2026-08-31T14:38:57.830Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9057,
+        "timestamp": "2026-08-31T14:38:57.830Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 11955,
+        "timestamp": "2026-08-31T14:40:22.014Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 11956,
+        "timestamp": "2026-08-31T14:40:22.014Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 11957,
+        "timestamp": "2026-08-31T14:40:22.015Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 11958,
+        "timestamp": "2026-08-31T14:40:22.015Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 11959,
+        "timestamp": "2026-08-31T14:40:22.015Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 11960,
+        "timestamp": "2026-08-31T14:40:22.015Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 14855,
+        "timestamp": "2026-08-31T14:42:02.130Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 14856,
+        "timestamp": "2026-08-31T14:42:02.130Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 14857,
+        "timestamp": "2026-08-31T14:42:02.131Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 14858,
+        "timestamp": "2026-08-31T14:42:02.131Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 14859,
+        "timestamp": "2026-08-31T14:42:02.131Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 14860,
+        "timestamp": "2026-08-31T14:42:02.131Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 16534,
+        "timestamp": "2026-08-31T14:43:36.049Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 16535,
+        "timestamp": "2026-08-31T14:43:36.049Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 16536,
+        "timestamp": "2026-08-31T14:43:36.049Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 16537,
+        "timestamp": "2026-08-31T14:43:36.049Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 16538,
+        "timestamp": "2026-08-31T14:43:36.049Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 16539,
+        "timestamp": "2026-08-31T14:43:36.049Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 17088,
+        "timestamp": "2026-08-31T14:44:27.612Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 17089,
+        "timestamp": "2026-08-31T14:44:27.612Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 17090,
+        "timestamp": "2026-08-31T14:44:27.612Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 17091,
+        "timestamp": "2026-08-31T14:44:27.612Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 17092,
+        "timestamp": "2026-08-31T14:44:27.612Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 17093,
+        "timestamp": "2026-08-31T14:44:27.613Z",
+        "detail": "bun test ./.v3/invariants.test.ts"
+      }
+    ],
+    "errors": [
+      {
+        "index": 2658,
+        "tool": "edit",
+        "error": "Could not find the exact text in lib/index.js. The old text must match exactly including all whitespace and newlines."
+      },
+      {
+        "index": 2659,
+        "tool": "edit",
+        "error": "Could not find the exact text in lib/index.js. The old text must match exactly including all whitespace and newlines."
+      },
+      {
+        "index": 2660,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 2661,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 2662,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 2663,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 5024,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n10 files were searched [77.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 5025,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n10 files were searched [77.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 5026,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 5027,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 5028,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 5029,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 5070,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not consume next argument > boolean flag followed by numeric string [1.63ms]\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not consume next argument > boolean flag followed by large numeric string [0.14ms]\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags sho"
+      },
+      {
+        "index": 5071,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not consume next argument > boolean flag followed by numeric string [1.63ms]\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not consume next argument > boolean flag followed by large numeric string [0.14ms]\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags sho"
+      },
+      {
+        "index": 5072,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 5073,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 5074,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 5075,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 6839,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.51ms]\n 7 |     expect(mri([\"--foo\", \"--bar\"])).toEqual({ _: [], foo: true, bar: true });\n 8 |   });\n 9 | \n10 |   test(\"handles short flags\", () => {\n11 |     expect(mri([\"-a\", \"-b\", \"val\"])).toEqual({ _: [], a: true, b: \"val\" });\n12 |     expect(mri([\"-ab\", \"val\"])).toEqual({ _: [], a: true, b: \"val\" });\n                                     ^\nerror: expect(received).toEqual(expected)\n\n  {\n    \"_\": [],\n-"
+      },
+      {
+        "index": 6840,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.51ms]\n 7 |     expect(mri([\"--foo\", \"--bar\"])).toEqual({ _: [], foo: true, bar: true });\n 8 |   });\n 9 | \n10 |   test(\"handles short flags\", () => {\n11 |     expect(mri([\"-a\", \"-b\", \"val\"])).toEqual({ _: [], a: true, b: \"val\" });\n12 |     expect(mri([\"-ab\", \"val\"])).toEqual({ _: [], a: true, b: \"val\" });\n                                     ^\nerror: expect(received).toEqual(expected)\n\n  {\n    \"_\": [],\n-"
+      },
+      {
+        "index": 6841,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 6842,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 6843,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 6844,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 9052,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by numeric string [1.57ms]\n11 |     });\n12 | \n13 |     test(\"boolean flag followed by large numeric string\", () => {\n14 |       const res = mri([\"--verbose\", \"999999\"], { boolean: \"verbose\" });\n15 |       expect(res.verbose).toBe(true);\n16 |       expect(res._).toEqual([\"999999\"]);\n            "
+      },
+      {
+        "index": 9053,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by numeric string [1.57ms]\n11 |     });\n12 | \n13 |     test(\"boolean flag followed by large numeric string\", () => {\n14 |       const res = mri([\"--verbose\", \"999999\"], { boolean: \"verbose\" });\n15 |       expect(res.verbose).toBe(true);\n16 |       expect(res._).toEqual([\"999999\"]);\n            "
+      },
+      {
+        "index": 9054,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 9055,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 9056,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 9057,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 11955,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by numeric string (short flag) [2.19ms]\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by large numeric string (long flag) [0.28ms]\n(pass) Boolean defaults leak into _ (mri) - invariant test"
+      },
+      {
+        "index": 11956,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by numeric string (short flag) [2.19ms]\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by large numeric string (long flag) [0.28ms]\n(pass) Boolean defaults leak into _ (mri) - invariant test"
+      },
+      {
+        "index": 11957,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 11958,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 11959,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 11960,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 14855,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by numeric string (short flag) [1.54ms]\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by large numeric string (long flag) [0.22ms]\n(pass) Boolean defaults leak into _ (mri) - invariant test"
+      },
+      {
+        "index": 14856,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by numeric string (short flag) [1.54ms]\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by large numeric string (long flag) [0.22ms]\n(pass) Boolean defaults leak into _ (mri) - invariant test"
+      },
+      {
+        "index": 14857,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 14858,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 14859,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 14860,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 16534,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by numeric string (short flag) [2.40ms]\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by large numeric string (long flag) [0.23ms]\n(pass) Boolean defaults leak into _ (mri) - invariant test"
+      },
+      {
+        "index": 16535,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by numeric string (short flag) [2.40ms]\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by large numeric string (long flag) [0.23ms]\n(pass) Boolean defaults leak into _ (mri) - invariant test"
+      },
+      {
+        "index": 16536,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 16537,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 16538,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 16539,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 17088,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by numeric string (short flag) [1.55ms]\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by large numeric string (long flag) [0.20ms]\n(pass) Boolean defaults leak into _ (mri) - invariant test"
+      },
+      {
+        "index": 17089,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by numeric string (short flag) [1.55ms]\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag followed by large numeric string (long flag) [0.20ms]\n(pass) Boolean defaults leak into _ (mri) - invariant test"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 1835,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1836,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1843,
+        "command": "bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[3],\"t\":true}\n_ contains: [ 3 ] types: [ \"number\" ]\nExpected: _: ['3'] (string), Got: _: [ 3 ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[42],\"v\":"
+      },
+      {
+        "index": 1844,
+        "command": "bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[3],\"t\":true}\n_ contains: [ 3 ] types: [ \"number\" ]\nExpected: _: ['3'] (string), Got: _: [ 3 ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[42],\"v\":"
+      },
+      {
+        "index": 1845,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1846,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1847,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1848,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3088,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3089,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3096,
+        "command": "bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[1,\"3\"],\"t\":true}\n_ contains: [ 1, \"3\" ] types: [ \"number\", \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ 1, \"3\" ]\n\nTest 2: -v 42 with default: { v: true "
+      },
+      {
+        "index": 3097,
+        "command": "bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[1,\"3\"],\"t\":true}\n_ contains: [ 1, \"3\" ] types: [ \"number\", \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ 1, \"3\" ]\n\nTest 2: -v 42 with default: { v: true "
+      },
+      {
+        "index": 3098,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3099,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3100,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3101,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3725,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3726,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3733,
+        "command": "bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[\"3\"],\"t\":true}\n_ contains: [ \"3\" ] types: [ \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ \"3\" ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[\"4"
+      },
+      {
+        "index": 3734,
+        "command": "bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[\"3\"],\"t\":true}\n_ contains: [ \"3\" ] types: [ \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ \"3\" ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[\"4"
+      },
+      {
+        "index": 3735,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3736,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3737,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3738,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 3770,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 3771,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 3778,
+        "command": "bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.59ms]\n(pass) mri regression > handles short flags [0.12ms]\n(pass) mri regression > handles -- separator [0"
+      },
+      {
+        "index": 3779,
+        "command": "bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.59ms]\n(pass) mri regression > handles short flags [0.12ms]\n(pass) mri regression > handles -- separator [0"
+      },
+      {
+        "index": 3780,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 3781,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 3782,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 3783,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 5016,
+        "command": "bun test .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 5017,
+        "command": "bun test .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 5024,
+        "command": "bun test .v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n10 files were searched [77.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the"
+      },
+      {
+        "index": 5025,
+        "command": "bun test .v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n10 files were searched [77.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the"
+      },
+      {
+        "index": 5026,
+        "command": "bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 5027,
+        "command": "bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 5028,
+        "command": "bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 5029,
+        "command": "bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 5060,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 5061,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 5070,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not consume next argument > boolean flag followed "
+      },
+      {
+        "index": 5071,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not consume next argument > boolean flag followed "
+      },
+      {
+        "index": 5072,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 5073,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 5074,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 5075,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 5856,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 5857,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 5864,
+        "command": "bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[],\"t\":true}\n_ contains: [] types: []\nExpected: _: ['3'] (string), Got: _: []\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[],\"v\":true}\n_ contains: ["
+      },
+      {
+        "index": 5865,
+        "command": "bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[],\"t\":true}\n_ contains: [] types: []\nExpected: _: ['3'] (string), Got: _: []\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[],\"v\":true}\n_ contains: ["
+      },
+      {
+        "index": 5866,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 5867,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 5868,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 5869,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 6786,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 6787,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 6794,
+        "command": "bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[\"3\"],\"t\":true}\n_ contains: [ \"3\" ] types: [ \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ \"3\" ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[\"4"
+      },
+      {
+        "index": 6795,
+        "command": "bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[\"3\"],\"t\":true}\n_ contains: [ \"3\" ] types: [ \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ \"3\" ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[\"4"
+      },
+      {
+        "index": 6796,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 6797,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 6798,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 6799,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 6831,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 6832,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 6839,
+        "command": "bun test",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.51ms]\n 7 |     expect(mri([\"--foo\", \"--bar\"])).toEqual({ _: [], foo: true, bar: true });\n 8 |   });\n 9 | \n"
+      },
+      {
+        "index": 6840,
+        "command": "bun test",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.51ms]\n 7 |     expect(mri([\"--foo\", \"--bar\"])).toEqual({ _: [], foo: true, bar: true });\n 8 |   });\n 9 | \n"
+      },
+      {
+        "index": 6841,
+        "command": "bun test",
+        "exitCode": 1
+      },
+      {
+        "index": 6842,
+        "command": "bun test",
+        "exitCode": 1
+      },
+      {
+        "index": 6843,
+        "command": "bun test",
+        "exitCode": 1
+      },
+      {
+        "index": 6844,
+        "command": "bun test",
+        "exitCode": 1
+      },
+      {
+        "index": 7943,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 7944,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 7951,
+        "command": "bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.59ms]\n(pass) mri regression > handles short flags [0.13ms]\n(pass) mri regression > handles -- separator [0"
+      },
+      {
+        "index": 7952,
+        "command": "bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.59ms]\n(pass) mri regression > handles short flags [0.13ms]\n(pass) mri regression > handles -- separator [0"
+      },
+      {
+        "index": 7953,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 7954,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 7955,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 7956,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 9042,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9043,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9052,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag foll"
+      },
+      {
+        "index": 9053,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag foll"
+      },
+      {
+        "index": 9054,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 9055,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 9056,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 9057,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 10807,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 10808,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 10815,
+        "command": "bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[\"3\"],\"t\":true}\n_ contains: [ \"3\" ] types: [ \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ \"3\" ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[\"4"
+      },
+      {
+        "index": 10816,
+        "command": "bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[\"3\"],\"t\":true}\n_ contains: [ \"3\" ] types: [ \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ \"3\" ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[\"4"
+      },
+      {
+        "index": 10817,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 10818,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 10819,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 10820,
+        "command": "bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 10848,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 10849,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 10856,
+        "command": "bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.47ms]\n(pass) mri regression > handles short flags [0.17ms]\n(pass) mri regression > handles -- separator [0"
+      },
+      {
+        "index": 10857,
+        "command": "bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.47ms]\n(pass) mri regression > handles short flags [0.17ms]\n(pass) mri regression > handles -- separator [0"
+      },
+      {
+        "index": 10858,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 10859,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 10860,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 10861,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 11945,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 11946,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 11955,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag foll"
+      },
+      {
+        "index": 11956,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag foll"
+      },
+      {
+        "index": 11957,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 11958,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 11959,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 11960,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 13078,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 13079,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 13088,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[\"3\"],\"t\":true}\n_ contains: [ \"3\" ] types: [ \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ \"3\" ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[\"4"
+      },
+      {
+        "index": 13089,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[\"3\"],\"t\":true}\n_ contains: [ \"3\" ] types: [ \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ \"3\" ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[\"4"
+      },
+      {
+        "index": 13090,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 13091,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 13092,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 13093,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 13379,
+        "command": "cat -n repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 13380,
+        "command": "cat -n repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 13385,
+        "command": "cat -n repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "     1\timport mri from \"./lib/index.js\";\n     2\t\n     3\t// Issue: When a boolean default is provided and a boolean flag is supplied,\n     4\t// the parser incorrectly coerces the boolean default and pu"
+      },
+      {
+        "index": 13386,
+        "command": "cat -n repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "     1\timport mri from \"./lib/index.js\";\n     2\t\n     3\t// Issue: When a boolean default is provided and a boolean flag is supplied,\n     4\t// the parser incorrectly coerces the boolean default and pu"
+      },
+      {
+        "index": 13387,
+        "command": "cat -n repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 13388,
+        "command": "cat -n repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 13389,
+        "command": "cat -n repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 13390,
+        "command": "cat -n repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 14805,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 14806,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 14813,
+        "command": "bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [2.17ms]\n(pass) mri regression > handles short flags [0.18ms]\n(pass) mri regression > handles -- separator [0"
+      },
+      {
+        "index": 14814,
+        "command": "bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [2.17ms]\n(pass) mri regression > handles short flags [0.18ms]\n(pass) mri regression > handles -- separator [0"
+      },
+      {
+        "index": 14815,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 14816,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 14817,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 14818,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 14845,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 14846,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 14855,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag foll"
+      },
+      {
+        "index": 14856,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag foll"
+      },
+      {
+        "index": 14857,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 14858,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 14859,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 14860,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 16484,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 16485,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 16494,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[\"3\"],\"t\":true}\n_ contains: [ \"3\" ] types: [ \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ \"3\" ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[\"4"
+      },
+      {
+        "index": 16495,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[\"3\"],\"t\":true}\n_ contains: [ \"3\" ] types: [ \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ \"3\" ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[\"4"
+      },
+      {
+        "index": 16496,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 16497,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 16498,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 16499,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 16524,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 16525,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 16534,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag foll"
+      },
+      {
+        "index": 16535,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag foll"
+      },
+      {
+        "index": 16536,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 16537,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 16538,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 16539,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 17037,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 17038,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 17047,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[\"3\"],\"t\":true}\n_ contains: [ \"3\" ] types: [ \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ \"3\" ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[\"4"
+      },
+      {
+        "index": 17048,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0,
+        "outputSnippet": "Test 1: -t 3 with boolean: t\nResult: {\"_\":[\"3\"],\"t\":true}\n_ contains: [ \"3\" ] types: [ \"string\" ]\nExpected: _: ['3'] (string), Got: _: [ \"3\" ]\n\nTest 2: -v 42 with default: { v: true }\nResult: {\"_\":[\"4"
+      },
+      {
+        "index": 17049,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 17050,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 17051,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 17052,
+        "command": "bun run repro.ts && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 17078,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 17079,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 17088,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag foll"
+      },
+      {
+        "index": 17089,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag foll"
+      },
+      {
+        "index": 17090,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 17091,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 17092,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 17093,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 18559,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 18560,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 18569,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag foll"
+      },
+      {
+        "index": 18570,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Boolean defaults leak into _ (mri) - invariant tests > Core bug fix: boolean flags should not leak numeric values into _ > boolean flag foll"
+      },
+      {
+        "index": 18571,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 18572,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 18573,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 18574,
+        "command": "bun test ./.v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 18609,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 18610,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 18617,
+        "command": "bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [2.36ms]\n(pass) mri regression > handles short flags [0.20ms]\n(pass) mri regression > handles -- separator [0"
+      },
+      {
+        "index": 18618,
+        "command": "bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [2.36ms]\n(pass) mri regression > handles short flags [0.20ms]\n(pass) mri regression > handles -- separator [0"
+      },
+      {
+        "index": 18619,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 18620,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 18621,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 18622,
+        "command": "bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 18670,
+        "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+        "exitCode": 0
+      },
+      {
+        "index": 18671,
+        "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+        "exitCode": 0
+      },
+      {
+        "index": 18676,
+        "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+        "exitCode": 0,
+        "outputSnippet": "index.d.ts\n"
+      },
+      {
+        "index": 18677,
+        "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+        "exitCode": 0,
+        "outputSnippet": "index.d.ts\n"
+      },
+      {
+        "index": 18678,
+        "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+        "exitCode": 0
+      },
+      {
+        "index": 18679,
+        "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+        "exitCode": 0
+      },
+      {
+        "index": 18680,
+        "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+        "exitCode": 0
+      },
+      {
+        "index": 18681,
+        "command": "rm repro.ts debug.ts debug2.ts /tmp/test_original.js 2>/dev/null; ls *.ts *.js 2>/dev/null | grep -v lib | grep -v node_modules",
+        "exitCode": 0
+      },
+      {
+        "index": 19201,
+        "command": "rm final_check.ts; bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 19202,
+        "command": "rm final_check.ts; bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 19209,
+        "command": "rm final_check.ts; bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.50ms]\n(pass) mri regression > handles short flags [0.12ms]\n(pass) mri regression > handles -- separator [0"
+      },
+      {
+        "index": 19210,
+        "command": "rm final_check.ts; bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.50ms]\n(pass) mri regression > handles short flags [0.12ms]\n(pass) mri regression > handles -- separator [0"
+      },
+      {
+        "index": 19211,
+        "command": "rm final_check.ts; bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 19212,
+        "command": "rm final_check.ts; bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 19213,
+        "command": "rm final_check.ts; bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 19214,
+        "command": "rm final_check.ts; bun test",
+        "exitCode": 0
+      }
+    ]
+  }
+}

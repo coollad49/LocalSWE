@@ -26,13 +26,14 @@
     "v3:run:case": "tsx src/cli/run-v3-case.ts",
     "v3:run": "tsx src/cli/run-v3.ts",
     "v3:validate": "tsx src/cli/run-v3-case.ts synth-001 --mock",
-    "experiment": "tsx src/cli/run-experiment.ts",
-    "experiment:v2": "tsx src/cli/run-experiment.ts --v2 --reuse-baseline --reuse-v1",
+    "experiment": "node --max-old-space-size=8192 ./node_modules/tsx/dist/cli.mjs src/cli/run-experiment.ts",
+    "experiment:v2": "node --max-old-space-size=8192 ./node_modules/tsx/dist/cli.mjs src/cli/run-experiment.ts --v2 --reuse-baseline --reuse-v1",
+    "experiment:v3": "node --max-old-space-size=8192 ./node_modules/tsx/dist/cli.mjs src/cli/run-experiment.ts --v3 --reuse-baseline --reuse-v1 --reuse-v2",
     "experiment:mock": "tsx src/cli/run-experiment.ts --mock",
     "experiment:fast": "tsx src/cli/run-experiment.ts --concurrency 6 --runs 1",
     "experiment:shrink": "tsx scripts/clean-trajectories.ts",
-    "evaluate": "tsx src/cli/evaluate.ts",
-    "evaluate:experiment": "tsx src/cli/evaluate.ts --experiment",
+    "evaluate": "node --max-old-space-size=8192 ./node_modules/tsx/dist/cli.mjs src/cli/evaluate.ts",
+    "evaluate:experiment": "node --max-old-space-size=8192 ./node_modules/tsx/dist/cli.mjs src/cli/evaluate.ts --experiment",
     "evaluator:test": "vitest run src/evaluator/tests"
   },
   "devDependencies": {

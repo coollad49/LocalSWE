@@ -1,0 +1,55 @@
+{
+  "runId": "hard-002-run-001-699e35",
+  "caseId": "hard-002",
+  "agentVersion": "agent-v3",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 116449,
+  "changedFiles": [
+    "lib/utils.js"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-002-run-001-699e35\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-002-run-001-699e35\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-002-run-001-699e35\\metadata.json",
+  "tests": [
+    {
+      "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-002-hard-002-run-001-699e35-cJxT6h\" && bun test",
+      "exitCode": 0,
+      "durationMs": 379,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\basic.test.ts:\n(pass) qs regression > basic parse [9.93ms]\n(pass) qs regression > basic stringify [2.45ms]\n(pass) qs regression > array parse [1.04ms]\n\n 3 pass\n 0 fail\n 3 expect() calls\nRan 3 tests across 1 file. [188.00ms]\n"
+    },
+    {
+      "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-002-hard-002-run-001-699e35-cJxT6h\" && bun test .v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 274,
+      "stdout": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n13 files were searched [68.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-002-hard-002-run-001-699e35-cJxT6h\" && bun test ./.v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 423,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=7,8 with arrayLimit:5 should flatten all 8 values [7.61ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5 with arrayLimit:5 should produce a flat array [0.26ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6 with arrayLimit:5 should produce overflow object [0.25ms]\n41 |   });\n42 | \n43 |   // Two overflow groups\n44 |   test(\"a=1,2,3,4,5,6&a=7,8,9,10,11,12 with arrayLimit:5 should flatten all\", () => {\n45 |     const result = qs.parse(\"a=1,2,3,4,5,6&a=7,8,9,10,11,12\", { comma: true, arrayLimit: 5 });\n46 |     expect(result).toEqual({\n                        ^\nerror: expect(received).toEqual(expected)\n\n  {\n    \"a\": {\n      \"0\": \"1\",\n      \"1\": \"2\",\n-     \"10\": \"11\",\n-     \"11\": \"12\",\n      \"2\": \"3\",\n      \"3\": \"4\",\n      \"4\": \"5\",\n      \"5\": \"6\",\n-     \"6\": \"7\",\n-     \"7\": \"8\",\n-     \"8\": \"9\",\n-     \"9\": \"10\",\n+     \"6\": {\n+       \"0\": \"7\",\n+       \"1\": \"8\",\n+       \"2\": \"9\",\n+       \"3\": \"10\",\n+       \"4\": \"11\",\n+       \"5\": \"12\",\n+     },\n    },\n  }\n\n- Expected  - 6\n+ Received  + 8\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-002-hard-002-run-001-699e35-cJxT6h\\.v3\\invariants.test.ts:46:20)\n(fail) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=7,8,9,10,11,12 with arrayLimit:5 should flatten all [1.34ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=single with arrayLimit:5 should flatten [0.42ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=7 with arrayLimit:5 should flatten [0.31ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=7,8&a=9,10,11 with arrayLimit:5 should flatten all [0.33ms]\n(pass) qs combine overflow flatten invariants > a=1,2,,4,5,6&a=7,8 with arrayLimit:5 should flatten [0.23ms]\n131 |   });\n132 | \n133 |   // Without comma option - should nest arrays\n134 |   test(\"a[]=1,2,3&a[]=4,5 without comma should nest arrays\", () => {\n135 |     const result = qs.parse(\"a[]=1,2,3&a[]=4,5\", { comma: false, arrayLimit: 5 });\n136 |     expect(result).toEqual({\n                         ^\nerror: expect(received).toEqual(expected)\n\n  {\n    \"a\": [\n-     [\n-       \"1,2,3\",\n-     ],\n-     [\n-       \"4,5\",\n-     ],\n+     \"1,2,3\",\n+     \"4,5\",\n    ],\n  }\n\n- Expected  - 6\n+ Received  + 2\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-002-hard-002-run-001-699e35-cJxT6h\\.v3\\invariants.test.ts:136:20)\n(fail) qs combine overflow flatten invariants > a[]=1,2,3&a[]=4,5 without comma should nest arrays [0.77ms]\n(pass) qs combine overflow flatten invariants > a=1,2&a=3 with arrayLimit:1 should flatten [0.35ms]\n(pass) qs combine overflow flatten invariants > multiple keys with overflow should work independently [0.41ms]\n(pass) qs combine overflow flatten invariants > empty string should return empty object [0.09ms]\n(pass) qs combine overflow flatten invariants > null input should return empty object [0.08ms]\n(pass) qs combine overflow flatten invariants > undefined input should return empty object [0.08ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=7,8 with arrayLimit:5 and throwOnLimitExceeded should throw [0.24ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=7 with arrayLimit:5 comma on first, no comma on second [0.23ms]\n\n 14 pass\n 2 fail\n 16 expect() calls\nRan 16 tests across 1 file. [228.00ms]\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-002-hard-002-run-001-699e35-cJxT6h\" && bun test ./.v3/invariants.test.ts",
+      "exitCode": 0,
+      "durationMs": 501,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=7,8 with arrayLimit:5 should flatten all 8 values [6.56ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5 with arrayLimit:5 should produce a flat array [0.29ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6 with arrayLimit:5 should produce overflow object [0.42ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=7,8,9,10,11,12 with arrayLimit:5 should flatten all [0.32ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=single with arrayLimit:5 should flatten [0.29ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=7 with arrayLimit:5 should flatten [0.21ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=7,8&a=9,10,11 with arrayLimit:5 should flatten all [0.28ms]\n(pass) qs combine overflow flatten invariants > a=1,2,,4,5,6&a=7,8 with arrayLimit:5 should flatten [0.30ms]\n(pass) qs combine overflow flatten invariants > a[]=1,2,3&a[]=4,5 without comma should not split on comma [0.25ms]\n(pass) qs combine overflow flatten invariants > a=1,2&a=3 with arrayLimit:1 should flatten [0.23ms]\n(pass) qs combine overflow flatten invariants > multiple keys with overflow should work independently [0.40ms]\n(pass) qs combine overflow flatten invariants > empty string should return empty object [0.09ms]\n(pass) qs combine overflow flatten invariants > null input should return empty object [0.06ms]\n(pass) qs combine overflow flatten invariants > undefined input should return empty object [0.06ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=7,8 with arrayLimit:5 and throwOnLimitExceeded should throw [0.47ms]\n(pass) qs combine overflow flatten invariants > a=1,2,3,4,5,6&a=7 with arrayLimit:5 comma on first, no comma on second [0.36ms]\n\n 16 pass\n 0 fail\n 16 expect() calls\nRan 16 tests across 1 file. [276.00ms]\n"
+    },
+    {
+      "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-002-hard-002-run-001-699e35-cJxT6h\" && bun test",
+      "exitCode": 0,
+      "durationMs": 428,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\basic.test.ts:\n(pass) qs regression > basic parse [7.50ms]\n(pass) qs regression > basic stringify [2.49ms]\n(pass) qs regression > array parse [0.83ms]\n\n 3 pass\n 0 fail\n 3 expect() calls\nRan 3 tests across 1 file. [226.00ms]\n"
+    },
+    {
+      "command": "cd \"C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-002-hard-002-run-001-699e35-cJxT6h\" && rm repro.ts && bun test",
+      "exitCode": 0,
+      "durationMs": 456,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\basic.test.ts:\n(pass) qs regression > basic parse [5.47ms]\n(pass) qs regression > basic stringify [1.35ms]\n(pass) qs regression > array parse [0.54ms]\n\n 3 pass\n 0 fail\n 3 expect() calls\nRan 3 tests across 1 file. [185.00ms]\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T14:29:28.440Z",
+  "endedAt": "2026-08-31T14:31:24.889Z"
+}

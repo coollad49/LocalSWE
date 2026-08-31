@@ -1,0 +1,43 @@
+{
+  "runId": "synth-003-run-001-f9bac8",
+  "caseId": "synth-003",
+  "agentVersion": "agent-v3",
+  "benchmarkVersion": "0.5",
+  "status": "success",
+  "durationMs": 55117,
+  "changedFiles": [
+    "src/queue.ts"
+  ],
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-f9bac8\\patch.diff",
+  "trajectoryPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-f9bac8\\trajectory.jsonl",
+  "metadataPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-003-run-001-f9bac8\\metadata.json",
+  "tests": [
+    {
+      "command": "bun test",
+      "exitCode": 0,
+      "durationMs": 296,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [1.43ms]\n(pass) AsyncQueue > dequeue throws on empty [0.60ms]\n(pass) AsyncQueue > pause and resume preserves jobs [0.62ms]\n(pass) AsyncQueue > pause resume multiple cycles [0.85ms]\n(pass) AsyncQueue > processJob retry re-enqueues [0.93ms]\n(pass) AsyncQueue > processJob succeeds [0.30ms]\n(pass) AsyncQueue > processNext handles empty [0.33ms]\n(pass) AsyncQueue > processNext surfaces errors via retry [0.39ms]\n(pass) AsyncQueue > clear empties queue [0.15ms]\n\n 9 pass\n 0 fail\n 35 expect() calls\nRan 9 tests across 1 file. [123.00ms]\n"
+    },
+    {
+      "command": "bun test .v3/invariants.test.ts",
+      "exitCode": 1,
+      "durationMs": 251,
+      "stdout": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n10 files were searched [69.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+    },
+    {
+      "command": "bun test ./.v3/invariants.test.ts",
+      "exitCode": 0,
+      "durationMs": 375,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\n.v3\\invariants.test.ts:\n(pass) Invariant & boundary tests > failed job with maxAttempts=1 is NOT re-enqueued [2.63ms]\n(pass) Invariant & boundary tests > failed job with maxAttempts=10 is re-enqueued on every attempt until exhausted [0.97ms]\n(pass) Invariant & boundary tests > handler success on first attempt does NOT re-enqueue [0.51ms]\n(pass) Invariant & boundary tests > handler success after retries does NOT re-enqueue [0.99ms]\n(pass) Invariant & boundary tests > processJob returns correct job id [0.46ms]\n(pass) Invariant & boundary tests > attempts counter increments correctly across retries [0.53ms]\n(pass) Invariant & boundary tests > concurrent processJob calls maintain invariants [1.97ms]\n(pass) Invariant & boundary tests > empty queue processNext returns null [0.30ms]\n(pass) Invariant & boundary tests > clear removes re-enqueued jobs from retries [0.55ms]\n\n 9 pass\n 0 fail\n 39 expect() calls\nRan 9 tests across 1 file. [171.00ms]\n"
+    },
+    {
+      "command": "bun test && rm repro.ts",
+      "exitCode": 0,
+      "durationMs": 449,
+      "stdout": "bun test v1.3.14 (0d9b296a)\n\ntests\\queue.test.ts:\n(pass) AsyncQueue > enqueue and dequeue [1.51ms]\n(pass) AsyncQueue > dequeue throws on empty [0.61ms]\n(pass) AsyncQueue > pause and resume preserves jobs [0.62ms]\n(pass) AsyncQueue > pause resume multiple cycles [0.85ms]\n(pass) AsyncQueue > processJob retry re-enqueues [1.91ms]\n(pass) AsyncQueue > processJob succeeds [0.55ms]\n(pass) AsyncQueue > processNext handles empty [0.57ms]\n(pass) AsyncQueue > processNext surfaces errors via retry [0.73ms]\n(pass) AsyncQueue > clear empties queue [0.18ms]\n\n 9 pass\n 0 fail\n 35 expect() calls\nRan 9 tests across 1 file. [129.00ms]\n"
+    }
+  ],
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T14:36:18.488Z",
+  "endedAt": "2026-08-31T14:37:13.605Z"
+}

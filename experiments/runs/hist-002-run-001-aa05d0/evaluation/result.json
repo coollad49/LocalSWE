@@ -1,0 +1,1922 @@
+{
+  "evaluationId": "eval-cfb88484-1788190384983",
+  "runId": "hist-002-run-001-aa05d0",
+  "caseId": "hist-002",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v3",
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T15:33:04.983Z",
+  "completedAt": "2026-08-31T15:33:06.700Z",
+  "durationMs": 1717,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-002-run-001-aa05d0\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 287,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-002-jy2tmZ\\patch-1788190385917.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 212,
+      "command": "bun run benchmark\\cases\\hist-002\\public\\reproduce.ts",
+      "stdout": "result: {\"__proto__\":{\"polluted\":true}} polluted=undefined hasPollution=false hasOwnProto=true proto={}\nObject.prototype.polluted=undefined ({}).polluted=undefined\nnormal merge 1: {\"a\":\"c\",\"d\":\"c\"} pass=true\nnormal merge 2 (nested): {\"a\":{\"d\":\"e\",\"b\":\"c\"}} pass=true\nnormal merge 3 (arrays): {\"array\":[\"a\",\"b\",\"c\",\"d\"]} pass=true\nPR case defu(malicious, {isAdmin:false}) => {\"isAdmin\":false} isAdmin=false globalIsAdmin=undefined pass=true\npollutionBlocked=true (expect true on fixed, false on buggy)\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 143,
+      "command": "bun test benchmark\\cases\\hist-002\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-002\\private\\oracle.test.ts:\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks __proto__ pollution via defaults (Object.assign vs spread) [1.88ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks __proto__ pollution with isAdmin payload (PR #156 case) [0.30ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks pollution when defaults is first pollution vector via JSON [0.13ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks constructor.prototype pollution [0.27ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > normal merging still works (regression) [0.36ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > handles non-object defaults [1.13ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > merge with merger still works [0.38ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > defu does not pollute global after multiple calls [0.50ms]\n\n 8 pass\n 0 fail\n 22 expect() calls\nRan 8 tests across 1 file. [103.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 138,
+      "command": "bun test benchmark\\repositories\\defu\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\defu\\tests\\defu.test.ts:\n(pass) defu regression > copies missing defaults [1.96ms]\n(pass) defu regression > fills null values from defaults [0.20ms]\n(pass) defu regression > merges nested objects [0.17ms]\n(pass) defu regression > concats arrays by default [0.21ms]\n(pass) defu regression > multi defaults [0.19ms]\n(pass) defu regression > handles non-object defaults [0.14ms]\n(pass) defu regression > does not override Object prototype via constructor [0.21ms]\n\n 7 pass\n 0 fail\n 8 expect() calls\nRan 7 tests across 1 file. [100.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "defu",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "security",
+      "validation"
+    ]
+  },
+  "metrics": {
+    "durationMs": 556472,
+    "totalTurns": 168,
+    "toolCalls": 84,
+    "commandsExecuted": 52,
+    "filesInspected": 8,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 219235,
+    "outputTokens": 137463,
+    "totalTokens": 4303450
+  },
+  "cost": {
+    "inputTokens": 219235,
+    "outputTokens": 137463,
+    "totalTokens": 356698,
+    "inputCostUsd": 0.030693,
+    "outputCostUsd": 0.03849,
+    "totalCostUsd": 0.080233,
+    "costUsd": 0.080233,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-002-run-001-aa05d0",
+    "caseId": "hist-002",
+    "agentVersion": "agent-v3",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:d90d534c8ed1c496f134c0feaf8f1dd536910fc1883548353e53a522255e97df",
+    "trajectory": {
+      "eventCount": 9708,
+      "durationMs": 556361,
+      "eventTypes": {
+        "agent_start": 5,
+        "turn_start": 78,
+        "message_start": 164,
+        "message_end": 164,
+        "message_update": 8861,
+        "tool_execution_start": 84,
+        "tool_execution_end": 84,
+        "turn_end": 78,
+        "tool_execution_update": 182,
+        "agent_end": 4,
+        "auto_retry_start": 1,
+        "auto_retry_end": 1,
+        "agent_settled": 1,
+        "diff_audit": 1
+      },
+      "assistantMessages": 9095,
+      "userMessages": 4,
+      "toolCalls": 84,
+      "toolResults": 336,
+      "thinkingEvents": 9089,
+      "unknownEvents": 272,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 84,
+      "uniqueTools": 5,
+      "byTool": {
+        "read": {
+          "calls": 16,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "write": {
+          "calls": 6,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 52,
+          "failures": 24
+        },
+        "edit": {
+          "calls": 4,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 219235,
+      "output": 137463,
+      "cacheRead": 3946752,
+      "cacheWrite": 0,
+      "total": 4303450,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.080233,
+      "inputCostUsd": 0.030693,
+      "outputCostUsd": 0.03849,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 9089,
+      "characterCount": 27775202,
+      "averageCharacters": 3056,
+      "maxCharacters": 12525,
+      "firstThinkingAt": "2026-08-31T14:29:42.552Z",
+      "lastThinkingAt": "2026-08-31T14:38:44.173Z",
+      "thinkingDurationMs": 541621
+    },
+    "editing": {
+      "editCalls": 4,
+      "writeCalls": 6,
+      "filesTouched": [
+        "repro.ts",
+        "src/defu.ts",
+        ".v3/invariants.test.ts"
+      ],
+      "uniqueFilesTouched": 3
+    },
+    "exploration": {
+      "readCalls": 16,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 52,
+      "explorationToEditingRatio": 7.4
+    },
+    "verification": {
+      "commandsDetected": 80,
+      "testsRun": true,
+      "testCommandCount": 12,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 48,
+      "duplicateReadTargets": 10,
+      "duplicateEditTargets": 7,
+      "toolFailureCount": 24,
+      "topRepetitions": [
+        {
+          "signature": "c430a6803135",
+          "tool": "read",
+          "target": "src/defu.ts",
+          "count": 6
+        },
+        {
+          "signature": "736649ae5159",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+          "count": 6
+        },
+        {
+          "signature": "d517b4a8dcf3",
+          "tool": "write",
+          "target": "repro.ts",
+          "count": 4
+        },
+        {
+          "signature": "97974ee1c593",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "23537aa6f333",
+          "tool": "read",
+          "target": "src/_utils.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-002-run-001-aa05d0",
+    "caseId": "hist-002",
+    "agentVersion": "agent-v3",
+    "timeline": [
+      {
+        "index": 40,
+        "timestamp": "2026-08-31T14:29:43.703Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 41,
+        "timestamp": "2026-08-31T14:29:43.703Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-31T14:29:43.703Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 43,
+        "timestamp": "2026-08-31T14:29:43.703Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 95,
+        "timestamp": "2026-08-31T14:29:45.810Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 96,
+        "timestamp": "2026-08-31T14:29:45.810Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 97,
+        "timestamp": "2026-08-31T14:29:45.810Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 98,
+        "timestamp": "2026-08-31T14:29:45.810Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 99,
+        "timestamp": "2026-08-31T14:29:45.811Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 100,
+        "timestamp": "2026-08-31T14:29:45.811Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 163,
+        "timestamp": "2026-08-31T14:29:47.890Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 164,
+        "timestamp": "2026-08-31T14:29:47.890Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 165,
+        "timestamp": "2026-08-31T14:29:47.890Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/_utils.ts"
+      },
+      {
+        "index": 166,
+        "timestamp": "2026-08-31T14:29:47.890Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/_utils.ts"
+      },
+      {
+        "index": 167,
+        "timestamp": "2026-08-31T14:29:47.890Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 168,
+        "timestamp": "2026-08-31T14:29:47.890Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 457,
+        "timestamp": "2026-08-31T14:30:02.793Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/defu.test.ts"
+      },
+      {
+        "index": 458,
+        "timestamp": "2026-08-31T14:30:02.793Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/defu.test.ts"
+      },
+      {
+        "index": 737,
+        "timestamp": "2026-08-31T14:30:09.907Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 738,
+        "timestamp": "2026-08-31T14:30:09.907Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 782,
+        "timestamp": "2026-08-31T14:30:11.980Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 783,
+        "timestamp": "2026-08-31T14:30:11.980Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 986,
+        "timestamp": "2026-08-31T14:31:00.006Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nconst payload = JSON.parse('{/\"__proto__/\":{/\"poll",
+        "commandClass": "general"
+      },
+      {
+        "index": 987,
+        "timestamp": "2026-08-31T14:31:00.006Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nconst payload = JSON.parse('{/\"__proto__/\":{/\"poll",
+        "commandClass": "general"
+      },
+      {
+        "index": 1180,
+        "timestamp": "2026-08-31T14:31:36.568Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// Testing if Object.assign causes pollution with ",
+        "commandClass": "general"
+      },
+      {
+        "index": 1181,
+        "timestamp": "2026-08-31T14:31:36.568Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// Testing if Object.assign causes pollution with ",
+        "commandClass": "general"
+      },
+      {
+        "index": 1345,
+        "timestamp": "2026-08-31T14:31:41.711Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// Key difference: JSON.parse creates __proto__ as",
+        "commandClass": "general"
+      },
+      {
+        "index": 1346,
+        "timestamp": "2026-08-31T14:31:41.711Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// Key difference: JSON.parse creates __proto__ as",
+        "commandClass": "general"
+      },
+      {
+        "index": 1495,
+        "timestamp": "2026-08-31T14:31:46.507Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// Direct property assignment test with __proto__\n",
+        "commandClass": "general"
+      },
+      {
+        "index": 1496,
+        "timestamp": "2026-08-31T14:31:46.507Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// Direct property assignment test with __proto__\n",
+        "commandClass": "general"
+      },
+      {
+        "index": 1938,
+        "timestamp": "2026-08-31T14:32:04.894Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// Let's trace through defu more carefully\nconst p",
+        "commandClass": "general"
+      },
+      {
+        "index": 1939,
+        "timestamp": "2026-08-31T14:32:04.894Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// Let's trace through defu more carefully\nconst p",
+        "commandClass": "general"
+      },
+      {
+        "index": 2241,
+        "timestamp": "2026-08-31T14:32:20.242Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 2242,
+        "timestamp": "2026-08-31T14:32:20.242Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 2573,
+        "timestamp": "2026-08-31T14:32:35.805Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nimport { defu } from './src/defu.ts';\n\n// Test 1: ",
+        "commandClass": "general"
+      },
+      {
+        "index": 2574,
+        "timestamp": "2026-08-31T14:32:35.805Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nimport { defu } from './src/defu.ts';\n\n// Test 1: ",
+        "commandClass": "general"
+      },
+      {
+        "index": 2947,
+        "timestamp": "2026-08-31T14:32:48.754Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nimport { defu } from './src/defu.ts';\n\n// The real",
+        "commandClass": "general"
+      },
+      {
+        "index": 2948,
+        "timestamp": "2026-08-31T14:32:48.754Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nimport { defu } from './src/defu.ts';\n\n// The real",
+        "commandClass": "general"
+      },
+      {
+        "index": 3447,
+        "timestamp": "2026-08-31T14:33:07.467Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nimport { defu } from './src/defu.ts';\n\n// The issu",
+        "commandClass": "general"
+      },
+      {
+        "index": 3448,
+        "timestamp": "2026-08-31T14:33:07.467Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nimport { defu } from './src/defu.ts';\n\n// The issu",
+        "commandClass": "general"
+      },
+      {
+        "index": 3794,
+        "timestamp": "2026-08-31T14:33:20.853Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nimport { defu } from './src/defu.ts';\n\n// The real",
+        "commandClass": "general"
+      },
+      {
+        "index": 3795,
+        "timestamp": "2026-08-31T14:33:20.853Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nimport { defu } from './src/defu.ts';\n\n// The real",
+        "commandClass": "general"
+      },
+      {
+        "index": 4178,
+        "timestamp": "2026-08-31T14:33:33.078Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nimport { defu } from './src/defu.ts';\n\n// Let's ch",
+        "commandClass": "general"
+      },
+      {
+        "index": 4179,
+        "timestamp": "2026-08-31T14:33:33.078Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nimport { defu } from './src/defu.ts';\n\n// Let's ch",
+        "commandClass": "general"
+      },
+      {
+        "index": 4520,
+        "timestamp": "2026-08-31T14:33:44.845Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// The bug is that Object.assign copies __proto__ ",
+        "commandClass": "general"
+      },
+      {
+        "index": 4521,
+        "timestamp": "2026-08-31T14:33:44.845Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// The bug is that Object.assign copies __proto__ ",
+        "commandClass": "general"
+      },
+      {
+        "index": 4905,
+        "timestamp": "2026-08-31T14:33:59.528Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// Test Object.create(null) as a safe alternative\n",
+        "commandClass": "general"
+      },
+      {
+        "index": 4906,
+        "timestamp": "2026-08-31T14:33:59.528Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// Test Object.create(null) as a safe alternative\n",
+        "commandClass": "general"
+      },
+      {
+        "index": 6319,
+        "timestamp": "2026-08-31T14:35:39.450Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// The core issue: Object.assign triggers __proto_",
+        "commandClass": "general"
+      },
+      {
+        "index": 6320,
+        "timestamp": "2026-08-31T14:35:39.450Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\n// The core issue: Object.assign triggers __proto_",
+        "commandClass": "general"
+      },
+      {
+        "index": 6562,
+        "timestamp": "2026-08-31T14:35:48.256Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nimport { defu } from './src/defu.ts';\n\n// The real",
+        "commandClass": "general"
+      },
+      {
+        "index": 6563,
+        "timestamp": "2026-08-31T14:35:48.256Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun -e \"\nimport { defu } from './src/defu.ts';\n\n// The real",
+        "commandClass": "general"
+      },
+      {
+        "index": 7147,
+        "timestamp": "2026-08-31T14:36:05.546Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 7148,
+        "timestamp": "2026-08-31T14:36:05.546Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 7194,
+        "timestamp": "2026-08-31T14:36:08.415Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 7195,
+        "timestamp": "2026-08-31T14:36:08.415Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 7591,
+        "timestamp": "2026-08-31T14:36:26.409Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 7592,
+        "timestamp": "2026-08-31T14:36:26.409Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 7644,
+        "timestamp": "2026-08-31T14:36:30.060Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 7645,
+        "timestamp": "2026-08-31T14:36:30.060Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 7689,
+        "timestamp": "2026-08-31T14:36:32.994Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 7690,
+        "timestamp": "2026-08-31T14:36:32.994Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 7751,
+        "timestamp": "2026-08-31T14:36:36.253Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run test",
+        "commandClass": "general"
+      },
+      {
+        "index": 7752,
+        "timestamp": "2026-08-31T14:36:36.253Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run test",
+        "commandClass": "general"
+      },
+      {
+        "index": 7812,
+        "timestamp": "2026-08-31T14:36:43.298Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu/.v3\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 7813,
+        "timestamp": "2026-08-31T14:36:43.298Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "ls \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu/.v3\"",
+        "commandClass": "general"
+      },
+      {
+        "index": 9091,
+        "timestamp": "2026-08-31T14:37:07.368Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 9092,
+        "timestamp": "2026-08-31T14:37:07.368Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 9135,
+        "timestamp": "2026-08-31T14:37:13.138Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 9136,
+        "timestamp": "2026-08-31T14:37:13.138Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 9196,
+        "timestamp": "2026-08-31T14:37:16.562Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 9197,
+        "timestamp": "2026-08-31T14:37:16.562Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 9329,
+        "timestamp": "2026-08-31T14:37:34.127Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 9330,
+        "timestamp": "2026-08-31T14:37:34.127Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 9389,
+        "timestamp": "2026-08-31T14:37:40.271Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 9390,
+        "timestamp": "2026-08-31T14:37:40.271Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 9453,
+        "timestamp": "2026-08-31T14:37:49.609Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 9454,
+        "timestamp": "2026-08-31T14:37:49.609Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 9519,
+        "timestamp": "2026-08-31T14:37:58.568Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 9520,
+        "timestamp": "2026-08-31T14:37:58.568Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 9577,
+        "timestamp": "2026-08-31T14:38:02.026Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+        "commandClass": "test"
+      },
+      {
+        "index": 9578,
+        "timestamp": "2026-08-31T14:38:02.026Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+        "commandClass": "test"
+      },
+      {
+        "index": 9621,
+        "timestamp": "2026-08-31T14:38:11.885Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 9622,
+        "timestamp": "2026-08-31T14:38:11.885Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/defu.ts"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 40,
+        "timestamp": "2026-08-31T14:29:43.703Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 737,
+        "timestamp": "2026-08-31T14:30:09.907Z",
+        "detail": "repro.ts"
+      },
+      {
+        "type": "first_repro",
+        "eventIndex": 782,
+        "timestamp": "2026-08-31T14:30:11.980Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run r"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 2241,
+        "timestamp": "2026-08-31T14:32:20.242Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run t"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 7202,
+        "timestamp": "2026-08-31T14:36:08.744Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run r"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 7203,
+        "timestamp": "2026-08-31T14:36:08.744Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run r"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 7204,
+        "timestamp": "2026-08-31T14:36:08.744Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run r"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 7205,
+        "timestamp": "2026-08-31T14:36:08.744Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run r"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 7206,
+        "timestamp": "2026-08-31T14:36:08.744Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run r"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 7207,
+        "timestamp": "2026-08-31T14:36:08.745Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run r"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9145,
+        "timestamp": "2026-08-31T14:37:13.515Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9146,
+        "timestamp": "2026-08-31T14:37:13.515Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9147,
+        "timestamp": "2026-08-31T14:37:13.515Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9148,
+        "timestamp": "2026-08-31T14:37:13.515Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9149,
+        "timestamp": "2026-08-31T14:37:13.515Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9150,
+        "timestamp": "2026-08-31T14:37:13.515Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9208,
+        "timestamp": "2026-08-31T14:37:23.121Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9209,
+        "timestamp": "2026-08-31T14:37:23.121Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9210,
+        "timestamp": "2026-08-31T14:37:23.121Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9211,
+        "timestamp": "2026-08-31T14:37:23.121Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9212,
+        "timestamp": "2026-08-31T14:37:23.121Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vites"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 9213,
+        "timestamp": "2026-08-31T14:37:23.121Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vites"
+      }
+    ],
+    "errors": [
+      {
+        "index": 4913,
+        "tool": "bash",
+        "error": "Object.assign({}): {\n  polluted: true,\n}\n  hasOwn polluted: false\n  proto: {\n  polluted: true,\n}\n\nObject.create(null) approach: [Object: null prototype] {\n  __proto__: {\n    polluted: true,\n  },\n}\n12 | const target2 = Object.create(null);\n13 | for (const key of Object.keys(payload)) {\n14 |   target2[key] = payload[key];\n15 | }\n16 | console.log('\\nObject.create(null) approach:', target2);\n17 | console.log('  hasOwn polluted:', target2.hasOwnProperty('polluted'));\n                                 "
+      },
+      {
+        "index": 4914,
+        "tool": "bash",
+        "error": "Object.assign({}): {\n  polluted: true,\n}\n  hasOwn polluted: false\n  proto: {\n  polluted: true,\n}\n\nObject.create(null) approach: [Object: null prototype] {\n  __proto__: {\n    polluted: true,\n  },\n}\n12 | const target2 = Object.create(null);\n13 | for (const key of Object.keys(payload)) {\n14 |   target2[key] = payload[key];\n15 | }\n16 | console.log('\\nObject.create(null) approach:', target2);\n17 | console.log('  hasOwn polluted:', target2.hasOwnProperty('polluted'));\n                                 "
+      },
+      {
+        "index": 4915,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 4916,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 4917,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 4918,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 7202,
+        "tool": "bash",
+        "error": "=== Reproduction: __proto__ should be treated as regular key ===\n\nTest 1: defu({}, {__proto__: {polluted: true}})\n  result: {\n  polluted: true,\n}\n  result.polluted: true\n  result.hasOwnProperty('polluted'): false\n  Object.getPrototypeOf(result1) === Object.prototype: false\n  PASS: false \n\nTest 2: defu({}, {__proto__: {inner: true}, own: 'value'})\n  result: {\n  own: \"value\",\n  inner: true,\n}\n  result.own: value\n  Object.getOwnPropertyDescriptor(result2, '__proto__'): undefined\n  Object.getPrototy"
+      },
+      {
+        "index": 7203,
+        "tool": "bash",
+        "error": "=== Reproduction: __proto__ should be treated as regular key ===\n\nTest 1: defu({}, {__proto__: {polluted: true}})\n  result: {\n  polluted: true,\n}\n  result.polluted: true\n  result.hasOwnProperty('polluted'): false\n  Object.getPrototypeOf(result1) === Object.prototype: false\n  PASS: false \n\nTest 2: defu({}, {__proto__: {inner: true}, own: 'value'})\n  result: {\n  own: \"value\",\n  inner: true,\n}\n  result.own: value\n  Object.getOwnPropertyDescriptor(result2, '__proto__'): undefined\n  Object.getPrototy"
+      },
+      {
+        "index": 7204,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 7205,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 7206,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 7207,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 9145,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n11 files were searched [114.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 9146,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n11 files were searched [114.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 9147,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 9148,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 9149,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 9150,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 9208,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n ❯ .v3/invariants.test.ts (24 tests | 2 failed) 163ms\n     × defu with __proto__ alongside regular properties 27ms\n     × defu with only __proto__ key 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  .v3/invariants.test.ts > __proto__ pollution invariants > defu with __proto__ alongside regular properties\nAssertionError: expected { __proto__: { polluted: true }, …(2) } to deeply equal { a: 'b', c: 42 }\n"
+      },
+      {
+        "index": 9209,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n ❯ .v3/invariants.test.ts (24 tests | 2 failed) 163ms\n     × defu with __proto__ alongside regular properties 27ms\n     × defu with only __proto__ key 3ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  .v3/invariants.test.ts > __proto__ pollution invariants > defu with __proto__ alongside regular properties\nAssertionError: expected { __proto__: { polluted: true }, …(2) } to deeply equal { a: 'b', c: 42 }\n"
+      },
+      {
+        "index": 9210,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 9211,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 9212,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 9213,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 782,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 783,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 790,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "=== Testing __proto__ pollution ===\nBefore test, ({}).polluted: undefined\nParsed payload: {\n  __proto__: {\n    polluted: true,\n  },\n}\npayload.__proto__: {\n  polluted: true,\n}\nObject.getPrototypeOf(pay"
+      },
+      {
+        "index": 791,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "=== Testing __proto__ pollution ===\nBefore test, ({}).polluted: undefined\nParsed payload: {\n  __proto__: {\n    polluted: true,\n  },\n}\npayload.__proto__: {\n  polluted: true,\n}\nObject.getPrototypeOf(pay"
+      },
+      {
+        "index": 792,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 793,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 794,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 795,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2241,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2242,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2257,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "1843 | \t\t\tsuiteOptions = { timeout: suiteOptions };\n1844 | \t\t}\n1845 | \t\tconst currentSuite = collectorContext.currentSuite?.suite;\n1846 | \t\tconst parentTask = currentSuite ?? collectorContext.currentS"
+      },
+      {
+        "index": 2258,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "1843 | \t\t\tsuiteOptions = { timeout: suiteOptions };\n1844 | \t\t}\n1845 | \t\tconst currentSuite = collectorContext.currentSuite?.suite;\n1846 | \t\tconst parentTask = currentSuite ?? collectorContext.currentS"
+      },
+      {
+        "index": 2259,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2260,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2261,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 2262,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run tests/defu.test.ts 2>&1 || bunx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 7194,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 7195,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 7202,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 1,
+        "outputSnippet": "=== Reproduction: __proto__ should be treated as regular key ===\n\nTest 1: defu({}, {__proto__: {polluted: true}})\n  result: {\n  polluted: true,\n}\n  result.polluted: true\n  result.hasOwnProperty('pollu"
+      },
+      {
+        "index": 7203,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 1,
+        "outputSnippet": "=== Reproduction: __proto__ should be treated as regular key ===\n\nTest 1: defu({}, {__proto__: {polluted: true}})\n  result: {\n  polluted: true,\n}\n  result.polluted: true\n  result.hasOwnProperty('pollu"
+      },
+      {
+        "index": 7204,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 7205,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 7206,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 7207,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 7689,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 7690,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 7697,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "=== Reproduction: __proto__ should be treated as regular key ===\n\nTest 1: defu({}, {__proto__: {polluted: true}})\n  result: {\n  __proto__: {\n    polluted: true,\n  },\n}\n  result.polluted: undefined\n  r"
+      },
+      {
+        "index": 7698,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "=== Reproduction: __proto__ should be treated as regular key ===\n\nTest 1: defu({}, {__proto__: {polluted: true}})\n  result: {\n  __proto__: {\n    polluted: true,\n  },\n}\n  result.polluted: undefined\n  r"
+      },
+      {
+        "index": 7699,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 7700,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 7701,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 7702,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9135,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9136,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9145,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n11 files were searched [114.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in th"
+      },
+      {
+        "index": 9146,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n11 files were searched [114.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in th"
+      },
+      {
+        "index": 9147,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 9148,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 9149,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 9150,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 9196,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9197,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9208,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n ❯ .v3/invariants.test.ts (24 tests | 2 failed) 163ms\n     × defu with __proto__ alongside regular pr"
+      },
+      {
+        "index": 9209,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n ❯ .v3/invariants.test.ts (24 tests | 2 failed) 163ms\n     × defu with __proto__ alongside regular pr"
+      },
+      {
+        "index": 9210,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 9211,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 9212,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 9213,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 9389,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9390,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9401,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n\n Test Files  1 passed (1)\n      Tests  24 passed (24)\n   Start at  15:37:45\n   Duration  1.03s (tran"
+      },
+      {
+        "index": 9402,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n\n Test Files  1 passed (1)\n      Tests  24 passed (24)\n   Start at  15:37:45\n   Duration  1.03s (tran"
+      },
+      {
+        "index": 9403,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9404,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9405,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9406,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9453,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 9454,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 9465,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n\n Test Files  2 passed (2)\n      Tests  31 passed (31)\n   Start at  15:37:54\n   Duration  1.01s (tran"
+      },
+      {
+        "index": 9466,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n\n Test Files  2 passed (2)\n      Tests  31 passed (31)\n   Start at  15:37:54\n   Duration  1.01s (tran"
+      },
+      {
+        "index": 9467,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 9468,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 9469,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 9470,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 9519,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9520,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9523,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 9524,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 9525,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9526,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9527,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9528,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && rm repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 9577,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+        "exitCode": 0
+      },
+      {
+        "index": 9578,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+        "exitCode": 0
+      },
+      {
+        "index": 9589,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n\n Test Files  2 passed (2)\n      Tests  31 passed (31)\n   Start at  15:38:07\n   Duration  1.01s (tran"
+      },
+      {
+        "index": 9590,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\n\n\n Test Files  2 passed (2)\n      Tests  31 passed (31)\n   Start at  15:38:07\n   Duration  1.01s (tran"
+      },
+      {
+        "index": 9591,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+        "exitCode": 0
+      },
+      {
+        "index": 9592,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+        "exitCode": 0
+      },
+      {
+        "index": 9593,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+        "exitCode": 0
+      },
+      {
+        "index": 9594,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-aa05d0-eVFTuu\" && npx vitest run && echo \"--- All tests pass ---\"",
+        "exitCode": 0
+      }
+    ]
+  }
+}

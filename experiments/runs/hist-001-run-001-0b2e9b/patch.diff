@@ -1,0 +1,21 @@
+diff --git a/src/CAC.ts b/src/CAC.ts
+index 7a3df11..45ec093 100644
+--- a/src/CAC.ts
++++ b/src/CAC.ts
+@@ -307,6 +307,15 @@ class CAC extends EventEmitter {
+       if (key !== '_') {
+         const keys = key.split('.')
+         setDotProp(options, keys, parsed[key])
++        // Also set all alias names for this option to the same value
++        const cliOption = cliOptions.find(opt => opt.names.includes(key))
++        if (cliOption) {
++          for (const name of cliOption.names) {
++            if (name !== key) {
++              options[name] = parsed[key]
++            }
++          }
++        }
+         setByType(options, transforms)
+       }
+     }
+

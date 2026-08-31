@@ -1,0 +1,1351 @@
+{
+  "evaluationId": "eval-c9a22cdf-1788190513752",
+  "runId": "synth-001-run-001-c76cd7",
+  "caseId": "synth-001",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v3",
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T15:35:13.751Z",
+  "completedAt": "2026-08-31T15:35:15.986Z",
+  "durationMs": 2234,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-001-run-001-c76cd7\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 467,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-001-6czYMi\\patch-1788190514832.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 277,
+      "command": "bun run benchmark\\cases\\synth-001\\public\\reproduce.ts",
+      "stdout": "description=\"keep me\" expected \"keep me\"\npriority=2 expected 2\nstatus=pending expected pending\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 180,
+      "command": "bun test benchmark\\cases\\synth-001\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-001\\private\\oracle.test.ts:\n(pass) synth-001 oracle: updateTask preserves fields > update only provided field [2.65ms]\n(pass) synth-001 oracle: updateTask preserves fields > update multiple fields preserves others [0.60ms]\n(pass) synth-001 oracle: updateTask preserves fields > update with empty object changes nothing except updatedAt [0.20ms]\n\n 3 pass\n 0 fail\n 10 expect() calls\nRan 3 tests across 1 file. [128.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 225,
+      "command": "bun test benchmark\\repositories\\task-manager\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\task-manager\\tests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [2.34ms]\n(pass) TaskManager > createTask validates priority [0.98ms]\n(pass) TaskManager > createTask validates title [0.26ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.47ms]\n(pass) TaskManager > updateTask only updates provided fields [0.33ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [2.27ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.28ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [1.23ms]\n(pass) TaskManager > filterByStatus validates status [0.19ms]\n(pass) TaskManager > getTasksByPriority filters correctly [1.02ms]\n(pass) TaskManager > deleteTask removes task [0.36ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [169.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "task-manager",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "state-management",
+      "business-logic"
+    ]
+  },
+  "metrics": {
+    "durationMs": 80890,
+    "totalTurns": 90,
+    "toolCalls": 42,
+    "commandsExecuted": 16,
+    "filesInspected": 8,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 113676,
+    "outputTokens": 37409,
+    "totalTokens": 1175597
+  },
+  "cost": {
+    "inputTokens": 113676,
+    "outputTokens": 37409,
+    "totalTokens": 151085,
+    "inputCostUsd": 0.015915,
+    "outputCostUsd": 0.010475,
+    "totalCostUsd": 0.029258,
+    "costUsd": 0.029258,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-001-run-001-c76cd7",
+    "caseId": "synth-001",
+    "agentVersion": "agent-v3",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:fd8e7f0ce627d06ff78733872aae2f1c1980de6dd58951a68c9027545834aed6",
+    "trajectory": {
+      "eventCount": 2643,
+      "durationMs": 80868,
+      "eventTypes": {
+        "agent_start": 3,
+        "turn_start": 44,
+        "message_start": 88,
+        "message_end": 88,
+        "message_update": 2235,
+        "tool_execution_start": 42,
+        "tool_execution_end": 42,
+        "turn_end": 44,
+        "tool_execution_update": 52,
+        "agent_end": 2,
+        "agent_settled": 1,
+        "scratch_cleaned": 1,
+        "diff_audit": 1
+      },
+      "assistantMessages": 2367,
+      "userMessages": 4,
+      "toolCalls": 42,
+      "toolResults": 168,
+      "thinkingEvents": 2367,
+      "unknownEvents": 102,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 42,
+      "uniqueTools": 5,
+      "byTool": {
+        "read": {
+          "calls": 12,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "write": {
+          "calls": 6,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 16,
+          "failures": 12
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 113676,
+      "output": 37409,
+      "cacheRead": 1024512,
+      "cacheWrite": 0,
+      "total": 1175597,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.029258,
+      "inputCostUsd": 0.015915,
+      "outputCostUsd": 0.010475,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 2367,
+      "characterCount": 618986,
+      "averageCharacters": 262,
+      "maxCharacters": 1301,
+      "firstThinkingAt": "2026-08-31T14:34:57.546Z",
+      "lastThinkingAt": "2026-08-31T14:36:16.172Z",
+      "thinkingDurationMs": 78626
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 6,
+      "filesTouched": [
+        "repro.ts",
+        "src/task-manager.ts",
+        ".v3/invariants.test.ts",
+        "tests/invariants.test.ts"
+      ],
+      "uniqueFilesTouched": 4
+    },
+    "exploration": {
+      "readCalls": 12,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 16,
+      "explorationToEditingRatio": 4.25
+    },
+    "verification": {
+      "commandsDetected": 64,
+      "testsRun": true,
+      "testCommandCount": 10,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 25,
+      "duplicateReadTargets": 7,
+      "duplicateEditTargets": 4,
+      "toolFailureCount": 12,
+      "topRepetitions": [
+        {
+          "signature": "fa455c633b20",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+          "count": 6
+        },
+        {
+          "signature": "a073f2962659",
+          "tool": "read",
+          "target": "src/task-manager.ts",
+          "count": 4
+        },
+        {
+          "signature": "277f8b968336",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "ec8ec0fa57e2",
+          "tool": "ls",
+          "target": ".",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "3366904cebb3",
+          "tool": "read",
+          "target": "src/types.ts",
+          "count": 2
+        },
+        {
+          "signature": "e48b3e59eb44",
+          "tool": "read",
+          "target": "src/validators.ts",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "6e6cdb409bf3",
+          "tool": "read",
+          "target": "tests/task-manager.test.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-001-run-001-c76cd7",
+    "caseId": "synth-001",
+    "agentVersion": "agent-v3",
+    "timeline": [
+      {
+        "index": 29,
+        "timestamp": "2026-08-31T14:34:57.833Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 30,
+        "timestamp": "2026-08-31T14:34:57.833Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 66,
+        "timestamp": "2026-08-31T14:34:59.534Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 67,
+        "timestamp": "2026-08-31T14:34:59.534Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 95,
+        "timestamp": "2026-08-31T14:35:00.861Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 96,
+        "timestamp": "2026-08-31T14:35:00.861Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 126,
+        "timestamp": "2026-08-31T14:35:02.234Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 127,
+        "timestamp": "2026-08-31T14:35:02.234Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 192,
+        "timestamp": "2026-08-31T14:35:05.733Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/types.ts"
+      },
+      {
+        "index": 193,
+        "timestamp": "2026-08-31T14:35:05.733Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/types.ts"
+      },
+      {
+        "index": 225,
+        "timestamp": "2026-08-31T14:35:07.540Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/validators.ts"
+      },
+      {
+        "index": 226,
+        "timestamp": "2026-08-31T14:35:07.540Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/validators.ts"
+      },
+      {
+        "index": 258,
+        "timestamp": "2026-08-31T14:35:09.232Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 259,
+        "timestamp": "2026-08-31T14:35:09.232Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 292,
+        "timestamp": "2026-08-31T14:35:11.187Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/task-manager.test.ts"
+      },
+      {
+        "index": 293,
+        "timestamp": "2026-08-31T14:35:11.187Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/task-manager.test.ts"
+      },
+      {
+        "index": 587,
+        "timestamp": "2026-08-31T14:35:19.450Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 588,
+        "timestamp": "2026-08-31T14:35:19.450Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 629,
+        "timestamp": "2026-08-31T14:35:21.937Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 630,
+        "timestamp": "2026-08-31T14:35:21.937Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 693,
+        "timestamp": "2026-08-31T14:35:27.363Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 694,
+        "timestamp": "2026-08-31T14:35:27.363Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 739,
+        "timestamp": "2026-08-31T14:35:29.529Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 740,
+        "timestamp": "2026-08-31T14:35:29.529Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 794,
+        "timestamp": "2026-08-31T14:35:32.190Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 795,
+        "timestamp": "2026-08-31T14:35:32.190Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 1546,
+        "timestamp": "2026-08-31T14:35:46.647Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 1547,
+        "timestamp": "2026-08-31T14:35:46.647Z",
+        "event": "write",
+        "tool": "write",
+        "target": ".v3/invariants.test.ts"
+      },
+      {
+        "index": 1590,
+        "timestamp": "2026-08-31T14:35:48.723Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 1591,
+        "timestamp": "2026-08-31T14:35:48.723Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 2287,
+        "timestamp": "2026-08-31T14:35:59.497Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/invariants.test.ts"
+      },
+      {
+        "index": 2288,
+        "timestamp": "2026-08-31T14:35:59.497Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/invariants.test.ts"
+      },
+      {
+        "index": 2328,
+        "timestamp": "2026-08-31T14:36:01.391Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 2329,
+        "timestamp": "2026-08-31T14:36:01.391Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 2387,
+        "timestamp": "2026-08-31T14:36:03.855Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 2388,
+        "timestamp": "2026-08-31T14:36:03.855Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 2452,
+        "timestamp": "2026-08-31T14:36:06.949Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+        "commandClass": "test"
+      },
+      {
+        "index": 2453,
+        "timestamp": "2026-08-31T14:36:06.949Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+        "commandClass": "test"
+      },
+      {
+        "index": 2492,
+        "timestamp": "2026-08-31T14:36:09.162Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 2493,
+        "timestamp": "2026-08-31T14:36:09.162Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 2535,
+        "timestamp": "2026-08-31T14:36:11.064Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "commandClass": "test"
+      },
+      {
+        "index": 2536,
+        "timestamp": "2026-08-31T14:36:11.064Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 29,
+        "timestamp": "2026-08-31T14:34:57.833Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 587,
+        "timestamp": "2026-08-31T14:35:19.450Z",
+        "detail": "repro.ts"
+      },
+      {
+        "type": "first_repro",
+        "eventIndex": 629,
+        "timestamp": "2026-08-31T14:35:21.937Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 637,
+        "timestamp": "2026-08-31T14:35:22.265Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 638,
+        "timestamp": "2026-08-31T14:35:22.265Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 639,
+        "timestamp": "2026-08-31T14:35:22.265Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 640,
+        "timestamp": "2026-08-31T14:35:22.265Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 641,
+        "timestamp": "2026-08-31T14:35:22.265Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 642,
+        "timestamp": "2026-08-31T14:35:22.265Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 794,
+        "timestamp": "2026-08-31T14:35:32.190Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1598,
+        "timestamp": "2026-08-31T14:35:48.966Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1599,
+        "timestamp": "2026-08-31T14:35:48.966Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1600,
+        "timestamp": "2026-08-31T14:35:48.966Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1601,
+        "timestamp": "2026-08-31T14:35:48.966Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1602,
+        "timestamp": "2026-08-31T14:35:48.966Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun tes"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 1603,
+        "timestamp": "2026-08-31T14:35:48.966Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun tes"
+      }
+    ],
+    "errors": [
+      {
+        "index": 637,
+        "tool": "bash",
+        "error": "=== Created Task ===\n{\n  id: \"fw316zc\",\n  title: \"Original Title\",\n  description: \"Original Description\",\n  priority: 3,\n  status: \"in_progress\",\n  dueDate: \"2024-12-31\",\n  createdAt: \"2026-08-31T14:35:22.237Z\",\n  updatedAt: \"2026-08-31T14:35:22.237Z\",\n}\n\n=== After Updating Only Title ===\n{\n  id: \"fw316zc\",\n  title: \"Updated Title\",\n  description: undefined,\n  priority: undefined,\n  status: undefined,\n  dueDate: undefined,\n  createdAt: \"2026-08-31T14:35:22.237Z\",\n  updatedAt: \"2026-08-31T14:35:2"
+      },
+      {
+        "index": 638,
+        "tool": "bash",
+        "error": "=== Created Task ===\n{\n  id: \"fw316zc\",\n  title: \"Original Title\",\n  description: \"Original Description\",\n  priority: 3,\n  status: \"in_progress\",\n  dueDate: \"2024-12-31\",\n  createdAt: \"2026-08-31T14:35:22.237Z\",\n  updatedAt: \"2026-08-31T14:35:22.237Z\",\n}\n\n=== After Updating Only Title ===\n{\n  id: \"fw316zc\",\n  title: \"Updated Title\",\n  description: undefined,\n  priority: undefined,\n  status: undefined,\n  dueDate: undefined,\n  createdAt: \"2026-08-31T14:35:22.237Z\",\n  updatedAt: \"2026-08-31T14:35:2"
+      },
+      {
+        "index": 639,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 640,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 641,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 642,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 1598,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n12 files were searched [67.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 1599,
+        "tool": "bash",
+        "error": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n12 files were searched [67.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the filename (ex: \"MyApp.test.ts\")\nnote: To treat the \".v3/invariants.test.ts\" filter as a path, run \"bun test ./.v3/invariants.test.ts\"\n\nLearn more about bun test: https://bun.com/docs/cli/test\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 1600,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 1601,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 1602,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 1603,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 629,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 630,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 637,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 1,
+        "outputSnippet": "=== Created Task ===\n{\n  id: \"fw316zc\",\n  title: \"Original Title\",\n  description: \"Original Description\",\n  priority: 3,\n  status: \"in_progress\",\n  dueDate: \"2024-12-31\",\n  createdAt: \"2026-08-31T14:3"
+      },
+      {
+        "index": 638,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 1,
+        "outputSnippet": "=== Created Task ===\n{\n  id: \"fw316zc\",\n  title: \"Original Title\",\n  description: \"Original Description\",\n  priority: 3,\n  status: \"in_progress\",\n  dueDate: \"2024-12-31\",\n  createdAt: \"2026-08-31T14:3"
+      },
+      {
+        "index": 639,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 640,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 641,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 642,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 739,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 740,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 747,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "=== Created Task ===\n{\n  id: \"z76agxx\",\n  title: \"Original Title\",\n  description: \"Original Description\",\n  priority: 3,\n  status: \"in_progress\",\n  dueDate: \"2024-12-31\",\n  createdAt: \"2026-08-31T14:3"
+      },
+      {
+        "index": 748,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "=== Created Task ===\n{\n  id: \"z76agxx\",\n  title: \"Original Title\",\n  description: \"Original Description\",\n  priority: 3,\n  status: \"in_progress\",\n  dueDate: \"2024-12-31\",\n  createdAt: \"2026-08-31T14:3"
+      },
+      {
+        "index": 749,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 750,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 751,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 752,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun run repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 794,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 795,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 804,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [2.26ms]\n(pass) TaskManager > createTask validates priority [0.57ms]\n(pass) TaskMana"
+      },
+      {
+        "index": 805,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [2.26ms]\n(pass) TaskManager > createTask validates priority [0.57ms]\n(pass) TaskMana"
+      },
+      {
+        "index": 806,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 807,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 808,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 809,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 1590,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1591,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1598,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n12 files were searched [67.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the"
+      },
+      {
+        "index": 1599,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\nThe following filters did not match any test files:\n .v3/invariants.test.ts\n12 files were searched [67.00ms]\n\nnote: Tests need \".test\", \"_test_\", \".spec\" or \"_spec_\" in the"
+      },
+      {
+        "index": 1600,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 1601,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 1602,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 1603,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test .v3/invariants.test.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 2328,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2329,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2338,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\invariants.test.ts:\n(pass) Update invariant tests > update with empty object preserves all fields [2.43ms]\n(pass) Update invariant tests > update can explicitly set "
+      },
+      {
+        "index": 2339,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\invariants.test.ts:\n(pass) Update invariant tests > update with empty object preserves all fields [2.43ms]\n(pass) Update invariant tests > update can explicitly set "
+      },
+      {
+        "index": 2340,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2341,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2342,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2343,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test tests/invariants.test.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 2387,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 2388,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 2397,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\invariants.test.ts:\n(pass) Update invariant tests > update with empty object preserves all fields [2.48ms]\n(pass) Update invariant tests > update can explicitly set "
+      },
+      {
+        "index": 2398,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\invariants.test.ts:\n(pass) Update invariant tests > update with empty object preserves all fields [2.48ms]\n(pass) Update invariant tests > update can explicitly set "
+      },
+      {
+        "index": 2399,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 2400,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 2401,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 2402,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 2452,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+        "exitCode": 0
+      },
+      {
+        "index": 2453,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+        "exitCode": 0
+      },
+      {
+        "index": 2456,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 2457,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 2458,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+        "exitCode": 0
+      },
+      {
+        "index": 2459,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+        "exitCode": 0
+      },
+      {
+        "index": 2460,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+        "exitCode": 0
+      },
+      {
+        "index": 2461,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && rm repro.ts && rm -rf .v3",
+        "exitCode": 0
+      },
+      {
+        "index": 2535,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 2536,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 2545,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\invariants.test.ts:\n(pass) Update invariant tests > update with empty object preserves all fields [2.13ms]\n(pass) Update invariant tests > update can explicitly set "
+      },
+      {
+        "index": 2546,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0,
+        "outputSnippet": "bun test v1.3.14 (0d9b296a)\n\ntests\\invariants.test.ts:\n(pass) Update invariant tests > update with empty object preserves all fields [2.13ms]\n(pass) Update invariant tests > update can explicitly set "
+      },
+      {
+        "index": 2547,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 2548,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 2549,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      },
+      {
+        "index": 2550,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-001-synth-001-run-001-c76cd7-1Ivjpc\" && bun test",
+        "exitCode": 0
+      }
+    ]
+  }
+}
