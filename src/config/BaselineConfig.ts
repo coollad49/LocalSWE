@@ -75,7 +75,7 @@ async function resolvePiVersion(): Promise<string> {
  * Minimal .env loader (no dotenv dependency). Populates process.env from .env if present.
  * Standard way: .env contains PROVIDER, PROVIDER_API_KEY, AGENT_MODEL, etc.
  */
-async function loadDotEnv(): Promise<void> {
+export async function loadDotEnv(): Promise<void> {
   const envPath = resolve(process.cwd(), ".env");
   if (!existsSync(envPath)) return;
   try {

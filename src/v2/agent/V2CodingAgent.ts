@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import { existsSync, readFileSync, mkdirSync, symlinkSync } from "node:fs";
+import { existsSync, readFileSync, mkdirSync, symlinkSync, readdirSync, rmSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
@@ -10,6 +10,7 @@ import type { AgentPhase, TaskState } from "../types.ts";
 import { TrajectoryCapture } from "../../trajectory/TrajectoryCapture.ts";
 import { capturePatch, writePatchFile } from "../../patch/PatchCapture.ts";
 import { writeJsonFile } from "../../utils/fs.ts";
+import { execWithTimeout } from "../../utils/git.ts";
 import { InvariantEngine } from "../workflow/InvariantEngine.ts";
 import { RollbackManager } from "../workflow/RollbackManager.ts";
 import { getV2PhasePrompt, getV2WorkflowOverview } from "./phasePrompts.ts";
@@ -38,34 +39,86 @@ function isScratchFile(path: string): boolean {
   if (path.startsWith(".v2/") || path === ".v2") return true;
   if (path.startsWith(".v1/") || path === ".v1") return true;
   const scratchPatterns = [
-    /^repro\.(js|ts|mjs|cjs)$/,
-    /^reproduce\.(js|ts)$/,
-    /^test-\w+\.(js|ts)$/,
-    /^tmp-.*\.(js|ts)$/,
-    /^scratch\.(js|ts)$/,
-    /^debug\.(js|ts)$/,
+    /^(repro|reproduce|test|test_fix|check|check_patches|scratch|debug|verify|invariants).*\.(js|ts|mjs|cjs|sh|py)$/i,
+    /^tmp-.*\.(js|ts)$/i,
     /^\.tmp-.*$/,
-    /^verify\.(js|ts|sh)$/,
   ];
-  for (const re of scratchPatterns) if (re.test(path)) return true;
+  for (const re of scratchPatterns) {
+    if (re.test(path)) return true;
+    const base = path.split("/").pop() ?? path;
+    if (re.test(base)) return true;
+  }
   if (path.startsWith("tmp/") || path.startsWith(".tmp/") || path.startsWith("scratch/")) return true;
   return false;
 }
 
 function sanitizePatchForScratchFiles(patch: string): string {
-  if (!patch) return patch;
+  if (!patch) return "";
   const lines = patch.split("\n");
   let out = "";
-  let skipping = false;
+  let skipHunk = false;
   for (const line of lines) {
-    if (line.startsWith("diff --git ")) {
-      const parts = line.split(" ");
-      const fileB = parts[3]?.replace(/^b\//, "") ?? "";
-      skipping = isScratchFile(fileB);
+    if (line.startsWith("diff --git a/")) {
+      const m = line.match(/^diff --git a\/(.+?) b\//);
+      const filePath = m?.[1] ?? "";
+      skipHunk = isScratchFile(filePath);
+      if (!skipHunk) out += line + "\n";
+      continue;
     }
-    if (!skipping) out += line + "\n";
+    if (skipHunk) {
+      if (line.startsWith("diff --git ")) {
+        skipHunk = false;
+        out += line + "\n";
+      }
+      continue;
+    }
+    out += line + "\n";
   }
-  return out.trim();
+  if (out.length > 0 && !out.endsWith("\n")) {
+    out += "\n";
+  }
+  return out;
+}
+
+async function cleanupScratchFiles(workspacePath: string, trajectory: TrajectoryCapture): Promise<string[]> {
+  const removed: string[] = [];
+  try {
+    const entries = readdirSync(workspacePath, { withFileTypes: true });
+    for (const e of entries) {
+      if (e.isDirectory()) continue;
+      const rel = e.name;
+      if (isScratchFile(rel) && !rel.startsWith(".v2")) {
+        try {
+          rmSync(join(workspacePath, rel), { force: true });
+          removed.push(rel);
+        } catch {}
+      }
+    }
+    // Also check untracked files via git status
+    try {
+      const status = await execWithTimeout("git", ["status", "--porcelain", "--", ".", ":!.v2", ":!.v2/**", ":!.v1", ":!.v1/**"], workspacePath, 5000);
+      if (status.code === 0) {
+        for (const line of status.stdout.split("\n")) {
+          const trimmed = line.trim();
+          if (!trimmed) continue;
+          const m = trimmed.match(/^\?\? "?(.+?)"?$/);
+          if (m && m[1]) {
+            const p = m[1].replace(/^"|"$/g, "");
+            if (isScratchFile(p)) {
+              try {
+                rmSync(join(workspacePath, p), { force: true });
+                if (!removed.includes(p)) removed.push(p);
+              } catch {}
+            }
+          }
+        }
+      }
+    } catch {}
+  } catch (e) {
+    trajectory.append("system", "scratch_cleanup_error", { error: (e as Error).message });
+  }
+  if (removed.length > 0) trajectory.append("harness", "scratch_cleaned", { removed });
+  return removed;
 }
 
 function extractTestRecords(events: Array<{ type: string; data: unknown; timestamp: string }>): TestRecord[] {
@@ -200,11 +253,6 @@ export class V2CodingAgent implements CodingAgent {
         const modelRuntime = await ModelRuntime.create();
         const providerEnv = process.env.PROVIDER?.trim();
         const providerKey = process.env.PROVIDER_API_KEY?.trim() ?? process.env.OPENCODE_API_KEY?.trim() ?? process.env.OPENCODE_GO_API_KEY?.trim();
-        if (providerEnv && providerKey) {
-          try {
-            await (modelRuntime as { setRuntimeApiKey: (p: string, k: string) => Promise<void> }).setRuntimeApiKey(providerEnv, providerKey);
-          } catch {}
-        }
 
         let model: unknown = null;
         const modelStr = this.config.model;
@@ -217,6 +265,13 @@ export class V2CodingAgent implements CodingAgent {
         } else if (providerEnv) {
           provider = providerEnv;
           modelId = modelStr;
+        }
+
+        const effectiveProvider = provider ?? providerEnv ?? "opencode-go";
+        if (providerKey && effectiveProvider) {
+          try {
+            await (modelRuntime as { setRuntimeApiKey: (p: string, k: string) => Promise<void> }).setRuntimeApiKey(effectiveProvider, providerKey);
+          } catch {}
         }
 
         if (provider && modelId) {
@@ -292,10 +347,13 @@ Please start by reading ISSUE.md and reproducing the issue.
       }
     }
 
+    // Clean scratch files from workspace before taking git diff
+    await cleanupScratchFiles(task.workspacePath, trajectory);
+
     // Capture clean git patch excluding scratch and .v2 files
     const patchRes = await capturePatch(task.workspacePath);
     patchContent = sanitizePatchForScratchFiles(patchRes.patch);
-    changedFiles = patchRes.changedFiles;
+    changedFiles = patchRes.changedFiles.filter((f) => !isScratchFile(f));
 
     const patchPath = join(runDir, "patch.diff");
     await writePatchFile(patchPath, patchContent);

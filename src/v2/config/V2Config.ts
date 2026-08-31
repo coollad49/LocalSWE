@@ -39,10 +39,13 @@ export const DEFAULT_V2_CONFIG: V2Config = {
   runsPerCase: 1,
 };
 
+import { loadDotEnv } from "../../config/BaselineConfig.ts";
+
 export async function loadV2Config(options?: {
   configPath?: string;
   overrides?: Partial<V2Config>;
 }): Promise<V2Config> {
+  await loadDotEnv();
   const path = options?.configPath ?? DEFAULT_CONFIG_PATH;
   let fileConfig: Partial<V2Config> = {};
 
@@ -55,8 +58,16 @@ export async function loadV2Config(options?: {
     }
   }
 
+  const envModel = process.env.AGENT_MODEL?.trim();
+  const providerEnv = process.env.PROVIDER?.trim();
+  let defaultModel = DEFAULT_V2_CONFIG.model;
+  if (envModel) {
+    defaultModel = providerEnv && !envModel.includes("/") ? `${providerEnv}/${envModel}` : envModel;
+  }
+
   return {
     ...DEFAULT_V2_CONFIG,
+    model: defaultModel,
     ...fileConfig,
     ...(options?.overrides ?? {}),
   };
