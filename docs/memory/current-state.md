@@ -8,7 +8,7 @@
 **Infrastructure:** `bun run scripts/verify-baseline-infra.ts` passes 17/17 checks.
 **Type check:** `bun run check-types` passes strictly.
 **Evaluator:** v1 deterministic with pricing, metrics, comparison, and reporting.
-**Agent V1:** Structured workflow with streamlined phase progression, auto-advance upon verified local tests, eliminated redundant gate-nudge round-trips, bounded 5 iterations.
+**Agent V1:** High-performance autonomous SWE agent with workspace `node_modules` linking, continuous tool execution loop (diagnose → reproduce → edit → verify), passive telemetry extraction, active verification gating, and zero artificial prompt turn delays.
 **Master Runner:** `bun run experiment` (`src/cli/run-experiment.ts`) orchestrates Baseline v0 vs Agent V1 across benchmark cases, supports `--reuse-baseline` to leverage completed baseline runs, streams real-time tool execution logs across concurrent workers, executes Evaluator, and outputs comparative delta table and reports in a single command.
 
 ## What exists — Benchmark (v0.5 FROZEN — 17 cases)

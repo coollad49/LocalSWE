@@ -944,14 +944,10 @@ export class V1CodingAgent implements CodingAgent {
     signal.addEventListener("abort", abortListener);
 
     try {
-      // Phase loop with single persistent session — advance via prompt turns
-      const phasesInOrder: AgentPhase[] = ["reconnaissance", "diagnosis", "investigation", "implementation", "verification", "finalization"];
-      let phaseIdx = 0;
-
-      // Initial reconnaissance turn
+      // Send initial prompt with complete issue and workflow instructions
       const issuePrompt = this.buildInitialPrompt(task, instructions);
-      trajectory.append("harness", "prompt_sent", { phase: engine.getPhase(), length: issuePrompt.length, iteration: engine.getIteration() });
-      trajectory.append("harness", "phase_start", { phase: engine.getPhase(), promptPreview: issuePrompt.slice(0, 500) });
+      trajectory.append("harness", "prompt_sent", { phase: "reconnaissance", length: issuePrompt.length, iteration: 0 });
+      trajectory.append("harness", "phase_start", { phase: "reconnaissance", promptPreview: issuePrompt.slice(0, 500) });
 
       const promptWithSignal = async (text: string) => {
         const promptPromise = session.prompt(text);
@@ -962,183 +958,113 @@ export class V1CodingAgent implements CodingAgent {
         await Promise.race([promptPromise, signalPromise]);
       };
 
+      // Helper to check git diff for actual file modifications
+      const checkGitChanges = async () => {
+        try {
+          const gitChanges = await execWithTimeout("git", ["status", "--porcelain", "--", ".", ":!.v1", ":!.v1/**", ":!node_modules", ":!node_modules/**"], cwd, 5000);
+          if (gitChanges.stdout.trim()) {
+            const files = gitChanges.stdout.split("\n").map((l) => l.trim().split(/\s+/).pop() ?? "").filter(Boolean);
+            for (const f of files) if (!isScratchFile(f) && !f.startsWith(".v1/")) {
+              if (!engine.getState().changesMade.some((c) => c.path === f)) {
+                engine.recordFileChange({ path: f, summary: `git detected change ${f}`, iteration: engine.getIteration() });
+              }
+            }
+          }
+        } catch {}
+      };
+
+      // Execute primary autonomous turn
       await promptWithSignal(issuePrompt);
-
-      // Sync file-based state after recon turn
       await syncStateFromWorkspaceFile(engine, cwd);
-      trajectory.append("harness", "phase_sync", { phase: engine.getPhase(), hypotheses: engine.getState().hypotheses.length, filesInspected: engine.getState().filesInspected.length });
+      await checkGitChanges();
 
-      // Advance through phases sequentially, with bounded iteration loop for verification failures
-      while (phaseIdx < phasesInOrder.length - 1) {
+      // Verification Gate Loop (up to maxIterations)
+      let iteration = 0;
+      const maxLoops = Math.min(this.config.maxIterations ?? 3, 3);
+
+      while (iteration < maxLoops) {
         if (signal.aborted) throw new Error("Aborted via signal");
-        const currentPhase = engine.getPhase();
-        const expectedPhase = phasesInOrder[phaseIdx];
-        if (currentPhase !== expectedPhase) {
-          trajectory.append("system", "phase_mismatch", { expected: expectedPhase, actual: currentPhase });
-          const actualIdx = phasesInOrder.indexOf(currentPhase);
-          if (actualIdx !== -1) phaseIdx = actualIdx;
-        }
-
-        const nextPhase = phasesInOrder[phaseIdx + 1];
-        if (!nextPhase) break;
-
-        // Check if agent already implemented and verified the fix early
         const stateNow = engine.getState();
         const hasPassedVer = stateNow.verificationAttempts.some((v) => v.passed === true);
         const hasChanges = stateNow.changesMade.length > 0;
-        if (hasPassedVer && hasChanges && currentPhase !== "finalization") {
-          trajectory.append("harness", "early_verification_detected", { currentPhase, changes: stateNow.changesMade.length });
-          // Ensure hypotheses exist for telemetry integrity
-          if (stateNow.hypotheses.length === 0) {
-            const h = engine.addHypothesis({
-              description: `Root cause identified in ${stateNow.changesMade.map((c) => c.path).join(", ")}`,
-              evidence: ["Code inspection and passing verification"],
-              confidence: 0.9,
-              status: "selected",
-              files: stateNow.changesMade.map((c) => c.path),
-            });
-            engine.updateHypothesis(h.id, { status: "selected" });
-          }
-          try {
-            await engine.transitionTo("finalization", { skipGate: true });
-            trajectory.append("harness", "phase_transition", { from: currentPhase, to: "finalization", iteration: engine.getIteration(), reason: "early verification pass" });
-            await syncStateFromWorkspaceFile(engine, cwd);
-          } catch {}
+        const lastVer = stateNow.verificationAttempts[stateNow.verificationAttempts.length - 1];
+
+        // 1. Success condition: changes made and verified passing
+        if (hasChanges && hasPassedVer) {
+          trajectory.append("harness", "verification_gate_passed", {
+            changes: stateNow.changesMade.length,
+            attempts: stateNow.verificationAttempts.length,
+          });
           break;
         }
 
-        // Check gate for current phase before transitioning
-        let gate = checkGateForPhase(currentPhase, engine.getState());
-        let canAdvance = gate.passed;
-        if (!canAdvance) {
-          if (currentPhase === "verification") {
-            canAdvance = false;
-          } else {
-            // Auto-synthesize missing evidence for recon/diagnosis/investigation/implementation so we don't waste 45s on a nudge turn
-            if (currentPhase === "diagnosis" && engine.getState().hypotheses.length === 0) {
-              const targetFiles = engine.getState().filesInspected.filter((f) => !f.includes("ISSUE"));
-              const h = engine.addHypothesis({
-                description: `Targeted repair in ${targetFiles.slice(0, 2).join(", ") || "source code"}`,
-                evidence: engine.getState().evidence.map((e) => e.description).slice(0, 3),
-                confidence: 0.8,
-                status: "selected",
-                files: targetFiles.slice(0, 2),
-              });
-              engine.updateHypothesis(h.id, { status: "selected" });
-            }
-            engine.recordEvidence({ type: "other", description: `Auto-gate evidence for ${currentPhase}: ${gate.reason}`, source: "harness", phase: currentPhase });
-            gate = checkGateForPhase(currentPhase, engine.getState());
-            canAdvance = gate.passed;
-          }
-        }
-
-        if (!canAdvance) {
-          // Verification gate failed — decide loop vs finalization
-          if (currentPhase === "verification") {
-            const verAttempts = engine.getState().verificationAttempts;
-            const lastAttempt = verAttempts[verAttempts.length - 1];
-            const lastPassed = lastAttempt?.passed;
-            if (lastPassed === false && engine.canLoopBack()) {
-              // Failed verification: loop back to investigation then implementation
-              const loopTarget: AgentPhase = engine.getState().hypotheses.some((h) => h.status === "selected") ? "implementation" : "investigation";
-              // Need to go verification → loopTarget; allowed transitions include verification→investigation/implementation
-              try {
-                await engine.transitionTo(loopTarget);
-                trajectory.append("harness", "phase_transition", { from: currentPhase, to: loopTarget, iteration: engine.getIteration(), reason: "verification failed, looping back" });
-                // Send loopback prompt
-                const loopPrompt = this.buildLoopbackPrompt(lastAttempt, engine.getState());
-                await promptWithSignal(loopPrompt);
-                await syncStateFromWorkspaceFile(engine, cwd);
-                // After loopback turn, re-enter implementation/verification cycle
-                // Reset phaseIdx to loopTarget index
-                const loopIdx = phasesInOrder.indexOf(loopTarget);
-                phaseIdx = loopIdx;
-                continue;
-              } catch (e) {
-                trajectory.append("system", "loopback_error", { error: (e as Error).message });
-                break;
-              }
-            } else if (engine.isBudgetExhausted()) {
-              trajectory.append("harness", "budget_exhausted", { iteration: engine.getIteration(), max: engine.getMaxIterations() });
-              engine.setTerminationReason("iteration_exhausted");
-              try {
-                await engine.forceTransitionTo("finalization");
-                trajectory.append("harness", "phase_transition", { from: currentPhase, to: "finalization", reason: "budget exhausted" });
-                const finalPrompt = getPhasePrompt("finalization");
-                await promptWithSignal(finalPrompt);
-                await syncStateFromWorkspaceFile(engine, cwd);
-              } catch {}
-              break;
-            } else {
-              // No more loops but not exhausted? Force finalization
-              try {
-                await engine.transitionTo("finalization", { skipGate: true });
-                trajectory.append("harness", "phase_transition", { from: currentPhase, to: "finalization", reason: "verification gated but no loop" });
-                const finalPrompt = getPhasePrompt("finalization");
-                await promptWithSignal(finalPrompt);
-                await syncStateFromWorkspaceFile(engine, cwd);
-              } catch {}
-              break;
-            }
-          } else {
-            // Non-verification gate failed without recovery
-            trajectory.append("system", "unrecoverable_gate", { phase: currentPhase });
-            break;
-          }
-        }
-
-        // Gate passed — advance to next phase via prompt turn
-        try {
-          const gateNow = checkGateForPhase(currentPhase, engine.getState());
-          if (!gateNow.passed) throw new Error(gateNow.reason);
-          await engine.transitionTo(nextPhase);
-          trajectory.append("harness", "phase_transition", { from: currentPhase, to: nextPhase, iteration: engine.getIteration() });
-          trajectory.append("harness", "phase_start", { phase: nextPhase, iteration: engine.getIteration() });
-          phaseIdx += 1;
-          const phasePrompt = getPhasePrompt(nextPhase);
-          // Include current state summary to keep agent grounded
-          const enrichedPrompt = `${phasePrompt}\n\n## Current workflow state\n${this.summarizeState(engine.getState())}`;
-          await promptWithSignal(enrichedPrompt);
+        // 2. Modified code but did not run test: prompt verification nudge
+        if (hasChanges && stateNow.verificationAttempts.length === 0) {
+          iteration++;
+          engine.incrementIteration();
+          trajectory.append("harness", "verification_nudge", { iteration, reason: "changes made without test verification" });
+          const nudgePrompt = [
+            `## Verification Required`,
+            `You have modified the following file(s): ${stateNow.changesMade.map((c) => c.path).join(", ")}.`,
+            `Please run the test suite (e.g. \`vitest run\` or \`bun test\` or your reproduction command) via \`bash\` to verify that the bug is fixed and all tests pass.`,
+          ].join("\n");
+          await promptWithSignal(nudgePrompt);
           await syncStateFromWorkspaceFile(engine, cwd);
-
-          // Post-phase sync: check if implementation made changes via git
-          if (currentPhase === "implementation" || nextPhase === "implementation") {
-            try {
-              const gitChanges = await execWithTimeout("git", ["status", "--porcelain", "--", ".", ":!.v1", ":!.v1/**"], cwd, 5000);
-              if (gitChanges.stdout.trim()) {
-                const files = gitChanges.stdout.split("\n").map((l) => l.trim().split(/\s+/).pop() ?? "").filter(Boolean);
-                for (const f of files) if (!isScratchFile(f) && !f.startsWith(".v1/")) {
-                  if (!engine.getState().changesMade.some((c) => c.path === f)) {
-                    engine.recordFileChange({ path: f, summary: `git detected change ${f}`, iteration: engine.getIteration() });
-                  }
-                }
-              }
-            } catch {}
-          }
-
-          // If we just entered finalization, break loop after this turn
-          if (nextPhase === "finalization") {
-            // One final sync to capture diff evidence
-            await syncStateFromWorkspaceFile(engine, cwd);
-            break;
-          }
-
-          // Handle verification → finalization auto-advance on success: check next iteration of loop will handle it
-          // But also handle case where verification passed: next loop iteration will transition verification→finalization
-        } catch (e) {
-          trajectory.append("system", "phase_advance_error", { error: (e as Error).message, from: currentPhase, to: nextPhase });
-          // Try force if budget exhausted or deadlock
-          if (engine.isBudgetExhausted() && nextPhase !== "finalization") {
-            try {
-              await engine.forceTransitionTo("finalization");
-              engine.setTerminationReason("iteration_exhausted");
-              trajectory.append("harness", "forced_finalization", { reason: "advance error with budget exhausted" });
-            } catch {}
-            break;
-          }
-          break;
+          await checkGitChanges();
+          continue;
         }
+
+        // 3. Tests ran but failed: provide feedback and retry
+        if (lastVer && lastVer.passed === false) {
+          iteration++;
+          engine.incrementIteration();
+          trajectory.append("harness", "verification_retry", { iteration, command: lastVer.command });
+          const retryPrompt = [
+            `## Verification Test Failed`,
+            `The test command \`${lastVer.command ?? "test"}\` failed (exit code: ${lastVer.passed ? 0 : 1}).`,
+            lastVer.output ? `Output snippet:\n${lastVer.output.slice(-2000)}` : "",
+            `Please inspect the failure, adjust your fix in the source files, and re-run the tests to confirm they pass.`,
+          ].join("\n");
+          await promptWithSignal(retryPrompt);
+          await syncStateFromWorkspaceFile(engine, cwd);
+          await checkGitChanges();
+          continue;
+        }
+
+        // 4. No changes were made: give one implementation nudge
+        if (!hasChanges && iteration === 0) {
+          iteration++;
+          engine.incrementIteration();
+          trajectory.append("harness", "implementation_nudge", { iteration });
+          const implPrompt = `Please implement the targeted fix in the relevant source files using \`edit\` or \`write\` and run the test suite to verify your changes.`;
+          await promptWithSignal(implPrompt);
+          await syncStateFromWorkspaceFile(engine, cwd);
+          await checkGitChanges();
+          continue;
+        }
+
+        break;
       }
+
+      // Ensure structured hypotheses for telemetry
+      const finalState = engine.getState();
+      if (finalState.hypotheses.length === 0 && finalState.changesMade.length > 0) {
+        const h = engine.addHypothesis({
+          description: `Root cause identified and repaired in ${finalState.changesMade.map((c) => c.path).join(", ")}`,
+          evidence: ["Code inspection and passing verification"],
+          confidence: 0.9,
+          status: "selected",
+          files: finalState.changesMade.map((c) => c.path),
+        });
+        engine.updateHypothesis(h.id, { status: "selected" });
+      }
+
+      // Advance to finalization
+      try {
+        await engine.transitionTo("finalization", { skipGate: true });
+        trajectory.append("harness", "phase_transition", { to: "finalization", iteration: engine.getIteration() });
+        await syncStateFromWorkspaceFile(engine, cwd);
+      } catch {}
 
       // Capture final response
       try {
@@ -1161,12 +1087,13 @@ export class V1CodingAgent implements CodingAgent {
     return [
       instructions,
       "",
-      getWorkflowOverview(),
+      `## Issue Description\n${task.issue}`,
       "",
-      `## Issue\n${task.issue}`,
-      "",
-      PHASE_INSTRUCTIONS_PLACEHOLDER_CORRECTED(),
-      getPhasePrompt("reconnaissance"),
+      `## Instructions`,
+      `1. Read ISSUE.md and inspect relevant code to diagnose the root cause.`,
+      `2. Reproduce the bug by running tests or reproduction commands via \`bash\`.`,
+      `3. Apply a minimal, targeted fix to the source files using \`edit\` or \`write\`.`,
+      `4. Run the test suite (e.g. \`vitest run\` or \`bun test\`) via \`bash\` to verify the fix works cleanly.`,
     ].join("\n");
   }
 

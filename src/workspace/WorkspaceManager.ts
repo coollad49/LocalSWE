@@ -1,4 +1,4 @@
-import { cpSync, existsSync, rmSync, mkdirSync } from "node:fs";
+import { cpSync, existsSync, rmSync, mkdirSync, symlinkSync } from "node:fs";
 import { copyFile, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -168,6 +168,17 @@ export class WorkspaceManager {
     try {
       // Copy repository contents to workspace root
       cpSync(repoPath, workspacePath, { recursive: true, filter: (src) => !src.includes(".git") });
+
+      // Link root node_modules so dependencies (vitest, tsx, side-channel, mri, etc.) resolve cleanly
+      const rootNodeModules = join(ROOT, "node_modules");
+      const wsNodeModules = join(workspacePath, "node_modules");
+      if (existsSync(rootNodeModules) && !existsSync(wsNodeModules)) {
+        try {
+          symlinkSync(rootNodeModules, wsNodeModules, "junction");
+        } catch {
+          // ignore if linking fails
+        }
+      }
 
       // Overlay buggy files
       for (const rel of manifest.buggyFiles) {
