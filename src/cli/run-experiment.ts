@@ -38,6 +38,7 @@ import {
   generateReportMarkdown,
   generateSummaryJson,
 } from "../evaluator/report.ts";
+import { TrajectoryDatasetAggregator } from "../evaluator/trajectory/aggregation.ts";
 import { vacuumTrajectories } from "../../scripts/clean-trajectories.ts";
 import { loadPricingConfig } from "../evaluator/pricing.ts";
 import { existsSync } from "node:fs";
@@ -325,6 +326,24 @@ async function main(): Promise<void> {
   await writeFile(join(reportDir, "report.json"), JSON.stringify(report, null, 2), "utf-8");
   const summaryJson = generateSummaryJson(report);
   await writeFile(join(reportDir, "summary.json"), JSON.stringify(summaryJson, null, 2), "utf-8");
+
+  // Trajectory Dataset Aggregation (cross-run dataset grouped by verdict & agent)
+  const runsWithTraj = evaluationResults.filter((r) => r.trajectoryMetrics);
+  if (runsWithTraj.length > 0) {
+    const trajDataset = TrajectoryDatasetAggregator.buildDataset({
+      benchmarkVersion: identity.version,
+      benchmarkFingerprint: identity.fingerprint,
+      runs: runsWithTraj.map((r) => ({
+        metrics: r.trajectoryMetrics!,
+        verdict: r.verdict,
+      })),
+    });
+    await writeFile(join(reportDir, "trajectory-dataset.json"), JSON.stringify(trajDataset, null, 2), "utf-8");
+    try {
+      await mkdir(join(ROOT, "evaluation"), { recursive: true });
+      await writeFile(join(ROOT, "evaluation/trajectory-dataset.json"), JSON.stringify(trajDataset, null, 2), "utf-8");
+    } catch {}
+  }
 
   // --- Step 4: Auto-Vacuum Trajectory Logs to Reclaim Disk Space ---
   try {

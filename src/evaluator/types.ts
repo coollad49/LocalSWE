@@ -114,6 +114,10 @@ export interface EvaluationResult {
 
   /** Per-run cost (null if unavailable, never $0 invent) */
   cost?: RunCost;
+
+  /** Deterministic trajectory analytics & evidence (added v0.5 upgrade) */
+  trajectoryMetrics?: import("./trajectory/types.ts").TrajectoryMetrics;
+  trajectoryEvidence?: import("./trajectory/types.ts").TrajectoryEvidence;
 }
 
 export interface EvaluateOptions {

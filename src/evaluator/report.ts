@@ -547,6 +547,55 @@ function generateExperimentReportMarkdown(report: ExperimentReport): string {
     lines.push(``);
   }
 
+  // Trajectory & Behavioral Analytics (Verdict Grouping & Tool Distributions)
+  const runsWithTraj = results.filter((r) => r.trajectoryMetrics);
+  if (runsWithTraj.length > 0) {
+    lines.push(`## Trajectory & Behavioral Analytics`);
+    lines.push(``);
+    lines.push(`### Performance Grouped by Outcome`);
+    lines.push(``);
+    lines.push(`| Outcome | Runs | Avg Duration | Avg Tool Calls | Avg Thinking Chars | Avg Edits | Avg Tests | Avg Cost |`);
+    lines.push(`| --- | --- | --- | --- | --- | --- | --- | --- |`);
+
+    const verdicts = ["verified", "agent_failure", "false_confidence", "regression_failure"];
+    for (const v of verdicts) {
+      const vRuns = runsWithTraj.filter((r) => r.verdict === v || (r.status === "error" && v === "agent_failure"));
+      if (vRuns.length > 0) {
+        const avgDur = vRuns.reduce((s, r) => s + (r.trajectoryMetrics?.trajectory.durationMs || r.durationMs), 0) / vRuns.length;
+        const avgTools = vRuns.reduce((s, r) => s + (r.trajectoryMetrics?.tools.totalCalls || 0), 0) / vRuns.length;
+        const avgThinking = vRuns.reduce((s, r) => s + (r.trajectoryMetrics?.thinking.characterCount || 0), 0) / vRuns.length;
+        const avgEdits = vRuns.reduce((s, r) => s + ((r.trajectoryMetrics?.editing.editCalls || 0) + (r.trajectoryMetrics?.editing.writeCalls || 0)), 0) / vRuns.length;
+        const avgTests = vRuns.reduce((s, r) => s + (r.trajectoryMetrics?.verification.testCommandCount || 0), 0) / vRuns.length;
+        const costList = vRuns.map((r) => r.cost?.totalCostUsd).filter((c): c is number => typeof c === "number");
+        const avgCost = costList.length > 0 ? costList.reduce((s, c) => s + c, 0) / costList.length : null;
+
+        lines.push(`| ${v} | ${vRuns.length} | ${(avgDur / 1000).toFixed(1)}s | ${avgTools.toFixed(1)} | ${Math.round(avgThinking)} | ${avgEdits.toFixed(1)} | ${avgTests.toFixed(1)} | ${fmtCost(avgCost)} |`);
+      }
+    }
+    lines.push(``);
+
+    lines.push(`### Per-Run Tool & Resource Breakdown`);
+    lines.push(``);
+    lines.push(`| Case | Agent | Verdict | Duration | Cost | Reads | Edits | Bash | Tests | Repetitions | Thinking Chars | Expl/Edit Ratio |`);
+    lines.push(`| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |`);
+    for (const r of [...runsWithTraj].sort((a, b) => a.caseId.localeCompare(b.caseId) || a.runId.localeCompare(b.runId))) {
+      const tm = r.trajectoryMetrics!;
+      const verdict = (r.verdict || r.status).toUpperCase();
+      const dur = `${(tm.trajectory.durationMs / 1000).toFixed(1)}s`;
+      const cost = r.cost?.totalCostUsd != null ? fmtCost(r.cost.totalCostUsd) : (r.cost?.costStatus === "unavailable" ? "`unav`" : "`null`");
+      const reads = tm.exploration.readCalls;
+      const edits = tm.editing.editCalls + tm.editing.writeCalls;
+      const bash = tm.exploration.bashCalls;
+      const tests = tm.verification.testCommandCount;
+      const reps = tm.behavior.repeatedToolCalls;
+      const thinking = tm.thinking.characterCount;
+      const ratio = tm.exploration.explorationToEditingRatio != null ? `${tm.exploration.explorationToEditingRatio}x` : "—";
+
+      lines.push(`| ${r.caseId} | ${r.agentVersion} | ${verdict} | ${dur} | ${cost} | ${reads} | ${edits} | ${bash} | ${tests} | ${reps} | ${thinking} | ${ratio} |`);
+    }
+    lines.push(``);
+  }
+
   // Reliability across repeated runs (stability already)
   lines.push(`## Reliability Across Repeated Runs`);
   lines.push(``);

@@ -24,6 +24,7 @@ import {
 import { computeHistoricalVsSynthetic, computeDifficultyBreakdown, computeCategoryBreakdown } from "../evaluator/breakdowns.ts";
 import { buildExperimentEvaluation, buildExperimentReport, generateReportMarkdown, generateSummaryJson } from "../evaluator/report.ts";
 import { loadPricingConfig } from "../evaluator/pricing.ts";
+import { TrajectoryDatasetAggregator } from "../evaluator/trajectory/aggregation.ts";
 import { existsSync } from "node:fs";
 import { readFile, readdir, writeFile, mkdir, symlink, lstat } from "node:fs/promises";
 import { join, resolve, dirname, basename } from "node:path";
@@ -298,6 +299,48 @@ async function evaluateExperimentRuns(params: {
               // ignore
             }
           }
+
+          // Enrich trajectory analytics for cached runs
+          if (!cached.trajectoryMetrics) {
+            try {
+              const trajMetricsPath = join(resolvedRunsDir, cached.runId, "trajectory-metrics.json");
+              const trajEvidencePath = join(resolvedRunsDir, cached.runId, "trajectory-evidence.json");
+              const trajPath = join(resolvedRunsDir, cached.runId, "trajectory.jsonl");
+
+              if (existsSync(trajMetricsPath)) {
+                try {
+                  cached.trajectoryMetrics = JSON.parse(await readFile(trajMetricsPath, "utf-8"));
+                } catch {}
+              }
+              if (existsSync(trajEvidencePath)) {
+                try {
+                  cached.trajectoryEvidence = JSON.parse(await readFile(trajEvidencePath, "utf-8"));
+                } catch {}
+              }
+
+              if (!cached.trajectoryMetrics && existsSync(trajPath)) {
+                const { TrajectoryParser } = await import("../evaluator/trajectory/parser.ts");
+                const { TrajectoryExtractor } = await import("../evaluator/trajectory/extractor.ts");
+                const parsed = await TrajectoryParser.parseFile(trajPath);
+                cached.trajectoryMetrics = TrajectoryExtractor.extractMetrics(parsed, {
+                  runId: cached.runId,
+                  caseId: cached.caseId,
+                  agentVersion: cached.agentVersion,
+                  benchmarkVersion: cached.benchmarkVersion,
+                  model: cached.model,
+                  timedOut: cached.status === "timeout",
+                  terminationReason: cached.status,
+                });
+                cached.trajectoryEvidence = TrajectoryExtractor.extractEvidence(parsed, {
+                  runId: cached.runId,
+                  caseId: cached.caseId,
+                  agentVersion: cached.agentVersion,
+                });
+                await writeFile(trajMetricsPath, JSON.stringify(cached.trajectoryMetrics, null, 2), "utf-8");
+                await writeFile(trajEvidencePath, JSON.stringify(cached.trajectoryEvidence, null, 2), "utf-8");
+              }
+            } catch {}
+          }
           results.push(cached);
           evaluated++;
           if (!jsonOnly) {
@@ -454,6 +497,24 @@ async function evaluateExperimentRuns(params: {
 
   const summaryPath = join(reportsRoot, "summary.json");
   await writeFile(summaryPath, JSON.stringify(generateSummaryJson(report), null, 2), "utf-8");
+
+  // Trajectory Dataset Aggregation (cross-run dataset grouped by verdict & agent)
+  const runsWithTraj = results.filter((r) => r.trajectoryMetrics);
+  if (runsWithTraj.length > 0) {
+    const trajDataset = TrajectoryDatasetAggregator.buildDataset({
+      benchmarkVersion: identity.version,
+      benchmarkFingerprint: identity.fingerprint,
+      runs: runsWithTraj.map((r) => ({
+        metrics: r.trajectoryMetrics!,
+        verdict: r.verdict,
+      })),
+    });
+    await writeFile(join(reportsRoot, "trajectory-dataset.json"), JSON.stringify(trajDataset, null, 2), "utf-8");
+    try {
+      await mkdir(join(ROOT, "evaluation"), { recursive: true });
+      await writeFile(join(ROOT, "evaluation/trajectory-dataset.json"), JSON.stringify(trajDataset, null, 2), "utf-8");
+    } catch {}
+  }
 
   // Per-run cases/<runId>.json under reports
   for (const r of results) {

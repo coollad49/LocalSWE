@@ -11,6 +11,9 @@ import { createIsolatedWorkspace, applyPatchIsolated } from "./isolation.ts";
 import { runReproduce, runOracle, runRegression } from "./exec.ts";
 import { computeVerdict } from "./verdict.ts";
 import { extractRunMetrics } from "./metrics.ts";
+import { TrajectoryParser } from "./trajectory/parser.ts";
+import { TrajectoryExtractor } from "./trajectory/extractor.ts";
+import type { TrajectoryMetrics, TrajectoryEvidence } from "./trajectory/types.ts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../..");
@@ -444,11 +447,14 @@ export class Evaluator {
     let result: EvaluationResult | undefined;
     let cleanupError: string | undefined;
 
-    // Helper to enrich with per-run metrics/cost (never invents, guardrail enforced)
+    // Helper to enrich with per-run metrics/cost and deterministic trajectory analytics
     const enrichMetrics = async (r: EvaluationResult): Promise<void> => {
       if (!options.runId) return;
+      const effectiveRunsDir = options.runsDir ?? RUNS_DIR;
+      const runDir = join(effectiveRunsDir, r.runId);
+
+      // 1. Basic run metrics extraction from metadata
       try {
-        const effectiveRunsDir = options.runsDir ?? RUNS_DIR;
         const { metrics, cost } = await extractRunMetrics({
           runId: r.runId,
           runsDir: effectiveRunsDir,
@@ -458,11 +464,77 @@ export class Evaluator {
         });
         r.metrics = metrics;
         r.cost = cost;
-        // Also ensure durationMs reflects runMetadata if we have it and result durationMs is 0
         if (metrics.durationMs != null && r.durationMs === 0) r.durationMs = metrics.durationMs;
-      } catch {
-        // best effort: leave metrics undefined
-      }
+      } catch {}
+
+      // 2. Deterministic trajectory analytics extraction
+      try {
+        const trajPath = join(runDir, "trajectory.jsonl");
+        const trajMetricsPath = join(runDir, "trajectory-metrics.json");
+        const trajEvidencePath = join(runDir, "trajectory-evidence.json");
+
+        if (existsSync(trajPath)) {
+          let trajMetrics: TrajectoryMetrics | undefined;
+          let trajEvidence: TrajectoryEvidence | undefined;
+
+          // Check for valid cache
+          if (existsSync(trajMetricsPath) && existsSync(trajEvidencePath)) {
+            try {
+              const cachedM = JSON.parse(await readFile(trajMetricsPath, "utf-8")) as TrajectoryMetrics;
+              const cachedE = JSON.parse(await readFile(trajEvidencePath, "utf-8")) as TrajectoryEvidence;
+              if (cachedM.analyticsVersion === "0.1" && cachedM.trajectoryHash) {
+                const rawBytes = await readFile(trajPath);
+                const currentHash = "sha256:" + (await import("node:crypto")).createHash("sha256").update(rawBytes).digest("hex");
+                if (cachedM.trajectoryHash === currentHash) {
+                  trajMetrics = cachedM;
+                  trajEvidence = cachedE;
+                }
+              }
+            } catch {}
+          }
+
+          // If not cached or stale, parse and extract
+          if (!trajMetrics || !trajEvidence) {
+            const parsed = await TrajectoryParser.parseFile(trajPath);
+            trajMetrics = TrajectoryExtractor.extractMetrics(parsed, {
+              runId: r.runId,
+              caseId: r.caseId,
+              agentVersion: r.agentVersion,
+              benchmarkVersion: r.benchmarkVersion,
+              model: r.model,
+              timedOut: r.status === "timeout",
+              terminationReason: r.status,
+            });
+            trajEvidence = TrajectoryExtractor.extractEvidence(parsed, {
+              runId: r.runId,
+              caseId: r.caseId,
+              agentVersion: r.agentVersion,
+            });
+
+            // Write derived analytics to disk idempotently
+            await writeFile(trajMetricsPath, JSON.stringify(trajMetrics, null, 2), "utf-8");
+            await writeFile(trajEvidencePath, JSON.stringify(trajEvidence, null, 2), "utf-8");
+          }
+
+          r.trajectoryMetrics = trajMetrics;
+          r.trajectoryEvidence = trajEvidence;
+
+          // Enrich tokens and cost if observed in trajectory
+          if (trajMetrics.tokens.observed && r.metrics) {
+            r.metrics.inputTokens = trajMetrics.tokens.input;
+            r.metrics.outputTokens = trajMetrics.tokens.output;
+            r.metrics.totalTokens = trajMetrics.tokens.total;
+            r.metrics.toolCalls = trajMetrics.tools.totalCalls;
+          }
+          if (trajMetrics.cost.costUsd != null && r.cost) {
+            r.cost.costUsd = trajMetrics.cost.costUsd;
+            r.cost.inputCostUsd = trajMetrics.cost.inputCostUsd;
+            r.cost.outputCostUsd = trajMetrics.cost.outputCostUsd;
+            r.cost.costStatus = trajMetrics.cost.costStatus;
+            r.cost.costSource = trajMetrics.cost.costSource;
+          }
+        }
+      } catch {}
     };
 
     try {
