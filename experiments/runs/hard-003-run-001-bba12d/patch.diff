@@ -1,0 +1,50 @@
+diff --git a/src/pathstringifier.ts b/src/pathstringifier.ts
+index a3d4d37..0bfee55 100644
+--- a/src/pathstringifier.ts
++++ b/src/pathstringifier.ts
+@@ -1,7 +1,8 @@
+ export type StringifiedPath = string;
+ type Path = string[];
+ 
+-export const escapeKey = (key: string) => key.replace(/\./g, '\\.');
++export const escapeKey = (key: string) =>
++  key.replace(/\\/g, '\\\\').replace(/\./g, '\\.');
+ 
+ export const stringifyPath = (path: Path): StringifiedPath =>
+   path
+@@ -9,7 +10,10 @@ export const stringifyPath = (path: Path): StringifiedPath =>
+     .map(escapeKey)
+     .join('.');
+ 
+-export const parsePath = (string: StringifiedPath) => {
++export const parsePath = (
++  string: StringifiedPath,
++  legacy: boolean = false
++) => {
+   const result: string[] = [];
+ 
+   let segment = '';
+@@ -23,6 +27,22 @@ export const parsePath = (string: StringifiedPath) => {
+       continue;
+     }
+ 
++    if (!legacy) {
++      const isEscapedBackslash = char === '\\' && string.charAt(i + 1) === '\\';
++      if (isEscapedBackslash) {
++        segment += '\\';
++        i++;
++        continue;
++      }
++
++      // In non-legacy mode, a lone backslash is invalid
++      if (char === '\\') {
++        throw new Error(
++          `Invalid escape sequence at position ${i} in path string: "${string}"`
++        );
++      }
++    }
++
+     const isEndOfSegment = char === '.';
+     if (isEndOfSegment) {
+       result.push(segment);
+

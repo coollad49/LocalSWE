@@ -1,0 +1,84 @@
+{
+  "runId": "hard-001-run-001-c320c2",
+  "caseId": "hard-001",
+  "agentVersion": "agent-v2",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 8135,
+  "startedAt": "2026-08-31T11:55:57.495Z",
+  "completedAt": "2026-08-31T11:56:05.630Z",
+  "caseMeta": {
+    "repository": "immer",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "state-management",
+      "lifecycle",
+      "api-behavior"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 182,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-001-qnjGSz\\patch-1788177358389.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 1512,
+      "command": "node tsx benchmark\\cases\\hard-001\\public\\reproduce.ts",
+      "stdout": "Test reverse: baseUnchanged=true nextCorrect=true => PASS\n  baseState=[{\"id\":1},{\"id\":2},{\"id\":3}] expected [{\"id\":1},{\"id\":2},{\"id\":3}]\n  reordered={\"id\":3} expected {\"id\":3}\n  nextState=[{\"id\":99},{\"id\":2},{\"id\":1}] expected [{\"id\":99},{\"id\":2},{\"id\":1}]\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 2393,
+      "command": "node vitest run benchmark\\cases\\hard-001\\private\\oracle.test.ts",
+      "stdout": "\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/Users/cooll/AppData/Local/Temp/eval-hard-001-qnjGSz\u001b[39m\n\n \u001b[32m✓\u001b[39m benchmark/cases/hard-001/private/oracle.test.ts \u001b[2m(\u001b[22m\u001b[2m7 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 32\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m1 passed\u001b[39m\u001b[22m\u001b[90m (1)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m7 passed\u001b[39m\u001b[22m\u001b[90m (7)\u001b[39m\n\u001b[2m   Start at \u001b[22m 12:56:01\n\u001b[2m   Duration \u001b[22m 1.11s\u001b[2m (transform 416ms, setup 0ms, import 534ms, tests 32ms, environment 0ms)\u001b[22m\n\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 2458,
+      "command": "node vitest run benchmark\\repositories\\immer\\tests",
+      "stdout": "\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/Users/cooll/AppData/Local/Temp/eval-hard-001-qnjGSz\u001b[39m\n\n \u001b[32m✓\u001b[39m benchmark/repositories/immer/tests/basic.test.ts \u001b[2m(\u001b[22m\u001b[2m2 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 23\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m1 passed\u001b[39m\u001b[22m\u001b[90m (1)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m2 passed\u001b[39m\u001b[22m\u001b[90m (2)\u001b[39m\n\u001b[2m   Start at \u001b[22m 12:56:04\n\u001b[2m   Duration \u001b[22m 1.25s\u001b[2m (transform 499ms, setup 0ms, import 644ms, tests 23ms, environment 0ms)\u001b[22m\n\n",
+      "stderr": "",
+      "timedOut": false
+    }
+  },
+  "metrics": {
+    "durationMs": 404154,
+    "totalTurns": 134,
+    "toolCalls": 68,
+    "commandsExecuted": 18,
+    "filesInspected": 14,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 143764,
+    "outputTokens": 50252,
+    "totalTokens": 2467040
+  },
+  "cost": {
+    "inputTokens": 143764,
+    "outputTokens": 50252,
+    "totalTokens": 194016,
+    "inputCostUsd": 0.020127,
+    "outputCostUsd": 0.014071,
+    "totalCostUsd": 0.040562,
+    "costUsd": 0.040562,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  }
+}

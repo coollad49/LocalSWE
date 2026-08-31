@@ -1,5 +1,5 @@
 {
-  "evaluationId": "eval-60a73a20-1788165877337",
+  "evaluationId": "eval-20df669b-1788177597993",
   "runId": "synth-006-run-001-f04458",
   "caseId": "synth-006",
   "benchmarkVersion": "0.5",
@@ -7,17 +7,17 @@
   "agentVersion": "agent-v1",
   "model": "opencode-go/mimo-v2.5",
   "piVersion": "0.84.4",
-  "startedAt": "2026-08-31T08:44:37.336Z",
-  "completedAt": "2026-08-31T08:44:39.410Z",
-  "durationMs": 2074,
+  "startedAt": "2026-08-31T11:59:57.993Z",
+  "completedAt": "2026-08-31T11:59:59.271Z",
+  "durationMs": 1278,
   "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-006-run-001-f04458\\patch.diff",
   "status": "completed",
   "verdict": "false_confidence",
   "verification": {
     "patchApply": {
       "status": "passed",
-      "durationMs": 317,
-      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-WZhDJv\\patch-1788165878420.diff",
+      "durationMs": 170,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-LurpdD\\patch-1788177598819.diff",
       "stdout": "",
       "stderr": "",
       "exitCode": 0,
@@ -26,7 +26,7 @@
     "reproduction": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 382,
+      "durationMs": 146,
       "command": "bun run benchmark\\cases\\synth-006\\public\\reproduce.ts",
       "stdout": "threw: Cannot dequeue from an empty queue PASS\ndequeue after enqueue a expected a\nPASS\n",
       "stderr": "",
@@ -35,10 +35,10 @@
     "oracle": {
       "status": "failed",
       "exitCode": 1,
-      "durationMs": 287,
+      "durationMs": 134,
       "command": "bun test benchmark\\cases\\synth-006\\private\\oracle.test.ts",
       "stdout": "bun test v1.3.14 (0d9b296a)\n",
-      "stderr": "\nbenchmark\\cases\\synth-006\\private\\oracle.test.ts:\n2 | import { AsyncQueue } from \"../../../repositories/async-queue/src/queue.ts\";\n3 | \n4 | describe(\"synth-006 oracle: dequeue throws on empty\", () => {\n5 |   test(\"throws when empty\", () => {\n6 |     const q = new AsyncQueue<string>();\n7 |     expect(() => q.dequeue()).toThrow(/Queue is empty/);\n                                  ^\nerror: expect(received).toThrow(expected)\n\nExpected pattern: /Queue is empty/\nReceived message: \"Cannot dequeue from an empty queue\"\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-WZhDJv\\benchmark\\cases\\synth-006\\private\\oracle.test.ts:7:31)\n(fail) synth-006 oracle: dequeue throws on empty > throws when empty [1.85ms]\n(pass) synth-006 oracle: dequeue throws on empty > does not throw when not empty [0.83ms]\n(pass) synth-006 oracle: dequeue throws on empty > processNext returns null on empty, not throw [0.69ms]\n(pass) synth-006 oracle: dequeue throws on empty > clear then dequeue throws [0.43ms]\n\n 3 pass\n 1 fail\n 5 expect() calls\nRan 4 tests across 1 file. [207.00ms]\n",
+      "stderr": "\nbenchmark\\cases\\synth-006\\private\\oracle.test.ts:\n2 | import { AsyncQueue } from \"../../../repositories/async-queue/src/queue.ts\";\n3 | \n4 | describe(\"synth-006 oracle: dequeue throws on empty\", () => {\n5 |   test(\"throws when empty\", () => {\n6 |     const q = new AsyncQueue<string>();\n7 |     expect(() => q.dequeue()).toThrow(/Queue is empty/);\n                                  ^\nerror: expect(received).toThrow(expected)\n\nExpected pattern: /Queue is empty/\nReceived message: \"Cannot dequeue from an empty queue\"\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-LurpdD\\benchmark\\cases\\synth-006\\private\\oracle.test.ts:7:31)\n(fail) synth-006 oracle: dequeue throws on empty > throws when empty [1.91ms]\n(pass) synth-006 oracle: dequeue throws on empty > does not throw when not empty [0.81ms]\n(pass) synth-006 oracle: dequeue throws on empty > processNext returns null on empty, not throw [0.69ms]\n(pass) synth-006 oracle: dequeue throws on empty > clear then dequeue throws [0.26ms]\n\n 3 pass\n 1 fail\n 5 expect() calls\nRan 4 tests across 1 file. [97.00ms]\n",
       "timedOut": false
     },
     "regression": {

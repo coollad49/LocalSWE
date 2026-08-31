@@ -1,0 +1,86 @@
+{
+  "runId": "hard-005-run-001-1f527a",
+  "caseId": "hard-005",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 1689,
+  "startedAt": "2026-08-31T11:57:29.678Z",
+  "completedAt": "2026-08-31T11:57:31.367Z",
+  "caseMeta": {
+    "repository": "path-to-regexp",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "parsing",
+      "api-behavior",
+      "data-transformation"
+    ]
+  },
+  "metrics": {
+    "durationMs": 371648,
+    "totalTurns": 218,
+    "toolCalls": 106,
+    "commandsExecuted": 54,
+    "filesInspected": 8,
+    "filesChanged": 2,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 97144,
+    "outputTokens": 41376,
+    "totalTokens": 3298540
+  },
+  "cost": {
+    "inputTokens": 97144,
+    "outputTokens": 41376,
+    "totalTokens": 138520,
+    "inputCostUsd": 0.029143,
+    "outputCostUsd": 0.049651,
+    "totalCostUsd": 0.268396,
+    "costUsd": 0.268396,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 260,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-005-tozcc4\\patch-1788177450411.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 268,
+      "command": "bun run benchmark\\cases\\hard-005\\public\\reproduce.ts",
+      "stdout": "Test astral ID_Continue: result=\"/:\\\"test\\\"𝛼\" expected=\"/:\\\"test\\\"𝛼\" => PASS\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 280,
+      "command": "bun test benchmark\\cases\\hard-005\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hard-005\\private\\oracle.test.ts:\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > quotes param name when followed by astral ID_Continue [3.90ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > quotes wildcard name when followed by astral ID_Continue [0.18ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > does not quote when followed by non-ID_Continue astral [0.10ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > quotes when next text starts with BMP ID_Continue [0.81ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > does not quote when next is not text or is empty [0.20ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > round-trip parse -> stringify -> parse for astral [1.61ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > parse correctly handles astral ID_Continue in param name [1.77ms]\n\n 7 pass\n 0 fail\n 9 expect() calls\nRan 7 tests across 1 file. [221.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 143,
+      "command": "bun test benchmark\\repositories\\path-to-regexp\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\path-to-regexp\\tests\\basic.test.ts:\n(pass) path-to-regexp regression > basic parse/stringify [3.51ms]\n(pass) path-to-regexp regression > wildcard [0.10ms]\n\n 2 pass\n 0 fail\n 3 expect() calls\nRan 2 tests across 1 file. [99.00ms]\n",
+      "timedOut": false
+    }
+  }
+}

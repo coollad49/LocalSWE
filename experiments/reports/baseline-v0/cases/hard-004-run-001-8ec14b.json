@@ -1,0 +1,80 @@
+{
+  "runId": "hard-004-run-001-8ec14b",
+  "caseId": "hard-004",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 1545,
+  "startedAt": "2026-08-31T11:57:16.954Z",
+  "completedAt": "2026-08-31T11:57:18.499Z",
+  "caseMeta": {
+    "repository": "p-queue",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "asynchronous",
+      "state-management",
+      "error-handling"
+    ]
+  },
+  "metrics": {
+    "durationMs": 600829,
+    "totalTurns": 106,
+    "toolCalls": 56,
+    "commandsExecuted": 30,
+    "filesInspected": 7,
+    "filesChanged": 2,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 108284,
+    "outputTokens": 38380,
+    "totalTokens": 1771240
+  },
+  "cost": {
+    "inputTokens": 108284,
+    "outputTokens": 38380,
+    "totalTokens": 146664,
+    "inputCostUsd": 0.01516,
+    "outputCostUsd": 0.010746,
+    "totalCostUsd": 0.030455,
+    "costUsd": 0.030455,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 339,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-MPlpzf\\patch-1788177437826.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 329,
+      "command": "bun run benchmark\\cases\\hard-004\\public\\reproduce.ts",
+      "stdout": "",
+      "stderr": "567 | \t*/\n        ^\nerror: Expected identifier but found \"/\"\n    at C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-MPlpzf\\benchmark\\repositories\\p-queue\\source\\index.ts:567:3\n\n568 | \tasync addAll<TaskResultsType>(\n             ^\nerror: Expected \"(\" but found \"addAll\"\n    at C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-MPlpzf\\benchmark\\repositories\\p-queue\\source\\index.ts:568:8\n\n568 | \tasync addAll<TaskResultsType>(\n                   ^\nerror: Expected identifier but found \"<\"\n    at C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-MPlpzf\\benchmark\\repositories\\p-queue\\source\\index.ts:568:14\n\n568 | \tasync addAll<TaskResultsType>(\n                    ^\nerror: Expected \")\" but found \"TaskResultsType\"\n    at C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-MPlpzf\\benchmark\\repositories\\p-queue\\source\\index.ts:568:15\n\n568 | \tasync addAll<TaskResultsType>(\n                                   ^\nerror: Expected \";\" but found \">\"\n    at C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-MPlpzf\\benchmark\\repositories\\p-queue\\source\\index.ts:568:30\n\n568 | \tasync addAll<TaskResultsType>(\n                                    ^\nerror: Expected identifier but found \"(\"\n    at C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-MPlpzf\\benchmark\\repositories\\p-queue\\source\\index.ts:568:31\n\n569 | \t\tfunctions: ReadonlyArray<Task<TaskResultsType>>,\n                                                       ^\nerror: Expected \";\" but found \",\"\n    at C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-MPlpzf\\benchmark\\repositories\\p-queue\\source\\index.ts:569:50\n\n570 | \t\toptions?: Partial<EnqueueOptionsType>,\n                                             ^\nerror: Expected \";\" but found \",\"\n    at C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-MPlpzf\\benchmark\\repositories\\p-queue\\source\\index.ts:570:40\n\n571 | \t): Promise<TaskResultsType[]>;\n       ^\nerror: Expected identifier but found \")\"\n    at C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-MPlpzf\\benchmark\\repositories\\p-queue\\source\\index.ts:571:2\n",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  }
+}

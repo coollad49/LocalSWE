@@ -1,0 +1,2846 @@
+{
+  "evaluationId": "eval-1a03c05a-1788177445437",
+  "runId": "hard-004-run-001-ee4d7d",
+  "caseId": "hard-004",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v2",
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T11:57:25.437Z",
+  "completedAt": "2026-08-31T11:57:26.968Z",
+  "durationMs": 1531,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-004-run-001-ee4d7d\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 175,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-Dzaf7Z\\patch-1788177446155.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 192,
+      "command": "bun run benchmark\\cases\\hard-004\\public\\reproduce.ts",
+      "stdout": "Test queued abort: outcome=rejected notRan=true sizeOk=true => PASS\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 222,
+      "command": "bun test benchmark\\cases\\hard-004\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hard-004\\private\\oracle.test.ts:\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject when signal is aborted while task is waiting in queue [4.70ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject immediately when signal is already aborted and task is queued [0.54ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should not affect running task when queued task is aborted [29.52ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > abort with custom reason forwards the reason [3.48ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should remove aborted task from priority queue [2.38ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > signal abort not called when task already started should not affect queue size [21.65ms]\n\n 6 pass\n 0 fail\n 15 expect() calls\nRan 6 tests across 1 file. [178.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 220,
+      "command": "bun test benchmark\\repositories\\p-queue\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\p-queue\\tests\\basic.test.ts:\n(pass) p-queue regression > basic queue [6.25ms]\n(pass) p-queue regression > concurrency [45.32ms]\n\n 2 pass\n 0 fail\n 2 expect() calls\nRan 2 tests across 1 file. [174.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "p-queue",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "asynchronous",
+      "state-management",
+      "error-handling"
+    ]
+  },
+  "metrics": {
+    "durationMs": 753426,
+    "totalTurns": 242,
+    "toolCalls": 118,
+    "commandsExecuted": 52,
+    "filesInspected": 7,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 201144,
+    "outputTokens": 93916,
+    "totalTokens": 6896532
+  },
+  "cost": {
+    "inputTokens": 201144,
+    "outputTokens": 93916,
+    "totalTokens": 295060,
+    "inputCostUsd": 0.02816,
+    "outputCostUsd": 0.026296,
+    "totalCostUsd": 0.072941,
+    "costUsd": 0.072941,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-004-run-001-ee4d7d",
+    "caseId": "hard-004",
+    "agentVersion": "agent-v2",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:cfe72bd63856cbcf1f325ada5ef68fb4f1769200f93f640dd2476762d9f79e2b",
+    "trajectory": {
+      "eventCount": 1164,
+      "durationMs": 746521,
+      "eventTypes": {
+        "agent_start": 7,
+        "turn_start": 116,
+        "message_start": 236,
+        "message_end": 236,
+        "tool_execution_start": 118,
+        "tool_execution_end": 118,
+        "turn_end": 116,
+        "tool_execution_update": 206,
+        "agent_end": 6,
+        "auto_retry_start": 2,
+        "auto_retry_end": 2,
+        "agent_settled": 1
+      },
+      "assistantMessages": 348,
+      "userMessages": 4,
+      "toolCalls": 118,
+      "toolResults": 472,
+      "thinkingEvents": 336,
+      "unknownEvents": 340,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 118,
+      "uniqueTools": 5,
+      "byTool": {
+        "read": {
+          "calls": 26,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "write": {
+          "calls": 12,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 52,
+          "failures": 54
+        },
+        "edit": {
+          "calls": 22,
+          "failures": 24
+        }
+      }
+    },
+    "tokens": {
+      "input": 201144,
+      "output": 93916,
+      "cacheRead": 6601472,
+      "cacheWrite": 0,
+      "total": 6896532,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.072941,
+      "inputCostUsd": 0.02816,
+      "outputCostUsd": 0.026296,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 336,
+      "characterCount": 165324,
+      "averageCharacters": 492,
+      "maxCharacters": 4099,
+      "firstThinkingAt": "2026-08-31T11:27:18.736Z",
+      "lastThinkingAt": "2026-08-31T11:39:41.344Z",
+      "thinkingDurationMs": 742608
+    },
+    "editing": {
+      "editCalls": 22,
+      "writeCalls": 12,
+      "filesTouched": [
+        "reproduce.ts",
+        "source/priority-queue.ts",
+        "source/queue.ts",
+        "source/index.ts",
+        "tests/basic.test.ts"
+      ],
+      "uniqueFilesTouched": 5
+    },
+    "exploration": {
+      "readCalls": 26,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 52,
+      "explorationToEditingRatio": 2.47
+    },
+    "verification": {
+      "commandsDetected": 128,
+      "testsRun": true,
+      "testCommandCount": 10,
+      "buildRun": true,
+      "typecheckRun": true,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 1
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 85,
+      "duplicateReadTargets": 19,
+      "duplicateEditTargets": 29,
+      "toolFailureCount": 78,
+      "topRepetitions": [
+        {
+          "signature": "ee34b93d5dc4",
+          "tool": "bash",
+          "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+          "count": 16
+        },
+        {
+          "signature": "8d10a4852074",
+          "tool": "edit",
+          "target": "source/index.ts",
+          "count": 14
+        },
+        {
+          "signature": "1cb99e70a005",
+          "tool": "read",
+          "target": "source/index.ts",
+          "count": 12
+        },
+        {
+          "signature": "be2980eea894",
+          "tool": "write",
+          "target": "reproduce.ts",
+          "count": 8
+        },
+        {
+          "signature": "6d51f0fec24d",
+          "tool": "bash",
+          "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+          "count": 8
+        },
+        {
+          "signature": "6bdb002aed6b",
+          "tool": "read",
+          "target": "tests/basic.test.ts",
+          "count": 4
+        },
+        {
+          "signature": "b558f4a8a19b",
+          "tool": "write",
+          "target": "tests/basic.test.ts",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "8062ae37db9e",
+          "tool": "ls",
+          "target": "AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K",
+          "count": 2
+        },
+        {
+          "signature": "0fe7b4654c52",
+          "tool": "ls",
+          "target": "source",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hard-004-run-001-ee4d7d",
+    "caseId": "hard-004",
+    "agentVersion": "agent-v2",
+    "timeline": [
+      {
+        "index": 14,
+        "timestamp": "2026-08-31T11:27:19.246Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 15,
+        "timestamp": "2026-08-31T11:27:19.246Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 30,
+        "timestamp": "2026-08-31T11:27:20.951Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K"
+      },
+      {
+        "index": 31,
+        "timestamp": "2026-08-31T11:27:20.951Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K"
+      },
+      {
+        "index": 46,
+        "timestamp": "2026-08-31T11:27:23.365Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "source"
+      },
+      {
+        "index": 47,
+        "timestamp": "2026-08-31T11:27:23.365Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "source"
+      },
+      {
+        "index": 48,
+        "timestamp": "2026-08-31T11:27:23.365Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 49,
+        "timestamp": "2026-08-31T11:27:23.365Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 70,
+        "timestamp": "2026-08-31T11:27:26.662Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 71,
+        "timestamp": "2026-08-31T11:27:26.662Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 72,
+        "timestamp": "2026-08-31T11:27:26.662Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/queue.ts"
+      },
+      {
+        "index": 73,
+        "timestamp": "2026-08-31T11:27:26.662Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/queue.ts"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-31T11:27:30.126Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/priority-queue.ts"
+      },
+      {
+        "index": 95,
+        "timestamp": "2026-08-31T11:27:30.126Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/priority-queue.ts"
+      },
+      {
+        "index": 96,
+        "timestamp": "2026-08-31T11:27:30.126Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/options.ts"
+      },
+      {
+        "index": 97,
+        "timestamp": "2026-08-31T11:27:30.126Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/options.ts"
+      },
+      {
+        "index": 98,
+        "timestamp": "2026-08-31T11:27:30.126Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 99,
+        "timestamp": "2026-08-31T11:27:30.126Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 126,
+        "timestamp": "2026-08-31T11:27:38.762Z",
+        "event": "write",
+        "tool": "write",
+        "target": "reproduce.ts"
+      },
+      {
+        "index": 127,
+        "timestamp": "2026-08-31T11:27:38.762Z",
+        "event": "write",
+        "tool": "write",
+        "target": "reproduce.ts"
+      },
+      {
+        "index": 142,
+        "timestamp": "2026-08-31T11:27:41.575Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 143,
+        "timestamp": "2026-08-31T11:27:41.575Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 170,
+        "timestamp": "2026-08-31T11:28:15.747Z",
+        "event": "write",
+        "tool": "write",
+        "target": "reproduce.ts"
+      },
+      {
+        "index": 171,
+        "timestamp": "2026-08-31T11:28:15.748Z",
+        "event": "write",
+        "tool": "write",
+        "target": "reproduce.ts"
+      },
+      {
+        "index": 186,
+        "timestamp": "2026-08-31T11:28:18.158Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 187,
+        "timestamp": "2026-08-31T11:28:18.158Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 214,
+        "timestamp": "2026-08-31T11:28:41.451Z",
+        "event": "write",
+        "tool": "write",
+        "target": "reproduce.ts"
+      },
+      {
+        "index": 215,
+        "timestamp": "2026-08-31T11:28:41.451Z",
+        "event": "write",
+        "tool": "write",
+        "target": "reproduce.ts"
+      },
+      {
+        "index": 230,
+        "timestamp": "2026-08-31T11:28:44.653Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 231,
+        "timestamp": "2026-08-31T11:28:44.653Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 260,
+        "timestamp": "2026-08-31T11:29:23.171Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/priority-queue.ts"
+      },
+      {
+        "index": 261,
+        "timestamp": "2026-08-31T11:29:23.171Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/priority-queue.ts"
+      },
+      {
+        "index": 276,
+        "timestamp": "2026-08-31T11:30:08.289Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/queue.ts"
+      },
+      {
+        "index": 277,
+        "timestamp": "2026-08-31T11:30:08.289Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/queue.ts"
+      },
+      {
+        "index": 292,
+        "timestamp": "2026-08-31T11:30:29.639Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 293,
+        "timestamp": "2026-08-31T11:30:29.639Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 308,
+        "timestamp": "2026-08-31T11:30:32.715Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 309,
+        "timestamp": "2026-08-31T11:30:32.715Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 324,
+        "timestamp": "2026-08-31T11:30:53.039Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 325,
+        "timestamp": "2026-08-31T11:30:53.039Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 340,
+        "timestamp": "2026-08-31T11:30:56.310Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 341,
+        "timestamp": "2026-08-31T11:30:56.310Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 356,
+        "timestamp": "2026-08-31T11:30:59.838Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 357,
+        "timestamp": "2026-08-31T11:30:59.838Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 372,
+        "timestamp": "2026-08-31T11:31:04.918Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 373,
+        "timestamp": "2026-08-31T11:31:04.918Z",
+        "event": "read",
+        "tool": "read",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 388,
+        "timestamp": "2026-08-31T11:31:24.392Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 389,
+        "timestamp": "2026-08-31T11:31:24.392Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 404,
+        "timestamp": "2026-08-31T11:31:29.362Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && sed -n '443,540p' source/index.ts | cat -A | head -100",
+        "commandClass": "general"
+      },
+      {
+        "index": 405,
+        "timestamp": "2026-08-31T11:31:29.362Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && sed -n '443,540p' source/index.ts | cat -A | head -100",
+        "commandClass": "general"
+      },
+      {
+        "index": 424,
+        "timestamp": "2026-08-31T11:31:34.279Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && sed -n '510,515p' source/index.ts | cat -A",
+        "commandClass": "general"
+      },
+      {
+        "index": 425,
+        "timestamp": "2026-08-31T11:31:34.279Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && sed -n '510,515p' source/index.ts | cat -A",
+        "commandClass": "general"
+      },
+      {
+        "index": 444,
+        "timestamp": "2026-08-31T11:31:59.354Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && head -545 source/index.ts | tail -105",
+        "commandClass": "general"
+      },
+      {
+        "index": 445,
+        "timestamp": "2026-08-31T11:31:59.354Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && head -545 source/index.ts | tail -105",
+        "commandClass": "general"
+      },
+      {
+        "index": 464,
+        "timestamp": "2026-08-31T11:32:35.362Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 465,
+        "timestamp": "2026-08-31T11:32:35.362Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 480,
+        "timestamp": "2026-08-31T11:32:40.187Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 481,
+        "timestamp": "2026-08-31T11:32:40.187Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 504,
+        "timestamp": "2026-08-31T11:33:07.083Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 505,
+        "timestamp": "2026-08-31T11:33:07.083Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 520,
+        "timestamp": "2026-08-31T11:33:11.018Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 521,
+        "timestamp": "2026-08-31T11:33:11.018Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 544,
+        "timestamp": "2026-08-31T11:33:24.006Z",
+        "event": "read",
+        "tool": "read",
+        "target": "reproduce.ts"
+      },
+      {
+        "index": 545,
+        "timestamp": "2026-08-31T11:33:24.006Z",
+        "event": "read",
+        "tool": "read",
+        "target": "reproduce.ts"
+      },
+      {
+        "index": 560,
+        "timestamp": "2026-08-31T11:33:43.208Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 561,
+        "timestamp": "2026-08-31T11:33:43.208Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 576,
+        "timestamp": "2026-08-31T11:33:49.021Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 577,
+        "timestamp": "2026-08-31T11:33:49.021Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 592,
+        "timestamp": "2026-08-31T11:34:00.376Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 593,
+        "timestamp": "2026-08-31T11:34:00.376Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 616,
+        "timestamp": "2026-08-31T11:34:16.629Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && sed -n '450,510p' source/index.ts",
+        "commandClass": "general"
+      },
+      {
+        "index": 617,
+        "timestamp": "2026-08-31T11:34:16.629Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && sed -n '450,510p' source/index.ts",
+        "commandClass": "general"
+      },
+      {
+        "index": 636,
+        "timestamp": "2026-08-31T11:34:42.458Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 637,
+        "timestamp": "2026-08-31T11:34:42.458Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "source/index.ts"
+      },
+      {
+        "index": 652,
+        "timestamp": "2026-08-31T11:34:46.922Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 653,
+        "timestamp": "2026-08-31T11:34:46.922Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 676,
+        "timestamp": "2026-08-31T11:35:02.594Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "reproduce.ts"
+      },
+      {
+        "index": 677,
+        "timestamp": "2026-08-31T11:35:02.594Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "reproduce.ts"
+      },
+      {
+        "index": 692,
+        "timestamp": "2026-08-31T11:35:05.926Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+        "commandClass": "test"
+      },
+      {
+        "index": 693,
+        "timestamp": "2026-08-31T11:35:05.926Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+        "commandClass": "test"
+      },
+      {
+        "index": 712,
+        "timestamp": "2026-08-31T11:35:12.888Z",
+        "event": "write",
+        "tool": "write",
+        "target": "reproduce.ts"
+      },
+      {
+        "index": 713,
+        "timestamp": "2026-08-31T11:35:12.888Z",
+        "event": "write",
+        "tool": "write",
+        "target": "reproduce.ts"
+      },
+      {
+        "index": 728,
+        "timestamp": "2026-08-31T11:35:16.229Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 729,
+        "timestamp": "2026-08-31T11:35:16.229Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 760,
+        "timestamp": "2026-08-31T11:35:42.303Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 761,
+        "timestamp": "2026-08-31T11:35:42.303Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 782,
+        "timestamp": "2026-08-31T11:35:53.437Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 783,
+        "timestamp": "2026-08-31T11:35:53.437Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 822,
+        "timestamp": "2026-08-31T11:36:27.196Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 823,
+        "timestamp": "2026-08-31T11:36:27.196Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 838,
+        "timestamp": "2026-08-31T11:36:31.454Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 839,
+        "timestamp": "2026-08-31T11:36:31.454Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 864,
+        "timestamp": "2026-08-31T11:37:30.760Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 865,
+        "timestamp": "2026-08-31T11:37:30.760Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 880,
+        "timestamp": "2026-08-31T11:37:36.642Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 881,
+        "timestamp": "2026-08-31T11:37:36.642Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 896,
+        "timestamp": "2026-08-31T11:37:51.473Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 897,
+        "timestamp": "2026-08-31T11:37:51.473Z",
+        "event": "write",
+        "tool": "write",
+        "target": "tests/basic.test.ts"
+      },
+      {
+        "index": 912,
+        "timestamp": "2026-08-31T11:37:55.791Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 913,
+        "timestamp": "2026-08-31T11:37:55.791Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 952,
+        "timestamp": "2026-08-31T11:38:12.352Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsc --noEmit 2>&1",
+        "commandClass": "build"
+      },
+      {
+        "index": 953,
+        "timestamp": "2026-08-31T11:38:12.352Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsc --noEmit 2>&1",
+        "commandClass": "build"
+      },
+      {
+        "index": 974,
+        "timestamp": "2026-08-31T11:38:24.554Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && ./node_modules/.bin/tsc --noEmit 2>&1",
+        "commandClass": "build"
+      },
+      {
+        "index": 975,
+        "timestamp": "2026-08-31T11:38:24.554Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && ./node_modules/.bin/tsc --noEmit 2>&1",
+        "commandClass": "build"
+      },
+      {
+        "index": 996,
+        "timestamp": "2026-08-31T11:38:30.185Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && git diff HEAD source/index.ts | head -100",
+        "commandClass": "git"
+      },
+      {
+        "index": 997,
+        "timestamp": "2026-08-31T11:38:30.185Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && git diff HEAD source/index.ts | head -100",
+        "commandClass": "git"
+      },
+      {
+        "index": 1016,
+        "timestamp": "2026-08-31T11:38:33.832Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && git stash && ./node_modules/.bin/tsc --noEmit 2>&1 && git sta",
+        "commandClass": "build"
+      },
+      {
+        "index": 1017,
+        "timestamp": "2026-08-31T11:38:33.832Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && git stash && ./node_modules/.bin/tsc --noEmit 2>&1 && git sta",
+        "commandClass": "build"
+      },
+      {
+        "index": 1042,
+        "timestamp": "2026-08-31T11:38:48.197Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && git stash pop",
+        "commandClass": "git"
+      },
+      {
+        "index": 1043,
+        "timestamp": "2026-08-31T11:38:48.197Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && git stash pop",
+        "commandClass": "git"
+      },
+      {
+        "index": 1064,
+        "timestamp": "2026-08-31T11:38:52.395Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 1065,
+        "timestamp": "2026-08-31T11:38:52.395Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 1090,
+        "timestamp": "2026-08-31T11:39:04.981Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 1091,
+        "timestamp": "2026-08-31T11:39:04.981Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 1122,
+        "timestamp": "2026-08-31T11:39:18.198Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 1123,
+        "timestamp": "2026-08-31T11:39:18.198Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 1140,
+        "timestamp": "2026-08-31T11:39:34.875Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && git diff --stat",
+        "commandClass": "git"
+      },
+      {
+        "index": 1141,
+        "timestamp": "2026-08-31T11:39:34.875Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && git diff --stat",
+        "commandClass": "git"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 14,
+        "timestamp": "2026-08-31T11:27:19.246Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 126,
+        "timestamp": "2026-08-31T11:27:38.762Z",
+        "detail": "reproduce.ts"
+      },
+      {
+        "type": "first_repro",
+        "eventIndex": 142,
+        "timestamp": "2026-08-31T11:27:41.575Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 490,
+        "timestamp": "2026-08-31T11:32:45.087Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 491,
+        "timestamp": "2026-08-31T11:32:45.087Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 492,
+        "timestamp": "2026-08-31T11:32:45.087Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 493,
+        "timestamp": "2026-08-31T11:32:45.087Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 494,
+        "timestamp": "2026-08-31T11:32:45.087Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 495,
+        "timestamp": "2026-08-31T11:32:45.087Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 530,
+        "timestamp": "2026-08-31T11:33:15.996Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 531,
+        "timestamp": "2026-08-31T11:33:15.996Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 532,
+        "timestamp": "2026-08-31T11:33:15.996Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 533,
+        "timestamp": "2026-08-31T11:33:15.996Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 534,
+        "timestamp": "2026-08-31T11:33:15.996Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 535,
+        "timestamp": "2026-08-31T11:33:15.996Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 602,
+        "timestamp": "2026-08-31T11:34:08.245Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 603,
+        "timestamp": "2026-08-31T11:34:08.245Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 604,
+        "timestamp": "2026-08-31T11:34:08.245Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 605,
+        "timestamp": "2026-08-31T11:34:08.245Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 606,
+        "timestamp": "2026-08-31T11:34:08.246Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 607,
+        "timestamp": "2026-08-31T11:34:08.246Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 662,
+        "timestamp": "2026-08-31T11:34:56.983Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 663,
+        "timestamp": "2026-08-31T11:34:56.983Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 664,
+        "timestamp": "2026-08-31T11:34:56.983Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 665,
+        "timestamp": "2026-08-31T11:34:56.983Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 666,
+        "timestamp": "2026-08-31T11:34:56.983Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 667,
+        "timestamp": "2026-08-31T11:34:56.983Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx rep"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 760,
+        "timestamp": "2026-08-31T11:35:42.303Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 768,
+        "timestamp": "2026-08-31T11:35:47.431Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 769,
+        "timestamp": "2026-08-31T11:35:47.431Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 770,
+        "timestamp": "2026-08-31T11:35:47.431Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 771,
+        "timestamp": "2026-08-31T11:35:47.431Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 772,
+        "timestamp": "2026-08-31T11:35:47.431Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 773,
+        "timestamp": "2026-08-31T11:35:47.431Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 850,
+        "timestamp": "2026-08-31T11:36:40.256Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 851,
+        "timestamp": "2026-08-31T11:36:40.256Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 852,
+        "timestamp": "2026-08-31T11:36:40.256Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 853,
+        "timestamp": "2026-08-31T11:36:40.257Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 854,
+        "timestamp": "2026-08-31T11:36:40.257Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest "
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 855,
+        "timestamp": "2026-08-31T11:36:40.257Z",
+        "detail": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest "
+      }
+    ],
+    "errors": [
+      {
+        "index": 326,
+        "tool": "edit",
+        "error": "Could not find the exact text in C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K/source/index.ts. The old text must match exactly including all whitespace and newlines."
+      },
+      {
+        "index": 327,
+        "tool": "edit",
+        "error": "Could not find the exact text in C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K/source/index.ts. The old text must match exactly including all whitespace and newlines."
+      },
+      {
+        "index": 328,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 329,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 330,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 331,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 390,
+        "tool": "edit",
+        "error": "Could not find the exact text in C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K/source/index.ts. The old text must match exactly including all whitespace and newlines."
+      },
+      {
+        "index": 391,
+        "tool": "edit",
+        "error": "Could not find the exact text in C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K/source/index.ts. The old text must match exactly including all whitespace and newlines."
+      },
+      {
+        "index": 392,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 393,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 394,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 395,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 490,
+        "tool": "bash",
+        "error": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = new Error();\r\n                 ^\r\n\r\nDOMException [AbortError]: This operation was aborted\r\n    at new DOMException (node:internal/per_context/domexception:76:18)\r\n    at AbortController.abort (node:internal/abort_controller:504:18)\r\n    at reproduce (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-0"
+      },
+      {
+        "index": 491,
+        "tool": "bash",
+        "error": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = new Error();\r\n                 ^\r\n\r\nDOMException [AbortError]: This operation was aborted\r\n    at new DOMException (node:internal/per_context/domexception:76:18)\r\n    at AbortController.abort (node:internal/abort_controller:504:18)\r\n    at reproduce (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-0"
+      },
+      {
+        "index": 492,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 493,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 494,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 495,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 530,
+        "tool": "bash",
+        "error": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = new Error();\r\n                 ^\r\n\r\nDOMException [AbortError]: This operation was aborted\r\n    at new DOMException (node:internal/per_context/domexception:76:18)\r\n    at AbortController.abort (node:internal/abort_controller:504:18)\r\n    at reproduce (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-0"
+      },
+      {
+        "index": 531,
+        "tool": "bash",
+        "error": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = new Error();\r\n                 ^\r\n\r\nDOMException [AbortError]: This operation was aborted\r\n    at new DOMException (node:internal/per_context/domexception:76:18)\r\n    at AbortController.abort (node:internal/abort_controller:504:18)\r\n    at reproduce (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-0"
+      },
+      {
+        "index": 532,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 533,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 534,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 535,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 602,
+        "tool": "bash",
+        "error": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = new Error();\r\n                 ^\r\n\r\nDOMException [AbortError]: This operation was aborted\r\n    at new DOMException (node:internal/per_context/domexception:76:18)\r\n    at AbortController.abort (node:internal/abort_controller:504:18)\r\n    at reproduce (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-0"
+      },
+      {
+        "index": 603,
+        "tool": "bash",
+        "error": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = new Error();\r\n                 ^\r\n\r\nDOMException [AbortError]: This operation was aborted\r\n    at new DOMException (node:internal/per_context/domexception:76:18)\r\n    at AbortController.abort (node:internal/abort_controller:504:18)\r\n    at reproduce (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-0"
+      },
+      {
+        "index": 604,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 605,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 606,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 607,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 662,
+        "tool": "bash",
+        "error": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = new Error();\r\n                 ^\r\n\r\nDOMException [AbortError]: This operation was aborted\r\n    at new DOMException (node:internal/per_context/domexception:76:18)\r\n    at AbortController.abort (node:internal/abort_controller:504:18)\r\n    at reproduce (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-0"
+      },
+      {
+        "index": 663,
+        "tool": "bash",
+        "error": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = new Error();\r\n                 ^\r\n\r\nDOMException [AbortError]: This operation was aborted\r\n    at new DOMException (node:internal/per_context/domexception:76:18)\r\n    at AbortController.abort (node:internal/abort_controller:504:18)\r\n    at reproduce (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hard-0"
+      },
+      {
+        "index": 664,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 665,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 666,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 667,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 678,
+        "tool": "edit",
+        "error": "Could not find the exact text in C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K/reproduce.ts. The old text must match exactly including all whitespace and newlines."
+      },
+      {
+        "index": 679,
+        "tool": "edit",
+        "error": "Could not find the exact text in C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K/reproduce.ts. The old text must match exactly including all whitespace and newlines."
+      },
+      {
+        "index": 680,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 681,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 682,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 683,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 768,
+        "tool": "bash",
+        "error": "\n> p-queue@9.1.0 test\n> xo && node --import=tsx/esm --test test/*.ts && del-cli dist && tsc && tsd\n\n'xo' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 769,
+        "tool": "bash",
+        "error": "\n> p-queue@9.1.0 test\n> xo && node --import=tsx/esm --test test/*.ts && del-cli dist && tsc && tsd\n\n'xo' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\n\nCommand exited with code 1"
+      },
+      {
+        "index": 770,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 771,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 772,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 773,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 850,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K\n\n ❯ tests/basic.test.ts (8 tests | 1 failed) 528ms\n       × abort does not affect already-running task 72ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/basic.test.ts > p-queue regression > abort signal while queued > abort does not affect already-running task\nAbortError: This operation was aborted\n ❯ tests/basic.test.ts:131:18\n    129|\n    130|       // Abort after task is running\n    131|       c"
+      },
+      {
+        "index": 851,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K\n\n ❯ tests/basic.test.ts (8 tests | 1 failed) 528ms\n       × abort does not affect already-running task 72ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/basic.test.ts > p-queue regression > abort signal while queued > abort does not affect already-running task\nAbortError: This operation was aborted\n ❯ tests/basic.test.ts:131:18\n    129|\n    130|       // Abort after task is running\n    131|       c"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 142,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 143,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 156,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test: Signal abort while task is queued should reject and remove from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nBlocker task done\nTask rejected as expected: DOMExce"
+      },
+      {
+        "index": 157,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test: Signal abort while task is queued should reject and remove from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nBlocker task done\nTask rejected as expected: DOMExce"
+      },
+      {
+        "index": 158,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 159,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 160,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 161,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 186,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 187,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 200,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test: Signal abort while task is queued should reject and remove from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nQueue size after abort: 1\nPending after abort: 1\nBlo"
+      },
+      {
+        "index": 201,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test: Signal abort while task is queued should reject and remove from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nQueue size after abort: 1\nPending after abort: 1\nBlo"
+      },
+      {
+        "index": 202,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 203,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 204,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 205,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 230,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 231,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 246,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nQueue size after abort: 1\nPending after abort: 1\nBlocker tas"
+      },
+      {
+        "index": 247,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nQueue size after abort: 1\nPending after abort: 1\nBlocker tas"
+      },
+      {
+        "index": 248,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 249,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 250,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 251,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 480,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 481,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 490,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = "
+      },
+      {
+        "index": 491,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = "
+      },
+      {
+        "index": 492,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 493,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 494,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 495,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 520,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 521,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 530,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = "
+      },
+      {
+        "index": 531,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = "
+      },
+      {
+        "index": 532,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 533,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 534,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 535,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 592,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 593,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 602,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = "
+      },
+      {
+        "index": 603,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = "
+      },
+      {
+        "index": 604,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 605,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 606,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 607,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 652,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 653,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 662,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = "
+      },
+      {
+        "index": 663,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nnode:internal/per_context/domexception:76\r\n    const self = "
+      },
+      {
+        "index": 664,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 665,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 666,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 667,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 1
+      },
+      {
+        "index": 692,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+        "exitCode": 0
+      },
+      {
+        "index": 693,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+        "exitCode": 0
+      },
+      {
+        "index": 698,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+        "exitCode": 0,
+        "outputSnippet": "import PQueue from './source/index.js';$\n$\nasync function reproduce() {$\n  console.log('Test: Signal abort while task is queued should REMOVE it from queue');$\n$\n  const queue = new PQueue({ concurren"
+      },
+      {
+        "index": 699,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+        "exitCode": 0,
+        "outputSnippet": "import PQueue from './source/index.js';$\n$\nasync function reproduce() {$\n  console.log('Test: Signal abort while task is queued should REMOVE it from queue');$\n$\n  const queue = new PQueue({ concurren"
+      },
+      {
+        "index": 700,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+        "exitCode": 0
+      },
+      {
+        "index": 701,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+        "exitCode": 0
+      },
+      {
+        "index": 702,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+        "exitCode": 0
+      },
+      {
+        "index": 703,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && cat -A reproduce.ts | head -40",
+        "exitCode": 0
+      },
+      {
+        "index": 728,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 729,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 746,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nCaught: DOMException [AbortError]: This operation was aborte"
+      },
+      {
+        "index": 747,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nCaught: DOMException [AbortError]: This operation was aborte"
+      },
+      {
+        "index": 748,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 749,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 750,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 751,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 760,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 761,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 768,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+        "exitCode": 1,
+        "outputSnippet": "\n> p-queue@9.1.0 test\n> xo && node --import=tsx/esm --test test/*.ts && del-cli dist && tsc && tsd\n\n'xo' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\n\nComma"
+      },
+      {
+        "index": 769,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+        "exitCode": 1,
+        "outputSnippet": "\n> p-queue@9.1.0 test\n> xo && node --import=tsx/esm --test test/*.ts && del-cli dist && tsc && tsd\n\n'xo' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\n\nComma"
+      },
+      {
+        "index": 770,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+        "exitCode": 1
+      },
+      {
+        "index": 771,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+        "exitCode": 1
+      },
+      {
+        "index": 772,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+        "exitCode": 1
+      },
+      {
+        "index": 773,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npm test",
+        "exitCode": 1
+      },
+      {
+        "index": 782,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 783,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 794,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  12:36:08\n   Duration  1.65s (transf"
+      },
+      {
+        "index": 795,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K\n\n\n Test Files  1 passed (1)\n      Tests  2 passed (2)\n   Start at  12:36:08\n   Duration  1.65s (transf"
+      },
+      {
+        "index": 796,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 797,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 798,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 799,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 838,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 839,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 850,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K\n\n ❯ tests/basic.test.ts (8 tests | 1 failed) 528ms\n       × abort does not affect already-running task"
+      },
+      {
+        "index": 851,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K\n\n ❯ tests/basic.test.ts (8 tests | 1 failed) 528ms\n       × abort does not affect already-running task"
+      },
+      {
+        "index": 852,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 1
+      },
+      {
+        "index": 853,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 1
+      },
+      {
+        "index": 854,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 1
+      },
+      {
+        "index": 855,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 1
+      },
+      {
+        "index": 912,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 913,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 924,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K\n\n\n Test Files  1 passed (1)\n      Tests  8 passed (8)\n   Start at  12:38:01\n   Duration  1.33s (transf"
+      },
+      {
+        "index": 925,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K\n\n\n Test Files  1 passed (1)\n      Tests  8 passed (8)\n   Start at  12:38:01\n   Duration  1.33s (transf"
+      },
+      {
+        "index": 926,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 927,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 928,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 929,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 1064,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 1065,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 1076,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K\n\n\n Test Files  1 passed (1)\n      Tests  8 passed (8)\n   Start at  12:38:57\n   Duration  1.27s (transf"
+      },
+      {
+        "index": 1077,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K\n\n\n Test Files  1 passed (1)\n      Tests  8 passed (8)\n   Start at  12:38:57\n   Duration  1.27s (transf"
+      },
+      {
+        "index": 1078,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 1079,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 1080,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 1081,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 1090,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1091,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1108,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nCaught: DOMException [AbortError]: This operation was aborte"
+      },
+      {
+        "index": 1109,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "Test: Signal abort while task is queued should REMOVE it from queue\nBlocker task started\nQueue size before abort: 1\nPending before abort: 1\nCaught: DOMException [AbortError]: This operation was aborte"
+      },
+      {
+        "index": 1110,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1111,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1112,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1113,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && npx tsx reproduce.ts 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 1122,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1123,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1126,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 1127,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 1128,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1129,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1130,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 1131,
+        "command": "cd C:/Users/cooll/AppData/Local/Temp/frontier-hard-004-hard-004-run-001-ee4d7d-nQJt5K && rm reproduce.ts",
+        "exitCode": 0
+      }
+    ]
+  }
+}

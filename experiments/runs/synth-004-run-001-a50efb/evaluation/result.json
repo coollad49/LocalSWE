@@ -1,0 +1,620 @@
+{
+  "evaluationId": "eval-15923103-1788177571118",
+  "runId": "synth-004-run-001-a50efb",
+  "caseId": "synth-004",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v2",
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T11:59:31.118Z",
+  "completedAt": "2026-08-31T11:59:32.658Z",
+  "durationMs": 1540,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-004-run-001-a50efb\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 275,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-004-P7TnaU\\patch-1788177571935.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 147,
+      "command": "bun run benchmark\\cases\\synth-004\\public\\reproduce.ts",
+      "stdout": "after 1 pending: 1 expected 1\nafter 2 pending: 2 expected 2\nafter update pending=1 expected 1, completed=1 expected 1\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 150,
+      "command": "bun test benchmark\\cases\\synth-004\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-004\\private\\oracle.test.ts:\n(pass) synth-004 oracle: filterByStatus cache invalidation > reflects new tasks [3.85ms]\n(pass) synth-004 oracle: filterByStatus cache invalidation > reflects status updates [0.69ms]\n(pass) synth-004 oracle: filterByStatus cache invalidation > reflects delete and clear [0.33ms]\n\n 3 pass\n 0 fail\n 6 expect() calls\nRan 3 tests across 1 file. [103.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 145,
+      "command": "bun test benchmark\\repositories\\task-manager\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\task-manager\\tests\\task-manager.test.ts:\n(pass) TaskManager > createTask creates task with defaults [1.60ms]\n(pass) TaskManager > createTask validates priority [0.61ms]\n(pass) TaskManager > createTask validates title [0.23ms]\n(pass) TaskManager > updateTask merges correctly without losing fields [0.50ms]\n(pass) TaskManager > updateTask only updates provided fields [0.30ms]\n(pass) TaskManager > getOverdueTasks detects overdue correctly [2.24ms]\n(pass) TaskManager > getOverdueTasks excludes completed tasks [0.25ms]\n(pass) TaskManager > filterByStatus returns correct tasks and not stale [1.03ms]\n(pass) TaskManager > filterByStatus validates status [0.17ms]\n(pass) TaskManager > getTasksByPriority filters correctly [0.73ms]\n(pass) TaskManager > deleteTask removes task [0.35ms]\n\n 11 pass\n 0 fail\n 27 expect() calls\nRan 11 tests across 1 file. [102.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "task-manager",
+    "type": "synthetic",
+    "difficulty": "hard",
+    "categories": [
+      "state-management",
+      "api-behavior"
+    ]
+  },
+  "metrics": {
+    "durationMs": 66936,
+    "totalTurns": 44,
+    "toolCalls": 24,
+    "commandsExecuted": 4,
+    "filesInspected": 6,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 29156,
+    "outputTokens": 3836,
+    "totalTokens": 159200
+  },
+  "cost": {
+    "inputTokens": 29156,
+    "outputTokens": 3836,
+    "totalTokens": 32992,
+    "inputCostUsd": 0.004082,
+    "outputCostUsd": 0.001074,
+    "totalCostUsd": 0.005509,
+    "costUsd": 0.005509,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-004-run-001-a50efb",
+    "caseId": "synth-004",
+    "agentVersion": "agent-v2",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:5ef350fe9e8a177c8f5017d90865cbd212dc9e3ed8fed7ef5328674f3e33c1ae",
+    "trajectory": {
+      "eventCount": 184,
+      "durationMs": 65701,
+      "eventTypes": {
+        "agent_start": 3,
+        "turn_start": 16,
+        "message_start": 42,
+        "message_end": 42,
+        "tool_execution_start": 24,
+        "tool_execution_end": 24,
+        "turn_end": 16,
+        "tool_execution_update": 14,
+        "agent_end": 2,
+        "agent_settled": 1
+      },
+      "assistantMessages": 48,
+      "userMessages": 4,
+      "toolCalls": 24,
+      "toolResults": 96,
+      "thinkingEvents": 48,
+      "unknownEvents": 36,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 24,
+      "uniqueTools": 4,
+      "byTool": {
+        "read": {
+          "calls": 12,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 4,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 29156,
+      "output": 3836,
+      "cacheRead": 126208,
+      "cacheWrite": 0,
+      "total": 159200,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.005509,
+      "inputCostUsd": 0.004082,
+      "outputCostUsd": 0.001074,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 48,
+      "characterCount": 7266,
+      "averageCharacters": 151,
+      "maxCharacters": 748,
+      "firstThinkingAt": "2026-08-31T11:35:00.699Z",
+      "lastThinkingAt": "2026-08-31T11:36:04.510Z",
+      "thinkingDurationMs": 63811
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/task-manager.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 12,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 4,
+      "explorationToEditingRatio": 11
+    },
+    "verification": {
+      "commandsDetected": 16,
+      "testsRun": true,
+      "testCommandCount": 4,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 12,
+      "duplicateReadTargets": 6,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 0,
+      "topRepetitions": [
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "ec8ec0fa57e2",
+          "tool": "ls",
+          "target": ".",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "4ea5709ce5f1",
+          "tool": "read",
+          "target": "package.json",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        },
+        {
+          "signature": "a073f2962659",
+          "tool": "read",
+          "target": "src/task-manager.ts",
+          "count": 2
+        },
+        {
+          "signature": "3366904cebb3",
+          "tool": "read",
+          "target": "src/types.ts",
+          "count": 2
+        },
+        {
+          "signature": "6e6cdb409bf3",
+          "tool": "read",
+          "target": "tests/task-manager.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "675d3a7abe3a",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-004-run-001-a50efb",
+    "caseId": "synth-004",
+    "agentVersion": "agent-v2",
+    "timeline": [
+      {
+        "index": 14,
+        "timestamp": "2026-08-31T11:35:01.032Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 15,
+        "timestamp": "2026-08-31T11:35:01.032Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 30,
+        "timestamp": "2026-08-31T11:35:03.396Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 31,
+        "timestamp": "2026-08-31T11:35:03.396Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 46,
+        "timestamp": "2026-08-31T11:35:07.514Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 47,
+        "timestamp": "2026-08-31T11:35:07.515Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 48,
+        "timestamp": "2026-08-31T11:35:07.515Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 49,
+        "timestamp": "2026-08-31T11:35:07.515Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 50,
+        "timestamp": "2026-08-31T11:35:07.515Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 51,
+        "timestamp": "2026-08-31T11:35:07.515Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 78,
+        "timestamp": "2026-08-31T11:35:10.002Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 79,
+        "timestamp": "2026-08-31T11:35:10.002Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 80,
+        "timestamp": "2026-08-31T11:35:10.002Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 81,
+        "timestamp": "2026-08-31T11:35:10.002Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 82,
+        "timestamp": "2026-08-31T11:35:10.002Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/types.ts"
+      },
+      {
+        "index": 83,
+        "timestamp": "2026-08-31T11:35:10.002Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/types.ts"
+      },
+      {
+        "index": 84,
+        "timestamp": "2026-08-31T11:35:10.002Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/task-manager.test.ts"
+      },
+      {
+        "index": 85,
+        "timestamp": "2026-08-31T11:35:10.002Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/task-manager.test.ts"
+      },
+      {
+        "index": 118,
+        "timestamp": "2026-08-31T11:35:15.679Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+        "commandClass": "test"
+      },
+      {
+        "index": 119,
+        "timestamp": "2026-08-31T11:35:15.679Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+        "commandClass": "test"
+      },
+      {
+        "index": 138,
+        "timestamp": "2026-08-31T11:35:38.557Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 139,
+        "timestamp": "2026-08-31T11:35:38.557Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/task-manager.ts"
+      },
+      {
+        "index": 154,
+        "timestamp": "2026-08-31T11:35:41.686Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 155,
+        "timestamp": "2026-08-31T11:35:41.686Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 14,
+        "timestamp": "2026-08-31T11:35:01.032Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 118,
+        "timestamp": "2026-08-31T11:35:15.679Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vit"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 138,
+        "timestamp": "2026-08-31T11:35:38.557Z",
+        "detail": "src/task-manager.ts"
+      }
+    ],
+    "errors": [],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 118,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 119,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 124,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\n\n ❯ tests/task-manager.test.ts (11 tests | 1 failed) 77ms\n     × filterByStatus returns correct task"
+      },
+      {
+        "index": 125,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\n\n ❯ tests/task-manager.test.ts (11 tests | 1 failed) 77ms\n     × filterByStatus returns correct task"
+      },
+      {
+        "index": 126,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 127,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 128,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 129,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run tests/task-manager.test.ts 2>&1 | head -80",
+        "exitCode": 0
+      },
+      {
+        "index": 154,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 155,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 166,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  12:35:59\n   Duration  1.50s (tr"
+      },
+      {
+        "index": 167,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\n\n\n Test Files  1 passed (1)\n      Tests  11 passed (11)\n   Start at  12:35:59\n   Duration  1.50s (tr"
+      },
+      {
+        "index": 168,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 169,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 170,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 171,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-synth-004-synth-004-run-001-a50efb-B3j4CQ\" && npx vitest run 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

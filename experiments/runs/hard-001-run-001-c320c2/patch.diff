@@ -1,0 +1,25 @@
+diff --git a/src/core/proxy.ts b/src/core/proxy.ts
+index bd98e27..18543ec 100644
+--- a/src/core/proxy.ts
++++ b/src/core/proxy.ts
+@@ -154,6 +154,20 @@ export const objectTraps: ProxyHandler<ProxyState> = {
+ 
+ 			return (state.copy_![childKey] = childDraft)
+ 		}
++		// After a reordering operation (reverse/sort), elements have been moved to different
++		// indices. The value at the current index might be the same object as another index
++		// in the base array. We need to create a proxy for it to prevent mutation of the base.
++		if (
++			isArrayWithStringProp &&
++			(state as ProxyArrayState).allIndicesReassigned_ &&
++			isDraftable(value) &&
++			!state.finalized_
++		) {
++			prepareCopy(state)
++			const childKey = state.type_ === ArchType.Array ? +(prop as string) : prop
++			const childDraft = createProxy(state.scope_, value, state, childKey)
++			return (state.copy_![childKey] = childDraft)
++		}
+ 		return value
+ 	},
+ 	has(state, prop) {

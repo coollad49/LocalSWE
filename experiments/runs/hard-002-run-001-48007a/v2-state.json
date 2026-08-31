@@ -1,0 +1,28 @@
+{
+  "phase": "reconnaissance",
+  "issue": "# qs combine overflow flatten bug\r\n\r\n## Problem\r\n\r\nWhen parsing a query string with `comma: true` and `arrayLimit`, appending values to an already-overflowed array incorrectly nests the new values instead of spreading them. For example, `a=1,2,3,4,5,6&a=7,8` with `arrayLimit:5` should result in a flat object with indices 0..7, but it nests the second group.\r\n",
+  "filesInspected": [],
+  "commandsExecuted": [],
+  "hypotheses": [],
+  "changesMade": [],
+  "verificationAttempts": [],
+  "invariantsResults": [],
+  "rollbackHistory": [],
+  "evidence": [],
+  "iteration": 1,
+  "maxIterations": 4,
+  "phaseHistory": [
+    {
+      "from": "init",
+      "to": "reconnaissance",
+      "timestamp": "2026-08-31T11:27:14.858Z",
+      "iteration": 1
+    }
+  ],
+  "phaseDurations": [
+    {
+      "phase": "reconnaissance",
+      "enteredAt": "2026-08-31T11:27:14.858Z"
+    }
+  ]
+}

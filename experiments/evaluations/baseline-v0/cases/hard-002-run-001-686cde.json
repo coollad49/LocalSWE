@@ -1,0 +1,84 @@
+{
+  "runId": "hard-002-run-001-686cde",
+  "caseId": "hard-002",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 2605,
+  "startedAt": "2026-08-31T11:56:14.002Z",
+  "completedAt": "2026-08-31T11:56:16.607Z",
+  "caseMeta": {
+    "repository": "qs",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "parsing",
+      "boundary",
+      "state-management"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 450,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-002-BameMt\\patch-1788177375242.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 378,
+      "command": "bun run benchmark\\cases\\hard-002\\public\\reproduce.ts",
+      "stdout": "Test overflow flatten: PASS\n  result={\"a\":{\"0\":\"1\",\"1\":\"2\",\"2\":\"3\",\"3\":\"4\",\"4\":\"5\",\"5\":\"6\",\"6\":\"7\",\"7\":\"8\"}}\n  expected={\"a\":{\"0\":\"1\",\"1\":\"2\",\"2\":\"3\",\"3\":\"4\",\"4\":\"5\",\"5\":\"6\",\"6\":\"7\",\"7\":\"8\"}}\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 273,
+      "command": "bun test benchmark\\cases\\hard-002\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hard-002\\private\\oracle.test.ts:\n(pass) hard-002 oracle: qs combine overflow flatten > spreads a comma group appended to an already-overflowed object [10.49ms]\n(pass) hard-002 oracle: qs combine overflow flatten > keeps a []= comma group as one element when appended to an already-overflowed key [0.45ms]\n(pass) hard-002 oracle: qs combine overflow flatten > spreads every later comma group appended to an already-overflowed object [0.35ms]\n(pass) hard-002 oracle: qs combine overflow flatten > spreads a comma group appended to an object overflowed under the default arrayLimit [1.07ms]\n(pass) hard-002 oracle: qs combine overflow flatten > spreads a comma group appended to an already-overflowed object with plainObjects [0.61ms]\n(pass) hard-002 oracle: qs combine overflow flatten > still throws with throwOnLimitExceeded when a comma group is appended to an already-overflowed object [0.48ms]\n(pass) hard-002 oracle: qs combine overflow flatten > does not throw for comma groups nested under bracket notation [0.44ms]\n(pass) hard-002 oracle: qs combine overflow flatten > single scalar after overflow not nested [0.58ms]\n\n 8 pass\n 0 fail\n 8 expect() calls\nRan 8 tests across 1 file. [229.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 259,
+      "command": "bun test benchmark\\repositories\\qs\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\qs\\tests\\basic.test.ts:\n(pass) qs regression > basic parse [5.47ms]\n(pass) qs regression > basic stringify [1.36ms]\n(pass) qs regression > array parse [0.83ms]\n\n 3 pass\n 0 fail\n 3 expect() calls\nRan 3 tests across 1 file. [210.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "metrics": {
+    "durationMs": 131861,
+    "totalTurns": 94,
+    "toolCalls": 38,
+    "commandsExecuted": 26,
+    "filesInspected": 5,
+    "filesChanged": 1,
+    "iterations": 3,
+    "iterationsSource": "v1-state",
+    "inputTokens": 93876,
+    "outputTokens": 19872,
+    "totalTokens": 1167956
+  },
+  "cost": {
+    "inputTokens": 93876,
+    "outputTokens": 19872,
+    "totalTokens": 113748,
+    "inputCostUsd": 0.013143,
+    "outputCostUsd": 0.005564,
+    "totalCostUsd": 0.021659,
+    "costUsd": 0.021659,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  }
+}

@@ -6,10 +6,10 @@
   "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
   "model": "mimo-v2.5",
   "piVersion": "0.84.4",
-  "status": "error",
-  "durationMs": 2965,
-  "startedAt": "2026-08-30T15:37:18.505Z",
-  "completedAt": "2026-08-30T15:37:21.470Z",
+  "status": "timeout",
+  "durationMs": 31510,
+  "startedAt": "2026-08-31T11:56:45.215Z",
+  "completedAt": "2026-08-31T11:57:16.725Z",
   "caseMeta": {
     "repository": "p-queue",
     "type": "historical",
@@ -29,58 +29,61 @@
     "filesChanged": 6,
     "iterations": 1,
     "iterationsSource": "fallback",
-    "inputTokens": null,
-    "outputTokens": null,
-    "totalTokens": null
+    "inputTokens": 120572,
+    "outputTokens": 46012,
+    "totalTokens": 3659480
   },
   "cost": {
-    "inputTokens": null,
-    "outputTokens": null,
-    "totalTokens": null,
-    "inputCostUsd": null,
-    "outputCostUsd": null,
-    "totalCostUsd": null,
-    "costUsd": null,
-    "costStatus": "unavailable",
-    "costSource": "none",
+    "inputTokens": 120572,
+    "outputTokens": 46012,
+    "totalTokens": 166584,
+    "inputCostUsd": 0.036172,
+    "outputCostUsd": 0.055214,
+    "totalCostUsd": 0.30096,
+    "costUsd": 0.30096,
+    "costStatus": "provider",
+    "costSource": "provider",
     "pricingModel": "mimo-v2.5"
   },
   "verification": {
     "patchApply": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 679,
-      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-PtLoLb\\patch-1788104239964.diff",
+      "durationMs": 175,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-DpqzGZ\\patch-1788177406027.diff",
       "stdout": "",
       "stderr": ""
     },
     "reproduction": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 605,
+      "durationMs": 278,
       "command": "bun run benchmark\\cases\\hard-004\\public\\reproduce.ts",
       "stdout": "Test queued abort: outcome=rejected notRan=true sizeOk=true => PASS\nOverall reproduce: PASS\n",
       "stderr": "",
       "timedOut": false
     },
     "oracle": {
-      "status": "error",
-      "durationMs": 3,
-      "command": "npx vitest run benchmark\\cases\\hard-004\\private\\oracle.test.ts",
-      "stdout": "",
-      "stderr": "",
-      "reason": "spawn npx ENOENT",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 207,
+      "command": "bun test benchmark\\cases\\hard-004\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hard-004\\private\\oracle.test.ts:\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject when signal is aborted while task is waiting in queue [4.64ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject immediately when signal is already aborted and task is queued [0.46ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should not affect running task when queued task is aborted [32.65ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > abort with custom reason forwards the reason [0.99ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should remove aborted task from priority queue [2.46ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > signal abort not called when task already started should not affect queue size [13.18ms]\n\n 6 pass\n 0 fail\n 15 expect() calls\nRan 6 tests across 1 file. [167.00ms]\n",
       "timedOut": false
     },
     "regression": {
-      "status": "skipped",
-      "durationMs": 0,
-      "command": "regression",
-      "reason": "skipped due to earlier stage"
+      "status": "timeout",
+      "durationMs": 30035,
+      "command": "bun test benchmark\\repositories\\p-queue\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\p-queue\\tests\\basic.test.ts:\n(pass) p-queue regression > basic queue [3.23ms]\n(pass) p-queue regression > concurrency [47.43ms]\n",
+      "reason": "Timeout after 30000ms: bun test benchmark\\repositories\\p-queue\\tests",
+      "timedOut": true
     }
   },
   "error": {
-    "code": "STAGE_ERROR",
-    "message": "spawn npx ENOENT"
+    "code": "STAGE_TIMEOUT",
+    "message": "Timeout after 30000ms: bun test benchmark\\repositories\\p-queue\\tests"
   }
 }

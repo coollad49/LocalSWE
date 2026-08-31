@@ -1,5 +1,5 @@
 {
-  "evaluationId": "eval-a981cfad-1788165749720",
+  "evaluationId": "eval-93419657-1788177491464",
   "runId": "hist-003-run-001-650a23",
   "caseId": "hist-003",
   "benchmarkVersion": "0.5",
@@ -7,17 +7,17 @@
   "agentVersion": "baseline-v0",
   "model": "opencode-go/mimo-v2.5",
   "piVersion": "0.84.4",
-  "startedAt": "2026-08-31T08:42:29.720Z",
-  "completedAt": "2026-08-31T08:42:31.700Z",
-  "durationMs": 1980,
+  "startedAt": "2026-08-31T11:58:11.464Z",
+  "completedAt": "2026-08-31T11:58:13.263Z",
+  "durationMs": 1799,
   "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-003-run-001-650a23\\patch.diff",
   "status": "completed",
   "verdict": "verified",
   "verification": {
     "patchApply": {
       "status": "passed",
-      "durationMs": 209,
-      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-003-0gvUyu\\patch-1788165750817.diff",
+      "durationMs": 240,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-003-lwjVqC\\patch-1788177492391.diff",
       "stdout": "",
       "stderr": "",
       "exitCode": 0,
@@ -26,7 +26,7 @@
     "reproduction": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 299,
+      "durationMs": 310,
       "command": "bun run benchmark\\cases\\hist-003\\public\\reproduce.ts",
       "stdout": "before: foo.f()=original own=undefined\nbefore descriptors: {}\nafter spy: foo.f()=mocked ownDesc={\"writable\":true,\"enumerable\":false,\"configurable\":true}\nafter restore: foo.f()=original ownDesc=undefined\nall own descriptors after restore: {}\nPASS: prototype restore is clean, no leak\n",
       "stderr": "",
@@ -35,19 +35,19 @@
     "oracle": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 190,
+      "durationMs": 171,
       "command": "bun test benchmark\\cases\\hist-003\\private\\oracle.test.ts",
       "stdout": "bun test v1.3.14 (0d9b296a)\n",
-      "stderr": "\nbenchmark\\cases\\hist-003\\private\\oracle.test.ts:\n(pass) hist-003 oracle: prototype restore leak > restore deletes own property for prototype method [4.90ms]\n(pass) hist-003 oracle: prototype restore leak > multiple spy/restore cycles remain clean [1.86ms]\n(pass) hist-003 oracle: prototype restore leak > prototype still owns method after restore [0.51ms]\n\n 3 pass\n 0 fail\n 27 expect() calls\nRan 3 tests across 1 file. [137.00ms]\n",
+      "stderr": "\nbenchmark\\cases\\hist-003\\private\\oracle.test.ts:\n(pass) hist-003 oracle: prototype restore leak > restore deletes own property for prototype method [4.40ms]\n(pass) hist-003 oracle: prototype restore leak > multiple spy/restore cycles remain clean [1.44ms]\n(pass) hist-003 oracle: prototype restore leak > prototype still owns method after restore [0.47ms]\n\n 3 pass\n 0 fail\n 27 expect() calls\nRan 3 tests across 1 file. [120.00ms]\n",
       "timedOut": false
     },
     "regression": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 178,
+      "durationMs": 147,
       "command": "bun test benchmark\\repositories\\tinyspy\\tests",
       "stdout": "bun test v1.3.14 (0d9b296a)\n",
-      "stderr": "\nbenchmark\\repositories\\tinyspy\\tests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [4.33ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [1.04ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [0.91ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [131.00ms]\n",
+      "stderr": "\nbenchmark\\repositories\\tinyspy\\tests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [3.29ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [0.90ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [1.05ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [105.00ms]\n",
       "timedOut": false
     }
   },

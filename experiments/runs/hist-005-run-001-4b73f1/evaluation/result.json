@@ -1,5 +1,5 @@
 {
-  "evaluationId": "eval-4876584a-1788165771589",
+  "evaluationId": "eval-488f6f1b-1788177510526",
   "runId": "hist-005-run-001-4b73f1",
   "caseId": "hist-005",
   "benchmarkVersion": "0.5",
@@ -7,17 +7,17 @@
   "agentVersion": "baseline-v0",
   "model": "mimo-v2.5",
   "piVersion": "0.84.4",
-  "startedAt": "2026-08-31T08:42:51.588Z",
-  "completedAt": "2026-08-31T08:42:53.484Z",
-  "durationMs": 1895,
+  "startedAt": "2026-08-31T11:58:30.526Z",
+  "completedAt": "2026-08-31T11:58:31.879Z",
+  "durationMs": 1353,
   "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-005-run-001-4b73f1\\patch.diff",
   "status": "completed",
   "verdict": "verified",
   "verification": {
     "patchApply": {
       "status": "passed",
-      "durationMs": 296,
-      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-005-8gXjSx\\patch-1788165772542.diff",
+      "durationMs": 175,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-005-j7FoTg\\patch-1788177511182.diff",
       "stdout": "",
       "stderr": "",
       "exitCode": 0,
@@ -26,7 +26,7 @@
     "reproduction": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 247,
+      "durationMs": 180,
       "command": "bun run benchmark\\cases\\hist-005\\public\\reproduce.ts",
       "stdout": "mri(['-a','01'], {alias:{a:['arg']}, default:{arg:''}}) => {\"_\":[],\"a\":\"01\",\"arg\":\"01\"}\na type string value 01 expected string \"01\"\narg type string value 01 expected string \"01\"\n_ empty true expected true\nsecondary mri(['-a','01'], {alias:{arg:['a']}, default:{arg:''}}) => {\"_\":[],\"a\":\"01\",\"arg\":\"01\"}\nPASS\n",
       "stderr": "",
@@ -35,19 +35,19 @@
     "oracle": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 185,
+      "durationMs": 140,
       "command": "bun test benchmark\\cases\\hist-005\\private\\oracle.test.ts",
       "stdout": "bun test v1.3.14 (0d9b296a)\n",
-      "stderr": "\nbenchmark\\cases\\hist-005\\private\\oracle.test.ts:\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > core bug: -a 01 with alias a->arg preserves string [4.16ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > all 5 variants from 5437ea5 fix [0.53ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > string types for each alias variant [0.48ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > numeric strings with leading zeros remain strings, numbers still coerce when not string-typed [0.24ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > boolean defaults still cascade to alias (regression from hist-004) [1.72ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > regression: basic parsing unchanged [0.28ms]\n\n 6 pass\n 0 fail\n 29 expect() calls\nRan 6 tests across 1 file. [135.00ms]\n",
+      "stderr": "\nbenchmark\\cases\\hist-005\\private\\oracle.test.ts:\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > core bug: -a 01 with alias a->arg preserves string [1.63ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > all 5 variants from 5437ea5 fix [0.41ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > string types for each alias variant [0.36ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > numeric strings with leading zeros remain strings, numbers still coerce when not string-typed [0.21ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > boolean defaults still cascade to alias (regression from hist-004) [1.10ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > regression: basic parsing unchanged [0.39ms]\n\n 6 pass\n 0 fail\n 29 expect() calls\nRan 6 tests across 1 file. [97.00ms]\n",
       "timedOut": false
     },
     "regression": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 208,
+      "durationMs": 199,
       "command": "bun test benchmark\\repositories\\mri\\tests",
       "stdout": "bun test v1.3.14 (0d9b296a)\n",
-      "stderr": "\nbenchmark\\repositories\\mri\\tests\\mri.test.ts:\n(pass) mri regression > parses basic flags [2.09ms]\n(pass) mri regression > handles short flags [0.18ms]\n(pass) mri regression > handles -- separator [0.13ms]\n(pass) mri regression > coerces numbers by default [0.15ms]\n(pass) mri regression > string opts preserve string values [0.25ms]\n(pass) mri regression > boolean flag with no value [0.24ms]\n(pass) mri regression > alias mirrors values [0.21ms]\n(pass) mri regression > default values [0.25ms]\n(pass) mri regression > unknown handler strict [0.49ms]\n(pass) mri regression > string default propagates to alias [0.30ms]\n(pass) mri regression > boolean default propagates to alias [9.54ms]\n(pass) mri regression > string default propagates when parsed via long name [3.79ms]\n\n 12 pass\n 0 fail\n 27 expect() calls\nRan 12 tests across 1 file. [140.00ms]\n",
+      "stderr": "\nbenchmark\\repositories\\mri\\tests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.54ms]\n(pass) mri regression > handles short flags [0.19ms]\n(pass) mri regression > handles -- separator [0.15ms]\n(pass) mri regression > coerces numbers by default [0.16ms]\n(pass) mri regression > string opts preserve string values [0.23ms]\n(pass) mri regression > boolean flag with no value [0.22ms]\n(pass) mri regression > alias mirrors values [0.19ms]\n(pass) mri regression > default values [0.11ms]\n(pass) mri regression > unknown handler strict [0.37ms]\n(pass) mri regression > string default propagates to alias [0.25ms]\n(pass) mri regression > boolean default propagates to alias [0.60ms]\n(pass) mri regression > string default propagates when parsed via long name [1.24ms]\n\n 12 pass\n 0 fail\n 27 expect() calls\nRan 12 tests across 1 file. [155.00ms]\n",
       "timedOut": false
     }
   },

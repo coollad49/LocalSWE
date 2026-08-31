@@ -4,10 +4,11 @@
   "agentVersion": "baseline-v0",
   "benchmarkVersion": "0.5",
   "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
-  "status": "error",
-  "durationMs": 2669,
-  "startedAt": "2026-08-30T15:36:52.348Z",
-  "completedAt": "2026-08-30T15:36:55.017Z",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 2524,
+  "startedAt": "2026-08-31T11:55:40.534Z",
+  "completedAt": "2026-08-31T11:55:43.058Z",
   "caseMeta": {
     "repository": "immer",
     "type": "historical",
@@ -23,24 +24,24 @@
       "status": "passed",
       "exitCode": 0,
       "durationMs": 0,
-      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-001-x6Mf9R\\benchmark\\repositories\\immer",
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-001-fFZCfj\\benchmark\\repositories\\immer",
       "stdout": "empty patch - no changes applied",
       "stderr": ""
     },
     "reproduction": {
-      "status": "error",
-      "durationMs": 4,
-      "command": "npx tsx benchmark\\cases\\hard-001\\public\\reproduce.ts",
-      "stdout": "",
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 1279,
+      "command": "node tsx benchmark\\cases\\hard-001\\public\\reproduce.ts",
+      "stdout": "Test reverse: baseUnchanged=false nextCorrect=true => FAIL\n  baseState=[{\"id\":1},{\"id\":2},{\"id\":99}] expected [{\"id\":1},{\"id\":2},{\"id\":3}]\n  reordered={\"id\":99} expected {\"id\":3}\n  nextState=[{\"id\":99},{\"id\":2},{\"id\":1}] expected [{\"id\":99},{\"id\":2},{\"id\":1}]\nOverall reproduce: FAIL\n",
       "stderr": "",
-      "reason": "spawn npx ENOENT",
       "timedOut": false
     },
     "oracle": {
       "status": "skipped",
       "durationMs": 0,
       "command": "oracle",
-      "reason": "skipped due to reproduction error"
+      "reason": "skipped due to reproduction failed"
     },
     "regression": {
       "status": "skipped",
@@ -48,10 +49,6 @@
       "command": "regression",
       "reason": "skipped due to earlier stage"
     }
-  },
-  "error": {
-    "code": "STAGE_ERROR",
-    "message": "spawn npx ENOENT"
   },
   "metrics": {
     "durationMs": 612377,
@@ -62,20 +59,20 @@
     "filesChanged": 0,
     "iterations": 1,
     "iterationsSource": "fallback",
-    "inputTokens": null,
-    "outputTokens": null,
-    "totalTokens": null
+    "inputTokens": 70304,
+    "outputTokens": 3142,
+    "totalTokens": 837912
   },
   "cost": {
-    "inputTokens": null,
-    "outputTokens": null,
-    "totalTokens": null,
-    "inputCostUsd": null,
-    "outputCostUsd": null,
-    "totalCostUsd": null,
-    "costUsd": null,
-    "costStatus": "unavailable",
-    "costSource": "none",
+    "inputTokens": 70304,
+    "outputTokens": 3142,
+    "totalTokens": 73446,
+    "inputCostUsd": 0.021091,
+    "outputCostUsd": 0.00377,
+    "totalCostUsd": 0.07073,
+    "costUsd": 0.07073,
+    "costStatus": "provider",
+    "costSource": "provider",
     "pricingModel": "mimo-v2.5"
   }
 }

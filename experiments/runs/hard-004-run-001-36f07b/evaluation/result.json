@@ -1,5 +1,5 @@
 {
-  "evaluationId": "eval-9ab22b74-1788174161952",
+  "evaluationId": "eval-7b267f73-1788177403105",
   "runId": "hard-004-run-001-36f07b",
   "caseId": "hard-004",
   "benchmarkVersion": "0.5",
@@ -7,17 +7,17 @@
   "agentVersion": "baseline-v0",
   "model": "mimo-v2.5",
   "piVersion": "0.84.4",
-  "startedAt": "2026-08-31T11:02:41.952Z",
-  "completedAt": "2026-08-31T11:02:44.073Z",
-  "durationMs": 2121,
+  "startedAt": "2026-08-31T11:56:43.105Z",
+  "completedAt": "2026-08-31T11:56:45.030Z",
+  "durationMs": 1925,
   "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hard-004-run-001-36f07b\\patch.diff",
   "status": "completed",
   "verdict": "verified",
   "verification": {
     "patchApply": {
       "status": "passed",
-      "durationMs": 210,
-      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-1tB1Ql\\patch-1788174162786.diff",
+      "durationMs": 228,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-004-MoxfCR\\patch-1788177403862.diff",
       "stdout": "",
       "stderr": "",
       "exitCode": 0,
@@ -26,7 +26,7 @@
     "reproduction": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 344,
+      "durationMs": 247,
       "command": "bun run benchmark\\cases\\hard-004\\public\\reproduce.ts",
       "stdout": "Test queued abort: outcome=rejected notRan=true sizeOk=true => PASS\nOverall reproduce: PASS\n",
       "stderr": "",
@@ -35,19 +35,19 @@
     "oracle": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 246,
+      "durationMs": 237,
       "command": "bun test benchmark\\cases\\hard-004\\private\\oracle.test.ts",
       "stdout": "bun test v1.3.14 (0d9b296a)\n",
-      "stderr": "\nbenchmark\\cases\\hard-004\\private\\oracle.test.ts:\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject when signal is aborted while task is waiting in queue [4.87ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject immediately when signal is already aborted and task is queued [0.42ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should not affect running task when queued task is aborted [43.24ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > abort with custom reason forwards the reason [0.63ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should remove aborted task from priority queue [1.73ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > signal abort not called when task already started should not affect queue size [24.04ms]\n\n 6 pass\n 0 fail\n 15 expect() calls\nRan 6 tests across 1 file. [202.00ms]\n",
+      "stderr": "\nbenchmark\\cases\\hard-004\\private\\oracle.test.ts:\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject when signal is aborted while task is waiting in queue [7.93ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should reject immediately when signal is already aborted and task is queued [0.51ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should not affect running task when queued task is aborted [29.07ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > abort with custom reason forwards the reason [3.15ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > should remove aborted task from priority queue [2.61ms]\n(pass) hard-004 oracle: p-queue signal abort while queued > signal abort not called when task already started should not affect queue size [21.29ms]\n\n 6 pass\n 0 fail\n 15 expect() calls\nRan 6 tests across 1 file. [187.00ms]\n",
       "timedOut": false
     },
     "regression": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 482,
+      "durationMs": 453,
       "command": "bun test benchmark\\repositories\\p-queue\\tests",
       "stdout": "bun test v1.3.14 (0d9b296a)\nBefore abort: queue.size = 1 firstTaskStarted = true\nImmediately after abort: queue.size = 0\n",
-      "stderr": "\nbenchmark\\repositories\\p-queue\\tests\\basic.test.ts:\n(pass) p-queue regression > basic queue [3.97ms]\n(pass) p-queue regression > concurrency [43.42ms]\n\nbenchmark\\repositories\\p-queue\\tests\\repro.test.ts:\n(pass) p-queue signal abort while queued > aborting signal while task is queued should reject the task and remove it from the queue [202.63ms]\n\n 3 pass\n 0 fail\n 7 expect() calls\nRan 3 tests across 2 files. [439.00ms]\n",
+      "stderr": "\nbenchmark\\repositories\\p-queue\\tests\\basic.test.ts:\n(pass) p-queue regression > basic queue [4.68ms]\n(pass) p-queue regression > concurrency [56.19ms]\n\nbenchmark\\repositories\\p-queue\\tests\\repro.test.ts:\n(pass) p-queue signal abort while queued > aborting signal while task is queued should reject the task and remove it from the queue [212.91ms]\n\n 3 pass\n 0 fail\n 7 expect() calls\nRan 3 tests across 2 files. [405.00ms]\n",
       "timedOut": false
     }
   },

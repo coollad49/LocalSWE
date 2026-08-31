@@ -1,0 +1,1532 @@
+{
+  "evaluationId": "eval-1d8db986-1788177476782",
+  "runId": "hist-002-run-001-8641aa",
+  "caseId": "hist-002",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v2",
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T11:57:56.782Z",
+  "completedAt": "2026-08-31T11:57:58.454Z",
+  "durationMs": 1672,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-002-run-001-8641aa\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 235,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-002-OLzOcZ\\patch-1788177477711.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 186,
+      "command": "bun run benchmark\\cases\\hist-002\\public\\reproduce.ts",
+      "stdout": "result: {} polluted=undefined hasPollution=false hasOwnProto=false proto={}\nObject.prototype.polluted=undefined ({}).polluted=undefined\nnormal merge 1: {\"a\":\"c\",\"d\":\"c\"} pass=true\nnormal merge 2 (nested): {\"a\":{\"d\":\"e\",\"b\":\"c\"}} pass=true\nnormal merge 3 (arrays): {\"array\":[\"a\",\"b\",\"c\",\"d\"]} pass=true\nPR case defu(malicious, {isAdmin:false}) => {\"isAdmin\":false} isAdmin=false globalIsAdmin=undefined pass=true\npollutionBlocked=true (expect true on fixed, false on buggy)\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 168,
+      "command": "bun test benchmark\\cases\\hist-002\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-002\\private\\oracle.test.ts:\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks __proto__ pollution via defaults (Object.assign vs spread) [1.87ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks __proto__ pollution with isAdmin payload (PR #156 case) [0.36ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks pollution when defaults is first pollution vector via JSON [0.19ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > blocks constructor.prototype pollution [0.16ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > normal merging still works (regression) [0.41ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > handles non-object defaults [0.98ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > merge with merger still works [0.38ms]\n(pass) hist-002 oracle: prototype pollution via __proto__ > defu does not pollute global after multiple calls [0.43ms]\n\n 8 pass\n 0 fail\n 22 expect() calls\nRan 8 tests across 1 file. [120.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 150,
+      "command": "bun test benchmark\\repositories\\defu\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\defu\\tests\\defu.test.ts:\n(pass) defu regression > copies missing defaults [1.79ms]\n(pass) defu regression > fills null values from defaults [0.19ms]\n(pass) defu regression > merges nested objects [0.18ms]\n(pass) defu regression > concats arrays by default [0.22ms]\n(pass) defu regression > multi defaults [0.16ms]\n(pass) defu regression > handles non-object defaults [0.13ms]\n(pass) defu regression > does not override Object prototype via constructor [0.22ms]\n\n 7 pass\n 0 fail\n 8 expect() calls\nRan 7 tests across 1 file. [104.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "defu",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "security",
+      "validation"
+    ]
+  },
+  "metrics": {
+    "durationMs": 280296,
+    "totalTurns": 124,
+    "toolCalls": 62,
+    "commandsExecuted": 20,
+    "filesInspected": 7,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 80224,
+    "outputTokens": 34700,
+    "totalTokens": 1149932
+  },
+  "cost": {
+    "inputTokens": 80224,
+    "outputTokens": 34700,
+    "totalTokens": 114924,
+    "inputCostUsd": 0.011231,
+    "outputCostUsd": 0.009716,
+    "totalCostUsd": 0.023845,
+    "costUsd": 0.023845,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-002-run-001-8641aa",
+    "caseId": "hist-002",
+    "agentVersion": "agent-v2",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:0be6114a700f56087093ed978c3873902d994f4aa59118089127f4e0dfa817f6",
+    "trajectory": {
+      "eventCount": 558,
+      "durationMs": 273411,
+      "eventTypes": {
+        "agent_start": 3,
+        "turn_start": 58,
+        "message_start": 122,
+        "message_end": 122,
+        "tool_execution_start": 62,
+        "tool_execution_end": 62,
+        "turn_end": 58,
+        "tool_execution_update": 68,
+        "agent_end": 2,
+        "agent_settled": 1
+      },
+      "assistantMessages": 174,
+      "userMessages": 4,
+      "toolCalls": 62,
+      "toolResults": 248,
+      "thinkingEvents": 174,
+      "unknownEvents": 132,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 62,
+      "uniqueTools": 5,
+      "byTool": {
+        "read": {
+          "calls": 18,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "write": {
+          "calls": 12,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 20,
+          "failures": 0
+        },
+        "edit": {
+          "calls": 6,
+          "failures": 6
+        }
+      }
+    },
+    "tokens": {
+      "input": 80224,
+      "output": 34700,
+      "cacheRead": 1035008,
+      "cacheWrite": 0,
+      "total": 1149932,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.023845,
+      "inputCostUsd": 0.011231,
+      "outputCostUsd": 0.009716,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 174,
+      "characterCount": 81624,
+      "averageCharacters": 469,
+      "maxCharacters": 2718,
+      "firstThinkingAt": "2026-08-31T11:27:19.134Z",
+      "lastThinkingAt": "2026-08-31T11:31:48.234Z",
+      "thinkingDurationMs": 269100
+    },
+    "editing": {
+      "editCalls": 6,
+      "writeCalls": 12,
+      "filesTouched": [
+        "repro.ts",
+        "src/defu.ts",
+        "tests/defu.test.ts"
+      ],
+      "uniqueFilesTouched": 3
+    },
+    "exploration": {
+      "readCalls": 18,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 20,
+      "explorationToEditingRatio": 2.44
+    },
+    "verification": {
+      "commandsDetected": 80,
+      "testsRun": true,
+      "testCommandCount": 6,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 46,
+      "duplicateReadTargets": 12,
+      "duplicateEditTargets": 13,
+      "toolFailureCount": 6,
+      "topRepetitions": [
+        {
+          "signature": "d517b4a8dcf3",
+          "tool": "write",
+          "target": "repro.ts",
+          "count": 12
+        },
+        {
+          "signature": "df09e713e42b",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+          "count": 12
+        },
+        {
+          "signature": "c430a6803135",
+          "tool": "read",
+          "target": "src/defu.ts",
+          "count": 6
+        },
+        {
+          "signature": "c619d9c8c2f0",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+          "count": 6
+        },
+        {
+          "signature": "e04e0aef35da",
+          "tool": "read",
+          "target": "tests/defu.test.ts",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "b2d3c0a4f728",
+          "tool": "read",
+          "target": "src/index.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-002-run-001-8641aa",
+    "caseId": "hist-002",
+    "agentVersion": "agent-v2",
+    "timeline": [
+      {
+        "index": 14,
+        "timestamp": "2026-08-31T11:27:19.291Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 15,
+        "timestamp": "2026-08-31T11:27:19.292Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 30,
+        "timestamp": "2026-08-31T11:27:21.016Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 31,
+        "timestamp": "2026-08-31T11:27:21.016Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 46,
+        "timestamp": "2026-08-31T11:27:23.087Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 47,
+        "timestamp": "2026-08-31T11:27:23.087Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 48,
+        "timestamp": "2026-08-31T11:27:23.088Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 49,
+        "timestamp": "2026-08-31T11:27:23.088Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 70,
+        "timestamp": "2026-08-31T11:27:26.736Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 71,
+        "timestamp": "2026-08-31T11:27:26.736Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 72,
+        "timestamp": "2026-08-31T11:27:26.736Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 73,
+        "timestamp": "2026-08-31T11:27:26.737Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/index.ts"
+      },
+      {
+        "index": 74,
+        "timestamp": "2026-08-31T11:27:26.737Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/defu.test.ts"
+      },
+      {
+        "index": 75,
+        "timestamp": "2026-08-31T11:27:26.737Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/defu.test.ts"
+      },
+      {
+        "index": 102,
+        "timestamp": "2026-08-31T11:27:33.771Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/_utils.ts"
+      },
+      {
+        "index": 103,
+        "timestamp": "2026-08-31T11:27:33.772Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/_utils.ts"
+      },
+      {
+        "index": 118,
+        "timestamp": "2026-08-31T11:27:39.184Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 119,
+        "timestamp": "2026-08-31T11:27:39.184Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 134,
+        "timestamp": "2026-08-31T11:27:42.009Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 135,
+        "timestamp": "2026-08-31T11:27:42.009Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 156,
+        "timestamp": "2026-08-31T11:28:05.369Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 157,
+        "timestamp": "2026-08-31T11:28:05.369Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 172,
+        "timestamp": "2026-08-31T11:28:09.287Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 173,
+        "timestamp": "2026-08-31T11:28:09.287Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 194,
+        "timestamp": "2026-08-31T11:28:34.263Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 195,
+        "timestamp": "2026-08-31T11:28:34.263Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 210,
+        "timestamp": "2026-08-31T11:28:37.411Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 211,
+        "timestamp": "2026-08-31T11:28:37.411Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 232,
+        "timestamp": "2026-08-31T11:29:03.462Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 233,
+        "timestamp": "2026-08-31T11:29:03.462Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 248,
+        "timestamp": "2026-08-31T11:29:06.338Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 249,
+        "timestamp": "2026-08-31T11:29:06.338Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 270,
+        "timestamp": "2026-08-31T11:29:30.891Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 271,
+        "timestamp": "2026-08-31T11:29:30.891Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 286,
+        "timestamp": "2026-08-31T11:29:33.040Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 287,
+        "timestamp": "2026-08-31T11:29:33.040Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 308,
+        "timestamp": "2026-08-31T11:29:52.887Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 309,
+        "timestamp": "2026-08-31T11:29:52.887Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 324,
+        "timestamp": "2026-08-31T11:29:59.500Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 325,
+        "timestamp": "2026-08-31T11:29:59.500Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 340,
+        "timestamp": "2026-08-31T11:30:06.039Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 341,
+        "timestamp": "2026-08-31T11:30:06.039Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 356,
+        "timestamp": "2026-08-31T11:30:14.905Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 357,
+        "timestamp": "2026-08-31T11:30:14.905Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.ts"
+      },
+      {
+        "index": 372,
+        "timestamp": "2026-08-31T11:30:18.391Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 373,
+        "timestamp": "2026-08-31T11:30:18.391Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "commandClass": "test"
+      },
+      {
+        "index": 394,
+        "timestamp": "2026-08-31T11:30:28.796Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 395,
+        "timestamp": "2026-08-31T11:30:28.796Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 420,
+        "timestamp": "2026-08-31T11:30:56.436Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/defu.test.ts"
+      },
+      {
+        "index": 421,
+        "timestamp": "2026-08-31T11:30:56.436Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/defu.test.ts"
+      },
+      {
+        "index": 436,
+        "timestamp": "2026-08-31T11:31:01.096Z",
+        "event": "edit",
+        "tool": "edit"
+      },
+      {
+        "index": 437,
+        "timestamp": "2026-08-31T11:31:01.096Z",
+        "event": "edit",
+        "tool": "edit"
+      },
+      {
+        "index": 452,
+        "timestamp": "2026-08-31T11:31:06.731Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/defu.test.ts"
+      },
+      {
+        "index": 453,
+        "timestamp": "2026-08-31T11:31:06.731Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "tests/defu.test.ts"
+      },
+      {
+        "index": 468,
+        "timestamp": "2026-08-31T11:31:09.187Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 469,
+        "timestamp": "2026-08-31T11:31:09.187Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 494,
+        "timestamp": "2026-08-31T11:31:20.164Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 495,
+        "timestamp": "2026-08-31T11:31:20.164Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/defu.ts"
+      },
+      {
+        "index": 510,
+        "timestamp": "2026-08-31T11:31:27.916Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+        "commandClass": "test"
+      },
+      {
+        "index": 511,
+        "timestamp": "2026-08-31T11:31:27.916Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+        "commandClass": "test"
+      },
+      {
+        "index": 528,
+        "timestamp": "2026-08-31T11:31:32.959Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "commandClass": "test"
+      },
+      {
+        "index": 529,
+        "timestamp": "2026-08-31T11:31:32.959Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 14,
+        "timestamp": "2026-08-31T11:27:19.291Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 118,
+        "timestamp": "2026-08-31T11:27:39.184Z",
+        "detail": "repro.ts"
+      },
+      {
+        "type": "first_repro",
+        "eventIndex": 134,
+        "timestamp": "2026-08-31T11:27:42.009Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx r"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 394,
+        "timestamp": "2026-08-31T11:30:28.796Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vites"
+      }
+    ],
+    "errors": [
+      {
+        "index": 438,
+        "tool": "edit",
+        "error": "Validation failed for tool \"edit\":\n  - path: must have required properties path\n\nReceived arguments:\n{\n  \"edits\": [\n    {\n      \"oldText\": \"  test(\\\"does not override Object prototype via constructor\\\", () => {\\n    const payload = JSON.parse('{\\\"constructor\\\": {\\\"prototype\\\": {\\\"isAdmin\\\": true}}}');\\n    defu({}, payload);\\n    defu(payload, {});\\n    defu(payload, payload);\\n    // @ts-ignore\\n    expect(({} as any).isAdmin).toBe(undefined);\\n  });\\n});\",\n      \"newText\": \"  test(\\\"does not o"
+      },
+      {
+        "index": 439,
+        "tool": "edit",
+        "error": "Validation failed for tool \"edit\":\n  - path: must have required properties path\n\nReceived arguments:\n{\n  \"edits\": [\n    {\n      \"oldText\": \"  test(\\\"does not override Object prototype via constructor\\\", () => {\\n    const payload = JSON.parse('{\\\"constructor\\\": {\\\"prototype\\\": {\\\"isAdmin\\\": true}}}');\\n    defu({}, payload);\\n    defu(payload, {});\\n    defu(payload, payload);\\n    // @ts-ignore\\n    expect(({} as any).isAdmin).toBe(undefined);\\n  });\\n});\",\n      \"newText\": \"  test(\\\"does not o"
+      },
+      {
+        "index": 440,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 441,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 442,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 443,
+        "tool": "edit",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 134,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 135,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 142,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Before pollution: undefined\npayload has own __proto__: true\nresult: {}\nAfter pollution: undefined\nFIX: Object.prototype was NOT polluted\n"
+      },
+      {
+        "index": 143,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Before pollution: undefined\npayload has own __proto__: true\nresult: {}\nAfter pollution: undefined\nFIX: Object.prototype was NOT polluted\n"
+      },
+      {
+        "index": 144,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 145,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 146,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 147,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 172,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 173,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 180,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Before pollution: undefined\npayload has own __proto__: true\npayload.__proto__: { polluted: true }\npayload.__proto__ === Object.prototype: false\nresult: {}\nAfter pollution: undefined\nDirect Object.assi"
+      },
+      {
+        "index": 181,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Before pollution: undefined\npayload has own __proto__: true\npayload.__proto__: { polluted: true }\npayload.__proto__ === Object.prototype: false\nresult: {}\nAfter pollution: undefined\nDirect Object.assi"
+      },
+      {
+        "index": 182,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 183,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 184,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 185,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 210,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 211,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 218,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1 - result1: {}\nTest 1 - result1.__proto__: { polluted: true }\nTest 1 - has own 'polluted' in result1: true\nTest 1 - result1.polluted: true\n\nTest 2 - result2: { polluted: true }\nTest 2 - result2."
+      },
+      {
+        "index": 219,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "Test 1 - result1: {}\nTest 1 - result1.__proto__: { polluted: true }\nTest 1 - has own 'polluted' in result1: true\nTest 1 - result1.polluted: true\n\nTest 2 - result2: { polluted: true }\nTest 2 - result2."
+      },
+      {
+        "index": 220,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 221,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 222,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 223,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 248,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 249,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 256,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "=== Before ===\nObject.prototype.polluted: undefined\n({}).polluted: undefined\n\npayload: { ['__proto__']: { polluted: true } }\npayload.__proto__: { polluted: true }\nIs __proto__ own property? true\n\n=== "
+      },
+      {
+        "index": 257,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "=== Before ===\nObject.prototype.polluted: undefined\n({}).polluted: undefined\n\npayload: { ['__proto__']: { polluted: true } }\npayload.__proto__: { polluted: true }\nIs __proto__ own property? true\n\n=== "
+      },
+      {
+        "index": 258,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 259,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 260,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 261,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 286,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 287,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 294,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "result: {}\nresult.__proto__: { polluted: true }\nPrototype is Object.prototype? false\nHas 'polluted' in prototype chain? true\nresult.polluted: true\nkey in result: polluted\nIs __proto__ own property of "
+      },
+      {
+        "index": 295,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "result: {}\nresult.__proto__: { polluted: true }\nPrototype is Object.prototype? false\nHas 'polluted' in prototype chain? true\nresult.polluted: true\nkey in result: polluted\nIs __proto__ own property of "
+      },
+      {
+        "index": 296,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 297,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 298,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 299,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 372,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 373,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 380,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "result: {}\nresult.__proto__: [Object: null prototype] {}\nPrototype is Object.prototype? true\nHas 'polluted' in prototype chain? false\nresult.polluted: undefined\nIs __proto__ own property of result? fa"
+      },
+      {
+        "index": 381,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0,
+        "outputSnippet": "result: {}\nresult.__proto__: [Object: null prototype] {}\nPrototype is Object.prototype? true\nHas 'polluted' in prototype chain? false\nresult.polluted: undefined\nIs __proto__ own property of result? fa"
+      },
+      {
+        "index": 382,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 383,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 384,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 385,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx tsx repro.ts",
+        "exitCode": 0
+      },
+      {
+        "index": 394,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 395,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 406,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\n\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  12:30:49\n   Duration  2.84s (transf"
+      },
+      {
+        "index": 407,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\n\n\n Test Files  1 passed (1)\n      Tests  7 passed (7)\n   Start at  12:30:49\n   Duration  2.84s (transf"
+      },
+      {
+        "index": 408,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 409,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 410,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 411,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 468,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 469,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 480,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\n\n\n Test Files  1 passed (1)\n      Tests  8 passed (8)\n   Start at  12:31:15\n   Duration  698ms (transf"
+      },
+      {
+        "index": 481,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\n\n\n Test Files  1 passed (1)\n      Tests  8 passed (8)\n   Start at  12:31:15\n   Duration  698ms (transf"
+      },
+      {
+        "index": 482,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 483,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 484,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 485,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 510,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 511,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 514,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 515,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 516,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 517,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 518,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 519,
+        "command": "rm \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW/repro.ts\"",
+        "exitCode": 0
+      },
+      {
+        "index": 528,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 529,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 540,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\n\n\n Test Files  1 passed (1)\n      Tests  8 passed (8)\n   Start at  12:31:37\n   Duration  676ms (transf"
+      },
+      {
+        "index": 541,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\n\n\n Test Files  1 passed (1)\n      Tests  8 passed (8)\n   Start at  12:31:37\n   Duration  676ms (transf"
+      },
+      {
+        "index": 542,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 543,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 544,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      },
+      {
+        "index": 545,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-002-hist-002-run-001-8641aa-zsH1WW\" && npx vitest run",
+        "exitCode": 0
+      }
+    ]
+  }
+}

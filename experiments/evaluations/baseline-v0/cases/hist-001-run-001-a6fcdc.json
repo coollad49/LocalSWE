@@ -1,0 +1,77 @@
+{
+  "runId": "hist-001-run-001-a6fcdc",
+  "caseId": "hist-001",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 1104,
+  "startedAt": "2026-08-31T11:57:52.011Z",
+  "completedAt": "2026-08-31T11:57:53.115Z",
+  "caseMeta": {
+    "repository": "cac",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "validation",
+      "parsing"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 168,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-001-nCxlRH\\patch-1788177472743.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 202,
+      "command": "bun run benchmark\\cases\\hist-001\\public\\reproduce.ts",
+      "stdout": "Test --base-url: options={\"--\":[],\"b\":\"https://gitlab.com\",\"baseUrl\":\"https://gitlab.com\"} => FAIL (hasB=true b=https://gitlab.com baseUrl=https://gitlab.com)\nTest -b: options={\"--\":[],\"b\":\"https://gitlab.com\",\"baseUrl\":\"https://gitlab.com\"} => PASS\nTest no args: options={\"--\":[],\"b\":\"https://github.com\",\"baseUrl\":\"https://github.com\"} => PASS\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "metrics": {
+    "durationMs": 189517,
+    "totalTurns": 128,
+    "toolCalls": 56,
+    "commandsExecuted": 28,
+    "filesInspected": 7,
+    "filesChanged": 1,
+    "iterations": 3,
+    "iterationsSource": "v1-state",
+    "inputTokens": 74208,
+    "outputTokens": 24260,
+    "totalTokens": 1199780
+  },
+  "cost": {
+    "inputTokens": 74208,
+    "outputTokens": 24260,
+    "totalTokens": 98468,
+    "inputCostUsd": 0.010389,
+    "outputCostUsd": 0.006793,
+    "totalCostUsd": 0.020266,
+    "costUsd": 0.020266,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  }
+}

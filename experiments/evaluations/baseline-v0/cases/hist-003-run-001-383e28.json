@@ -1,0 +1,83 @@
+{
+  "runId": "hist-003-run-001-383e28",
+  "caseId": "hist-003",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 1589,
+  "startedAt": "2026-08-31T11:58:07.379Z",
+  "completedAt": "2026-08-31T11:58:08.968Z",
+  "caseMeta": {
+    "repository": "tinyspy",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "state-management",
+      "api-behavior"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 191,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-003-BEmncz\\patch-1788177488128.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 357,
+      "command": "bun run benchmark\\cases\\hist-003\\public\\reproduce.ts",
+      "stdout": "before: foo.f()=original own=undefined\nbefore descriptors: {}\nafter spy: foo.f()=mocked ownDesc={\"writable\":true,\"enumerable\":false,\"configurable\":true}\nafter restore: foo.f()=original ownDesc=undefined\nall own descriptors after restore: {}\nPASS: prototype restore is clean, no leak\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 142,
+      "command": "bun test benchmark\\cases\\hist-003\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-003\\private\\oracle.test.ts:\n(pass) hist-003 oracle: prototype restore leak > restore deletes own property for prototype method [3.15ms]\n(pass) hist-003 oracle: prototype restore leak > multiple spy/restore cycles remain clean [1.43ms]\n(pass) hist-003 oracle: prototype restore leak > prototype still owns method after restore [0.57ms]\n\n 3 pass\n 0 fail\n 27 expect() calls\nRan 3 tests across 1 file. [94.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 147,
+      "command": "bun test benchmark\\repositories\\tinyspy\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\tinyspy\\tests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [2.99ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [0.88ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [0.91ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [103.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "metrics": {
+    "durationMs": 348519,
+    "totalTurns": 98,
+    "toolCalls": 46,
+    "commandsExecuted": 20,
+    "filesInspected": 7,
+    "filesChanged": 2,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 100804,
+    "outputTokens": 50488,
+    "totalTokens": 1382980
+  },
+  "cost": {
+    "inputTokens": 100804,
+    "outputTokens": 50488,
+    "totalTokens": 151292,
+    "inputCostUsd": 0.030241,
+    "outputCostUsd": 0.060586,
+    "totalCostUsd": 0.164728,
+    "costUsd": 0.164728,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  }
+}

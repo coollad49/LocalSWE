@@ -1,0 +1,1204 @@
+{
+  "evaluationId": "eval-59239378-1788177516524",
+  "runId": "hist-005-run-001-ea5728",
+  "caseId": "hist-005",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v2",
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T11:58:36.524Z",
+  "completedAt": "2026-08-31T11:58:37.741Z",
+  "durationMs": 1217,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\hist-005-run-001-ea5728\\patch.diff",
+  "status": "completed",
+  "verdict": "verified",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 170,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-005-ZnoU2e\\patch-1788177517158.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 140,
+      "command": "bun run benchmark\\cases\\hist-005\\public\\reproduce.ts",
+      "stdout": "mri(['-a','01'], {alias:{a:['arg']}, default:{arg:''}}) => {\"_\":[],\"a\":\"01\",\"arg\":\"01\"}\na type string value 01 expected string \"01\"\narg type string value 01 expected string \"01\"\n_ empty true expected true\nsecondary mri(['-a','01'], {alias:{arg:['a']}, default:{arg:''}}) => {\"_\":[],\"a\":\"01\",\"arg\":\"01\"}\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 132,
+      "command": "bun test benchmark\\cases\\hist-005\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-005\\private\\oracle.test.ts:\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > core bug: -a 01 with alias a->arg preserves string [2.41ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > all 5 variants from 5437ea5 fix [0.52ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > string types for each alias variant [0.51ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > numeric strings with leading zeros remain strings, numbers still coerce when not string-typed [0.27ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > boolean defaults still cascade to alias (regression from hist-004) [0.63ms]\n(pass) hist-005 oracle: alias defaults string cascade (5437ea5) > regression: basic parsing unchanged [0.23ms]\n\n 6 pass\n 0 fail\n 29 expect() calls\nRan 6 tests across 1 file. [90.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 137,
+      "command": "bun test benchmark\\repositories\\mri\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\mri\\tests\\mri.test.ts:\n(pass) mri regression > parses basic flags [1.49ms]\n(pass) mri regression > handles short flags [0.12ms]\n(pass) mri regression > handles -- separator [0.09ms]\n(pass) mri regression > coerces numbers by default [0.10ms]\n(pass) mri regression > string opts preserve string values [0.18ms]\n(pass) mri regression > boolean flag with no value [0.17ms]\n(pass) mri regression > alias mirrors values [0.14ms]\n(pass) mri regression > default values [0.07ms]\n(pass) mri regression > unknown handler strict [0.28ms]\n\n 9 pass\n 0 fail\n 15 expect() calls\nRan 9 tests across 1 file. [92.00ms]\n",
+      "timedOut": false
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "mri",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "parsing",
+      "alias-handling"
+    ]
+  },
+  "metrics": {
+    "durationMs": 169126,
+    "totalTurns": 106,
+    "toolCalls": 52,
+    "commandsExecuted": 20,
+    "filesInspected": 7,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 58308,
+    "outputTokens": 22672,
+    "totalTokens": 822356
+  },
+  "cost": {
+    "inputTokens": 58308,
+    "outputTokens": 22672,
+    "totalTokens": 80980,
+    "inputCostUsd": 0.008163,
+    "outputCostUsd": 0.006348,
+    "totalCostUsd": 0.016587,
+    "costUsd": 0.016587,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-005-run-001-ea5728",
+    "caseId": "hist-005",
+    "agentVersion": "agent-v2",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:b06a3e48814dcd4059af9c2b3136ec721337a33cafbe1eb3d650822180c5a73d",
+    "trajectory": {
+      "eventCount": 484,
+      "durationMs": 168239,
+      "eventTypes": {
+        "agent_start": 5,
+        "turn_start": 48,
+        "message_start": 102,
+        "message_end": 102,
+        "tool_execution_start": 52,
+        "tool_execution_end": 52,
+        "turn_end": 48,
+        "tool_execution_update": 68,
+        "agent_end": 4,
+        "auto_retry_start": 1,
+        "auto_retry_end": 1,
+        "agent_settled": 1
+      },
+      "assistantMessages": 144,
+      "userMessages": 4,
+      "toolCalls": 52,
+      "toolResults": 208,
+      "thinkingEvents": 138,
+      "unknownEvents": 128,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 52,
+      "uniqueTools": 5,
+      "byTool": {
+        "read": {
+          "calls": 14,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "write": {
+          "calls": 6,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 20,
+          "failures": 12
+        },
+        "edit": {
+          "calls": 6,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 58308,
+      "output": 22672,
+      "cacheRead": 741376,
+      "cacheWrite": 0,
+      "total": 822356,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.016587,
+      "inputCostUsd": 0.008163,
+      "outputCostUsd": 0.006348,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 138,
+      "characterCount": 48726,
+      "averageCharacters": 353,
+      "maxCharacters": 2450,
+      "firstThinkingAt": "2026-08-31T11:31:52.729Z",
+      "lastThinkingAt": "2026-08-31T11:34:38.572Z",
+      "thinkingDurationMs": 165843
+    },
+    "editing": {
+      "editCalls": 6,
+      "writeCalls": 6,
+      "filesTouched": [
+        "repro.js",
+        "lib/index.js",
+        "edge-cases.js",
+        "debug.js"
+      ],
+      "uniqueFilesTouched": 4
+    },
+    "exploration": {
+      "readCalls": 14,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 20,
+      "explorationToEditingRatio": 3.33
+    },
+    "verification": {
+      "commandsDetected": 48,
+      "testsRun": true,
+      "testCommandCount": 4,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": true,
+      "commands": [
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "node repro.js",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+          "exitCode": 0
+        },
+        {
+          "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 35,
+      "duplicateReadTargets": 10,
+      "duplicateEditTargets": 8,
+      "toolFailureCount": 12,
+      "topRepetitions": [
+        {
+          "signature": "66c5e6c0102c",
+          "tool": "read",
+          "target": "lib/index.js",
+          "count": 8
+        },
+        {
+          "signature": "c5f8c70aa0f8",
+          "tool": "bash",
+          "target": "node repro.js",
+          "count": 6
+        },
+        {
+          "signature": "7e24bf976545",
+          "tool": "edit",
+          "target": "lib/index.js",
+          "count": 4
+        },
+        {
+          "signature": "ad82b654e802",
+          "tool": "bash",
+          "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+          "count": 4
+        },
+        {
+          "signature": "a06bd62cf506",
+          "tool": "bash",
+          "target": "node edge-cases.js",
+          "count": 4
+        },
+        {
+          "signature": "de1a1a8d4ebf",
+          "tool": "bash",
+          "target": "node debug.js",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "ec8ec0fa57e2",
+          "tool": "ls",
+          "target": ".",
+          "count": 2
+        },
+        {
+          "signature": "89379771070d",
+          "tool": "ls",
+          "target": "lib",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "hist-005-run-001-ea5728",
+    "caseId": "hist-005",
+    "agentVersion": "agent-v2",
+    "timeline": [
+      {
+        "index": 14,
+        "timestamp": "2026-08-31T11:31:53.395Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 15,
+        "timestamp": "2026-08-31T11:31:53.395Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 16,
+        "timestamp": "2026-08-31T11:31:53.396Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 17,
+        "timestamp": "2026-08-31T11:31:53.396Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "."
+      },
+      {
+        "index": 38,
+        "timestamp": "2026-08-31T11:31:55.404Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "lib"
+      },
+      {
+        "index": 39,
+        "timestamp": "2026-08-31T11:31:55.404Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "lib"
+      },
+      {
+        "index": 40,
+        "timestamp": "2026-08-31T11:31:55.404Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 41,
+        "timestamp": "2026-08-31T11:31:55.404Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 42,
+        "timestamp": "2026-08-31T11:31:55.404Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 43,
+        "timestamp": "2026-08-31T11:31:55.404Z",
+        "event": "read",
+        "tool": "read",
+        "target": "package.json"
+      },
+      {
+        "index": 70,
+        "timestamp": "2026-08-31T11:31:59.818Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 71,
+        "timestamp": "2026-08-31T11:31:59.818Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 72,
+        "timestamp": "2026-08-31T11:31:59.818Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/mri.test.ts"
+      },
+      {
+        "index": 73,
+        "timestamp": "2026-08-31T11:31:59.818Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/mri.test.ts"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-31T11:32:44.936Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.js"
+      },
+      {
+        "index": 95,
+        "timestamp": "2026-08-31T11:32:44.936Z",
+        "event": "write",
+        "tool": "write",
+        "target": "repro.js"
+      },
+      {
+        "index": 110,
+        "timestamp": "2026-08-31T11:32:47.178Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node repro.js",
+        "commandClass": "test"
+      },
+      {
+        "index": 111,
+        "timestamp": "2026-08-31T11:32:47.178Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node repro.js",
+        "commandClass": "test"
+      },
+      {
+        "index": 146,
+        "timestamp": "2026-08-31T11:33:05.163Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 147,
+        "timestamp": "2026-08-31T11:33:05.163Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 162,
+        "timestamp": "2026-08-31T11:33:11.773Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 163,
+        "timestamp": "2026-08-31T11:33:11.773Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 178,
+        "timestamp": "2026-08-31T11:33:14.457Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node repro.js",
+        "commandClass": "test"
+      },
+      {
+        "index": 179,
+        "timestamp": "2026-08-31T11:33:14.457Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node repro.js",
+        "commandClass": "test"
+      },
+      {
+        "index": 200,
+        "timestamp": "2026-08-31T11:33:18.241Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 201,
+        "timestamp": "2026-08-31T11:33:18.241Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 228,
+        "timestamp": "2026-08-31T11:33:38.863Z",
+        "event": "write",
+        "tool": "write",
+        "target": "edge-cases.js"
+      },
+      {
+        "index": 229,
+        "timestamp": "2026-08-31T11:33:38.863Z",
+        "event": "write",
+        "tool": "write",
+        "target": "edge-cases.js"
+      },
+      {
+        "index": 244,
+        "timestamp": "2026-08-31T11:33:42.254Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node edge-cases.js",
+        "commandClass": "general"
+      },
+      {
+        "index": 245,
+        "timestamp": "2026-08-31T11:33:42.254Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node edge-cases.js",
+        "commandClass": "general"
+      },
+      {
+        "index": 266,
+        "timestamp": "2026-08-31T11:33:49.354Z",
+        "event": "write",
+        "tool": "write",
+        "target": "debug.js"
+      },
+      {
+        "index": 267,
+        "timestamp": "2026-08-31T11:33:49.354Z",
+        "event": "write",
+        "tool": "write",
+        "target": "debug.js"
+      },
+      {
+        "index": 282,
+        "timestamp": "2026-08-31T11:33:51.153Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node debug.js",
+        "commandClass": "general"
+      },
+      {
+        "index": 283,
+        "timestamp": "2026-08-31T11:33:51.153Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node debug.js",
+        "commandClass": "general"
+      },
+      {
+        "index": 304,
+        "timestamp": "2026-08-31T11:33:57.958Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 305,
+        "timestamp": "2026-08-31T11:33:57.958Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 320,
+        "timestamp": "2026-08-31T11:34:03.805Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 321,
+        "timestamp": "2026-08-31T11:34:03.805Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 336,
+        "timestamp": "2026-08-31T11:34:06.333Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node debug.js",
+        "commandClass": "general"
+      },
+      {
+        "index": 337,
+        "timestamp": "2026-08-31T11:34:06.333Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node debug.js",
+        "commandClass": "general"
+      },
+      {
+        "index": 358,
+        "timestamp": "2026-08-31T11:34:11.944Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "edge-cases.js"
+      },
+      {
+        "index": 359,
+        "timestamp": "2026-08-31T11:34:11.944Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "edge-cases.js"
+      },
+      {
+        "index": 374,
+        "timestamp": "2026-08-31T11:34:15.970Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node edge-cases.js",
+        "commandClass": "general"
+      },
+      {
+        "index": 375,
+        "timestamp": "2026-08-31T11:34:15.970Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node edge-cases.js",
+        "commandClass": "general"
+      },
+      {
+        "index": 396,
+        "timestamp": "2026-08-31T11:34:19.723Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 397,
+        "timestamp": "2026-08-31T11:34:19.723Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "commandClass": "test"
+      },
+      {
+        "index": 424,
+        "timestamp": "2026-08-31T11:34:25.484Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node repro.js",
+        "commandClass": "test"
+      },
+      {
+        "index": 425,
+        "timestamp": "2026-08-31T11:34:25.484Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "node repro.js",
+        "commandClass": "test"
+      },
+      {
+        "index": 446,
+        "timestamp": "2026-08-31T11:34:28.965Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 447,
+        "timestamp": "2026-08-31T11:34:28.965Z",
+        "event": "read",
+        "tool": "read",
+        "target": "lib/index.js"
+      },
+      {
+        "index": 462,
+        "timestamp": "2026-08-31T11:34:32.158Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+        "commandClass": "test"
+      },
+      {
+        "index": 463,
+        "timestamp": "2026-08-31T11:34:32.158Z",
+        "event": "bash",
+        "tool": "bash",
+        "target": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+        "commandClass": "test"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 14,
+        "timestamp": "2026-08-31T11:31:53.395Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 94,
+        "timestamp": "2026-08-31T11:32:44.936Z",
+        "detail": "repro.js"
+      },
+      {
+        "type": "first_repro",
+        "eventIndex": 110,
+        "timestamp": "2026-08-31T11:32:47.178Z",
+        "detail": "node repro.js"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 200,
+        "timestamp": "2026-08-31T11:33:18.241Z",
+        "detail": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test"
+      }
+    ],
+    "errors": [
+      {
+        "index": 252,
+        "tool": "bash",
+        "error": "✓ alias with string default preserves string type\n✓ alias with boolean default preserves boolean type\n✗ multiple aliases with string default all get string type: Expected \"008\", got 007\n✓ alias uses default when no value provided\n✓ string option without default still works\n✗ default with number value works correctly: Cannot convert undefined or null to object\n✗ alias with number default gets number type: Cannot convert undefined or null to object\n✓ string alias with no value gets empty string\n✓ "
+      },
+      {
+        "index": 253,
+        "tool": "bash",
+        "error": "✓ alias with string default preserves string type\n✓ alias with boolean default preserves boolean type\n✗ multiple aliases with string default all get string type: Expected \"008\", got 007\n✓ alias uses default when no value provided\n✓ string option without default still works\n✗ default with number value works correctly: Cannot convert undefined or null to object\n✗ alias with number default gets number type: Cannot convert undefined or null to object\n✓ string alias with no value gets empty string\n✓ "
+      },
+      {
+        "index": 254,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 255,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 256,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 257,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 290,
+        "tool": "bash",
+        "error": "Test: default with number value\nC:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\\lib\\index.js:51\r\n\t\t\t(opts[typeof opts.default[k]] || []).push.apply(opts[typeof opts.default[k]], opts.alias[k]);\r\n\t\t\t                                          ^\r\n\r\nTypeError: Cannot convert undefined or null to object\r\n    at push (<anonymous>)\r\n    at module.exports (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\\lib\\index.js:51:46)\r\n    at Obje"
+      },
+      {
+        "index": 291,
+        "tool": "bash",
+        "error": "Test: default with number value\nC:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\\lib\\index.js:51\r\n\t\t\t(opts[typeof opts.default[k]] || []).push.apply(opts[typeof opts.default[k]], opts.alias[k]);\r\n\t\t\t                                          ^\r\n\r\nTypeError: Cannot convert undefined or null to object\r\n    at push (<anonymous>)\r\n    at module.exports (C:\\Users\\cooll\\AppData\\Local\\Temp\\frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\\lib\\index.js:51:46)\r\n    at Obje"
+      },
+      {
+        "index": 292,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 293,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 294,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 295,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 110,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 111,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 118,
+        "command": "node repro.js",
+        "exitCode": 0,
+        "outputSnippet": "Result: { _: [], a: 1, arg: 1 }\ntypeof result.a: number\ntypeof result.arg: number\nresult.a value: 1\nExpected: \"01\" (string), Got: 1\n\n--- Additional tests ---\nWithout default, with string opt: 01 (type"
+      },
+      {
+        "index": 119,
+        "command": "node repro.js",
+        "exitCode": 0,
+        "outputSnippet": "Result: { _: [], a: 1, arg: 1 }\ntypeof result.a: number\ntypeof result.arg: number\nresult.a value: 1\nExpected: \"01\" (string), Got: 1\n\n--- Additional tests ---\nWithout default, with string opt: 01 (type"
+      },
+      {
+        "index": 120,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 121,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 122,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 123,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 178,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 179,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 186,
+        "command": "node repro.js",
+        "exitCode": 0,
+        "outputSnippet": "Result: { _: [], a: '01', arg: '01' }\ntypeof result.a: string\ntypeof result.arg: string\nresult.a value: 01\nExpected: \"01\" (string), Got: 01\n\n--- Additional tests ---\nWithout default, with string opt: "
+      },
+      {
+        "index": 187,
+        "command": "node repro.js",
+        "exitCode": 0,
+        "outputSnippet": "Result: { _: [], a: '01', arg: '01' }\ntypeof result.a: string\ntypeof result.arg: string\nresult.a value: 01\nExpected: \"01\" (string), Got: 01\n\n--- Additional tests ---\nWithout default, with string opt: "
+      },
+      {
+        "index": 188,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 189,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 190,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 191,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 200,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 201,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 214,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> mri@1.1.4 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  12:"
+      },
+      {
+        "index": 215,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> mri@1.1.4 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  12:"
+      },
+      {
+        "index": 216,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 217,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 218,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 219,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 396,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 397,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 410,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> mri@1.1.4 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  12:"
+      },
+      {
+        "index": 411,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0,
+        "outputSnippet": "\n> mri@1.1.4 test\n> vitest run\n\n\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  12:"
+      },
+      {
+        "index": 412,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 413,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 414,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 415,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && npm test",
+        "exitCode": 0
+      },
+      {
+        "index": 424,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 425,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 432,
+        "command": "node repro.js",
+        "exitCode": 0,
+        "outputSnippet": "Result: { _: [], a: '01', arg: '01' }\ntypeof result.a: string\ntypeof result.arg: string\nresult.a value: 01\nExpected: \"01\" (string), Got: 01\n\n--- Additional tests ---\nWithout default, with string opt: "
+      },
+      {
+        "index": 433,
+        "command": "node repro.js",
+        "exitCode": 0,
+        "outputSnippet": "Result: { _: [], a: '01', arg: '01' }\ntypeof result.a: string\ntypeof result.arg: string\nresult.a value: 01\nExpected: \"01\" (string), Got: 01\n\n--- Additional tests ---\nWithout default, with string opt: "
+      },
+      {
+        "index": 434,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 435,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 436,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 437,
+        "command": "node repro.js",
+        "exitCode": 0
+      },
+      {
+        "index": 462,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+        "exitCode": 0
+      },
+      {
+        "index": 463,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+        "exitCode": 0
+      },
+      {
+        "index": 466,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 467,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+        "exitCode": 0,
+        "outputSnippet": "(no output)"
+      },
+      {
+        "index": 468,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+        "exitCode": 0
+      },
+      {
+        "index": 469,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+        "exitCode": 0
+      },
+      {
+        "index": 470,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+        "exitCode": 0
+      },
+      {
+        "index": 471,
+        "command": "cd \"C:/Users/cooll/AppData/Local/Temp/frontier-hist-005-hist-005-run-001-ea5728-qBrEkN\" && rm -f repro.js debug.js edge-cases.js",
+        "exitCode": 0
+      }
+    ]
+  }
+}

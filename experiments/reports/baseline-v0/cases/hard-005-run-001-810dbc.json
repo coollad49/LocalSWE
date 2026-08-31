@@ -1,0 +1,86 @@
+{
+  "runId": "hard-005-run-001-810dbc",
+  "caseId": "hard-005",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 1613,
+  "startedAt": "2026-08-31T11:57:34.647Z",
+  "completedAt": "2026-08-31T11:57:36.260Z",
+  "caseMeta": {
+    "repository": "path-to-regexp",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "parsing",
+      "api-behavior",
+      "data-transformation"
+    ]
+  },
+  "metrics": {
+    "durationMs": 396145,
+    "totalTurns": 146,
+    "toolCalls": 72,
+    "commandsExecuted": 34,
+    "filesInspected": 6,
+    "filesChanged": 2,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 181192,
+    "outputTokens": 64900,
+    "totalTokens": 2697292
+  },
+  "cost": {
+    "inputTokens": 181192,
+    "outputTokens": 64900,
+    "totalTokens": 246092,
+    "inputCostUsd": 0.025367,
+    "outputCostUsd": 0.018172,
+    "totalCostUsd": 0.050402,
+    "costUsd": 0.050402,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 184,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-005-zpEqKd\\patch-1788177455545.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 204,
+      "command": "bun run benchmark\\cases\\hard-005\\public\\reproduce.ts",
+      "stdout": "Test astral ID_Continue: result=\"/:\\\"test\\\"𝛼\" expected=\"/:\\\"test\\\"𝛼\" => PASS\nOverall reproduce: PASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 161,
+      "command": "bun test benchmark\\cases\\hard-005\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hard-005\\private\\oracle.test.ts:\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > quotes param name when followed by astral ID_Continue [3.87ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > quotes wildcard name when followed by astral ID_Continue [0.21ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > does not quote when followed by non-ID_Continue astral [0.14ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > quotes when next text starts with BMP ID_Continue [0.86ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > does not quote when next is not text or is empty [0.21ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > round-trip parse -> stringify -> parse for astral [1.80ms]\n(pass) hard-005 oracle: path-to-regexp astral ID_Continue quoting > parse correctly handles astral ID_Continue in param name [0.19ms]\n\n 7 pass\n 0 fail\n 9 expect() calls\nRan 7 tests across 1 file. [117.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 163,
+      "command": "bun test benchmark\\repositories\\path-to-regexp\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\path-to-regexp\\tests\\basic.test.ts:\n(pass) path-to-regexp regression > basic parse/stringify [3.97ms]\n(pass) path-to-regexp regression > wildcard [0.13ms]\n(pass) path-to-regexp regression > param followed by astral ID_Continue in text token must be quoted [1.00ms]\n(pass) path-to-regexp regression > wildcard followed by astral ID_Continue in text token must be quoted [0.17ms]\n(pass) path-to-regexp regression > param followed by non-ID_Continue emoji stays unquoted [0.18ms]\n\n 5 pass\n 0 fail\n 9 expect() calls\nRan 5 tests across 1 file. [124.00ms]\n",
+      "timedOut": false
+    }
+  }
+}

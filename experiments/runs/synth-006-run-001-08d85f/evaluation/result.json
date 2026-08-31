@@ -1,0 +1,655 @@
+{
+  "evaluationId": "eval-b05d4e11-1788177589687",
+  "runId": "synth-006-run-001-08d85f",
+  "caseId": "synth-006",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "agentVersion": "agent-v2",
+  "model": "opencode-go/mimo-v2.5",
+  "startedAt": "2026-08-31T11:59:49.687Z",
+  "completedAt": "2026-08-31T11:59:50.784Z",
+  "durationMs": 1097,
+  "patchPath": "C:\\Users\\cooll\\Documents\\code\\frontier-verifier\\experiments\\runs\\synth-006-run-001-08d85f\\patch.diff",
+  "status": "completed",
+  "verdict": "false_confidence",
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "durationMs": 159,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-sTITkV\\patch-1788177590349.diff",
+      "stdout": "",
+      "stderr": "",
+      "exitCode": 0,
+      "applied": true
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 139,
+      "command": "bun run benchmark\\cases\\synth-006\\public\\reproduce.ts",
+      "stdout": "threw: Cannot dequeue from an empty queue PASS\ndequeue after enqueue a expected a\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 135,
+      "command": "bun test benchmark\\cases\\synth-006\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\synth-006\\private\\oracle.test.ts:\n2 | import { AsyncQueue } from \"../../../repositories/async-queue/src/queue.ts\";\n3 | \n4 | describe(\"synth-006 oracle: dequeue throws on empty\", () => {\n5 |   test(\"throws when empty\", () => {\n6 |     const q = new AsyncQueue<string>();\n7 |     expect(() => q.dequeue()).toThrow(/Queue is empty/);\n                                  ^\nerror: expect(received).toThrow(expected)\n\nExpected pattern: /Queue is empty/\nReceived message: \"Cannot dequeue from an empty queue\"\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-006-sTITkV\\benchmark\\cases\\synth-006\\private\\oracle.test.ts:7:31)\n(fail) synth-006 oracle: dequeue throws on empty > throws when empty [2.01ms]\n(pass) synth-006 oracle: dequeue throws on empty > does not throw when not empty [0.83ms]\n(pass) synth-006 oracle: dequeue throws on empty > processNext returns null on empty, not throw [0.70ms]\n(pass) synth-006 oracle: dequeue throws on empty > clear then dequeue throws [0.25ms]\n\n 3 pass\n 1 fail\n 5 expect() calls\nRan 4 tests across 1 file. [93.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "workspace": {
+    "isolated": true
+  },
+  "caseMeta": {
+    "repository": "async-queue",
+    "type": "synthetic",
+    "difficulty": "easy",
+    "categories": [
+      "api-behavior",
+      "error-handling"
+    ]
+  },
+  "metrics": {
+    "durationMs": 53024,
+    "totalTurns": 46,
+    "toolCalls": 22,
+    "commandsExecuted": 4,
+    "filesInspected": 3,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 26136,
+    "outputTokens": 3900,
+    "totalTokens": 191572
+  },
+  "cost": {
+    "inputTokens": 26136,
+    "outputTokens": 3900,
+    "totalTokens": 30036,
+    "inputCostUsd": 0.003659,
+    "outputCostUsd": 0.001092,
+    "totalCostUsd": 0.005203,
+    "costUsd": 0.005203,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "trajectoryMetrics": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-006-run-001-08d85f",
+    "caseId": "synth-006",
+    "agentVersion": "agent-v2",
+    "benchmarkVersion": "0.5",
+    "model": "opencode-go/mimo-v2.5",
+    "trajectoryHash": "sha256:62c9f7f87fb14119994188bf60afe718ccd761353b9993a453c4d544ae20e6f8",
+    "trajectory": {
+      "eventCount": 198,
+      "durationMs": 52330,
+      "eventTypes": {
+        "agent_start": 3,
+        "turn_start": 20,
+        "message_start": 44,
+        "message_end": 44,
+        "tool_execution_start": 22,
+        "tool_execution_end": 22,
+        "turn_end": 20,
+        "tool_execution_update": 20,
+        "agent_end": 2,
+        "agent_settled": 1
+      },
+      "assistantMessages": 60,
+      "userMessages": 4,
+      "toolCalls": 22,
+      "toolResults": 88,
+      "thinkingEvents": 60,
+      "unknownEvents": 46,
+      "parseErrors": 0
+    },
+    "tools": {
+      "totalCalls": 22,
+      "uniqueTools": 4,
+      "byTool": {
+        "read": {
+          "calls": 10,
+          "failures": 0
+        },
+        "ls": {
+          "calls": 6,
+          "failures": 0
+        },
+        "bash": {
+          "calls": 4,
+          "failures": 6
+        },
+        "edit": {
+          "calls": 2,
+          "failures": 0
+        }
+      }
+    },
+    "tokens": {
+      "input": 26136,
+      "output": 3900,
+      "cacheRead": 161536,
+      "cacheWrite": 0,
+      "total": 191572,
+      "observed": true
+    },
+    "cost": {
+      "costUsd": 0.005203,
+      "inputCostUsd": 0.003659,
+      "outputCostUsd": 0.001092,
+      "costStatus": "provider",
+      "costSource": "provider"
+    },
+    "thinking": {
+      "eventCount": 60,
+      "characterCount": 9606,
+      "averageCharacters": 160,
+      "maxCharacters": 487,
+      "firstThinkingAt": "2026-08-31T11:35:54.937Z",
+      "lastThinkingAt": "2026-08-31T11:36:44.611Z",
+      "thinkingDurationMs": 49674
+    },
+    "editing": {
+      "editCalls": 2,
+      "writeCalls": 0,
+      "filesTouched": [
+        "src/queue.ts"
+      ],
+      "uniqueFilesTouched": 1
+    },
+    "exploration": {
+      "readCalls": 10,
+      "grepCalls": 0,
+      "findCalls": 0,
+      "lsCalls": 6,
+      "bashCalls": 4,
+      "explorationToEditingRatio": 10
+    },
+    "verification": {
+      "commandsDetected": 16,
+      "testsRun": true,
+      "testCommandCount": 4,
+      "buildRun": false,
+      "typecheckRun": false,
+      "reproductionDetected": false,
+      "commands": [
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 1
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        },
+        {
+          "command": "npx vitest run 2>&1",
+          "exitCode": 0
+        }
+      ]
+    },
+    "behavior": {
+      "repeatedToolCalls": 14,
+      "duplicateReadTargets": 7,
+      "duplicateEditTargets": 1,
+      "toolFailureCount": 6,
+      "topRepetitions": [
+        {
+          "signature": "2107b5f3f42e",
+          "tool": "read",
+          "target": "src/queue.ts",
+          "count": 6
+        },
+        {
+          "signature": "730861c7c241",
+          "tool": "bash",
+          "target": "npx vitest run 2>&1",
+          "count": 4
+        },
+        {
+          "signature": "1da88cf91770",
+          "tool": "read",
+          "target": "ISSUE.md",
+          "count": 2
+        },
+        {
+          "signature": "07c98b4a2fa1",
+          "tool": "ls",
+          "count": 2
+        },
+        {
+          "signature": "d82b02683685",
+          "tool": "ls",
+          "target": "src",
+          "count": 2
+        },
+        {
+          "signature": "4ec9267c0742",
+          "tool": "ls",
+          "target": "tests",
+          "count": 2
+        },
+        {
+          "signature": "48bb11fb60ea",
+          "tool": "read",
+          "target": "tests/queue.test.ts",
+          "count": 2
+        },
+        {
+          "signature": "965f0ad5ddbb",
+          "tool": "edit",
+          "target": "src/queue.ts",
+          "count": 2
+        }
+      ]
+    },
+    "termination": {
+      "reason": "completed",
+      "timedOut": false
+    }
+  },
+  "trajectoryEvidence": {
+    "schemaVersion": "1.0",
+    "analyticsVersion": "0.1",
+    "runId": "synth-006-run-001-08d85f",
+    "caseId": "synth-006",
+    "agentVersion": "agent-v2",
+    "timeline": [
+      {
+        "index": 14,
+        "timestamp": "2026-08-31T11:35:55.399Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 15,
+        "timestamp": "2026-08-31T11:35:55.399Z",
+        "event": "read",
+        "tool": "read",
+        "target": "ISSUE.md"
+      },
+      {
+        "index": 30,
+        "timestamp": "2026-08-31T11:35:57.483Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 31,
+        "timestamp": "2026-08-31T11:35:57.483Z",
+        "event": "ls",
+        "tool": "ls"
+      },
+      {
+        "index": 46,
+        "timestamp": "2026-08-31T11:36:01.656Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 47,
+        "timestamp": "2026-08-31T11:36:01.656Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "src"
+      },
+      {
+        "index": 48,
+        "timestamp": "2026-08-31T11:36:01.656Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 49,
+        "timestamp": "2026-08-31T11:36:01.656Z",
+        "event": "ls",
+        "tool": "ls",
+        "target": "tests"
+      },
+      {
+        "index": 70,
+        "timestamp": "2026-08-31T11:36:04.603Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 71,
+        "timestamp": "2026-08-31T11:36:04.603Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 72,
+        "timestamp": "2026-08-31T11:36:04.603Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/queue.test.ts"
+      },
+      {
+        "index": 73,
+        "timestamp": "2026-08-31T11:36:04.603Z",
+        "event": "read",
+        "tool": "read",
+        "target": "tests/queue.test.ts"
+      },
+      {
+        "index": 94,
+        "timestamp": "2026-08-31T11:36:07.641Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 95,
+        "timestamp": "2026-08-31T11:36:07.641Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 120,
+        "timestamp": "2026-08-31T11:36:23.577Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 121,
+        "timestamp": "2026-08-31T11:36:23.577Z",
+        "event": "edit",
+        "tool": "edit",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 136,
+        "timestamp": "2026-08-31T11:36:26.694Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 137,
+        "timestamp": "2026-08-31T11:36:26.694Z",
+        "event": "test",
+        "tool": "bash",
+        "target": "npx vitest run 2>&1",
+        "commandClass": "test"
+      },
+      {
+        "index": 162,
+        "timestamp": "2026-08-31T11:36:36.560Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 163,
+        "timestamp": "2026-08-31T11:36:36.560Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 178,
+        "timestamp": "2026-08-31T11:36:39.290Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      },
+      {
+        "index": 179,
+        "timestamp": "2026-08-31T11:36:39.290Z",
+        "event": "read",
+        "tool": "read",
+        "target": "src/queue.ts"
+      }
+    ],
+    "milestones": [
+      {
+        "type": "first_read",
+        "eventIndex": 14,
+        "timestamp": "2026-08-31T11:35:55.399Z",
+        "detail": "ISSUE.md"
+      },
+      {
+        "type": "first_test",
+        "eventIndex": 94,
+        "timestamp": "2026-08-31T11:36:07.641Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 106,
+        "timestamp": "2026-08-31T11:36:19.383Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 107,
+        "timestamp": "2026-08-31T11:36:19.383Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 108,
+        "timestamp": "2026-08-31T11:36:19.383Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 109,
+        "timestamp": "2026-08-31T11:36:19.383Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 110,
+        "timestamp": "2026-08-31T11:36:19.383Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "verification_fail",
+        "eventIndex": 111,
+        "timestamp": "2026-08-31T11:36:19.383Z",
+        "detail": "npx vitest run 2>&1"
+      },
+      {
+        "type": "first_edit",
+        "eventIndex": 120,
+        "timestamp": "2026-08-31T11:36:23.577Z",
+        "detail": "src/queue.ts"
+      }
+    ],
+    "errors": [
+      {
+        "index": 106,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-08d85f-HMB5UU\n\n ❯ tests/queue.test.ts (9 tests | 1 failed) 55ms\n     × dequeue throws on empty 23ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > dequeue throws on empty\nAssertionError: expected [Function] to throw an error\n\n- Expected:\nnull\n\n+ Received:\nundefined\n\n ❯ tests/queue.test.ts:17:31\n     15|   test(\"dequeue throws on empty\", () => {\n     16|     const q = new AsyncQueue()"
+      },
+      {
+        "index": 107,
+        "tool": "bash",
+        "error": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-08d85f-HMB5UU\n\n ❯ tests/queue.test.ts (9 tests | 1 failed) 55ms\n     × dequeue throws on empty 23ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/queue.test.ts > AsyncQueue > dequeue throws on empty\nAssertionError: expected [Function] to throw an error\n\n- Expected:\nnull\n\n+ Received:\nundefined\n\n ❯ tests/queue.test.ts:17:31\n     15|   test(\"dequeue throws on empty\", () => {\n     16|     const q = new AsyncQueue()"
+      },
+      {
+        "index": 108,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 109,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 110,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      },
+      {
+        "index": 111,
+        "tool": "bash",
+        "error": "Tool failed with exitCode 1"
+      }
+    ],
+    "repetitions": [],
+    "verificationEvents": [
+      {
+        "index": 94,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 95,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 106,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-08d85f-HMB5UU\n\n ❯ tests/queue.test.ts (9 tests | 1 failed) 55ms\n     × dequeue throws on empty 23ms\n\n⎯⎯⎯⎯⎯⎯⎯ Faile"
+      },
+      {
+        "index": 107,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-08d85f-HMB5UU\n\n ❯ tests/queue.test.ts (9 tests | 1 failed) 55ms\n     × dequeue throws on empty 23ms\n\n⎯⎯⎯⎯⎯⎯⎯ Faile"
+      },
+      {
+        "index": 108,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 109,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 110,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 111,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 1
+      },
+      {
+        "index": 136,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 137,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 148,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-08d85f-HMB5UU\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  12:36:32\n   Duration  979ms (tran"
+      },
+      {
+        "index": 149,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0,
+        "outputSnippet": "\n RUN  v4.1.11 C:/Users/cooll/AppData/Local/Temp/frontier-synth-006-synth-006-run-001-08d85f-HMB5UU\n\n\n Test Files  1 passed (1)\n      Tests  9 passed (9)\n   Start at  12:36:32\n   Duration  979ms (tran"
+      },
+      {
+        "index": 150,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 151,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 152,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      },
+      {
+        "index": 153,
+        "command": "npx vitest run 2>&1",
+        "exitCode": 0
+      }
+    ]
+  }
+}

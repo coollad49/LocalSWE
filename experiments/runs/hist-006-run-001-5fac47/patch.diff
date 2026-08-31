@@ -1,0 +1,65 @@
+diff --git a/src/spyOn.ts b/src/spyOn.ts
+index cf0f3f8..fc03fe5 100644
+--- a/src/spyOn.ts
++++ b/src/spyOn.ts
+@@ -25,6 +25,19 @@ type Constructors<T> = {
+ let getDescriptor = (obj: any, method: string | symbol | number) =>
+   Object.getOwnPropertyDescriptor(obj, method)
+ 
++let findInPrototypeChain = (
++  obj: any,
++  method: string | symbol | number
++): PropertyDescriptor | undefined => {
++  let current = obj
++  while (current) {
++    let desc = Object.getOwnPropertyDescriptor(current, method)
++    if (desc) return desc
++    current = Object.getPrototypeOf(current)
++  }
++  return undefined
++}
++
+ let setPototype = (fn: any, val: any) => {
+   if (val != null && typeof val === 'function' && val.prototype != null) {
+     // inherit prototype, keep original prototype chain
+@@ -70,6 +83,17 @@ export function internalSpyOn<T, K extends string & keyof T>(
+   let protoDescriptor = proto && getDescriptor(proto, accessName)
+   let originalDescriptor = objDescriptor || protoDescriptor
+ 
++  // For getter/setter access, search the full prototype chain if not found yet
++  if (
++    !originalDescriptor &&
++    (accessType === 'get' || accessType === 'set')
++  ) {
++    originalDescriptor = findInPrototypeChain(obj, accessName)
++  }
++
++  // Track whether the original was on the object itself or inherited
++  let isOwn = !!objDescriptor
++
+   assert(
+     originalDescriptor || accessName in obj,
+     `${String(accessName)} does not exist`
+@@ -114,10 +138,17 @@ export function internalSpyOn<T, K extends string & keyof T>(
+     ;(desc as PropertyDescriptor)[accessType] = cb
+     define(obj, accessName, desc)
+   }
+-  let restore = () =>
+-    originalDescriptor && !original
+-      ? define(obj, accessName, originalDescriptor)
+-      : reassign(original)
++  let restore = () => {
++    if (originalDescriptor && !original) {
++      define(obj, accessName, originalDescriptor)
++    } else if (!isOwn && originalDescriptor) {
++      // Method was inherited from prototype — remove the own property
++      // so the prototype's original method/getter/setter is visible again
++      delete (obj as any)[accessName]
++    } else {
++      reassign(original)
++    }
++  }
+ 
+   if (!mock) mock = original
+ 
+

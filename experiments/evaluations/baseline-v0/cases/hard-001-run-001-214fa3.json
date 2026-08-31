@@ -1,0 +1,78 @@
+{
+  "runId": "hard-001-run-001-214fa3",
+  "caseId": "hard-001",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 2284,
+  "startedAt": "2026-08-31T11:55:38.049Z",
+  "completedAt": "2026-08-31T11:55:40.333Z",
+  "caseMeta": {
+    "repository": "immer",
+    "type": "historical",
+    "difficulty": "hard",
+    "categories": [
+      "state-management",
+      "lifecycle",
+      "api-behavior"
+    ]
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hard-001-LY22Nd\\benchmark\\repositories\\immer",
+      "stdout": "empty patch - no changes applied",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 1026,
+      "command": "node tsx benchmark\\cases\\hard-001\\public\\reproduce.ts",
+      "stdout": "Test reverse: baseUnchanged=false nextCorrect=true => FAIL\n  baseState=[{\"id\":1},{\"id\":2},{\"id\":99}] expected [{\"id\":1},{\"id\":2},{\"id\":3}]\n  reordered={\"id\":99} expected {\"id\":3}\n  nextState=[{\"id\":99},{\"id\":2},{\"id\":1}] expected [{\"id\":99},{\"id\":2},{\"id\":1}]\nOverall reproduce: FAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  },
+  "metrics": {
+    "durationMs": 608561,
+    "totalTurns": 82,
+    "toolCalls": 52,
+    "commandsExecuted": 18,
+    "filesInspected": 17,
+    "filesChanged": 0,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 157896,
+    "outputTokens": 20864,
+    "totalTokens": 1380040
+  },
+  "cost": {
+    "inputTokens": 157896,
+    "outputTokens": 20864,
+    "totalTokens": 178760,
+    "inputCostUsd": 0.022105,
+    "outputCostUsd": 0.005842,
+    "totalCostUsd": 0.031311,
+    "costUsd": 0.031311,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  }
+}

@@ -1,0 +1,27 @@
+diff --git a/lib/utils.js b/lib/utils.js
+index 10698bd..667e4fb 100644
+--- a/lib/utils.js
++++ b/lib/utils.js
+@@ -338,9 +338,18 @@ var combine = function combine(a, b, arrayLimit, plainObjects, throwOnLimitExcee
+         if (throwOnLimitExceeded) {
+             throw new RangeError('Array limit exceeded. Only ' + arrayLimit + ' element' + (arrayLimit === 1 ? '' : 's') + ' allowed in an array.');
+         }
+-        var newIndex = getMaxIndex(a) + 1;
+-        a[newIndex] = b;
+-        setMaxIndex(a, newIndex);
++        // If b is an array, spread its elements into consecutive indices
++        if (isArray(b)) {
++            for (var i = 0; i < b.length; i++) {
++                var newIndex = getMaxIndex(a) + 1;
++                a[newIndex] = b[i];
++                setMaxIndex(a, newIndex);
++            }
++        } else {
++            var newIndex = getMaxIndex(a) + 1;
++            a[newIndex] = b;
++            setMaxIndex(a, newIndex);
++        }
+         return a;
+     }
+ 
+
