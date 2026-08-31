@@ -219,10 +219,10 @@ export async function runReproduce(tmpRoot: string, caseId: string, timeoutMs: n
   const { fileURLToPath } = await import("node:url");
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const ROOT = pathResolve(__dirname, "../..");
-  const fallbackBin = join(ROOT, "node_modules/.bin/tsx");
-  const fallbackCommand = existsSync(fallbackBin) ? fallbackBin : "npx";
-  const fallbackArgs = existsSync(fallbackBin) ? [reproRelative] : ["tsx", reproRelative];
-  const fallbackString = existsSync(fallbackBin) ? `${fallbackBin} ${reproRelative}` : `npx tsx ${reproRelative}`;
+  const tsxMjs = join(ROOT, "node_modules/tsx/dist/cli.mjs");
+  const fallbackCommand = existsSync(tsxMjs) ? process.execPath : (process.platform === "win32" ? "npx.cmd" : "npx");
+  const fallbackArgs = existsSync(tsxMjs) ? [tsxMjs, reproRelative] : ["tsx", reproRelative];
+  const fallbackString = existsSync(tsxMjs) ? `node tsx ${reproRelative}` : `npx tsx ${reproRelative}`;
 
   return tryBunThenFallback("bun", ["run", reproRelative], bunString, fallbackCommand, fallbackArgs, fallbackString, tmpRoot, timeoutMs);
 }
@@ -234,10 +234,10 @@ export async function runOracle(tmpRoot: string, caseId: string, timeoutMs: numb
   const { fileURLToPath } = await import("node:url");
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const ROOT = pathResolve(__dirname, "../..");
-  const vitestBin = pathJoin(ROOT, "node_modules/.bin/vitest");
-  const fallbackCommand = existsSync(vitestBin) ? vitestBin : "npx";
-  const fallbackArgs = existsSync(vitestBin) ? ["run", oracleRelative] : ["vitest", "run", oracleRelative];
-  const fallbackString = existsSync(vitestBin) ? `${vitestBin} run ${oracleRelative}` : `npx vitest run ${oracleRelative}`;
+  const vitestMjs = pathJoin(ROOT, "node_modules/vitest/vitest.mjs");
+  const fallbackCommand = existsSync(vitestMjs) ? process.execPath : (process.platform === "win32" ? "npx.cmd" : "npx");
+  const fallbackArgs = existsSync(vitestMjs) ? [vitestMjs, "run", oracleRelative] : ["vitest", "run", oracleRelative];
+  const fallbackString = existsSync(vitestMjs) ? `node vitest run ${oracleRelative}` : `npx vitest run ${oracleRelative}`;
 
   return tryBunThenFallback("bun", ["test", oracleRelative], bunString, fallbackCommand, fallbackArgs, fallbackString, tmpRoot, timeoutMs);
 }
@@ -249,10 +249,10 @@ export async function runRegression(tmpRoot: string, caseId: string, repository:
   const { fileURLToPath } = await import("node:url");
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const ROOT = pathResolve(__dirname, "../..");
-  const vitestBin = pathJoin(ROOT, "node_modules/.bin/vitest");
-  const fallbackCommand = existsSync(vitestBin) ? vitestBin : "npx";
-  const fallbackArgs = existsSync(vitestBin) ? ["run", regressionRelative] : ["vitest", "run", regressionRelative];
-  const fallbackString = existsSync(vitestBin) ? `${vitestBin} run ${regressionRelative}` : `npx vitest run ${regressionRelative}`;
+  const vitestMjs = pathJoin(ROOT, "node_modules/vitest/vitest.mjs");
+  const fallbackCommand = existsSync(vitestMjs) ? process.execPath : (process.platform === "win32" ? "npx.cmd" : "npx");
+  const fallbackArgs = existsSync(vitestMjs) ? [vitestMjs, "run", regressionRelative] : ["vitest", "run", regressionRelative];
+  const fallbackString = existsSync(vitestMjs) ? `node vitest run ${regressionRelative}` : `npx vitest run ${regressionRelative}`;
 
   return tryBunThenFallback("bun", ["test", regressionRelative], bunString, fallbackCommand, fallbackArgs, fallbackString, tmpRoot, timeoutMs);
 }

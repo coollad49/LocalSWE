@@ -116,24 +116,21 @@ function exec(cmd: string, args: string[], cwd: string, timeout = 15000): Promis
 
 async function runBunFile(filePath: string, cwd: string): Promise<{ code: number; stdout: string; stderr: string }> {
   let bunResult: { code: number; stdout: string; stderr: string } | null = null;
+  const tsxMjs = join(ROOT, "node_modules/tsx/dist/cli.mjs");
   try {
     bunResult = await exec("bun", ["run", filePath], cwd);
   } catch (e: any) {
     // Spawn failed (bun not installed) → fallback to tsx
-    const tsxBin = join(ROOT, "node_modules/.bin/tsx");
-    if (existsSync(tsxBin)) return exec(tsxBin, [filePath], cwd);
-    return exec("npx", ["tsx", filePath], cwd);
+    if (existsSync(tsxMjs)) return exec(process.execPath, [tsxMjs, filePath], cwd);
+    return exec(process.platform === "win32" ? "npx.cmd" : "npx", ["tsx", filePath], cwd);
   }
   // If bun failed due to TypeScript ESM incompatibility (e.g., immer's `export 'Draft' not found`), fallback to tsx for correctness
   if (bunResult && bunResult.code !== 0 && (bunResult.stderr.includes("SyntaxError") || bunResult.stderr.includes("not found in") || bunResult.stderr.includes("Cannot find package"))) {
-    const tsxBin = join(ROOT, "node_modules/.bin/tsx");
-    if (existsSync(tsxBin)) {
-      const fallback = await exec(tsxBin, [filePath], cwd);
-      // Prefer fallback if it succeeded or has different error; otherwise return original
-      // If tsx also fails, return whichever is more informative; prioritize tsx for TS handling
+    if (existsSync(tsxMjs)) {
+      const fallback = await exec(process.execPath, [tsxMjs, filePath], cwd);
       if (fallback.code === 0 || !fallback.stderr.includes("not found in")) return fallback;
     } else {
-      const fallback = await exec("npx", ["tsx", filePath], cwd);
+      const fallback = await exec(process.platform === "win32" ? "npx.cmd" : "npx", ["tsx", filePath], cwd);
       if (fallback.code === 0) return fallback;
     }
   }
@@ -142,23 +139,20 @@ async function runBunFile(filePath: string, cwd: string): Promise<{ code: number
 
 async function runBunTest(testPath: string, cwd: string): Promise<{ code: number; stdout: string; stderr: string }> {
   let bunResult: { code: number; stdout: string; stderr: string } | null = null;
+  const vitestMjs = join(ROOT, "node_modules/vitest/vitest.mjs");
   try {
     bunResult = await exec("bun", ["test", testPath], cwd);
   } catch (e: any) {
-    const vitestBin = join(ROOT, "node_modules/.bin/vitest");
-    if (existsSync(vitestBin)) return exec(vitestBin, ["run", testPath], cwd);
-    return exec("npx", ["vitest", "run", testPath], cwd);
+    if (existsSync(vitestMjs)) return exec(process.execPath, [vitestMjs, "run", testPath], cwd);
+    return exec(process.platform === "win32" ? "npx.cmd" : "npx", ["vitest", "run", testPath], cwd);
   }
   // Fallback to vitest if bun failed due to TS/ESM incompatibility (e.g., type-only imports)
   if (bunResult && bunResult.code !== 0 && (bunResult.stderr.includes("SyntaxError") || bunResult.stderr.includes("not found in") || bunResult.stderr.includes("Cannot find package") )) {
-    // Ensure the file exists in this temp workspace before falling back; vitest will handle explicit path
-    const vitestBin = join(ROOT, "node_modules/.bin/vitest");
-    if (existsSync(vitestBin)) {
-      const fallback = await exec(vitestBin, ["run", testPath], cwd);
-      // Prefer vitest result when bun had compilation error
+    if (existsSync(vitestMjs)) {
+      const fallback = await exec(process.execPath, [vitestMjs, "run", testPath], cwd);
       return fallback;
     }
-    return exec("npx", ["vitest", "run", testPath], cwd);
+    return exec(process.platform === "win32" ? "npx.cmd" : "npx", ["vitest", "run", testPath], cwd);
   }
   return bunResult!;
 }
@@ -331,6 +325,15 @@ async function createTempWorkspace(caseId: string, repository: string, buggy: bo
     try { cpSync(repoDir, destHardRepos, { recursive: true }); } catch {}
     cpSync(caseDir, destCase, { recursive: true });
     try { cpSync(caseDir, destHardCase, { recursive: true }); } catch {}
+
+    // Link root node_modules into tmpRoot for vitest package resolution
+    const rootNodeModules = join(ROOT, "node_modules");
+    if (existsSync(rootNodeModules)) {
+      try {
+        const { symlinkSync } = await import("node:fs");
+        symlinkSync(rootNodeModules, join(tmpRoot, "node_modules"), "junction");
+      } catch {}
+    }
 
     if (buggy) {
       const manifestRaw = await readFile(join(caseDir, "manifest.json"), "utf-8");

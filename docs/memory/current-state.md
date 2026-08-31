@@ -1,15 +1,15 @@
-# Current State — 2026-08-30 v0.5 FROZEN + Baseline v0 + Evaluator v0 (frozen) + Frontier-Hard + Agent V1 (frozen)
+# Current State — 2026-08-31 v0.5 FROZEN + Windows Cross-Platform Fixes + Master Experiment Runner
 
 **Benchmark version:** 0.5 — FROZEN for experiments (12 Core: 6 genuine historical + 6 synthetic + 5 Frontier-Hard: all genuine historical)
-**Fingerprint:** `sha256:20f1003c3f0e10bcd6293f49ca2a2167011941f5b0677076c93103b10f411dde` (sha256 over manifests + issue.md + provenance.md + buggy + oracles + schema + 12 repos — 7 Core + 5 Hard)
-**Previous:** v0.4 `sha256:cead5c6e50fb88d367729ded45f77eb8375320953549e8ff41649731598e4b9e` preserved as `benchmark/validation-report.v0.4.json`
-**Cases:** 17 (12 Core + 5 Frontier-Hard) — 17/17 VALID (12/12 Core + 5/5 Hard, isolated v0.5 validator, bun-first → vitest/tsx fallback with SyntaxError fallback for `immer`/`superjson` type-only imports)
+**Fingerprint:** `sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf` (sha256 over manifests + issue.md + provenance.md + buggy + oracles + schema + 12 repos — 7 Core + 5 Hard)
+**Cases:** 17 (12 Core + 5 Frontier-Hard) — 17/17 VALID on Windows & Linux (isolated v0.5 validator, bun-first → direct Node `process.execPath` + `.mjs` fallback for `tsx` and `vitest` to prevent `spawn ENOENT` on Windows).
 **Repositories:** 12 (7 Core: 3 synthetic + 4 genuine + 5 Hard: immer, qs, superjson, p-queue, path-to-regexp — all MIT/BSD-3)
-**Validator:** `bun run benchmark:validate` / `npm run benchmark:validate` v0.5 isolated (temp workspace, path containment, exec guard, oracle 3×, fingerprint includes provenance, dual-root discovery) passes
-**Type check:** `bun run check-types` + `bun run benchmark:check-types` passes (also `npm run`); `vitest` + `tsx` for harness
-**Repo tests:** all pass on known-good via `vitest run` (`bun run test` / `npm test` both → 40 files, 233 tests — 30+ benchmark + evaluator + 5 V1 workflow)
-**Evaluator:** v0 deterministic (see docs/decisions/evaluator-v0.md) — `bun run evaluate` / `npm run evaluate` passes, now handles `hard-*` via dual-root and `SyntaxError` fallback
-**Agent V1:** structured workflow (see `docs/decisions/agent-v1.md`) — `bun run v1:run:case -- synth-001 --mock` / `V1_MOCK=1 bun run v1:run` passes, same Pi/model/workspace, single session, file-based hypotheses via `.v1/state.json`, evidence gates, bounded 5 iterations, patch hygiene via pathspec, telemetry `v1:{phases,evidence,hypotheses}`
+**Validator:** `bun run benchmark:validate` passes 17/17 cases deterministically.
+**Infrastructure:** `bun run scripts/verify-baseline-infra.ts` passes 17/17 checks.
+**Type check:** `bun run check-types` passes strictly.
+**Evaluator:** v1 deterministic with pricing, metrics, comparison, and reporting.
+**Agent V1:** Structured workflow with streamlined phase progression, auto-advance upon verified local tests, eliminated redundant gate-nudge round-trips, bounded 5 iterations.
+**Master Runner:** `bun run experiment` (`src/cli/run-experiment.ts`) orchestrates Baseline v0 vs Agent V1 across benchmark cases, supports `--reuse-baseline` to leverage completed baseline runs, streams real-time tool execution logs across concurrent workers, executes Evaluator, and outputs comparative delta table and reports in a single command.
 
 ## What exists — Benchmark (v0.5 FROZEN — 17 cases)
 

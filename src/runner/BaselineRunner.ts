@@ -177,7 +177,7 @@ export class BaselineRunner {
   async runBaseline(options: RunBaselineOptions): Promise<RepairRun[]> {
     const caseIds = options.caseIds ?? (await CaseLoader.listCases());
     const runsPerCase = options.runsPerCase ?? this.config.runsPerCase ?? 1;
-    const concurrency = Math.max(1, Math.min(options.concurrency ?? 1, 4)); // cap at 4 for safety
+    const concurrency = Math.max(1, Math.min(options.concurrency ?? 1, 16));
 
     const results: RepairRun[] = [];
 

@@ -1,4 +1,5 @@
 import { describe, test, expect } from "vitest";
+import { tmpdir } from "node:os";
 import { execDeterministic, toStageResult } from "../exec.ts";
 
 describe("execDeterministic", () => {
@@ -6,7 +7,7 @@ describe("execDeterministic", () => {
     const res = await execDeterministic({
       command: "node",
       args: ["-e", "console.log('hello'); process.exit(0)"],
-      cwd: "/tmp",
+      cwd: tmpdir(),
       timeoutMs: 2000,
       commandString: "node -e hello",
     });
@@ -21,7 +22,7 @@ describe("execDeterministic", () => {
     const res = await execDeterministic({
       command: "node",
       args: ["-e", "process.exit(1)"],
-      cwd: "/tmp",
+      cwd: tmpdir(),
       timeoutMs: 2000,
       commandString: "node -e fail",
     });
@@ -35,7 +36,7 @@ describe("execDeterministic", () => {
     const res = await execDeterministic({
       command: "node",
       args: ["-e", "setInterval(()=>{}, 100)"],
-      cwd: "/tmp",
+      cwd: tmpdir(),
       timeoutMs: 400,
       commandString: "node sleep",
     });
@@ -49,7 +50,7 @@ describe("execDeterministic", () => {
     const res = await execDeterministic({
       command: "this-command-does-not-exist-xyz",
       args: [],
-      cwd: "/tmp",
+      cwd: tmpdir(),
       timeoutMs: 1000,
       commandString: "missing",
     });
@@ -63,7 +64,7 @@ describe("execDeterministic", () => {
     const res = await execDeterministic({
       command: "node",
       args: ["-e", "console.error('err'); process.exit(1)"],
-      cwd: "/tmp",
+      cwd: tmpdir(),
       timeoutMs: 2000,
       commandString: "node err",
     });
@@ -75,7 +76,7 @@ describe("execDeterministic", () => {
     const res = await execDeterministic({
       command: "node",
       args: ["-e", "console.log(process.argv[1])", "hello; echo injected"],
-      cwd: "/tmp",
+      cwd: tmpdir(),
       timeoutMs: 2000,
       commandString: "node injection test",
     });

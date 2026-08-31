@@ -201,16 +201,13 @@ async function main() {
   await check("12. Timeout handling works", async () => {
     // Test via exec timeout: run a slow command with timeout
     const { execWithTimeout } = await import("../src/utils/git.ts");
+    const { tmpdir } = await import("node:os");
     let timedOut = false;
     try {
-      await execWithTimeout("sleep", ["2"], "/tmp", 100);
+      await execWithTimeout("node", ["-e", "setInterval(()=>{}, 100)"], tmpdir(), 100);
     } catch (e) {
       if ((e as Error).message.includes("Timeout")) timedOut = true;
     }
-    // Also test runner timeout via invalid case is not timeout, but ensure timeout path exists
-    // For Pi timeout, test with mocked slow agent: create agent with very low timeout and run real Pi that would need network?
-    // Instead, test that timeout config is respected and trajectory would contain timeout if triggered.
-    // Here we at least verify exec timeout works.
     return timedOut;
   })();
 

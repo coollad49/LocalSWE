@@ -421,14 +421,19 @@ export class PiCodingAgent implements CodingAgent {
     let modelFound = false;
 
     // Model resolution: use AGENT_MODEL from .env exactly as provided (standard way)
-    // No synthesis or normalization — pass through to pi catalog via getModel(provider, id)
-    const modelStr = this.config.model; // e.g. "opencode-go/muse-spark-1.2-contributor" from .env AGENT_MODEL
+    const modelStr = this.config.model; // e.g. "opencode-go/mimo-v2.5" or "mimo-v2.5" with PROVIDER=opencode-go
     const slashIdx = modelStr.indexOf("/");
     let provider: string | undefined;
     let modelId: string | undefined;
     if (slashIdx > 0) {
       provider = modelStr.slice(0, slashIdx);
       modelId = modelStr.slice(slashIdx + 1);
+    } else if (providerEnv) {
+      provider = providerEnv;
+      modelId = modelStr;
+    }
+
+    if (provider && modelId) {
       try {
         model = getModel(provider, modelId);
         if (model) {
@@ -515,8 +520,26 @@ export class PiCodingAgent implements CodingAgent {
 
     const unsubAgent = session.agent.subscribe((event: unknown, _signal: AbortSignal) => {
       const ev = event as { type: string };
-      // Avoid huge payloads: stringify but truncate
       trajectory.append("agent", ev.type ?? "unknown", event);
+
+      if (process.env.BASELINE_LIVE_PROGRESS === "1") {
+        const type = ev.type ?? "";
+        const data = (ev as { data?: Record<string, unknown> })?.data ?? (event as Record<string, unknown>);
+        if (type === "tool_execution_start") {
+          const tool = (data?.toolName as string) ?? "tool";
+          const args = data?.args as Record<string, unknown> | undefined;
+          const target = args?.path ?? args?.command ?? args?.pattern ?? args?.query ?? "";
+          console.log(`  [${task.caseId}] 🔧 ${tool} ${String(target).slice(0, 75)}`);
+        } else if (type === "tool_execution_end") {
+          const tool = (data?.toolName as string) ?? "tool";
+          if (tool === "bash") {
+            const isError = data?.isError as boolean | undefined;
+            const res = data?.result as Record<string, unknown> | undefined;
+            const code = (res?.exitCode as number) ?? (isError ? 1 : 0);
+            console.log(`  [${task.caseId}] ⚡ bash exit: ${code}`);
+          }
+        }
+      }
     });
 
     // Propagate abort signal to Pi if timeout occurs

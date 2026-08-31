@@ -143,7 +143,7 @@ export class V1Runner {
   async runV1(options: RunV1Options): Promise<RepairRun[]> {
     const caseIds = options.caseIds ?? (await CaseLoader.listCases());
     const runsPerCase = options.runsPerCase ?? this.config.runsPerCase ?? 1;
-    const concurrency = Math.max(1, Math.min(options.concurrency ?? 1, 4));
+    const concurrency = Math.max(1, Math.min(options.concurrency ?? 1, 16));
 
     const results: RepairRun[] = [];
     const queue: Array<{ caseId: string; runIndex: number }> = [];

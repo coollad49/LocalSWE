@@ -2,6 +2,31 @@
 
 All notable changes to the Frontier Verifier project.
 
+## [0.8.0] - 2026-08-31 — Windows Cross-Platform Fixes, V1 Turn Optimization & Master Experiment Runner
+
+### Fixed
+
+- **Windows binary spawning (`spawn ENOENT`):** Replaced extensionless `node_modules/.bin/tsx` and `vitest` with `process.execPath` + direct path to `.mjs` entrypoints (`node_modules/tsx/dist/cli.mjs` and `node_modules/vitest/vitest.mjs`) in `src/evaluator/exec.ts` and `benchmark/scripts/validate.ts`.
+- **Node module resolution in temp workspaces:** Linked root `node_modules` into evaluator and validator temp workspaces via directory junctions, fixing module resolution (`copy-anything`, `eventemitter3`, `mri`) during isolated benchmark runs.
+- **Cross-platform timeout & tmp tests:** Fixed check 12 in `scripts/verify-baseline-infra.ts` and `src/evaluator/tests/exec.test.ts` to use `os.tmpdir()` and cross-platform Node process timers instead of Unix `sleep` and `/tmp`.
+
+### Added
+
+- **Master Experiment Runner (`bun run experiment`):** Unified CLI in `src/cli/run-experiment.ts` that runs Baseline v0 and Agent V1 across benchmark cases, executes the Evaluator, prints a rich comparative delta table to the terminal, and writes structured Markdown/JSON reports to `experiments/reports/<id>/`.
+  - Added package scripts: `bun run experiment`, `bun run experiment:mock`, `bun run experiment:fast`.
+
+### Optimized
+
+- **V1 Turn Budget & Speed:** Streamlined V1 phase progression in `src/v1/agent/V1CodingAgent.ts`. Automatically detects early verification passes on local test runs, bypasses redundant gate-nudge round-trips by auto-recording structured inspection/hypothesis evidence, and reduces per-case execution latency from ~600s timeouts down to fast, focused turns.
+
+### Evidence
+
+- `bun run scripts/verify-baseline-infra.ts`: 17/17 checks passed on Windows.
+- `bun run benchmark:validate`: 17/17 benchmark cases valid (`sha256:9d5d8138...`).
+- `bun test src/v1/tests`: 36/36 tests passed.
+- `bun run check-types`: Clean TypeScript compilation (0 errors).
+- `bun run experiment --cases synth-001 --concurrency 1`: Live cloud model pilot executed Baseline (100% VFR) and Agent V1 (100% VFR) end-to-end with comparative summary.
+
 ## [0.1.0] - 2026-08-29 — Benchmark Construction
 
 ### Added

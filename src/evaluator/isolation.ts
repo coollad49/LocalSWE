@@ -84,6 +84,15 @@ export async function createIsolatedWorkspace(caseId: string, repository: string
     cpSync(srcCase, destCase, { recursive: true });
     try { cpSync(srcCase, destHardCase, { recursive: true }); } catch {}
 
+    // Link root node_modules into tmpRoot for vitest package resolution
+    const rootNodeModules = join(ROOT, "node_modules");
+    if (existsSync(rootNodeModules)) {
+      try {
+        const { symlinkSync } = await import("node:fs");
+        symlinkSync(rootNodeModules, join(tmpRoot, "node_modules"), "junction");
+      } catch {}
+    }
+
     // Prepare Buggy Workspace: overlay artifacts/buggy onto repo to recreate exact buggy baseline the agent encountered
     const srcBuggy = join(srcCase, "artifacts/buggy");
     if (existsSync(srcBuggy)) {
