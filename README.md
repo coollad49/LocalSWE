@@ -104,7 +104,7 @@ Verified Fix Rate (VFR) Evolution:
 
 ## 4. Improvement Changelog Overview
 
-Below is the summary of how our solution evolved across iterations. For the complete, detailed engineering narrative, see [**`CHANGELOG.md`**](file:///c:/Users/cooll/Documents/code/frontier-verifier/CHANGELOG.md).
+Below is the summary of how our solution evolved across iterations. For the complete, detailed engineering narrative, see [**`CHANGELOG.md`**]
 
 | Stage | What We Tried and Why | Evidence (From 148 Real Runs) | Decision / Learning |
 | :--- | :--- | :--- | :--- |
@@ -113,7 +113,7 @@ Below is the summary of how our solution evolved across iterations. For the comp
 | **Iteration 2 (`agent-v2`)** | Implemented **Adversarial Invariant Synthesis** and **Automated State Rollback on Regression** (`git checkout`). | **77.78% VFR** (\$0.0243 / case, 253s duration). Solved `hard-001` (100%) and `hard-004` (100%). | **KEPT (Major milestone).** Proved that state rollback stops error compounding and slashes token cost by 80%. |
 | **Iteration 3 (`agent-v3` / LocalSWE)** | Added **Hypothesis Memory with Negative Lessons**, **Concurrent Jitter Fuzzing**, and **Static Dependency Graph Indexing**. | **83.33% VFR** (15/18 verified, 94.44% repro rate). Highest fix rate across all benchmark tiers. | **KEPT (Final Contribution).** Solved remaining multi-file amnesia and concurrent race conditions. |
 
-👉 *Read the full iteration-by-iteration breakdown in [**`CHANGELOG.md`**](file:///c:/Users/cooll/Documents/code/frontier-verifier/CHANGELOG.md).*
+👉 *Read the full iteration-by-iteration breakdown in [**`CHANGELOG.md`**]
 
 ---
 
@@ -144,7 +144,7 @@ Even with hypothesis memory and jitter testing, compact models occasionally stru
 
 ## 7. Clean Environment Reproduction Guide
 
-Anyone can reproduce our entire baseline, V1, V2, and LocalSWE V3 evaluation from a clean environment in under 5 minutes. Full reproduction steps for both downloaded archives and GitHub clones are documented in [**`REPRODUCTION.md`**](file:///c:/Users/cooll/Documents/code/frontier-verifier/REPRODUCTION.md).
+Anyone can reproduce our entire baseline, V1, V2, and LocalSWE V3 evaluation from a clean environment in under 5 minutes. Full reproduction steps for both downloaded archives and GitHub clones are documented in [**`REPRODUCTION.md`**]
 
 ### Quick Reproduction Commands:
 ```bash
@@ -199,10 +199,3 @@ localswe/
 ```
 
 ---
-
-## 9. Final Deliverables Checklist
-
-- [x] **01 Complete Code & Improvement Changelog**: Full source code in `src/`, summary in `README.md`, detailed log in [`CHANGELOG.md`](file:///c:/Users/cooll/Documents/code/frontier-verifier/CHANGELOG.md).
-- [x] **02 Reproduction Guide**: Complete clean-environment guide in [`REPRODUCTION.md`](file:///c:/Users/cooll/Documents/code/frontier-verifier/REPRODUCTION.md).
-- [x] **03 Solution Video**: 5-minute video walkthrough demonstrating problem statement, live execution, and improvement changelog.
-- [x] **04 Agent Trajectories**: 148 complete trajectory files in `experiments/runs/` + aggregated dataset in `evaluation/trajectory-dataset.json`.

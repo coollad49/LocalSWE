@@ -6,9 +6,9 @@
   "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
   "status": "completed",
   "verdict": "false_confidence",
-  "durationMs": 1731,
-  "startedAt": "2026-08-31T15:33:39.074Z",
-  "completedAt": "2026-08-31T15:33:40.805Z",
+  "durationMs": 1566,
+  "startedAt": "2026-08-31T15:14:09.956Z",
+  "completedAt": "2026-08-31T15:14:11.522Z",
   "caseMeta": {
     "repository": "mri",
     "type": "historical",
@@ -22,15 +22,15 @@
     "patchApply": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 221,
-      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-004-nWtKne\\patch-1788190420079.diff",
+      "durationMs": 197,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-004-A0N1H2\\patch-1788189250836.diff",
       "stdout": "",
       "stderr": ""
     },
     "reproduction": {
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 304,
+      "durationMs": 143,
       "command": "bun run benchmark\\cases\\hist-004\\public\\reproduce.ts",
       "stdout": "mri(['-t'], {default:{t:true}}) => {\"_\":[],\"t\":true}\n_ empty? true (length 0) expected true\nt is boolean? true expected true, t===true? true\nhas numeric leak (1 in _)? false expected false\nalias check mri(['-t'], {alias:{t:['tt']}, default:{t:true}}) => {\"_\":[],\"t\":true,\"tt\":true}\nalias check pass? true\nPASS\n",
       "stderr": "",
@@ -39,10 +39,10 @@
     "oracle": {
       "status": "failed",
       "exitCode": 1,
-      "durationMs": 196,
+      "durationMs": 343,
       "command": "bun test benchmark\\cases\\hist-004\\private\\oracle.test.ts",
       "stdout": "bun test v1.3.14 (0d9b296a)\n",
-      "stderr": "\nbenchmark\\cases\\hist-004\\private\\oracle.test.ts:\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > core bug: -t with default true does not leak into _ [2.20ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default variations [0.33ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default & alias [0.41ms]\n41 |     expect(typeof baz.two).toBe(\"boolean\");\n42 |   });\n43 | \n44 |   test(\"flag boolean with default string & alias (string coercion branch)\", () => {\n45 |     const foo = mri([\"-t\"], { default: { t: \"hi\" } });\n46 |     expect(foo).toEqual({ t: \"\", _: [] });\n                     ^\nerror: expect(received).toEqual(expected)\n\n  {\n    \"_\": [],\n-   \"t\": \"\",\n+   \"t\": true,\n  }\n\n- Expected  - 1\n+ Received  + 1\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-004-nWtKne\\benchmark\\cases\\hist-004\\private\\oracle.test.ts:46:17)\n(fail) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default string & alias (string coercion branch) [1.27ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > no numeric pollution in _ for boolean defaults [0.57ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > regression: basic non-boolean parsing still works [0.75ms]\n\n 5 pass\n 1 fail\n 25 expect() calls\nRan 6 tests across 1 file. [115.00ms]\n",
+      "stderr": "\nbenchmark\\cases\\hist-004\\private\\oracle.test.ts:\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > core bug: -t with default true does not leak into _ [2.49ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default variations [0.37ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default & alias [0.51ms]\n41 |     expect(typeof baz.two).toBe(\"boolean\");\n42 |   });\n43 | \n44 |   test(\"flag boolean with default string & alias (string coercion branch)\", () => {\n45 |     const foo = mri([\"-t\"], { default: { t: \"hi\" } });\n46 |     expect(foo).toEqual({ t: \"\", _: [] });\n                     ^\nerror: expect(received).toEqual(expected)\n\n  {\n    \"_\": [],\n-   \"t\": \"\",\n+   \"t\": true,\n  }\n\n- Expected  - 1\n+ Received  + 1\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-004-A0N1H2\\benchmark\\cases\\hist-004\\private\\oracle.test.ts:46:17)\n(fail) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default string & alias (string coercion branch) [1.39ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > no numeric pollution in _ for boolean defaults [0.59ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > regression: basic non-boolean parsing still works [0.71ms]\n\n 5 pass\n 1 fail\n 25 expect() calls\nRan 6 tests across 1 file. [263.00ms]\n",
       "timedOut": false
     },
     "regression": {

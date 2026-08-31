@@ -3,7 +3,7 @@
 **Benchmark:** 0.5 `sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf`
 **Experiment:** localswe-benchmark
 **Runs Dir:** `C:\Users\cooll\Documents\code\frontier-verifier\experiments\runs`
-**Timestamp:** 2026-08-31T15:36:44.983Z
+**Timestamp:** 2026-08-31T16:17:04.383Z
 **Total Runs:** 148
 
 | Metric | Baseline v0 | V1 (Target) | Status |
@@ -116,7 +116,7 @@
 | hard-002-run-001-e88bde | hard-002 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 1498ms |
 | hard-002-run-001-f38dcb | hard-002 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 3102ms |
 | hard-002-run-001-fbed24 | hard-002 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 2241ms |
-| hard-003-run-001-737a2e | hard-003 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 2247ms |
+| hard-003-run-001-737a2e | hard-003 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 1962ms |
 | hard-003-run-001-7ba7a9 | hard-003 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 1419ms |
 | hard-003-run-001-7d2b0b | hard-003 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 1186ms |
 | hard-003-run-001-877413 | hard-003 | FALSE_CONFIDENCE | PASSED | PASSED | FAILED | SKIPPED | 1580ms |
@@ -168,7 +168,7 @@
 | hist-003-run-001-650a23 | hist-003 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1949ms |
 | hist-003-run-001-8c14a5 | hist-003 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1556ms |
 | hist-003-run-001-8f9ea0 | hist-003 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 2227ms |
-| hist-004-run-001-0c6917 | hist-004 | FALSE_CONFIDENCE | PASSED | PASSED | FAILED | SKIPPED | 1731ms |
+| hist-004-run-001-0c6917 | hist-004 | FALSE_CONFIDENCE | PASSED | PASSED | FAILED | SKIPPED | 1566ms |
 | hist-004-run-001-2610c2 | hist-004 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1519ms |
 | hist-004-run-001-7c58e0 | hist-004 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1509ms |
 | hist-004-run-001-80bf0e | hist-004 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1655ms |
@@ -183,7 +183,7 @@
 | hist-005-run-001-524675 | hist-005 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1636ms |
 | hist-005-run-001-79d6f0 | hist-005 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1784ms |
 | hist-005-run-001-dab367 | hist-005 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1661ms |
-| hist-005-run-001-ea5728 | hist-005 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1930ms |
+| hist-005-run-001-ea5728 | hist-005 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1646ms |
 | hist-006-run-001-2f12b5 | hist-006 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 2089ms |
 | hist-006-run-001-5fac47 | hist-006 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1548ms |
 | hist-006-run-001-96aa54 | hist-006 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1855ms |
@@ -230,7 +230,7 @@
 | synth-004-run-001-eb669c | synth-004 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1604ms |
 | synth-004-run-001-f4c644 | synth-004 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1907ms |
 | synth-004-run-001-fb40e1 | synth-004 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1698ms |
-| synth-005-run-001-013483 | synth-005 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 2162ms |
+| synth-005-run-001-013483 | synth-005 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1710ms |
 | synth-005-run-001-190edb | synth-005 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1583ms |
 | synth-005-run-001-60a979 | synth-005 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1492ms |
 | synth-005-run-001-738d06 | synth-005 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1624ms |
@@ -239,7 +239,7 @@
 | synth-005-run-001-dd8b5c | synth-005 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1503ms |
 | synth-005-run-001-e03bab | synth-005 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1936ms |
 | synth-006-run-001-08d85f | synth-006 | FALSE_CONFIDENCE | PASSED | PASSED | FAILED | SKIPPED | 1806ms |
-| synth-006-run-001-13a5ed | synth-006 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1873ms |
+| synth-006-run-001-13a5ed | synth-006 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1221ms |
 | synth-006-run-001-41b611 | synth-006 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1915ms |
 | synth-006-run-001-445830 | synth-006 | FALSE_CONFIDENCE | PASSED | PASSED | FAILED | SKIPPED | 1425ms |
 | synth-006-run-001-678039 | synth-006 | FALSE_CONFIDENCE | PASSED | PASSED | FAILED | SKIPPED | 1543ms |

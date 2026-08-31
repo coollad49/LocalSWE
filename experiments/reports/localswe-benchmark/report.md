@@ -7,9 +7,9 @@
 **Evaluator:** `1.0.0`
 **Experiment:** localswe-benchmark
 **Runs Dir:** `C:\Users\cooll\Documents\code\frontier-verifier\experiments\runs`
-**Timestamp:** 2026-08-31T15:36:45.018Z
+**Timestamp:** 2026-08-31T16:17:04.393Z
 **Total Runs:** 148 (valid 147, infra errors 1)
-**Elapsed:** 500204ms
+**Elapsed:** 1471ms
 
 ## Agent Versions
 
@@ -423,7 +423,7 @@
 | hard-002-run-001-e88bde | hard-002 | baseline-v0 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 1498ms | $0.0589 | 76 | 609796 | 1 |
 | hard-002-run-001-f38dcb | hard-002 | baseline-v0 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 3102ms | $0.0172 | 80 | 895912 | 1 |
 | hard-002-run-001-fbed24 | hard-002 | baseline-v0 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 2241ms | $0.1158 | 120 | 1391098 | 1 |
-| hard-003-run-001-737a2e | hard-003 | agent-v1 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 2247ms | $0.0249 | 64 | 531248 | 0 |
+| hard-003-run-001-737a2e | hard-003 | agent-v1 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 1962ms | $0.0249 | 64 | 531248 | 0 |
 | hard-003-run-001-7ba7a9 | hard-003 | baseline-v0 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 1419ms | $0.0309 | 62 | 513236 | 1 |
 | hard-003-run-001-7d2b0b | hard-003 | agent-v1 | AGENT_FAILURE | PASSED | FAILED | SKIPPED | SKIPPED | 1186ms | $0.1283 | 86 | 1220004 | 0 |
 | hard-003-run-001-877413 | hard-003 | agent-v3 | FALSE_CONFIDENCE | PASSED | PASSED | FAILED | SKIPPED | 1580ms | $0.3660 | 366 | 38868807 | 1 |
@@ -475,7 +475,7 @@
 | hist-003-run-001-650a23 | hist-003 | baseline-v0 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1949ms | $0.0110 | 62 | 372164 | 1 |
 | hist-003-run-001-8c14a5 | hist-003 | agent-v2 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1556ms | $0.0182 | 92 | 799660 | 1 |
 | hist-003-run-001-8f9ea0 | hist-003 | baseline-v0 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 2227ms | $0.0126 | 62 | 413528 | 1 |
-| hist-004-run-001-0c6917 | hist-004 | agent-v2 | FALSE_CONFIDENCE | PASSED | PASSED | FAILED | SKIPPED | 1731ms | $0.0267 | 116 | 1101524 | 1 |
+| hist-004-run-001-0c6917 | hist-004 | agent-v2 | FALSE_CONFIDENCE | PASSED | PASSED | FAILED | SKIPPED | 1566ms | $0.0267 | 116 | 1101524 | 1 |
 | hist-004-run-001-2610c2 | hist-004 | baseline-v0 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1519ms | $0.1096 | 94 | 786996 | 1 |
 | hist-004-run-001-7c58e0 | hist-004 | agent-v1 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1509ms | $0.0308 | 108 | 1357996 | 3 |
 | hist-004-run-001-80bf0e | hist-004 | agent-v3 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1655ms | $0.2096 | 240 | 15505904 | 1 |
@@ -490,7 +490,7 @@
 | hist-005-run-001-524675 | hist-005 | baseline-v0 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1636ms | $0.0069 | 42 | 158472 | 1 |
 | hist-005-run-001-79d6f0 | hist-005 | agent-v1 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1784ms | $0.0137 | 94 | 674468 | 3 |
 | hist-005-run-001-dab367 | hist-005 | baseline-v0 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1661ms | $0.0150 | 54 | 357784 | 1 |
-| hist-005-run-001-ea5728 | hist-005 | agent-v2 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1930ms | $0.0166 | 106 | 822356 | 1 |
+| hist-005-run-001-ea5728 | hist-005 | agent-v2 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1646ms | $0.0166 | 106 | 822356 | 1 |
 | hist-006-run-001-2f12b5 | hist-006 | agent-v1 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 2089ms | $0.0311 | 96 | 1560436 | 0 |
 | hist-006-run-001-5fac47 | hist-006 | agent-v2 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1548ms | $0.0219 | 102 | 1124908 | 1 |
 | hist-006-run-001-96aa54 | hist-006 | baseline-v0 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1855ms | $0.1314 | 90 | 803832 | 1 |
@@ -537,7 +537,7 @@
 | synth-004-run-001-eb669c | synth-004 | baseline-v0 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1604ms | $0.0313 | 66 | 299388 | 1 |
 | synth-004-run-001-f4c644 | synth-004 | baseline-v0 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1907ms | $0.0050 | 48 | 148496 | 1 |
 | synth-004-run-001-fb40e1 | synth-004 | agent-v1 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1698ms | $0.0080 | 78 | 393924 | 3 |
-| synth-005-run-001-013483 | synth-005 | agent-v2 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 2162ms | $0.0065 | 58 | 262384 | 1 |
+| synth-005-run-001-013483 | synth-005 | agent-v2 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1710ms | $0.0065 | 58 | 262384 | 1 |
 | synth-005-run-001-190edb | synth-005 | agent-v1 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1583ms | $0.5410 | 380 | 7429422 | 0 |
 | synth-005-run-001-60a979 | synth-005 | agent-v1 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1492ms | $0.0094 | 74 | 390132 | 3 |
 | synth-005-run-001-738d06 | synth-005 | baseline-v0 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1624ms | $0.0040 | 34 | 90156 | 1 |
@@ -546,7 +546,7 @@
 | synth-005-run-001-dd8b5c | synth-005 | agent-v1 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1503ms | $0.0238 | 92 | 1208080 | 0 |
 | synth-005-run-001-e03bab | synth-005 | baseline-v0 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1936ms | $0.0051 | 36 | 95860 | 1 |
 | synth-006-run-001-08d85f | synth-006 | agent-v2 | FALSE_CONFIDENCE | PASSED | PASSED | FAILED | SKIPPED | 1806ms | $0.0052 | 46 | 191572 | 1 |
-| synth-006-run-001-13a5ed | synth-006 | agent-v1 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1873ms | $0.3639 | 282 | 4308784 | 0 |
+| synth-006-run-001-13a5ed | synth-006 | agent-v1 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1221ms | $0.3639 | 282 | 4308784 | 0 |
 | synth-006-run-001-41b611 | synth-006 | baseline-v0 | VERIFIED | PASSED | PASSED | PASSED | PASSED | 1915ms | $0.0039 | 32 | 90296 | 1 |
 | synth-006-run-001-445830 | synth-006 | agent-v1 | FALSE_CONFIDENCE | PASSED | PASSED | FAILED | SKIPPED | 1425ms | $0.0071 | 76 | 349760 | 3 |
 | synth-006-run-001-678039 | synth-006 | agent-v3 | FALSE_CONFIDENCE | PASSED | PASSED | FAILED | SKIPPED | 1543ms | $0.0159 | 82 | 680513 | 1 |
