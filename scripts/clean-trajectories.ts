@@ -57,17 +57,12 @@ async function shrinkTrajectoryFile(filePath: string): Promise<{ origBytes: numb
   return { origBytes, newBytes, linesRemoved };
 }
 
-async function main(): Promise<void> {
-  if (!existsSync(RUNS_DIR)) {
-    console.log("No experiments/runs directory found.");
-    return;
+export async function vacuumTrajectories(runsDir: string = RUNS_DIR, silent = false): Promise<{ processedFiles: number; savedMb: number; finalMb: number }> {
+  if (!existsSync(runsDir)) {
+    return { processedFiles: 0, savedMb: 0, finalMb: 0 };
   }
 
-  console.log("==============================================================================");
-  console.log("  Frontier Verifier — Trajectory Log Vacuum Utility");
-  console.log("==============================================================================");
-
-  const entries = await readdir(RUNS_DIR, { withFileTypes: true });
+  const entries = await readdir(runsDir, { withFileTypes: true });
   let totalOrigBytes = 0;
   let totalNewBytes = 0;
   let totalLinesRemoved = 0;
@@ -76,9 +71,9 @@ async function main(): Promise<void> {
   for (const entry of entries) {
     let trajPath = "";
     if (entry.isDirectory()) {
-      trajPath = join(RUNS_DIR, entry.name, "trajectory.jsonl");
+      trajPath = join(runsDir, entry.name, "trajectory.jsonl");
     } else if (entry.name.endsWith(".jsonl")) {
-      trajPath = join(RUNS_DIR, entry.name);
+      trajPath = join(runsDir, entry.name);
     }
 
     if (trajPath && existsSync(trajPath)) {
@@ -89,25 +84,40 @@ async function main(): Promise<void> {
         totalLinesRemoved += linesRemoved;
         processedFiles++;
 
-        if (linesRemoved > 0) {
+        if (!silent && linesRemoved > 0) {
           const origMb = (origBytes / (1024 * 1024)).toFixed(2);
           const newMb = (newBytes / (1024 * 1024)).toFixed(2);
           console.log(`  ✓ ${entry.name}: ${origMb} MB → ${newMb} MB (-${linesRemoved} stream lines)`);
         }
       } catch (e: any) {
-        console.warn(`  Failed to process ${trajPath}: ${e.message}`);
+        if (!silent) console.warn(`  Failed to process ${trajPath}: ${e.message}`);
       }
     }
   }
 
-  const savedMb = ((totalOrigBytes - totalNewBytes) / (1024 * 1024)).toFixed(2);
-  const savedGb = ((totalOrigBytes - totalNewBytes) / (1024 * 1024 * 1024)).toFixed(2);
-  const finalMb = (totalNewBytes / (1024 * 1024)).toFixed(2);
+  const savedMb = Number(((totalOrigBytes - totalNewBytes) / (1024 * 1024)).toFixed(2));
+  const finalMb = Number((totalNewBytes / (1024 * 1024)).toFixed(2));
+
+  return { processedFiles, savedMb, finalMb };
+}
+
+async function main(): Promise<void> {
+  if (!existsSync(RUNS_DIR)) {
+    console.log("No experiments/runs directory found.");
+    return;
+  }
+
+  console.log("==============================================================================");
+  console.log("  Frontier Verifier — Trajectory Log Vacuum Utility");
+  console.log("==============================================================================");
+
+  const { processedFiles, savedMb, finalMb } = await vacuumTrajectories(RUNS_DIR, false);
+  const savedGb = (savedMb / 1024).toFixed(2);
 
   console.log("==============================================================================");
   console.log(`  Processed:      ${processedFiles} trajectory files`);
   console.log(`  Space Saved:    ${savedGb} GB (${savedMb} MB)`);
-  console.log(`  Final Size:     ${finalMb} MB (was ${(totalOrigBytes / (1024 * 1024 * 1024)).toFixed(2)} GB)`);
+  console.log(`  Final Size:     ${finalMb} MB`);
   console.log("==============================================================================\n");
 }
 

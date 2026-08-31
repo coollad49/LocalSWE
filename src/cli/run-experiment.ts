@@ -33,7 +33,12 @@ import {
   computeDifficultyBreakdown,
   computeCategoryBreakdown,
 } from "../evaluator/breakdowns.ts";
-import { buildExperimentReport, generateReportMarkdown, generateSummaryJson } from "../evaluator/report.ts";
+import {
+  buildExperimentReport,
+  generateReportMarkdown,
+  generateSummaryJson,
+} from "../evaluator/report.ts";
+import { vacuumTrajectories } from "../../scripts/clean-trajectories.ts";
 import { loadPricingConfig } from "../evaluator/pricing.ts";
 import { existsSync } from "node:fs";
 import { readFile, readdir, writeFile, mkdir } from "node:fs/promises";
@@ -320,6 +325,14 @@ async function main(): Promise<void> {
   await writeFile(join(reportDir, "report.json"), JSON.stringify(report, null, 2), "utf-8");
   const summaryJson = generateSummaryJson(report);
   await writeFile(join(reportDir, "summary.json"), JSON.stringify(summaryJson, null, 2), "utf-8");
+
+  // --- Step 4: Auto-Vacuum Trajectory Logs to Reclaim Disk Space ---
+  try {
+    const vacuumRes = await vacuumTrajectories(runsRoot, true);
+    if (vacuumRes.savedMb > 0) {
+      console.log(`\n  [Storage] Auto-vacuum reclaimed ${vacuumRes.savedMb} MB of trajectory logs.`);
+    }
+  } catch {}
 
   // --- Print Rich Terminal Comparative Summary ---
   console.log("\n" + "=".repeat(78));
