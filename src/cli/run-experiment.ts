@@ -76,7 +76,7 @@ function parseCliArgs(): ExperimentCliOptions {
   const reuseBaseline = args.includes("--reuse-baseline");
   const skipV1 = args.includes("--skip-v1");
   const reuseV1 = args.includes("--reuse-v1");
-  const runV2 = args.includes("--v2") || args.includes("--agent-v2");
+  const runV2 = !args.includes("--skip-v2");
   const skipV2 = args.includes("--skip-v2");
 
   const runsIdx = args.indexOf("--runs");

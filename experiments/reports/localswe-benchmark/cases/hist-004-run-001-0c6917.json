@@ -1,0 +1,81 @@
+{
+  "runId": "hist-004-run-001-0c6917",
+  "caseId": "hist-004",
+  "agentVersion": "agent-v2",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "opencode-go/mimo-v2.5",
+  "status": "completed",
+  "verdict": "false_confidence",
+  "durationMs": 1141,
+  "startedAt": "2026-08-31T11:58:16.773Z",
+  "completedAt": "2026-08-31T11:58:17.914Z",
+  "caseMeta": {
+    "repository": "mri",
+    "type": "historical",
+    "difficulty": "easy",
+    "categories": [
+      "parsing",
+      "type-coercion"
+    ]
+  },
+  "metrics": {
+    "durationMs": 217670,
+    "totalTurns": 116,
+    "toolCalls": 54,
+    "commandsExecuted": 20,
+    "filesInspected": 7,
+    "filesChanged": null,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 94764,
+    "outputTokens": 38312,
+    "totalTokens": 1101524
+  },
+  "cost": {
+    "inputTokens": 94764,
+    "outputTokens": 38312,
+    "totalTokens": 133076,
+    "inputCostUsd": 0.013267,
+    "outputCostUsd": 0.010727,
+    "totalCostUsd": 0.026706,
+    "costUsd": 0.026706,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 162,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-004-NAcgWe\\patch-1788177497430.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 164,
+      "command": "bun run benchmark\\cases\\hist-004\\public\\reproduce.ts",
+      "stdout": "mri(['-t'], {default:{t:true}}) => {\"_\":[],\"t\":true}\n_ empty? true (length 0) expected true\nt is boolean? true expected true, t===true? true\nhas numeric leak (1 in _)? false expected false\nalias check mri(['-t'], {alias:{t:['tt']}, default:{t:true}}) => {\"_\":[],\"t\":true,\"tt\":true}\nalias check pass? true\nPASS\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 155,
+      "command": "bun test benchmark\\cases\\hist-004\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-004\\private\\oracle.test.ts:\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > core bug: -t with default true does not leak into _ [2.23ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default variations [0.36ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default & alias [0.49ms]\n41 |     expect(typeof baz.two).toBe(\"boolean\");\n42 |   });\n43 | \n44 |   test(\"flag boolean with default string & alias (string coercion branch)\", () => {\n45 |     const foo = mri([\"-t\"], { default: { t: \"hi\" } });\n46 |     expect(foo).toEqual({ t: \"\", _: [] });\n                     ^\nerror: expect(received).toEqual(expected)\n\n  {\n    \"_\": [],\n-   \"t\": \"\",\n+   \"t\": true,\n  }\n\n- Expected  - 1\n+ Received  + 1\n\n      at <anonymous> (C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-004-NAcgWe\\benchmark\\cases\\hist-004\\private\\oracle.test.ts:46:17)\n(fail) hist-004 oracle: boolean defaults toVal order (94f8c09) > flag boolean with default string & alias (string coercion branch) [1.22ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > no numeric pollution in _ for boolean defaults [0.57ms]\n(pass) hist-004 oracle: boolean defaults toVal order (94f8c09) > regression: basic non-boolean parsing still works [0.66ms]\n\n 5 pass\n 1 fail\n 25 expect() calls\nRan 6 tests across 1 file. [105.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  }
+}

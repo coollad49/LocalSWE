@@ -692,11 +692,11 @@ async function main(): Promise<void> {
       runsDir = (args.runsDir as string) ?? (args.runsRoot as string) ?? join(ROOT, "experiments/runs");
       const resolved = resolve(ROOT, runsDir);
       const defaultRuns = join(ROOT, "experiments/runs");
-      if (resolved === defaultRuns) experimentId = "baseline-v0";
+      if (resolved === defaultRuns) experimentId = "localswe-benchmark";
       else experimentId = basename(resolved) || "evaluation";
     } else {
       runsDir = (args.runsRoot as string) ?? (args.runsDir as string) ?? join(ROOT, "experiments/runs");
-      experimentId = "baseline-v0";
+      experimentId = "localswe-benchmark";
     }
 
     await evaluateExperimentRuns({

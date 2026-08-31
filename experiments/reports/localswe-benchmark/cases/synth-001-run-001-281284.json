@@ -1,0 +1,79 @@
+{
+  "runId": "synth-001-run-001-281284",
+  "caseId": "synth-001",
+  "agentVersion": "agent-v1",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "agent_failure",
+  "durationMs": 846,
+  "startedAt": "2026-08-31T11:58:50.692Z",
+  "completedAt": "2026-08-31T11:58:51.538Z",
+  "caseMeta": {
+    "repository": "task-manager",
+    "type": "synthetic",
+    "difficulty": "medium",
+    "categories": [
+      "state-management",
+      "business-logic"
+    ]
+  },
+  "metrics": {
+    "durationMs": 601690,
+    "totalTurns": 168,
+    "toolCalls": 80,
+    "commandsExecuted": 52,
+    "filesInspected": 10,
+    "filesChanged": 0,
+    "iterations": 0,
+    "iterationsSource": "v1-state",
+    "inputTokens": 105264,
+    "outputTokens": 16776,
+    "totalTokens": 2025144
+  },
+  "cost": {
+    "inputTokens": 105264,
+    "outputTokens": 16776,
+    "totalTokens": 122040,
+    "inputCostUsd": 0.031579,
+    "outputCostUsd": 0.020131,
+    "totalCostUsd": 0.165897,
+    "costUsd": 0.165897,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 0,
+      "command": "git apply --whitespace=nowarn in C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-synth-001-H03A8F\\benchmark\\repositories\\task-manager",
+      "stdout": "empty patch - no changes applied",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 154,
+      "command": "bun run benchmark\\cases\\synth-001\\public\\reproduce.ts",
+      "stdout": "description=undefined expected \"keep me\"\npriority=undefined expected 2\nstatus=undefined expected pending\nFAIL\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "oracle",
+      "reason": "skipped due to reproduction failed"
+    },
+    "regression": {
+      "status": "skipped",
+      "durationMs": 0,
+      "command": "regression",
+      "reason": "skipped due to earlier stage"
+    }
+  }
+}

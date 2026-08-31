@@ -1,0 +1,84 @@
+{
+  "runId": "hist-006-run-001-f415e7",
+  "caseId": "hist-006",
+  "agentVersion": "baseline-v0",
+  "benchmarkVersion": "0.5",
+  "benchmarkFingerprint": "sha256:9d5d8138fd0f0b726e46437b544ad010cd9b70242f879f3f80c9d191b55e55cf",
+  "model": "opencode-go/mimo-v2.5",
+  "piVersion": "0.84.4",
+  "status": "completed",
+  "verdict": "verified",
+  "durationMs": 1678,
+  "startedAt": "2026-08-31T11:58:47.190Z",
+  "completedAt": "2026-08-31T11:58:48.868Z",
+  "caseMeta": {
+    "repository": "tinyspy",
+    "type": "historical",
+    "difficulty": "medium",
+    "categories": [
+      "state-management"
+    ]
+  },
+  "metrics": {
+    "durationMs": 288572,
+    "totalTurns": 98,
+    "toolCalls": 46,
+    "commandsExecuted": 16,
+    "filesInspected": 4,
+    "filesChanged": 1,
+    "iterations": 1,
+    "iterationsSource": "fallback",
+    "inputTokens": 91436,
+    "outputTokens": 36900,
+    "totalTokens": 1051472
+  },
+  "cost": {
+    "inputTokens": 91436,
+    "outputTokens": 36900,
+    "totalTokens": 128336,
+    "inputCostUsd": 0.012801,
+    "outputCostUsd": 0.010332,
+    "totalCostUsd": 0.025718,
+    "costUsd": 0.025718,
+    "costStatus": "provider",
+    "costSource": "provider",
+    "pricingModel": "opencode-go/mimo-v2.5"
+  },
+  "verification": {
+    "patchApply": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 219,
+      "command": "git apply C:\\Users\\cooll\\AppData\\Local\\Temp\\eval-hist-006-2OeXdk\\patch-1788177528071.diff",
+      "stdout": "",
+      "stderr": ""
+    },
+    "reproduction": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 229,
+      "command": "bun run benchmark\\cases\\hist-006\\public\\reproduce.ts",
+      "stdout": "before: foo.bar=bar (expected 'bar')\nafter spy: foo.bar=foo (expected 'foo')\nsetter succeeded: foo.bar=foo _bar=baz (expected 'foo' / 'baz')\nPASS: inherited getter correctly mocked with setter preserved\n",
+      "stderr": "",
+      "timedOut": false
+    },
+    "oracle": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 172,
+      "command": "bun test benchmark\\cases\\hist-006\\private\\oracle.test.ts",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\cases\\hist-006\\private\\oracle.test.ts:\n(pass) hist-006 oracle: inherited methods > mocks inherited getter preserves setter [3.52ms]\n(pass) hist-006 oracle: inherited methods > mocks deeply inherited getter preserves setter [1.32ms]\n(pass) hist-006 oracle: inherited methods > mocks inherited overridden getter - setter throws [0.85ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [129.00ms]\n",
+      "timedOut": false
+    },
+    "regression": {
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 171,
+      "command": "bun test benchmark\\repositories\\tinyspy\\tests",
+      "stdout": "bun test v1.3.14 (0d9b296a)\n",
+      "stderr": "\nbenchmark\\repositories\\tinyspy\\tests\\tinyspy.test.ts:\n(pass) tinyspy regression > spyOn mocks prototype method and restores cleanly [5.31ms]\n(pass) tinyspy regression > spy creates mock function with call tracking [5.25ms]\n(pass) tinyspy regression > spyOn inherited getter preserves setter [0.95ms]\n\n 3 pass\n 0 fail\n 14 expect() calls\nRan 3 tests across 1 file. [124.00ms]\n",
+      "timedOut": false
+    }
+  }
+}
